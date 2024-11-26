@@ -1,0 +1,1 @@
+# The code masks the NaN values in the 2D numpy array using np.ma.masked_array. Then it calculates the mean along axis 1 (row-wise) using np.mean and fills the masked values with NaN using filled() method.

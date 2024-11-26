@@ -1,0 +1,26 @@
+```python
+def solve(s):
+    # This function processes a string by swapping the case of each alphabetic character.
+    # If no alphabetic characters are found, it returns the reversed string.
+    # Test cases:
+    # >>> solve("Hello World")
+    # 'hELLO wORLD'
+    # >>> solve("12345")
+    # '54321'
+    # >>> solve("1a2b3C")
+    # '1A2B3c'
+    flg = 0
+    idx = 0
+    new_str = list(s)
+    for i in s:
+        if i.isalpha():
+            new_str[idx] = i.swapcase()
+            flg = 1
+        idx += 1
+    s = ""
+    for i in new_str:
+        s += i
+    if flg == 0:
+        return s[len(s)::-1]
+    return s
+```

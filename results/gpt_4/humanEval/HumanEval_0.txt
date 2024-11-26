@@ -1,0 +1,24 @@
+from typing import List
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    # This function checks if there are any two elements in the input list 'numbers' that have a distance (absolute difference) less than the given 'threshold'.
+    # If such a pair exists, it returns True; otherwise, it returns False.
+    # >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    # False
+    # >>> has_close_elements([1.0, 1.4, 3.0], 0.5)
+    # True
+    # >>> has_close_elements([1.0, 2.0, 3.0], 2.1)
+    # True
+    # >>> has_close_elements([], 0.5)
+    # False
+    for idx, elem in enumerate(numbers):
+        for idx2, elem2 in enumerate(numbers):
+            # Don't compare an element to itself
+            if idx != idx2:
+                # Calculate the absolute difference between two elements
+                distance = abs(elem - elem2)
+                # If the distance is less than the threshold, return True
+                if distance < threshold:
+                    return True
+    # If no pairs of elements are found that satisfy the condition, return False
+    return False

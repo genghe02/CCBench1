@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8a603f96-ef32-4dea-8f70-acdb41633c03" name="HPC(项目级别)">
+        <fileTransfer rootFolder="/hpc2hdd/home/hgeng777" accessType="SFTP" sshConfigId="735f5446-2c6a-466f-8cf4-004efdc9259d" sshConfig="hgeng777@hpc2login.hpc.hkust-gz.edu.cn:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

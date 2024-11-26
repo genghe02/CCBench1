@@ -1,0 +1,9 @@
+```python
+import pandas as pd
+
+def compute_mean_along_rows(df):
+    # Compute the mean of each row in the DataFrame and add it as a new column 'mean'.
+    # Ensure that the function handles DataFrames with numeric data only.
+    df['mean'] = df.mean(axis=1)
+    return df
+```

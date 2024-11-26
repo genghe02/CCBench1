@@ -1,0 +1,1 @@
+# Select columns in the DataFrame 'df' that have data type float64 and create a new DataFrame 'new_df' containing only those columns.

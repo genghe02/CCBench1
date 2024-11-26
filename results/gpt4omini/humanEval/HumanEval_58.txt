@@ -1,0 +1,19 @@
+```python
+def common(l1: list, l2: list):
+    # Find the common elements between two lists by comparing each element from both lists and storing unique matches in a set.
+    # param l1: list, the first list to compare
+    # param l2: list, the second list to compare
+    # return: list, a sorted list of unique common elements between l1 and l2
+    # Test cases for the function:
+    # >>> common([1, 2, 3], [2, 3, 4])  # returns [2, 3]
+    # >>> common([1, 1, 2], [1, 2, 3])  # returns [1, 2]
+    # >>> common([], [1, 2, 3])          # returns []
+    # >>> common([1, 2, 3], [])          # returns []
+    # >>> common([], [])                  # returns []
+    ret = set()
+    for e1 in l1:
+        for e2 in l2:
+            if e1 == e2:
+                ret.add(e1)
+    return sorted(list(ret))
+```

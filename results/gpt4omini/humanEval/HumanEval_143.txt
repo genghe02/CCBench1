@@ -1,0 +1,26 @@
+```python
+def words_in_sentence(sentence):
+    # This function processes a sentence and filters out words based on specific conditions: 
+    # It retains words that are either prime-length or have a length of 2.
+    
+    # :param sentence: str, the input sentence from which words need to be filtered.
+    # :return: str, a space-separated string of words that meet the filtering criteria.
+
+    new_lst = []
+    for word in sentence.split():
+        flg = 0
+        if len(word) == 1:
+            flg = 1
+        for i in range(2, len(word)):
+            if len(word) % i == 0:
+                flg = 1
+        if flg == 0 or len(word) == 2:
+            new_lst.append(word)
+    return " ".join(new_lst)
+
+# Test cases for the function
+# >>> words_in_sentence("hello world") should return "world" because "hello" has length 5 (not prime) and "world" has length 5 (not prime).
+# >>> words_in_sentence("it is a test") should return "it is a" because "it" has length 2, "is" has length 2, and "a" has length 1 (not included).
+# >>> words_in_sentence("one two three") should return "one two" because "three" has length 5 (not prime).
+# >>> words_in_sentence("hi to my cat") should return "hi to my cat" because all words satisfy the conditions (lengths 2, 2, 2, and 3 respectively).
+```

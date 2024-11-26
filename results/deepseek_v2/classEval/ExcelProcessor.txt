@@ -1,0 +1,64 @@
+```python
+import openpyxl
+
+
+class ExcelProcessor:
+    # This class provides functionalities to read, write, and process data from Excel files.
+    def __init__(self):
+        pass
+
+    def read_excel(self, file_name):
+        # Read data from an Excel file and return it as a list of rows.
+        # param file_name: str, the name of the Excel file to read.
+        # return: list of lists, each inner list represents a row from the Excel file, or None if an error occurs.
+        data = []
+        try:
+            workbook = openpyxl.load_workbook(file_name)
+            sheet = workbook.active
+            for row in sheet.iter_rows(values_only=True):
+                data.append(row)
+            workbook.close()
+            return data
+        except:
+            return None
+
+    def write_excel(self, data, file_name):
+        # Write data to an Excel file.
+        # param data: list of lists, each inner list represents a row to be written to the Excel file.
+        # param file_name: str, the name of the Excel file to write.
+        # return: int, 1 if the write operation is successful, 0 otherwise.
+        # >>> processor = ExcelProcessor()
+        # >>> processor.write_excel([['Name', 'Age'], ['Alice', 30], ['Bob', 25]], 'output.xlsx')
+        try:
+            workbook = openpyxl.Workbook()
+            sheet = workbook.active
+            for row in data:
+                sheet.append(row)
+            workbook.save(file_name)
+            workbook.close()
+            return 1
+        except:
+            return 0
+
+    def process_excel_data(self, N, save_file_name):
+        # Process the data from an Excel file by appending a modified version of the Nth column to each row.
+        # param N: int, the index of the column to process (0-based).
+        # param save_file_name: str, the name of the Excel file to read and save the processed data.
+        # return: tuple, (1, new_file_name) if the process is successful, (0, None) otherwise.
+        # >>> processor = ExcelProcessor()
+        # >>> processor.process_excel_data(1, 'input.xlsx')
+        data = self.read_excel(save_file_name)
+        if data is None or N >= len(data[0]):
+            return 0, None
+        new_data = []
+        for row in data:
+            new_row = list(row[:])
+            if not str(row[N]).isdigit():
+                new_row.append(str(row[N]).upper())
+            else:
+                new_row.append(row[N])
+            new_data.append(new_row)
+        new_file_name = save_file_name.split('.')[0] + '_process.xlsx'
+        success = self.write_excel(new_data, new_file_name)
+        return success, new_file_name
+```

@@ -1,0 +1,98 @@
+```python
+class URLHandler:
+    # This class handles parsing of URLs into their components such as scheme, host, path, query parameters, and fragments.
+    def __init__(self, url):
+        # Initializes the URLHandler with a URL string.
+        # url: str, the URL to be parsed.
+        self.url = url
+
+    def get_scheme(self):
+        # Extracts the scheme (e.g., 'http', 'https') from the URL.
+        # return: str or None, the scheme of the URL if present, otherwise None.
+        # >>> url_handler = URLHandler('http://example.com')
+        # >>> url_handler.get_scheme()
+        # 'http'
+        # >>> url_handler = URLHandler('example.com')
+        # >>> url_handler.get_scheme()
+        # None
+        scheme_end = self.url.find("://")
+        if scheme_end != -1:
+            return self.url[:scheme_end]
+        return None
+
+    def get_host(self):
+        # Extracts the host (e.g., 'example.com') from the URL.
+        # return: str or None, the host of the URL if present, otherwise None.
+        # >>> url_handler = URLHandler('http://example.com/path')
+        # >>> url_handler.get_host()
+        # 'example.com'
+        # >>> url_handler = URLHandler('https://www.example.com')
+        # >>> url_handler.get_host()
+        # 'www.example.com'
+        # >>> url_handler = URLHandler('example.com/path')
+        # >>> url_handler.get_host()
+        # None
+        scheme_end = self.url.find("://")
+        if scheme_end != -1:
+            url_without_scheme = self.url[scheme_end + 3:]
+            host_end = url_without_scheme.find("/")
+            if host_end != -1:
+                return url_without_scheme[:host_end]
+            return url_without_scheme
+        return None
+
+    def get_path(self):
+        # Extracts the path (e.g., '/path') from the URL.
+        # return: str or None, the path of the URL if present, otherwise None.
+        # >>> url_handler = URLHandler('http://example.com/path/to/resource')
+        # >>> url_handler.get_path()
+        # '/path/to/resource'
+        # >>> url_handler = URLHandler('https://example.com')
+        # >>> url_handler.get_path()
+        # None
+        scheme_end = self.url.find("://")
+        if scheme_end != -1:
+            url_without_scheme = self.url[scheme_end + 3:]
+            host_end = url_without_scheme.find("/")
+            if host_end != -1:
+                return url_without_scheme[host_end:]
+        return None
+
+    def get_query_params(self):
+        # Extracts the query parameters from the URL.
+        # return: dict or None, a dictionary of query parameters if present, otherwise None.
+        # >>> url_handler = URLHandler('http://example.com/path?param1=value1&param2=value2')
+        # >>> url_handler.get_query_params()
+        # {'param1': 'value1', 'param2': 'value2'}
+        # >>> url_handler = URLHandler('http://example.com/path')
+        # >>> url_handler.get_query_params()
+        # None
+        query_start = self.url.find("?")
+        fragment_start = self.url.find("#")
+        if query_start != -1:
+            query_string = self.url[query_start + 1:fragment_start] if fragment_start != -1 else self.url[query_start + 1:]
+            params = {}
+            if len(query_string) > 0:
+                param_pairs = query_string.split("&")
+                for pair in param_pairs:
+                    key_value = pair.split("=")
+                    if len(key_value) == 2:
+                        key, value = key_value
+                        params[key] = value
+            return params
+        return None
+
+    def get_fragment(self):
+        # Extracts the fragment (e.g., 'section1') from the URL.
+        # return: str or None, the fragment of the URL if present, otherwise None.
+        # >>> url_handler = URLHandler('http://example.com/path#section1')
+        # >>> url_handler.get_fragment()
+        # 'section1'
+        # >>> url_handler = URLHandler('http://example.com')
+        # >>> url_handler.get_fragment()
+        # None
+        fragment_start = self.url.find("#")
+        if fragment_start != -1:
+            return self.url[fragment_start + 1:]
+        return None
+```

@@ -1,0 +1,22 @@
+ def f(n):
+ # This function generates a list of Fibonacci numbers up to the given index 'n'.
+ <description for whole function>
+ result = []
+ # Iterate through each index from 1 to 'n' and append the corresponding Fibonacci number to the result list.
+ for i in range(1, n+1):
+ if i % 2 == 0: # If the index 'i' is even
+ x = 1 # Initialize 'x' with the value 1
+ for j in range(1, i+1): x *= j # Multiply 'x' with each number from 1 to 'i'
+ result += [x] # Append the calculated Fibonacci number to the result list
+ else: # If the index 'i' is odd
+ x = 0 # Initialize 'x' with the value 0
+ for j in range(1, i+1): x += j # Add each number from 1 to 'i' to 'x'
+ result += [x] # Append the calculated Fibonacci number to the result list
+ <description for return statement>
+ return result
+
+ # Test cases
+ >>> f(5)
+ [1, 1, 2, 3, 5]
+ >>> f(10)
+ [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]

@@ -1,0 +1,9 @@
+ # Count the number of NaN values in each column of the DataFrame using pandas method isnull() and sum()
+
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'A':[1,4], 'B':[np.nan,301]})
+
+# Count the number of NaN values in each column of the DataFrame using pandas method isnull() and sum()
+count_series = df.isnull().sum()

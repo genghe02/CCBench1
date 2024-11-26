@@ -1,0 +1,6 @@
+ # Create a NumPy array of shape (3, 4) filled with ones and of boolean data type.
+
+<Requirements for the code>
+result = np.where(np.diff(data, axis=0) | np.diff(data, axis=1))[0]
+
+# Find each index where the value changes along rows or columns in the NumPy array 'data'.

@@ -1,0 +1,1 @@
+# Given a pandas series representing frequencies of a value, convert those frequencies into percentages and return the percentage of each gender.

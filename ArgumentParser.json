@@ -1,0 +1,21 @@
+[
+  "This is a class for parsing command line arguments to a dictionary.",
+  "Initialize the ArgumentParser object with empty arguments, required arguments, and types.",
+  "self.arguments is a dict that stores the args in a command line\nself.required is a set that stores the required arguments\nself.types is a dict that stores type of every arguments.",
+  ">>> parser = ArgumentParser()\n>>> parser.add_argument('name', required=True, arg_type=str)\n>>> parser.add_argument('age', required=False, arg_type=int)",
+  "Parse the command string and populate the arguments dictionary.\nparam command_string: str, the command line string to be parsed",
+  "return: tuple, (bool, set or None), True if all required arguments are present, otherwise False and a set of missing arguments",
+  ">>> parser = ArgumentParser()\n>>> parser.add_argument('name', required=True, arg_type=str)\n>>> parser.add_argument('age', required=False, arg_type=int)\n>>> parser.parse_arguments('script.py --name=John --age=30')\n(True, None)\n>>> parser.parse_arguments('script.py --age=30')\n(False, {'name'})",
+  "Retrieve the value of a specific argument from the parsed arguments.",
+  "param key: str, the key of the argument to retrieve",
+  "return: the value of the argument if it exists, otherwise None",
+  ">>> parser = ArgumentParser()\n>>> parser.add_argument('name', required=True, arg_type=str)\n >>> parser.parse_arguments('script.py --name=John')\n>>> parser.get_argument('name')\n'John'",
+  "Add an argument to the parser with its required status and type.",
+  "param arg: str, the argument key\nparam required: bool, whether the argument is required\nparam arg_type: type, the expected type of the argument value",
+  "return: None",
+  ">>> parser = ArgumentParser()\n>>> parser.add_argument('name', required=True, arg_type=str)\n>>> parser.add_argument('age', required=False, arg_type=int)",
+  "Convert the value of an argument to its specified type.",
+  "param arg: str, the argument key\nparam value: str, the value of the argument to be converted",
+  "return: the converted value if successful, otherwise the original value",
+  ">>> parser = ArgumentParser()\n>>> parser.add_argument('age', required=False, arg_type=int)\n>>> parser._convert_type('age', '30')\n30"
+]

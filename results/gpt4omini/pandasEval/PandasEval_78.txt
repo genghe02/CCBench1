@@ -1,0 +1,11 @@
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'mycol': np.arange(5), 'dummy': np.arange(5)})
+# This code creates a pandas DataFrame with two columns: 'mycol' containing 
+# integers from 0 to 4 and 'dummy' also containing integers from 0 to 4.
+# The function retrieves the value at index 1 from the 'mycol' column. 
+# If index 1 does not exist, it defaults to returning NaN.
+value = df.mycol.get(1, np.nan)
+```

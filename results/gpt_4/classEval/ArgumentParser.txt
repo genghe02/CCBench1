@@ -1,0 +1,68 @@
+```python
+# This is a class for parsing command line arguments to a dictionary.
+class ArgumentParser:
+    # Constructor for the ArgumentParser class. Initializes empty dictionaries and sets for arguments, required arguments, and argument types.
+    def __init__(self):
+        # self.arguments is a dict that stores the command line arguments.
+        # self.required is a set that stores the required arguments.
+        # self.types is a dict that stores the type of every argument.
+        # Test case: parser = ArgumentParser(); print(parser.arguments); print(parser.required); print(parser.types)
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    # This function parses command line arguments into a dictionary.
+    # param command_string: str, the command line arguments as a string
+    # return: (bool, set), a tuple containing a boolean indicating whether all required arguments are present and a set of missing arguments
+    # Test case: parser.parse_arguments("--arg1=value1 --arg2 --arg3=value3 -a value4")
+    def parse_arguments(self, command_string):
+        args = command_string.split()[1:]
+        for i in range(len(args)):
+            arg = args[i]
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    self.arguments[key_value[0]] = self._convert_type(key_value[0], key_value[1])
+                else:
+                    self.arguments[key_value[0]] = True
+            elif arg.startswith('-'):
+                key = arg[1:]
+                if i + 1 < len(args) and not args[i + 1].startswith('-'):
+                    self.arguments[key] = self._convert_type(key, args[i + 1])
+                else:
+                    self.arguments[key] = True
+        missing_args = self.required - set(self.arguments.keys())
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    # This function retrieves the value of a specified argument.
+    # param key: str, the key of the argument to retrieve
+    # return: the value of the specified argument, or None if the argument does not exist
+    # Test case: parser.get_argument("arg1")
+    def get_argument(self, key):
+        return self.arguments.get(key)
+
+    # This function adds a new argument.
+    # param arg: str, the key of the argument to add
+    # param required: bool, whether the argument is required
+    # param arg_type: type, the expected type of the argument
+    # return: None
+    # Test case: parser.add_argument("arg1", required=True, arg_type=int)
+    def add_argument(self, arg, required=False, arg_type=str):
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    # This private function converts the value of an argument to its expected type.
+    # param arg: str, the key of the argument 
+    # param value: str, the value of the argument to convert
+    # return: the converted value, or the original value if the conversion fails
+    # Test case: parser._convert_type("arg1", "123")
+    def _convert_type(self, arg, value):
+        try:
+            return self.types[arg](value)
+        except (ValueError, KeyError):
+            return value
+```

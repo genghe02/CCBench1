@@ -1,0 +1,2 @@
+Convert the 'date' column to datetime type.
+Skip rows with strings that cannot be converted to datetime by using errors='coerce'.

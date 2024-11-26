@@ -1,0 +1,7 @@
+import pandas as pd
+
+def counting_consecutive_positive_values(y):
+    # Counting consecutive positive values in Python/pandas array
+    # I'm trying to count consecutive up days in equity return data; so if a positive day is 1 and a negative is 0, a list y=[0,0,1,1,1,0,0,1,0,1,1] should return z=[0,0,1,2,3,0,0,1,0,1,2].
+    # Return the result
+    return y * (y.groupby((y != y.shift()).cumsum()).cumcount() + 1)

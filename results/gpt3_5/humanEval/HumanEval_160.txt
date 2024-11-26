@@ -1,0 +1,16 @@
+def do_algebra(operator, operand):
+    # Perform algebraic operations on a list of operands based on given operators.
+    
+    # Test cases:
+    # Test for addition: do_algebra(['+', '+', '+'], [1, 2, 3, 4]) -> Expected output: 10
+    # Test for subtraction: do_algebra(['-', '-', '-'], [10, 2, 3, 4]) -> Expected output: 1
+    # Test for multiplication: do_algebra(['*', '*', '*'], [2, 2, 2, 2]) -> Expected output: 16
+    # Test for division: do_algebra(['/', '/', '/'], [100, 2, 5]) -> Expected output: 10.0
+
+    # Construct the expression string by concatenating operands and operators.
+    expression = str(operand[0])
+    for oprt, oprn in zip(operator, operand[1:]):
+        expression += oprt + str(oprn)
+        
+    # Evaluate the algebraic expression and return the result.
+    return eval(expression)

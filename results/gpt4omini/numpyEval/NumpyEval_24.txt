@@ -1,0 +1,8 @@
+```python
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5])
+# Create a 2D array by adding each element of array 'a' with each element of array 'b' multiplied by 2.
+c = a[:, None] + b*2
+```

@@ -1,0 +1,1 @@
+# Multiply a nD array with a 1D array, where len(1D-array) == len(nD array) by converting the array b to a (2, 1) shape array using None or numpy.newaxis in the index tuple.

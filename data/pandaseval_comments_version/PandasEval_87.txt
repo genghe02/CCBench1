@@ -1,0 +1,6 @@
+import pandas as pd
+
+def concat_df(df1, df2):
+    # Given that all the dataframes have the same columns, you can simply concat them:
+    # return the concated dataframe
+    return pd.concat([df1, df2])

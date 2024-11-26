@@ -1,0 +1,1 @@
+# Apply a lambda function to group the dataframe by 'Mt' and then select the rows within each group where 'num' is at its maximum value.

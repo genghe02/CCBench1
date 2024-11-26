@@ -1,0 +1,1 @@
+# This function checks whether all elements in the provided numpy array are zeros. It uses np.any() to return False if any element in the array is non-zero, otherwise it returns True.

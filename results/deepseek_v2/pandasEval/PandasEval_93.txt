@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def transform_timestamp_to_pydatetime(timestamp):
+    # Convert a pandas Timestamp object to a Python datetime object.
+    return timestamp.to_pydatetime()
+```

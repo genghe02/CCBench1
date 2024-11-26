@@ -1,0 +1,1 @@
+# Sort the DataFrame by date in ascending order and then group by 'id' and keep the last row for each group.

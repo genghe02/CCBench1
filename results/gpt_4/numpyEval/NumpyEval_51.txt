@@ -1,0 +1,1 @@
+# Find the indices of the 'k' smallest values of the numpy array 'A' using the np.argpartition function.

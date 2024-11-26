@@ -1,0 +1,1 @@
+# Convert a pandas DataFrame to a list of dictionaries using the 'records' orientation.

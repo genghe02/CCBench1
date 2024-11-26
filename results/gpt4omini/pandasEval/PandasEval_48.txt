@@ -1,0 +1,19 @@
+```python
+import pandas as pd
+df = pd.DataFrame({'col': ["apple",
+                           "pear",
+                           "strawberry"]})
+targets = ['apple', 'banana']
+# This code filters the DataFrame 'df' to select rows where the 'col' column contains any of the values in the 'targets' list.
+# If none of the target words are found in 'df', the result will be an empty DataFrame.
+# Example test cases:
+# >>> df.loc[df['col'].isin(['apple', 'banana'])]
+#   col
+# 0 apple
+# 
+# >>> df.loc[df['col'].isin(['pear', 'banana'])]
+# Empty DataFrame
+# Columns: [col]
+# Index: []
+result = df.loc[df['col'].isin(targets)]
+```

@@ -1,0 +1,1 @@
+# This code transforms a 2-dimensional array into a structured numpy array (record array) with column names 'col1', 'col2', 'col3'. The .T attribute transposes the initial array (switches its rows with columns), which is needed because np.core.records.fromarrays() expects a sequence of 1-dimensional arrays, each representing a column in the resulting record array.

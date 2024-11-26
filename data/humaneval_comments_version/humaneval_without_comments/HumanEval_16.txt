@@ -1,0 +1,6 @@
+
+
+def count_distinct_characters(string: str) -> int:
+    <Requirements for the code>
+    <some test cases for the function>
+    return len(set(string.lower()))

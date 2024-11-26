@@ -1,0 +1,1 @@
+# This function takes a pandas DataFrame and two column names as input. It returns all rows where the value in column 'col_a' is greater than the value in column 'col_b'.

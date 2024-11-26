@@ -1,0 +1,1 @@
+# Remain the rows where line_num is not equal to 0 using the most efficient method.

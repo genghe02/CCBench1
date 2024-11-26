@@ -1,0 +1,4 @@
+# This function takes a numpy array and an axis value as inputs. It uses numpy's argmax function to find the index of the maximum value along the specified axis in the array.
+
+def get_index_max_element(arr, axis_value):
+    return np.argmax(arr, axis=axis_value)

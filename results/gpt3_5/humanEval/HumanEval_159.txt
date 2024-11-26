@@ -1,0 +1,8 @@
+def eat(number, need, remaining):
+    # Function to calculate the number of items eaten based on the amount needed and the remaining items.
+    
+    # Test cases for the function
+    if(need <= remaining):
+        return [ number + need , remaining-need ]
+    else:
+        return [ number + remaining , 0]

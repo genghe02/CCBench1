@@ -1,0 +1,1 @@
+# Create a histogram of the data in the array. Each bin of the histogram represents a range of values and the count of numbers in that range. Afterwards, calculate the cumulative sum of the histogram counts, so that each bin now represents the total count of numbers that fall into that bin or any bin with smaller values.

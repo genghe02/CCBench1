@@ -1,0 +1,41 @@
+```python
+# This class is designed to partition a list into almost equal sizes with a predefined limit.
+class AvgPartition:
+    def __init__(self, lst, limit):
+        # Initialize the class with a list and a limit for partition size.
+        # lst: list, The list to be partitioned.
+        # limit: int, The limit for the partition size.
+        self.lst = lst
+        self.limit = limit
+
+    def setNum(self):
+        # This function calculates and returns the size of each partition and the remainder.
+        # No parameters needed for this function.
+        # return: tuple, The first element is the size of each partition, the second element is the remainder.
+        # >>> avgpartition = AvgPartition([1,2,3,4,5,6,7,8,9,10], 3)
+        # >>> avgpartition.setNum()
+        # (3, 1)
+        size = len(self.lst) // self.limit
+        remainder = len(self.lst) % self.limit
+        return size, remainder
+
+        
+    def get(self, index):
+        # This function returns the partition of the list at a given index.
+        # index: int, The index of the partition.
+        # return: list, The partition of the list at the given index.
+        # Test cases:
+        # >>> avgpartition = AvgPartition([1,2,3,4,5,6,7,8,9,10], 3)
+        # >>> avgpartition.get(0)
+        # [1, 2, 3, 4]
+        # >>> avgpartition.get(1)
+        # [5, 6, 7]
+        # >>> avgpartition.get(2)
+        # [8, 9, 10]
+        size, remainder = self.setNum()
+        start = index * size + min(index, remainder)
+        end = start + size
+        if index + 1 <= remainder:
+            end += 1
+        return self.lst[start:end]
+```

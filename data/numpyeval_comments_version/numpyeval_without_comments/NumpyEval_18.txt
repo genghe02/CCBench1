@@ -1,0 +1,4 @@
+import numpy as np
+def get_minimum_value(arr):
+    <Requirements for the code>
+    return np.min(arr)

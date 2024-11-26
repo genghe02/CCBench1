@@ -1,0 +1,59 @@
+```python
+import sqlite3
+
+# This class represents a user login database using SQLite3. It includes functions for user insertion, searching, deletion and validation.
+class UserLoginDB:
+    # This function initializes the SQLite3 connection and cursor.
+    # :param db_name: str, the name of the SQLite3 database file
+    def __init__(self, db_name):
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+
+    # This function inserts a new user into the database.
+    # :param username: str, the username of the user
+    # :param password: str, the password of the user
+    # No explicit return, but changes are committed to the database.
+    # >>> db = UserLoginDB('test.db')
+    # >>> db.insert_user('test_user', 'test_pass')
+    def insert_user(self, username, password):
+        self.cursor.execute('''
+            INSERT INTO users (username, password)
+            VALUES (?, ?)
+        ''', (username, password))
+        self.connection.commit()
+
+    # This function searches for a user by name in the database.
+    # :param username: str, the username of the user
+    # Return: tuple, the user's username and password from the database, or None if not found.
+    # >>> db = UserLoginDB('test.db')
+    # >>> db.search_user_by_username('test_user')
+    def search_user_by_username(self, username):
+        self.cursor.execute('''
+            SELECT * FROM users WHERE username = ?
+        ''', (username,))
+        user = self.cursor.fetchone()
+        return user
+
+    # This function deletes a user by name from the database.
+    # :param username: str, the username of the user
+    # No explicit return, but changes are committed to the database.
+    # >>> db = UserLoginDB('test.db')
+    # >>> db.delete_user_by_username('test_user')
+    def delete_user_by_username(self, username):
+        self.cursor.execute('''
+            DELETE FROM users WHERE username = ?
+        ''', (username,))
+        self.connection.commit()
+
+    # This function validates a user's login credentials.
+    # :param username: str, the username of the user
+    # :param password: str, the password of the user
+    # Return: bool, True if the username and password match a user in the database, False otherwise.
+    # >>> db = UserLoginDB('test.db')
+    # >>> db.validate_user_login('test_user', 'test_pass')
+    def validate_user_login(self, username, password):
+        user = self.search_user_by_username(username)
+        if user is not None and user[1] == password:
+            return True
+        return False
+```

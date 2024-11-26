@@ -1,0 +1,46 @@
+```python
+from collections import Counter
+
+# This class provides methods to calculate basic statistics such as mean, median, and mode for a given dataset.
+class DataStatistics:
+    def mean(self, data):
+        # Calculate the mean of the given data.
+        # param data: list, a list of numerical values from which the mean will be calculated.
+        # return: float, the average of the data rounded to two decimal places.
+        # >>> stats = DataStatistics()
+        # >>> stats.mean([1, 2, 3, 4, 5])
+        # 3.0
+        return round(sum(data) / len(data), 2)
+
+    def median(self, data):
+        # Calculate the median of the given data.
+        # param data: list, a list of numerical values from which the median will be calculated.
+        # return: float or int, the median of the data; if even number of elements, returns the average of the two middle numbers, else returns the middle number.
+        # >>> stats = DataStatistics()
+        # >>> stats.median([1, 3, 2, 4, 5])
+        # 3.0
+        # >>> stats.median([1, 2, 3, 4])
+        # 2.5
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 0:
+            middle = n // 2
+            return round((sorted_data[middle - 1] + sorted_data[middle]) / 2, 2)
+        else:
+            middle = n // 2
+            return sorted_data[middle]
+
+    def mode(self, data):
+        # Calculate the mode of the given data.
+        # param data: list, a list of numerical values from which the mode will be calculated.
+        # return: list, a list of the most frequently occurring values in the data; if there is a tie, all modes are returned.
+        # >>> stats = DataStatistics()
+        # >>> stats.mode([1, 2, 2, 3, 4])
+        # [2]
+        # >>> stats.mode([1, 1, 2, 2, 3])
+        # [1, 2]
+        counter = Counter(data)
+        mode_count = max(counter.values())
+        mode = [x for x, count in counter.items() if count == mode_count]
+        return mode
+```

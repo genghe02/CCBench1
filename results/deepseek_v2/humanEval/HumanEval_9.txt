@@ -1,0 +1,31 @@
+```python
+from typing import List, Tuple
+
+
+def rolling_max(numbers: List[int]) -> List[int]:
+    # Calculate the rolling maximum of a list of integers. The rolling maximum at each position is the maximum value encountered so far in the list.
+    # param numbers: List[int], the list of integers to calculate the rolling maximum for
+    # return: List[int], the list of rolling maximum values
+    # >>> rolling_max([3, 2, 5, 1, 4])
+    # [3, 3, 5, 5, 5]
+    # >>> rolling_max([1, 1, 1, 1])
+    # [1, 1, 1, 1]
+    # >>> rolling_max([])
+    # []
+    # >>> rolling_max([-1, -2, -3, -4])
+    # [-1, -1, -1, -1]
+    # >>> rolling_max([5, 5, 5, 5])
+    # [5, 5, 5, 5]
+    running_max = None
+    result = []
+
+    for n in numbers:
+        if running_max is None:
+            running_max = n
+        else:
+            running_max = max(running_max, n)
+
+        result.append(running_max)
+
+    return result
+```

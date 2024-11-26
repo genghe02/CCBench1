@@ -1,0 +1,8 @@
+
+
+def monotonic(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    if l == sorted(l) or l == sorted(l, reverse=True):
+        return True
+    return False

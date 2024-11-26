@@ -1,0 +1,1 @@
+# Filter the DataFrame to select rows where the 'col' column values are present in the 'targets' list.

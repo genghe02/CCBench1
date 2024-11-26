@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_91.txt", "comments": "# Removing columns with index 1 and 3 in numpy\n# If you ever want to delete more than one columns, you just pass indices of columns you want deleted as a list to np.delete, like this:\n"}

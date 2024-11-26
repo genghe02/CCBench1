@@ -1,0 +1,20 @@
+def solve(s):
+    # Function to toggle the case of alphabetic characters in the input string and reverse the string if no alphabetic characters are present.
+    # Test cases:
+    # Case 1: solve("Hello, World!") should return "hELLO, wORLD!"
+    # Case 2: solve("12345") should return "54321"
+    # Case 3: solve("HeLLo123") should return "hEllO123"
+    flg = 0
+    idx = 0
+    new_str = list(s)
+    for i in s:
+        if i.isalpha():
+            new_str[idx] = i.swapcase()
+            flg = 1
+        idx += 1
+    s = ""
+    for i in new_str:
+        s += i
+    if flg == 0:
+        return s[len(s)::-1]
+    return s

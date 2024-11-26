@@ -1,0 +1,8 @@
+```python
+import numpy as np
+from numpy import newaxis
+
+a = np.array([[1, 2, 3], [3, 4, 5], [5, 6, 7]])
+# Add a new axis to the array, which allows for broadcasting in further operations or transformations.
+b = a[:, :, newaxis]
+```

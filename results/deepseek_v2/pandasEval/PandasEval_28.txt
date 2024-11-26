@@ -1,0 +1,10 @@
+```python
+import pandas as pd
+
+def is_df_exist(df):
+    # Check if the DataFrame exists by verifying if it is None. If it is None, return False; otherwise, return True.
+    if df is None:
+        return False
+    else:
+        return True
+```

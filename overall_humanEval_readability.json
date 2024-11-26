@@ -1,0 +1,24 @@
+{
+  "original": {
+    "flesch_reading_ease": 63.32470238095239,
+    "flesch_kincaid_grade": 8.300595238095237,
+    "smog_index": 3.583928571428571,
+    "coleman_liau_index": 8.625000000000002,
+    "automated_readability_index": 9.123809523809522,
+    "dale_chall_readability_score": 9.416428571428568,
+    "difficult_words": 6.726190476190476,
+    "linsear_write_formula": 9.129414682539682,
+    "gunning_fog": 10.189761904761907
+  },
+  "aligned": {
+    "flesch_reading_ease": 60.474329268292685,
+    "flesch_kincaid_grade": 9.527439024390246,
+    "smog_index": 2.3512195121951223,
+    "coleman_liau_index": 8.338536585365857,
+    "automated_readability_index": 10.197560975609749,
+    "dale_chall_readability_score": 9.472560975609754,
+    "difficult_words": 6.439024390243903,
+    "linsear_write_formula": 11.506425891181989,
+    "gunning_fog": 11.750731707317073
+  }
+}

@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'Apples': [2, 1, np.nan],
+              'Bananas': [3, 3, 7],
+              'Grapes': [np.nan, 2, 3],})
+
+# Requirements for the code:
+# This code creates a DataFrame representing the quantity of different fruits.
+# It calculates a new column 'Fruit Total', which represents the total quantity of fruits 
+# for each row. The sum should ignore any NaN values.
+# The output should be the original DataFrame with the new 'Fruit Total' column added.
+
+# some test cases for the function:
+# - For the first row (2 apples, 3 bananas, NaN grapes), the total should be 5.
+# - For the second row (1 apple, 3 bananas, 2 grapes), the total should be 6.
+# - For the third row (NaN apples, 7 bananas, 3 grapes), the total should be 10.
+
+df['Fruit Total'] = df.apply(lambda x: sum(x.values), axis=1)
+```

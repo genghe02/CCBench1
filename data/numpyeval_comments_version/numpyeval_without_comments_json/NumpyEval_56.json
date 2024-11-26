@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_56.txt", "comments": "# I have an array of distances called dists. I want to select dists which are within a range [r, r+dr].\n# You don't actually need where if you're just trying to filter out the elements of dists that don't fit your criteria:\n"}

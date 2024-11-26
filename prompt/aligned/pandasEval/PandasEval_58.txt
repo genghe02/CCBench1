@@ -1,0 +1,1 @@
+# Remove all the numbers from the Name column at the series/dataframe level.

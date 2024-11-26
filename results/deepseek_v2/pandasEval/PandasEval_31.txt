@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def drop_consecutive_duplicates(series):
+    # Drop consecutive duplicate values in a pandas Series by comparing each element with its next neighbor and utilizing the shift method.
+    return series.loc[series.shift(-1) != series]
+```

@@ -1,0 +1,1 @@
+# Retrieve values from column 'A' in the DataFrame 'df' where the values in column 'B' are equal to 3.

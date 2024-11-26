@@ -1,0 +1,50 @@
+```python
+# This is a class for performing Boyer-Moore string matching algorithm.
+class BoyerMooreSearch:
+    def __init__(self, text, pattern):
+        # This is a constructor for the BoyerMooreSearch class.
+        # param text: str, the text in which we are searching
+        # param pattern: str, the pattern that we are searching for
+        self.text, self.pattern = text, pattern
+        self.textLen, self.patLen = len(text), len(pattern)
+
+    def match_in_pattern(self, char):
+        # This function searches for a character in the pattern from right to left.
+        # param char: str, the character that we are looking for in the pattern
+        # return: int, the index of the character if found, -1 otherwise
+        # Test case: 
+        # bm = BoyerMooreSearch("hello", "lo")
+        # bm.match_in_pattern("l") => 1
+        for i in range(self.patLen - 1, -1, -1):
+            if char == self.pattern[i]:
+                return i
+        return -1
+
+    def mismatch_in_text(self, currentPos):
+        # This function finds the position of the mismatched character in the text.
+        # param currentPos: int, the current position in the text
+        # return: int, the index of the mismatched character if found, -1 otherwise
+        # Test case: 
+        # bm = BoyerMooreSearch("hello", "lo")
+        # bm.mismatch_in_text(3) => -1
+        for i in range(self.patLen - 1, -1, -1):
+            if self.pattern[i] != self.text[currentPos + i]:
+                return currentPos + i
+        return -1
+
+    def bad_character_heuristic(self):
+        # This function applies the bad character heuristic of the Boyer-Moore algorithm.
+        # return: list, a list of positions where pattern matches the text.
+        # Test case: 
+        # bm = BoyerMooreSearch("hello", "lo")
+        # bm.bad_character_heuristic() => [3]
+        positions = []
+        for i in range(self.textLen - self.patLen + 1):
+            mismatch_index = self.mismatch_in_text(i)
+            if mismatch_index == -1:
+                positions.append(i)
+            else:
+                match_index = self.match_in_pattern(self.text[mismatch_index])
+                i = (mismatch_index - match_index)
+        return positions
+```

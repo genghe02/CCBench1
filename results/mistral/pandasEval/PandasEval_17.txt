@@ -1,0 +1,16 @@
+ # Drop duplicates based on specific columns in a DataFrame using pandas drop_duplicates method.
+# Keep the last occurrence of duplicates when there are multiple duplicates.
+
+import pandas as pd
+
+def remove_duplicates_by_column(df, col1, col2):
+    """
+    Remove duplicates from a DataFrame based on given columns and keep the last occurrence of duplicates.
+
+    :param df: DataFrame to remove duplicates from.
+    :param col1: Name of the first column to consider for duplicate removal.
+    :param col2: Name of the second column to consider for duplicate removal.
+    :return: DataFrame with duplicates removed and last occurrence kept.
+    """
+    <Requirements for the code>
+    return df.drop_duplicates(subset=[col1, col2], keep="last")

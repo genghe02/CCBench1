@@ -1,0 +1,14 @@
+```python
+import pandas as pd
+
+# I want to create a dataframe with one of the column as a list or array.
+df = pd.DataFrame({'Name':['Juda','Pri']})
+emails = {'a@a.com','b@b.com'}
+df['Email'] = ''
+
+# Ensure the 'Email' column can hold lists or arrays by converting it to object type.
+df.Email = df.Email.astype(object)
+
+# Assign the set of emails to the 'Email' column of the first row.
+df.loc[0].Email = emails
+```

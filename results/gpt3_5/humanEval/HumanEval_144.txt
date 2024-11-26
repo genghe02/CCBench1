@@ -1,0 +1,13 @@
+```python
+def simplify(x, n):
+    # Split the input fractions x and n into their numerators and denominators
+    a, b = x.split("/")
+    c, d = n.split("/")
+    # Calculate the numerator and denominator of the result fraction
+    numerator = int(a) * int(c)
+    denom = int(b) * int(d)
+    # Check if the result is a whole number and return True, otherwise return False
+    if (numerator/denom == int(numerator/denom)):
+        return True
+    return False
+```

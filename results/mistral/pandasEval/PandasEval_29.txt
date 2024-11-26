@@ -1,0 +1,25 @@
+ # Sort each column in the DataFrame in ascending order, and drop rows where all elements are NaN.
+# This can be achieved by applying the sorted function with pd.isnull as the key to each column using df.apply(lambda x: sorted(x, key=pd.isnull)),
+# and then dropping the NaN rows using df.dropna(how='all').
+
+# Here is an example of how to write test cases for the function:
+#
+# Test case 1: DataFrame with no NaN values
+# >>> df = pd.DataFrame({'A': [1, 4, 7], 'B': [2, 5, 8], 'C': [3, 6, 9]})
+# >>> new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how='all')
+# >>> assert new_df.equals(df)
+#
+# Test case 2: DataFrame with NaN values in one column
+# >>> df = pd.DataFrame({'A': [1, 4, 7, np.nan], 'B': [np.nan, 2, 5, np.nan], 'C': [np.nan, np.nan, 3, 6]})
+# >>> new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how='all')
+# >>> assert new_df.equals(df.iloc[np.where(df.isna().all(axis=1) == False)])
+#
+# Test case 3: DataFrame with NaN values in all columns
+# >>> df = pd.DataFrame(np.nan * np.ones((3, 3)))
+# >>> new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how='all')
+# >>> assert new_df.empty
+#
+# Test case 4: DataFrame with NaN values in different positions in each column
+# >>> df = pd.DataFrame({'A': [1, np.nan, 4, np.nan, 7], 'B': [np.nan, 2, np.nan, 5, np.nan], 'C': [np.nan, np.nan, 3, 6, np.nan]})
+# >>> new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how='all')
+# >>> assert new_df.equals(df.iloc[np.where(df.isna().all(axis=1) == False)])

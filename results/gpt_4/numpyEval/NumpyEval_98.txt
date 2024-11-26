@@ -1,0 +1,1 @@
+# Calculate the Euclidean distance between two numpy arrays 'a' and 'b' using the np.linalg.norm() function.

@@ -1,0 +1,9 @@
+
+
+def below_threshold(l: list, t: int):
+    <Requirements for the code>
+    <some test cases for the function>
+    for e in l:
+        if e >= t:
+            return False
+    return True

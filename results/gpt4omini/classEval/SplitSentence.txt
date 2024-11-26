@@ -1,0 +1,43 @@
+```python
+import re
+
+# This is a class that handles the splitting of sentences and counting words.
+class SplitSentence:
+
+    def split_sentences(self, sentences_string):
+        # Split the provided string into sentences based on punctuation marks while avoiding common abbreviations.
+        # param sentences_string: str, the string containing multiple sentences that need to be split.
+        # return: list, a list of sentences obtained from the input string.
+        # >>> splitter = SplitSentence()
+        # >>> splitter.split_sentences("Hello world. This is a test. How many sentences?")
+        # ['Hello world.', 'This is a test.', 'How many sentences?']
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        # Count the number of words in a given sentence after removing non-alphabetical characters.
+        # param sentence: str, the sentence from which words need to be counted.
+        # return: int, the number of words in the provided sentence.
+        # >>> splitter = SplitSentence()
+        # >>> splitter.count_words("Hello, world!")
+        # 2
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        # Process the input string to find the sentence with the maximum word count.
+        # param sentences_string: str, the string containing multiple sentences to be processed.
+        # return: int, the maximum word count found in any single sentence from the input string.
+        # >>> splitter = SplitSentence()
+        # >>> splitter.process_text_file("Hello world. This is a test. How many sentences do we have?")
+        # 7
+        sentences = self.split_sentences(sentences_string)
+        max_count = 0
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        return max_count
+```

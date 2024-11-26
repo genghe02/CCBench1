@@ -1,0 +1,1 @@
+# Find the indices where the elements in the numpy array 'x' are divisible by 2 efficiently using numpy by applying the condition x % 2 == 0 and utilizing np.where() method.

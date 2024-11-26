@@ -1,0 +1,24 @@
+```python
+import pandas as pd
+
+def add_column_to_dataframe(df: pd.DataFrame, column_name: str, column_data: list) -> pd.DataFrame:
+    """ 
+    Adds a new column with specified name and data to the given Pandas DataFrame.
+    The function assumes that the length of column_data matches the number of rows in the DataFrame.
+    If the column already exists, it will be overwritten.
+    
+    >>> df = pd.DataFrame({'A': [1, 2, 3]})
+    >>> add_column_to_dataframe(df, 'B', [4, 5, 6])
+       A  B
+    0  1  4
+    1  2  5
+    2  3  6
+    >>> add_column_to_dataframe(df, 'A', [7, 8, 9])
+       A  B
+    0  7  4
+    1  8  5
+    2  9  6
+    """
+    df[column_name] = column_data
+    return df
+```

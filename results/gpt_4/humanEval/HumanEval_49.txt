@@ -1,0 +1,27 @@
+```python
+def modp(n: int, p: int):
+    """
+    Calculate the remainder of 2^n divided by p efficiently.
+    This function uses a for loop and the property of modulus to calculate the remainder of 2^n divided by p. 
+    It iteratively multiplies the result by 2 and takes the modulus by p, which gives the same result as 2^n mod p, but much more efficiently.
+
+    Parameters:
+    n: int, the exponent of 2
+    p: int, the divisor
+
+    Returns:
+    ret: int, the remainder of 2^n divided by p
+
+    Example:
+    >>> modp(10, 13)
+    10
+    >>> modp(2, 3)
+    1
+    >>> modp(15, 17)
+    1
+    """
+    ret = 1
+    for i in range(n):
+        ret = (2 * ret) % p
+    return ret
+```

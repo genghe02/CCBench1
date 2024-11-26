@@ -1,0 +1,37 @@
+ def fib(n: int):
+    # This function calculates the Fibonacci sequence up to the given index 'n'
+    <description for whole function>
+    if n == 0:
+        # Base case: Fibonacci sequence starts with 0
+        return 0
+    if n == 1:
+        # Base case: Fibonacci sequence starts with 1
+        return 1
+    # Recursive case: calculate Fibonacci numbers up to 'n' by calling the function recursively
+    return fib(n - 1) + fib(n - 2)
+
+    <description for all parameters>:param n: int, the index up to which the Fibonacci sequence is calculated
+
+    <some test cases for the function>
+    >>> fib(0)
+    0
+    >>> fib(1)
+    1
+    >>> fib(2)
+    1
+    >>> fib(3)
+    2
+    >>> fib(4)
+    3
+    >>> fib(5)
+    5
+    >>> fib(6)
+    8
+    >>> fib(7)
+    13
+    >>> fib(8)
+    21
+    >>> fib(9)
+    34
+    >>> fib(10)
+    55

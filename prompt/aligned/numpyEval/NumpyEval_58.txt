@@ -1,0 +1,1 @@
+# Check if a given NumPy array is sorted using numpy.all.

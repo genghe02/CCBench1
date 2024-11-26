@@ -1,0 +1,43 @@
+ def iscube(a):
+    # Check if input is a number
+    <description for whole function>: This function checks if a given number is a cube.
+    <description for parameter>: param a: float or int, the number to be checked for cubicity.
+
+    a = abs(a)
+    # Calculate the cube root of the absolute value of the input number
+    cube_root = int(round(a ** (1. / 3)))
+    # Check if the cube root raised to the power of 3 equals the original number
+    return cube_root ** 3 == a
+
+    <some test cases for the function>
+    >>> iscube(8)
+    True
+    >>> iscube(27)
+    True
+    >>> iscube(125)
+    True
+    >>> iscube(13)
+    False
+    >>> iscube(12)
+    False
+    >>> iscube(1000)
+    True
+    >>> iscube(-27)
+    False
+    >>> iscube(-1)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "<stdin>", line 3, in iscube
+    TypeError: int() arg must be a number or a sequence of numbers
+    # Test case for negative numbers
+    >>> iscube(-27)
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "<stdin>", line 3, in iscube
+    TypeError: int() arg must be a number or a sequence of numbers
+    # Test case for non-numeric input
+    >>> iscube('abc')
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "<stdin>", line 3, in iscube
+    TypeError: unsupported operand type(s) for ** or pow():'str' and 'float'

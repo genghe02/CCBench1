@@ -1,0 +1,1 @@
+# Reshape the input array 'x' into a 1-dimensional array of shape (3,) using numpy's reshape function.

@@ -1,0 +1,10 @@
+[
+  "This is a class that checks for bracket matching",
+  "Initializes the class with an expression.",
+  ":param expr: The expression to check for balanced brackets,str.",
+  "Clears the expression of all characters that are not brackets.",
+  ">>> b = BalancedBrackets(\"a(b)c\")\n        >>> b.clear_expr()\n        >>> b.expr\n        '()'",
+  "Checks if the expression has balanced brackets.",
+  ":return: True if the expression has balanced brackets, False otherwise.",
+  ">>> b = BalancedBrackets(\"a(b)c\")\n        >>> b.check_balanced_brackets()\n        True"
+]

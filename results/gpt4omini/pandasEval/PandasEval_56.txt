@@ -1,0 +1,11 @@
+```python
+import pandas as pd
+
+df = pd.DataFrame({'a': [3.0, 2.0, 4.0, 1.0],'b': [1.0, 4.0 , 2.0, 3.0]})
+""" This code creates a DataFrame with two columns 'a' and 'b', each containing float values. 
+    It then retrieves the largest value from column 'a' and assigns it to 'first_value'. 
+    If the DataFrame is not empty, 'first_value' should hold the maximum value in column 'a'.
+    >>> first_value = df.a.nlargest(1).iloc[-1]  # Expected output: 4.0
+"""
+first_value = df.a.nlargest(1).iloc[-1]
+```

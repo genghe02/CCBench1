@@ -1,0 +1,6 @@
+import pandas as pd
+
+def divide_multiple_cols_by_first_col(df):
+    <Requirements for the code>
+    df[['B','C']] = df[['B','C']].div(df.A, axis=0)
+    return df

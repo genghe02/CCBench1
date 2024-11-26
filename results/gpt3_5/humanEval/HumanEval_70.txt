@@ -1,0 +1,15 @@
+def strange_sort_list(lst):
+    # Sort the input list in a strange way where the elements are alternated between the minimum and maximum values.
+    # The function takes a list as input and returns a list that is sorted in a unique pattern.
+
+    # Test Cases:
+    # Case 1: Input list is [4, 3, 6, 9, 2]
+    # Case 2: Input list is [5, 8, 1, 7, 3, 2]
+    # Case 3: Input list is [10, 5, 3, 7, 8, 12, 2]
+
+    res, switch = [], True
+    while lst:
+        res.append(min(lst) if switch else max(lst))
+        lst.remove(res[-1])
+        switch = not switch
+    return res

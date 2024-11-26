@@ -1,0 +1,5 @@
+import pandas as pd
+
+def combine_df(df1, df2):
+    <Requirements for the code>
+    return df1.append(df2, ignore_index=True)

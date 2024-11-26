@@ -1,0 +1,1 @@
+# Create a variable 'a_shape' to store the shape of the numpy array 'a'. This will hold a tuple representing the dimensions of the array.

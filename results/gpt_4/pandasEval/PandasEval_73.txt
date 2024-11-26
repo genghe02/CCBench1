@@ -1,0 +1,1 @@
+# Takes a pandas dataframe as input and returns a new dataframe with the unique values and their counts in the original dataframe. The unique values are renamed as 'unique_values' and the counts as 'counts'.

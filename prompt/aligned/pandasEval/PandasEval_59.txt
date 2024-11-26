@@ -1,0 +1,1 @@
+# Delete all columns from the DataFrame that contain only NaN values and return the result.

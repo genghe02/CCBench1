@@ -1,0 +1,18 @@
+ # Round each element in the series up to the nearest integer using NumPy's ceil function.
+
+import pandas as pd
+import numpy as np
+
+def ceil_of_series(s):
+    # Ensure input is a Pandas Series
+    if not isinstance(s, pd.Series):
+        raise TypeError("Input must be a Pandas Series")
+
+    # Convert the Series to a NumPy array for efficient element-wise operation
+    s_arr = np.array(s)
+
+    # Round each element up to the nearest integer using NumPy's ceil function
+    result = np.ceil(s_arr)
+
+    # Convert the result back to a Pandas Series
+    return pd.Series(result, index=s.index)

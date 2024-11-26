@@ -1,0 +1,3 @@
+# Split an array into multiple sub-arrays as equally as possible using numpy's array_split function. The number of sub-arrays is specified by the second argument.
+
+result = np.array_split(x, 3)

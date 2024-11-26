@@ -1,0 +1,134 @@
+ <description for whole class>
+import random
+
+class MahjongConnect:
+ # This class represents a Mahjong Connect game board, where the goal is to connect icons of the same type.
+
+ def __init__(self, BOARD_SIZE, ICONS):
+ # Initialize the MahjongConnect game object with the given board size and icon set.
+ <description for whole function>
+ <description for parameters>:
+ :param BOARD_SIZE: tuple, the size of the game board (rows, columns)
+ :param ICONS: list, the set of available icons
+ :return: None
+
+ <description for all parameters>
+ :param BOARD_SIZE: The size of the game board.
+ :param ICONS: A list of available icons for the game.
+
+ <some test cases for the function>
+ >>> mahjong = MahjongConnect((3, 3), ['A', 'B', 'C'])
+ >>> mahjong2 = MahjongConnect((4, 4), ['A', 'B', 'C', 'D'])
+
+ self.BOARD_SIZE = BOARD_SIZE
+ self.ICONS = ICONS
+ self.board = self.create_board()
+
+ <description for whole function>
+ <description for return statement>
+ <description for return type>:
+ :return: None
+ <description for side effects>:
+ :raises: ValueError if the board size is not valid
+
+ def create_board(self):
+ # Create a new MahjongConnect game board filled with random icons.
+ <description for whole function>
+ <description for return statement>
+ <description for return type>:
+ :return: None
+ <description for side effects>:
+ :raises: ValueError if the board cannot be created
+
+ <some test cases for the function>
+ >>> mahjong.create_board()
+
+ self.board = [[random.choice(self.ICONS) for _ in range(self.BOARD_SIZE[1])] for _ in range(self.BOARD_SIZE[0])]
+
+ <description for whole function>
+ <description for all parameters>
+ <description for return statement>
+ <description for return type>:
+ :return: bool
+ <description for side effects>:
+ :raises: None
+
+ def is_valid_move(self, pos1, pos2):
+ # Check if a move from position pos1 to position pos2 is valid.
+ <description for whole function>
+ <description for parameters>:
+ :param pos1: tuple, the position of the first icon (row, column)
+ :param pos2: tuple, the position of the second icon (row, column)
+ :return: bool
+ <description for side effects>:
+ :raises: ValueError if the positions are not valid
+
+ <description for all parameters>
+ :param pos1: The position of the first icon.
+ :param pos2: The position of the second icon.
+
+ <description for return statement>
+ :return: True if the move is valid, False otherwise
+
+ <some test cases for the function>
+ >>> mahjong.is_valid_move((0, 0), (1, 1))
+ >>> mahjong.is_valid_move((2, 2), (2, 2))
+
+ def has_path(self, pos1, pos2):
+ # Check if there is a valid path between positions pos1 and pos2.
+ <description for whole function>
+ <description for parameters>:
+ :param pos1: tuple, the position of the first icon (row, column)
+ :param pos2: tuple, the position of the second icon (row, column)
+ :return: bool
+ <description for side effects>:
+ :raises: None
+
+ <description for all parameters>
+ :param pos1: The position of the first icon.
+ :param pos2: The position of the second icon.
+
+ <description for return statement>
+ :return: True if there is a valid path between the positions, False otherwise
+
+ <some test cases for the function>
+ >>> mahjong.has_path((0, 0), (1, 1))
+ >>> mahjong.has_path((1, 1), (2, 2))
+
+ def remove_icons(self, pos1, pos2):
+ # Remove the icons at positions pos1 and pos2.
+ <description for whole function>
+ <description for parameters>:
+ :param pos1: tuple, the position of the first icon (row, column)
+ :param pos2: tuple, the position of the second icon (row, column)
+ :return: None
+ <description for side effects>:
+ :raises: ValueError if the positions are not valid
+
+ <description for all parameters>
+ :param pos1: The position of the first icon.
+ :param pos2: The position of the second icon.
+
+ <description for return statement>
+ :return: None
+ <description for side effects>:
+ :modifies: The game board
+
+ <some test cases for the function>
+ >>> mahjong.remove_icons((0, 0), (1, 1))
+
+ def is_game_over(self):
+ # Check if the game is over by checking if there are any icons left on the board.
+ <description for whole function>
+ <description for return statement>
+ <description for return type>:
+ :return: bool
+ <description for side effects>:
+ :raises: None
+
+ <description for return statement>
+ :return: True if the game is over, False otherwise
+
+ <some test cases for the function>
+ >>> mahjong.is_game_over()
+ >>> mahjong2.is_game_over()

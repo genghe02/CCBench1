@@ -1,0 +1,1 @@
+# Obtain a pandas DataFrame without the index and print the entire DataFrame without displaying the index.

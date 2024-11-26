@@ -1,0 +1,7 @@
+
+
+def get_positive(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    return [e for e in l if e > 0]
+

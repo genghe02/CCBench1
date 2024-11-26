@@ -1,0 +1,1 @@
+# The goal of this code is to get the unique values in the DataFrame. This is achieved by first flattening the DataFrame into a 1-D array using 'ravel()' and then using 'np.unique()' to get the unique values.

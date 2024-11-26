@@ -1,0 +1,1 @@
+# Divide all columns ['B', 'C'] in a DataFrame by the first column 'A' and return the result.

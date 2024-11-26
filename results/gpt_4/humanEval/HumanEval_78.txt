@@ -1,0 +1,15 @@
+def hex_key(num):
+    # This function finds the total count of prime numbers in a hexadecimal number string
+    # The prime numbers considered are 2, 3, 5, 7, B(11 in decimal) and D(13 in decimal)
+    # num: str, the input hexadecimal number string
+    # return: int, the total count of prime numbers in the hexadecimal number string
+    # Test cases:
+    # >>> hex_key('1234') returns 2
+    # >>> hex_key('1ABCD') returns 3
+    # >>> hex_key('0') returns 0
+    primes = ('2', '3', '5', '7', 'B', 'D')
+    total = 0
+    for i in range(0, len(num)):
+        if num[i] in primes:
+            total += 1
+    return total

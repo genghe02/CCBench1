@@ -1,0 +1,1 @@
+# Check if the array 'a' is sorted in ascending order by comparing each element with its neighbor using numpy and return a boolean value.

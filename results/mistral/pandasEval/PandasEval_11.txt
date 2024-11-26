@@ -1,0 +1,8 @@
+ # Filter the DataFrame based on specified column name and values using pandas method isin().
+# This function returns a new DataFrame that contains only the rows where the specified column has one of the given values.
+
+import pandas as pd
+
+def select_rows_from_column(df, col_name, values):
+    <Filter the DataFrame based on specified column name and values using pandas method isin().>
+    return df[df[col_name].isin(values)]

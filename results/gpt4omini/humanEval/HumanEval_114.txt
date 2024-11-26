@@ -1,0 +1,26 @@
+```python
+def minSubArraySum(nums):
+    # This function calculates the minimum subarray sum in a given list of integers.
+    # It utilizes a modified Kadane's algorithm to find the minimum sum subarray efficiently.
+    # 
+    # :param nums: List[int], a list of integers from which the minimum subarray sum is to be calculated.
+    # :return: int, the minimum subarray sum.
+    #
+    # Test cases:
+    # >>> minSubArraySum([1, 2, -1, -2, 3])  # Returns -3, as the minimum subarray is [-1, -2].
+    # >>> minSubArraySum([-1, -2, -3])        # Returns -6, as the entire array is the minimum subarray.
+    # >>> minSubArraySum([5, 4, -1, 7])       # Returns -1, as the minimum subarray is [-1].
+    # >>> minSubArraySum([2, 3, 1])           # Returns 1, as the minimum subarray is [1].
+    
+    max_sum = 0
+    s = 0
+    for num in nums:
+        s += -num
+        if (s < 0):
+            s = 0
+        max_sum = max(s, max_sum)
+    if max_sum == 0:
+        max_sum = max(-i for i in nums)
+    min_sum = -max_sum
+    return min_sum
+```

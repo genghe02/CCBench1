@@ -1,0 +1,1 @@
+# This function removes all rows from a given numpy array that contain non-numeric values. It uses np.isnan() to identify non-numeric values and np.any() to check each row. Rows with non-numeric values are then removed by indexing with a logical NOT (~) operator.

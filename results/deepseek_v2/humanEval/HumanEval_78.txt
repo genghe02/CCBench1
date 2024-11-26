@@ -1,0 +1,26 @@
+```python
+def hex_key(num):
+    # This function counts the number of hexadecimal digits in the input string 'num' that are prime.
+    # The prime digits in hexadecimal are '2', '3', '5', '7', 'B', and 'D'.
+    # param num: str, the hexadecimal number as a string
+    # return: int, the count of prime digits in the hexadecimal number
+    
+    primes = ('2', '3', '5', '7', 'B', 'D')
+    total = 0
+    for i in range(0, len(num)):
+        if num[i] in primes:
+            total += 1
+    return total
+
+# Test cases for the function
+# >>> hex_key('2A')
+# 1
+# >>> hex_key('123456789ABCDEF')
+# 7
+# >>> hex_key('0')
+# 0
+# >>> hex_key('B')
+# 1
+# >>> hex_key('F')
+# 0
+```

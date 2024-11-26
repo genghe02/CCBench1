@@ -1,0 +1,82 @@
+ class CamelCaseMap:
+    # A dictionary map that converts keys to CamelCase for efficient access.
+    def __init__(self):
+        # Initialize an empty dictionary to store the data.
+        self._data = {}
+
+    def __getitem__(self, key):
+        # Retrieve the value associated with the given key, converting it to CamelCase if it's a string.
+        value = self._data.get(self._convert_key(key), None)
+        if value is None:
+            raise KeyError(f"Key '{key}' not found in the dictionary.")
+        return value
+
+    def __setitem__(self, key, value):
+        # Store the given key-value pair in the dictionary, converting the key to CamelCase.
+        self._data[self._convert_key(key)] = value
+
+    def __delitem__(self, key):
+        # Remove the key-value pair with the given key from the dictionary, converting the key to CamelCase.
+        if key in self._data:
+            del self._data[self._convert_key(key)]
+        else:
+            raise KeyError(f"Key '{key}' not found in the dictionary.")
+
+    def __iter__(self):
+        # Iterate over the items in the dictionary, converting the keys to CamelCase.
+        return iter((self._convert_key(key), value) for key, value in self._data.items())
+
+    def __len__(self):
+        # Get the number of items in the dictionary.
+        return len(self._data)
+
+    def _convert_key(self, key):
+        # Convert the given string key to CamelCase.
+        if isinstance(key, str):
+            return self._to_camel_case(key)
+        return key
+
+    @staticmethod
+    def _to_camel_case(key):
+        # Convert the given string to CamelCase by capitalizing the first letter of each word, except the first one.
+        parts = key.split('_')
+        return parts[0] + ''.join(part.title() for part in parts[1:])
+
+    # Test cases:
+    # >>> map = CamelCaseMap()
+    # >>> map['some_key'] ='some value'
+    # >>> map['some_key']
+    #'some value'
+    # >>> map['some_key'] = 42
+    # >>> map['some_key']
+    # 42
+    # >>> map['some_key'] = [1, 2, 3]
+    # >>> map['some_key']
+    # [1, 2, 3]
+    # >>> del map['some_key']
+    # >>>'some_key' in map
+    # False
+    # >>> map['another_key'] = 'another value'
+    # >>> map['AnotherKey']
+    # 'another value'
+    # >>> map['Another_key']
+    # Traceback (most recent call last):
+    # KeyError: 'Another_key'
+    # >>> map['Another_key'] = 43
+    # Traceback (most recent call last):
+    # TypeError: 'int' object is not iterable
+    # >>> map['Another_key'] = [5, 6, 7]
+    # >>> map['Another_key']
+    # [5, 6, 7]
+    # >>> map['Another_key'] = {'a': 1, 'b': 2}
+    # Traceback (most recent call last):
+    # TypeError: 'dict' object is not iterable
+    # >>> map['Another_key'] = {'a': 1, 'b': 2}.items()
+    # >>> map['Another_key']
+    # dict_items(['a': 1, 'b': 2])
+    # >>> list(map['Another_key'])
+    # ['a', 'b']
+    # >>> map['Another_key']['a']
+    # 1
+    # >>> map['Another_key']['b']
+    # 2

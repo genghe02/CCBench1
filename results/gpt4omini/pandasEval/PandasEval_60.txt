@@ -1,0 +1,19 @@
+```python
+import pandas as pd
+
+def convert_column_to_date(df: pd.DataFrame) -> pd.DataFrame:
+    """ Convert the 'Date' column in a given DataFrame to datetime format.
+    The function expects that the DataFrame has a column named 'Date' which contains date information in a format recognizable 
+    by pandas. If the 'Date' column is successfully converted, it will replace the original 'Date' column in the DataFrame.
+    
+    >>> df = pd.DataFrame({'Date': ['2021-01-01', '2021-02-01'], 'Value': [10, 20]})
+    >>> convert_column_to_date(df).dtypes['Date']
+    dtype('<M8[ns]')
+    >>> df_empty = pd.DataFrame({'Date': []})
+    >>> converted_empty_df = convert_column_to_date(df_empty)
+    >>> converted_empty_df['Date'].dtype
+    dtype('<M8[ns]')
+    """
+    df["Date"] = pd.to_datetime(df.Date)
+    return df
+```

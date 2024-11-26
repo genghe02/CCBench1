@@ -1,0 +1,70 @@
+```python
+# This class is used for performing various encryption techniques on the provided text.
+class EncryptionUtils:
+    def __init__(self, key):
+        # This function initializes the EncryptionUtils class with the provided key.
+        # The key is a string that is used for encrypting the text using different ciphers.
+        self.key = key
+
+    def caesar_cipher(self, plaintext, shift):
+        # This function encrypts the provided plaintext using the Caesar Cipher technique.
+        # The plaintext is a string that needs to be encrypted.
+        # The shift is an integer representing the number of places each letter in the plaintext is shifted down the alphabet.
+        # Returns the ciphertext obtained by shifting the letters of the plaintext down the alphabet by the shift value.
+        # Test case: assert EncryptionUtils('key').caesar_cipher('HELLO', 3) == 'KHOOR'
+        ciphertext = ""
+        for char in plaintext:
+            if char.isalpha():
+                if char.isupper():
+                    ascii_offset = 65
+                else:
+                    ascii_offset = 97
+                shifted_char = chr((ord(char) - ascii_offset + shift) % 26 + ascii_offset)
+                ciphertext += shifted_char
+            else:
+                ciphertext += char
+        return ciphertext
+    
+    def vigenere_cipher(self, plain_text):
+        # This function encrypts the provided plaintext using the Vigenere Cipher technique.
+        # The plain_text is a string that needs to be encrypted.
+        # Returns the encrypted text obtained by shifting each letter in the plaintext by a number of places determined by the key.
+        # Test case: assert EncryptionUtils('key').vigenere_cipher('HELLO') == 'RIJVS'
+        encrypted_text = ""
+        key_index = 0
+        for char in plain_text:
+            if char.isalpha():
+                shift = ord(self.key[key_index % len(self.key)].lower()) - ord('a')
+                encrypted_char = chr((ord(char.lower()) - ord('a') + shift) % 26 + ord('a'))
+                encrypted_text += encrypted_char.upper() if char.isupper() else encrypted_char
+                key_index += 1
+            else:
+                encrypted_text += char
+        return encrypted_text
+
+    def rail_fence_cipher(self, plain_text, rails):
+        # This function encrypts the provided plaintext using the Rail Fence Cipher technique.
+        # The plain_text is a string that needs to be encrypted.
+        # The rails is an integer representing the number of rails in the fence.
+        # Returns the encrypted text obtained by arranging the letters of the plaintext in a zigzag pattern on a fence with the specified number of rails.
+        # Test case: assert EncryptionUtils('key').rail_fence_cipher('HELLO', 3) == 'HLELO'
+        fence = [['\n' for _ in range(len(plain_text))] for _ in range(rails)]
+        direction = -1
+        row, col = 0, 0
+
+        for char in plain_text:
+            if row == 0 or row == rails-1:
+                direction = -direction
+
+            fence[row][col] = char
+            col += 1
+            row += direction
+
+        encrypted_text = ''
+        for i in range(rails):
+            for j in range(len(plain_text)):
+                if fence[i][j] != '\n':
+                    encrypted_text += fence[i][j]
+
+        return encrypted_text
+```

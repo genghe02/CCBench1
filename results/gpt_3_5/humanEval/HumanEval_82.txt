@@ -1,0 +1,23 @@
+def prime_length(string):
+    # Check if the length of the string is a prime number.
+    # Returns True if the length is a prime number, False otherwise.
+    
+    # Test case for an empty string
+    assert prime_length("") == False
+    
+    # Test case for a string with length 1
+    assert prime_length("a") == False
+    
+    # Test case for a string with length 2
+    assert prime_length("ab") == True
+    
+    # Test case for a string with length 5 (prime number)
+    assert prime_length("hello") == True
+    
+    l = len(string)
+    if l == 0 or l == 1:
+        return False
+    for i in range(2, l):
+        if l % i == 0:
+            return False
+    return True

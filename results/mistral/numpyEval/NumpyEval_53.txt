@@ -1,0 +1,2 @@
+ # Find the difference between each element and the minimum value in its corresponding row using numpy.
+result = a - a.min(axis=0)

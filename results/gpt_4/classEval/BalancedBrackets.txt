@@ -1,0 +1,48 @@
+```python
+# This class is used to check if a given string has balanced brackets.
+class BalancedBrackets:
+    def __init__(self, expr):
+        # This function initializes the BalancedBrackets class with the string of brackets to check.
+        # param expr: string, the string of brackets to check for balance.
+        self.stack = []
+        self.left_brackets = ["(", "{", "["]
+        self.right_brackets = [")", "}", "]"]
+        self.expr = expr
+
+    def clear_expr(self):
+        # This function clears the string of brackets, removing any character that's not a bracket.
+        # return: None, it modifies the expr attribute in place.
+        # >>> BB = BalancedBrackets('(([[{{}}]]))')
+        # >>> BB.clear_expr()
+        # >>> print(BB.expr)
+        # '(([[{{}}]]))'
+        self.expr = ''.join(c for c in self.expr if (c in self.left_brackets or c in self.right_brackets))
+
+    def check_balanced_brackets(self):
+        # This function checks if the string of brackets is balanced.
+        # return: bool, True if the string of brackets is balanced, False otherwise.
+        # >>> BB = BalancedBrackets('((((')
+        # >>> print(BB.check_balanced_brackets())
+        # False
+        # >>> BB = BalancedBrackets('()(())')
+        # >>> print(BB.check_balanced_brackets())
+        # True
+        self.clear_expr()
+        for Brkt in self.expr:
+            if Brkt in self.left_brackets:
+                self.stack.append(Brkt)
+            else:
+                Current_Brkt = self.stack.pop()
+                if Current_Brkt == "(":
+                    if Brkt != ")":
+                        return False
+                if Current_Brkt == "{":
+                    if Brkt != "}":
+                        return False
+                if Current_Brkt == "[":
+                    if Brkt != "]":
+                        return False
+        if self.stack:
+            return False
+        return True
+```

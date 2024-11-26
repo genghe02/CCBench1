@@ -1,0 +1,14 @@
+def check_if_last_char_is_a_letter(txt):
+    # This function checks if the last character of a given string, after being split by spaces, is a letter.
+    # The function splits the string into a list of substrings and checks the last substring.
+    # The function returns True if the last substring is a single character and is a letter (i.e., its ASCII value is between 97 and 122), and False otherwise.
+    
+    # Test cases:
+    # >>> check_if_last_char_is_a_letter("Hello world") should return True because the last character is 'd' which is a letter.
+    # >>> check_if_last_char_is_a_letter("1234 5678 9A") should return True because the last character is 'A' which is a letter.
+    # >>> check_if_last_char_is_a_letter("Hello world1") should return False because the last character is '1' which is not a letter.
+    # >>> check_if_last_char_is_a_letter("Hello world ") should return False because the last character is ' ' which is not a letter.
+    # >>> check_if_last_char_is_a_letter("") should return False because there is no character in the string.
+
+    check = txt.split(' ')[-1]
+    return True if len(check) == 1 and (97 <= ord(check.lower()) <= 122) else False

@@ -1,0 +1,1 @@
+# Select and create a new dataframe that only includes columns of type 'float64' from the original dataframe.

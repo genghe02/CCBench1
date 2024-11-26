@@ -1,0 +1,1 @@
+# Find the largest value in column 'a' of the DataFrame df and store it in the variable first_value. The nlargest() function returns the largest n elements. In this case, we're only interested in the largest one (n=1), which is why we're using iloc[-1] to get the last (and only) element.

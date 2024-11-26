@@ -1,0 +1,13 @@
+def max_fill(grid, capacity):
+    import math
+    # This function calculates the maximum fill of each array in the grid when filled to the specified capacity.
+    # For each array in the grid, it calculates the sum of the array values and divides it by the capacity.
+    # The math.ceil method is used to round up the result to the nearest whole number.
+    # The final result is the sum of all the rounded up numbers.
+    # Note: This function assumes that all values in the grid are non-negative.
+    # 
+    # Test cases:
+    # max_fill([[1, 2, 3], [4, 5, 6]], 3) --> 6
+    # max_fill([[1, 1, 1], [2, 2, 2]], 2) --> 4
+    # max_fill([[4, 4, 4], [8, 8, 8]], 6) --> 6
+    return sum([math.ceil(sum(arr)/capacity) for arr in grid])

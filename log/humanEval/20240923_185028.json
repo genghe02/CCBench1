@@ -1,0 +1,26 @@
+{
+  "response body": {
+    "id": "0c40271a-2f7d-42bf-af9c-8d423288b7c4",
+    "object": "chat.completion",
+    "model": "gpt-4-32k",
+    "created": "2024-09-23 18:50:28",
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "def sort_even(l: list):\n    # This function takes a list of integers as input and sorts the even-indexed elements in ascending order.\n    # The sorted even-indexed elements and the original odd-indexed elements are then alternately placed in a new list.\n    # If the number of even-indexed elements is greater than the number of odd-indexed elements, the last even-indexed element is appended at the end.\n    # For example, if the input list is [4, 5, 2, 3, 1], the output will be [1, 5, 2, 3, 4].\n\n    # Here are some test cases for the function:\n    # >>> sort_even([4, 5, 2, 3, 1])\n    # [1, 5, 2, 3, 4]\n    # >>> sort_even([1, 2, 3, 4, 5])\n    # [1, 2, 3, 4, 5]\n    # >>> sort_even([5, 4, 3, 2, 1])\n    # [1, 4, 3, 2, 5]\n\n    evens = l[::2]\n    odds = l[1::2]\n    evens.sort()\n    ans = []\n    for e, o in zip(evens, odds):\n        ans.extend([e, o])\n    if len(evens) > len(odds):\n        ans.append(evens[-1])\n    return ans\n    # The function returns a list where the sorted even-indexed elements and the original odd-indexed elements are alternately placed."
+        }
+      }
+    ],
+    "usage": {
+      "completion_tokens": 349,
+      "prompt_tokens": 648,
+      "total_tokens": 997
+    },
+    "feeType": "1",
+    "consume": 0.586856
+  },
+  "test_case_name": "HumanEval_37.txt"
+}

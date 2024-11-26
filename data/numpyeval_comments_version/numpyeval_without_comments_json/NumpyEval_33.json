@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_33.txt", "comments": "# Is there a quick way to \"sub-flatten\" or flatten only some of the first dimensions in a numpy array?\n# Given a numpy array of dimensions (50,100,25), the resultant dimensions would be (5000,25)\n"}

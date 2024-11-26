@@ -1,0 +1,13 @@
+```python
+import pandas as pd
+
+df = pd.DataFrame({'name': ['jon','sam','jane','bob'],
+           'age': [30,25,18,26],
+           'sex':['male','male','female','male']})
+
+row = ['45', 'Dean', 'male']
+df.loc[-1] = row
+df.index = df.index + 1
+# Ensure the newly added row is placed at the top of the DataFrame by sorting the index.
+df.sort_index(inplace=True)
+```

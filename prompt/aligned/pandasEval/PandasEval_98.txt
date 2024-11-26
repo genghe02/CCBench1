@@ -1,0 +1,1 @@
+# Get a list of the column headers from a Pandas DataFrame provided by user input, regardless of the number of columns or their names, and return the list of column headers.

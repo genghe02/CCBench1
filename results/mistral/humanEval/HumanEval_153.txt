@@ -1,0 +1,28 @@
+ def Strongest\_Extension(class\_name, extensions):
+```python
+# This function returns the strongest extension for a given class name and a list of extensions.
+# It calculates the difference between the number of uppercase and lowercase letters in each extension,
+# and returns the extension with the highest difference as the strongest one.
+
+# Requirements for the function
+# param class_name: str, the name of the class
+# param extensions: list, a list of strings representing the available extensions
+# return: str, the name of the strongest extension for the given class
+
+# Test cases for the function
+# >>> Strongest_Extension("MyClass", ["ExtensionA", "ExtensionB", "ExtensionC"])
+# 'MyClass.ExtensionB'
+# >>> Strongest_Extension("MyClass", ["ExtensionA", "ExtensionB", "ExtensionC", "ExtensionD"])
+# 'MyClass.ExtensionD'
+
+strong = extensions[0]
+my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+for s in extensions:
+    val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+    if val > my_val:
+        strong = s
+        my_val = val
+
+ans = class_name + "." + strong
+return ans
+```

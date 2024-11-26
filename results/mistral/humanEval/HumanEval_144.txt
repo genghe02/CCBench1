@@ -1,0 +1,10 @@
+ def simplify(x, n):
+ # Splits the given strings 'x' and 'n' into two parts using "/" as delimiter and converts each part into integers to calculate the numerator and denominator.
+ a, b = x.split("/")
+ c, d = n.split("/")
+ numerator = int(a) * int(c)
+ denom = int(b) * int(d)
+ # Checks if the result of the division of the numerator by the denominator is an integer and returns True if it is, otherwise returns False.
+ if (numerator/denom == int(numerator/denom)):
+ return True
+ return False

@@ -1,0 +1,1 @@
+# Normalize the columns of the Pandas DataFrame so that each value is between 0 and 1, given that each column has a different value range.

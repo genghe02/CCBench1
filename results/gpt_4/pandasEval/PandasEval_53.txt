@@ -1,0 +1,1 @@
+# This function is used to get the number of columns in a dataframe by utilizing the 'len' function on the 'columns' attribute of the dataframe.

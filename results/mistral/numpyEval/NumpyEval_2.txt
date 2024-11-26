@@ -1,0 +1,2 @@
+ # Find the indices where the histogram values change, indicating a new bin.
+result = np.where(hist[1:]!= hist[:-1])[0] + np.where(hist[1:] - hist[:-1] < 0, len(hist) - 1, result)

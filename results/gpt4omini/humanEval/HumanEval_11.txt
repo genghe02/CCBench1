@@ -1,0 +1,22 @@
+```python
+from typing import List
+
+def string_xor(a: str, b: str) -> str:
+    # Perform a bitwise XOR operation on two binary strings and return the result as a new binary string.
+    # The function compares corresponding bits from both strings and returns '1' if they differ, and '0' if they are the same.
+    
+    # Test cases for the function:
+    # >>> string_xor('1100', '1010')  # Expected output: '0110'
+    # >>> string_xor('1111', '0000')  # Expected output: '1111'
+    # >>> string_xor('1010', '1010')  # Expected output: '0000'
+    # >>> string_xor('1', '0')         # Expected output: '1'
+    # >>> string_xor('0', '0')         # Expected output: '0'
+
+    def xor(i, j):
+        if i == j:
+            return '0'
+        else:
+            return '1'
+
+    return ''.join(xor(x, y) for x, y in zip(a, b))
+```

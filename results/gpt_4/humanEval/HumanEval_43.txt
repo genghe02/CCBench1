@@ -1,0 +1,23 @@
+```python
+def pairs_sum_to_zero(l):
+    # This function checks if any pair of numbers in the list sums up to zero.
+    # It takes a list of integers as input and returns True if a pair exists that sums up to zero, else False.
+    # The function uses a nested loop to compare each pair of numbers.
+    # In each iteration, it sums up the current number with every other number in the list.
+    # If the sum equals zero, it returns True. If no such pair is found after checking all pairs, it returns False.
+    #
+    # param l: list of integers
+    # return: bool, True if a pair exists that sums up to zero, else False
+    #
+    # some test cases for the function:
+    # >>> pairs_sum_to_zero([1, 2, 3, -2])  # returns True because 2 and -2 sum up to zero
+    # >>> pairs_sum_to_zero([1, 2, 3, 4])   # returns False because no pair sums up to zero
+    # >>> pairs_sum_to_zero([0, 0])         # returns True because 0 and 0 sum up to zero
+    # >>> pairs_sum_to_zero([])             # returns False because the list is empty
+    # >>> pairs_sum_to_zero([1, -1, 2, -2]) # returns True because there are multiple pairs that sum up to zero
+    for i, l1 in enumerate(l):
+        for j in range(i + 1, len(l)):
+            if l1 + l[j] == 0:
+                return True
+    return False
+```

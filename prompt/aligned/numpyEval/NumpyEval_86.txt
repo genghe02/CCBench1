@@ -1,0 +1,1 @@
+# Convert Numpy Vector from (N, 1) dimension to (N,) dimension.

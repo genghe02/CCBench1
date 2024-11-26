@@ -1,0 +1,7 @@
+# Define a numpy matrix that uses operations modulo 2, known as "xor".
+# Arguments:
+#    x: a numpy array
+#    y: a numpy array
+#    z: a numpy array
+# Returns:
+#    A numpy array containing the result of the operation.

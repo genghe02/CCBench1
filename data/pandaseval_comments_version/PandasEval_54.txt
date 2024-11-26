@@ -1,0 +1,10 @@
+import pandas as pd
+
+def extract_the_last_year(df, column_name):
+    # I am trying to extract the last year (YY) of a fiscal date string in the format of YYYY-YY.
+    # e.g The last year of this '1999-00' would be 2000.
+    # I need a logic to include a case where if it is the end of the century then my apply method should add to the first two digits.
+    # the column_name is the column name of the dataframe that contains the date strings.
+    # return the numerical Series obj of the last year.
+    final_result = pd.to_numeric(df[column_name].str.split('-').str[0]) + 1
+    return final_result

@@ -1,0 +1,7 @@
+ # Find each index where 'a' matrix has different values than its neighbors in a 2D efficient way using numpy by comparing each element with its neighbors and utilizing np.where(condition) in a 2D array.
+
+result = np.where((a[1:, 1:]!= a[:-1, :-1].T) | (a[1:, :-1]!= a[:-1, 1:].T))[0]
+result = result.reshape((len(result) // 2, 2))
+
+# Apply the result to 'b' matrix by setting the corresponding values to 1.
+b[result[:, 0] + 1, result[:, 1] + 1] = 1

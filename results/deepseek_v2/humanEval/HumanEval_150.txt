@@ -1,0 +1,30 @@
+```python
+def x_or_y(n, x, y):
+    # Determine whether to return 'x' or 'y' based on the divisibility of 'n' by any number from 2 to n-1.
+    # If 'n' is 1, return 'y'. If 'n' is divisible by any number in the range, return 'y'. Otherwise, return 'x'.
+
+    # param n: int, the number to be checked for divisibility.
+    # param x: any type, the value to return if 'n' is a prime number.
+    # param y: any type, the value to return if 'n' is not a prime number or is 1.
+    # return: any type, the value 'x' or 'y' based on the conditions.
+
+    # >>> x_or_y(1, 'prime', 'not prime')
+    # 'not prime'
+    # >>> x_or_y(2, 'prime', 'not prime')
+    # 'prime'
+    # >>> x_or_y(4, 'prime', 'not prime')
+    # 'not prime'
+    # >>> x_or_y(7, 'prime', 'not prime')
+    # 'prime'
+    # >>> x_or_y(15, 'prime', 'not prime')
+    # 'not prime'
+
+    if n == 1:
+        return y
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x
+```

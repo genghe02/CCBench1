@@ -1,0 +1,37 @@
+<description for whole class>
+This class represents a person request object with attributes for name, sex, and phone number.
+
+<description for whole function>
+This class defines an initializer method to create a PersonRequest object and validate the input parameters.
+
+<description for all parameters>
+:param name: str, the name of the person
+:param sex: str, the gender of the person
+:param phoneNumber: str, the phone number of the person
+
+<description for whole function>
+This method validates the input name parameter for the PersonRequest object.
+
+<description for all parameters>
+:param name: str, the name to be validated
+
+<description for return statement>
+Returns the validated name if it meets the criteria, otherwise returns None.
+
+<description for whole function>
+This method validates the input sex parameter for the PersonRequest object.
+
+<description for all parameters>
+:param sex: str, the gender to be validated
+
+<description for return statement>
+Returns the validated gender if it meets the criteria, otherwise returns None.
+
+<description for whole function>
+This method validates the input phoneNumber parameter for the PersonRequest object.
+
+<description for all parameters>
+:param phoneNumber: str, the phone number to be validated
+
+<description for return statement>
+Returns the validated phone number if it meets the criteria, otherwise returns None.

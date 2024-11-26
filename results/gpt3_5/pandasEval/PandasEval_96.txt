@@ -1,0 +1,1 @@
+# Merge two DataFrames based on the 'company' column to create a new DataFrame containing columns from both input DataFrames.

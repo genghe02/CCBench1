@@ -1,0 +1,1 @@
+# This code creates a 2D array of zeros with the shape (data.size, data.max()+1). Then, it sets the value 1 for each column in `data` at the corresponding index, effectively creating a one-hot encoding of the `data` array.

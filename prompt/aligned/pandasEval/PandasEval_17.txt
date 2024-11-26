@@ -1,0 +1,1 @@
+# Drop duplicate rows in the DataFrame based on column `col1`, keeping the row with the last value in column `col2`, and return the final DataFrame.

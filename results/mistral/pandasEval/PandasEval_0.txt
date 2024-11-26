@@ -1,0 +1,2 @@
+# Drop rows with NaN values in the specified column using pandas dropna function.
+# The subset parameter is used to specify the column name to be checked for NaN values.

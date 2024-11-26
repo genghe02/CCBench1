@@ -1,0 +1,1 @@
+# This function is designed to add leading zeros to the values in a specified column of a dataframe. It uses the apply method to apply a lambda function to each element in the specified column. The lambda function uses the format method to add leading zeros to each value, making sure that the total length of the value is 15 characters.

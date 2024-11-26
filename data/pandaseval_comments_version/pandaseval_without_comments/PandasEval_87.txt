@@ -1,0 +1,5 @@
+import pandas as pd
+
+def concat_df(df1, df2):
+    <Requirements for the code>
+    return pd.concat([df1, df2])

@@ -1,0 +1,1 @@
+# The requirement for this code is to create a 2D numpy array with the specified elements.

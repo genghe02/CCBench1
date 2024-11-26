@@ -1,0 +1,8 @@
+
+
+def greatest_common_divisor(a: int, b: int) -> int:
+    <Requirements for the code>
+    <some test cases for the function>
+    while b:
+        a, b = b, a % b
+    return a

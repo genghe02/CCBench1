@@ -1,0 +1,48 @@
+```python
+# This class simulates an automatic guitar based on input text
+class AutomaticGuitarSimulator:
+    def __init__(self, text) -> None:
+        # This function initializes the AutomaticGuitarSimulator class
+        # text : str, the string of playing instructions for the simulator
+        self.play_text = text
+
+    def interpret(self, display=False):
+        # This function interprets the play_text into a list of dictionaries 
+        # where each dictionary represents a chord and its tune.
+        # display : bool, optional, if True, the function will display each chord
+        # and its tune as it's processed 
+        # Returns a list of dictionaries, each representing a chord and its tune.
+        # Test case:
+        # >>> guitar = AutomaticGuitarSimulator("A4 B5 C6")
+        # >>> guitar.interpret()
+        # [{'Chord': 'A', 'Tune': '4'}, {'Chord': 'B', 'Tune': '5'}, {'Chord': 'C', 'Tune': '6'}]
+        if len(self.play_text) == 0:
+            return
+        else:
+            play_list = []
+            play_segs = self.play_text.split(" ")
+            for play_seg in play_segs:
+                pos = 0
+                for ele in play_seg:
+                    if ele.isalpha():
+                        pos += 1
+                        continue
+                    break
+                play_chord = play_seg[0:pos]
+                play_value = play_seg[pos:]
+                play_list.append({'Chord': play_chord, 'Tune': play_value})
+                if display:
+                    self.display(play_chord, play_value)
+            return play_list
+
+    def display(self, key, value):
+        # This function displays the chord and its tune
+        # key : str, the chord
+        # value : str, the tune
+        # Returns a formatted string displaying the chord and its tune
+        # Test case:
+        # >>> guitar = AutomaticGuitarSimulator("A4")
+        # >>> guitar.display("A", "4")
+        # 'Normal Guitar Playing -- Chord: A, Play Tune: 4'
+        return "Normal Guitar Playing -- Chord: %s, Play Tune: %s" % (key, value)
+```

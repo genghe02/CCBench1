@@ -1,0 +1,6 @@
+
+def decimal_to_binary(decimal):
+    <Requirements for the code>
+
+    <some test cases for the function>
+    return "db" + bin(decimal)[2:] + "db"

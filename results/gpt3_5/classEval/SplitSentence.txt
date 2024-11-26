@@ -1,0 +1,43 @@
+import re
+
+
+class SplitSentence:
+
+    # Class to handle splitting and processing sentences.
+
+    def split_sentences(self, sentences_string):
+        # Split the input string into individual sentences based on common sentence-ending punctuation.
+        # param sentences_string: str, the input string containing multiple sentences
+        # return: list, a list of individual sentences extracted from the input string
+        # Some test cases for the function
+        # Test case 1: "Hello world. How are you?" => ["Hello world.", "How are you?"]
+        # Test case 2: "This is a sentence." => ["This is a sentence."]
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        # Count the number of words in a given sentence after removing non-alphabetic characters.
+        # param sentence: str, the input sentence to count words from
+        # return: int, the count of words in the sentence
+        # Some test cases for the function
+        # Test case 1: "Hello world!" => 2
+        # Test case 2: "There are 5 words here." => 5
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        # Process the input text file to find the sentence with the maximum number of words.
+        # param sentences_string: str, the input string containing multiple sentences
+        # return: int, the count of words in the sentence with the maximum number of words
+        # Some test cases for the function
+        # Test case 1: "This is a test sentence. How many words does it have?" => 5
+        # Test case 2: "No words here." => 1
+        sentences = self.split_sentences(sentences_string)
+        max_count = 0
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        return max_count

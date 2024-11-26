@@ -1,0 +1,18 @@
+```python
+def circular_shift(x, shift):
+    # Shift the digits of the input number x to the right by a specified amount shift.
+    # This function returns the modified number as a string, applying a circular shift.
+    # param x: int, the number whose digits are to be circularly shifted
+    # param shift: int, the number of positions to shift the digits to the right
+    # return: str, the modified number as a string after performing the circular shift
+    # Test cases for the function:
+    # >>> circular_shift(12345, 2)  # Expected: '45123'
+    # >>> circular_shift(12345, 5)  # Expected: '12345' (full rotation)
+    # >>> circular_shift(12345, 6)  # Expected: '54321' (more than length, result should be reversed)
+    # >>> circular_shift(12345, 0)  # Expected: '12345' (no shift)
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]
+```

@@ -1,0 +1,65 @@
+```python
+class BinaryDataProcessor:
+    """This class processes binary string data, allowing for cleanup of non-binary characters, and conversion to ASCII or UTF-8 encoding."""
+
+    def __init__(self, binary_string):
+        """Initializes the BinaryDataProcessor with a binary string and cleans non-binary characters."""
+        self.binary_string = binary_string
+        self.clean_non_binary_chars()
+
+    def clean_non_binary_chars(self):
+        """Removes all non-binary characters from the binary string."""
+        # Test cases for the function:
+        # >>> processor = BinaryDataProcessor('101010abc1001')
+        # >>> processor.clean_non_binary_chars()
+        # >>> processor.binary_string
+        # '1010101001'
+        self.binary_string = ''.join(filter(lambda x: x in '01', self.binary_string))
+
+    def calculate_binary_info(self):
+        """Calculates the percentage of zeroes and ones in the binary string and the total length."""
+        # Test cases for the function:
+        # >>> processor = BinaryDataProcessor('110010101')
+        # >>> processor.calculate_binary_info()
+        # {'Zeroes': 0.4444444444444444, 'Ones': 0.5555555555555556, 'Bit length': 9}
+        zeroes_count = self.binary_string.count('0')
+        ones_count = self.binary_string.count('1')
+        total_length = len(self.binary_string)
+
+        zeroes_percentage = (zeroes_count / total_length) if total_length > 0 else 0
+        ones_percentage = (ones_count / total_length) if total_length > 0 else 0
+
+        return {
+            'Zeroes': zeroes_percentage,
+            'Ones': ones_percentage,
+            'Bit length': total_length
+        }
+
+    def convert_to_ascii(self):
+        """Converts the binary string to its ASCII representation."""
+        # Test cases for the function:
+        # >>> processor = BinaryDataProcessor('0100100001100101011011000110110001101111')
+        # >>> processor.convert_to_ascii()
+        # 'Hello'
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('ascii')
+
+    def convert_to_utf8(self):
+        """Converts the binary string to its UTF-8 representation."""
+        # Test cases for the function:
+        # >>> processor = BinaryDataProcessor('110000101100100011101000110010101110010')
+        # >>> processor.convert_to_utf8()
+        # 'Êté'
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('utf-8')
+```

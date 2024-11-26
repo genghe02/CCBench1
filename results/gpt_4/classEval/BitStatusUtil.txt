@@ -1,0 +1,49 @@
+# This class is used to perform operations on bit states.
+class BitStatusUtil:
+    @staticmethod
+    # This function adds a stat (bit) to the given states (bit collection).
+    # :param states: int, The initial bit states.
+    # :param stat: int, The stat (bit) to be added.
+    # :return: int, The new bit states after adding the stat.
+    # >>> BitStatusUtil.add(5, 2) -> 7
+    # >>> BitStatusUtil.add(8, 1) -> 9
+    def add(states, stat):
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    # This function checks if a given stat (bit) exists in the states (bit collection).
+    # :param states: int, The initial bit states.
+    # :param stat: int, The stat (bit) to be checked.
+    # :return: bool, True if the stat exists in the states, False otherwise.
+    # >>> BitStatusUtil.has(7, 2) -> True
+    # >>> BitStatusUtil.has(8, 1) -> False
+    def has(states, stat):
+        BitStatusUtil.check([states, stat])
+        return (states & stat) == stat
+
+    @staticmethod
+    # This function removes a given stat (bit) from the states (bit collection).
+    # :param states: int, The initial bit states.
+    # :param stat: int, The stat (bit) to be removed.
+    # :return: int, The new bit states after removing the stat.
+    # >>> BitStatusUtil.remove(7, 2) -> 5
+    # >>> BitStatusUtil.remove(8, 1) -> 8
+    def remove(states, stat):
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    # This function checks if the input arguments are valid (non-negative and even).
+    # :param args: list, The list of arguments to be checked.
+    # :return: None, Raises ValueError if any argument is not valid.
+    # >>> BitStatusUtil.check([4, 6]) -> None
+    # >>> BitStatusUtil.check([1, 3]) -> ValueError
+    def check(args):
+        for arg in args:
+            if arg < 0:
+                raise ValueError(f"{arg} must be greater than or equal to 0")
+            if arg % 2 != 0:
+                raise ValueError(f"{arg} not even")

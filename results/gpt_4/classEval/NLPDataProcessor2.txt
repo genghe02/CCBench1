@@ -1,0 +1,49 @@
+```python
+from collections import Counter
+import re
+
+# This class is for natural language processing, specifically for processing a given list of strings.
+# It has methods to process the data, calculate word frequency and a main process method that combines the two.
+class NLPDataProcessor2:
+
+    # This method processes a list of strings by converting them to lowercase, removing non-English characters, and splitting them into words.
+    # param string_list: list, a list of strings to be processed
+    # return: list, a list of lists where each sub-list contains words from the corresponding string in the input list
+    # test case: >>> nlp = NLPDataProcessor2()
+    #            >>> nlp.process_data(['Hello World!', 'Python is Great.'])
+    #            Output: [['hello', 'world'], ['python', 'is', 'great']]
+    def process_data(self, string_list):
+        words_list = []
+        for string in string_list:
+            # Remove non-English letters and convert to lowercase
+            processed_string = re.sub(r'[^a-zA-Z\s]', '', string.lower())
+            # Split the string into words
+            words = processed_string.split()
+            words_list.append(words)
+        return words_list
+
+    # This method calculates the frequency of each word in the given list of words.
+    # param words_list: list, a list of lists where each sub-list contains words
+    # return: dict, a dictionary where keys are words and values are their corresponding frequency in the input list
+    # test case: >>> nlp = NLPDataProcessor2()
+    #            >>> nlp.calculate_word_frequency([['hello', 'world'], ['python', 'is', 'great']])
+    #            Output: {'hello': 1, 'world': 1, 'python': 1, 'is': 1, 'great': 1}
+    def calculate_word_frequency(self, words_list):
+        word_frequency = Counter()
+        for words in words_list:
+            word_frequency.update(words)
+        sorted_word_frequency = dict(sorted(word_frequency.items(), key=lambda x: x[1], reverse=True))
+        top_5_word_frequency = dict(list(sorted_word_frequency.items())[:5])
+        return top_5_word_frequency
+
+    # This method processes a list of strings and returns the frequency of each word in the strings.
+    # param string_list: list, a list of strings to be processed
+    # return: dict, a dictionary where keys are words and values are their corresponding frequency in the input list
+    # test case: >>> nlp = NLPDataProcessor2()
+    #            >>> nlp.process(['Hello World!', 'Python is Great.'])
+    #            Output: {'hello': 1, 'world': 1, 'python': 1, 'is': 1, 'great': 1}
+    def process(self, string_list):
+        words_list = self.process_data(string_list)
+        word_frequency_dict = self.calculate_word_frequency(words_list)
+        return word_frequency_dict
+```

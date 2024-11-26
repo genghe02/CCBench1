@@ -1,0 +1,28 @@
+```python
+def search(lst):
+    # This function searches for the largest integer 'i' such that 'i' appears at least 'i' times in the list.
+    # It counts the frequency of each integer and returns the largest valid integer found, or -1 if none exists.
+    # :param lst: List[int], a list of integers to be checked.
+    # :return: int, the largest integer 'i' that appears at least 'i' times in the list, or -1 if no such integer exists.
+    # Test cases for the function:
+    # >>> search([0, 1, 2, 3, 3, 3])
+    # 3
+    # >>> search([0, 1, 1, 1])
+    # 1
+    # >>> search([1, 2, 2, 3, 4, 5])
+    # 2
+    # >>> search([5, 5, 5, 5, 5])
+    # 5
+    # >>> search([1, 2, 3, 4])
+    # -1
+    frq = [0] * (max(lst) + 1)
+    for i in lst:
+        frq[i] += 1;
+
+    ans = -1
+    for i in range(1, len(frq)):
+        if frq[i] >= i:
+            ans = i
+    
+    return ans
+```

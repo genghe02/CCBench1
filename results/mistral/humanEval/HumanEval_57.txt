@@ -1,0 +1,25 @@
+ def monotonic(l: list):
+    # Check if the input list 'l' is monotonic i.e., either sorted in ascending order or descending order.
+    if l == sorted(l):
+        # If the list is sorted in ascending order, return True.
+        return True
+    elif l == sorted(l, reverse=True):
+        # If the list is sorted in descending order, return True.
+        return True
+    else:
+        # If the list is not monotonic, return False.
+        return False
+
+    <some test cases for the function>
+    >>> monotonic([1, 2, 3])
+    True
+    >>> monotonic([3, 2, 1])
+    True
+    >>> monotonic([1, 3, 2])
+    False
+    >>> monotonic([1, 2, 3, 1])
+    True
+    >>> monotonic([1, 2, 3, 4])
+    True
+    >>> monotonic([1, 4, 3, 2])
+    False

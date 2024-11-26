@@ -1,0 +1,25 @@
+```python
+def fruit_distribution(s, n):
+    # This function takes a string `s` containing space-separated numbers and a total number `n`.
+    # It extracts the numbers from the string, sums them up, and returns the difference between `n` and the sum.
+    # param s: str, a string containing space-separated numbers
+    # param n: int, the total number to be compared with the sum of numbers in `s`
+    # return: int, the difference between `n` and the sum of numbers in `s`
+    
+    # >>> fruit_distribution("3 5 7", 20)
+    # 5
+    # >>> fruit_distribution("1 2 3 4 5", 15)
+    # 0
+    # >>> fruit_distribution("10 20 30", 100)
+    # 40
+    # >>> fruit_distribution("", 10)
+    # 10
+    # >>> fruit_distribution("1 1 1 1 1", 5)
+    # 0
+    
+    lis = list()
+    for i in s.split(' '):
+        if i.isdigit():
+            lis.append(int(i))
+    return n - sum(lis)
+```

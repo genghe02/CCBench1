@@ -1,0 +1,9 @@
+from typing import List, Any
+
+
+def filter_integers(values: List[Any]) -> List[int]:
+    # This function filters through a list of values, returning only those that are integers
+    # For example:
+    # >>> filter_integers([1, 'a', 2.5, '3', 4, 'abc'])
+    # [1, 4]
+    return [x for x in values if isinstance(x, int)]

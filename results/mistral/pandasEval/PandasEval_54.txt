@@ -1,0 +1,12 @@
+ # Extract the year component from the given column in an efficient way using pandas string manipulation and numeric conversion.
+
+import pandas as pd
+
+def extract_the_last_year(df, column_name):
+    # Extract the year component from each string in the given column using pandas string manipulation
+    year_series = pd.to_numeric(df[column_name].str.extract(r'\d{4}'))
+    
+    # Add 1 to each extracted year to get the desired result
+    final_result = year_series + 1
+    
+    return final_result

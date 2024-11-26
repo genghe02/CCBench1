@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_81.txt", "comments": "# How do I extract a sub-array from a numpy 2d array? \n# I'd like to extract a numpy array with a specified size from a numpy 2d array--essentially I want to crop the array.\n# Return a sub-array from a numpy 2d array.\n"}

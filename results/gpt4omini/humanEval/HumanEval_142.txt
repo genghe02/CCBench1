@@ -1,0 +1,26 @@
+```python
+def sum_squares(lst):
+    # This function takes a list of numbers and returns the sum of their squares or cubes based on the index of each number.
+    # For indices divisible by 3, it squares the number.
+    # For indices divisible by 4 (but not by 3), it cubes the number.
+    # For all other indices, it leaves the number unchanged.
+    
+    # param lst: list of numbers, the input list to process
+    # return: int, the sum of the processed numbers according to the defined rules.
+    
+    # Test cases for the function:
+    # >>> sum_squares([1, 2, 3, 4, 5, 6])  # Should return 1^2 + 2 + 3^2 + 4^3 + 5 + 6^2 = 1 + 2 + 9 + 64 + 5 + 36 = 117
+    # >>> sum_squares([0, 1, 2, 3, 4])  # Should return 0^2 + 1 + 2^2 + 3^3 + 4 = 0 + 1 + 4 + 27 + 4 = 36
+    # >>> sum_squares([])  # Should return 0 since the list is empty
+    # >>> sum_squares([10, 20, 30, 40, 50])  # Should return 10^2 + 20 + 30^2 + 40^3 + 50 = 100 + 20 + 900 + 64000 + 50 = 64970
+    
+    result = []
+    for i in range(len(lst)):
+        if i % 3 == 0:
+            result.append(lst[i] ** 2)
+        elif i % 4 == 0 and i % 3 != 0:
+            result.append(lst[i] ** 3)
+        else:
+            result.append(lst[i])
+    return sum(result)
+```

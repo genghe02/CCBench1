@@ -1,0 +1,13 @@
+ # Find the minimum value in the given NumPy array using numpy.min() function.
+
+import numpy as np
+
+def get_minimum_value(arr):
+    """
+    Find the minimum value in the given NumPy array using numpy.min() function.
+
+    :param arr: A NumPy array.
+    :return: The minimum value in the array.
+    """
+    # Find the minimum value in the given NumPy array using numpy.min() function.
+    return np.min(arr)

@@ -1,0 +1,22 @@
+```python
+def encode(message):
+    # Encode the message by swapping the case of each character and replacing vowels with their corresponding characters shifted by 2 positions in the ASCII table.
+    
+    # >>> encode("Hello World")
+    # 'Hkllo Wkrld'
+    # >>> encode("Python Programming")
+    # 'Pythxn Prgrrmmng'
+    # >>> encode("aeiou")
+    # 'cgkqw'
+    # >>> encode("AEIOU")
+    # 'CGKQW'
+    # >>> encode("12345")
+    # '12345'
+    # >>> encode("")
+    # ''
+    
+    vowels = "aeiouAEIOU"
+    vowels_replace = dict([(i, chr(ord(i) + 2)) for i in vowels])
+    message = message.swapcase()
+    return ''.join([vowels_replace[i] if i in vowels else i for i in message])
+```

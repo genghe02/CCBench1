@@ -1,0 +1,14 @@
+def starts_one_ends(n):
+    # The function calculates the number of n-digit numbers that start and end with the number 1.
+    # param n: int, the number of digits in the number.
+    if n == 1: return 1  # If n is 1, then there is only one 1-digit number that starts and ends with 1, which is 1 itself.
+    return 18 * (10 ** (n - 2))  # If n is not 1, then the number of such numbers is calculated as 18 times 10 to the power of (n-2). This formula is derived from the combinatorial mathematics.
+    # return: int, the number of n-digit numbers that start and end with 1.
+
+# Test cases:
+# Test case 1: For a 1-digit number, it should return 1
+# >>> starts_one_ends(1)
+# Test case 2: For a 2-digit number, it should return 18
+# >>> starts_one_ends(2)
+# Test case 3: For a 3-digit number, it should return 180
+# >>> starts_one_ends(3)

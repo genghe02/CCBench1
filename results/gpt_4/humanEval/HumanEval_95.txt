@@ -1,0 +1,31 @@
+def check_dict_case(dict):
+    # This function checks whether all keys in the given dictionary are in the same case (either all upper-case or all lower-case).
+    # If the dictionary is empty or keys are in mixed case, the function returns False.
+    # If all keys are in either upper case or lower case, the function returns True.
+    # Some test cases for this function could be:
+    # >>> check_dict_case({})  # Expected output: False
+    # >>> check_dict_case({'a': 1, 'b': 2, 'c': 3})  # Expected output: True
+    # >>> check_dict_case({'A': 1, 'B': 2, 'C': 3})  # Expected output: True
+    # >>> check_dict_case({'A': 1, 'b': 2, 'C': 3})  # Expected output: False
+    # >>> check_dict_case({1: 'a', 'B': 2, 'C': 3})  # Expected output: False
+    if len(dict.keys()) == 0:
+        return False
+    else:
+        state = "start"
+        for key in dict.keys():
+            if isinstance(key, str) == False:
+                state = "mixed"
+                break
+            if state == "start":
+                if key.isupper():
+                    state = "upper"
+                elif key.islower():
+                    state = "lower"
+                else:
+                    break
+            elif (state == "upper" and not key.isupper()) or (state == "lower" and not key.islower()):
+                    state = "mixed"
+                    break
+            else:
+                break
+        return state == "upper" or state == "lower" 

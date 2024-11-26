@@ -1,0 +1,29 @@
+ def words_string(s):
+    # This function takes a string as an argument and returns a list of words in that string.
+    # It handles the edge case where the input string is empty by returning an empty list.
+
+    if not s:
+        return []
+
+    s_list = []
+
+    # Iterate through each character in the string and append either a space or the character to the list based on the character.
+    for letter in s:
+        if letter == ',':
+            s_list.append(' ')
+        else:
+            s_list.append(letter)
+
+    # Join the list into a single string using an empty join string and then split the string into a list of words using the split() method.
+    s_list = "".join(s_list)
+    return s_list.split()
+
+    <some test cases for the function>
+    >>> words_string("")
+    []
+    >>> words_string("hello, world")
+    ['hello', 'world']
+    >>> words_string("hello, world, this is a test")
+    ['hello', 'world', 'this', 'is', 'a', 'test']
+    >>> words_string("1, 2, 3")
+    ['1', '2', '3']

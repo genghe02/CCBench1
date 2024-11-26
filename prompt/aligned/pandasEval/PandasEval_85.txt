@@ -1,0 +1,1 @@
+# Set the value of the entire column `B` in a Pandas DataFrame and return the modified DataFrame.

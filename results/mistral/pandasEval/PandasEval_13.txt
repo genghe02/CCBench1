@@ -1,0 +1,16 @@
+ # Create an empty DataFrame using pandas with the given column names.
+
+import pandas as pd
+
+def create_empty_df(col_names):
+    """
+    Create an empty DataFrame using pandas with the given column names.
+
+    Parameters:
+    col_names (list): List of column names for the DataFrame.
+
+    Returns:
+    pandas.DataFrame: An empty DataFrame with the given column names.
+    """
+    # Create an empty DataFrame with the given column names.
+    return pd.DataFrame(columns=col_names)

@@ -1,0 +1,27 @@
+ def below_threshold(l: list, t: int):
+    # Check if all elements in the given list are below the threshold value.
+    # If any element is greater than or equal to the threshold, return False.
+    # Otherwise, return True.
+    for e in l:
+        # Check if the current element is greater than or equal to the threshold.
+        if e >= t:
+            # If so, return False as soon as possible to avoid further checks.
+            return False
+    # If no element was found to be greater than or equal to the threshold, return True.
+    return True
+
+    <some test cases for the function>
+    >>> below_threshold([1, 2, 3], 3)
+    True
+    >>> below_threshold([1, 2, 3], 2)
+    True
+    >>> below_threshold([1, 2, 3], 4)
+    False
+    >>> below_threshold([1, 2, 3, 4], 3)
+    True
+    >>> below_threshold([1, 2, 3, 4], 2)
+    False
+    >>> below_threshold([1, 2, 3, 4], 1)
+    True
+    >>> below_threshold([1, 2, 3, 4], 5)
+    False

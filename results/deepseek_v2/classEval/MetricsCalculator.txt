@@ -1,0 +1,78 @@
+```python
+# This class is designed to calculate various metrics for evaluating the performance of a classification model.
+class MetricsCalculator:
+    def __init__(self):
+        # Initialize the counters for true positives, false positives, false negatives, and true negatives.
+        self.true_positives = 0
+        self.false_positives = 0
+        self.false_negatives = 0
+        self.true_negatives = 0
+
+    def update(self, predicted_labels, true_labels):
+        # Update the counters based on the predicted and true labels.
+        # param predicted_labels: list, the predicted labels from the model
+        # param true_labels: list, the ground truth labels
+        # return: None
+        # >>> metrics = MetricsCalculator()
+        # >>> metrics.update([1, 0, 1], [1, 1, 0])
+        for predicted, true in zip(predicted_labels, true_labels):
+            if predicted == 1 and true == 1:
+                self.true_positives += 1
+            elif predicted == 1 and true == 0:
+                self.false_positives += 1
+            elif predicted == 0 and true == 1:
+                self.false_negatives += 1
+            elif predicted == 0 and true == 0:
+                self.true_negatives += 1
+
+    def precision(self, predicted_labels, true_labels):
+        # Calculate the precision metric, which is the ratio of true positives to the sum of true positives and false positives.
+        # param predicted_labels: list, the predicted labels from the model
+        # param true_labels: list, the ground truth labels
+        # return: float, the precision value
+        # >>> metrics = MetricsCalculator()
+        # >>> metrics.precision([1, 0, 1], [1, 1, 0])
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_positives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_positives)
+
+    def recall(self, predicted_labels, true_labels):
+        # Calculate the recall metric, which is the ratio of true positives to the sum of true positives and false negatives.
+        # param predicted_labels: list, the predicted labels from the model
+        # param true_labels: list, the ground truth labels
+        # return: float, the recall value
+        # >>> metrics = MetricsCalculator()
+        # >>> metrics.recall([1, 0, 1], [1, 1, 0])
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_negatives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_negatives)
+
+    def f1_score(self, predicted_labels, true_labels):
+        # Calculate the F1 score, which is the harmonic mean of precision and recall.
+        # param predicted_labels: list, the predicted labels from the model
+        # param true_labels: list, the ground truth labels
+        # return: float, the F1 score value
+        # >>> metrics = MetricsCalculator()
+        # >>> metrics.f1_score([1, 0, 1], [1, 1, 0])
+        self.update(predicted_labels, true_labels)
+        precision = self.precision(predicted_labels, true_labels)
+        recall = self.recall(predicted_labels, true_labels)
+        if precision + recall == 0.0:
+            return 0.0
+        return (2 * precision * recall) / (precision + recall)
+
+    def accuracy(self, predicted_labels, true_labels):
+        # Calculate the accuracy metric, which is the ratio of correct predictions to the total number of predictions.
+        # param predicted_labels: list, the predicted labels from the model
+        # param true_labels: list, the ground truth labels
+        # return: float, the accuracy value
+        # >>> metrics = MetricsCalculator()
+        # >>> metrics.accuracy([1, 0, 1], [1, 1, 0])
+        self.update(predicted_labels, true_labels)
+        total = self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        if total == 0:
+            return 0.0
+        return (self.true_positives + self.true_negatives) / total
+```

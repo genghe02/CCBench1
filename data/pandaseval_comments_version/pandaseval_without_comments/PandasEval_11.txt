@@ -1,0 +1,5 @@
+import pandas as pd
+
+def select_rows_from_column(df, col_name, values):
+    <Requirements for the code>
+    return df[df[col_name].isin(values)]

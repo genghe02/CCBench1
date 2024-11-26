@@ -1,0 +1,6 @@
+```python
+import numpy as np
+
+# Create a 5x5 array and fill it with -1. This could be used for initialization in further calculations or data processing.
+out = np.full((5, 5), -1.)
+```

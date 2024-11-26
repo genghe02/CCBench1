@@ -1,0 +1,14 @@
+```python
+def same_chars(s0: str, s1: str):
+    # Check if two strings have the same characters, regardless of the order and frequency of those characters.
+    # The function returns True if both strings contain exactly the same unique characters; otherwise, it returns False.
+    # param s0: str, the first string to compare
+    # param s1: str, the second string to compare
+    # return: bool, True if both strings have the same characters, False otherwise
+    # >>> same_chars("abc", "cab")  # True, both strings contain the same characters.
+    # >>> same_chars("abc", "ab")   # False, second string is missing 'c'.
+    # >>> same_chars("aabbcc", "abc")  # True, both have characters 'a', 'b', and 'c'.
+    # >>> same_chars("", "")  # True, both empty strings contain the same characters (none).
+    # >>> same_chars("abc", "")  # False, one string is empty while the other is not.
+    return set(s0) == set(s1)
+```

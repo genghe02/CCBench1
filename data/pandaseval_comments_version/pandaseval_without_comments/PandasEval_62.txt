@@ -1,0 +1,8 @@
+import pandas as pd
+
+df = pd.DataFrame({'MSRA': [10, 11, 12], 'THU': [100, 110, 120]})
+df = df.reset_index()  # make sure indexes pair with number of rows
+<Requirements for the code>
+rows_dict = {} # {MSRA: THU, ...}
+for index, row in df.iterrows():
+    rows_dict[row['MSRA']] = row['THU']

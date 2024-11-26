@@ -1,0 +1,50 @@
+```python
+import json
+
+# This class provides utility functions to handle cookies, including loading and saving cookie data from a specified file.
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        # Initialize the CookiesUtil class with the path to the cookies file.
+        # :param cookies_file: str, the path to the file where cookies will be stored or loaded from.
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, response):
+        # Extract cookies from a response and save them for future use.
+        # :param response: dict, the response object containing cookie data in the 'cookies' key.
+        # >>> util = CookiesUtil('cookies.json')
+        # >>> util.get_cookies({'cookies': {'session_id': 'abcd1234', 'user_id': 'user5678'}})
+        self.cookies = response['cookies']
+        self._save_cookies()
+
+    def load_cookies(self):
+        # Load cookies from the specified file, returning them as a dictionary.
+        # :return: dict, the loaded cookies from the file if available, otherwise an empty dictionary.
+        # >>> util = CookiesUtil('cookies.json')
+        # >>> util.load_cookies()  # Assuming the file exists and contains valid JSON cookies.
+        # >>> util.load_cookies()  # Returns {} if the file does not exist.
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+
+    def _save_cookies(self):
+        # Save the current cookies to the specified file in JSON format.
+        # :return: bool, True if cookies are saved successfully, False otherwise.
+        # >>> util = CookiesUtil('cookies.json')
+        # >>> util.cookies = {'session_id': 'abcd1234', 'user_id': 'user5678'}
+        # >>> util._save_cookies()  # Returns True if the file is saved correctly.
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        # Set the cookies for a request by formatting the cookies as a string.
+        # :param request: dict, the request object where cookies will be added.
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```

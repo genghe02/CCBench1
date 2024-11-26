@@ -1,0 +1,26 @@
+def move_one_ball(arr):
+    # This function checks if the array 'arr' can be sorted by moving only one ball to a different position.
+    
+    # Test cases:
+    # Test case 1: Empty array
+    # Expected output: True
+    if len(arr) == 0:
+        return True
+    
+    # Sort the array
+    sorted_array = sorted(arr)
+    my_arr = []
+    
+    # Find the minimum value and its index in the array
+    min_value = min(arr)
+    min_index = arr.index(min_value)
+    
+    # Create a new array 'my_arr' by shifting the elements of 'arr' based on the position of the minimum value
+    my_arr = arr[min_index:] + arr[0:min_index]
+    
+    # Check if the sorted array matches the rearranged 'my_arr'
+    # If the arrays are equal, return True; otherwise, return False
+    for i in range(len(arr)):
+        if my_arr[i] != sorted_array[i]:
+            return False
+    return True

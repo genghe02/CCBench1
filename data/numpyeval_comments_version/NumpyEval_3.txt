@@ -1,0 +1,6 @@
+import numpy as np
+
+def convert_string_in_array_to_float(arr):
+    # How to convert an array of strings to an array of floats in numpy?
+    # Return the final result
+    return arr.astype(np.float)

@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def get_list_from_dataframe(df):
+    # Extract and return the list of column names from the DataFrame.
+    return df.columns.tolist()
+```

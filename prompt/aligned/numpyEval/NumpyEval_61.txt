@@ -1,0 +1,1 @@
+# Dynamically slice a NumPy array along a specific axis using the slice(start, end) method.

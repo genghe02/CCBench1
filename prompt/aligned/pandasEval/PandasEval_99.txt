@@ -1,0 +1,1 @@
+# Find non-numeric rows in a Pandas DataFrame and return the rows that contain non-numeric values. To obtain the subDataFrame of rows with non-numeric values, use the negation (~) of the condition to identify rows with at least one non-numeric entry.

@@ -1,0 +1,51 @@
+```python
+<description for whole class>
+class TicTacToe:
+    def __init__(self, N=3):
+        # Initialize a Tic Tac Toe game board with size N x N.
+        self.board = [[' ' for _ in range(N)] for _ in range(3)]
+        # Set the starting player as 'X'.
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        # Make a move on the game board at the specified row and column.
+        # param row: int, the row index to place the move
+        # param col: int, the column index to place the move
+        # return: bool, True if the move was successfully made, False otherwise
+        # Test case: Make a move on an empty space, expect True.
+        # Test case: Make a move on an occupied space, expect False.
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        else:
+            return False
+
+    def check_winner(self):
+        # Check if there is a winner on the game board.
+        # return: str or None, the winner if there is one, None otherwise
+        # Test case: Check for a row win, expect the winning player's mark.
+        # Test case: Check for a column win, expect the winning player's mark.
+        # Test case: Check for a diagonal win, expect the winning player's mark.
+        for row in self.board:
+            if row[0] == row[1] == row[2] != ' ':
+                return row[0]
+        for col in range(3):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] != ' ':
+                return self.board[0][col]
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != ' ':
+            return self.board[0][0]
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != ' ':
+            return self.board[0][2]
+        return None
+
+    def is_board_full(self):
+        # Check if the game board is full with no empty spaces left.
+        # return: bool, True if the board is full, False otherwise
+        # Test case: Check on a full board, expect True.
+        # Test case: Check on a board with empty spaces, expect False.
+        for row in self.board:
+            if ' ' in row:
+                return False
+        return True
+```

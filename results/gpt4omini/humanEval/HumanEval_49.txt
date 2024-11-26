@@ -1,0 +1,19 @@
+```python
+def modp(n: int, p: int):
+    # Calculate 2 raised to the power n modulo p, efficiently using modular arithmetic.
+    # The function takes two integers n and p, where n is the exponent and p is the modulus.
+    # param n: int, the exponent to raise 2 to
+    # param p: int, the modulus for the operation
+    # return: int, the result of (2 ** n) % p
+
+    # Test cases for the function:
+    # >>> modp(3, 5)  # Expected output: 3, since 2^3 % 5 = 8 % 5 = 3
+    # >>> modp(0, 7)  # Expected output: 1, since 2^0 % 7 = 1 % 7 = 1
+    # >>> modp(10, 1024)  # Expected output: 0, since 2^10 % 1024 = 1024 % 1024 = 0
+    # >>> modp(5, 3)  # Expected output: 2, since 2^5 % 3 = 32 % 3 = 2
+
+    ret = 1
+    for i in range(n):
+        ret = (2 * ret) % p
+    return ret
+```

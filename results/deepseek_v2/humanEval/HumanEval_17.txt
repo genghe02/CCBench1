@@ -1,0 +1,26 @@
+```python
+from typing import List
+
+
+def parse_music(music_string: str) -> List[int]:
+    # Convert a music string into a list of integers representing note durations.
+    # The music string consists of space-separated symbols where each symbol represents a note duration.
+    # The mapping of symbols to durations is provided in the note_map dictionary.
+
+    # param music_string: str, the input string representing the music notes.
+    # return: List[int], a list of integers representing the durations of the notes.
+
+    # >>> parse_music("o o| .|")
+    # [4, 2, 1]
+    # >>> parse_music("o| .| o")
+    # [2, 1, 4]
+    # >>> parse_music("o o o| .|")
+    # [4, 4, 2, 1]
+    # >>> parse_music("")
+    # []
+    # >>> parse_music(" ")
+    # []
+
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    return [note_map[x] for x in music_string.split(' ') if x]
+```

@@ -1,0 +1,11 @@
+def digitSum(s):
+    # This function calculates the sum of ASCII values of uppercase characters in the input string.
+    # It returns the total sum calculated.
+    
+    # Test cases:
+    # Case 1: Empty string input
+    # Input: ""
+    # Expected Output: 0
+    if s == "": return 0
+    
+    return sum(ord(char) if char.isupper() else 0 for char in s)

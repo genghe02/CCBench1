@@ -1,0 +1,6 @@
+
+def is_equal_to_sum_even(n):
+    <Requirements for the code>
+    <some test cases for the function>
+
+    return n%2 == 0 and n >= 8

@@ -1,0 +1,9 @@
+
+def fruit_distribution(s,n):
+    <Requirements for the code>
+    <some test cases for the function>
+    lis = list()
+    for i in s.split(' '):
+        if i.isdigit():
+            lis.append(int(i))
+    return n - sum(lis)

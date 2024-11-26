@@ -1,0 +1,18 @@
+def count_upper(s):
+    # This function counts the number of occurrences of uppercase vowels (A, E, I, O, U) at even-indexed positions in a string.
+    
+    # Test case:
+    # >>> count_upper('Hello')
+    # 1
+    # >>> count_upper('EVEN')
+    # 2
+    # >>> count_upper('Odd')
+    # 0
+
+    count = 0
+    for i in range(0,len(s),2):
+        # Check if the character at even index is an uppercase vowel
+        if s[i] in "AEIOU":
+            count += 1
+    return count
+    # Returns the count of uppercase vowels at even-indexed positions.

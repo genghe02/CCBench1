@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_49.txt", "comments": "# How to add a new row to an empty numpy array\n# example: \n# input: np.array([1,2,3]) and np.array([4,5,6])\n# output: np.array([[1,2,3],[4,5,6]])\n# Return the new array\n"}

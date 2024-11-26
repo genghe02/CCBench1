@@ -1,0 +1,1 @@
+# After assigning a list or array-like value to the columns, the column is considered as type object. Assign the emails to the first row and the 'Email' column.

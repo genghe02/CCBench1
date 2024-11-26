@@ -1,0 +1,2 @@
+# In the code, several variables may either contain a pandas DataFrame or be empty. 
+# Check if a certain DataFrame has been created.

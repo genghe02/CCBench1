@@ -1,0 +1,77 @@
+ <description for whole class>
+# This is a class for processing various image operations such as loading, saving, resizing, rotating, and adjusting brightness using PIL library.
+
+class ImageProcessor:
+    def __init__(self):
+        # Initialize the class with an empty image and no specific image loaded
+        self.image = None
+
+    def load_image(self, image_path):
+        <description for whole function>
+        # Function to load an image from a given path and assign it to the instance variable 'image'
+        self.image = Image.open(image_path)
+
+        <description for all parameters>
+        :param image_path: str, the path to the image file
+
+        <some test cases for the function>
+        >>> test_image = ImageProcessor()
+        >>> test_image.load_image('test_image.jpg')
+
+    def save_image(self, save_path):
+        <description for whole function>
+        # Function to save the current image to a given path
+        if self.image:
+            self.image.save(save_path)
+
+        <description for all parameters>
+        :param save_path: str, the path to save the image
+
+        <some test cases for the function>
+        >>> test_image = ImageProcessor()
+        >>> test_image.load_image('test_image.jpg')
+        >>> test_image.save_image('test_save_image.jpg')
+
+    def resize_image(self, width, height):
+        <description for whole function>
+        # Function to resize the current image to the given width and height
+        if self.image:
+            self.image = self.image.resize((width, height))
+
+        <description for all parameters>
+        :param width: int, the new width for the image
+        :param height: int, the new height for the image
+
+        <some test cases for the function>
+        >>> test_image = ImageProcessor()
+        >>> test_image.load_image('test_image.jpg')
+        >>> test_image.resize_image(100, 100)
+
+    def rotate_image(self, degrees):
+        <description for whole function>
+        # Function to rotate the current image by the given degrees
+        if self.image:
+            self.image = self.image.rotate(degrees)
+
+        <description for all parameters>
+        :param degrees: int or float, the number of degrees to rotate the image
+
+        <some test cases for the function>
+        >>> test_image = ImageProcessor()
+        >>> test_image.load_image('test_image.jpg')
+        >>> test_image.rotate_image(90)
+
+    def adjust_brightness(self, factor):
+        <description for whole function>
+        # Function to adjust the brightness of the current image by the given factor
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)
+
+        <description for all parameters>
+        :param factor: float, the factor to adjust the brightness
+
+        <some test cases for the function>
+        >>> test_image = ImageProcessor()
+        >>> test_image.load_image('test_image.jpg')
+        >>> test_image.adjust_brightness(1.5)

@@ -1,0 +1,17 @@
+```python
+from typing import List
+
+def mean_absolute_deviation(numbers: List[float]) -> float:
+    # Calculate the mean absolute deviation of a list of numbers.
+    # This function determines the average distance of each number from the mean.
+    # param numbers: List[float], a list of numbers for which the mean absolute deviation is calculated
+    # return: float, the mean absolute deviation of the numbers in the list
+    # Test cases:
+    # >>> mean_absolute_deviation([1, 2, 3, 4, 5])  # Expected output: 1.2
+    # >>> mean_absolute_deviation([1, 1, 1, 1, 1])  # Expected output: 0.0
+    # >>> mean_absolute_deviation([-1, 0, 1])        # Expected output: 0.6666666666666666
+    # >>> mean_absolute_deviation([])                 # Expected output: 0 (or handle empty input accordingly)
+    
+    mean = sum(numbers) / len(numbers)
+    return sum(abs(x - mean) for x in numbers) / len(numbers)
+```

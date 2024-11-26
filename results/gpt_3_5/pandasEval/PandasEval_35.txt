@@ -1,0 +1,1 @@
+# Remove duplicates in a pandas DataFrame based on column names by keeping only the first occurrence of each column.

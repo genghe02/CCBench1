@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_53.txt", "comments": "# Firstly, We need to find the minimun value of each column with axis 0,\n# Then conduct subtract operation between each element of the column and the minimum value.\n"}

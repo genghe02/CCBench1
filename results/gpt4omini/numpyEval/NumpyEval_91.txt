@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.arange(12).reshape(3,4)
+# Remove the second and fourth columns from the 2D array 'a' along the specified axis (axis=1) to return an array with the remaining columns.
+out = np.delete(a, [1, 3], axis=1)
+```

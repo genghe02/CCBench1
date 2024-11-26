@@ -1,0 +1,8 @@
+
+
+def sort_third(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    l = list(l)
+    l[::3] = sorted(l[::3])
+    return l

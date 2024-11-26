@@ -1,0 +1,1 @@
+# Filter out consecutive duplicate values in a pandas Series by comparing each element with its neighbor using shift() function and returning only the elements that are not equal to their next neighbor.

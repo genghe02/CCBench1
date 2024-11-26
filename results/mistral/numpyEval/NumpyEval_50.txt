@@ -1,0 +1,1 @@
+ # Calculate the mean of each array along the 0-axis using numpy's mean function.

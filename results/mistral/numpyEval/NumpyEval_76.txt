@@ -1,0 +1,16 @@
+ # Find each index where the dictionary value changes by converting it to a NumPy array and utilizing np.where(condition) based on the difference between consecutive elements.
+
+```python
+import numpy as np
+
+result = {0: 1.1, 1: 0.5, 2: 0.4, 3: 0.4, 4: 1.0, 5: 0.1, 6: 0.2}
+names = ['id','data']
+formats = ['<f8','<f8'] # Update formats to match NumPy dtype format
+dtype = dict(names = names, formats=formats)
+
+# Convert dictionary to NumPy array
+array = np.array(list(result.items()), dtype=dtype)
+
+# Find indices where data changes
+result_indices = np.where(np.diff(array['data'].values)!= 0)[0]
+```

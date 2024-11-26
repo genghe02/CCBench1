@@ -1,0 +1,29 @@
+ def x_or_y(n, x, y):
+    # This function takes three arguments: an integer n and two variables x and y.
+    # It returns either the value of x or y based on the value of n.
+
+    # If n is equal to 1, the function returns the value of y.
+    if n == 1:
+        return y
+
+    # If n is greater than 1, the function checks if n is prime.
+    # If n is prime, the function returns the value of x.
+    # If n is not prime, the function returns the value of y.
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x
+
+    # Test cases:
+    # Test case 1: n is 1, x is 5, y is 10. The function should return 10.
+    # Test case 2: n is 2, x is 5, y is 10. The function should return 5.
+    # Test case 3: n is 3, x is 5, y is 10. The function should return 5.
+    # Test case 4: n is 4, x is 5, y is 10. The function should return 10.
+    # Test case 5: n is 5, x is 5, y is 10. The function should return 5.
+    # Test case 6: n is 6, x is 5, y is 10. The function should return 10.
+    # Test case 7: n is 7, x is 5, y is 10. The function should return 5.
+    # Test case 8: n is 8, x is 5, y is 10. The function should return 10.
+    # Test case 9: n is 9, x is 5, y is 10. The function should return 5.
+    # Test case 10: n is 10, x is 5, y is 10. The function should return 5.

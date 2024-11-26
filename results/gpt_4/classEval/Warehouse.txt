@@ -1,0 +1,64 @@
+```python
+# This class represents a Warehouse with inventory and order tracking capabilities.
+class Warehouse:
+    def __init__(self):
+        # Initialize an empty inventory (Product ID: Product) and orders (Order ID: Order).
+        self.inventory = {}  
+        self.orders = {}  
+
+    def add_product(self, product_id, name, quantity):
+        # This function is used to add a new product or update the quantity of an existing product in the inventory.
+        # Parameters: product_id is the unique identifier of the product, name is the product's name, and quantity is the number of items.
+        # Test cases: add_product('p1', 'Product 1', 10); add_product('p1', 'Product 1', 5); add_product('p2', 'Product 2', 7)
+        if product_id not in self.inventory:
+            self.inventory[product_id] = {'name': name, 'quantity': quantity}
+        else:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def update_product_quantity(self, product_id, quantity):
+        # This function is used to update the quantity of a product in the inventory.
+        # Test cases: update_product_quantity('p1', 3); update_product_quantity('p2', -2)
+        if product_id in self.inventory:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def get_product_quantity(self, product_id):
+        # This function returns the quantity of a product in the inventory or False if the product is not in the inventory.
+        # Parameter: product_id is the unique identifier of the product.
+        # Return: the quantity of the product or False if the product is not in the inventory.
+        # Test cases: get_product_quantity('p1'); get_product_quantity('p3')
+        if product_id in self.inventory:
+            return self.inventory[product_id]['quantity']
+        else:
+            return False
+
+    def create_order(self, order_id, product_id, quantity):
+        # This function is used to create a new order if the product is available in the required quantity.
+        # Parameters: order_id is the unique identifier of the order, product_id is the unique identifier of the product, and quantity is the number of items.
+        # Return: None if the order is created successfully or False if the product is not available in the required quantity.
+        # Test cases: create_order('o1', 'p1', 5); create_order('o2', 'p2', 10); create_order('o3', 'p1', 10)
+        if self.get_product_quantity(product_id) >= quantity:
+            self.update_product_quantity(product_id, -quantity)
+            self.orders[order_id] = {'product_id': product_id, 'quantity': quantity, 'status': 'Shipped'}
+        else:
+            return False
+
+    def change_order_status(self, order_id, status):
+        # This function changes the status of an order.
+        # Parameters: order_id is the unique identifier of the order, status is the new status of the order.
+        # Return: None if the status is updated successfully or False if the order does not exist.
+        # Test cases: change_order_status('o1', 'Delivered'); change_order_status('o2', 'Cancelled')
+        if order_id in self.orders:
+            self.orders[order_id]['status'] = status
+        else:
+            return False
+
+    def track_order(self, order_id):
+        # This function returns the status of an order or False if the order does not exist.
+        # Parameter: order_id is the unique identifier of the order.
+        # Return: the status of the order or False if the order does not exist.
+        # Test cases: track_order('o1'); track_order('o2')
+        if order_id in self.orders:
+            return self.orders[order_id]['status']
+        else:
+            return False
+```

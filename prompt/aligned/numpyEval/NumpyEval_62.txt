@@ -1,0 +1,2 @@
+# Convert a 2D numpy array to a structured array using numpy.core.records.fromarrays.
+# Transpose the array and reset the names to 'col1', 'col2', 'col3'.

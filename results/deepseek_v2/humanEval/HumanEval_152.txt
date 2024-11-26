@@ -1,0 +1,21 @@
+```python
+def compare(game, guess):
+    # Compare two lists element-wise and return a list of absolute differences.
+    
+    # param game: list, the list of correct values
+    # param guess: list, the list of guessed values
+    # return: list, a list of absolute differences between corresponding elements of game and guess
+    
+    # >>> compare([1, 2, 3], [1, 2, 3])
+    # [0, 0, 0]
+    # >>> compare([1, 2, 3], [2, 3, 4])
+    # [1, 1, 1]
+    # >>> compare([1, 2, 3], [3, 2, 1])
+    # [2, 0, 2]
+    # >>> compare([1, 2, 3], [1, 2])
+    # [0, 0]
+    # >>> compare([1, 2], [1, 2, 3])
+    # [0, 0]
+    
+    return [abs(x - y) for x, y in zip(game, guess)]
+```

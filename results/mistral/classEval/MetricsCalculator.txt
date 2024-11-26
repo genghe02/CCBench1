@@ -1,0 +1,75 @@
+ <description for whole class>
+# A class for calculating various metrics used in machine learning and data science, such as precision, recall, F1 score, and accuracy.
+class MetricsCalculator:
+    def __init__(self):
+        # Initialize instance variables for storing the number of true positives, false positives, false negatives, and true negatives.
+        self.true_positives = 0
+        self.false_positives = 0
+        self.false_negatives = 0
+        self.true_negatives = 0
+
+    def update(self, predicted_labels, true_labels):
+        # Update the instance variables based on the given predicted and true labels.
+        for predicted, true in zip(predicted_labels, true_labels):
+            if predicted == 1 and true == 1:
+                self.true_positives += 1
+            elif predicted == 1 and true == 0:
+                self.false_positives += 1
+            elif predicted == 0 and true == 1:
+                self.false_negatives += 1
+            elif predicted == 0 and true == 0:
+                self.true_negatives += 1
+
+    def precision(self, predicted_labels, true_labels):
+        # Calculate the precision metric, which measures the proportion of true positives among all positive predictions.
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_positives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_positives)
+
+    def recall(self, predicted_labels, true_labels):
+        # Calculate the recall metric, which measures the proportion of true positives among all actual positives.
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_negatives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_negatives)
+
+    def f1_score(self, predicted_labels, true_labels):
+        # Calculate the F1 score, which is the harmonic mean of precision and recall.
+        self.update(predicted_labels, true_labels)
+        precision = self.precision(predicted_labels, true_labels)
+        recall = self.recall(predicted_labels, true_labels)
+        if precision + recall == 0.0:
+            return 0.0
+        return (2 * precision * recall) / (precision + recall)
+
+    def accuracy(self, predicted_labels, true_labels):
+        # Calculate the accuracy metric, which measures the proportion of correct predictions among all predictions.
+        self.update(predicted_labels, true_labels)
+        total = self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        if total == 0:
+            return 0.0
+        return (self.true_positives + self.true_negatives) / total
+
+<some test cases for the function>
+# Example test cases for the MetricsCalculator class.
+if __name__ == '__main__':
+    # Test case 1: Precision, recall, F1 score, and accuracy for a perfect classifier.
+    predicted_labels_perfect = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    true_labels_perfect = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    calculator = MetricsCalculator()
+    print("Perfect classifier test case:")
+    print("Precision:", calculator.precision(predicted_labels_perfect, true_labels_perfect))
+    print("Recall:", calculator.recall(predicted_labels_perfect, true_labels_perfect))
+    print("F1 score:", calculator.f1_score(predicted_labels_perfect, true_labels_perfect))
+    print("Accuracy:", calculator.accuracy(predicted_labels_perfect, true_labels_perfect))
+
+    # Test case 2: Precision, recall, F1 score, and accuracy for an imperfect classifier.
+    predicted_labels_imperfect = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    true_labels_imperfect = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    calculator = MetricsCalculator()
+    print("Imperfect classifier test case:")
+    print("Precision:", calculator.precision(predicted_labels_imperfect, true_labels_imperfect))
+    print("Recall:", calculator.recall(predicted_labels_imperfect, true_labels_imperfect))
+    print("F1 score:", calculator.f1_score(predicted_labels_imperfect, true_labels_imperfect))
+    print("Accuracy:", calculator.accuracy(predicted_labels_imperfect, true_labels_imperfect))

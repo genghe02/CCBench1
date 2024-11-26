@@ -1,0 +1,1 @@
+ # Find the number of elements in array 'a' that have values between 2 and 8 inclusive.

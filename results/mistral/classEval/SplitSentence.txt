@@ -1,0 +1,106 @@
+ <description for whole class>
+"""
+A class for processing text data by splitting sentences and counting words.
+"""
+
+class SplitSentence:
+
+    def split_sentences(self, sentences_string):
+        """
+        Splits a given string into a list of sentences using regular expressions.
+
+        :param sentences_string: str, the input string containing multiple sentences
+        :return: list, a list of split sentences
+        """
+        # Split the given string into a list of sentences using regular expressions
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        """
+        Counts the number of words in a given sentence.
+
+        :param sentence: str, the input sentence
+        :return: int, the number of words in the sentence
+        """
+        # Remove any non-alphanumeric characters from the sentence and split it into a list of words
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        # Return the length of the list of words
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        """
+        Processes a given text file by splitting sentences and finding the sentence with the maximum number of words.
+
+        :param sentences_string: str, the input string containing multiple sentences
+        :return: int, the number of words in the sentence with the maximum number of words
+        """
+        # Split the given string into a list of sentences
+        sentences = self.split_sentences(sentences_string)
+        # Initialize a variable to store the maximum number of words in a sentence
+        max_count = 0
+        # Iterate through each sentence and update the maximum count if the current sentence has more words
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        # Return the maximum number of words found in any sentence
+        return max_count
+
+<some test cases for the function>
+# Test case 1
+splitter = SplitSentence()
+sentences_string = "Hello, this is the first sentence. This is the second sentence. The third sentence is longer and has more words than the others."
+assert len(splitter.split_sentences(sentences_string)) == 3
+
+# Test case 2
+splitter = SplitSentence()
+sentences_string = "This is a test. This is only a test."
+assert len(splitter.split_sentences(sentences_string)) == 1
+
+# Test case 3
+splitter = SplitSentence()
+sentences_string = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
+assert len(splitter.split_sentences(sentences_string)) == 1
+
+# Test case 4
+splitter = SplitSentence()
+sentences_string = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
+assert len(splitter.split_sentences(sentences_string)) == 3
+
+# Test case 5
+splitter = SplitSentence()
+sentences_string = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
+assert len(splitter.split_sentences(sentences_string)) == 5
+
+# Test case 6
+splitter = SplitSentence()
+sentences_string = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
+assert len(splitter.split_sentences(sentences_string)) == 10
+
+# Test case 7
+splitter = SplitSentence()
+sentences_string = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
+assert len(splitter.split_sentences(sentences_string)) == 20
+
+# Test case 8
+splitter = SplitSentence()
+sentences_string = ""
+assert len(splitter.split_sentences(sentences_string)) == 0
+
+# Test case 9
+splitter = SplitSentence()
+sentences_string = "."
+assert len(splitter.split_sentences(sentences_string)) == 0
+
+# Test case 10
+splitter = SplitSentence()
+sentences_string = "Hello, world!"
+assert len(splitter.split_sentences(sentences_string)) == 1
+
+# Test case 11
+splitter = SplitSentence()
+sentences_string = "The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog."
+assert splitter.process_text_file(sentences_string) == 20

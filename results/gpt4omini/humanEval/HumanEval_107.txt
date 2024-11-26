@@ -1,0 +1,30 @@
+```python
+def even_odd_palindrome(n):
+    # Counts the number of even and odd palindromic numbers from 1 to n.
+    # :param n: int, the upper limit of the range to check for palindromic numbers.
+    # :return: tuple, (even_palindrome_count, odd_palindrome_count) indicating the count of even and odd palindromic numbers respectively.
+
+    def is_palindrome(n):
+        # Check if the number n is a palindrome by comparing string representation.
+        return str(n) == str(n)[::-1]
+
+    even_palindrome_count = 0
+    odd_palindrome_count = 0
+
+    for i in range(1, n + 1):
+        if i % 2 == 1 and is_palindrome(i):
+            odd_palindrome_count += 1
+        elif i % 2 == 0 and is_palindrome(i):
+            even_palindrome_count += 1
+    return (even_palindrome_count, odd_palindrome_count)
+
+# Test cases for the function:
+# >>> even_odd_palindrome(10)
+# (4, 5)  # Palindromes: 2, 4, 6, 8 (even) and 1, 3, 5, 7, 9 (odd)
+# >>> even_odd_palindrome(20)
+# (6, 9)  # Additional palindromes: 11, 22 (even) and 121, 131 (odd)
+# >>> even_odd_palindrome(1)
+# (0, 1)  # Only the number 1 is an odd palindrome
+# >>> even_odd_palindrome(0)
+# (0, 0)  # No numbers to check
+```

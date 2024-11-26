@@ -1,0 +1,1 @@
+# Convert each element in the numpy array to a string using list comprehension.

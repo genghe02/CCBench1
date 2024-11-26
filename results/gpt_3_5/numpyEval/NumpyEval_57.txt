@@ -1,0 +1,1 @@
+# Repeat each element in the array 'a' that satisfies the condition 'cond' (even numbers) 'n' times.

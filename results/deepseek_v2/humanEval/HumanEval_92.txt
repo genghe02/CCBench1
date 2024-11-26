@@ -1,0 +1,23 @@
+```python
+def any_int(x, y, z):
+    # Check if any two of the three integers sum up to the third integer.
+    # param x: int, the first integer to be checked
+    # param y: int, the second integer to be checked
+    # param z: int, the third integer to be checked
+    # return: bool, True if any two integers sum up to the third, False otherwise
+    
+    # >>> any_int(1, 2, 3)
+    # True
+    # >>> any_int(2, 2, 4)
+    # True
+    # >>> any_int(1, 2, 4)
+    # False
+    # >>> any_int(1, 2, '3')
+    # False
+    
+    if isinstance(x,int) and isinstance(y,int) and isinstance(z,int):
+        if (x+y==z) or (x+z==y) or (y+z==x):
+            return True
+        return False
+    return False
+```

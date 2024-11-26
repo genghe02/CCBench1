@@ -1,0 +1,1 @@
+# Convert the 'date' column of the dataframe to datetime format. If any errors are encountered during the conversion process, they are ignored and the problematic data is replaced with NaT (Not a Time).

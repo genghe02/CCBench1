@@ -1,0 +1,52 @@
+ <description for whole class>
+# Class for maintaining a list of words and finding the longest word in a given sentence that exists in the list.
+
+class LongestWord:
+
+    def __init__(self):
+        # Initialize an empty list to store the added words.
+        self.word_list = []
+
+    def add_word(self, word):
+        # Add a word to the list.
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        # Find the longest word in the given sentence that exists in the list.
+        longest_word = ""
+        # Convert the sentence to lowercase and remove punctuations.
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        # Split the sentence into words.
+        sentence = re.split(' ', sentence)
+        # Iterate through each word in the sentence and update the longest word if the current word is longer.
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        # Return the longest word.
+        return longest_word
+
+<some test cases for the function>
+# Test cases for the find_longest_word function.
+longest_word = LongestWord()
+longest_word.add_word("apple")
+longest_word.add_word("banana")
+longest_word.add_word("cherry")
+
+# Test case 1: Find the longest word in a sentence with all the words in the list.
+assert longest_word.find_longest_word("the quick brown fox jumps over the lazy dog the apple cherry cherry cherry cherry banana") == "cherry"
+
+# Test case 2: Find the longest word in a sentence with a word not in the list.
+assert longest_word.find_longest_word("the quick brown fox jumps over the lazy dog the apple cherry cherry cherry cherry banana the orange") == ""
+
+# Test case 3: Find the longest word in an empty sentence.
+assert longest_word.find_longest_word("") == ""
+
+# Test case 4: Find the longest word in a sentence with only one word.
+assert longest_word.find_longest_word("cherry") == "cherry"
+
+# Test case 5: Find the longest word in a sentence with multiple words, but only one is in the list.
+assert longest_word.find_longest_word("the quick brown fox jumps over the lazy dog the apple cherry cherry cherry cherry banana the cherry") == "cherry"
+
+# Test case 6: Find the longest word in a sentence with multiple words, but none are in the list.
+assert longest_word.find_longest_word("the quick brown fox jumps over the lazy dog the apple cherry cherry cherry cherry banana the orange the grape") == ""

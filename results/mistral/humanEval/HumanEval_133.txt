@@ -1,0 +1,24 @@
+ def sum_squares(lst):
+ # This function calculates the sum of the squares of all numbers in the given list.
+
+ # Parameters:
+ # param lst: list, a list of numbers to calculate the sum of squares for.
+
+ result = 0
+ for i in lst:
+ # Calculate the square of each number using math.ceil() to round up to the nearest integer.
+ squared = math.ceil(i) ** 2
+ result += squared
+
+ return result
+ # Return the sum of squares of all numbers in the list.
+
+ # Test cases:
+ # >>> sum_squares([1, 2, 3])
+ # 14
+ # >>> sum_squares([0, -1, 2, 3])
+ # 14
+ # >>> sum_squares([10, 20, 30])
+ # 33750
+ # >>> sum_squares([])
+ # 0

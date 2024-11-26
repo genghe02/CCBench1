@@ -1,0 +1,13 @@
+```python
+def x_or_y(n, x, y):
+    # Return x if n is a prime number, otherwise return y. If n is 1, return y.
+
+    # Test case when n is 1, should return y
+    assert x_or_y(1, 'x', 'y') == 'y'
+
+    # Test case when n is a prime number, should return x
+    assert x_or_y(7, 'x', 'y') == 'x'
+
+    # Test case when n is not a prime number, should return y
+    assert x_or_y(4, 'x', 'y') == 'y'
+```

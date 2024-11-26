@@ -1,0 +1,23 @@
+```python
+import pandas as pd
+import numpy as np
+
+def display_rows_with_gt_1_nan(df: pd.DataFrame) -> pd.DataFrame:
+    """ 
+    Given a pandas DataFrame, return a new DataFrame containing only the rows 
+    that have more than one NaN value. The function checks each row in the DataFrame 
+    and filters out the rows that do not meet this criterion.
+    
+    >>> df = pd.DataFrame({'A': [1, 2, np.nan], 'B': [np.nan, 3, np.nan], 'C': [4, 5, 6]})
+    >>> display_rows_with_gt_1_nan(df)
+       A   B  C
+    2 NaN NaN  6
+
+    >>> df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]})
+    >>> display_rows_with_gt_1_nan(df)
+    Empty DataFrame
+    Columns: [A, B, C]
+    Index: []
+    """
+    return df[df.isna().any(axis=1)]
+```

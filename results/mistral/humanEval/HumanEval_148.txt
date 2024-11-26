@@ -1,0 +1,26 @@
+ def bf(planet1, planet2):
+    # This function takes two planet names as arguments and returns a list of planet names between them in the order they appear in the planet_names list.
+    # Raise an error if the planets are not valid or are the same.
+    planet_names = ("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
+    if planet1 not in planet_names or planet2 not in planet_names or planet1 == planet2:
+        raise ValueError("Invalid planet names or same planet names")
+    planet1_index = planet_names.index(planet1)
+    planet2_index = planet_names.index(planet2)
+    # Determine which planet comes first and return the list of planets between them.
+    if planet1_index < planet2_index:
+        return list(planet_names[planet1_index + 1: planet2_index + 1])
+    else:
+        return list(planet_names[planet2_index + 1: planet1_index + 1])
+
+    <some test cases for the function>
+    >>> bf("Mercury", "Venus")
+    ['Venus']
+    >>> bf("Mars", "Jupiter")
+    ['Mars', 'Jupiter']
+    >>> bf("Saturn", "Mars")
+    ['Jupiter', 'Saturn']
+    >>> bf("Neptune", "Neptune")
+    Traceback (most recent call last):
+      File "<stdin>", line 1, in <module>
+      File "<stdin>", line 3, in bf
+      ValueError: Invalid planet names or same planet names

@@ -1,0 +1,2 @@
+ # Find the indices in master where the values in search are present using numpy's searchsorted function.
+# This function returns the indices where the values in search are located in sorted master array.

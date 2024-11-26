@@ -1,0 +1,1 @@
+# Retrieve the number of columns in a Pandas DataFrame and return it.

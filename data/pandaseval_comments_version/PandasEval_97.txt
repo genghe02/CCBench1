@@ -1,0 +1,7 @@
+import pandas as pd
+
+def rename_column(df, old_name, new_name):
+    # How would I rename the only one column header?
+    # return the changed dataframe
+    df = df.rename(columns={old_name: new_name})
+    return df

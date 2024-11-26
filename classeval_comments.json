@@ -1,0 +1,1970 @@
+[
+  {
+    "filename": "AccessGatewayFilter.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      11,
+      31,
+      42,
+      56
+    ],
+    "comments": [
+      "This class is a filter used for accessing gateway filtering, primarily for authentication and access log recording.",
+      "Filter the incoming request based on certain rules and conditions.",
+      "Check if the request URI starts with certain prefixes.",
+      "Get the user information from the JWT token in the request.",
+      "Set the current user information and log the access."
+    ]
+  },
+  {
+    "filename": "AreaCalculator.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      7,
+      12,
+      18,
+      24,
+      31,
+      38
+    ],
+    "comments": [
+      "This is a class for calculating the area of different shapes, including circle, sphere, cylinder, sector and annulus.",
+      "Initialize the radius for shapes.",
+      "calculate the area of circle based on self.radius",
+      "calculate the area of sphere based on self.radius",
+      "calculate the area of cylinder based on self.radius and height",
+      "calculate the area of sector based on self.radius and angle",
+      "calculate the area of annulus based on inner_radius and out_radius"
+    ]
+  },
+  {
+    "filename": "ArgumentParser.txt",
+    "all_tokens": 20,
+    "comment_tokens": [
+      0,
+      3,
+      11,
+      37,
+      44,
+      53
+    ],
+    "comments": [
+      "This is a class for parsing command line arguments to a dictionary.",
+      "Initialize the fields.",
+      " Parses the given command line argument string and invoke _convert_type to stores the parsed result in specific type in the arguments dictionary.\n        Checks for missing required arguments, if any, and returns False with the missing argument names, otherwise returns True.",
+      "Retrieves the value of the specified argument from the arguments dictionary and returns it.",
+      "Adds an argument to self.types and self.required.\n        Check if it is a required argument and store the argument type.\n        If the argument is set as required, it wull be added to the required set.\n        The argument type and name are stored in the types dictionary as key-value pairs.",
+      ":param value: str, the input value in command line"
+    ]
+  },
+  {
+    "filename": "ArrangementCalculator.txt",
+    "all_tokens": 23,
+    "comment_tokens": [
+      0,
+      6,
+      12,
+      23,
+      33,
+      45,
+      56
+    ],
+    "comments": [
+      "The Arrangement class provides permutation calculations and selection operations for a given set of data elements.",
+      "Initializes the ArrangementCalculator object with a list of datas.",
+      "Counts the number of arrangements by choosing m items from n items (permutations).\n        If m is not provided or n equals m, returns factorial(n).",
+      "Counts the total number of all possible arrangements by choosing at least 1 item and at most n items from n items.",
+      "Generates a list of arrangements by selecting m items from the internal datas.\n        If m is not provided, selects all items.",
+      "Generates a list of all arrangements by selecting at least 1 item and at most the number of internal datas.",
+      ":param n: int, the number to calculate the factorial."
+    ]
+  },
+  {
+    "filename": "AssessmentSystem.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      13,
+      20,
+      30,
+      42,
+      56
+    ],
+    "comments": [
+      "This is a class as an student assessment system, which supports add student, add course score, calculate GPA, and other functions for students and courses.",
+      "Initialize the students dict in assessment system.",
+      "Add a new student into self.students dict",
+      "Add score of specific course for student in self.students",
+      "Get average grade of one student.",
+      "Get all students who have any score blow 60",
+      "Get the average score of a specific course.",
+      "Calculate every student's gpa with get_gpa method, and find the student with highest gpa"
+    ]
+  },
+  {
+    "filename": "AutomaticGuitarSimulator.txt",
+    "all_tokens": 11,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      32
+    ],
+    "comments": [
+      "This class is an automatic guitar simulator that can interpret and play based on the input guitar sheet music.",
+      "Initialize the score to be played",
+      "Interpret the music score to be played",
+      "Print out chord and play tune with following format: Normal Guitar Playing -- Chord: %s, Play Tune: %s"
+    ]
+  },
+  {
+    "filename": "AvgPartition.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      17
+    ],
+    "comments": [
+      "This is a class that partitions the given list into different blocks by specifying the number of partitions, with each block having a uniformly distributed length.",
+      "Initialize the class with the given list and the number of partitions, and check if the number of partitions is greater than 0.",
+      "Calculate the size of each block and the remainder of the division.",
+      "calculate the size of each block and the remainder of the division, and calculate the corresponding start and end positions based on the index of the partition.\n"
+    ]
+  },
+  {
+    "filename": "BalancedBrackets.txt",
+    "all_tokens": 8,
+    "comment_tokens": [
+      0,
+      3,
+      11,
+      16
+    ],
+    "comments": [
+      "This is a class that checks for bracket matching",
+      "Initializes the class with an expression.",
+      "Clears the expression of all characters that are not brackets.",
+      "Checks if the expression has balanced brackets."
+    ]
+  },
+  {
+    "filename": "Bank_Account_System.txt",
+    "all_tokens": 10,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      15,
+      29
+    ],
+    "comments": [
+      "This is a class as a bank account system, which supports deposit money, withdraw money, view balance, and transfer money.",
+      "Initializes a bank account object with an attribute balance, default value is 0.",
+      "Deposits a certain amount into the account, increasing the account balance, return the current account balance.\n        If amount is negative, raise a ValueError(\"Invalid amount\").",
+      "Withdraws a certain amount from the account, decreasing the account balance, return the current account balance.\n        If amount is negative, raise a ValueError(\"Invalid amount\").\n        If the withdrawal amount is greater than the account balance, raise a ValueError(\"Insufficient balance.\").",
+      "Transfers a certain amount from the current account to another account."
+    ]
+  },
+  {
+    "filename": "BigNumCalculator.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      4,
+      27,
+      70
+    ],
+    "comments": [
+      "This is a class that implements big number calculations, including adding, subtracting and multiplying.",
+      "Adds two big numbers.",
+      "Subtracts two big numbers.",
+      "Multiplies two big numbers."
+    ]
+  },
+  {
+    "filename": "BinaryDataProcessor.txt",
+    "all_tokens": 10,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      13,
+      29,
+      40
+    ],
+    "comments": [
+      "This is a class used to process binary data, which includes functions such as clearing non 0 or 1 characters, counting binary string information, and converting to corresponding strings based on different encoding methods.",
+      "Initialize the class with a binary string and clean it by removing all non 0 or 1 characters.",
+      "Clean the binary string by removing all non 0 or 1 characters.",
+      "Calculate the binary string information, including the percentage of 0 and 1, and the total length of the binary string.",
+      "Convert the binary string to ascii string.",
+      "Convert the binary string to utf-8 string."
+    ]
+  },
+  {
+    "filename": "BitStatusUtil.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      4,
+      13,
+      22,
+      33
+    ],
+    "comments": [
+      "This is a utility class that provides methods for manipulating and checking status using bitwise operations.",
+      "Add a status to the current status,and check the parameters wheather they are legal.",
+      "Check if the current status contains the specified status,and check the parameters wheather they are legal.",
+      "Remove the specified status from the current status,and check the parameters wheather they are legal.",
+      "Check if the parameters are legal, args must be greater than or equal to 0 and must be even,if not,raise ValueError."
+    ]
+  },
+  {
+    "filename": "BlackjackGame.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      6,
+      12,
+      25,
+      46
+    ],
+    "comments": [
+      "This is a class representing a game of blackjack, which includes creating a deck, calculating the value of a hand, and determine the winner based on the hand values of the player and dealer.",
+      "Initialize the Blackjack Game with the attribute deck, player_hand and dealer_hand.\n        While initializing deck attribute, call the create_deck method to generate.\n        The deck stores 52 rondom order poker with the Jokers removed, format is ['AS', '2S', ...].\n        player_hand is a list which stores player's hand cards.\n        dealer_hand is is a list which stores dealer's hand cards.",
+      "Create a deck of 52 cards, which stores 52 rondom order poker with the Jokers removed.",
+      "Calculate the value of the poker cards stored in hand list according to the rules of the Blackjack Game.\n        If the card is a digit, its value is added to the total hand value.\n        Value of J, Q, or K is 10, while Aces are worth 11.\n        If the total hand value exceeds 21 and there are Aces present, one Ace is treated as having a value of 1 instead of 11,\n        until the hand value is less than or equal to 21, or all Aces have been counted as value of 1.",
+      "Determines the winner of a game by comparing the hand values of the player and dealer.\n        rule:\n        If both players have hand values that are equal to or less than 21, the winner is the one whose hand value is closer to 21.\n        Otherwise, the winner is the one with the lower hand value."
+    ]
+  },
+  {
+    "filename": "BookManagement.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      15,
+      24,
+      30
+    ],
+    "comments": [
+      "This is a class as managing books system, which supports to add and remove books from the inventory dict, view the inventory, and check the quantity of a specific book.\n",
+      "Initialize the inventory of Book Manager.",
+      "Add one or several books to inventory which is sorted by book title.",
+      "Remove one or several books from inventory which is sorted by book title.\n        Raise false while get invalid input.",
+      "Get the inventory of the Book Management.",
+      "Get the quantity of a book."
+    ]
+  },
+  {
+    "filename": "BookManagementDB.txt",
+    "all_tokens": 20,
+    "comment_tokens": [
+      0,
+      5,
+      12,
+      25,
+      35,
+      44,
+      53,
+      62
+    ],
+    "comments": [
+      "This is a database class as a book management system, used to handle the operations of adding, removing, updating, and searching books.",
+      "Initializes the class by creating a database connection and cursor, \n        and creates the book table if it does not already exist",
+      "Creates the book table in the database if it does not already exist.",
+      "Adds a book to the database with the specified title and author, \n        setting its availability to 1 as free to borrow.",
+      "Removes a book from the database based on the given book ID.",
+      "Marks a book as borrowed in the database based on the given book ID.",
+      "Marks a book as returned in the database based on the given book ID.",
+      "Retrieves all books from the database and returns their information."
+    ]
+  },
+  {
+    "filename": "BoyerMooreSearch.txt",
+    "all_tokens": 14,
+    "comment_tokens": [
+      0,
+      3,
+      9,
+      19,
+      29
+    ],
+    "comments": [
+      "This is a class that implements the Boyer-Moore algorithm for string searching, which is used to find occurrences of a pattern within a given text.",
+      "Initializes the BoyerMooreSearch class with the given text and pattern.",
+      "Finds the rightmost occurrence of a character in the pattern.",
+      "Determines the position of the first dismatch between the pattern and the text.",
+      "Finds all occurrences of the pattern in the text."
+    ]
+  },
+  {
+    "filename": "CSVProcessor.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      10,
+      23,
+      36
+    ],
+    "comments": [
+      "This is a class for processing CSV files, including readring and writing CSV data, as well as processing specific operations and saving as a new CSV file.",
+      "Read the csv file by file_name, get the title and data from it",
+      "Write data into a csv file.",
+      "Read a csv file into variable title and data.\n        Only remain the N th (from 0) column data and Capitalize them, store the title and new data into a new csv file.\n        Add '_process' suffix after old file name, as a new file name."
+    ]
+  },
+  {
+    "filename": "Calculator.txt",
+    "all_tokens": 14,
+    "comment_tokens": [
+      0,
+      3,
+      13,
+      55,
+      69
+    ],
+    "comments": [
+      "This is a class for a calculator, capable of performing basic arithmetic calculations on numerical expressions using the operators +, -, *, /, and ^ (exponentiation).",
+      "Initialize the operations performed by the five operators'+','-','*','/','^'",
+      "Calculate the value of a given expression",
+      "Returns the priority of the specified operator, where the higher the priority, the greater the assignment. The priority of '^' is greater than '/' and '*', and the priority of '/' and '*' is greater than '+' and '-'",
+      "Use the operator at the top of the operator stack to perform the operation on the two numbers at the top of the operator stack, and store the results at the top of the operator stack"
+    ]
+  },
+  {
+    "filename": "CalendarUtil.txt",
+    "all_tokens": 24,
+    "comment_tokens": [
+      0,
+      5,
+      9,
+      15,
+      22,
+      33,
+      43,
+      61
+    ],
+    "comments": [
+      "This is a class as CalendarUtil that provides functionalities to manage calendar events, schedule appointments, and perform conflict checks.",
+      "Initialize the calendar with an empty list of events.",
+      "Add an event to the calendar.",
+      "Remove an event from the calendar.",
+      "Get all events on a given date.",
+      "Check if the calendar is available for a given time slot.",
+      "Get all available time slots on a given date.",
+      "Get the next n upcoming events from a given date."
+    ]
+  },
+  {
+    "filename": "CamelCaseMap.txt",
+    "all_tokens": 28,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      14,
+      21,
+      28,
+      34,
+      40,
+      50
+    ],
+    "comments": [
+      "This is a custom class that allows keys to be in camel case style by converting them from underscore style, which provides dictionary-like functionality.",
+      "Initialize data to an empty dictionary",
+      "Return the value corresponding to the key",
+      "Set the value corresponding to the key to the specified value",
+      "Delete the value corresponding to the key",
+      "Returning Iterateable Objects with Own Data",
+      "Returns the length of the own data",
+      "convert key string into camel case",
+      "convert key string into camel case"
+    ]
+  },
+  {
+    "filename": "ChandrasekharSieve.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      3,
+      9,
+      33
+    ],
+    "comments": [
+      "This is a class that uses the Chandrasekhar's Sieve method to find all prime numbers within the range",
+      "Initialize the ChandrasekharSieve class with the given limit.",
+      "Generate prime numbers up to the specified limit using the Chandrasekhar sieve algorithm.",
+      "Get the list of generated prime numbers."
+    ]
+  },
+  {
+    "filename": "Chat.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      5,
+      9,
+      20,
+      31,
+      50
+    ],
+    "comments": [
+      "This is a chat class with the functions of adding users, removing users, sending messages, and obtaining messages.",
+      "Initialize the Chat with an attribute users, which is an empty dictionary.",
+      "Add a new user to the Chat.",
+      "Remove a user from the Chat.",
+      "Send a message from a user to another user.",
+      "Get all the messages of a user from the Chat."
+    ]
+  },
+  {
+    "filename": "Class_Registration_System.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      4,
+      9,
+      17,
+      28,
+      39,
+      49
+    ],
+    "comments": [
+      "This is a class as a class registration system, allowing to register students, register them for classes, retrieve students by major, get a list of all majors, and determine the most popular class within a specific major.",
+      "Initialize the registration system with the attribute students and students_registration_class.\n        students is a list of student dictionaries, each student dictionary has the key of name and major.\n        students_registration_class is a dictionaries, key is the student name, value is a list of class names",
+      "register a student to the system, add the student to the students list, if the student is already registered, return 0, else return 1",
+      "register a class to the student.",
+      "get all students in the major",
+      "get all majors in the system",
+      "get the class with the highest enrollment in the major."
+    ]
+  },
+  {
+    "filename": "ClassroomManagement.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      6,
+      12,
+      20,
+      27,
+      40
+    ],
+    "comments": [
+      "This is a class representing a classroom, capable of adding and removing courses, checking availability at a given time, and detecting conflicts when scheduling new courses.",
+      "Initialize the classroom management system.",
+      "Add course to self.courses list if the course wasn't in it.",
+      "Remove course from self.courses list if the course was in it.",
+      "change the time format as '%H:%M' and check the time is free or not in the classroom.",
+      "Before adding a new course, check if the new course time conflicts with any other course."
+    ]
+  },
+  {
+    "filename": "CombinationCalculator.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      7,
+      12,
+      22,
+      31,
+      40,
+      49
+    ],
+    "comments": [
+      "This is a class that provides methods to calculate the number of combinations for a specific count, calculate all possible combinations, and generate combinations with a specified number of elements.",
+      "Initialize the calculator with a list of data.",
+      "Calculate the number of combinations for a specific count.",
+      "Calculate the number of all possible combinations.",
+      "Generate combinations with a specified number of elements.",
+      "Generate all possible combinations of  selecting elements from the given data list,and it uses the select method.",
+      "Generate combinations with a specified number of elements by recursion."
+    ]
+  },
+  {
+    "filename": "ComplexCalculator.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      7,
+      18,
+      28,
+      38
+    ],
+    "comments": [
+      "# This is a class that implements addition, subtraction, multiplication, and division operations for complex numbers.",
+      "Adds two complex numbers.",
+      "Subtracts two complex numbers.",
+      "Multiplies two complex numbers.",
+      "Divides two complex numbers."
+    ]
+  },
+  {
+    "filename": "CookiesUtil.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      5,
+      11,
+      18,
+      29
+    ],
+    "comments": [
+      "This is a class as utility for managing and manipulating Cookies, including methods for retrieving, saving, and setting Cookies data.",
+      "Initializes the CookiesUtil with the specified cookies file.",
+      "Gets the cookies from the specified response,and save it to cookies_file.",
+      "Loads the cookies from the cookies_file to the cookies data.",
+      "Saves the cookies to the cookies_file, and returns True if successful, False otherwise."
+    ]
+  },
+  {
+    "filename": "CurrencyConverter.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      3,
+      15,
+      32,
+      38,
+      47
+    ],
+    "comments": [
+      "This is a class for currency conversion, which supports to convert amounts between different currencies, retrieve supported currencies, add new currency rates, and update existing currency rates.",
+      "Initialize the exchange rate of the US dollar against various currencies",
+      "Convert the value of a given currency to another currency type",
+      "Returns a list of supported currency types",
+      "Add a new supported currency type, return False if the currency type is already in the support list",
+      "Update the exchange rate for a certain currency"
+    ]
+  },
+  {
+    "filename": "DataStatistics.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      6,
+      13,
+      27
+    ],
+    "comments": [
+      "This is a class for performing data statistics, supporting to calculate the mean, median, and mode of a given data set.",
+      "Calculate the average value of a group of data, accurate to two digits after the Decimal separator",
+      "Calculate the median of a group of data, accurate to two digits after the Decimal separator",
+      "Calculate the mode of a set of data"
+    ]
+  },
+  {
+    "filename": "DataStatistics2.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      14,
+      20,
+      26,
+      32,
+      38
+    ],
+    "comments": [
+      "This is a class for performing data statistics, supporting to get the sum, minimum, maximum, variance, standard deviation, and correlation of a given dataset.",
+      "Initialize Data List",
+      "Calculate the sum of data",
+      "Calculate the minimum value in the data",
+      "Calculate the maximum value in the data",
+      "Calculate variance, accurate to two digits after the Decimal separator",
+      "Calculate standard deviation, accurate to two digits after the Decimal separator",
+      "Calculate correlation"
+    ]
+  },
+  {
+    "filename": "DataStatistics4.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      7,
+      22,
+      37,
+      58
+    ],
+    "comments": [
+      "This is a class that performs advanced mathematical calculations and statistics, including correlation coefficient, skewness, kurtosis, and probability density function (PDF) for a normal distribution.",
+      "Calculate the correlation coefficient of two sets of data.",
+      "Calculate the skewness of a set of data.",
+      "Calculate the kurtosis of a set of data.",
+      "Calculate the probability density function (PDF) of a set of data under a normal distribution."
+    ]
+  },
+  {
+    "filename": "DatabaseOperation.txt",
+    "all_tokens": 15,
+    "comment_tokens": [
+      0,
+      8,
+      12,
+      25,
+      39,
+      57
+    ],
+    "comments": [
+      "This is a class for processing a database, supporting to create tables, insert data into the database, search for data based on name, and delete data from the database.",
+      "Initialize database name of database processor",
+      "Create a new table in the database if it doesn't exist.\n        And make id (INTEGER) as PRIMARY KEY, make key1 as TEXT, key2 as INTEGER",
+      "Insert data into the specified table in the database.",
+      "Search the specified table in the database for rows with a matching name.",
+      "Delete rows from the specified table in the database with a matching name."
+    ]
+  },
+  {
+    "filename": "DecryptionUtils.txt",
+    "all_tokens": 15,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      26,
+      43
+    ],
+    "comments": [
+      "This is a class that provides methods for decryption, including the Caesar cipher, Vigenere cipher, and Rail Fence cipher.",
+      "Initializes the decryption utility with a key.",
+      "Deciphers the given ciphertext using the Caesar cipher",
+      "Deciphers the given ciphertext using the Vigenere cipher",
+      "Deciphers the given ciphertext using the Rail Fence cipher"
+    ]
+  },
+  {
+    "filename": "DiscountStrategy.txt",
+    "all_tokens": 22,
+    "comment_tokens": [
+      0,
+      3,
+      12,
+      19,
+      30,
+      38,
+      50
+    ],
+    "comments": [
+      "This is a class that allows to use different discount strategy based on shopping credit or shopping cart in supermarket.",
+      "Initialize the DiscountStrategy with customer information, a cart of items, and an optional promotion.",
+      "Calculate the total cost of items in the cart.",
+      "Calculate the final amount to be paid after applying the discount.",
+      "Calculate the discount based on the fidelity points of the customer.Customers with over 1000 points can enjoy a 5% discount on the entire order.",
+      "Calculate the discount based on bulk item quantity in the order.In the same order, if the quantity of a single item reaches 20 or more, each item will enjoy a 10% discount.",
+      "Calculate the discount based on the number of different products in the order.If the quantity of different products in the order reaches 10 or more, the entire order will enjoy a 7% discount."
+    ]
+  },
+  {
+    "filename": "DocFileHandler.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      8,
+      13,
+      22,
+      39,
+      51,
+      66
+    ],
+    "comments": [
+      "This is a class that handles Word documents and provides functionalities for reading, writing, and modifying the content of Word documents.",
+      "Initializes the DocFileHandler object with the specified file path.",
+      "Reads the content of a Word document and returns it as a string.",
+      "Writes the specified content to a Word document.",
+      "Adds a heading to the Word document.",
+      "Adds a table to the Word document with the specified data.",
+      "Returns the alignment value corresponding to the given alignment string."
+    ]
+  },
+  {
+    "filename": "EightPuzzle.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      3,
+      9,
+      19,
+      38,
+      57
+    ],
+    "comments": [
+      "This class is an implementation of the classic 8-puzzle game, including methods for finding the blank tile, making moves, getting possible moves, and solving the puzzle using a breadth-first search algorithm.",
+      "Initializing the initial state of Eight Puzzle Game, stores in attribute self.initial_state.\n        And set the goal state of this game, stores in self.goal_state. In this case, set the size as 3*3",
+      "Find the blank position of current state, which is the 0 element.",
+      "Find the blank block, then makes the board moves forward the given direction.",
+      "According the current state, find all the possible moving directions. Only has 4 direction 'up', 'down', 'left', 'right'.",
+      "Use BFS algorithm to find the path solution which makes the initial state to the goal method.\n        Maintain a list as a queue, named as open_list, append the initial state.\n        Always visit and pop the 0 index element, invoke get_possible_moves method find all the possible directions.\n        Traversal the possible_moves list and invoke move method to get several new states.Then append them.\n        redo the above steps until the open_list is empty or the state has changed to the goal state."
+    ]
+  },
+  {
+    "filename": "EmailClient.txt",
+    "all_tokens": 20,
+    "comment_tokens": [
+      0,
+      5,
+      12,
+      33,
+      45,
+      53,
+      62
+    ],
+    "comments": [
+      "This is a class that serves as an email client, implementing functions such as checking emails, determining whether there is sufficient space, and cleaning up space",
+      "Initializes the EmailClient class with the email address and the capacity of the email box.",
+      "Sends an email to the given email address.",
+      "Retrieves the first unread email in the email box and marks it as read.",
+      "Determines whether the email box is full after adding an email of the given size.",
+      "Gets the total size of the emails in the email box.",
+      "Clears the email box by deleting the oldest emails until the email box has enough space to accommodate the given size."
+    ]
+  },
+  {
+    "filename": "EncryptionUtils.txt",
+    "all_tokens": 15,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      26,
+      43
+    ],
+    "comments": [
+      "# This is a class that provides methods for encryption, including the Caesar cipher, Vigenere cipher, and Rail Fence cipher.",
+      "Initializes the class with a key.",
+      "Encrypts the plaintext using the Caesar cipher.",
+      "Encrypts the plaintext using the Vigenere cipher.",
+      "Encrypts the plaintext using the Rail Fence cipher."
+    ]
+  },
+  {
+    "filename": "ExcelProcessor.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      9,
+      24,
+      40
+    ],
+    "comments": [
+      "# This is a class for processing excel files, including readring and writing excel data, as well as processing specific operations and saving as a new excel file.",
+      "Reading data from Excel files",
+      "Write data to the specified Excel file",
+      "Change the specified column in the Excel file to uppercase"
+    ]
+  },
+  {
+    "filename": "ExpressionCalculator.txt",
+    "all_tokens": 25,
+    "comment_tokens": [
+      0,
+      8,
+      13,
+      40,
+      76,
+      83,
+      95,
+      114
+    ],
+    "comments": [
+      "# This is a class in Python that can perform calculations with basic arithmetic operations, including addition, subtraction, multiplication, division, and modulo.",
+      "Initialize the expression calculator",
+      "Calculate the result of the given postfix expression",
+      "Prepare the infix expression for conversion to postfix notation",
+      "Check if a character is an operator in {'+', '-', '*', '/', '(', ')', '%'}",
+      "Compare the precedence of two operators",
+      "Perform the mathematical calculation based on the given operands and operator",
+      "Transform the infix expression to a format suitable for conversion"
+    ]
+  },
+  {
+    "filename": "FitnessTracker.txt",
+    "all_tokens": 11,
+    "comment_tokens": [
+      0,
+      3,
+      14,
+      20,
+      39
+    ],
+    "comments": [
+      "# This is a class as fitness tracker that implements to calculate BMI (Body Mass Index) and calorie intake based on the user's height, weight, age, and sex.",
+      "Initialize the class with height, weight, age, and sex, and calculate the BMI standard based on sex, and male is 20-25, female is 19-24.",
+      "Calculate the BMI based on the height and weight.",
+      "Judge the condition of the user based on the BMI standard.",
+      "Calculate the calorie intake based on the user's condition and BMR (Basal Metabolic Rate),BMR is calculated based on the user's height, weight, age, and sex,male is10 * self.weight + 6.25 * self.height - 5 * self.age + 5,female is 10 * self.weight + 6.25 * self.height - 5 * self.age - 161, and the calorie intake is calculated based on the BMR and the user's condition,if the user is too fat, the calorie intake is BMR * 1.2, if the user is too thin, the calorie intake is BMR * 1.6, if the user is normal, the calorie intake is BMR * 1.4."
+    ]
+  },
+  {
+    "filename": "GomokuGame.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      3,
+      9,
+      20,
+      33
+    ],
+    "comments": [
+      "# This class is an implementation of a Gomoku game, supporting for making moves, checking for a winner, and checking if there are five consecutive symbols on the game board.",
+      "Initializes the game with a given board size.\n        It initializes the board with empty spaces and sets the current player symble as 'X'.",
+      "Makes a move at the given row and column.\n        If the move is valid, it places the current player's symbol on the board\n        and changes the current player to the other player (if the current player is 'X', then it becomes 'O' and vice versa).",
+      "Checks if there is a winner by looking for five in a row in all directions (horizontal, vertical, diagonal).",
+      "checks if there are five consecutive symbols of the same player in a row starting from a given cell in a given direction (horizontal, vertical, diagonal).\n        Counts the number of consecutive symbols in that direction starting from the given cell,"
+    ]
+  },
+  {
+    "filename": "HRManagementSystem.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      23,
+      34,
+      50,
+      60
+    ],
+    "comments": [
+      "# This is a class as personnel management system that implements functions such as adding, deleting, querying, and updating employees",
+      "Initialize the HRManagementSystem withan attribute employees, which is an empty dictionary.",
+      "Add a new employee to the HRManagementSystem.",
+      "Remove an employee from the HRManagementSystem.",
+      "Update an employee's information in the HRManagementSystem.",
+      "Get an employee's information from the HRManagementSystem.",
+      "List all employees' information in the HRManagementSystem."
+    ]
+  },
+  {
+    "filename": "Hotel.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      3,
+      14,
+      35,
+      53,
+      62
+    ],
+    "comments": [
+      "# This is a class as hotel management system, managing the booking, check-in, check-out, and availability of rooms in a hotel with different room types.",
+      "Initialize the three fields in Hotel System.\n        name is the hotel name.\n        available_rooms stores the remaining rooms in the hotel\n        booked_rooms stores the rooms that have been booked and the person's name who booked rooms.",
+      "Check if there are any rooms of the specified type available.\n        if rooms are adequate, modify available_rooms and booked_rooms and finish booking, or fail to book otherwise.",
+      "Check if the room of the specified type and number is booked by the person named name.\n        Remove this name when check in successfuly(room_number is equal to specific person's booked_rooms. When the actual check in quantity (room_number) is less than the booked quantity, number in booked_rooms will be booked quantity minus actual quantity",
+      "Check out rooms, add number for specific type in available_rooms.\n        If room_type is new, add new type in available_rooms.",
+      "Get the number of specific type of available rooms."
+    ]
+  },
+  {
+    "filename": "HtmlUtil.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      10,
+      23,
+      29,
+      70
+    ],
+    "comments": [
+      "# This is a class as util for html, supporting for formatting and extracting code from HTML text, including cleaning up the text and converting certain elements into specific marks.",
+      "Initialize a series of labels",
+      "Replace consecutive line breaks with a single line break",
+      "get the html text without the code, and add the code tag -CODE- where the code is",
+      "extract codes from the html body"
+    ]
+  },
+  {
+    "filename": "IPAddress.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      20,
+      29
+    ],
+    "comments": [
+      "# This is a class to process IP Address, including validating, getting the octets and obtaining the binary representation of a valid IP address.",
+      "Initialize the IP address to the specified address",
+      "Judge whether the IP address is valid, that is, whether the IP address is composed of four Decimal digits separated by '.'. Each digit is greater than or equal to 0 and less than or equal to 255",
+      "If the IP address is valid, the list of four decimal numbers separated by \".\" constituting the IP address is returned; otherwise, an empty list is returned",
+      "If the IP address is valid, return the binary form of the IP address; otherwise, return ''"
+    ]
+  },
+  {
+    "filename": "IPUtil.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      8,
+      20,
+      32
+    ],
+    "comments": [
+      "# This is a class as tool for ip that can be used to obtain the local IP address, validate its validity, and also provides the functionality to retrieve the corresponding hostname.",
+      "Check if the given IP address is a valid IPv4 address.",
+      "Check if the given IP address is a valid IPv6 address.",
+      "Get the hostname associated with the given IP address."
+    ]
+  },
+  {
+    "filename": "ImageProcessor.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      6,
+      10,
+      16,
+      23,
+      30,
+      37
+    ],
+    "comments": [
+      "# This is a class to process image, including loading, saving, resizing, rotating, and adjusting the brightness of images.",
+      "Initialize self.image",
+      "Use Image util in PIL to open a image",
+      "Save image to a path if image has opened",
+      "Risize the image if image has opened.",
+      "rotate image if image has opened",
+      "Adjust the brightness of image if image has opened."
+    ]
+  },
+  {
+    "filename": "Interpolation.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      7,
+      22
+    ],
+    "comments": [
+      "# This is a class that implements the Linear interpolation operation of one-dimensional and two-dimensional data",
+      "Linear interpolation of one-dimensional data",
+      "Linear interpolation of two-dimensional data"
+    ]
+  },
+  {
+    "filename": "JSONProcessor.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      7,
+      21,
+      33
+    ],
+    "comments": [
+      "# This is a class to process JSON file, including reading and writing JSON files, as well as processing JSON data by removing a specified key from the JSON object.",
+      "Read a JSON file and return the data.",
+      "Write data to a JSON file and save it to the given path.",
+      "read a JSON file and process the data by removing a specified key and rewrite the modified data back to the file."
+    ]
+  },
+  {
+    "filename": "JobMarketplace.txt",
+    "all_tokens": 25,
+    "comment_tokens": [
+      0,
+      7,
+      16,
+      23,
+      31,
+      38,
+      49
+    ],
+    "comments": [
+      "# This is a class that provides functionalities to publish positions, remove positions, submit resumes, withdraw resumes, search for positions, and obtain candidate information.",
+      "This function is used to publish positions,and add the position information to the job_listings list.",
+      "This function is used to remove positions,and remove the position information from the job_listings list.",
+      "This function is used to submit resumes,and add the resume information to the resumes list.",
+      "This function is used to withdraw resumes,and remove the resume information from the resumes list.",
+      "This function is used to search for positions,and return the position information that meets the requirements.",
+      "This function is used to obtain candidate information,and return the candidate information that meets the requirements by calling the matches_requirements function."
+    ]
+  },
+  {
+    "filename": "KappaCalculator.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      8,
+      26
+    ],
+    "comments": [
+      "# This is a class as KappaCalculator, supporting to calculate Cohen's and Fleiss' kappa coefficient.",
+      "Calculate the cohens kappa value of a k-dimensional matrix",
+      "Calculate the fliss kappa value of an N * k matrix"
+    ]
+  },
+  {
+    "filename": "Lemmatization.txt",
+    "all_tokens": 14,
+    "comment_tokens": [
+      0,
+      13,
+      17,
+      38,
+      51
+    ],
+    "comments": [
+      "# This is a class about Lemmatization, which utilizes the nltk library to perform lemmatization and part-of-speech tagging on sentences, as well as remove punctuation.",
+      "creates a WordNetLemmatizer object and stores it in the self.lemmatizer member variable.",
+      "Remove punctuations of the sentence and tokenizes the input sentence, mark the part of speech tag of each word,\n        lemmatizes the words with different parameters based on their parts of speech, and stores in a list.",
+      "Remove punctuations of the sentence and tokenizes the input sentence, mark the part of speech tag of each word.",
+      "Removes punctuation from the input text."
+    ]
+  },
+  {
+    "filename": "LongestWord.txt",
+    "all_tokens": 8,
+    "comment_tokens": [
+      0,
+      8,
+      12,
+      17
+    ],
+    "comments": [
+      "# This is a class allows to add words to a list and find the longest word in a given sentence by comparing the words with the ones in the word list.",
+      "Initialize a list of word.",
+      "append the input word into self.word_list",
+      "Remove punctuation marks and split a sentence into a list of word. Find the longest splited word that is in the self.word_list.\n        Words are strictly case sensitive."
+    ]
+  },
+  {
+    "filename": "MahjongConnect.txt",
+    "all_tokens": 22,
+    "comment_tokens": [
+      0,
+      6,
+      14,
+      21,
+      49,
+      77,
+      87
+    ],
+    "comments": [
+      "# MahjongConnect is a class representing a game board for Mahjong Connect with features like creating the board, checking valid moves, finding paths, removing icons, and checking if the game is over.",
+      "initialize the board size and the icon list, create the game board",
+      "create the game board with the given board size and icons",
+      "check if the move of two icons is valid (i.e. positions are within the game board range, the two positions are not the same, the two positions have the same icon, and there is a valid path between the two positions)",
+      "check if there is a path between two icons",
+      "remove the connected icons on the game board",
+      "Check if the game is over (i.e., if there are no more icons on the game board)"
+    ]
+  },
+  {
+    "filename": "Manacher.txt",
+    "all_tokens": 10,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      19
+    ],
+    "comments": [
+      "#This is a class that implements a manacher algorithm to find the Longest palindromic substring in a given string.",
+      "Initializes the Manacher class with the given input_string.",
+      "Recursively calculates the length of the palindromic substring based on a given center, difference value, and input string.",
+      "Finds the longest palindromic substring in the given string."
+    ]
+  },
+  {
+    "filename": "MetricsCalculator.txt",
+    "all_tokens": 22,
+    "comment_tokens": [
+      0,
+      3,
+      10,
+      25,
+      35,
+      45,
+      57
+    ],
+    "comments": [
+      "# The class calculates precision, recall, F1 score, and accuracy based on predicted and true labels.",
+      "Initialize the number of all four samples to 0",
+      "Update the number of all four samples(true_positives, false_positives, false_negatives, true_negatives)",
+      "Calculate precision",
+      "Calculate recall",
+      "Calculate f1 score, which is the harmonic mean of precision and recall",
+      "Calculate accuracy"
+    ]
+  },
+  {
+    "filename": "MetricsCalculator2.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      10,
+      57
+    ],
+    "comments": [
+      "# The class provides to calculate Mean Reciprocal Rank (MRR) and Mean Average Precision (MAP) based on input data, where MRR measures the ranking quality and MAP measures the average precision.",
+      "compute the MRR of the input data. MRR is a widely used evaluation index. It is the mean of reciprocal rank.",
+      "compute the MAP of the input data. MAP is a widely used evaluation index. It is the mean of AP (average precision)."
+    ]
+  },
+  {
+    "filename": "MinesweeperGame.txt",
+    "all_tokens": 16,
+    "comment_tokens": [
+      0,
+      5,
+      14,
+      51,
+      58,
+      68
+    ],
+    "comments": [
+      "# This is a class that implements mine sweeping games including minesweeping and winning judgment.",
+      "Initializes the MinesweeperGame class with the size of the board and the number of mines.",
+      "Generates a minesweeper map with the given size of the board and the number of mines,the given parameter n is the size of the board,the size of the board is n*n,the parameter k is the number of mines,'X' represents the mine,other numbers represent the number of mines around the position.",
+      "Generates a player map with the given size of the board, the given parameter n is the size of the board,the size of the board is n*n,the parameter k is the number of mines,'-' represents the unknown position.",
+      "Checks whether the player has won the game,if there are just mines in the player map,return True,otherwise return False.",
+      "Sweeps the given position."
+    ]
+  },
+  {
+    "filename": "MovieBookingSystem.txt",
+    "all_tokens": 14,
+    "comment_tokens": [
+      0,
+      6,
+      11,
+      24,
+      40
+    ],
+    "comments": [
+      "# this is a class as movie booking system, which allows to add movies, book tickets and check the available movies within a given time range. ",
+      "Initialize movies contains the information about movies",
+      "Add a new movie into self.movies",
+      "Book tickets for a movie. Change the seats value in self.movies if book successfully.",
+      "Get a list of available movies within the specified time range"
+    ]
+  },
+  {
+    "filename": "MovieTicketDB.txt",
+    "all_tokens": 15,
+    "comment_tokens": [
+      0,
+      6,
+      13,
+      27,
+      37,
+      48
+    ],
+    "comments": [
+      "# This is a class for movie database operations, which allows for inserting movie information, searching for movie information by name, and deleting movie information by name.",
+      "Initializes the MovieTicketDB object with the specified database name.",
+      "Creates a \"tickets\" table in the database if it does not exist already.Fields include ID of type int, movie name of type str, theater name of type str, seat number of type str, and customer name of type str",
+      "Inserts a new ticket into the \"tickets\" table.",
+      "Searches for tickets in the \"tickets\" table by customer name.",
+      "Deletes a ticket from the \"tickets\" table by ticket ID."
+    ]
+  },
+  {
+    "filename": "MusicPlayer.txt",
+    "all_tokens": 27,
+    "comment_tokens": [
+      0,
+      3,
+      9,
+      15,
+      24,
+      33,
+      43,
+      57,
+      71,
+      81
+    ],
+    "comments": [
+      "# This is a class as a music player that provides to play, stop, add songs, remove songs, set volume, shuffle, and switch to the next or previous song.",
+      "Initializes the music player with an empty playlist, no current song, and a default volume of 50.",
+      "Adds a song to the playlist.",
+      "Removes a song from the playlist.",
+      "Plays the current song in the playlist.",
+      "Stops the current song in the playlist.",
+      "Switches to the next song in the playlist.",
+      "Switches to the previous song in the playlist.",
+      "Sets the volume of the music player,ifthe volume is between 0 and 100 is valid.",
+      "Shuffles the playlist."
+    ]
+  },
+  {
+    "filename": "NLPDataProcessor.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      4,
+      11,
+      25
+    ],
+    "comments": [
+      "# The class processes NLP data by removing stop words from a list of strings using a pre-defined stop word list.",
+      "Construct a stop word list including 'a', 'an', 'the'.",
+      "Remove all the stop words from the list of strings.",
+      "Construct a stop word list including 'a', 'an', 'the', and remove all the stop words from the list of strings."
+    ]
+  },
+  {
+    "filename": "NLPDataProcessor2.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      7,
+      21,
+      33
+    ],
+    "comments": [
+      "# The class processes NLP data by extracting words from a list of strings, calculating the frequency of each word, and returning the top 5 most frequent words.",
+      "keep only English letters and spaces in the string, then convert the string to lower case, and then split the string into a list of words.",
+      "Calculate the word frequency of each word in the list of words list, and sort the word frequency dictionary by value in descending order.",
+      "keep only English letters and spaces in the string, then convert the string to lower case, and then split the string into a list of words. Calculate the word frequency of each word in the list of words list, and sort the word frequency dictionary by value in descending order.\n"
+    ]
+  },
+  {
+    "filename": "NumberConverter.txt",
+    "all_tokens": 25,
+    "comment_tokens": [
+      0,
+      4,
+      13,
+      22,
+      31,
+      40,
+      49
+    ],
+    "comments": [
+      "# The class allows to convert  decimal to binary, octal and hexadecimal repectively and contrarily",
+      "Convert a number from decimal format to binary format.",
+      "Convert a number from binary format to decimal format.",
+      "Convert a number from decimal format to octal format.",
+      "Convert a number from octal format to decimal format.",
+      "Convert a number from decimal format to hex format.",
+      "Convert a number from hex format to decimal format."
+    ]
+  },
+  {
+    "filename": "NumberWordFormatter.txt",
+    "all_tokens": 22,
+    "comment_tokens": [
+      0,
+      3,
+      13,
+      23,
+      51,
+      66,
+      78
+    ],
+    "comments": [
+      "# This is a class that provides to convert numbers into their corresponding English word representation, including handling the conversion of both the integer and decimal parts, and incorporating appropriate connectors and units.\n",
+      "Initialize NumberWordFormatter object.",
+      "Converts a number into words format",
+      "Converts a string representation of a number into words format",
+      "Converts a two-digit number into words format",
+      "Converts a three-digit number into words format",
+      "Parses the thousand/million/billion suffix based on the index"
+    ]
+  },
+  {
+    "filename": "NumericEntityUnescaper.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      6,
+      48
+    ],
+    "comments": [
+      "# This is a class that provides functionality to replace numeric entities with their corresponding characters in a given string.",
+      "Replaces numeric character references (HTML entities) in the input string with their corresponding Unicode characters.",
+      "Determines whether a given character is a hexadecimal digit."
+    ]
+  },
+  {
+    "filename": "OrderManagement.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      4,
+      14,
+      29,
+      38
+    ],
+    "comments": [
+      "# The class manages restaurant orders by allowing the addition of dishes, calculation of the total cost, and checkout.",
+      "Initialize the order management system\n        self.menu stores the dishes of resturant inventory\n        menu = [{\"dish\": dish name, \"price\": price, \"count\": count}, ...]\n        self.selected_dishes stores the dished selected by customer\n        selected_dish = {\"dish\": dish name, \"count\": count, price: price}\n        self.sales stores the sales of each dish\n        sales = {dish name: sales}",
+      "Check the self.menu and add into self.selected_dish if the dish count is valid.\n        And if the dish has successfully been added, change the count in self.menu.",
+      "Calculate the total price of dishes that have been ordered. Multiply the count, price and sales.",
+      "Check out the dished ordered. IF the self.selected_dishes is not empty, invoke the calculate_total\n        method to check out."
+    ]
+  },
+  {
+    "filename": "PDFHandler.txt",
+    "all_tokens": 9,
+    "comment_tokens": [
+      0,
+      6,
+      12,
+      31
+    ],
+    "comments": [
+      "# The class allows merging multiple PDF files into one and extracting text from PDFs using PyPDF2 library.",
+      "takes a list of file paths filepaths as a parameter.\n        It creates a list named readers using PyPDF2, where each reader opens a file from the given paths.",
+      "Read files in self.readers which stores handles to multiple PDF files.\n        Merge them to one pdf and update the page number, then save in disk.",
+      "Extract text from pdf files in self.readers"
+    ]
+  },
+  {
+    "filename": "PageUtil.txt",
+    "all_tokens": 15,
+    "comment_tokens": [
+      0,
+      3,
+      11,
+      23,
+      46
+    ],
+    "comments": [
+      "# PageUtil class is a versatile utility for handling pagination and search functionalities in an efficient and convenient manner.",
+      "Initialize the PageUtil object with the given data and page size.",
+      "Retrieve a specific page of data.",
+      "Retrieve information about a specific page.",
+      "Search for items in the data that contain the given keyword."
+    ]
+  },
+  {
+    "filename": "PersonRequest.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      3,
+      10,
+      20,
+      28
+    ],
+    "comments": [
+      "# This class validates input personal information data and sets invalid fields to None based to specific rules.",
+      "Initialize PersonRequest object with the provided information.",
+      "Validate the name and return it. If name is empty or exceeds 33 characters in length, set to None.",
+      "Validate the sex and return it. If sex is not Man, Woman, or UGM, set to None.",
+      "Validate the phone number and return it. If phoneNumber is empty or not an 11 digit number, set to None."
+    ]
+  },
+  {
+    "filename": "PushBoxGame.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      3,
+      17,
+      31,
+      43
+    ],
+    "comments": [
+      "# This class implements a functionality of a sokoban game, where the player needs to move boxes to designated targets in order to win.",
+      "Initialize the push box game with the map and various attributes.",
+      "Initialize the game by setting the positions of the player, targets, and boxes based on the map.",
+      "Check if the game is won. The game is won when all the boxes are placed on target positions.\n        And update the value of self.is_game_over.",
+      "Move the player based on the specified direction and check if the game is won."
+    ]
+  },
+  {
+    "filename": "RPGCharacter.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      3,
+      13,
+      20,
+      29,
+      41,
+      53
+    ],
+    "comments": [
+      "# The class represents a role-playing game character, which allows to attack other characters, heal, gain experience, level up, and check if the character is alive.",
+      "Initialize an RPG character object.",
+      "Attack another character. The damage caused needs to offset the defense value.",
+      "Heal the character with 10 hp and the max hp is 100.",
+      "Gain experience points for the character and level_up when the exp has reached the values that is 100 times the current level\n        The experience that overflows should be used to calculate the next leve up untill exhausts",
+      "Level up the character and return to zero experience points, increase hp by 20 points, attack power and defense points by 5 points.\n        max level is 100",
+      "Check if player is alive."
+    ]
+  },
+  {
+    "filename": "RegexUtils.txt",
+    "all_tokens": 38,
+    "comment_tokens": [
+      0,
+      7,
+      18,
+      25,
+      32,
+      39,
+      46,
+      53,
+      60,
+      68,
+      76
+    ],
+    "comments": [
+      "# The class provides to match, find all occurrences, split, and substitute text using regular expressions. It also includes predefined patterns, validating phone numbers and extracting email addresses.",
+      "Check if the text matches the regular expression",
+      "Find all matching substrings and return a list of all matching substrings",
+      "Split text based on regular expression patterns and return a list of substrings",
+      "Replace the substring matched by a regular expression with the specified string",
+      "Generate regular expression patterns that match email addresses",
+      "Generate regular expression patterns that match phone numbers",
+      "Generate regular expression patterns that match the middle characters of two sentences",
+      "Split the text into a list of sentences without Punctuation except the last sentence",
+      "Verify if the phone number is valid",
+      "Extract all email addresses from the text"
+    ]
+  },
+  {
+    "filename": "SQLGenerator.txt",
+    "all_tokens": 27,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      22,
+      32,
+      41,
+      49,
+      57
+    ],
+    "comments": [
+      "# This class generates SQL statements for common operations on a table, such as SELECT, INSERT, UPDATE, and DELETE.",
+      "Initialize the table name.",
+      "Generates a SELECT SQL statement based on the specified fields and conditions.",
+      "Generates an INSERT SQL statement based on the given data.",
+      "Generates an UPDATE SQL statement based on the given data and condition.",
+      "Generates a DELETE SQL statement based on the given condition.",
+      "Generates a SQL statement to select females under a specified age.",
+      "Generates a SQL statement to select records within a specified age range."
+    ]
+  },
+  {
+    "filename": "SQLQueryBuilder.txt",
+    "all_tokens": 16,
+    "comment_tokens": [
+      0,
+      5,
+      18,
+      28,
+      39
+    ],
+    "comments": [
+      "# This class provides to build SQL queries, including SELECT, INSERT, UPDATE, and DELETE statements. ",
+      "Generate the SELECT SQL statement from the given parameters.",
+      "Generate the INSERT SQL statement from the given parameters.",
+      "Generate the DELETE SQL statement from the given parameters.",
+      "Generate the UPDATE SQL statement from the given parameters."
+    ]
+  },
+  {
+    "filename": "Server.txt",
+    "all_tokens": 22,
+    "comment_tokens": [
+      0,
+      4,
+      10,
+      21,
+      32,
+      47,
+      56
+    ],
+    "comments": [
+      "# This is a class as a server, which handles a white list, message sending and receiving, and information display.",
+      "Initialize the whitelist as an empty list, and initialize the sending and receiving information as an empty dictionary",
+      "Add an address to the whitelist and do nothing if it already exists",
+      "Remove an address from the whitelist and do nothing if it does not exist",
+      "Receive information containing address and content. If the address is on the whitelist, receive the content; otherwise, do not receive it",
+      "Send information containing address and content",
+      "Returns struct of the specified type"
+    ]
+  },
+  {
+    "filename": "ShoppingCart.txt",
+    "all_tokens": 16,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      17,
+      27,
+      33
+    ],
+    "comments": [
+      "# The class manages items, their prices, quantities, and allows to for add, removie, view items, and calculate the total price.",
+      "Initialize the items representing the shopping list as an empty dictionary",
+      "Add item information to the shopping list items, including price and quantity. The default quantity is 1",
+      "Subtract the specified quantity of item from the shopping list items",
+      "Return the current shopping list items",
+      "Calculate the total price of all items in the shopping list, which is the quantity of each item multiplied by the price"
+    ]
+  },
+  {
+    "filename": "SignInSystem.txt",
+    "all_tokens": 20,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      18,
+      29,
+      42,
+      51
+    ],
+    "comments": [
+      "# This is a class as sigin in system, including adding users, signing in/out, checking sign-in status, and retrieving signed-in/not signed-in users.",
+      "Initialize the sign-in system.",
+      "Add a user to the sign-in system if the user wasn't in the self.users.\n        And the initial state is False.",
+      "Sign in a user if the user was in the self.users and change the state to True.",
+      "Check if a user is signed in.",
+      "Check if all users are signed in.",
+      "Get a list of usernames that are not signed in."
+    ]
+  },
+  {
+    "filename": "Snake.txt",
+    "all_tokens": 15,
+    "comment_tokens": [
+      0,
+      6,
+      17,
+      40,
+      47,
+      56
+    ],
+    "comments": [
+      "# The class is a snake game, with allows snake to move and eat food, and also enables to reset, and generat a random food position.",
+      "Initialize the length of the snake, screen width, screen height, block size, snake head position, score, and food position.",
+      "Move the snake in the specified direction. If the new position of the snake's head is equal to the position of the food, then eat the food; If the position of the snake's head is equal to the position of its body, then start over, otherwise its own length plus one.",
+      "Randomly generate a new food position, but don't place it on the snake.",
+      "Reset the snake to its initial state. Set the length to 1, the snake head position to ((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2)), the score to 0, and randomly generate new food position.",
+      "Increase the length of the snake by 1 and increase the score by 100. Randomly generate a new food position, but\n        don't place it on the snake."
+    ]
+  },
+  {
+    "filename": "SplitSentence.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      7,
+      15,
+      24
+    ],
+    "comments": [
+      "# The class allows to split sentences, count words in a sentence, and process a text file to find the maximum word count.",
+      "Split a string into a list of sentences. Sentences end with . or ? and with a space after that. Please note that Mr. also end with . but are not sentences.",
+      "Count the number of words in a sentence. Note that words are separated by spaces and that punctuation marks and numbers are not counted as words.",
+      "Given a text, return the number of words in the longest sentence"
+    ]
+  },
+  {
+    "filename": "Statistics3.txt",
+    "all_tokens": 29,
+    "comment_tokens": [
+      0,
+      5,
+      18,
+      31,
+      46,
+      56,
+      73,
+      86
+    ],
+    "comments": [
+      "# This is a class that implements methods for calculating indicators such as median, mode, correlation matrix, and Z-score in statistics.",
+      "calculates the median of the given list.",
+      "calculates the mode of the given list.",
+      "calculates the correlation of the given list.",
+      "calculates the mean of the given list.",
+      "calculates the correlation matrix of the given list.",
+      "calculates the standard deviation of the given list.",
+      "calculates the z-score of the given list."
+    ]
+  },
+  {
+    "filename": "StockPortfolioTracker.txt",
+    "all_tokens": 26,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      19,
+      31,
+      43,
+      53,
+      62,
+      73
+    ],
+    "comments": [
+      "# This is a class as StockPortfolioTracker that allows to add stocks, remove stocks, buy stocks, sell stocks, calculate the total value of the portfolio, and obtain a summary of the portfolio.",
+      "Initialize the StockPortfolioTracker class with a cash balance and an empty portfolio.",
+      "Add a stock to the portfolio.",
+      "Remove a stock from the portfolio.",
+      "Buy a stock and add it to the portfolio.",
+      "Sell a stock and remove it from the portfolio and add the cash to the cash balance.",
+      "Calculate the total value of the portfolio.",
+      "Get a summary of the portfolio.",
+      "Get the value of a stock."
+    ]
+  },
+  {
+    "filename": "StudentDatabaseProcessor.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      7,
+      12,
+      33,
+      51,
+      67
+    ],
+    "comments": [
+      "# This is a class with database operation, including inserting student information, searching for student information by name, and deleting student information by name.",
+      "Initializes the StudentDatabaseProcessor object with the specified database name.",
+      "Creates a \"students\" table in the database if it does not exist already.Fields include ID of type int, name of type str, age of type int, gender of type str, and grade of type int\n",
+      "Inserts a new student into the \"students\" table.",
+      "Searches for a student in the \"students\" table by their name.",
+      "Deletes a student from the \"students\" table by their name."
+    ]
+  },
+  {
+    "filename": "TextFileProcessor.txt",
+    "all_tokens": 14,
+    "comment_tokens": [
+      0,
+      6,
+      11,
+      20,
+      27,
+      34
+    ],
+    "comments": [
+      "# The class handles reading, writing, and processing text files. It can read the file as JSON, read the raw text, write content to the file, and process the file by removing non-alphabetic characters.",
+      "Initialize the file path.",
+      "Read the self.file_path file as json format.\n        if the file content doesn't obey json format, the code will raise error.",
+      "Read the return the content of self.file_path file.",
+      "Write content into the self.file_path file, and overwrite if the file has already existed.",
+      "Read the self.file_path file and filter out non-alphabetic characters from the content string.\n        Overwrite the after-processed data into the same self.file_path file."
+    ]
+  },
+  {
+    "filename": "Thermostat.txt",
+    "all_tokens": 22,
+    "comment_tokens": [
+      0,
+      5,
+      12,
+      18,
+      24,
+      29,
+      38,
+      46,
+      63
+    ],
+    "comments": [
+      "# The class manages temperature control, including setting and retrieving the target temperature, adjusting the mode, and simulating temperature operation.",
+      "initialize instances of the Thermostat class, including the current temperature, target temperature, and operating mode.",
+      "Get the target temperature of an instance of the Thermostat class.",
+      "Set the target temperature",
+      "Get the current work mode",
+      "Get the current work mode",
+      "Automatically set the operating mode by comparing with the current temperature and target temperature. If the current temperature is lower than the target temperature, the operating mode is set to 'heat', otherwise it is set to 'cool'.",
+      "Check if there is a conflict between the operating mode and the relationship between the current temperature and the target temperature.\n        If there is a conflict, the operating mode will be adjusted automatically.",
+      "simulate the operation of Thermostat. It will automatically start the auto_set_mode method to set the operating mode,\n        and then automatically adjust the current temperature according to the operating mode until the target temperature is reached."
+    ]
+  },
+  {
+    "filename": "TicTacToe.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      20,
+      36
+    ],
+    "comments": [
+      "# The class represents a game of Tic-Tac-Toe and its functions include making a move on the board, checking for a winner, and determining if the board is full.",
+      "Initialize a 3x3 game board with all empty spaces and current symble player, default is 'X'.",
+      "Place the current player's mark at the specified position on the board and switch the mark.",
+      "Check if there is a winner on the board in rows, columns and diagonals three directions",
+      "Check if the game board is completely filled."
+    ]
+  },
+  {
+    "filename": "TimeUtils.txt",
+    "all_tokens": 27,
+    "comment_tokens": [
+      0,
+      7,
+      11,
+      18,
+      25,
+      34,
+      41,
+      48,
+      56
+    ],
+    "comments": [
+      "# This is a time util class, including getting the current time and date, adding seconds to a datetime, converting between strings and datetime objects, calculating the time difference in minutes, and formatting a datetime object.",
+      "Get the current datetime",
+      "Return the current time in the format of '%H:%M:%S'",
+      "Return the current date in the format of \"%Y-%m-%d\"",
+      "Add the specified number of seconds to the current time",
+      "Convert the time string to a datetime instance",
+      "Convert a datetime instance to a string",
+      "Calculate how many minutes have passed between two times, and round the results to the nearest",
+      "get format time"
+    ]
+  },
+  {
+    "filename": "TriCalculator.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      10,
+      17,
+      28,
+      44,
+      60
+    ],
+    "comments": [
+      "# The class allows to calculate trigonometric values, including cosine, sine, and tangent, using Taylor series approximations.",
+      "Calculate the cos value of the x-degree angle",
+      "Calculate the factorial of a",
+      "Finding the n-order Taylor expansion value of cos (x/180 * pi)",
+      "Calculate the sin value of the x-degree angle",
+      "Calculate the tan value of the x-degree angle"
+    ]
+  },
+  {
+    "filename": "TwentyFourPointGame.txt",
+    "all_tokens": 13,
+    "comment_tokens": [
+      0,
+      9,
+      15,
+      23,
+      48
+    ],
+    "comments": [
+      "# This ia a game of twenty-four points, which provides to generate four numbers and check whether player's expression is equal to 24.",
+      "Generate random numbers between 1 and 9 for the cards.",
+      "Get a list of four random numbers between 1 and 9 representing the player's cards.",
+      "Check if a given mathematical expression using the cards can evaluate to 24.",
+      "Evaluate a mathematical expression and check if the result is 24."
+    ]
+  },
+  {
+    "filename": "URLHandler.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      3,
+      7,
+      16,
+      29,
+      41,
+      60
+    ],
+    "comments": [
+      "# The class supports to handle URLs, including extracting the scheme, host, path, query parameters, and fragment.",
+      "Initialize URLHandler's URL",
+      "get the scheme of the URL",
+      "Get the second part of the URL, which is the host domain name",
+      "Get the third part of the URL, which is the address of the resource",
+      "Get the request parameters for the URL",
+      "Get the fragment after '#' in the URL"
+    ]
+  },
+  {
+    "filename": "UrlPath.txt",
+    "all_tokens": 12,
+    "comment_tokens": [
+      0,
+      6,
+      11,
+      17,
+      33
+    ],
+    "comments": [
+      "# The  class is a utility for encapsulating and manipulating the path component of a URL, including adding nodes, parsing path strings, and building path strings with optional encoding.\n",
+      "Initializes the UrlPath object with an empty list of segments and a flag indicating the presence of an end tag.",
+      "Adds a segment to the list of segments in the UrlPath.",
+      "Parses a given path string and populates the list of segments in the UrlPath.",
+      "Fixes the given path string by removing leading and trailing slashes."
+    ]
+  },
+  {
+    "filename": "UserLoginDB.txt",
+    "all_tokens": 19,
+    "comment_tokens": [
+      0,
+      6,
+      12,
+      23,
+      34,
+      44
+    ],
+    "comments": [
+      "# This is a database management class for user login verification, providing functions for inserting user information, searching user information, deleting user information, and validating user login.\n",
+      "Initializes the UserLoginDB object with the specified database name.",
+      "Inserts a new user into the \"users\" table.",
+      "Searches for users in the \"users\" table by username.",
+      "Deletes a user from the \"users\" table by username.",
+      "Determine whether the user can log in, that is, the user is in the database and the password is correct"
+    ]
+  },
+  {
+    "filename": "VectorCalculator.txt",
+    "all_tokens": 17,
+    "comment_tokens": [
+      0,
+      9,
+      17,
+      29,
+      41
+    ],
+    "comments": [
+      "# The class provides vector operations, including calculating similarity, cosine similarities, average similarity, and IDF weights.",
+      "Compute the cosine similarity between one vector and another vector.",
+      "Compute cosine similarities between one vector and a set of other vectors.",
+      "Compute cosine similarity between two sets of vectors.",
+      "Calculate log(total_num+1/count+1) for each count in number_dict"
+    ]
+  },
+  {
+    "filename": "VendingMachine.txt",
+    "all_tokens": 21,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      16,
+      24,
+      40,
+      51
+    ],
+    "comments": [
+      "# This is a class to simulate a vending machine, including adding products, inserting coins, purchasing products, viewing balance, replenishing product inventory, and displaying product information.",
+      "Initializes the vending machine's inventory and balance.",
+      "Adds a product to the vending machine's inventory.",
+      "Inserts coins into the vending machine.",
+      "Purchases a product from the vending machine and returns the balance after the purchase and display purchase unsuccessful if the product is out of stock.",
+      "Replenishes the inventory of a product already in the vending machine.",
+      "Displays the products in the vending machine."
+    ]
+  },
+  {
+    "filename": "Warehouse.txt",
+    "all_tokens": 23,
+    "comment_tokens": [
+      0,
+      3,
+      8,
+      17,
+      23,
+      33,
+      44,
+      54
+    ],
+    "comments": [
+      "# The class manages inventory and orders, including adding products, updating product quantities, retrieving product quantities, creating orders, changing order statuses, and tracking orders.",
+      "Initialize two fields.\n        self.inventory is a dict that stores the products.\n        self.inventory = {Product ID: Product}\n        self.orders is a dict that stores the products in a order.\n        self.orders = {Order ID: Order}",
+      "Add product to inventory and plus the quantity if it has existed in inventory.\n        Or just add new product to dict otherwise.",
+      "According to product_id, add the quantity to the corresponding product in inventory.",
+      "Get the quantity of specific product by product_id.",
+      "Create a order which includes the infomation of product, like id and quantity.\n        And put the new order into self.orders.\n        The default value of status is 'Shipped'.",
+      "Change the status of order if the input order_id is in self.orders.",
+      "Get the status of specific order."
+    ]
+  },
+  {
+    "filename": "WeatherSystem.txt",
+    "all_tokens": 16,
+    "comment_tokens": [
+      0,
+      3,
+      10,
+      29,
+      36,
+      42
+    ],
+    "comments": [
+      "# This is a class representing a weather system that provides functionality to query weather information for a specific city and convert temperature units between Celsius and Fahrenheit.",
+      "Initialize the weather system with a city name.",
+      "Query the weather system for the weather and temperature of the city,and convert the temperature units based on the input parameter.",
+      "Set the city of the weather system.",
+      "Convert the temperature from Celsius to Fahrenheit.",
+      "Convert the temperature from Fahrenheit to Celsius."
+    ]
+  },
+  {
+    "filename": "Words2Numbers.txt",
+    "all_tokens": 10,
+    "comment_tokens": [
+      0,
+      4,
+      26,
+      65
+    ],
+    "comments": [
+      "# The class provides a text-to-number conversion utility, allowing conversion of written numbers (in words) to their numerical representation.",
+      "Initialize the word lists and dictionaries required for conversion",
+      "Convert the word string to the corresponding integer string",
+      "Check if the input text contains only valid words that can be converted into numbers."
+    ]
+  },
+  {
+    "filename": "XMLProcessor.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      6,
+      12,
+      23,
+      35,
+      45
+    ],
+    "comments": [
+      "# This is a class as XML files handler, including reading, writing, processing as well as finding elements in a XML file.",
+      "Initialize the XMLProcessor object with the given file name.",
+      "Reads the XML file and returns the root element.",
+      "Writes the XML data to the specified file.",
+      "Modifies the data in XML elements and writes the updated XML data to a new file.",
+      "Finds the XML elements with the specified name."
+    ]
+  },
+  {
+    "filename": "ZipFileProcessor.txt",
+    "all_tokens": 18,
+    "comment_tokens": [
+      0,
+      6,
+      11,
+      21,
+      33,
+      45
+    ],
+    "comments": [
+      "# This is a compressed file processing class that provides the ability to read and decompress compressed files",
+      "Initialize file name",
+      "Get open file object",
+      "Extract all zip files and place them in the specified path",
+      "Extract the file with the specified name from the zip file and place it in the specified path",
+      "Compress the specified file list into a zip file and place it in the specified path"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+ # Add a new row to an existing NumPy array in an efficient way using np.vstack().
+
+import numpy as np
+
+def add_row_to_arr(arr, row):
+    """
+    Add a new row to an existing NumPy array.
+
+    Parameters:
+    arr (numpy.ndarray): The NumPy array to add a new row to.
+    row (list or numpy.ndarray): The new row to be added.
+
+    Returns:
+    numpy.ndarray: The updated NumPy array with the new row added.
+    """
+    # Ensure that the input row is a NumPy array with the same shape as the existing array.
+    if not isinstance(row, np.ndarray) or row.shape[0]!= arr.shape[1]:
+        row = np.array(row)
+
+    # Add the new row to the existing array using np.vstack().
+    return np.vstack((arr, row))

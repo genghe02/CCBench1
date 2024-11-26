@@ -1,0 +1,1 @@
+# Convert the numpy array 'a' to a string by joining each element with a space in between.

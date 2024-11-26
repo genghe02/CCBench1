@@ -1,0 +1,6 @@
+ # Add a new column 'C' to the DataFrame by element-wise adding the values of columns 'A' and 'B'.
+
+# Use pandas vectorized operations to perform the addition efficiently.
+# This operation does not involve comparing elements with their neighbors, so no need for numpy's np.where function.
+
+# The resulting DataFrame will have three columns: 'A', 'B', and 'C'.

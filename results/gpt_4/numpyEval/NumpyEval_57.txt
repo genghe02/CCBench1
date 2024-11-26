@@ -1,0 +1,1 @@
+# The requirement for this code is to repeat each even number in the array 'a' for 'n' times. np.repeat(a[cond], n) is used to create a new array that repeats each of the even elements in 'a' for 'n' times.

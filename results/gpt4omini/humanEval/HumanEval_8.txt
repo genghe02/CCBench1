@@ -1,0 +1,25 @@
+```python
+from typing import List, Tuple
+
+def sum_product(numbers: List[int]) -> Tuple[int, int]:
+    # Calculate the sum and product of a list of integers.
+    # The function iterates through the list, summing the values and multiplying them.
+    # 
+    # :param numbers: List[int], a list of integers to be summed and multiplied.
+    # :return: Tuple[int, int], a tuple containing the sum and the product of the integers.
+    # 
+    # Example test cases:
+    # >>> sum_product([1, 2, 3])
+    # (6, 6)  # sum is 1+2+3=6, product is 1*2*3=6
+    # >>> sum_product([0, 1, 2])
+    # (3, 0)  # sum is 0+1+2=3, product is 0*1*2=0
+    # >>> sum_product([-1, 1, 2])
+    # (2, -2)  # sum is -1+1+2=2, product is -1*1*2=-2
+    sum_value = 0
+    prod_value = 1
+
+    for n in numbers:
+        sum_value += n
+        prod_value *= n
+    return sum_value, prod_value
+```

@@ -1,0 +1,11 @@
+{
+  "response body": {
+    "error": {
+      "message": "Server not responding, please try in New Conversation or report to \u79d1\u5927Go Mini Programs - Repair.",
+      "type": "one_api_error",
+      "param": "",
+      "code": "api_resp"
+    }
+  },
+  "test_case_name": "HumanEval_74.txt"
+}

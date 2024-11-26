@@ -1,0 +1,7 @@
+
+df = pd.DataFrame({'Name':['Juda','Pri']})
+emails = {'a@a.com','b@b.com'}
+df['Email'] = ''
+df.Email = df.Email.astype(object)
+# Assign the list of emails to the 'Email' column for the first row in the dataframe.
+df.loc[0].Email = emails

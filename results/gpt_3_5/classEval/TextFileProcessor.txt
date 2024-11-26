@@ -1,0 +1,49 @@
+import json
+
+
+class TextFileProcessor:
+    # This class provides methods for reading and writing text files.
+
+    def __init__(self, file_path):
+        # Initialize the TextFileProcessor object with the file path.
+        # param file_path: str, the path to the text file to be processed
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        # Read the content of the text file as JSON format.
+        # return: dict, the data read from the file in JSON format
+        # Test cases:
+        # >>> processor = TextFileProcessor('sample.json')
+        # >>> data = processor.read_file_as_json()
+        with open(self.file_path, 'r') as file:
+            data = json.load(file)
+
+        return data
+
+    def read_file(self):
+        # Read the content of the text file as a string.
+        # return: str, the content of the file as a string
+        # Test cases:
+        # >>> processor = TextFileProcessor('sample.txt')
+        # >>> content = processor.read_file()
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write_file(self, content):
+        # Write the given content to the text file.
+        # param content: str, the content to be written to the file
+        # Test cases:
+        # >>> processor = TextFileProcessor('output.txt')
+        # >>> processor.write_file('Hello, world!')
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+    def process_file(self):
+        # Process the content of the text file by removing non-alphabetic characters.
+        # Test cases:
+        # >>> processor = TextFileProcessor('input.txt')
+        # >>> processed_content = processor.process_file()
+        content = self.read_file()
+        content = ''.join([char for char in content if char.isalpha()])
+        self.write_file(content)
+        return content

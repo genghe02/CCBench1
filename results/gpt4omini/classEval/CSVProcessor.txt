@@ -1,0 +1,51 @@
+```python
+import csv
+
+# This is a class for processing CSV files, including reading from and writing to CSV files.
+class CSVProcessor:
+
+    def __init__(self):
+        pass
+
+    def read_csv(self, file_name):
+        # Read the contents of a CSV file and return the title and data.
+        # param file_name: str, the name of the CSV file to read
+        # return: tuple, a tuple containing the title (first row) and the rest of the data
+        # >>> processor = CSVProcessor()
+        # >>> title, data = processor.read_csv('example.csv')
+        data = []
+        with open(file_name, 'r') as file:
+            reader = csv.reader(file)
+            title = next(reader)
+            for row in reader:
+                data.append(row)
+        return title, data
+
+    def write_csv(self, data, file_name):
+        # Write data to a CSV file.
+        # param data: list of lists, the data to write to the CSV file
+        # param file_name: str, the name of the CSV file to write to
+        # return: int, returns 1 if the write operation is successful, otherwise returns 0
+        # >>> processor = CSVProcessor()
+        # >>> result = processor.write_csv([['Name', 'Age'], ['Alice', '30']], 'output.csv')
+        try:
+            with open(file_name, 'w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(data)
+            return 1
+        except:
+            return 0
+
+    def process_csv_data(self, N, save_file_name):
+        # Process a specific column of CSV data by converting its contents to uppercase and saving it to a new file.
+        # param N: int, the index of the column to be processed
+        # param save_file_name: str, the name of the original CSV file to read data from
+        # return: int, returns 1 if the processing and saving operations are successful, otherwise returns 0
+        # >>> processor = CSVProcessor()
+        # >>> result = processor.process_csv_data(0, 'example.csv')
+        title, data = self.read_csv(save_file_name)
+        column_data = [row[N] for row in data]
+        column_data = [row.upper() for row in column_data]
+        new_data = [title, column_data]
+        return self.write_csv(new_data, save_file_name.split('.')[0] + '_process.csv')
+```

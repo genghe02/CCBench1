@@ -1,0 +1,21 @@
+[
+  "# This is a database management class for user login verification, providing functions for inserting user information, searching user information, deleting user information, and validating user login.\n",
+  "Initializes the UserLoginDB object with the specified database name.",
+  ":param db_name: str, the name of the SQLite database.",
+  "Inserts a new user into the \"users\" table.",
+  ":param username: str, the username of the user.\n        :param password: str, the password of the user.",
+  ":return: None",
+  ">>> user_db = UserLoginDB(\"user_database.db\")\n        >>> user_db.create_table()\n        >>> user_db.insert_user('user1', 'pass1')",
+  "Searches for users in the \"users\" table by username.",
+  ":param username: str, the username of the user to search for.",
+  ":return:list of tuples, the rows from the \"users\" table that match the search criteria.",
+  ">>> user_db = UserLoginDB(\"user_database.db\")\n        >>> user_db.create_table()\n        >>> user_db.insert_user('user1', 'pass1')\n        >>> result = user_db.search_user_by_username('user1')\n        len(result) = 1",
+  "Deletes a user from the \"users\" table by username.",
+  ":param username: str, the username of the user to delete.",
+  ":return: None",
+  ">>> user_db = UserLoginDB(\"user_database.db\")\n        >>> user_db.create_table()\n        >>> user_db.insert_user('user1', 'pass1')\n        >>> user_db.delete_user_by_username('user1')",
+  "Determine whether the user can log in, that is, the user is in the database and the password is correct",
+  ":param username:str, the username of the user to validate.\n        :param password:str, the password of the user to validate.",
+  ":return:bool, representing whether the user can log in correctly",
+  ">>> user_db = UserLoginDB(\"user_database.db\")\n        >>> user_db.create_table()\n        >>> user_db.insert_user('user1', 'pass1')\n        >>> user_db.validate_user_login('user1', 'pass1')\n        True"
+]

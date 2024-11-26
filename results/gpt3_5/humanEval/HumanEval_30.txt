@@ -1,0 +1,12 @@
+def get_positive(l: list):
+    # Filter out all positive elements from the input list.
+    # Test case 1: Input list contains positive elements only
+    assert get_positive([1, 2, 3, 4]) == [1, 2, 3, 4]
+    
+    # Test case 2: Input list contains negative and positive elements
+    assert get_positive([-1, 2, -3, 4]) == [2, 4]
+    
+    # Test case 3: Input list is empty
+    assert get_positive([]) == []
+    
+    return [e for e in l if e > 0]

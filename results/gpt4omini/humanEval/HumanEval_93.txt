@@ -1,0 +1,16 @@
+```python
+def encode(message):
+    # This function encodes a message by swapping its case and replacing vowels with the character two positions ahead in the ASCII table.
+    
+    # Test cases for the function:
+    # >>> encode("hello")        # Expected: "jCnnM"
+    # >>> encode("HELLO")        # Expected: "jCnnm"
+    # >>> encode("Python")       # Expected: "rJvJp"
+    # >>> encode("")             # Expected: ""
+    # >>> encode("12345")        # Expected: "12345"
+    
+    vowels = "aeiouAEIOU"
+    vowels_replace = dict([(i, chr(ord(i) + 2)) for i in vowels])
+    message = message.swapcase()
+    return ''.join([vowels_replace[i] if i in vowels else i for i in message])
+```

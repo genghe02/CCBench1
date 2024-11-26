@@ -1,0 +1,26 @@
+{
+  "response body": {
+    "id": "c5c83724-f4ea-4445-8e00-c136f4dcf218",
+    "object": "chat.completion",
+    "model": "gpt-4-32k",
+    "created": "2024-09-23 19:54:52",
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "```python\nimport csv\n\n# This class CSVProcessor provides methods for reading, writing, and processing CSV files.\nclass CSVProcessor:\n\n    def __init__(self):\n        pass\n\n    # This function reads a CSV file and returns its header and data.\n    # The parameter file_name is a string representing the name of the CSV file to be read.\n    # The function returns a tuple containing the title (header) of the CSV file and its data.\n    # Test case: read_csv('test.csv') should return the title and data of 'test.csv'.\n    def read_csv(self, file_name):\n        data = []\n        with open(file_name, 'r') as file:\n            reader = csv.reader(file)\n            title = next(reader)\n            for row in reader:\n                data.append(row)\n        return title, data\n\n    # This function writes a list of rows to a CSV file.\n    # The parameter data is a list of lists, where each list represents a row to be written to the CSV file.\n    # The parameter file_name is a string representing the name of the CSV file to be written.\n    # The function returns 1 if the operation is successful, and 0 otherwise.\n    # Test case: write_csv([['Name', 'Age'], ['Alice', '23'], ['Bob', '25']], 'test.csv') should create a CSV file named 'test.csv'.\n    def write_csv(self, data, file_name):\n        try:\n            with open(file_name, 'w', newline='') as file:\n                writer = csv.writer(file)\n                writer.writerows(data)\n            return 1\n        except:\n            return 0\n\n    # This function reads a CSV file, processes its data, and writes the processed data to a new CSV file.\n    # The parameter N is an integer representing the index of the column to be processed.\n    # The parameter save_file_name is a string representing the name of the CSV file to be read and processed.\n    # The function returns 1 if the operation is successful, and 0 otherwise.\n    # Test case: process_csv_data(1, 'test.csv') should create a new CSV file containing the processed data of the column at index 1 in 'test.csv'.\n    def process_csv_data(self, N, save_file_name):\n        title, data = self.read_csv(save_file_name)\n        column_data = [row[N] for row in data]\n        column_data = [row.upper() for row in column_data]\n        new_data = [title, column_data]\n        return self.write_csv(new_data, save_file_name.split('.')[0] + '_process.csv')\n```"
+        }
+      }
+    ],
+    "usage": {
+      "completion_tokens": 544,
+      "prompt_tokens": 859,
+      "total_tokens": 1403
+    },
+    "feeType": "1",
+    "consume": 0.848892
+  },
+  "test_case_name": "CSVProcessor.txt"
+}

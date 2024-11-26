@@ -1,0 +1,1 @@
+{"filename": "PandasEval_7.txt", "comments": "# transfer column date to datetime type\n# when there is a string that is not capable of beeing turned into datetime format, skip that row,\n# use errors='coerce' for this\n"}

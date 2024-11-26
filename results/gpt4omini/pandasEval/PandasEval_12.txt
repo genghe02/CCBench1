@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+
+def get_row_count(df: pd.DataFrame) -> int:
+    """ 
+    Given a pandas DataFrame, return the total number of rows in the DataFrame.
+    
+    The function counts the number of entries and returns it as an integer. 
+    It should return 0 for an empty DataFrame.
+    
+    >>> df_empty = pd.DataFrame()
+    >>> get_row_count(df_empty)
+    0
+    >>> df_single_row = pd.DataFrame({'A': [1]})
+    >>> get_row_count(df_single_row)
+    1
+    >>> df_multiple_rows = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    >>> get_row_count(df_multiple_rows)
+    3
+    """
+    return len(df.index)
+```

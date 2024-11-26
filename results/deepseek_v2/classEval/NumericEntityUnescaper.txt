@@ -1,0 +1,70 @@
+```python
+# This class is designed to unescape numeric HTML entities in a given string.
+class NumericEntityUnescaper:
+    def __init__(self):
+        pass
+
+    def replace(self, string):
+        # This function replaces numeric HTML entities in the input string with their corresponding characters.
+        # param string: str, the input string containing numeric HTML entities.
+        # return: str, the string with numeric HTML entities replaced by their corresponding characters.
+        # >>> unescaper = NumericEntityUnescaper()
+        # >>> unescaper.replace("&#38;")
+        # '&'
+        # >>> unescaper.replace("&#x26;")
+        # '&'
+        # >>> unescaper.replace("&#x26; &#38;")
+        # '& &'
+        # >>> unescaper.replace("&#x26; &#38; &#x27;")
+        # '& & '''
+        out = []
+        pos = 0
+        length = len(string)
+
+        while pos < length - 2:
+            if string[pos] == '&' and string[pos + 1] == '#':
+                start = pos + 2
+                is_hex = False
+                first_char = string[start]
+
+                if first_char == 'x' or first_char == 'X':
+                    start += 1
+                    is_hex = True
+
+                if start == length:
+                    return ''.join(out)
+
+                end = start
+                while end < length and self.is_hex_char(string[end]):
+                    end += 1
+
+                if end < length and string[end] == ';':
+                    try:
+                        entity_value = int(string[start:end], 16 if is_hex else 10)
+                    except:
+                        return ''.join(out)
+
+                    out.append(chr(entity_value))
+                    pos = end + 1
+                    continue
+
+            out.append(string[pos])
+            pos += 1
+
+        return ''.join(out)
+
+    @staticmethod
+    def is_hex_char(char):
+        # This static method checks if a character is a valid hexadecimal character.
+        # param char: str, the character to be checked.
+        # return: bool, True if the character is a valid hexadecimal character, False otherwise.
+        # >>> NumericEntityUnescaper.is_hex_char('a')
+        # True
+        # >>> NumericEntityUnescaper.is_hex_char('f')
+        # True
+        # >>> NumericEntityUnescaper.is_hex_char('g')
+        # False
+        # >>> NumericEntityUnescaper.is_hex_char('5')
+        # True
+        return char.isdigit() or ('a' <= char.lower() <= 'f')
+```

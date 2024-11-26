@@ -1,0 +1,6 @@
+import numpy as np
+
+arr = np.array([[1,2,3], [4,5,6], [7,8,9]])
+<Requirements for the code>
+hist, bin_edges = np.histogram(arr, bins=10)
+hist = hist.cumsum()

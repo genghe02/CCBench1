@@ -1,0 +1,16 @@
+[
+  "# This is a class about Lemmatization, which utilizes the nltk library to perform lemmatization and part-of-speech tagging on sentences, as well as remove punctuation.",
+  "creates a WordNetLemmatizer object and stores it in the self.lemmatizer member variable.",
+  "Remove punctuations of the sentence and tokenizes the input sentence, mark the part of speech tag of each word,\n        lemmatizes the words with different parameters based on their parts of speech, and stores in a list.",
+  ":param sentence: a sentence str",
+  ":return: a list of words which have been lemmatized.",
+  ">>> lemmatization = Lemmatization()\n        >>> lemmatization.lemmatize_sentence(\"I am running in a race.\")\n        ['I', 'be', 'run', 'in', 'a', 'race']",
+  "Remove punctuations of the sentence and tokenizes the input sentence, mark the part of speech tag of each word.",
+  ":param sentence: a sentence str",
+  ":return: list, part of speech tag of each word in the sentence.",
+  ">>> lemmatization = Lemmatization()\n        >>> lemmatization.get_pos_tag(\"I am running in a race.\")\n        ['PRP', 'VBP', 'VBG', 'IN', 'DT', 'NN']",
+  "Removes punctuation from the input text.",
+  ":param sentence: a sentence str",
+  ":return: str, sentence without any punctuation",
+  ">>> lemmatization = Lemmatization()\n        >>> lemmatization.remove_punctuation(\"I am running in a race.\")\n        'I am running in a race'"
+]

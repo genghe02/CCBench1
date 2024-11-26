@@ -1,0 +1,23 @@
+```python
+import pandas as pd
+
+def normalize(df: pd.DataFrame) -> pd.DataFrame:
+    """ Normalizes the features of a DataFrame by applying standard scaling (z-score normalization) 
+    to all columns except the last one. This function modifies the DataFrame in place and returns
+    the updated DataFrame.
+    
+    The normalization is performed by subtracting the mean and dividing by the standard deviation
+    for each feature. It is assumed that the last column is not a feature that needs normalization 
+    (e.g., it might be the target column).
+    
+    >>> data = pd.DataFrame({
+    ...     'feature1': [1, 2, 3, 4, 5],
+    ...     'feature2': [10, 20, 30, 40, 50],
+    ...     'target': [1, 0, 1, 0, 1]
+    ... })
+    >>> normalized_df = normalize(data)
+    >>> normalized_df.iloc[:, :2]  # Check only feature columns
+    """
+    df.iloc[:,0:-1] = df.iloc[:,0:-1].apply(lambda x: (x-x.mean())/ x.std(), axis=0)
+    return df
+```

@@ -1,0 +1,1 @@
+# This function takes a pandas DataFrame as input and returns all rows which contain more than one NaN (Not a Number) value. It uses the 'isna()' function to identify NaN values and 'any(axis=1)' to check each row.

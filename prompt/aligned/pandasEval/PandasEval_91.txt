@@ -1,0 +1,1 @@
+# Convert a table represented as a list of lists into a pandas DataFrame with columns ['one', 'two'] and convert the 'two' column to float type in the best way.

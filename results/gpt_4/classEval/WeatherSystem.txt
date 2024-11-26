@@ -1,0 +1,61 @@
+```python
+# This is a class for managing and retrieving weather data for different cities.
+class WeatherSystem:
+    def __init__(self, city) -> None:
+        # Initialize the WeatherSystem with a specified city.
+        # It sets the initial temperature and weather to None, and stores the city name and an empty dictionary for weather data.
+        self.temperature = None
+        self.weather = None
+        self.city = city
+        self.weather_list = {}
+    
+    def query(self, weather_list, tmp_units = 'celsius'):
+        # This function takes a weather data dictionary and optional temperature units as input (default is 'celsius'), 
+        # and returns the temperature and weather of the currently set city in the specified units.
+        # If the city is not in the weather list, it returns False.
+        # param weather_list: dict, the weather data for various cities. 
+        # param tmp_units: str, the units to use for the temperature ('celsius' or 'fahrenheit').
+        # return: tuple, the temperature and weather in the specified city, or False if the city is not in the weather list.
+        # >>> ws = WeatherSystem('New York')
+        # >>> ws.query({'New York': {'temperature': 32, 'temperature units': 'celsius', 'weather': 'Sunny'}}, 'fahrenheit')
+        # (89.6, 'Sunny')
+        self.weather_list = weather_list
+        if self.city not in weather_list:
+            return False
+        else:
+            self.temperature = self.weather_list[self.city]['temperature']
+            self.weather = self.weather_list[self.city]['weather']
+        if self.weather_list[self.city]['temperature units'] != tmp_units:
+            if tmp_units == 'celsius':
+                return self.fahrenheit_to_celsius(), self.weather
+            elif tmp_units == 'fahrenheit':
+                return self.celsius_to_fahrenheit(), self.weather
+        else:
+            return self.temperature, self.weather
+    
+    def set_city(self, city):
+        # This function changes the currently set city of the WeatherSystem.
+        # param city: str, the name of the city to set.
+        # return: None.
+        # >>> ws = WeatherSystem('New York')
+        # >>> ws.set_city('London')
+        self.city = city
+
+    def celsius_to_fahrenheit(self):
+        # This function converts the current temperature from celsius to fahrenheit.
+        # return: float, the temperature in fahrenheit.
+        # >>> ws = WeatherSystem('New York')
+        # >>> ws.query({'New York': {'temperature': 0, 'temperature units': 'celsius', 'weather': 'Sunny'}})
+        # >>> ws.celsius_to_fahrenheit()
+        # 32.0
+        return (self.temperature * 9/5) + 32
+
+    def fahrenheit_to_celsius(self):
+        # This function converts the current temperature from fahrenheit to celsius.
+        # return: float, the temperature in celsius.
+        # >>> ws = WeatherSystem('New York')
+        # >>> ws.query({'New York': {'temperature': 32, 'temperature units': 'fahrenheit', 'weather': 'Sunny'}})
+        # >>> ws.fahrenheit_to_celsius()
+        # 0.0
+        return (self.temperature - 32) * 5/9
+```

@@ -1,0 +1,9 @@
+ # Combine two empty NumPy arrays 'arr1' and 'arr2' using np.vstack and np.hstack, and then append 'arr1' to the new array 'new_arr' efficiently.
+
+# Create an empty NumPy array 'new_arr' of size 0x0 with np.array([]) and then append 'arr1' to it using np.vstack and np.hstack.
+# np.hstack horizontally stacks arrays along an axis that is specified by the dimension which is 0 for rows and 1 for columns.
+# np.vstack vertically stacks arrays along an axis that is specified by the dimension which is 0 for rows and 1 for columns.
+
+new_arr = np.array([])
+new_arr = np.hstack((new_arr, arr1))
+new_arr = np.vstack((new_arr, arr2))

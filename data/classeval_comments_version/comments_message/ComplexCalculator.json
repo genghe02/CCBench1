@@ -1,0 +1,19 @@
+[
+  "# This is a class that implements addition, subtraction, multiplication, and division operations for complex numbers.",
+  "Adds two complex numbers.",
+  ":param c1: The first complex number,complex.\n        :param c2: The second complex number,complex.",
+  ":return: The sum of the two complex numbers,complex.",
+  " >>> complexCalculator = ComplexCalculator()\n        >>> complexCalculator.add(1+2j, 3+4j)\n        (4+6j)",
+  "Subtracts two complex numbers.",
+  ":param c1: The first complex number,complex.\n        :param c2: The second complex number,complex.",
+  ":return: The difference of the two complex numbers,complex.",
+  ">>> complexCalculator = ComplexCalculator()\n        >>> complexCalculator.subtract(1+2j, 3+4j)\n        (-2-2j)",
+  "Multiplies two complex numbers.",
+  ":param c1: The first complex number,complex.\n        :param c2: The second complex number,complex.",
+  ":return: The product of the two complex numbers,complex.",
+  ">>> complexCalculator = ComplexCalculator()\n        >>> complexCalculator.multiply(1+2j, 3+4j)\n        (-5+10j)",
+  "Divides two complex numbers.",
+  ":param c1: The first complex number,complex.\n        :param c2: The second complex number,complex.",
+  ":return: The quotient of the two complex numbers,complex.",
+  ">>> complexCalculator = ComplexCalculator()\n        >>> complexCalculator.divide(1+2j, 3+4j)\n        (0.44+0.08j)"
+]

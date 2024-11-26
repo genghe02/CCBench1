@@ -1,0 +1,21 @@
+```python
+def largest_smallest_integers(lst):
+    # Find the largest negative integer and smallest positive integer from the given list.
+    
+    # Test cases
+    # Test case 1: List with negative and positive integers
+    # Input: [-3, 5, 2, -7, 8, -2]
+    # Output: (-3, 2)
+    
+    # Test case 2: List with only negative integers
+    # Input: [-4, -9, -6, -2]
+    # Output: (-4, None)
+    
+    # Test case 3: List with only positive integers
+    # Input: [3, 9, 6, 2]
+    # Output: (None, 2)
+    
+    smallest = list(filter(lambda x: x < 0, lst))
+    largest = list(filter(lambda x: x > 0, lst))
+    return (max(smallest) if smallest else None, min(largest) if largest else None)
+```

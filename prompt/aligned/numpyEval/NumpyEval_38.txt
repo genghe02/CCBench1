@@ -1,0 +1,1 @@
+# Given a list containing numpy arrays L=[a,b,c] where a, b, and c are numpy arrays with sizes N_a in T, N_b in T, and N_c in T, row-wise concatenate a, b, and c to obtain a numpy array with shape (N_a+N_b+N_c, T) in a pythonic way.

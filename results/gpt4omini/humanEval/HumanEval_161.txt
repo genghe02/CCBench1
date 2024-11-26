@@ -1,0 +1,30 @@
+```python
+def solve(s):
+    # This function takes a string and toggles the case of each alphabetic character.
+    # If the string contains no alphabetic characters, it returns the reverse of the original string.
+    # 
+    # :param s: str, the input string to be processed
+    # :return: str, the modified string with toggled case or reverse if no alphabetic characters are present
+    
+    # Example cases to demonstrate functionality:
+    # >>> solve("Hello World")  # 'hELLO wORLD'
+    # >>> solve("1234")         # '4321'
+    # >>> solve("Python")       # 'pYTHON'
+    # >>> solve("!@#$%")        # '!@#$%'
+    # >>> solve("")             # ''
+    
+    flg = 0
+    idx = 0
+    new_str = list(s)
+    for i in s:
+        if i.isalpha():
+            new_str[idx] = i.swapcase()
+            flg = 1
+        idx += 1
+    s = ""
+    for i in new_str:
+        s += i
+    if flg == 0:
+        return s[len(s)::-1]
+    return s
+```

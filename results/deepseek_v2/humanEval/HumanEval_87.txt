@@ -1,0 +1,18 @@
+```python
+def get_row(lst, x):
+    # This function finds all coordinates (i, j) in a 2D list where the element equals x, then sorts these coordinates first by row index (i) and then by column index (j) in descending order.
+    
+    # param lst: list of lists, the 2D list to search for the element x
+    # param x: any, the element to search for in the 2D list
+    # return: list of tuples, sorted coordinates where the element x is found
+    
+    # >>> get_row([[1, 2], [2, 3]], 2)
+    # [(0, 1), (1, 0)]
+    # >>> get_row([[1, 2, 2], [2, 3, 3], [1, 2, 2]], 2)
+    # [(0, 1), (0, 2), (1, 0), (2, 1), (2, 2)]
+    # >>> get_row([[1, 2], [3, 4]], 5)
+    # []
+    
+    coords = [(i, j) for i in range(len(lst)) for j in range(len(lst[i])) if lst[i][j] == x]
+    return sorted(sorted(coords, key=lambda x: x[1], reverse=True), key=lambda x: x[0])
+```

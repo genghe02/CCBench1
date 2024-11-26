@@ -1,0 +1,1 @@
+# Perform a symmetric difference between two numpy arrays using setxor1d directly without converting the arrays to sets.

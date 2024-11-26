@@ -1,0 +1,33 @@
+```python
+def is_palindrome(string: str) -> bool:
+    # Check if the given string is the same forwards and backwards.
+    return string == string[::-1]
+
+def make_palindrome(string: str) -> str:
+    # Create a palindrome by appending the necessary suffix to the string.
+    # 
+    # :param string: str, the input string that needs to be converted into a palindrome
+    # :return: str, the resulting palindrome string
+    # 
+    # Test cases for the function:
+    # >>> make_palindrome("abc")
+    # 'abcba'
+    # >>> make_palindrome("abca")
+    # 'abcba'
+    # >>> make_palindrome("a")
+    # 'a'
+    # >>> make_palindrome("")
+    # ''
+    # >>> make_palindrome("race")
+    # 'racecar'
+    
+    if not string:
+        return ''
+    
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]
+```

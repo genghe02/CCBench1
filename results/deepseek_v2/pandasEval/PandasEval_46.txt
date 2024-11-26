@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+import numpy as np
+
+def get_value_when_condition(df):
+    # Extract values from column 'A' where the corresponding value in column 'B' is 3.
+    return df[df['B'] == 3]['A'].values
+```

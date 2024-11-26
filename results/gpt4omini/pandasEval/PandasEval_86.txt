@@ -1,0 +1,24 @@
+```python
+import pandas as pd
+
+df = pd.DataFrame({'A': [1, 2, 3], 'B': [100, 300, 500], 'C': list('abc')})
+
+# Requirements for the code: 
+# This code creates a DataFrame with three columns: 'A', 'B', and 'C'. 
+# The operation performed drops the specified columns 'A' and 'C' from the DataFrame, 
+# returning a new DataFrame that contains only the column 'B'.
+
+# Some test cases for the function:
+# Assuming the original DataFrame is as follows:
+#    A    B  C
+# 0  1  100  a
+# 1  2  300  b
+# 2  3  500  c
+#
+# The resulting DataFrame new_df after dropping 'A' and 'C' would be:
+#     B
+# 0  100
+# 1  300
+# 2  500
+new_df = df.drop(['A', 'C'], axis=1)
+```

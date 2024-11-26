@@ -1,0 +1,78 @@
+# A class for managing a human resource system that holds employee details.
+class HRManagementSystem:
+    # Constructor function. Initializes an empty dictionary to hold employee details.
+    def __init__(self):
+        self.employees = {}  # Empty dictionary to store employee details.
+
+    # Function to add a new employee to the HR system.
+    # param employee_id: int, the unique identifier for the employee.
+    # param name: str, the name of the employee.
+    # param position: str, the job position of the employee.
+    # param department: str, the department the employee belongs to.
+    # param salary: float, the salary of the employee.
+    # return: bool, True if the employee was successfully added, False otherwise.
+    # Test case: >>> hr_system = HRManagementSystem()
+    #           >>> hr_system.add_employee(1, 'John Doe', 'Engineer', 'R&D', 50000)
+    def add_employee(self, employee_id, name, position, department, salary):
+        if employee_id in self.employees:
+            return False
+        else:
+            self.employees[employee_id] = {
+                'name': name,
+                'position': position,
+                'department': department,
+                'salary': salary
+            }
+            return True
+
+    # Function to remove an employee from the HR system.
+    # param employee_id: int, the unique identifier for the employee.
+    # return: bool, True if the employee was successfully removed, False otherwise.
+    # Test case: >>> hr_system.remove_employee(1)
+    def remove_employee(self, employee_id):
+        if employee_id in self.employees:
+            del self.employees[employee_id]
+            return True
+        else:
+            return False
+
+    # Function to update the details of an existing employee.
+    # param employee_id: int, the unique identifier for the employee.
+    # param employee_info: dict, dictionary holding the new employee details to update.
+    # return: bool, True if the employee details were successfully updated, False otherwise.
+    # Test case: >>> hr_system.update_employee(1, {'salary': 60000})
+    def update_employee(self, employee_id: int, employee_info: dict):
+        employee = self.get_employee(employee_id)
+        if employee == False:
+            return False
+        else:
+            for key, value in employee_info.items():
+                if key not in employee:
+                    return False
+            for key, value in employee_info.items():
+                employee[key] = value
+            return True
+
+    # Function to get the details of an employee.
+    # param employee_id: int, the unique identifier for the employee.
+    # return: dict or False, the details of the employee if found, False otherwise.
+    # Test case: >>> hr_system.get_employee(1)
+    def get_employee(self, employee_id):
+        if employee_id in self.employees:
+            return self.employees[employee_id]
+        else:
+            return False
+
+    # Function to list the details of all employees in the HR system.
+    # return: dict, a dictionary holding the details of all employees.
+    # Test case: >>> hr_system.list_employees()
+    def list_employees(self):
+        employee_data = {}
+        if self.employees:
+            for employee_id, employee_info in self.employees.items():
+                employee_details = {}
+                employee_details["employee_ID"] = employee_id
+                for key, value in employee_info.items():
+                    employee_details[key] = value
+                employee_data[employee_id] = employee_details
+        return employee_data

@@ -1,0 +1,24 @@
+def vowels_count(s):
+    # Count the number of vowels in the given string 's' and consider 'y' or 'Y' as a vowel as well.
+
+    # Test case 1: Empty string
+    assert vowels_count('') == 0, "Empty string check failed"
+    
+    # Test case 2: All vowels in the string
+    assert vowels_count('AEIOUaeiou') == 10, "All vowels check failed"
+    
+    # Test case 3: No vowels in the string
+    assert vowels_count('xyz') == 0, "No vowels check failed"
+    
+    # Test case 4: String with mixed characters
+    assert vowels_count('Hello World') == 3, "Mixed characters check failed"
+    
+    # Test case 5: String with 'y' at the end
+    assert vowels_count('Python') == 2, "'y' at the end check failed"
+    
+    # Count the number of vowels in the string 's' and consider 'y' or 'Y' as a vowel as well.
+    vowels = "aeiouAEIOU"
+    n_vowels = sum(c in vowels for c in s)
+    if s[-1] == 'y' or s[-1] == 'Y':
+        n_vowels += 1
+    return n_vowels

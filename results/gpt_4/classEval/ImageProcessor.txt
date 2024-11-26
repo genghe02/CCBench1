@@ -1,0 +1,54 @@
+```python
+from PIL import Image, ImageEnhance, ImageChops
+
+# This is a class for processing images, including loading, saving, resizing, rotating and adjusting the brightness of images.
+class ImageProcessor:
+    def __init__(self):
+        # This is a constructor which initializes the image attribute to None.
+        self.image = None
+
+    def load_image(self, image_path):
+        # This function loads an image from a given path.
+        # param image_path: str, the path where the image is located.
+        # >>> image_processor = ImageProcessor()
+        # >>> image_processor.load_image("path_to_image")
+        self.image = Image.open(image_path)
+
+    def save_image(self, save_path):
+        # This function saves the current image to a specified path.
+        # param save_path: str, the path where the image will be saved.
+        # >>> image_processor = ImageProcessor()
+        # >>> image_processor.load_image("path_to_image")
+        # >>> image_processor.save_image("path_to_save_image")
+        if self.image:
+            self.image.save(save_path)
+
+    def resize_image(self, width, height):
+        # This function resizes the current image to the given width and height.
+        # param width: int, the width to resize the image to.
+        # param height: int, the height to resize the image to.
+        # >>> image_processor = ImageProcessor()
+        # >>> image_processor.load_image("path_to_image")
+        # >>> image_processor.resize_image(500, 500)
+        if self.image:
+            self.image = self.image.resize((width, height))
+
+    def rotate_image(self, degrees):
+        # This function rotates the current image by the given number of degrees.
+        # param degrees: int, the number of degrees to rotate the image.
+        # >>> image_processor = ImageProcessor()
+        # >>> image_processor.load_image("path_to_image")
+        # >>> image_processor.rotate_image(90)
+        if self.image:
+            self.image = self.image.rotate(degrees)
+
+    def adjust_brightness(self, factor):
+        # This function adjusts the brightness of the current image by a given factor.
+        # param factor: float, the factor by which to adjust the image brightness.
+        # >>> image_processor = ImageProcessor()
+        # >>> image_processor.load_image("path_to_image")
+        # >>> image_processor.adjust_brightness(1.5)
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)
+```

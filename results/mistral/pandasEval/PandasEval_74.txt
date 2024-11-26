@@ -1,0 +1,16 @@
+ # Count the occurrences of a specific value in a pandas Series using value_counts() method.
+
+import pandas as pd
+
+def counting_occurrences_of_a_value(series, value):
+    """
+    This function returns the number of occurrences of a given value in a pandas Series.
+
+    :param series: A pandas Series object.
+    :param value: The value to be counted.
+    :return: An integer representing the number of occurrences of the given value in the Series.
+    """
+
+    # Count the occurrences of the given value in the Series using value_counts() method.
+    <Requirements for the code>
+    return series.value_counts()[value]

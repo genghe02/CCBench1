@@ -1,0 +1,9 @@
+import numpy as np
+
+a = np.array([[1, 1, 1, 0, 0, 0],
+       [0, 1, 1, 1, 0, 0],
+       [0, 1, 1, 1, 0, 0],
+       [1, 1, 1, 0, 0, 0],
+       [1, 1, 1, 1, 1, 0]])
+<Requirements for the code>
+out = np.unique(a, axis=0)

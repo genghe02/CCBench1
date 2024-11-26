@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+
+def get_mean_in_column(df: pd.DataFrame, col_name: str) -> float:
+    """ 
+    Given a pandas DataFrame and a column name, return the mean value of that column. 
+    If the column does not exist or contains no numeric data, the function should return NaN.
+    
+    >>> df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    >>> get_mean_in_column(df, 'A')
+    2.0
+    >>> get_mean_in_column(df, 'B')
+    5.0
+    >>> get_mean_in_column(df, 'C') # Non-existing column
+    nan
+    >>> empty_df = pd.DataFrame({'A': []})
+    >>> get_mean_in_column(empty_df, 'A') # Empty column
+    nan
+    """
+    return df[col_name].mean()
+```

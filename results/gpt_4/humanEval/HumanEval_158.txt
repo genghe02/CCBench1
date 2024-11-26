@@ -1,0 +1,5 @@
+def find_max(words):
+    # The function sorts the words based on two criteria: The first is the number of unique characters in a word, and the second is the word itself. 
+    # The sorting order for the first criteria is descending (more unique characters come first), and ascending for the second criteria (lexicographically smaller words come first). 
+    # Then, it returns the first word from the sorted list, which is the word with the most unique characters. If there are multiple such words, it returns the lexicographically smallest one.
+    return sorted(words, key = lambda x: (-len(set(x)), x))[0]

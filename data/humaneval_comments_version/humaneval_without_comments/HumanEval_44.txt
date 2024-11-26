@@ -1,0 +1,10 @@
+
+
+def change_base(x: int, base: int):
+    <Requirements for the code>
+    <some test cases for the function>
+    ret = ""
+    while x > 0:
+        ret = str(x % base) + ret
+        x //= base
+    return ret

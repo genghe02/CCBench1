@@ -1,0 +1,9 @@
+import numpy as np
+
+def interweaving_two_arrays(a, b):
+    # How would one interweave them efficiently?
+    # It can be assumed that length(a)==length(b).
+    c = np.empty((a.size + b.size,), dtype=a.dtype)
+    c[0::2] = a
+    c[1::2] = b
+    return c

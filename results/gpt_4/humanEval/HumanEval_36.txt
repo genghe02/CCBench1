@@ -1,0 +1,23 @@
+```python
+def fizz_buzz(n: int):
+    # This function uses the FizzBuzz concept but with a twist. Instead of checking for multiples of 3 and 5, 
+    # it checks for multiples of 11 and 13. It creates a list of such multiples, converts them to a string,
+    # and then counts the number of '7' in that string. The function returns this count.
+    # :param n: int, the upper limit until which to check for multiples of 11 and 13
+    # :return: int, the count of '7' in the string representation of the multiples
+
+    # Test cases:
+    # >>> fizz_buzz(100)
+    # >>> fizz_buzz(200)
+    # >>> fizz_buzz(300)
+
+    ns = []
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            ns.append(i)
+    s = ''.join(list(map(str, ns)))
+    ans = 0
+    for c in s:
+        ans += (c == '7')
+    return ans
+```

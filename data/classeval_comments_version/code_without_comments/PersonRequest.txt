@@ -1,0 +1,38 @@
+<description for whole class>
+class PersonRequest:
+    def __init__(self, name: str, sex: str, phoneNumber: str):
+        <description for whole function>
+        <description for all parameters>
+        self.name = self._validate_name(name)
+        self.sex = self._validate_sex(sex)
+        self.phoneNumber = self._validate_phoneNumber(phoneNumber)
+
+    def _validate_name(self, name: str) -> str:
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        if not name:
+            return None
+        if len(name) > 33:
+            return None
+        return name
+
+    def _validate_sex(self, sex: str) -> str:
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        if sex not in ["Man", "Woman", "UGM"]:
+            return None
+        return sex
+
+    def _validate_phoneNumber(self, phoneNumber: str) -> str:
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        if not phoneNumber:
+            return None
+        if len(phoneNumber) != 11 or not phoneNumber.isdigit():
+            return None
+        return phoneNumber
+
+

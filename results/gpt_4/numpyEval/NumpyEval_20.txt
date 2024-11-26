@@ -1,0 +1,5 @@
+# Convert the numpy array to a byte string using the tostring() method. 
+ts = arr.tostring()
+
+# Convert the byte string back to a numpy array using the fromstring() method.
+new_arr = np.fromstring(ts, dtype=int)

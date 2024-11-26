@@ -1,0 +1,3 @@
+ # Find each row where the value in the 'col' column matches any of the given targets using pandas efficiently by utilizing the isin() method and loc().
+
+Please note that this annotation is consistent with the one provided in the sample.

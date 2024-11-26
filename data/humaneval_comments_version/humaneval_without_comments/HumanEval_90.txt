@@ -1,0 +1,5 @@
+
+def next_smallest(lst):
+    <Requirements for the code>
+    lst = sorted(set(lst))
+    return None if len(lst) < 2 else lst[1]

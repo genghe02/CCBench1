@@ -1,0 +1,30 @@
+def solve(s):
+    # This function takes a string as input, and checks for each character if it is an alphabet.
+    # If it is, the case of the character (lowercase/uppercase) is swapped.
+    # If the string does not contain any alphabets, the string is reversed and returned.
+    # The function returns the new string after the above operations.
+
+    # Test cases:
+    # >>> solve('abc')
+    # 'ABC'
+    # >>> solve('123')
+    # '321'
+    # >>> solve('a1b2c3')
+    # 'A1B2C3'
+    # >>> solve('Test')
+    # 'tEST'
+
+    flg = 0
+    idx = 0
+    new_str = list(s)
+    for i in s:
+        if i.isalpha():
+            new_str[idx] = i.swapcase()
+            flg = 1
+        idx += 1
+    s = ""
+    for i in new_str:
+        s += i
+    if flg == 0:
+        return s[len(s)::-1]
+    return s

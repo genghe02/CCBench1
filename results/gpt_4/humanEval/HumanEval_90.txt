@@ -1,0 +1,6 @@
+def next_smallest(lst):
+    # The function receives a list as input, removes duplicates, sorts it, and returns the second smallest element if it exists.
+    # If the list has less than two unique elements, it returns None.
+    # param lst: input list
+    lst = sorted(set(lst))
+    return None if len(lst) < 2 else lst[1] # return the second smallest unique element in the list if it exists, else return None.

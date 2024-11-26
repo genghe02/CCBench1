@@ -1,0 +1,4 @@
+ # Find the indices of elements within the given range in an efficient way using numpy.
+# This function takes an array 'arr' and two integers 'low' and 'high' as input,
+# and returns the indices of elements in 'arr' that are greater than or equal to 'low'
+# and less than or equal to 'high'. This is achieved by using np.where(np.logical_and(condition)) where condition is the logical condition arr >= low and arr <= high.

@@ -1,0 +1,986 @@
+[
+  {
+    "filename": "HumanEval_0.txt",
+    "comments": [
+      "# Check if any two numbers in the given list are closer to each other than the specified threshold."
+    ]
+  },
+  {
+    "filename": "HumanEval_1.txt",
+    "comments": [
+      "# Input to this function is a string containing multiple groups of nested parentheses. Separate those groups into separate strings and return the list of those. The groups are balanced (each open brace is properly closed) and not nested within each other. Ignore any spaces in the input string."
+    ]
+  },
+  {
+    "filename": "HumanEval_2.txt",
+    "comments": [
+      "# Decompose a positive floating point number into its integer part (largest integer smaller than the given number) and its decimal part (remaining value smaller than 1)."
+    ]
+  },
+  {
+    "filename": "HumanEval_3.txt",
+    "comments": [
+      "# Given a list of deposit and withdrawal operations on a bank account that starts with zero balance, detect if at any point the balance falls below zero, and return True if it does. Otherwise, return False."
+    ]
+  },
+  {
+    "filename": "HumanEval_4.txt",
+    "comments": [
+      "# For a given list of input numbers, calculate the Mean Absolute Deviation (MAD) around the mean of this dataset. \n# The Mean Absolute Deviation is defined as the average absolute difference between each element and the mean of the dataset: \n# MAD = average | x - x_mean |."
+    ]
+  },
+  {
+    "filename": "HumanEval_5.txt",
+    "comments": [
+      "# Insert a number 'delimiter' between every two consecutive elements of the input list `numbers`."
+    ]
+  },
+  {
+    "filename": "HumanEval_6.txt",
+    "comments": [
+      "# Input to this function is a string representing multiple groups of nested parentheses separated by spaces. For each group, output the deepest level of nesting of parentheses. For example, (()()) has a maximum of two levels of nesting while ((())) has three."
+    ]
+  },
+  {
+    "filename": "HumanEval_7.txt",
+    "comments": [
+      "# Filter the input list of strings to retain only those that contain the given substring."
+    ]
+  },
+  {
+    "filename": "HumanEval_8.txt",
+    "comments": [
+      "# For a given list of integers, return a tuple consisting of the sum and product of all integers in the list. The sum for an empty list should be 0, and the product for an empty list should be 1."
+    ]
+  },
+  {
+    "filename": "HumanEval_9.txt",
+    "comments": [
+      "# From a given list of integers, generate a list of rolling maximum elements found up to each moment in the sequence."
+    ]
+  },
+  {
+    "filename": "HumanEval_10.txt",
+    "comments": [
+      "# Test if the given string is a palindrome."
+    ]
+  },
+  {
+    "filename": "HumanEval_11.txt",
+    "comments": [
+      "# Given two input strings a and b consisting only of 1s and 0s, perform binary XOR on these inputs and return the result as a string."
+    ]
+  },
+  {
+    "filename": "HumanEval_12.txt",
+    "comments": [
+      "# From a list of strings, return the longest string. In case of multiple strings of the same length, return the first one. Return None if the input list is empty."
+    ]
+  },
+  {
+    "filename": "HumanEval_13.txt",
+    "comments": [
+      "# Return the greatest common divisor of two integers a and b."
+    ]
+  },
+  {
+    "filename": "HumanEval_14.txt",
+    "comments": [
+      "# Return a list of all prefixes from shortest to longest of the input string."
+    ]
+  },
+  {
+    "filename": "HumanEval_15.txt",
+    "comments": [
+      "# Return a string containing space-delimited numbers starting from 0 up to n inclusive."
+    ]
+  },
+  {
+    "filename": "HumanEval_16.txt",
+    "comments": [
+      "# Given a string, find the number of distinct characters it consists of, regardless of case."
+    ]
+  },
+  {
+    "filename": "HumanEval_17.txt",
+    "comments": [
+      "# Input to this function is a string representing musical notes in a special ASCII format. Parse the string and return a list of integers corresponding to the duration of each note in beats. The legend is as follows: 'o' represents a whole note lasting four beats, 'o|' represents a half note lasting two beats, and '.|' represents a quarter note lasting one beat."
+    ]
+  },
+  {
+    "filename": "HumanEval_18.txt",
+    "comments": [
+      "# Find the number of times a given substring appears in the original string, including overlapping cases."
+    ]
+  },
+  {
+    "filename": "HumanEval_19.txt",
+    "comments": [
+      "# Given a space-delimited string of numerals from 'zero' to 'nine', return the string with numbers sorted from smallest to largest. Valid choices include 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', and 'nine'."
+    ]
+  },
+  {
+    "filename": "HumanEval_20.txt",
+    "comments": [
+      "# From a supplied list of numbers (with a minimum length of two), select and return the two closest numbers in order (smaller number first, larger number second)."
+    ]
+  },
+  {
+    "filename": "HumanEval_21.txt",
+    "comments": [
+      "# Given a list of numbers (containing at least two elements), apply a linear transformation to the list so that the smallest number becomes 0 and the largest number becomes 1."
+    ]
+  },
+  {
+    "filename": "HumanEval_22.txt",
+    "comments": [
+      "# Filter the given list to retain only integer values."
+    ]
+  },
+  {
+    "filename": "HumanEval_23.txt",
+    "comments": [
+      "# Return the length of the given string."
+    ]
+  },
+  {
+    "filename": "HumanEval_24.txt",
+    "comments": [
+      "# For a given number n, find the largest number that divides n evenly and is smaller than n."
+    ]
+  },
+  {
+    "filename": "HumanEval_25.txt",
+    "comments": [
+      "# Return a list of prime factors of the given integer in ascending order, with each factor repeated according to its multiplicity in the factorization. Ensure that the input number equals the product of all listed factors."
+    ]
+  },
+  {
+    "filename": "HumanEval_26.txt",
+    "comments": [
+      "# From a list of integers, remove all elements that occur more than once while keeping the order of the remaining elements the same as in the input."
+    ]
+  },
+  {
+    "filename": "HumanEval_27.txt",
+    "comments": [
+      "# For a given string, flip lowercase characters to uppercase and uppercase characters to lowercase."
+    ]
+  },
+  {
+    "filename": "HumanEval_28.txt",
+    "comments": [
+      "# Concatenate a list of strings into a single string."
+    ]
+  },
+  {
+    "filename": "HumanEval_29.txt",
+    "comments": [
+      "# Filter the input list of strings to include only those that start with the given prefix."
+    ]
+  },
+  {
+    "filename": "HumanEval_30.txt",
+    "comments": [
+      "# Return only the positive numbers from the list."
+    ]
+  },
+  {
+    "filename": "HumanEval_31.txt",
+    "comments": [
+      "# Return true if the given number is prime, and false otherwise."
+    ]
+  },
+  {
+    "filename": "HumanEval_32.txt",
+    "comments": [
+      "# Evaluate the polynomial with coefficients xs at the point x and return the result, which is computed as xs[0] + xs[1] * x + xs[2] * x^2 + ... + xs[n] * x^n."
+    ]
+  },
+  {
+    "filename": "HumanEval_33.txt",
+    "comments": [
+      "# This function takes a list l and returns a list l' such that l' is identical to l at indices that are not divisible by three, while at indices that are divisible by three, the values are equal to the corresponding values of l but sorted."
+    ]
+  },
+  {
+    "filename": "HumanEval_34.txt",
+    "comments": [
+      "# Return sorted unique elements from a list."
+    ]
+  },
+  {
+    "filename": "HumanEval_35.txt",
+    "comments": [
+      "# Return the maximum element in the list."
+    ]
+  },
+  {
+    "filename": "HumanEval_36.txt",
+    "comments": [
+      "# Return the number of times the digit 7 appears in integers less than n that are divisible by 11 or 13."
+    ]
+  },
+  {
+    "filename": "HumanEval_37.txt",
+    "comments": [
+      "# This function takes a list l and returns a list l' such that l' is identical to l at the odd indices, while its values at the even indices are equal to the sorted values of the even indices of l."
+    ]
+  },
+  {
+    "filename": "HumanEval_38.txt",
+    "comments": [
+      "# Return an encoded string by cycling through groups of three characters."
+    ]
+  },
+  {
+    "filename": "HumanEval_39.txt",
+    "comments": [
+      "# Return the n-th number that is both a Fibonacci number and prime."
+    ]
+  },
+  {
+    "filename": "HumanEval_40.txt",
+    "comments": [
+      "# Determine if there are three distinct elements in the input list of integers that sum to zero. Return True if such elements exist, otherwise return False."
+    ]
+  },
+  {
+    "filename": "HumanEval_41.txt",
+    "comments": [
+      "# Given n cars moving left to right and n cars moving right to left along an infinitely long straight road, output the number of collisions that occur when two cars move towards each other, assuming they continue on their trajectory without any change after the collision."
+    ]
+  },
+  {
+    "filename": "HumanEval_42.txt",
+    "comments": [
+      "# Return a list with elements incremented by 1."
+    ]
+  },
+  {
+    "filename": "HumanEval_43.txt",
+    "comments": [
+      "# The function pairs_sum_to_zero takes a list of integers as input. It returns True if there are two distinct elements in the list that sum to zero, and False otherwise."
+    ]
+  },
+  {
+    "filename": "HumanEval_44.txt",
+    "comments": [
+      "# Change the numerical base of the input number x to the specified base and return the string representation after the conversion. The base must be less than 10."
+    ]
+  },
+  {
+    "filename": "HumanEval_45.txt",
+    "comments": [
+      "# Given the length of a side and height, return the area of a triangle."
+    ]
+  },
+  {
+    "filename": "HumanEval_46.txt",
+    "comments": [
+      "# Define a function to efficiently compute the n-th element of the Fib4 number sequence, \n# which is defined as follows:\n# fib4(0) -> 0\n# fib4(1) -> 0\n# fib4(2) -> 2\n# fib4(3) -> 0\n# fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4), \n# without using recursion."
+    ]
+  },
+  {
+    "filename": "HumanEval_47.txt",
+    "comments": [
+      "# Return the median of elements in the list l."
+    ]
+  },
+  {
+    "filename": "HumanEval_48.txt",
+    "comments": [
+      "# Check if the given string is a palindrome."
+    ]
+  },
+  {
+    "filename": "HumanEval_49.txt",
+    "comments": [
+      "# Return 2^n modulo p, considering numerical constraints."
+    ]
+  },
+  {
+    "filename": "HumanEval_50.txt",
+    "comments": [
+      "# Return an encoded string by shifting every character by 5 in the alphabet."
+    ]
+  },
+  {
+    "filename": "HumanEval_51.txt",
+    "comments": [
+      "# The function remove_vowels takes a string as input and returns the string without vowels."
+    ]
+  },
+  {
+    "filename": "HumanEval_52.txt",
+    "comments": [
+      "# Return True if all numbers in the list l are below the threshold t."
+    ]
+  },
+  {
+    "filename": "HumanEval_53.txt",
+    "comments": [
+      "# Add two numbers x and y."
+    ]
+  },
+  {
+    "filename": "HumanEval_54.txt",
+    "comments": [
+      "# Check if two words have the same characters."
+    ]
+  },
+  {
+    "filename": "HumanEval_55.txt",
+    "comments": [
+      "# Return the n-th Fibonacci number."
+    ]
+  },
+  {
+    "filename": "HumanEval_56.txt",
+    "comments": [
+      "# Given a string of brackets \"<\" and \">\", return True if every opening bracket has a corresponding closing bracket."
+    ]
+  },
+  {
+    "filename": "HumanEval_57.txt",
+    "comments": [
+      "# Return True if the list elements are monotonically increasing or decreasing."
+    ]
+  },
+  {
+    "filename": "HumanEval_58.txt",
+    "comments": [
+      "# Return sorted unique common elements for two lists."
+    ]
+  },
+  {
+    "filename": "HumanEval_59.txt",
+    "comments": [
+      "# Return the largest prime factor of n, assuming n > 1 and n is not a prime."
+    ]
+  },
+  {
+    "filename": "HumanEval_60.txt",
+    "comments": [
+      "# Define the function sum_to_n to calculate the sum of numbers from 1 to n."
+    ]
+  },
+  {
+    "filename": "HumanEval_61.txt",
+    "comments": [
+      "# Given a string of brackets, return True if every opening bracket has a corresponding closing bracket."
+    ]
+  },
+  {
+    "filename": "HumanEval_62.txt",
+    "comments": [
+      "# Given xs, which represent coefficients of a polynomial in the form xs[0] + xs[1] * x + xs[2] * x^2 + ..., return the derivative of this polynomial in the same form."
+    ]
+  },
+  {
+    "filename": "HumanEval_63.txt",
+    "comments": [
+      "# Define a function to efficiently compute the n-th element of the FibFib number sequence, where:\n# fibfib(0) == 0,\n# fibfib(1) == 0,\n# fibfib(n) == fibfib(n-1) + fibfib(n-2) + fibfib(n-3) for n >= 2."
+    ]
+  },
+  {
+    "filename": "HumanEval_64.txt",
+    "comments": [
+      "# Write a function vowels_count that takes a string representing a word as input and returns the number of vowels in the string. Vowels include 'a', 'e', 'i', 'o', 'u', and 'y' when it is at the end of the given word."
+    ]
+  },
+  {
+    "filename": "HumanEval_65.txt",
+    "comments": [
+      "# Circularly shift the digits of the integer x to the right by the specified shift amount and return the result as a string. If the shift is greater than the number of digits, return the digits reversed."
+    ]
+  },
+  {
+    "filename": "HumanEval_66.txt",
+    "comments": [
+      "# Write a function that takes a string as input and returns the sum of the ASCII codes of upper characters only."
+    ]
+  },
+  {
+    "filename": "HumanEval_67.txt",
+    "comments": [
+      "# Given a string that represents the number of apples and oranges in a basket, \n# and an integer that represents the total number of fruits in the basket, \n# return the number of mango fruits in the basket."
+    ]
+  },
+  {
+    "filename": "HumanEval_68.txt",
+    "comments": [
+      "# Given an array representing a branch of a tree with non-negative integer nodes, \n# pluck the node with the smallest even value and return it.\n# If multiple nodes share the same smallest even value, return the node with the smallest index.\n# Return the plucked node in a list format: [smallest_value, its_index].\n# If there are no even values or the array is empty, return an empty list []."
+    ]
+  },
+  {
+    "filename": "HumanEval_69.txt",
+    "comments": [
+      "# Given a non-empty list of positive integers, return the greatest integer that is greater than zero and has a frequency greater than or equal to its own value. If no such value exists, return -1."
+    ]
+  },
+  {
+    "filename": "HumanEval_70.txt",
+    "comments": [
+      "# Given a list of integers, return the list in a strange order, which starts with the minimum value, followed by the maximum of the remaining integers, then the next minimum, and so on."
+    ]
+  },
+  {
+    "filename": "HumanEval_71.txt",
+    "comments": [
+      "# Given the lengths of the three sides of a triangle, return the area of the triangle rounded to 2 decimal points if the three sides form a valid triangle. Otherwise, return -1. The three sides form a valid triangle when the sum of any two sides is greater than the third side."
+    ]
+  },
+  {
+    "filename": "HumanEval_72.txt",
+    "comments": [
+      "# Write a function that returns True if the object q will fly, and False otherwise. \n# The object q will fly if it is balanced (a palindromic list) and the sum of its elements is less than or equal to the maximum possible weight w."
+    ]
+  },
+  {
+    "filename": "HumanEval_73.txt",
+    "comments": [
+      "# Given an array arr of integers, find the minimum number of elements that need to be changed to make the array palindromic. A palindromic array is defined as an array that reads the same backwards and forwards. One change allows for the modification of one element to any other element."
+    ]
+  },
+  {
+    "filename": "HumanEval_74.txt",
+    "comments": [
+      "# Write a function that accepts two lists of strings and returns the list whose total number of characters in all strings is less than that of the other list. If both lists have the same total number of characters, return the first list."
+    ]
+  },
+  {
+    "filename": "HumanEval_75.txt",
+    "comments": [
+      "# Write a function that returns True if the given number is the product of 3 prime numbers and False otherwise, knowing that the number is less than 100."
+    ]
+  },
+  {
+    "filename": "HumanEval_76.txt",
+    "comments": [
+      "# Write a function that returns True if a number x is a simple power of n, and False otherwise. \n# A number x is considered a simple power of n if n raised to the power of an integer equals x."
+    ]
+  },
+  {
+    "filename": "HumanEval_77.txt",
+    "comments": [
+      "# Write a function that takes an integer 'a' and returns True if this integer is a cube of some integer number. Assume the input is always valid."
+    ]
+  },
+  {
+    "filename": "HumanEval_78.txt",
+    "comments": [
+      "# Write a function that receives a hexadecimal number as a string and counts the number of hexadecimal digits that are prime numbers.\n# Hexadecimal digits include: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n# The prime hexadecimal digits to be counted are: 2, 3, 5, 7, B (decimal 11), D (decimal 13).\n# Assume the input is always correct or an empty string, and all hexadecimal symbols are uppercase."
+    ]
+  },
+  {
+    "filename": "HumanEval_79.txt",
+    "comments": [
+      "# Convert a given decimal number to binary format and return it as a string.\n# Each character in the string represents a binary number ('0' or '1').\n# The resulting string will have 'db' appended at the beginning and end for formatting purposes."
+    ]
+  },
+  {
+    "filename": "HumanEval_80.txt",
+    "comments": [
+      "# Given a string s, check if the string is happy. A string is considered happy if its length is at least 3 and every 3 consecutive letters are distinct."
+    ]
+  },
+  {
+    "filename": "HumanEval_81.txt",
+    "comments": [
+      "# Write a function that takes a list of GPAs as input and outputs a list of letter grades according to the following grading table:\n# \n# GPA       |    Letter grade\n# 4.0                A+\n# > 3.7                A \n# > 3.3                A- \n# > 3.0                B+\n# > 2.7                B \n# > 2.3                B-\n# > 2.0                C+\n# > 1.7                C\n# > 1.3                C-\n# > 1.0                D+ \n# > 0.7                D \n# > 0.0                D-\n# 0.0                E"
+    ]
+  },
+  {
+    "filename": "HumanEval_82.txt",
+    "comments": [
+      "# Write a function that takes a string and returns True if the string length is a prime number; otherwise, return False."
+    ]
+  },
+  {
+    "filename": "HumanEval_83.txt",
+    "comments": [
+      "# Given a positive integer n, return the count of n-digit positive integers that start or end with 1."
+    ]
+  },
+  {
+    "filename": "HumanEval_84.txt",
+    "comments": [
+      "# Given a positive integer N, return the total sum of its digits in binary."
+    ]
+  },
+  {
+    "filename": "HumanEval_85.txt",
+    "comments": [
+      "# Given a non-empty list of integers lst, add the even elements that are located at odd indices."
+    ]
+  },
+  {
+    "filename": "HumanEval_86.txt",
+    "comments": [
+      "# Write a function that takes a string and returns an ordered version of it, where all words (separated by space) are replaced by new words with characters arranged in ascending order based on ASCII value, while maintaining the order of words and blank spaces in the sentence."
+    ]
+  },
+  {
+    "filename": "HumanEval_87.txt",
+    "comments": [
+      "# Given a 2-dimensional nested list similar to a matrix, where each row may contain a different number of columns, find the integer x in the list. Return a list of tuples representing coordinates of (row, column) for each occurrence of x, starting from 0. Sort the coordinates first by rows in ascending order and then by columns in descending order."
+    ]
+  },
+  {
+    "filename": "HumanEval_88.txt",
+    "comments": [
+      "# Given an array of non-negative integers, return a copy of the array after sorting. \n# Sort the array in ascending order if the sum of the first and last index values is odd, \n# or sort it in descending order if the sum is even. \n# Do not modify the original array."
+    ]
+  },
+  {
+    "filename": "HumanEval_89.txt",
+    "comments": [
+      "# Create a function `encrypt` that takes a string as an argument and \n# returns a string encrypted with the alphabet rotated by four places."
+    ]
+  },
+  {
+    "filename": "HumanEval_90.txt",
+    "comments": [
+      "# Given a list of integers, write a function next_smallest() to return the 2nd smallest element of the list, and return None if there is no such element."
+    ]
+  },
+  {
+    "filename": "HumanEval_91.txt",
+    "comments": [
+      "# Given a string of words, count the number of sentences that start with the word \"I\". Sentences are delimited by '.', '?', or '!'."
+    ]
+  },
+  {
+    "filename": "HumanEval_92.txt",
+    "comments": [
+      "# Create a function that takes 3 numbers and returns true if one of the numbers is equal to the sum of the other two, provided all numbers are integers. Return false in all other cases."
+    ]
+  },
+  {
+    "filename": "HumanEval_93.txt",
+    "comments": [
+      "# Write a function that takes a message, encodes it by swapping the case of all letters, and replacing all vowels in the message with the letter that appears 2 places ahead in the English alphabet. Assume that the input consists of letters only."
+    ]
+  },
+  {
+    "filename": "HumanEval_94.txt",
+    "comments": [
+      "# Given a list of integers, find the largest prime value and return the sum of its digits."
+    ]
+  },
+  {
+    "filename": "HumanEval_95.txt",
+    "comments": [
+      "# Given a dictionary, return True if all keys are strings in lowercase or all keys are strings in uppercase; otherwise, return False. The function should return False if the given dictionary is empty."
+    ]
+  },
+  {
+    "filename": "HumanEval_96.txt",
+    "comments": [
+      "# Implement a function that takes a non-negative integer and returns an array of the first n prime numbers that are less than n."
+    ]
+  },
+  {
+    "filename": "HumanEval_97.txt",
+    "comments": [
+      "# Complete the function that takes two integers and returns the product of their unit digits, assuming the input is always valid."
+    ]
+  },
+  {
+    "filename": "HumanEval_98.txt",
+    "comments": [
+      "# Given a string s, count the number of uppercase vowels located at even indices."
+    ]
+  },
+  {
+    "filename": "HumanEval_99.txt",
+    "comments": [
+      "# Create a function that takes a string representing a number and returns the closest integer. If the number is equidistant from two integers, round it away from zero."
+    ]
+  },
+  {
+    "filename": "HumanEval_100.txt",
+    "comments": [
+      "# Given a positive integer n, create a pile of n levels of stones. The first level contains n stones. The number of stones in each subsequent level is determined as follows: for an odd n, use the next odd number, and for an even n, use the next even number. Return a list where each element at index i represents the number of stones in level (i+1)."
+    ]
+  },
+  {
+    "filename": "HumanEval_101.txt",
+    "comments": [
+      "# Given a string of words separated by commas or spaces, split the string into words and return an array of the words."
+    ]
+  },
+  {
+    "filename": "HumanEval_102.txt",
+    "comments": [
+      "# This function takes two positive numbers x and y, and returns the largest even integer within the inclusive range [x, y]. If no even integer exists in that range, the function returns -1."
+    ]
+  },
+  {
+    "filename": "HumanEval_103.txt",
+    "comments": [
+      "# Given two positive integers n and m, compute the average of the integers from n to m (inclusive). \n# Round the average to the nearest integer and convert the result to binary. \n# Return -1 if n is greater than m."
+    ]
+  },
+  {
+    "filename": "HumanEval_104.txt",
+    "comments": [
+      "# Given a list of positive integers x, return a sorted list of all elements that do not have any even digit. The returned list should be sorted in increasing order."
+    ]
+  },
+  {
+    "filename": "HumanEval_105.txt",
+    "comments": [
+      "# Given an array of integers, sort the integers between 1 and 9 inclusive, reverse the resulting array, and replace each digit with its corresponding name from \"One\", \"Two\", \"Three\", \"Four\", \"Five\", \"Six\", \"Seven\", \"Eight\", \"Nine\"."
+    ]
+  },
+  {
+    "filename": "HumanEval_106.txt",
+    "comments": [
+      "# Implement the function f that takes n as a parameter and returns a list of size n, \n# where the value of the element at index i is the factorial of i if i is even, \n# or the sum of numbers from 1 to i if i is odd. \n# Note that i starts from 1, and the factorial of i is defined as the multiplication of the numbers from 1 to i (1 * 2 * ... * i)."
+    ]
+  },
+  {
+    "filename": "HumanEval_107.txt",
+    "comments": [
+      "# Given a positive integer n, return a tuple containing the number of even and odd integer palindromes that fall within the range (1, n), inclusive."
+    ]
+  },
+  {
+    "filename": "HumanEval_108.txt",
+    "comments": [
+      "# Write a function `count_nums` that takes an array of integers and returns the number of elements with a sum of digits greater than 0. Note that for negative numbers, the first digit is signed; for example, -123 has signed digits -1, 2, and 3."
+    ]
+  },
+  {
+    "filename": "HumanEval_109.txt",
+    "comments": [
+      "# Given an array 'arr' of N integers with randomly ordered elements, \n# determine if it is possible to get an array sorted in non-decreasing order \n# by performing right shift operations any number of times. \n# A right shift operation shifts all elements of the array by one position \n# to the right, and the last element moves to the 0th index.\n# If the sorted array can be achieved through these operations, return True; \n# otherwise, return False. If the array is empty, return True. \n# Note: The elements in the given list are guaranteed to be unique."
+    ]
+  },
+  {
+    "filename": "HumanEval_110.txt",
+    "comments": [
+      "# Implement a function that takes two lists of numbers and determines whether it is possible to exchange elements between them to make lst1 a list of only even numbers. \n# There is no limit on the number of exchanged elements. \n# Return \"YES\" if it is possible to make all elements of lst1 even, otherwise return \"NO\"."
+    ]
+  },
+  {
+    "filename": "HumanEval_111.txt",
+    "comments": [
+      "# Given a string representing space-separated lowercase letters, return a dictionary of the letters with the most repetition and their corresponding counts. If several letters have the same occurrence, return all of them."
+    ]
+  },
+  {
+    "filename": "HumanEval_112.txt",
+    "comments": [
+      "# Given two strings s and c, delete all characters in s that are equal to any character in c, then check if the resultant string is a palindrome. A string is a palindrome if it reads the same backward as forward. Return a tuple containing the resultant string and a boolean indicating the palindrome check (True/False)."
+    ]
+  },
+  {
+    "filename": "HumanEval_113.txt",
+    "comments": [
+      "# Given a list of strings consisting of only digits, return a list where each element represents the number of odd digits in the corresponding string of the input."
+    ]
+  },
+  {
+    "filename": "HumanEval_114.txt",
+    "comments": [
+      "# Given an array of integers nums, find the minimum sum of any non-empty sub-array of nums."
+    ]
+  },
+  {
+    "filename": "HumanEval_115.txt",
+    "comments": [
+      "# Given a rectangular grid of wells where each row represents a well and each 1 in a row represents a unit of water, determine the number of times buckets need to be lowered to empty the wells, considering that each well has a corresponding bucket with the same capacity."
+    ]
+  },
+  {
+    "filename": "HumanEval_116.txt",
+    "comments": [
+      "# Sort an array of non-negative integers according to the number of ones in their binary representation in ascending order. For numbers with the same number of ones, sort based on their decimal value."
+    ]
+  },
+  {
+    "filename": "HumanEval_117.txt",
+    "comments": [
+      "# Given a string s and a natural number n, implement a function that returns a list of all words from string s that contain exactly n consonants, in the order they appear in the string s. If the string s is empty, return an empty list. Assume the input string contains only letters and spaces."
+    ]
+  },
+  {
+    "filename": "HumanEval_118.txt",
+    "comments": [
+      "# Given a word, find the closest vowel that stands between two consonants from the right side of the word (case sensitive). \n# Vowels at the beginning and end of the word do not count. \n# Return an empty string if no such vowel is found. \n# Assume that the given string contains only English letters."
+    ]
+  },
+  {
+    "filename": "HumanEval_119.txt",
+    "comments": [
+      "# Given a list of two strings consisting of open parentheses '(' and close parentheses ')', check if it is possible to concatenate the two strings in some order to form a balanced string. A string is considered balanced if all parentheses are correctly matched. Return 'Yes' if a good string can be formed, and return 'No' otherwise."
+    ]
+  },
+  {
+    "filename": "HumanEval_120.txt",
+    "comments": [
+      "# Given an array of integers arr and a positive integer k, return a sorted list of length k containing the maximum k numbers in arr."
+    ]
+  },
+  {
+    "filename": "HumanEval_121.txt",
+    "comments": [
+      "# Given a non-empty list of integers, return the sum of all odd elements located at even positions."
+    ]
+  },
+  {
+    "filename": "HumanEval_122.txt",
+    "comments": [
+      "# Given a non-empty array of integers arr and an integer k, return the sum of the elements with at most two digits from the first k elements of arr."
+    ]
+  },
+  {
+    "filename": "HumanEval_123.txt",
+    "comments": [
+      "# Given a positive integer n, return a sorted list containing the odd numbers in the Collatz sequence. \n# The Collatz sequence is defined as follows: start with any positive integer n. \n# Each subsequent term is derived from the previous term: if the term is even, the next term is half of it; \n# if the term is odd, the next term is three times the term plus one. \n# It is conjectured that this sequence will always reach 1 for any starting value of n. \n# Note: \n# 1. Collatz(1) is [1]. \n# 2. The returned list must be sorted in increasing order."
+    ]
+  },
+  {
+    "filename": "HumanEval_124.txt",
+    "comments": [
+      "# Write a function to validate a given date string and return True if the date is valid, otherwise return False. \n# The date is valid if it satisfies the following rules:\n# 1. The date string is not empty.\n# 2. The number of days is between 1 and 31 for months 1, 3, 5, 7, 8, 10, 12; between 1 and 30 for months 4, 6, 9, 11; and between 1 and 29 for February.\n# 3. The month value is between 1 and 12.\n# 4. The date must be in the format: mm-dd-yyyy."
+    ]
+  },
+  {
+    "filename": "HumanEval_125.txt",
+    "comments": [
+      "# Given a string of words, return a list of words split on whitespace. If no whitespace exists, split on commas. If no commas exist, return the number of lower-case letters with odd order in the alphabet (ord('a') = 0, ord('b') = 1, ..., ord('z') = 25)."
+    ]
+  },
+  {
+    "filename": "HumanEval_126.txt",
+    "comments": [
+      "# Given a list of numbers, return whether they are sorted in ascending order. If the list contains more than 1 duplicate of the same number, return False. Assume the list contains only non-negative integers."
+    ]
+  },
+  {
+    "filename": "HumanEval_127.txt",
+    "comments": [
+      "# Given two closed intervals represented as pairs of integers (start, end), \n# determine whether the length of their intersection is a prime number.\n# If the intervals are (1, 3) and (2, 4), the intersection is (2, 3) \n# with a length of 1, which is not a prime number. \n# If the length of the intersection is a prime number, return \"YES\", \n# otherwise return \"NO\". \n# If the two intervals do not intersect, return \"NO\"."
+    ]
+  },
+  {
+    "filename": "HumanEval_128.txt",
+    "comments": [
+      "# Given an array arr of integers, return the sum of magnitudes of integers multiplied by the product of all signs of each number in the array, represented by 1, -1, or 0. Return None for an empty arr."
+    ]
+  },
+  {
+    "filename": "HumanEval_129.txt",
+    "comments": [
+      "# Given a grid with N rows and N columns (N >= 2) and a positive integer k, \n# where each cell contains a unique integer in the range [1, N * N] inclusive, \n# find the minimum path of length k in the grid. \n# You can start from any cell and can move to any neighboring cells sharing an edge. \n# A path of length k means visiting exactly k cells (not necessarily distinct) and cannot go off the grid. \n# A path A is considered less than a path B if list_A is lexicographically less than list_B. \n# Return an ordered list of the values from the cells that the minimum path passes through."
+    ]
+  },
+  {
+    "filename": "HumanEval_130.txt",
+    "comments": [
+      "# Given a non-negative integer n, return a list of the first n + 1 numbers of the Tribonacci sequence, which is defined by the recurrence: \n# tri(1) = 3,\n# tri(n) = 1 + n / 2, if n is even,\n# tri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd."
+    ]
+  },
+  {
+    "filename": "HumanEval_131.txt",
+    "comments": [
+      "# Given a positive integer n, return the product of the odd digits and return 0 if all digits are even."
+    ]
+  },
+  {
+    "filename": "HumanEval_132.txt",
+    "comments": [
+      "# Create a function that takes a string containing only square brackets as input and returns True if there is a valid subsequence of brackets where at least one bracket in the subsequence is nested."
+    ]
+  },
+  {
+    "filename": "HumanEval_133.txt",
+    "comments": [
+      "# Given a list of numbers, return the sum of squared numbers in the given list after rounding each element to the upper integer (Ceiling)."
+    ]
+  },
+  {
+    "filename": "HumanEval_134.txt",
+    "comments": [
+      "# Create a function that returns True if the last character of a given string is an alphabetical character and not part of a word; otherwise, return False. A \"word\" is defined as a group of characters separated by spaces."
+    ]
+  },
+  {
+    "filename": "HumanEval_135.txt",
+    "comments": [
+      "# Create a function that returns the largest index of an element that is not greater than or equal to the element immediately preceding it. If no such element exists, return -1. The given array does not contain duplicate values."
+    ]
+  },
+  {
+    "filename": "HumanEval_136.txt",
+    "comments": [
+      "# Create a function that returns a tuple (a, b), where 'a' is the largest of negative integers and 'b' is the smallest of positive integers in the list. If there are no negative or positive integers, return None for each."
+    ]
+  },
+  {
+    "filename": "HumanEval_137.txt",
+    "comments": [
+      "# Create a function that takes integers, floats, or strings representing real numbers and returns the larger variable in its given variable type. Return None if the values are equal. Note that a real number represented as a string may use either '.' or ',' as the decimal point."
+    ]
+  },
+  {
+    "filename": "HumanEval_138.txt",
+    "comments": [
+      "# Evaluate whether the given number n can be expressed as the sum of exactly 4 positive even numbers."
+    ]
+  },
+  {
+    "filename": "HumanEval_139.txt",
+    "comments": [
+      "# Define the Brazilian factorial as follows: \n# brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1! \n# where n > 0."
+    ]
+  },
+  {
+    "filename": "HumanEval_140.txt",
+    "comments": [
+      "# Given a string text, replace all spaces with underscores, and replace all consecutive spaces with a single dash if there are more than two consecutive spaces."
+    ]
+  },
+  {
+    "filename": "HumanEval_141.txt",
+    "comments": [
+      "# Create a function that takes a string representing a file's name and returns 'Yes' if the file's name is valid, and 'No' otherwise. \n# A file's name is considered valid if all the following conditions are met:\n# - There should not be more than three digits ('0'-'9') in the file's name.\n# - The file's name contains exactly one dot '.'.\n# - The substring before the dot should not be empty and must start with a letter from the Latin alphabet ('a'-'z' and 'A'-'Z').\n# - The substring after the dot must be one of the following: ['txt', 'exe', 'dll']."
+    ]
+  },
+  {
+    "filename": "HumanEval_142.txt",
+    "comments": [
+      "# This function takes a list of integers, squares the integer at each index that is a multiple of 3, \n# cubes the integer at each index that is a multiple of 4 but not a multiple of 3, \n# and returns the sum of all modified entries in the list."
+    ]
+  },
+  {
+    "filename": "HumanEval_143.txt",
+    "comments": [
+      "# Given a string representing a sentence containing words separated by spaces, return a string of the words whose lengths are prime numbers, maintaining the original order of the words."
+    ]
+  },
+  {
+    "filename": "HumanEval_144.txt",
+    "comments": [
+      "# Implement a function to simplify the expression x * n. The function returns True if x * n evaluates to a whole number and returns False otherwise. Both x and n are string representations of fractions in the format <numerator>/<denominator>, where both numerator and denominator are positive whole numbers. It is assumed that x and n are valid fractions with no zero as a denominator."
+    ]
+  },
+  {
+    "filename": "HumanEval_145.txt",
+    "comments": [
+      "# Write a function that sorts the given list of integers in ascending order based on the sum of their digits. If multiple items have the same sum of their digits, order them according to their original index in the list."
+    ]
+  },
+  {
+    "filename": "HumanEval_146.txt",
+    "comments": [
+      "# Define a function that takes an array of numbers as input and returns the count of elements in the array that are greater than 10 and have both first and last digits as odd (1, 3, 5, 7, 9)."
+    ]
+  },
+  {
+    "filename": "HumanEval_147.txt",
+    "comments": [
+      "# Given a positive integer n, create an integer array a of length n.\n# For each i (1 \u2264 i \u2264 n), set the value of a[i] = i * i - i + 1.\n# Return the number of triples (a[i], a[j], a[k]) of a where i < j < k,\n# and a[i] + a[j] + a[k] is a multiple of 3."
+    ]
+  },
+  {
+    "filename": "HumanEval_148.txt",
+    "comments": [
+      "# There are eight planets in our solar system: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune. \n# Write a function that takes two planet names as strings, planet1 and planet2. \n# The function should return a tuple containing all planets whose orbits are located between the orbit of planet1 and planet2, sorted by proximity to the Sun. \n# The function should return an empty tuple if planet1 or planet2 are not valid planet names."
+    ]
+  },
+  {
+    "filename": "HumanEval_149.txt",
+    "comments": [
+      "# Write a function that accepts a list of strings as a parameter,\n# deletes the strings with odd lengths from it,\n# and returns the resulting list in sorted order.\n# The input will always be a list of strings and may contain duplicates.\n# The returned list should be sorted in ascending order by the length of each word.\n# If two words have the same length, sort the list alphabetically.\n# The function should return a list of strings in sorted order.\n# It is assumed that all words will have the same length."
+    ]
+  },
+  {
+    "filename": "HumanEval_150.txt",
+    "comments": [
+      "# A program that returns the value of x if n is a prime number, and returns the value of y otherwise."
+    ]
+  },
+  {
+    "filename": "HumanEval_151.txt",
+    "comments": [
+      "# Given a list of numbers, return the sum of squares of the odd integers in the list, ignoring negative numbers and non-integer values."
+    ]
+  },
+  {
+    "filename": "HumanEval_152.txt",
+    "comments": [
+      "# Determine if a person correctly guessed the results of a number of matches given two arrays: scores and guesses of equal length. \n# Return an array of the same length indicating the accuracy of each guess, where a correct guess results in a value of 0, \n# and an incorrect guess results in the absolute difference between the guess and the score."
+    ]
+  },
+  {
+    "filename": "HumanEval_153.txt",
+    "comments": [
+      "# Given the name of a class (a string) and a list of extensions, determine the strongest extension based on the strength calculated as CAP - SM, where CAP is the number of uppercase letters and SM is the number of lowercase letters in the extension's name. Return a string in the format: ClassName.StrongestExtensionName. If multiple extensions have the same strength, select the first one in the list."
+    ]
+  },
+  {
+    "filename": "HumanEval_154.txt",
+    "comments": [
+      "# Given two words, return True if the second word or any of its rotations is a substring of the first word."
+    ]
+  },
+  {
+    "filename": "HumanEval_155.txt",
+    "comments": [
+      "# Given an integer, return a tuple containing the counts of even and odd digits, respectively."
+    ]
+  },
+  {
+    "filename": "HumanEval_156.txt",
+    "comments": [
+      "# Given a positive integer, obtain its Roman numeral equivalent as a string and return it in lowercase. The input must satisfy the restriction: 1 <= num <= 1000."
+    ]
+  },
+  {
+    "filename": "HumanEval_157.txt",
+    "comments": [
+      "# Given the lengths of the three sides of a triangle, return True if the three sides form a right-angled triangle; return False otherwise. A right-angled triangle is defined as a triangle in which one of the angles is a right angle, measuring 90 degrees."
+    ]
+  },
+  {
+    "filename": "HumanEval_158.txt",
+    "comments": [
+      "# Write a function that accepts a list of strings, returns the word with the maximum number of unique characters. \n# If multiple strings have the same maximum number of unique characters, return the one that comes first in lexicographical order."
+    ]
+  },
+  {
+    "filename": "HumanEval_159.txt",
+    "comments": [
+      "# Given the number of already eaten carrots and the requirement to eat more carrots to complete the day's meals, return an array with the total number of eaten carrots after the meals and the number of carrots left after the meals. If there are not enough remaining carrots, consume all remaining carrots but return that the rabbit is still hungry."
+    ]
+  },
+  {
+    "filename": "HumanEval_160.txt",
+    "comments": [
+      "# Given two lists, operator and operand, where the operator list contains basic algebra operations and the operand list contains integers, build the algebraic expression using these lists and return the evaluation of the expression.  \n# The basic algebra operations include addition (+), subtraction (-), multiplication (*), floor division (//), and exponentiation (**).  \n# Note: The length of the operator list is equal to the length of the operand list minus one. The operand list consists of non-negative integers, with at least two operands and at least one operator in the operator list."
+    ]
+  },
+  {
+    "filename": "HumanEval_161.txt",
+    "comments": [
+      "# Given a string s, reverse the case of each letter in the string from lower to upper or vice versa. If the character is not a letter, keep it as it is. If the string contains no letters, reverse the entire string. The function should return the resulted string."
+    ]
+  },
+  {
+    "filename": "HumanEval_162.txt",
+    "comments": [
+      "# Given a string 'text', return its MD5 hash equivalent string. If 'text' is an empty string, return None."
+    ]
+  },
+  {
+    "filename": "HumanEval_163.txt",
+    "comments": [
+      "# Given two positive integers a and b, return the even digits between a and b in ascending order."
+    ]
+  }
+]

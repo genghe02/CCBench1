@@ -1,0 +1,1 @@
+# Return the last 'n' rows of a DataFrame using the tail method in pandas.

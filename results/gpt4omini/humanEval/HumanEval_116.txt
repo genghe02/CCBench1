@@ -1,0 +1,29 @@
+```python
+def sort_array(arr):
+    # Sort the input array first in ascending order, and then sort it based on the number of '1's in the binary representation of each element.
+    # The primary sorting is done numerically, followed by a secondary sort based on the count of '1's in each number's binary form.
+    # :param arr: list of integers, the array to be sorted
+    # :return: list of integers, the sorted array first in ascending order, then by the number of '1's in binary representation
+
+    # Test case 1: Basic input
+    # >>> sort_array([1, 2, 3]) 
+    # returns [1, 2, 3]
+    
+    # Test case 2: Input with duplicate values
+    # >>> sort_array([1, 2, 2, 3, 3, 3]) 
+    # returns [1, 2, 2, 3, 3, 3]
+    
+    # Test case 3: Input including zeros
+    # >>> sort_array([0, 1, 2, 3]) 
+    # returns [0, 1, 2, 3]
+    
+    # Test case 4: Input with varying binary ones
+    # >>> sort_array([3, 1, 2, 4])
+    # returns [1, 2, 4, 3]
+    
+    # Test case 5: Empty array
+    # >>> sort_array([])
+    # returns []
+    
+    return sorted(sorted(arr), key=lambda x: bin(x)[2:].count('1'))
+```

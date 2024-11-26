@@ -1,0 +1,1 @@
+# Access the value in the 'mycol' column of the DataFrame at index 1, if it does not exist return np.nan.

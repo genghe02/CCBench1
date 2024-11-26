@@ -1,0 +1,31 @@
+ from typing import List
+
+
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    # Remove duplicates from the given list of integers and return the new list.
+    # Use a dictionary from collections module as a counter to count the occurrences of each number.
+    # Keep only the numbers that appear less than or equal to once in the list.
+    import collections
+    c = collections.Counter(numbers)
+    return [n for n in numbers if c[n] <= 1]
+
+    <Requirements for the code>
+    # This function takes a list of integers as an argument and returns a new list with no duplicates.
+    # It uses the collections.Counter to count the occurrences of each number in the list.
+    # The list comprehension is used to filter out the numbers that appear more than once.
+
+    <some test cases for the function>
+    >>> remove_duplicates([1, 1, 2, 2, 3, 3, 4, 4, 5])
+    [1, 2, 3, 4]
+
+    >>> remove_duplicates([1, 2, 2, 3, 3, 3, 4, 4, 5, 5])
+    [1, 2, 3, 4, 5]
+
+    >>> remove_duplicates([1, 1, 1, 1, 1])
+    [1]
+
+    >>> remove_duplicates([])
+    []
+
+    >>> remove_duplicates([1])
+    [1]

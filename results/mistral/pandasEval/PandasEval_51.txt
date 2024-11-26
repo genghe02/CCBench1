@@ -1,0 +1,1 @@
+ # Apply a lambda function to each row of the DataFrame using apply method, and sum up the values in each row using numpy sum function.

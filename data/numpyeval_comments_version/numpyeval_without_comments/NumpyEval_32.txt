@@ -1,0 +1,6 @@
+import numpy as np
+
+def broadcasting_app(a, L, S):  # Window len = L, Stride len/stepsize = S
+    <Requirements for the code>
+    nrows = ((a.size-L)//S)+1
+    return a[S*np.arange(nrows)[:,None] + np.arange(L)]

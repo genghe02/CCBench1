@@ -1,0 +1,99 @@
+```python
+import math
+
+# This class provides static methods to calculate different statistical measures like median, mode, correlation, mean, standard deviation and z-score.
+class Statistics3:
+    @staticmethod
+    # This method computes the median of the provided data.
+    # :param data: list, the data from which the median is to be computed.
+    # :return: float or int, the median of the data.
+    # Test case: >>> Statistics3.median([1, 3, 3, 6, 7, 8, 9]) -> 6
+    def median(data):
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 1:
+            return sorted_data[n // 2]
+        else:
+            return (sorted_data[n // 2 - 1] + sorted_data[n // 2]) / 2
+
+    @staticmethod
+    # This method computes the mode(s) of the provided data.
+    # :param data: list, the data from which the mode is to be computed.
+    # :return: list, the mode(s) of the data.
+    # Test case: >>> Statistics3.mode([1, 2, 3, 3, 4, 4, 4, 5]) -> [4]
+    def mode(data):
+        counts = {}
+        for value in data:
+            counts[value] = counts.get(value, 0) + 1
+        max_count = max(counts.values())
+        mode_values = [value for value, count in counts.items() if count == max_count]
+        return mode_values
+
+    @staticmethod
+    # This method computes the correlation between two lists of data.
+    # :param x: list, the first list of data.
+    # :param y: list, the second list of data.
+    # :return: float, the correlation between x and y.
+    # Test case: >>> Statistics3.correlation([1, 2, 3, 4], [5, 6, 7, 8]) -> 1.0
+    def correlation(x, y):
+        n = len(x)
+        mean_x = sum(x) / n
+        mean_y = sum(y) / n
+        numerator = sum((xi - mean_x) * (yi - mean_y) for xi, yi in zip(x, y))
+        denominator = math.sqrt(sum((xi - mean_x) ** 2 for xi in x) * sum((yi - mean_y) ** 2 for yi in y))
+        if denominator == 0:
+            return None
+        return numerator / denominator
+
+    @staticmethod
+    # This method computes the mean of the provided data.
+    # :param data: list, the data from which the mean is to be computed.
+    # :return: float, the mean of the data.
+    # Test case: >>> Statistics3.mean([1, 2, 3, 4, 5]) -> 3.0
+    def mean(data):
+        if len(data) == 0:
+            return None
+        return sum(data) / len(data)
+
+    @staticmethod
+    # This method computes the correlation matrix of the provided data.
+    # :param data: list of lists, the data from which the correlation matrix is to be computed.
+    # :return: list of lists, the correlation matrix of the data.
+    # Test case: >>> Statistics3.correlation_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) -> [[1.0, 1.0, 1.0], [1.0, 1.0, 1.0], [1.0, 1.0, 1.0]]
+    def correlation_matrix(data):
+        matrix = []
+        for i in range(len(data[0])):
+            row = []
+            for j in range(len(data[0])):
+                column1 = [row[i] for row in data]
+                column2 = [row[j] for row in data]
+                correlation = Statistics3.correlation(column1, column2)
+                row.append(correlation)
+            matrix.append(row)
+        return matrix
+
+    @staticmethod
+    # This method computes the standard deviation of the provided data.
+    # :param data: list, the data from which the standard deviation is to be computed.
+    # :return: float, the standard deviation of the data.
+    # Test case: >>> Statistics3.standard_deviation([1, 2, 3, 4, 5]) -> 1.5811388300841898
+    def standard_deviation(data):
+        n = len(data)
+        if n < 2:
+            return None
+        mean_value = Statistics3.mean(data)
+        variance = sum((x - mean_value) ** 2 for x in data) / (n - 1)
+        return math.sqrt(variance)
+
+    @staticmethod
+    # This method computes the z-scores of the provided data.
+    # :param data: list, the data from which the z-scores are to be computed.
+    # :return: list, the z-scores of the data.
+    # Test case: >>> Statistics3.z_score([1, 2, 3, 4, 5]) -> [-1.414213562373095, -0.7071067811865475, 0.0, 0.7071067811865475, 1.414213562373095]
+    def z_score(data):
+        mean = Statistics3.mean(data)
+        std_deviation = Statistics3.standard_deviation(data)
+        if std_deviation is None or std_deviation == 0:
+            return None
+        return [(x - mean) / std_deviation for x in data]
+```

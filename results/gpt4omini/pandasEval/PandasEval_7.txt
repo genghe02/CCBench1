@@ -1,0 +1,15 @@
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    'date': ["2022-01-01", "2022-01-02", "2022-01-03", "friday"],
+    'value': [1, 2, 3, 4]
+})
+
+# Convert the 'date' column in the DataFrame to datetime objects.
+# If a date cannot be converted, it will be replaced with NaT (Not a Time).
+# This is particularly useful for handling inconsistent date formats and ensuring
+# that subsequent date operations can be performed safely.
+# For example, "friday" is not a valid date and should result in a NaT value upon conversion.
+df['date'] = pd.to_datetime(df['date'], errors='coerce')
+```

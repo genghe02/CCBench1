@@ -1,0 +1,14 @@
+from typing import List
+
+
+def parse_music(music_string: str) -> List[int]:
+    # Parse the music string into a list of integers representing notes based on the mapping provided.
+    
+    # Test cases:
+    # Test case 1: Empty string
+    # Test case 2: String with one note
+    # Test case 3: String with multiple notes separated by spaces
+    # Test case 4: String with invalid notes
+    
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    return [note_map[x] for x in music_string.split(' ') if x]

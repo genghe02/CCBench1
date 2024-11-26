@@ -1,0 +1,1 @@
+# This function takes a pandas series as input and returns a new series where each element is the smallest integer greater than or equal to the corresponding element in the input series. This is done using the numpy ceil function.

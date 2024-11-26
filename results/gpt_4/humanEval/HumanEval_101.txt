@@ -1,0 +1,25 @@
+def words_string(s):
+    # This function takes a string 's' as input, replaces the commas in the string with spaces, and then splits the string into a list of words.
+    # It returns an empty list if the input string is empty or None.
+    
+    # Test cases:
+    # >>> words_string("Hello, world!")
+    # ['Hello', ' world!']
+    # >>> words_string("Python, is, a, great, language")
+    # ['Python', ' is', ' a', ' great', ' language']
+    # >>> words_string("")
+    # []
+
+    if not s:
+        return []
+
+    s_list = []
+
+    for letter in s:
+        if letter == ',':
+            s_list.append(' ')
+        else:
+            s_list.append(letter)
+
+    s_list = "".join(s_list)
+    return s_list.split()

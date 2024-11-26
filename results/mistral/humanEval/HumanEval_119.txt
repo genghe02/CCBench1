@@ -1,0 +1,33 @@
+ def match\_parens(lst):
+"""
+Check if a given list of characters contains a valid pair of parentheses.
+
+:param lst: list, a list of characters to check for valid parentheses.
+:return: str, 'Yes' if a valid pair of parentheses is found, 'No' otherwise.
+"""
+
+def check(s):
+"""
+Helper function to check if a given string contains a valid pair of parentheses.
+
+:param s: str, a string of characters to check for valid parentheses.
+:return: bool, True if a valid pair of parentheses is found, False otherwise.
+"""
+val = 0
+for i in s:
+if i == '(':
+val = val + 1
+else:
+val = val - 1
+if val < 0:
+return False
+return True if val == 0 else False
+
+S1 = lst[0] + lst[1]
+S2 = lst[1] + lst[0]
+# Test cases:
+# 1. ['(', ')']
+# 2. ['(', '(', ')']
+# 3. ['(', '(', ')', '(']
+# 4. ['(', '(', ')', '(']
+return 'Yes' if check(S1) or check(S2) else 'No'

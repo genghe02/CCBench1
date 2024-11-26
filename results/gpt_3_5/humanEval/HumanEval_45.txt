@@ -1,0 +1,16 @@
+def triangle_area(a, h):
+    # Calculate the area of a triangle using the formula: area = 0.5 * base * height
+    # a: float, the base of the triangle
+    # h: float, the height of the triangle
+    # Return the calculated area of the triangle as a float value
+
+    # Test case 1: Calculate the area of a triangle with base 4 and height 6
+    assert triangle_area(4, 6) == 12.0
+
+    # Test case 2: Calculate the area of a triangle with base 5.5 and height 8.3
+    assert triangle_area(5.5, 8.3) == 22.825
+
+    # Test case 3: Calculate the area of a triangle with base 0 and height 10
+    assert triangle_area(0, 10) == 0.0
+
+    return a * h / 2.0

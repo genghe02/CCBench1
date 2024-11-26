@@ -1,0 +1,8 @@
+import pandas as pd
+
+def add_zeros_to_string(df, col_name):
+    # Add Leading Zeros to Strings at `col_name` in Pandas Dataframe
+    # The maximum length of the string is 15
+    # Return the dataframe
+    df[col_name] = df[col_name].apply(lambda x: '{0:0>15}'.format(x))
+    return df

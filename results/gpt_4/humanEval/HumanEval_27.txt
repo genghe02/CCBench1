@@ -1,0 +1,13 @@
+def flip_case(string: str) -> str:
+    # This function uses the built-in swapcase() function to swap the case of each character in the input string.
+    # For example, all uppercase characters are converted to lowercase and all lowercase characters are converted to uppercase.
+    
+    # Test cases:
+    # >>> flip_case("Hello World") 
+    # 'hELLO wORLD'
+    # >>> flip_case("Python Programming") 
+    # 'pYTHON pROGRAMMING'
+    # >>> flip_case("123ABCabc") 
+    # '123abcABC'
+
+    return string.swapcase()

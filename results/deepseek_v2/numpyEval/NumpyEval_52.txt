@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+a = np.array([(3, 2), (6, 2), (3, 6), (3, 4), (5, 3)])
+
+# Sort the array based on the second column (y-coordinate) and then by the first column (x-coordinate) in case of ties.
+ind = np.lexsort((a[:, 0], a[:, 1]))
+a = a[ind]
+```

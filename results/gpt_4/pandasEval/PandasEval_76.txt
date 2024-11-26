@@ -1,0 +1,1 @@
+# Merge two pandas series into one by appending the source series to the target series, and ignoring the original indices of the two series, resulting in a new series with a default integer index.

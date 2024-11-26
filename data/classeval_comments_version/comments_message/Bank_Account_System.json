@@ -1,0 +1,12 @@
+[
+  "This is a class as a bank account system, which supports deposit money, withdraw money, view balance, and transfer money.",
+  "Initializes a bank account object with an attribute balance, default value is 0.",
+  "Deposits a certain amount into the account, increasing the account balance, return the current account balance.\n        If amount is negative, raise a ValueError(\"Invalid amount\").",
+  ":param amount: int",
+  "Withdraws a certain amount from the account, decreasing the account balance, return the current account balance.\n        If amount is negative, raise a ValueError(\"Invalid amount\").\n        If the withdrawal amount is greater than the account balance, raise a ValueError(\"Insufficient balance.\").",
+  ":param amount: int",
+  "Return the account balance.",
+  "Transfers a certain amount from the current account to another account.",
+  ":param other_account: BankAccount\n        :param amount: int",
+  ">>> account1 = BankAccount()\n        >>> account2 = BankAccount()\n        >>> account1.deposit(1000)\n        >>> account1.transfer(account2, 300)\n        account1.balance = 700 account2.balance = 300"
+]

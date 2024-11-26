@@ -1,0 +1,16 @@
+```python
+from typing import List
+
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    # Filter the input list of strings, returning only those that contain the specified substring.
+    # param strings: List[str], a list of strings to be filtered based on the substring
+    # param substring: str, the substring to search for within each of the strings
+    # return: List[str], a list of strings that contain the specified substring
+    # >>> filter_by_substring(['apple', 'banana', 'cherry'], 'an') 
+    # ['banana']
+    # >>> filter_by_substring(['apple', 'banana', 'cherry'], 'e') 
+    # ['apple', 'cherry']
+    # >>> filter_by_substring(['apple', 'banana', 'cherry'], 'x') 
+    # []
+    return [x for x in strings if substring in x]
+```

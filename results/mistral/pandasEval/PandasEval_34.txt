@@ -1,0 +1,7 @@
+ # Add a new row to the DataFrame by appending the given dictionary using pandas append function with ignore_index set to True.
+
+import pandas as pd
+
+def append_dict_to_df(df, dictionary):
+    df = df.append(pd.DataFrame.from_records([dictionary], ignore_index=True), ignore_index=True)
+    return df

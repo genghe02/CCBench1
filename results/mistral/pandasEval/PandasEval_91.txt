@@ -1,0 +1,10 @@
+ # Transform the 'two' column to a NumPy array and then cast each element to float using astype(float) before creating a DataFrame.
+
+import pandas as pd
+
+a = [['a', '1.2'], ['b', '70'], ['x', '5']]
+<Requirements for the code>
+# Transform the 'two' column to a NumPy array and then cast each element to float using astype(float) before creating a DataFrame.
+np_a = np.array([row[1] for row in a], dtype=np.float64)
+df = pd.DataFrame(a, columns=['one', 'two'])
+df['two'] = np_a

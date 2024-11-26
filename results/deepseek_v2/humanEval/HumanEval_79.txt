@@ -1,0 +1,15 @@
+```python
+def decimal_to_binary(decimal):
+    # Convert a decimal number to a binary string, prefixed and suffixed with "db".
+
+    # >>> decimal_to_binary(5)
+    # 'db101db'
+    # >>> decimal_to_binary(10)
+    # 'db1010db'
+    # >>> decimal_to_binary(0)
+    # 'db0db'
+    # >>> decimal_to_binary(-5)
+    # 'db-101db'
+
+    return "db" + bin(decimal)[2:] + "db"
+```

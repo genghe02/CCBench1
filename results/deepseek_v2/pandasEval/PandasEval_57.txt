@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def sorting_columns_based_on_column_name(df):
+    # Sort the columns of the DataFrame based on the column names in ascending order.
+    return df.reindex(sorted(df.columns), axis=1)
+```

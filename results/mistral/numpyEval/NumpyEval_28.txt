@@ -1,0 +1,7 @@
+ # Convert a NumPy matrix to a 1-D NumPy array efficiently using np.squeeze and np.asarray.
+
+import numpy as np
+
+def matrix2array(M):
+ <Requirements for the code>
+ return np.squeeze(np.asarray(M))

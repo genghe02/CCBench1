@@ -1,0 +1,15 @@
+ # Find the common elements between two pandas Series using the intersection method.
+
+import pandas as pd
+
+s1 = pd.Series([3, 4, 5])
+s2 = pd.Series([1, 2, 3, 5])
+
+<Requirements for the code>
+
+# Convert Series to sets for efficient set operations
+s1 = set(s1)
+s2 = set(s2)
+
+# Find the intersection of the two sets (common elements)
+intersection_result = s1.intersection(s2)

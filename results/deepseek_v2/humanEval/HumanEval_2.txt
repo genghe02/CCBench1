@@ -1,0 +1,15 @@
+```python
+def truncate_number(number: float) -> float:
+    # Truncate the decimal part of a floating-point number by using the modulus operator.
+    # param number: float, the number to be truncated
+    # return: float, the truncated number (i.e., the integer part of the number)
+    
+    # >>> truncate_number(3.14)
+    # 0.14
+    # >>> truncate_number(5.0)
+    # 0.0
+    # >>> truncate_number(-2.718)
+    # 0.282
+    
+    return number % 1.0
+```

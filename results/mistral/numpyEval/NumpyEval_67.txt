@@ -1,0 +1,13 @@
+ # Find the indices of elements equal to zero in the given NumPy array using np.where(arr == 0).
+
+import numpy as np
+
+def find_indices_zero(arr):
+"""
+Find the indices of elements equal to zero in the given NumPy array.
+
+:param arr: A NumPy array.
+:return: A NumPy array of indices where the given array elements are equal to zero.
+"""
+# Find the indices of elements equal to zero in the given NumPy array using np.where(arr == 0).
+return np.where(arr == 0)[0]

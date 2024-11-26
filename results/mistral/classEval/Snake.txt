@@ -1,0 +1,78 @@
+ class Snake:
+    # Define a class for controlling the behavior of a snake game object
+
+    def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT, BLOCK_SIZE, food_position):
+        # Initialize the snake object with given screen dimensions, block size, and initial food position
+
+        <description for whole function>: Initialize the snake object with given screen dimensions, block size, and initial food position.
+        <description for all parameters>:
+        :param SCREEN_WIDTH: int, width of the game screen
+        :param SCREEN_HEIGHT: int, height of the game screen
+        :param BLOCK_SIZE: int, size of each block in the game screen
+        :param food_position: tuple, initial position of the food in the game screen
+
+        self.length = 1
+        self.SCREEN_WIDTH = SCREEN_WIDTH
+        self.SCREEN_HEIGHT = SCREEN_HEIGHT
+        self.BLOCK_SIZE = BLOCK_SIZE
+        self.positions = [((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))]
+        self.score = 0
+        self.food_position = food_position
+
+    def move(self, direction):
+        # Move the snake object in the given direction
+
+        <description for whole function>: Move the snake object in the given direction.
+        <description for all parameters>:
+        :param direction: tuple, direction to move the snake (x, y)
+
+        <description for return statement>: None
+
+        cur = self.positions[0]
+        x, y = direction
+
+        new = (
+            ((cur[0] + (x * self.BLOCK_SIZE)) % self.SCREEN_WIDTH),
+            (cur[1] + (y * self.BLOCK_SIZE)) % self.SCREEN_HEIGHT,
+        )
+
+        if new == self.food_position:
+            self.eat_food()
+
+        if len(self.positions) > 2 and new in self.positions[2:]:
+            self.reset()
+        else:
+            self.positions.insert(0, new)
+            if len(self.positions) > self.length:
+                self.positions.pop()
+
+    def random_food_position(self):
+        # Generate a random food position for the snake to eat
+
+        <description for whole function>: Generate a random food position for the snake to eat.
+        <description for return statement>: None
+
+        while self.food_position in self.positions:
+            self.food_position = (random.randint(0, self.SCREEN_WIDTH // self.BLOCK_SIZE - 1) * self.BLOCK_SIZE,
+                                  random.randint(0, self.SCREEN_HEIGHT // self.BLOCK_SIZE - 1) * self.BLOCK_SIZE)
+
+    def reset(self):
+        # Reset the snake object to its initial state
+
+        <description for whole function>: Reset the snake object to its initial state.
+        <description for return statement>: None
+
+        self.length = 1
+        self.positions = [((self.SCREEN_WIDTH / 2), (self.SCREEN_HEIGHT / 2))]
+        self.score = 0
+        self.random_food_position()
+
+    def eat_food(self):
+        # Handle the logic when the snake eats the food
+
+        <description for whole function>: Handle the logic when the snake eats the food.
+        <description for return statement>: None
+
+        self.length += 1
+        self.score += 100
+        self.random_food_position()

@@ -1,0 +1,1 @@
+# Convert the numpy array 'arr' to a string representation using tostring() method and then create a new numpy array 'new_arr' by converting the string back to integers using fromstring() method.

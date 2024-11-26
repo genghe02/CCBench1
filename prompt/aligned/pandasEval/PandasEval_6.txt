@@ -1,0 +1,3 @@
+# Change the dtype of multiple columns in the dataframe.
+# The dataframe contains columns with different dtypes: some columns are float64, while others are int64.
+# Convert all columns with dtype float64 to float32.

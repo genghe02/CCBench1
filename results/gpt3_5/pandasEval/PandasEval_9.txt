@@ -1,0 +1,1 @@
+# Extract the first and last rows of a DataFrame using iloc and return them.

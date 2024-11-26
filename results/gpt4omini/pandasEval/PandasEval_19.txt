@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+
+def creating_df_with_same_as_other(df_original: pd.DataFrame) -> pd.DataFrame:
+    """ Create a copy of the original DataFrame with the same structure (column names and types)
+    but with no rows. Useful for initializing a DataFrame with the same schema while allowing for 
+    later data manipulations and additions.
+    
+    The resulting DataFrame will have the following characteristics:
+    - The index will be empty.
+    - The columns will be identical to the original DataFrame.
+    
+    >>> df = pd.DataFrame({'A': [1, 2], 'B': ['x', 'y']})
+    >>> df_empty = creating_df_with_same_as_other(df)
+    >>> df_empty.empty
+    True
+    >>> df_empty.columns.tolist()
+    ['A', 'B']
+    """
+    df_copy = df_original.iloc[:0,:].copy()
+    return df_copy
+```

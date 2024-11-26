@@ -1,0 +1,61 @@
+ class SQLGenerator:
+    # This class generates SQL queries for various database operations on a given table.
+    def __init__(self, table_name):
+        # Initialize the SQLGenerator instance with the given table name.
+        self.table_name = table_name
+
+    def select(self, fields=None, condition=None):
+        # Generate and return an SQL SELECT query based on the given fields and condition.
+        if fields is None:
+            fields = "*"
+        else:
+            fields = ", ".join(fields)
+        sql = f"SELECT {fields} FROM {self.table_name}"
+        if condition is not None:
+            sql += f" WHERE {condition}"
+        return sql + ";"
+
+    def insert(self, data):
+        # Generate and return an SQL INSERT query based on the given data.
+        fields = ", ".join(data.keys())
+        values = ", ".join([f"'{value}'" for value in data.values()])
+        sql = f"INSERT INTO {self.table_name} ({fields}) VALUES ({values})"
+        return sql + ";"
+
+    def update(self, data, condition):
+        # Generate and return an SQL UPDATE query based on the given data and condition.
+        set_clause = ", ".join([f"{field} = '{value}'" for field, value in data.items()])
+        sql = f"UPDATE {self.table_name} SET {set_clause} WHERE {condition}"
+        return sql + ";"
+
+    def delete(self, condition):
+        # Generate and return an SQL DELETE query based on the given condition.
+        sql = f"DELETE FROM {self.table_name} WHERE {condition}"
+        return sql + ";"
+
+    def select_female_under_age(self, age):
+        # Generate and return an SQL SELECT query for females under the given age.
+        condition = f"age < {age} AND gender = 'female'"
+        return self.select(condition=condition)
+
+    def select_by_age_range(self, min_age, max_age):
+        # Generate and return an SQL SELECT query for records within the given age range.
+        condition = f"age BETWEEN {min_age} AND {max_age}"
+        return self.select(condition=condition)
+
+    # Test cases:
+    # >>> sql_gen = SQLGenerator("users")
+    # >>> sql_gen.select()
+    # 'SELECT * FROM users;'
+    # >>> sql_gen.select(fields=["name", "age"])
+    # 'SELECT name, age FROM users;'
+    # >>> sql_gen.insert(data={"name": "John Doe", "age": 30})
+    # 'INSERT INTO users (name, age) VALUES ("John Doe", 30);'
+    # >>> sql_gen.update(data={"age": 31}, condition="age = 30")
+    # 'UPDATE users SET age = "31" WHERE age = 30;'
+    # >>> sql_gen.delete(condition="age < 18")
+    # 'DELETE FROM users WHERE age < 18;'
+    # >>> sql_gen.select_female_under_age(age=20)
+    # 'SELECT * FROM users WHERE age < 20 AND gender = "female";'
+    # >>> sql_gen.select_by_age_range(min_age=25, max_age=30)
+    # 'SELECT * FROM users WHERE age BETWEEN 25 AND 30;'

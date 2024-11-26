@@ -1,0 +1,37 @@
+ def unique(l: list):
+    # This function takes a list as an argument and returns a new list containing only the unique elements.
+    # It achieves this by converting the list to a set, which automatically removes duplicates,
+    # and then converting the set back to a list to maintain the original order if necessary.
+
+    # For example, if the input list is [1, 2, 2, 3, 3, 3, 4, 4, 4, 5], the output will be [1, 2, 3, 4, 5].
+
+    return sorted(list(set(l)))
+    
+    # Test cases:
+    # Test case 1: Empty list
+    >>> unique([])
+    []
+    
+    # Test case 2: List with no duplicates
+    >>> unique([1, 2, 3])
+    [1, 2, 3]
+    
+    # Test case 3: List with duplicates
+    >>> unique([1, 2, 2, 3, 3, 3, 4, 4, 4, 5])
+    [1, 2, 3, 4, 5]
+    
+    # Test case 4: List with negative numbers
+    >>> unique([-1, 0, 1, 1, 2])
+    [-1, 0, 1]
+    
+    # Test case 5: List with floating point numbers
+    >>> unique([1.1, 1.2, 1.1, 2.2])
+    [1.1, 1.2, 2.2]
+    
+    # Test case 6: List with strings
+    >>> unique(["apple", "banana", "apple", "orange"])
+    ['apple', 'banana', 'orange']
+    
+    # Test case 7: List with complex numbers
+    >>> unique([1+2j, 1+2j, 3+4j])
+    [1+2j, 3+4j]

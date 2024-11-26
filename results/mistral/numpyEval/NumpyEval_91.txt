@@ -1,0 +1,9 @@
+ # Find each column where all elements are different from those in adjacent columns, and delete these columns using np.delete().
+
+import numpy as np
+
+a = np.arange(12).reshape(3,4)
+
+# Find each column where all elements are different from those in adjacent columns, and delete these columns using np.delete().
+result = np.delete(a, np.where(np.all(np.triu(np.equal(a, a.shift(1, axis=1))), axis=0).any(axis=0)), axis=1)
+out = np.delete(a, [1, 3], axis=1) # This is the original code, no need to change it.

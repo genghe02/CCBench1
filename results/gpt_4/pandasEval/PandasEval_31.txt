@@ -1,0 +1,1 @@
+# This function takes a pandas series as input and returns another series where all consecutive duplicate values are dropped. This is done by shifting the series by one element and comparing it with the original series. The loc method is used to select only those elements of the series where the value is not equal to the shifted series.

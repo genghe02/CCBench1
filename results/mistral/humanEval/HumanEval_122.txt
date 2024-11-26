@@ -1,0 +1,24 @@
+ def add_elements(arr, k):
+    # This function takes an array 'arr' and an integer 'k' as input, and returns the sum of elements in the array whose length is less than or equal to 2, up to the index 'k'.
+
+    # Test cases:
+    # Test case 1: Empty array and index 0
+    # Test case 2: Array with elements less than or equal to 2 and index less than array length
+    # Test case 3: Array with elements greater than 2 and index equal to array length
+    # Test case 4: Array with elements of different lengths and index greater than array length
+
+    # Check if input is valid
+    if not isinstance(arr, list) or not isinstance(k, int):
+        raise TypeError("Input must be a list and index must be an integer")
+
+    # Check if index is valid
+    if k < 0:
+        raise IndexError("Index must be non-negative")
+
+    # Check if all elements are valid
+    for elem in arr:
+        if not isinstance(elem, (int, float)):
+            raise TypeError("Array elements must be numbers")
+
+    # Calculate sum of elements up to index 'k' with length less than or equal to 2
+    return sum(elem for elem in arr[:k] if len(str(elem)) <= 2)

@@ -1,0 +1,1 @@
+# Shifts the values in the 'gdp' column of the dataframe up by one place. This operation leaves the first row of the 'gdp' column with a NaN value and the last value of the column is dropped.

@@ -1,0 +1,1 @@
+# Reshape a 3D numpy array into a 2D array with dimensions (5000, 25) by flattening the first two dimensions.

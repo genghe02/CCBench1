@@ -1,0 +1,7 @@
+def multiply(a, b):
+    # Multiply the last digit of two given numbers after taking their absolute values.
+    # Test cases:
+    # 1. multiply(3, 5) -> 15
+    # 2. multiply(-7, 6) -> 42
+    # 3. multiply(0, 9) -> 0
+    return abs(a % 10) * abs(b % 10)

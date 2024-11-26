@@ -1,0 +1,1 @@
+{"filename": "PandasEval_81.txt", "comments": "# What is the best way to do a groupby on a Pandas dataframe, but exclude some columns from that groupby?\n# I want to groupby the column `Country` and `Item_Code` and only compute the sum of the rows falling under the columns ['Y1961', 'Y1962' and 'Y1963']. \n"}

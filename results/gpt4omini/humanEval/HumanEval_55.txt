@@ -1,0 +1,17 @@
+```python
+def fib(n: int):
+    # Calculate the nth Fibonacci number using a recursive approach.
+    # This function handles the base cases where n is 0 or 1, and recursively calls itself for larger values of n.
+    # param n: int, a non-negative integer representing the position in the Fibonacci sequence.
+    # return: int, the nth Fibonacci number.
+    # Test cases:
+    # >>> fib(0)  # should return 0
+    # >>> fib(1)  # should return 1
+    # >>> fib(5)  # should return 5
+    # >>> fib(10)  # should return 55
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+```

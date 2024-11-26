@@ -1,0 +1,15 @@
+ def solution(lst):
+    # This function takes a list as an argument and returns the sum of elements that have an even index and an odd value.
+
+    # Test cases:
+    # Test case 1: Empty list
+    # Test case 2: All even elements
+    # Test case 3: All odd elements
+    # Test case 4: Mixed elements
+
+    result = 0
+    for idx, x in enumerate(lst):
+        # Check if the index is even and the value is odd
+        if idx % 2 == 0 and x % 2 == 1:
+            result += x
+    return result

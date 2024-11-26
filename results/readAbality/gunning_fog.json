@@ -1,0 +1,52 @@
+[
+    {
+        "model": "deepseek_v2",
+        "dataset": "pandasEval",
+        "gunning_fog": 9.311980198019798
+    },
+    {
+        "model": "deepseek_v2",
+        "dataset": "numpyEval",
+        "gunning_fog": 11.04405940594059
+    },
+    {
+        "model": "gpt_3_5",
+        "dataset": "pandasEval",
+        "gunning_fog": 10.2719801980198
+    },
+    {
+        "model": "gpt_3_5",
+        "dataset": "numpyEval",
+        "gunning_fog": 11.034257425742572
+    },
+    {
+        "model": "mistral",
+        "dataset": "pandasEval",
+        "gunning_fog": 9.205940594059406
+    },
+    {
+        "model": "mistral",
+        "dataset": "numpyEval",
+        "gunning_fog": 10.23207920792079
+    },
+    {
+        "model": "gpt_4",
+        "dataset": "pandasEval",
+        "gunning_fog": 9.449900990099005
+    },
+    {
+        "model": "gpt_4",
+        "dataset": "numpyEval",
+        "gunning_fog": 9.976930693069304
+    },
+    {
+        "model": "Dataset",
+        "dataset": "pandasEval",
+        "gunning_fog": 8.255841584158418
+    },
+    {
+        "model": "Dataset",
+        "dataset": "numpyEval",
+        "gunning_fog": 9.339603960396035
+    }
+]

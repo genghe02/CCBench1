@@ -1,0 +1,1 @@
+ # Calculate the mean of each row in the masked array'mdat' along the axis 1, and replace nan values in the resulting array with nan.

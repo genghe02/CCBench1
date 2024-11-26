@@ -1,0 +1,1 @@
+# Merge two dataframes based on their indexes. If the indexes are same, the rows will be merged. Otherwise, the function will return NaN values for the dataframe that doesn't have a row with the corresponding index.

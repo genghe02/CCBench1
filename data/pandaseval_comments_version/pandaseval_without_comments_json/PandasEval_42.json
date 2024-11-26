@@ -1,0 +1,1 @@
+{"filename": "PandasEval_42.txt", "comments": "# Delete first n rows of a dataframe\n# Input:\n#   df: DataFrame\n#   n: int\n# Return:\n#   DataFrame\n"}

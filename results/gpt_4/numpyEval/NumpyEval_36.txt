@@ -1,0 +1,1 @@
+# Select specific indices (1 and 4) from the numpy array and store the result in result_arr.

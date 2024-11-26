@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+a = np.arange(1, 10)
+a = a.reshape(len(a), 1)
+# Reshape the array 'a' to have dimensions (length of 'a', 1)
+b = a[4:]
+# Slice the array 'a' starting from index 4 to the end
+```

@@ -1,0 +1,4 @@
+ # Replace the first element in each row of 'a' array with 'x' using numpy indexing.
+result = np.zeros(a.shape[0], dtype=int)
+result[:] = np.equal(a, np.roll(a, 1, axis=1)).all(axis=1) + np.equal(a[:, 0], x).astype(int)
+a[:, 1] = x[result]

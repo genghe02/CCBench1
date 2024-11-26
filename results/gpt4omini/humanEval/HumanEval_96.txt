@@ -1,0 +1,22 @@
+```python
+def count_up_to(n):
+    # Generate a list of prime numbers up to a given number n.
+    # The function iterates through all numbers starting from 2 up to n and checks if each number is prime.
+    # param n: int, the upper limit to which we want to find prime numbers
+    # return: list, a list of prime numbers less than n
+    # Test cases:
+    # >>> count_up_to(10)  # Expected output: [2, 3, 5, 7]
+    # >>> count_up_to(1)   # Expected output: [] (no primes less than 1)
+    # >>> count_up_to(2)   # Expected output: [] (no primes less than 2)
+    # >>> count_up_to(20)  # Expected output: [2, 3, 5, 7, 11, 13, 17, 19]
+    primes = []
+    for i in range(2, n):
+        is_prime = True
+        for j in range(2, i):
+            if i % j == 0:
+                is_prime = False
+                break
+        if is_prime:
+            primes.append(i)
+    return primes
+```

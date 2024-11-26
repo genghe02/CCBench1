@@ -1,0 +1,1 @@
+# Calculate the mean of the arrays 'a', 'b', and 'c' along the first axis (axis=0) using numpy. This will result in a new array 'mean_array' where each element is the mean of the corresponding elements in 'a', 'b', and 'c'.

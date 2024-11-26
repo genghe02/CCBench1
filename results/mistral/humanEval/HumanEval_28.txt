@@ -1,0 +1,17 @@
+ from typing import List
+
+
+def concatenate(strings: List[str]) -> str:
+    # This function takes a list of strings as an argument and returns a single string which is the concatenation of all the strings in the list.
+    # Use the join method of the str class to concatenate all the strings in the list with no separator.
+    return ''.join(strings)
+    
+    <test cases>
+    >>> concatenate(['hello', 'world'])
+    'helloworld'
+    >>> concatenate(['', 'abc', 'def'])
+    'abcdef'
+    >>> concatenate(['123', '456'])
+    '123456'
+    >>> concatenate([])
+    ''

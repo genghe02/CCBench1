@@ -1,0 +1,15 @@
+ # Check if a specific value exists in the unique elements of a pandas Series.
+# This function takes a pandas Series and a value as input arguments.
+# It returns a boolean value indicating whether the value is present in the Series or not.
+
+# The function uses the 'unique' method of the Series object to get a list of unique values.
+# It then checks if the input value is present in the list using the 'in' keyword.
+
+# Time complexity: O(n), where n is the length of the Series.
+# This is because the 'unique' method has a time complexity of O(n), and checking for a value in a list has a time complexity of O(1) on average.
+
+# Test cases:
+# >>> is_contain_particular_value(pd.Series([1, 2, 3, 1, 2, 3]), 1)
+# True
+# >>> is_contain_particular_value(pd.Series([1, 2, 3, 1, 2, 3]), 4)
+# False

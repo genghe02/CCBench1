@@ -1,0 +1,4 @@
+import numpy as np
+
+<Requirements for the code>
+out = np.full((5, 5), -1.)

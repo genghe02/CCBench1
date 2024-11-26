@@ -1,0 +1,1 @@
+ # Slice the given array along the last dimension using the given index.

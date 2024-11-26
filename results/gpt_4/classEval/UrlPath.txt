@@ -1,0 +1,48 @@
+```python
+import urllib.parse
+
+# This class is used for parsing and manipulating URL paths.
+class UrlPath:
+    def __init__(self):
+        # This function initializes the UrlPath object. 
+        # It sets up an empty list for segments of the URL path, and a flag for whether the URL path ends with a tag.
+        self.segments = []
+        self.with_end_tag = False
+
+    def add(self, segment):
+        # This function adds a new segment to the URL path.
+        # The segment is a string representing a part of the URL path.
+        # >>> path = UrlPath()
+        # >>> path.add('new_segment')
+        # >>> print(path.segments)  # ['new_segment']
+        self.segments.append(self.fix_path(segment))
+
+    def parse(self, path, charset):
+        # This function parses a URL path, splits it into segments, and decodes each segment using the provided charset.
+        # 'path' is a string representing the URL path, and 'charset' is a string representing the charset.
+        # >>> path = UrlPath()
+        # >>> path.parse('/segment1/segment2/', 'utf-8')
+        # >>> print(path.segments)  # ['segment1', 'segment2']
+        if path:
+            if path.endswith('/'):
+                self.with_end_tag = True
+
+            path = self.fix_path(path)
+            if path:
+                split = path.split('/')
+                for seg in split:
+                    decoded_seg = urllib.parse.unquote(seg, encoding=charset)
+                    self.segments.append(decoded_seg)
+
+    @staticmethod
+    def fix_path(path):
+        # This static method removes the leading and trailing slashes from a URL path.
+        # 'path' is a string representing a URL path.
+        # It returns the URL path after removing the leading and trailing slashes.
+        # >>> UrlPath.fix_path('/segment/')  # 'segment'
+        if not path:
+            return ''
+
+        segment_str = path.strip('/')
+        return segment_str
+```

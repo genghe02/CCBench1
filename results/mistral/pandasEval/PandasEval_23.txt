@@ -1,0 +1,9 @@
+ # Find columns with missing values by utilizing pandas method isna() and list indexing to access columns with at least one NaN value, then convert the resulting Series to a list.
+
+import pandas as pd
+import numpy as np
+
+def find_columns_name_lists(df):
+    columns_with_missing_values = df.columns[df.isna().any()].tolist()
+    <Return type of the function>
+    return columns_with_missing_values

@@ -1,0 +1,63 @@
+```python
+# Class to calculate the total cost and discounts for a customer's shopping cart based on different promotion strategies.
+class DiscountStrategy:
+    def __init__(self, customer, cart, promotion=None):
+        # Initialize DiscountStrategy with customer details, shopping cart items, and an optional promotion function.
+        # Parameters:
+        # customer: dict, details of the customer
+        # cart: list, items in the shopping cart
+        # promotion: function, optional promotion strategy function
+        # Test cases:
+        self.customer = customer
+        self.cart = cart
+        self.promotion = promotion
+        self.__total = self.total()
+
+    def total(self):
+        # Calculate the total cost of items in the shopping cart.
+        # Return the total cost.
+        # Test cases:
+        self.__total = sum(item['quantity'] * item['price'] for item in self.cart)
+        return self.__total
+
+    def due(self):
+        # Calculate the total amount due after applying any discounts based on the selected promotion.
+        # Return the total amount due.
+        # Test cases:
+        if self.promotion is None:
+            discount = 0
+        else:
+            discount = self.promotion(self)
+        return self.__total - discount
+
+    @staticmethod
+    def FidelityPromo(order):
+        # Apply a fidelity promotion discount based on the customer's fidelity points.
+        # Parameters:
+        # order: DiscountStrategy, the order for which the promotion is applied
+        # Return the fidelity promotion discount amount.
+        # Test cases:
+        return order.total() * 0.05 if order.customer['fidelity'] >= 1000 else 0
+
+    @staticmethod
+    def BulkItemPromo(order):
+        # Apply a bulk item promotion discount for items in the shopping cart.
+        # Parameters:
+        # order: DiscountStrategy, the order for which the promotion is applied
+        # Return the bulk item promotion discount amount.
+        # Test cases:
+        discount = 0
+        for item in order.cart:
+            if item['quantity'] >= 20:
+                discount += item['quantity'] * item['price'] * 0.1
+        return discount
+
+    @staticmethod
+    def LargeOrderPromo(order):
+        # Apply a large order promotion discount based on the number of unique products in the shopping cart.
+        # Parameters:
+        # order: DiscountStrategy, the order for which the promotion is applied
+        # Return the large order promotion discount amount.
+        # Test cases:
+        return order.total() * 0.07 if len({item['product'] for item in order.cart}) >= 10 else 0
+```

@@ -1,0 +1,73 @@
+```python
+class FitnessTracker:
+    # This class is responsible for tracking fitness metrics such as BMI and calorie intake based on user information.
+    def __init__(self, height, weight, age, sex) -> None:
+        # Initialize the FitnessTracker with height, weight, age, and sex.
+        # height: float, the height of the individual in meters
+        # weight: float, the weight of the individual in kilograms
+        # age: int, the age of the individual in years
+        # sex: str, the sex of the individual ('male' or 'female')
+        self.height = height
+        self.weight = weight
+        self.age = age
+        self.sex = sex
+        self.BMI_std = [
+            {"male": [20, 25]},
+            {"female": [19, 24]}
+        ]
+
+    def get_BMI(self):
+        # Calculate the Body Mass Index (BMI) based on the weight and height of the individual.
+        # return: float, the calculated BMI value
+        # Test cases for the function:
+        # >>> tracker = FitnessTracker(1.75, 70, 25, 'male')
+        # >>> tracker.get_BMI()   # expected output: 22.86 (approx)
+        # >>> tracker = FitnessTracker(1.60, 50, 30, 'female')
+        # >>> tracker.get_BMI()   # expected output: 19.53 (approx)
+        return self.weight / self.height ** 2
+
+    def condition_judge(self):
+        # Determine the weight condition based on the individual's BMI.
+        # return: int, 1 if overweight, -1 if underweight, 0 if normal weight
+        # Test cases for the function:
+        # >>> tracker = FitnessTracker(1.75, 70, 25, 'male')
+        # >>> tracker.condition_judge()  # expected output: 0 (normal)
+        # >>> tracker = FitnessTracker(1.75, 90, 25, 'male')
+        # >>> tracker.condition_judge()  # expected output: 1 (overweight)
+        # >>> tracker = FitnessTracker(1.75, 50, 25, 'male')
+        # >>> tracker.condition_judge()  # expected output: -1 (underweight)
+        BMI = self.get_BMI()
+        if self.sex == "male":
+            BMI_range = self.BMI_std[0]["male"]
+        else:
+            BMI_range = self.BMI_std[1]["female"]
+        if BMI > BMI_range[1]:
+            # too fat
+            return 1
+        elif BMI < BMI_range[0]:
+            # too thin
+            return -1
+        else:
+            # normal
+            return 0
+
+    def calculate_calorie_intake(self):
+        # Calculate the daily caloric intake needed based on the individual's Basal Metabolic Rate (BMR) and activity level.
+        # return: float, the calculated recommended daily calorie intake
+        # Test cases for the function:
+        # >>> tracker = FitnessTracker(1.75, 70, 25, 'male')
+        # >>> tracker.calculate_calorie_intake()  # expected output depends on activity level
+        # >>> tracker = FitnessTracker(1.60, 50, 30, 'female')
+        # >>> tracker.calculate_calorie_intake()  # expected output depends on activity level
+        if self.sex == "male":
+            BMR = 10 * self.weight + 6.25 * self.height - 5 * self.age + 5
+        else:
+            BMR = 10 * self.weight + 6.25 * self.height - 5 * self.age - 161
+        if self.condition_judge() == 1:
+            calorie_intake = BMR * 1.2  # Sedentary lifestyle
+        elif self.condition_judge() == -1:
+            calorie_intake = BMR * 1.6  # Active lifestyle
+        else:
+            calorie_intake = BMR * 1.4  # Moderate lifestyle
+        return calorie_intake
+```

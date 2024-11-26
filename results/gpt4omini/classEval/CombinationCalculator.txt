@@ -1,0 +1,76 @@
+```python
+import math
+from typing import List
+
+# This class provides methods for calculating combinations and selecting items from a list.
+class CombinationCalculator:
+    
+    def __init__(self, datas: List[str]):
+        # Initialize with a list of data items.
+        self.datas = datas
+
+    @staticmethod
+    def count(n: int, m: int) -> int:
+        # Calculate the number of combinations of n items taken m at a time.
+        # param n: int, total number of items
+        # param m: int, number of items to choose
+        # return: int, the number of combinations
+        # >>> CombinationCalculator.count(5, 3)  # Should return 10
+        # >>> CombinationCalculator.count(5, 0)  # Should return 1
+        # >>> CombinationCalculator.count(5, 5)  # Should return 1
+        if m == 0 or n == m:
+            return 1
+        return math.factorial(n) // (math.factorial(n - m) * math.factorial(m))
+
+    @staticmethod
+    def count_all(n: int) -> int:
+        # Calculate the total number of subsets of n items.
+        # param n: int, the number of items 
+        # return: int, the total number of subsets
+        # >>> CombinationCalculator.count_all(3)  # Should return 7 (2^3 - 1)
+        # >>> CombinationCalculator.count_all(0)  # Should return 0
+        # >>> CombinationCalculator.count_all(63)  # Should return float("inf")
+        if n < 0 or n > 63:
+            return False
+        return (1 << n) - 1 if n != 63 else float("inf")
+
+    def select(self, m: int) -> List[List[str]]:
+        # Generate all combinations of m items from the list of data.
+        # param m: int, the number of items to select
+        # return: List[List[str]], a list of combinations
+        # >>> calc = CombinationCalculator(['a', 'b', 'c', 'd'])
+        # >>> calc.select(2)  # Should return all pairs: [['a', 'b'], ['a', 'c'], ...]
+        result = []
+        self._select(0, [None] * m, 0, result)
+        return result
+
+    def select_all(self) -> List[List[str]]:
+        # Generate all combinations of all possible sizes from the list of data.
+        # return: List[List[str]], a list of all combinations
+        # >>> calc = CombinationCalculator(['a', 'b'])
+        # >>> calc.select_all()  # Should return all combinations including [], ['a'], ['b'], ['a', 'b']
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    def _select(self, dataIndex: int, resultList: List[str], resultIndex: int, result: List[List[str]]):
+        # Helper function to recursively generate combinations.
+        # param dataIndex: int, current index in the data list
+        # param resultList: List[str], currently constructed combination
+        # param resultIndex: int, current length of the constructed combination
+        # param result: List[List[str]], list of all found combinations
+        # return: None
+        # >>> calc = CombinationCalculator(['a', 'b', 'c'])
+        # >>> res = []
+        # >>> calc._select(0, [None]*2, 0, res)  # Should perform the recursive selection process
+        resultLen = len(resultList)
+        resultCount = resultIndex + 1
+        if resultCount > resultLen:
+            result.append(resultList.copy())
+            return
+
+        for i in range(dataIndex, len(self.datas) + resultCount - resultLen):
+            resultList[resultIndex] = self.datas[i]
+            self._select(i + 1, resultList, resultIndex + 1, result)
+```

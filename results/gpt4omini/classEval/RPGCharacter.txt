@@ -1,0 +1,64 @@
+```python
+# This class represents a role-playing game (RPG) character with attributes such as health points, attack power, and defense.
+class RPGCharacter:
+    def __init__(self, name, hp, attack_power, defense, level=1):
+        # Initialize a new RPG character with specified attributes.
+        # param name: str, the name of the character
+        # param hp: int, the starting health points of the character
+        # param attack_power: int, the attack power of the character
+        # param defense: int, the defense points of the character
+        # param level: int, optional, the initial level of the character, default is 1
+        self.name = name
+        self.hp = hp
+        self.attack_power = attack_power
+        self.defense = defense
+        self.level = level
+        self.exp = 0
+
+    def attack(self, other_character):
+        # Make the character attack another character, inflicting damage based on attack power and defense.
+        # param other_character: RPGCharacter, the character being attacked
+        # Test case: char1 = RPGCharacter('Hero', 100, 20, 5), char2 = RPGCharacter('Monster', 80, 15, 3)
+        # char1.attack(char2) should reduce char2.hp based on the damage calculation.
+        damage = max(self.attack_power - other_character.defense, 1)
+        other_character.hp -= damage
+
+    def heal(self):
+        # Heal the character by increasing health points, not exceeding a maximum of 100.
+        # return: int, the new health points of the character after healing
+        # Test case: char = RPGCharacter('Hero', 90, 20, 5); char.heal() should return 100 and set char.hp to 100.
+        self.hp += 10
+        if self.hp > 100:
+            self.hp = 100
+        return self.hp
+
+    def gain_exp(self, amount):
+        # Increase the character's experience points and level up if enough experience is gained.
+        # param amount: int, the amount of experience points to add
+        # Test case: char = RPGCharacter('Hero', 50, 20, 5); char.gain_exp(150) should level up the character.
+        while amount != 0:
+            if self.exp + amount >= self.level * 100:
+                amount -= (self.level * 100 - self.exp)
+                self.level_up()
+            else:
+                self.exp += amount
+                amount = 0
+
+    def level_up(self):
+        # Level up the character, enhancing its attributes and resetting experience points.
+        # return: tuple, the new level, health points, attack power, and defense of the character
+        # Test case: char = RPGCharacter('Hero', 100, 20, 5, level=1); char.level_up() should return (2, 120, 25, 10).
+        if self.level < 100:
+            self.level += 1
+            self.exp = 0
+            self.hp += 20
+            self.attack_power += 5
+            self.defense += 5
+        return self.level, self.hp, self.attack_power, self.defense
+
+    def is_alive(self):
+        # Check if the character is alive based on their health points.
+        # return: bool, True if the character's health points are greater than 0; otherwise False
+        # Test case: char = RPGCharacter('Hero', 0, 20, 5); char.is_alive() should return False.
+        return self.hp > 0
+```

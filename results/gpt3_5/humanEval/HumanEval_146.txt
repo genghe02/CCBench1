@@ -1,0 +1,18 @@
+```python
+def specialFilter(nums):
+    # Count the number of elements in the nums list that are greater than 10 and have odd digits at both the first and last positions.
+    # Test cases:
+    # specialFilter([11, 22, 33]) should return 3 as all elements satisfy the conditions.
+    # specialFilter([12, 22, 35, 47]) should return 1 as only 33 satisfies the condition.
+    # specialFilter([7, 18, 15, 49]) should return 1 as only 49 satisfies the condition.
+    
+    count = 0
+    for num in nums:
+        if num > 10:
+            odd_digits = (1, 3, 5, 7, 9)
+            number_as_string = str(num)
+            if int(number_as_string[0]) in odd_digits and int(number_as_string[-1]) in odd_digits:
+                count += 1
+        
+    return count 
+```

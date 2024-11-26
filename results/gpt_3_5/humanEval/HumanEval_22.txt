@@ -1,0 +1,10 @@
+from typing import List, Any
+
+
+def filter_integers(values: List[Any]) -> List[int]:
+    # Filter a list of values and return only the integers present in the list.
+    # Test case 1: Passing a list with integers and strings to check if the function filters integers correctly.
+    # Expected output: [1, 2, 3, 4, 5]
+    # Test case 2: Passing an empty list to check if the function handles empty input.
+    # Expected output: []
+    return [x for x in values if isinstance(x, int)]

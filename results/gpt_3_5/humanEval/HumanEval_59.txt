@@ -1,0 +1,21 @@
+def largest_prime_factor(n: int):
+    # Find the largest prime factor of a given integer n by iterating through the factors and checking if each factor is prime.
+    # Test cases:
+    # largest_prime_factor(10) returns 5
+    # largest_prime_factor(21) returns 7
+    # largest_prime_factor(100) returns 5
+
+    def is_prime(k):
+        # Check if a number k is prime by iterating from 2 to k-1 and checking for divisibility.
+        if k < 2:
+            return False
+        for i in range(2, k - 1):
+            if k % i == 0:
+                return False
+        return True
+
+    largest = 1
+    for j in range(2, n + 1):
+        if n % j == 0 and is_prime(j):
+            largest = max(largest, j)
+    return largest

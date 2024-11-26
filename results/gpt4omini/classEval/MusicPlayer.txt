@@ -1,0 +1,138 @@
+```python
+class MusicPlayer:
+    # This is a class that represents a music player with functionality to manage a playlist, including adding, removing, playing, stopping, switching, and shuffling songs.
+
+    def __init__(self):
+        # Initialize the music player with an empty playlist, no current song, and a default volume of 50.
+        self.playlist = []
+        self.current_song = None
+        self.volume = 50
+
+    def add_song(self, song):
+        # Add a song to the playlist.
+        # :param song: str, the song to be added to the playlist
+        # >>> player = MusicPlayer()
+        # >>> player.add_song('Song A')
+        # >>> print(player.playlist)
+        # ['Song A']
+        self.playlist.append(song)
+
+    def remove_song(self, song):
+        # Remove a song from the playlist if it exists.
+        # :param song: str, the song to be removed from the playlist
+        # >>> player = MusicPlayer()
+        # >>> player.add_song('Song A')
+        # >>> player.remove_song('Song A')
+        # >>> print(player.playlist)
+        # []
+        if song in self.playlist:
+            self.playlist.remove(song)
+            if self.current_song == song:
+                self.stop()
+
+    def play(self):
+        # Play the current song from the playlist.
+        # :return: str or bool, returns the current song if it is playing, 
+        #         otherwise returns False if there are songs in the playlist but none is currently selected
+        # >>> player = MusicPlayer()
+        # >>> player.add_song('Song A')
+        # >>> player.current_song = 'Song A'
+        # >>> player.play()
+        # 'Song A'
+        # >>> player.current_song = None
+        # >>> player.play()
+        # False
+        if self.playlist and self.current_song:
+            return self.current_song
+        elif len(self.playlist): 
+            return False
+
+    def stop(self):
+        # Stop playing the current song.
+        # :return: bool, returns True if a song was playing and has stopped, otherwise returns False
+        # >>> player = MusicPlayer()
+        # >>> player.current_song = 'Song A'
+        # >>> player.stop()
+        # True
+        # >>> player.stop()
+        # False
+        if self.current_song:
+            self.current_song = None
+            return True
+        else:
+            return False
+
+    def switch_song(self):
+        # Switch to the next song in the playlist.
+        # :return: bool, returns True if the song was switched, otherwise returns False if no song is currently playing or if reached the end
+        # >>> player = MusicPlayer()
+        # >>> player.add_song('Song A')
+        # >>> player.add_song('Song B')
+        # >>> player.current_song = 'Song A'
+        # >>> player.switch_song()
+        # True
+        # >>> player.switch_song()
+        # False
+        if self.current_song:
+            current_index = self.playlist.index(self.current_song)
+            if current_index < len(self.playlist) - 1:
+                self.current_song = self.playlist[current_index + 1]
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def previous_song(self):
+        # Switch to the previous song in the playlist.
+        # :return: bool, returns True if the song was switched, otherwise returns False if no song is currently playing or if at the beginning
+        # >>> player = MusicPlayer()
+        # >>> player.add_song('Song A')
+        # >>> player.add_song('Song B')
+        # >>> player.current_song = 'Song B'
+        # >>> player.previous_song()
+        # True
+        # >>> player.previous_song()
+        # False
+        if self.current_song:
+            current_index = self.playlist.index(self.current_song)
+            if current_index > 0:
+                self.current_song = self.playlist[current_index - 1]
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def set_volume(self, volume):
+        # Set the volume of the music player.
+        # :param volume: int, the volume level to be set (0 to 100)
+        # :return: bool, returns True if the volume was set successfully, otherwise returns False if the value is out of range
+        # >>> player = MusicPlayer()
+        # >>> player.set_volume(30)
+        # >>> player.volume
+        # 30
+        # >>> player.set_volume(150)
+        # False
+        if 0 <= volume <= 100:
+            self.volume = volume
+        else:
+            return False
+
+    def shuffle(self):
+        # Shuffle the playlist.
+        # :return: bool, returns True if the playlist was shuffled successfully, otherwise returns False if the playlist is empty
+        # >>> player = MusicPlayer()
+        # >>> player.add_song('Song A')
+        # >>> player.add_song('Song B')
+        # >>> player.shuffle()
+        # True
+        # >>> player.playlist
+        # ['Song B', 'Song A'] (the order may vary)
+        if self.playlist:
+            import random
+            random.shuffle(self.playlist)
+            return True
+        else:
+            return False
+```

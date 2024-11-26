@@ -1,0 +1,402 @@
+[
+    {
+        "filename": "AccessGatewayFilter.txt",
+        "cover": [1, 0, 0, 0]
+    },
+    {
+        "filename": "AreaCalculator.txt",
+        "cover": [1, 1, 1, 1, 1]
+    },
+    {
+        "filename": "ArgumentParser.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "ArrangementCalculator.txt",
+        "cover": [2, 1, 1, 1, 1]
+    },
+    {
+        "filename": "AssessmentSystem.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "AutomaticGuitarSimulator.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "AvgPartition.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "BalancedBrackets.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "Bank_Account_System.txt",
+        "cover": [0]
+    },
+    {
+        "filename": "BigNumCalculator.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "BinaryDataProcessor.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "BitStatusUtil.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "BlackjackGame.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "BookManagement.txt",
+        "cover": [1, 1]
+    },
+    {
+        "filename": "BookManagementDB.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "BoyerMooreSearch.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "Calculator.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "CalendarUtil.txt",
+        "cover": [1, 1, 1, 1, 2, 1]
+    },
+    {
+        "filename": "CamelCaseMap.txt",
+        "cover": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "ChandrasekharSieve.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "Chat.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "ClassroomManagement.txt",
+        "cover": [1, 1, 1, 3]
+    },
+    {
+        "filename": "Class_Registration_System.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "CombinationCalculator.txt",
+        "cover": [2, 3, 1, 1, 1]
+    },
+    {
+        "filename": "ComplexCalculator.txt",
+        "cover": [1, 1, 1, 1]
+    },
+    {
+        "filename": "CookiesUtil.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "CSVProcessor.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "CurrencyConverter.txt",
+        "cover": [2, 1, 1, 1]
+    },
+    {
+        "filename": "DatabaseOperation.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "DataStatistics.txt",
+        "cover": [1, 2, 1]
+    },
+    {
+        "filename": "DataStatistics2.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "DataStatistics4.txt",
+        "cover": [1, 1, 2, 1]
+    },
+    {
+        "filename": "DecryptionUtils.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "DiscountStrategy.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "DocFileHandler.txt",
+        "cover": [0]
+    },
+    {
+        "filename": "EightPuzzle.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "EmailClient.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "EncryptionUtils.txt",
+        "cover": [4, 2, 4]
+    },
+    {
+        "filename": "ExcelProcessor.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "ExpressionCalculator.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "FitnessTracker.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "GomokuGame.txt",
+        "cover": [1, 3, 0]
+    },
+    {
+        "filename": "Hotel.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "HRManagementSystem.txt",
+        "cover": [2, 2, 1, 1, 1]
+    },
+    {
+        "filename": "HtmlUtil.txt",
+        "cover": [1, 2]
+    },
+    {
+        "filename": "ImageProcessor.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "Interpolation.txt",
+        "cover": [2, 2]
+    },
+    {
+        "filename": "IPAddress.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "IPUtil.txt",
+        "cover": [2, 2, 2]
+    },
+    {
+        "filename": "JobMarketplace.txt",
+        "cover": [1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+        "filename": "JSONProcessor.txt",
+        "cover": [2, 1, 2]
+    },
+    {
+        "filename": "KappaCalculator.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "Lemmatization.txt",
+        "cover": [4, 1, 1]
+    },
+    {
+        "filename": "LongestWord.txt",
+        "cover": [2]
+    },
+    {
+        "filename": "MahjongConnect.txt",
+        "cover": [1, 4, 8, 1, 1]
+    },
+    {
+        "filename": "Manacher.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "MetricsCalculator.txt",
+        "cover": [3, 1, 1, 1, 1]
+    },
+    {
+        "filename": "MetricsCalculator2.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "MinesweeperGame.txt",
+        "cover": [0, 1, 1, 1]
+    },
+    {
+        "filename": "MovieBookingSystem.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "MovieTicketDB.txt",
+        "cover": [1]
+    },
+    {
+        "filename": "MusicPlayer.txt",
+        "cover": [0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "NLPDataProcessor.txt",
+        "cover": [1, 2, 1]
+    },
+    {
+        "filename": "NLPDataProcessor2.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "NumberConverter.txt",
+        "cover": [1, 1, 1, 1, 1, 1]
+    },
+    {
+        "filename": "NumberWordFormatter.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "NumericEntityUnescaper.txt",
+        "cover": [6, 1]
+    },
+    {
+        "filename": "OrderManagement.txt",
+        "cover": [3, 0, 0]
+    },
+    {
+        "filename": "PageUtil.txt",
+        "cover": [1, 1, 1]
+    },
+    {
+        "filename": "PDFHandler.txt",
+        "cover": [1, 1]
+    },
+    {
+        "filename": "PersonRequest.txt",
+        "cover": [0]
+    },
+    {
+        "filename": "PushBoxGame.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "RegexUtils.txt",
+        "cover": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "RPGCharacter.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "Server.txt",
+        "cover": [1, 1, 3, 1, 3]
+    },
+    {
+        "filename": "ShoppingCart.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "SignInSystem.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "Snake.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "SplitSentence.txt",
+        "cover": [1, 1, 2]
+    },
+    {
+        "filename": "SQLGenerator.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "SQLQueryBuilder.txt",
+        "cover": [3, 1, 2, 1]
+    },
+    {
+        "filename": "Statistics3.txt",
+        "cover": [1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+        "filename": "StockPortfolioTracker.txt",
+        "cover": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "StudentDatabaseProcessor.txt",
+        "cover": [0, 0, 0, 0]
+    },
+    {
+        "filename": "TextFileProcessor.txt",
+        "cover": [1, 1, 1, 1]
+    },
+    {
+        "filename": "Thermostat.txt",
+        "cover": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "TicTacToe.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "TimeUtils.txt",
+        "cover": [0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "TriCalculator.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "TwentyFourPointGame.txt",
+        "cover": [0, 0, 0]
+    },
+    {
+        "filename": "URLHandler.txt",
+        "cover": [1, 2, 2, 3, 1]
+    },
+    {
+        "filename": "UrlPath.txt",
+        "cover": [1, 3, 1]
+    },
+    {
+        "filename": "UserLoginDB.txt",
+        "cover": [1, 1, 1, 1]
+    },
+    {
+        "filename": "VectorCalculator.txt",
+        "cover": [1, 1, 1, 1]
+    },
+    {
+        "filename": "VendingMachine.txt",
+        "cover": [0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "Warehouse.txt",
+        "cover": [0, 0, 0, 0, 0, 0]
+    },
+    {
+        "filename": "WeatherSystem.txt",
+        "cover": [3, 1, 1, 1]
+    },
+    {
+        "filename": "Words2Numbers.txt",
+        "cover": [0, 0]
+    },
+    {
+        "filename": "XMLProcessor.txt",
+        "cover": [1, 1, 1, 1]
+    },
+    {
+        "filename": "ZipFileProcessor.txt",
+        "cover": [1, 1, 1, 1]
+    }
+]

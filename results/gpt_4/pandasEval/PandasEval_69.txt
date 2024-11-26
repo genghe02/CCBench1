@@ -1,0 +1,1 @@
+# This function replaces any None or NaN values in the specified columns of a dataframe with 0. The function takes as input a dataframe and a list of column names, and returns the dataframe after the operation.

@@ -1,0 +1,39 @@
+```python
+def intersection(interval1, interval2):
+    # Determine if the intersection of two intervals has a prime length.
+    # If the intersection length is greater than zero and is a prime number, return "YES".
+    # Otherwise, return "NO".
+
+    # Test cases for the function:
+    # >>> intersection((1, 2), (2, 3))
+    # "NO"
+    # >>> intersection((-1, 1), (0, 4))
+    # "NO"
+    # >>> intersection((-3, -1), (-5, 5))
+    # "YES"
+
+    def is_prime(num):
+        # Check if a number is a prime number.
+        # Return False if the number is 0 or 1.
+        # Return True if the number is 2.
+        # Otherwise, check divisibility from 2 to num-1.
+        if num == 1 or num == 0:
+            return False
+        if num == 2:
+            return True
+        for i in range(2, num):
+            if num % i == 0:
+                return False
+        return True
+
+    # Calculate the left boundary of the intersection.
+    l = max(interval1[0], interval2[0])
+    # Calculate the right boundary of the intersection.
+    r = min(interval1[1], interval2[1])
+    # Calculate the length of the intersection.
+    length = r - l
+    # Check if the length is greater than zero and is a prime number.
+    if length > 0 and is_prime(length):
+        return "YES"
+    return "NO"
+```

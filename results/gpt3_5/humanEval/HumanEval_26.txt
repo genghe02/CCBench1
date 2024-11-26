@@ -1,0 +1,20 @@
+from typing import List
+
+
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    # Remove duplicates from a list of numbers while preserving the order of elements.
+    # Utilize Counter from collections to count occurrences of each number.
+    # Return a new list with duplicates removed.
+    # Test cases:
+    # Case 1: Empty list
+    # Input: []
+    # Output: []
+    # Case 2: List with duplicates
+    # Input: [1, 2, 2, 3, 4, 4, 4]
+    # Output: [1, 3]
+    # Case 3: List with no duplicates
+    # Input: [5, 6, 7, 8]
+    # Output: [5, 6, 7, 8]
+    import collections
+    c = collections.Counter(numbers)
+    return [n for n in numbers if c[n] <= 1]

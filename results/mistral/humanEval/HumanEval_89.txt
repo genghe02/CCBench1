@@ -1,0 +1,25 @@
+ def encrypt(s):
+ # This function takes a string as an argument and returns an encrypted version of the string using a simple Caesar cipher with a shift of 2.
+
+ # Requirements for the code
+ # param s: str, the input string to be encrypted
+
+ result = ''
+ d = 'abcdefghijklmnopqrstuvwxyz' # Define the alphabet for encryption
+
+ # Function implementation
+ for c in s:
+ if c in d: # Check if the character is a letter in the alphabet
+ out += d[(d.index(c)+2*2) % 26] # Apply the Caesar cipher with a shift of 2
+ else:
+ out += c # If the character is not a letter, leave it as is in the output
+
+ return out
+
+ # Some test cases for the function
+ >>> encrypt('hello')
+ 'khoor'
+ >>> encrypt('Python')
+ 'Rvzqun'
+ >>> encrypt('12345')
+ '12345' # The function does not modify non-alphabetic characters.

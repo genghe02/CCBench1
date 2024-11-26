@@ -1,0 +1,21 @@
+```python
+def eat(number, need, remaining):
+    # This function calculates the new values of 'number' and 'remaining' after consuming 'need' amount.
+    # It checks if 'need' is less than or equal to 'remaining'. If true, it adds 'need' to 'number' and subtracts 'need' from 'remaining'.
+    # If 'need' is more than 'remaining', it adds 'remaining' to 'number' and sets 'remaining' to zero.
+    # :param number: int, the initial amount
+    # :param need: int, the required amount to consume
+    # :param remaining: int, the remaining amount
+    # :return: list, updated values of 'number' and 'remaining' in this order
+
+    # Test cases:
+    # >>> eat(5, 3, 10)
+    # [8, 7] because need is less than remaining, so we can add need to number and subtract need from remaining
+    # >>> eat(5, 12, 10)
+    # [15, 0] because need is more than remaining, so we add all remaining to number and remaining becomes 0
+
+    if(need <= remaining):
+        return [ number + need , remaining-need ]
+    else:
+        return [ number + remaining , 0]
+```

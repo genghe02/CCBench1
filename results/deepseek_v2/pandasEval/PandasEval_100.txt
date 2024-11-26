@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+x = pd.DataFrame({'a':1,'b':2}, index = range(1))
+# Repeat the DataFrame 'x' 5 times by concatenating it with itself 5 times.
+repeated_x = pd.concat([x]*5)
+```

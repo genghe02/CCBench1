@@ -1,0 +1,8 @@
+ # Rename a column in a DataFrame using its old name and new name efficiently using pandas.rename(columns={old\_name: new\_name}) method.
+
+import pandas as pd
+
+def rename_column(df, old_name, new_name):
+ <Requirements for the code>
+ df = df.rename(columns={old_name: new_name})
+ return df

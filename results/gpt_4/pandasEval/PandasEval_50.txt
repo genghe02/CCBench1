@@ -1,0 +1,1 @@
+# For each row in the dataframe, add the values of column 'A' and 'B' and store the result in a new column 'C'.

@@ -1,0 +1,44 @@
+```python
+def minPath(grid, k):
+    # Calculate the minimum values reachable from each cell in the grid while allowing at most k obstacles to be bypassed.
+    # The function returns a list of length k, where odd indices contain the minimum value encountered so far 
+    # and even indices are filled with the value 1.
+    # param grid: List[List[int]], a 2D grid where 1 indicates an obstacle and 0 indicates a free cell.
+    # param k: int, the maximum number of obstacles that can be bypassed.
+    # return: List[int], a list of size k containing a pattern of values based on the minimum found values in the grid.
+    
+    # Test cases for the function:
+    # 1. If the grid is [[0]], k = 1, then it should return [1].
+    # 2. If the grid is [[1]], k = 1, then it should return [1].
+    # 3. If the grid is [[0, 0], [0, 0]], k = 2, then it should return [1, 1].
+    # 4. If the grid is [[1, 1], [0, 0]], k = 3, then it should return [1, 1, 1].
+    # 5. If the grid has no obstacles and k = 5, return [1, 1, 1, 1, 1].
+
+    n = len(grid)
+    val = n * n + 1
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 1:
+                temp = []
+                if i != 0:
+                    temp.append(grid[i - 1][j])
+
+                if j != 0:
+                    temp.append(grid[i][j - 1])
+
+                if i != n - 1:
+                    temp.append(grid[i + 1][j])
+
+                if j != n - 1:
+                    temp.append(grid[i][j + 1])
+
+                val = min(temp)
+
+    ans = []
+    for i in range(k):
+        if i % 2 == 0:
+            ans.append(1)
+        else:
+            ans.append(val)
+    return ans
+```

@@ -1,0 +1,1 @@
+# Merge two pandas DataFrames df1 and df2 using the indexes of both DataFrames as the join keys. Return a new DataFrame that combines the columns of both input DataFrames based on the common index values.

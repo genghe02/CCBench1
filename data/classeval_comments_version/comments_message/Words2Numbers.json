@@ -1,0 +1,12 @@
+[
+  "# The class provides a text-to-number conversion utility, allowing conversion of written numbers (in words) to their numerical representation.",
+  "Initialize the word lists and dictionaries required for conversion",
+  "Convert the word string to the corresponding integer string",
+  ":param textnum: string, the word string to be converted",
+  ":return: string, the final converted integer string",
+  ">>> w2n = Words2Numbers()\n        >>> w2n.text2int(\"thirty-two\")\n        \"32\"",
+  "Check if the input text contains only valid words that can be converted into numbers.",
+  ":param textnum: The input text containing words representing numbers.",
+  ":return: True if input is valid, False otherwise.",
+  ">>> w2n = Words2Numbers()\n        >>> w2n.is_valid_input(\"thirty-two\")\n        False"
+]

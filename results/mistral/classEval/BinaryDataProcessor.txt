@@ -1,0 +1,58 @@
+ class BinaryDataProcessor:
+    # This is a class for processing binary data by cleaning non-binary characters, calculating binary information, converting binary data to ASCII and UTF-8.
+    def __init__(self, binary_string):
+        # Initialize the binary data processor with a given binary string.
+        # Clean non-binary characters from the binary string.
+        self.binary_string = binary_string
+        self.clean_non_binary_chars()
+
+    def clean_non_binary_chars(self):
+        # Remove all non-binary characters (characters not in '0' and '1') from the binary string.
+        def is_binary_char(char):
+            return char in '01'
+
+        self.binary_string = ''.join(filter(is_binary_char, self.binary_string))
+
+    def calculate_binary_info(self):
+        # Calculate and return binary information such as zeroes percentage, ones percentage, and bit length.
+        zeroes_count = self.binary_string.count('0')
+        ones_count = self.binary_string.count('1')
+        total_length = len(self.binary_string)
+
+        zeroes_percentage = (zeroes_count / total_length)
+        ones_percentage = (ones_count / total_length)
+
+        return {
+            'Zeroes': zeroes_percentage,
+            'Ones': ones_percentage,
+            'Bit length': total_length
+        }
+
+    def convert_to_ascii(self):
+        # Convert binary data to ASCII format.
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('ascii')
+
+    def convert_to_utf8(self):
+        # Convert binary data to UTF-8 format.
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('utf-8')
+
+    <test cases for the class>
+    >>> binary_data = BinaryDataProcessor('11101111011011011111111111111111')
+    >>> binary_data.calculate_binary_info()
+    {'Bit length': 32, 'Ones': 0.5, 'Zeroes': 0.5}
+    >>> binary_data.convert_to_ascii()
+    b'\x0f\x0f'
+    >>> binary_data.convert_to_utf8()
+    b'\x0f\x0f'

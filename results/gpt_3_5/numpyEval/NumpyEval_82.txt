@@ -1,0 +1,1 @@
+# Add the first element of the input array 'arr' to the end of the array using numpy's append function.

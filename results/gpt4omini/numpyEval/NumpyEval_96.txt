@@ -1,0 +1,6 @@
+```python
+import numpy as np
+
+# Create a boolean array of ones with shape (3, 4) to represent a matrix of True values.
+data = np.ones((3, 4), dtype=bool)
+```

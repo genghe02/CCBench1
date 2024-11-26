@@ -1,0 +1,37 @@
+ def solve(s):
+ # This function takes a string as an argument and returns a new string with the first letter of each word capitalized and the rest in lowercase.
+ # If the string does not contain any alphabets, the function returns the original string in reverse order.
+
+ # Requirements for the code
+ s = str(s) # Ensure the input is a string
+
+ # some test cases for the function
+ >>> solve("Hello World")
+ "Hello world"
+ >>> solve("1234abCdEf")
+ "1234AbCdEf"
+ >>> solve("")
+ ""
+ >>> solve("Race a car")
+ "Race a car"
+
+ flg = 0
+ idx = 0
+ new_str = list(s.split()) # Split the string into words and convert it to a list
+ for word in new_str:
+ if word: # Check if the word is not empty
+ for i in word:
+ if i.isalpha():
+ new_str[idx][:1] = i.upper() # Capitalize the first letter of each word
+ new_str[idx] = ''.join(new_str[idx]) # Join the list back into a string
+ flg = 1
+ idx += 1
+
+ s = ""
+ for i in new_str:
+ s += i + " " # Add a space after each word
+ s = s[:-1] # Remove the last space
+
+ if flg == 0:
+ return s[::-1] # Return the reversed string if no alphabets were found
+ return s

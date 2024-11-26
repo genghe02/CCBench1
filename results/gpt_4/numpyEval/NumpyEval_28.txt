@@ -1,0 +1,1 @@
+# Convert a matrix to an array by first converting it to a numpy array and then squeezing it to remove single-dimensional entries.

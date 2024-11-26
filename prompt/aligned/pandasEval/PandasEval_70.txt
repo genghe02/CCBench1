@@ -1,0 +1,1 @@
+# Drop all data in a Pandas DataFrame using df.index to remove all rows.

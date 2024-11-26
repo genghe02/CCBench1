@@ -1,0 +1,31 @@
+def is_multiply_prime(a):
+    # The function checks if the given input 'a' can be expressed as a product of three prime numbers between 2 and 100.
+    # Function 'is_prime' is a helper function that checks if a number is prime by iterating from 2 to n and checking if n is divisible by any number.
+    # If it is, then it's not a prime number and the function returns False, else it returns True.
+    # The function then iterates from 2 to 100 for three variables i, j and k. If any of them is not a prime number, it continues to the next iteration.
+    # If all three are prime and their product equals to 'a', the function returns True. If no such three prime numbers are found, the function returns False.
+
+    # Test cases:
+    # >>> is_multiply_prime(30)  # 30 can be expressed as the product of three primes 2, 3 and 5.
+    # True
+    # >>> is_multiply_prime(100)  # 100 cannot be expressed as the product of three primes.
+    # False
+    # >>> is_multiply_prime(105)  # 105 can be expressed as the product of three primes 3, 5 and 7.
+    # True
+    # >>> is_multiply_prime(2)  # 2 is a prime number but it cannot be expressed as the product of three primes.
+    # False
+
+    def is_prime(n):
+        for j in range(2,n):
+            if n%j == 0:
+                return False
+        return True
+
+    for i in range(2,101):
+        if not is_prime(i): continue
+        for j in range(2,101):
+            if not is_prime(j): continue
+            for k in range(2,101):
+                if not is_prime(k): continue
+                if i*j*k == a: return True
+    return False

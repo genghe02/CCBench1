@@ -1,0 +1,1 @@
+# This function selects and returns multiple columns from the given dataframe. The parameter 'df' is the input dataframe and 'columns' is a list of column names to be selected.

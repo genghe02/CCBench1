@@ -1,0 +1,1 @@
+# Sort the 2D numpy array first by y-coordinates, then by x-coordinates using numpy's lexsort function. The lexsort function returns an array of indices used to index an array to achieve sorted order.

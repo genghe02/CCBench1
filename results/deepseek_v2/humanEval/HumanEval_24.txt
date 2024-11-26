@@ -1,0 +1,21 @@
+```python
+def largest_divisor(n: int) -> int:
+    # Find the largest integer divisor of a given number 'n' that is less than 'n' itself.
+    # This function iterates from 'n-1' down to 1, checking if the current number is a divisor of 'n'.
+    # The first divisor found is returned as the largest divisor.
+    
+    # >>> largest_divisor(10)
+    # 5
+    # >>> largest_divisor(17)
+    # 1
+    # >>> largest_divisor(24)
+    # 12
+    # >>> largest_divisor(1)
+    # 1
+    # >>> largest_divisor(0)
+    # (This will raise a ZeroDivisionError, as 0 has no divisors other than itself)
+    
+    for i in reversed(range(n)):
+        if n % i == 0:
+            return i
+```

@@ -1,0 +1,95 @@
+ <description for whole class>
+"""
+A class for managing a SQLite database to store information about books, including adding, removing, borrowing, and returning books.
+"""
+
+class BookManagementDB:
+    def __init__(self, db_name):
+        """
+        Initialize the database connection and create the table if it doesn't exist.
+
+        :param db_name: str, the name of the database file
+        """
+        self.connect_to_db(db_name)
+
+    def connect_to_db(self, db_name):
+        """
+        Connect to the SQLite database and create a cursor.
+
+        :param db_name: str, the name of the database file
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+        self.create_table()
+
+    def create_table(self):
+        """
+        Create the 'books' table in the database if it doesn't exist.
+        """
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS books (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                author TEXT,
+                available INTEGER
+            )
+        ''')
+        self.connection.commit()
+
+    def add_book(self, title, author):
+        """
+        Add a new book to the database with the given title and author.
+
+        :param title: str, the title of the book
+        :param author: str, the author of the book
+        """
+        self.cursor.execute('''
+            INSERT INTO books (title, author, available)
+            VALUES (?,?, 1)
+        ''', (title, author))
+        self.connection.commit()
+
+    def remove_book(self, book_id):
+        """
+        Remove a book from the database with the given id.
+
+        :param book_id: int, the id of the book to remove
+        """
+        self.cursor.execute('''
+            DELETE FROM books WHERE id =?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def borrow_book(self, book_id):
+        """
+        Mark a book as borrowed in the database with the given id.
+
+        :param book_id: int, the id of the book to mark as borrowed
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 0 WHERE id =?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def return_book(self, book_id):
+        """
+        Mark a book as returned in the database with the given id.
+
+        :param book_id: int, the id of the book to mark as returned
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 1 WHERE id =?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def search_books(self):
+        """
+        Return all books in the database.
+
+        :return: list, a list of tuples representing each book in the database
+        """
+        self.cursor.execute('''
+            SELECT * FROM books
+        ''')
+        books = self.cursor.fetchall()
+        return books

@@ -1,0 +1,56 @@
+```python
+# This class handles interpolation functions for 1-dimensional and 2-dimensional data.
+class Interpolation:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    # This function applies 1-dimensional linear interpolation to a given array of x and y values for a specified set of x_interpolation points.
+    # param x: List of original x values.
+    # param y: List of original y values.
+    # param x_interp: List of x values where the y values are to be interpolated.
+    # return: List of interpolated y values for the given x_interp values.
+    # Test cases:
+    # >>> interpolate_1d([1, 2, 3], [1, 2, 3], [1.5, 2.5])
+    # [1.5, 2.5]
+    def interpolate_1d(x, y, x_interp):
+        y_interp = []
+        for xi in x_interp:
+            for i in range(len(x) - 1):
+                if x[i] <= xi <= x[i+1]:
+                    yi = y[i] + (y[i+1] - y[i]) * (xi - x[i]) / (x[i+1] - x[i])
+                    y_interp.append(yi)
+                    break
+        return y_interp
+    
+    @staticmethod
+    # This function applies 2-dimensional linear interpolation to a given array of x, y and z values for a specified set of x_interpolation and y_interpolation points.
+    # param x: List of original x values.
+    # param y: List of original y values.
+    # param z: 2D List of original z values.
+    # param x_interp: List of x values where the z values are to be interpolated.
+    # param y_interp: List of y values where the z values are to be interpolated.
+    # return: List of interpolated z values for the given x_interp and y_interp values.
+    # Test cases:
+    #>>> interpolate_2d([1, 2], [1, 2], [[1, 2], [3, 4]], [1.5], [1.5])
+    # [2.5]
+    def interpolate_2d(x, y, z, x_interp, y_interp):
+        z_interp = []
+        for xi, yi in zip(x_interp, y_interp):
+            for i in range(len(x) - 1):
+                if x[i] <= xi <= x[i+1]:
+                    for j in range(len(y) - 1):
+                        if y[j] <= yi <= y[j+1]:
+                            z00 = z[i][j]
+                            z01 = z[i][j+1]
+                            z10 = z[i+1][j]
+                            z11 = z[i+1][j+1]
+                            zi = (z00 * (x[i+1] - xi) * (y[j+1] - yi) +
+                                  z10 * (xi - x[i]) * (y[j+1] - yi) +
+                                  z01 * (x[i+1] - xi) * (yi - y[j]) +
+                                  z11 * (xi - x[i]) * (yi - y[j])) / ((x[i+1] - x[i]) * (y[j+1] - y[j]))
+                            z_interp.append(zi)
+                            break
+                    break
+        return z_interp
+```

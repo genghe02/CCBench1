@@ -1,0 +1,13 @@
+```python
+def is_bored(S):
+    # This function checks how many sentences in a given string start with "I " to determine if the speaker is bored.
+    
+    # Example test cases for the function:
+    # >>> is_bored("I am bored. I want to go out. It's a nice day!") => 2
+    # >>> is_bored("I feel great! What a lovely day.") => 1
+    # >>> is_bored("Let's have some fun. I think I should relax.") => 1
+    # >>> is_bored("Nothing to say.") => 0
+    import re
+    sentences = re.split(r'[.?!]\s*', S)
+    return sum(sentence[0:2] == 'I ' for sentence in sentences)
+```

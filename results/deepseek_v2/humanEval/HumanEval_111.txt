@@ -1,0 +1,28 @@
+```python
+def histogram(test):
+    # This function takes a string as input and returns a dictionary where the keys are the words that appear the most frequently in the string, and the values are the frequencies of those words.
+    
+    # >>> histogram("hello world hello")
+    # {'hello': 2}
+    # >>> histogram("a a a b b c")
+    # {'a': 3, 'b': 2}
+    # >>> histogram("")
+    # {}
+    # >>> histogram("one")
+    # {'one': 1}
+    # >>> histogram("hello hello world world world")
+    # {'world': 3}
+    
+    dict1 = {}
+    list1 = test.split(" ")
+    t = 0
+
+    for i in list1:
+        if list1.count(i) > t and i != '':
+            t = list1.count(i)
+    if t > 0:
+        for i in list1:
+            if list1.count(i) == t:
+                dict1[i] = t
+    return dict1
+```

@@ -1,0 +1,26 @@
+```python
+from typing import List
+
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    # Return a new list with the delimiter inserted between each number in the original list.
+    # Handles the case where the input list is empty by returning an empty list.
+
+    # Test cases for the function:
+    # >>> intersperse([1, 2, 3], 0) -> [1, 0, 2, 0, 3]
+    # >>> intersperse([], 0) -> []
+    # >>> intersperse([5], 1) -> [5]
+    # >>> intersperse([1, 2], 3) -> [1, 3, 2]
+
+    if not numbers:
+        return []
+
+    result = []
+
+    for n in numbers[:-1]:
+        result.append(n)
+        result.append(delimeter)
+
+    result.append(numbers[-1])
+
+    return result
+```

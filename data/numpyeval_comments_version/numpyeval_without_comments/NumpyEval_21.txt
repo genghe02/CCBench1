@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.arange(0,10)
+<Requirements for the code>
+a_string = " ".join(str(i) for i in a)

@@ -1,0 +1,11 @@
+```python
+import numpy as np
+
+a = np.array([[1,2,3],
+              [3,2,4]])
+
+my_dict = {1:23, 2:34, 3:36, 4:45}
+
+# Apply the dictionary values to the corresponding elements in the numpy array using np.vectorize.
+out = np.vectorize(my_dict.get)(a)
+```

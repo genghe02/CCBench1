@@ -1,0 +1,42 @@
+<description for whole class>
+class IPAddress:
+    def __init__(self, ip_address):
+        <Initialize the IPAddress class with the given IP address.>
+        <Parameters:>
+        self.ip_address = ip_address
+
+    def is_valid(self):
+        <Check if the IP address is valid by verifying the format and range of each octet.>
+        <Returns:>
+        <True if the IP address is valid, False otherwise.>
+        <Test cases for the function:>
+        octets = self.ip_address.split('.')
+        if len(octets) != 4:
+            return False
+        for octet in octets:
+            if not octet.isdigit() or int(octet) < 0 or int(octet) > 255:
+                return False
+        return True
+
+    def get_octets(self):
+        <Return the individual octets of the IP address if it is valid.>
+        <Returns:>
+        <List of octets if the IP address is valid, otherwise an empty list.>
+        <Test cases for the function:>
+        if self.is_valid():
+            return self.ip_address.split('.')
+        else:
+            return []
+
+    def get_binary(self):
+        <Convert the IP address octets to binary format if the IP address is valid.>
+        <Returns:>
+        <Binary representation of the IP address if valid, otherwise an empty string.>
+        <Test cases for the function:>
+        if self.is_valid():
+            binary_octets = []
+            for octet in self.get_octets():
+                binary_octets.append(format(int(octet), '08b'))
+            return '.'.join(binary_octets)
+        else:
+            return ''

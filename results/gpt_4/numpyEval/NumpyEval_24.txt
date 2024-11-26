@@ -1,0 +1,1 @@
+# Perform element-wise addition on arrays 'a' and 'b'. 'a' is reshaped to a 2-D array using 'None' for broadcasting. Each element in 'b' is multiplied by 2 before the addition.

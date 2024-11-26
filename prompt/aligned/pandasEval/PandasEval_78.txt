@@ -1,0 +1,2 @@
+# Check whether a column or row exists in a DataFrame before referencing it. 
+# Output the second row of data in the `mycol` column if it exists; otherwise, output NaN.

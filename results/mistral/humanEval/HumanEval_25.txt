@@ -1,0 +1,35 @@
+ from typing import List
+
+
+def factorize(n: int) -> List[int]:
+ # This function takes an integer as input and returns a list of its prime factors.
+ # It uses a simple trial division method to find the prime factors.
+
+ # Test cases:
+ # >>> factorize(1)
+ # []
+ # >>> factorize(2)
+ # [2]
+ # >>> factorize(9)
+ # [3, 3]
+ # >>> factorize(15)
+ # [3, 5]
+ # >>> factorize(16)
+ # [2, 2, 2]
+
+ import math
+ fact = []
+ i = 2
+ while i <= int(math.sqrt(n) + 1):
+ # Try dividing the number by each number starting from 2 up to the square root of the number.
+ # If the division is exact, then the divisor is a prime factor.
+ if n % i == 0:
+ fact.append(i)
+ n //= i
+ else:
+ i += 1
+
+ # If the number is still greater than 1 after the loop, then it is a prime factor.
+ if n > 1:
+ fact.append(n)
+ return fact

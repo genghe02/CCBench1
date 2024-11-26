@@ -1,0 +1,46 @@
+class MusicPlayer:
+    # This class represents a music player that allows users to manage a playlist and control music playback.
+
+    def __init__(self):
+        # Initializes the MusicPlayer object with an empty playlist, no current song, and default volume set to 50.
+
+    def add_song(self, song):
+        # Adds a song to the playlist.
+        # param song: str, the name of the song to be added.
+        # Test case: add_song("Song1")
+
+    def remove_song(self, song):
+        # Removes a song from the playlist if it exists, and stops playing the song if it is the current song.
+        # param song: str, the name of the song to be removed.
+        # Test cases: remove_song("Song3"), remove_song("Song5")
+
+    def play(self):
+        # Plays the current song if there is one, otherwise returns False.
+        # return: str, the name of the song being played, or False if there are no songs.
+        # Test cases: play(), play()
+
+    def stop(self):
+        # Stops the playback of the current song if there is one.
+        # return: bool, True if the music playback is stopped successfully, False otherwise.
+        # Test cases: stop(), stop()
+
+    def switch_song(self):
+        # Switches to the next song in the playlist if there is one.
+        # return: bool, True if the song is switched successfully, False if end of playlist is reached or no current song.
+        # Test cases: switch_song(), switch_song()
+
+    def previous_song(self):
+        # Switches to the previous song in the playlist if there is one.
+        # return: bool, True if the song is switched successfully, False if beginning of playlist is reached or no current song.
+        # Test cases: previous_song(), previous_song()
+
+    def set_volume(self, volume):
+        # Sets the volume of the music player within the range of 0 to 100.
+        # param volume: int, the volume level to be set.
+        # return: bool, True if volume is set successfully, False if volume is out of range.
+        # Test cases: set_volume(75), set_volume(110)
+
+    def shuffle(self):
+        # Shuffles the songs in the playlist.
+        # return: bool, True if the playlist is shuffled successfully, False if the playlist is empty.
+        # Test cases: shuffle(), shuffle()

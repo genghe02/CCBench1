@@ -1,0 +1,1 @@
+ # Convert the 'date' column to pandas datetime format using pd.to_datetime() with errors set to 'coerce'. This will handle any non-datetime values in the 'date' column and return NaT for those rows.

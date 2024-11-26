@@ -1,0 +1,80 @@
+```python
+from docx import Document
+from docx.shared import Pt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+
+
+class DocFileHandler:
+    # This class provides methods to handle operations on DOCX files, such as reading, writing, adding headings, and adding tables.
+    def __init__(self, file_path):
+        # Initialize the DocFileHandler with a file path.
+        # param file_path: str, the path to the DOCX file.
+        self.file_path = file_path
+
+    def read_text(self):
+        # Read the text content from the DOCX file and return it as a single string.
+        # return: str, the concatenated text content of the DOCX file.
+        doc = Document(self.file_path)
+        text = []
+        for paragraph in doc.paragraphs:
+            text.append(paragraph.text)
+        return "\n".join(text)
+
+    def write_text(self, content, font_size=12, alignment='left'):
+        # Write the given content to a new DOCX file with specified font size and alignment.
+        # param content: str, the text content to be written to the DOCX file.
+        # param font_size: int, the font size for the text content. Default is 12.
+        # param alignment: str, the alignment of the text content. Options are 'left', 'center', 'right'. Default is 'left'.
+        # return: bool, True if the text was successfully written, False otherwise.
+        try:
+            doc = Document()
+            paragraph = doc.add_paragraph()
+            run = paragraph.add_run(content)
+            font = run.font
+            font.size = Pt(font_size)
+            alignment_value = self._get_alignment_value(alignment)
+            paragraph.alignment = alignment_value
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_heading(self, heading, level=1):
+        # Add a heading to the existing DOCX file with the specified level.
+        # param heading: str, the heading text to be added.
+        # param level: int, the heading level (1 for main heading, 2 for subheading, etc.). Default is 1.
+        # return: bool, True if the heading was successfully added, False otherwise.
+        try:
+            doc = Document(self.file_path)
+            doc.add_heading(heading, level)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_table(self, data):
+        # Add a table to the existing DOCX file with the provided data.
+        # param data: list of lists, the data to be added to the table. Each inner list represents a row.
+        # return: bool, True if the table was successfully added, False otherwise.
+        try:
+            doc = Document(self.file_path)
+            table = doc.add_table(rows=len(data), cols=len(data[0]))
+            for i, row in enumerate(data):
+                for j, cell_value in enumerate(row):
+                    table.cell(i, j).text = str(cell_value)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def _get_alignment_value(self, alignment):
+        # Convert the alignment string to the corresponding WD_PARAGRAPH_ALIGNMENT value.
+        # param alignment: str, the alignment string ('left', 'center', 'right').
+        # return: WD_PARAGRAPH_ALIGNMENT, the corresponding alignment value.
+        alignment_options = {
+            'left': WD_PARAGRAPH_ALIGNMENT.LEFT,
+            'center': WD_PARAGRAPH_ALIGNMENT.CENTER,
+            'right': WD_PARAGRAPH_ALIGNMENT.RIGHT
+        }
+        return alignment_options.get(alignment.lower(), WD_PARAGRAPH_ALIGNMENT.LEFT)
+```

@@ -1,0 +1,26 @@
+{
+  "response body": {
+    "id": "bf7914d9-befb-498d-902a-99628d97f77d",
+    "object": "chat.completion",
+    "model": "gpt-4-32k",
+    "created": "2024-09-23 18:25:08",
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "stop",
+        "message": {
+          "role": "assistant",
+          "content": "from typing import List\n\ndef filter_by_substring(strings: List[str], substring: str) -> List[str]:\n    # This function filters a list of strings to only include strings that contain a specified substring.\n    # param strings: List[str], the list of strings to filter\n    # param substring: str, the substring to filter by\n    # return: List[str], a new list consisting of only strings that contain the specified substring.\n    # Test cases:\n    # >>> filter_by_substring(['hello', 'world', 'hell', 'word'], 'hell')\n    # ['hello', 'hell']\n    # >>> filter_by_substring(['python', 'java', 'c++', 'javascript'], 'java')\n    # ['java', 'javascript']\n    # >>> filter_by_substring(['apple', 'banana', 'cherry', 'date'], 'a')\n    # ['apple', 'banana', 'date']\n\n    return [x for x in strings if substring in x]"
+        }
+      }
+    ],
+    "usage": {
+      "completion_tokens": 203,
+      "prompt_tokens": 607,
+      "total_tokens": 810
+    },
+    "feeType": "1",
+    "consume": 0.441668
+  },
+  "test_case_name": "HumanEval_7.txt"
+}

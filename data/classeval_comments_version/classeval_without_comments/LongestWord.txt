@@ -1,0 +1,29 @@
+<description for whole class>
+import re
+import string
+
+
+class LongestWord:
+
+    def __init__(self):
+        <description for whole function>
+        self.word_list = []
+
+    def add_word(self, word):
+        <description for whole function>
+        <description for all parameters>
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        longest_word = ""
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        sentence = re.split(' ', sentence)
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        return longest_word

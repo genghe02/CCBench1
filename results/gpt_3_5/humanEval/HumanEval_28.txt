@@ -1,0 +1,16 @@
+from typing import List
+
+def concatenate(strings: List[str]) -> str:
+    # Concatenate a list of strings into a single string by joining them together.
+    # This function takes a list of strings as input and returns a single concatenated string.
+    
+    # Test case 1: Concatenating an empty list should return an empty string
+    assert concatenate([]) == ''
+    
+    # Test case 2: Concatenating a list of strings with one element should return that string
+    assert concatenate(['hello']) == 'hello'
+    
+    # Test case 3: Concatenating a list of multiple strings should return a single string with all elements joined together
+    assert concatenate(['hello', 'world']) == 'helloworld'
+    
+    return ''.join(strings)

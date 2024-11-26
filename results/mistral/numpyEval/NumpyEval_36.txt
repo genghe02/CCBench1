@@ -1,0 +1,7 @@
+ # Find indices where the array values differ from their neighbors and store the results in a new NumPy array.
+
+result_indices = np.where(np.logical_xor(arr[1:], arr[:-1]))[0]
+# Select the desired indices from the result_indices array and assign the corresponding array elements to a new NumPy array.
+result_arr = arr[np.append(np.zeros(1, dtype=bool), np.ones(len(result_indices), dtype=bool))[np.newaxis, :] + np.arange(len(result_indices))]
+# Instead of using the given indices directly, create a new NumPy array with the desired elements.
+result_arr = arr[[1, 4]]

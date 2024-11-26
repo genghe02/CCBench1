@@ -1,0 +1,41 @@
+class ClassRegistrationSystem:
+
+    def __init__(self):
+        # Initialize the ClassRegistrationSystem object with an empty list of students and an empty dictionary to store student registration classes.
+
+    def register_student(self, student):
+        # Register a new student if they are not already in the system.
+        # Return 1 if the student is successfully registered, 0 if the student is already registered.
+        
+    def register_class(self, student_name, class_name):
+        # Register a class for a specific student.
+        # Parameters:
+        # student_name: str, the name of the student
+        # class_name: str, the name of the class to register
+        # Return the list of classes the student is registered for after adding the new class.
+        # Test cases:
+        # 1. Register a new class for an existing student.
+        # 2. Register a class for a new student.
+
+    def get_students_by_major(self, major):
+        # Get a list of students by a specific major.
+        # Parameters:
+        # major: str, the major to filter students by
+        # Return a list of student names who belong to the given major.
+        # Test cases:
+        # 1. Get students from a major with multiple students.
+        # 2. Get students from a major with no students.
+
+    def get_all_major(self):
+        # Get a list of all majors present in the system.
+        # Return a list of unique majors from the registered students.
+        # Test cases:
+        # 1. Get all majors with multiple students.
+        # 2. Get all majors with no students.
+
+    def get_most_popular_class_in_major(self, major):
+        # Get the most popular class among students of a specific major.
+        # Return the name of the class that is registered by the most students in the given major.
+        # Test cases:
+        # 1. Get the most popular class in a major with multiple classes.
+        # 2. Get the most popular class in a major with no classes.

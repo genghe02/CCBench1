@@ -1,0 +1,54 @@
+```python
+import json
+import os
+
+
+class JSONProcessor:
+    # This class provides methods to read, write, and process JSON files.
+
+    def read_json(self, file_path):
+        # Read and parse a JSON file from the given file path.
+        # param file_path: str, the path to the JSON file to be read.
+        # return: dict, the parsed JSON data if successful, 0 if the file does not exist, -1 if there is an error during parsing.
+        # >>> processor = JSONProcessor()
+        # >>> processor.read_json('example.json')
+        if not os.path.exists(file_path):
+            return 0
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            return data
+        except:
+            return -1
+
+    def write_json(self, data, file_path):
+        # Write a dictionary to a JSON file at the given file path.
+        # param data: dict, the data to be written to the JSON file.
+        # param file_path: str, the path to the JSON file to be written.
+        # return: int, 1 if the write operation is successful, -1 if there is an error during writing.
+        # >>> processor = JSONProcessor()
+        # >>> processor.write_json({'key': 'value'}, 'example.json')
+        try:
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return 1
+        except:
+            return -1
+
+    def process_json(self, file_path, remove_key):
+        # Process a JSON file by removing a specified key from the JSON data and saving the changes.
+        # param file_path: str, the path to the JSON file to be processed.
+        # param remove_key: str, the key to be removed from the JSON data.
+        # return: int, 1 if the key is successfully removed and the file is updated, 0 if the key is not found or if there is an error.
+        # >>> processor = JSONProcessor()
+        # >>> processor.process_json('example.json', 'key_to_remove')
+        data = self.read_json(file_path)
+        if data == 0 or data == -1:
+            return 0
+        if remove_key in data:
+            del data[remove_key]
+            self.write_json(data, file_path)
+            return 1
+        else:
+            return 0
+```

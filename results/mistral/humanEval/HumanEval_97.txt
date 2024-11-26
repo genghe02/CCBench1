@@ -1,0 +1,24 @@
+ def multiply(a: float, b: float):
+ # This function multiplies the absolute values of the last digit of two numbers.
+
+ # Parameters:
+ # param a: The first number to be processed.
+ # param b: The second number to be processed.
+
+ result = abs(a % 10) * abs(b % 10)
+ # Return the multiplication result.
+ return result
+
+ # Test cases:
+ >>> multiply(12.345, 67.891)
+ 0.0
+ >>> multiply(11, 22)
+ 1.0
+ >>> multiply(-15, 33)
+ 3.0
+ >>> multiply(0.01, 0.02)
+ 0.0
+ >>> multiply(1.1, 2.2)
+ 1.0
+ >>> multiply(10, 5)
+ 0 # Since 10 % 10 = 0 and 5 % 10 = 5, the result is 0.

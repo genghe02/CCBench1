@@ -1,0 +1,5 @@
+import pandas as pd
+
+def is_contain_particular_value(series, value):
+    <Requirements for the code>
+    return value in series.unique()

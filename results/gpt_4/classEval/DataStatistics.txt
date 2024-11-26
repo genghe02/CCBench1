@@ -1,0 +1,41 @@
+from collections import Counter
+
+# This class is used to calculate statistical measures including mean, median and mode of a dataset
+class DataStatistics:
+    def mean(self, data):
+        # This function calculates the mean of the provided dataset
+        # :param data: list, the dataset for which the mean is to be calculated
+        # :return: float, the mean of the dataset
+        # Some test cases for the function:
+        # >>> stats = DataStatistics()
+        # >>> stats.mean([1, 2, 3, 4, 5])
+        return round(sum(data) / len(data), 2)
+
+    def median(self, data):
+        # This function calculates the median of the provided dataset
+        # :param data: list, the dataset for which the median is to be calculated
+        # :return: float, the median of the dataset
+        # Some test cases for the function:
+        # >>> stats = DataStatistics()
+        # >>> stats.median([1, 2, 3, 4, 5])
+        # >>> stats.median([1, 2, 3, 4])
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 0:
+            middle = n // 2
+            return round((sorted_data[middle - 1] + sorted_data[middle]) / 2, 2)
+        else:
+            middle = n // 2
+            return sorted_data[middle]
+
+    def mode(self, data):
+        # This function calculates the mode of the provided dataset
+        # :param data: list, the dataset for which the mode is to be calculated
+        # :return: list, the mode(s) of the dataset
+        # Some test cases for the function:
+        # >>> stats = DataStatistics()
+        # >>> stats.mode([1, 2, 2, 3, 4, 4])
+        counter = Counter(data)
+        mode_count = max(counter.values())
+        mode = [x for x, count in counter.items() if count == mode_count]
+        return mode

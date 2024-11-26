@@ -1,0 +1,5 @@
+import numpy as np
+
+x = np.arange(8.0)
+# Partition array into 3 chunks with Numpy
+result = np.array_split(x, 3)

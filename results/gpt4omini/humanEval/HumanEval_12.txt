@@ -1,0 +1,28 @@
+```python
+from typing import List, Optional
+
+def longest(strings: List[str]) -> Optional[str]:
+    # Determine the longest string from a list of strings. If multiple strings are the longest,
+    # the first one encountered in the list will be returned. If the list is empty, None is returned.
+    # 
+    # :param strings: List[str], the list of strings to be evaluated
+    # :return: Optional[str], the longest string in the list or None if the list is empty
+    # 
+    # Test cases:
+    # >>> longest(['apple', 'banana', 'cherry'])
+    # 'banana'
+    # >>> longest(['apple', 'fig', 'grape', 'kiwi'])
+    # 'grape'
+    # >>> longest(['longest', 'long', 'longer'])
+    # 'longest'
+    # >>> longest([])
+    # None
+    
+    if not strings:
+        return None
+
+    maxlen = max(len(x) for x in strings)
+    for s in strings:
+        if len(s) == maxlen:
+            return s
+```

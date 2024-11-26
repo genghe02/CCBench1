@@ -1,0 +1,23 @@
+ def change_base(x: int, base: int):
+    """
+    Convert an integer number x to a string in base 'base' representation.
+
+    :param x: int, the number to be converted
+    :param base: int, the base of the representation
+    :return: str, the converted number as a string
+    """
+    result = ""
+    while x > 0:
+        result = str(x % base) + result
+        x //= base
+    return result
+
+    # Test cases:
+    >>> change_base(10, 2)
+    '1010'
+    >>> change_base(15, 3)
+    '1111'
+    >>> change_base(25, 5)
+    '110101'
+    >>> change_base(12345, 16)
+    '3c97'

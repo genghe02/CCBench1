@@ -1,0 +1,13 @@
+ # Normalize each column of the DataFrame using the mean and standard deviation of that column.
+# Apply the normalization formula to each column using the apply method and lambda function.
+# Use axis=0 to apply the function to each column instead of each row.
+
+import pandas as pd
+
+def normalize(df):
+ <Requirements for the code:
+ Normalize each column of the DataFrame using the mean and standard deviation of that column.
+ Apply the normalization formula to each column using the apply method and lambda function.
+ Use axis=0 to apply the function to each column instead of each row.>
+ df.iloc[:,0:-1] = df.iloc[:,0:-1].apply(lambda x: (x-x.mean())/ x.std(), axis=0)
+ return df

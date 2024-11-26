@@ -1,0 +1,20 @@
+```python
+def match_parens(lst):
+    # Check if two strings can form valid parentheses combinations when concatenated in both orders.
+    
+    # Test if the concatenated parentheses strings are valid.
+    def check(s):
+        val = 0
+        for i in s:
+            if i == '(':
+                val = val + 1
+            else:
+                val = val - 1
+            if val < 0:
+                return False
+        return True if val == 0 else False
+    
+    S1 = lst[0] + lst[1]  # Concatenate the first string with the second.
+    S2 = lst[1] + lst[0]  # Concatenate the second string with the first.
+    return 'Yes' if check(S1) or check(S2) else 'No'  # Return 'Yes' if either combination is valid, otherwise 'No'.
+```

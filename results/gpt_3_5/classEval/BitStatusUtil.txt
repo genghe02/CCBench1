@@ -1,0 +1,42 @@
+<description for whole class>
+class BitStatusUtil:
+    @staticmethod
+    def add(states, stat):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    def has(states, stat):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        BitStatusUtil.check([states, stat])
+        return (states & stat) == stat
+
+    @staticmethod
+    def remove(states, stat):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    def check(args):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        for arg in args:
+            if arg < 0:
+                raise ValueError(f"{arg} must be greater than or equal to 0")
+            if arg % 2 != 0:
+                raise ValueError(f"{arg} not even")

@@ -1,0 +1,37 @@
+```python
+def prime_fib(n: int):
+    # Generate the nth Fibonacci number that is also a prime number.
+    # The function computes Fibonacci numbers and checks for primality 
+    # until it finds the nth prime Fibonacci.
+    # param n: int, the index of the prime Fibonacci number to retrieve
+    # return: int, the nth Fibonacci number that is prime
+
+    import math
+
+    def is_prime(p):
+        # Check if a number is prime.
+        # A prime number is greater than 1 and has no divisors other than 1 and itself.
+        # param p: int, the number to check for primality
+        # return: bool, True if p is prime, False otherwise
+        
+        if p < 2:
+            return False
+        for k in range(2, min(int(math.sqrt(p)) + 1, p - 1)):
+            if p % k == 0:
+                return False
+        return True
+    
+    f = [0, 1]  # Starting values for Fibonacci sequence
+    while True:
+        f.append(f[-1] + f[-2])  # Generate next Fibonacci number
+        if is_prime(f[-1]):
+            n -= 1  # Decrease count if a prime Fibonacci number is found
+        if n == 0:
+            return f[-1]  # Return the nth prime Fibonacci number
+
+# Test cases for the function
+# >>> prime_fib(1) # Should return 2, which is the first prime Fibonacci number
+# >>> prime_fib(2) # Should return 3, which is the second prime Fibonacci number
+# >>> prime_fib(3) # Should return 5, which is the third prime Fibonacci number
+# >>> prime_fib(4) # Should return 13, which is the fourth prime Fibonacci number
+```

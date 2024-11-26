@@ -1,0 +1,1 @@
+# Remove the first n rows from a pandas DataFrame and return the updated DataFrame.

@@ -1,0 +1,1 @@
+# This function concatenates two numpy arrays into one using np.concatenate() function.

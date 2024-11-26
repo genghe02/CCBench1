@@ -1,0 +1,9 @@
+ # Replace column names in a DataFrame using pandas.rename(columns) method.
+# <origin_names> and <new_names> are dictionaries mapping old names to new names.
+
+import pandas as pd
+
+def change_col_names_of_df(df, origin_names, new_names):
+    <The function takes a DataFrame 'df', a dictionary 'origin_names' with old column names as keys, and a dictionary 'new_names' with new column names as keys. It returns the DataFrame 'df' with updated column names.>
+
+    return df.rename(columns={origin_names:new_names})

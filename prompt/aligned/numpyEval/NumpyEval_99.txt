@@ -1,0 +1,1 @@
+# Sum all values in a Pandas DataFrame and return the result as a numeric value.

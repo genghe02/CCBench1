@@ -1,0 +1,5 @@
+def compute_mean_along_rows(df):
+    # Compute the mean value along each row (axis=1) of the DataFrame.
+    # Assign these mean values to a new column in the DataFrame named 'mean'.
+    df['mean'] = df.mean(axis=1)
+    return df

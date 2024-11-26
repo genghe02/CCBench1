@@ -1,0 +1,27 @@
+def file_name_check(file_name):
+    # This function checks if a given file name follows a specific set of rules. 
+    # The file name should be in the format: 'name.extension'
+    # The name should start with a letter and can contain up to 3 digits. 
+    # The extension should be one of the following: 'txt', 'exe', 'dll'
+    # Test cases:
+    # >>> file_name_check('file1.txt') --> 'Yes'
+    # >>> file_name_check('file1234.txt') --> 'No'
+    # >>> file_name_check('1file.txt') --> 'No'
+    # >>> file_name_check('file.py') --> 'No'
+    # >>> file_name_check('file') --> 'No'
+    # >>> file_name_check('.txt') --> 'No'
+    suf = ['txt', 'exe', 'dll']
+    lst = file_name.split(sep='.')
+    if len(lst) != 2:
+        return 'No'
+    if not lst[1] in suf:
+        return 'No'
+    if len(lst[0]) == 0:
+        return 'No'
+    if not lst[0][0].isalpha():
+        return 'No'
+    # Count the digits in the name part of the file
+    t = len([x for x in lst[0] if x.isdigit()])
+    if t > 3:
+        return 'No'
+    return 'Yes'

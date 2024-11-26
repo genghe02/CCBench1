@@ -1,0 +1,47 @@
+```python
+def file_name_check(file_name):
+    # Check if the given file name is valid based on specific rules:
+    # 1. The file name must have exactly one '.' separator.
+    # 2. The file extension must be one of ['txt', 'exe', 'dll'].
+    # 3. The file name part must not be empty.
+    # 4. The file name part must start with an alphabetic character.
+    # 5. The file name part must contain no more than 3 digits.
+    # Return 'Yes' if all conditions are met, otherwise return 'No'.
+    
+    # Test cases for the function:
+    # >>> file_name_check('test.txt')
+    # 'Yes'
+    # >>> file_name_check('123test.txt')
+    # 'No'
+    # >>> file_name_check('test.doc')
+    # 'No'
+    # >>> file_name_check('test.exe')
+    # 'Yes'
+    # >>> file_name_check('test1234.dll')
+    # 'No'
+    # >>> file_name_check('test.')
+    # 'No'
+    # >>> file_name_check('.txt')
+    # 'No'
+    # >>> file_name_check('test123.dll')
+    # 'Yes'
+    # >>> file_name_check('test12345.exe')
+    # 'No'
+    # >>> file_name_check('test.txt.exe')
+    # 'No'
+    
+    suf = ['txt', 'exe', 'dll']
+    lst = file_name.split(sep='.')
+    if len(lst) != 2:
+        return 'No'
+    if not lst[1] in suf:
+        return 'No'
+    if len(lst[0]) == 0:
+        return 'No'
+    if not lst[0][0].isalpha():
+        return 'No'
+    t = len([x for x in lst[0] if x.isdigit()])
+    if t > 3:
+        return 'No'
+    return 'Yes'
+```

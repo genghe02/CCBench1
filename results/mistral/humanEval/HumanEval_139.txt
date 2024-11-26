@@ -1,0 +1,19 @@
+ """
+Defines a function named special_factorial that calculates the special factorial of an integer.
+
+Parameters:
+    n (int): The integer for which the special factorial is to be calculated.
+
+For example:
+>>> special_factorial(4)
+288
+
+The function will receive an integer as input and should return the special factorial of this integer. The special factorial is calculated by multiplying the factorial of each number from 1 to n.
+"""
+def special_factorial(n):
+    fact_i = 1  # Initialize factorial of current number
+    special_fact = 1  # Initialize special factorial
+    for i in range(1, n+1):
+        fact_i *= i  # Multiply current number with the factorial of next number
+        special_fact *= fact_i  # Multiply special factorial with the factorial of current number
+    return special_fact

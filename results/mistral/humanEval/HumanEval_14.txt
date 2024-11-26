@@ -1,0 +1,18 @@
+ from typing import List
+
+
+def all_prefixes(string: str) -> List[str]:
+    # Generate a list of all prefixes of the given string
+    result = []
+
+    # Iterate through each index i from 0 to the length of the string
+    for i in range(len(string)):
+        # Append the substring from index 0 to i+1 to the result list
+        result.append(string[:i+1])
+    return result
+
+    <test cases>
+    >>> all_prefixes("python")
+    ['', 'p', 'py', 'pyt', 'pyth', 'pytho', 'pythoN']
+    >>> all_prefixes("hello")
+    ['', 'h', 'he', 'hel', 'hell']

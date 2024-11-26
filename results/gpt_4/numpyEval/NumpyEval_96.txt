@@ -1,0 +1,1 @@
+# Create a 3x4 numpy array filled with True boolean values. The dtype=bool is used to specify that the elements of the array should be of boolean type.

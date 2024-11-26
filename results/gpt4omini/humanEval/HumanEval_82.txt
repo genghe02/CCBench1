@@ -1,0 +1,27 @@
+```python
+def prime_length(string):
+    # Check if the length of the given string is a prime number.
+    # A prime number is a natural number greater than 1 that cannot be formed by multiplying two smaller natural numbers.
+    # The function returns True if the length is prime, and False otherwise.
+    
+    # Parameters:
+    # param string: str, the input string whose length needs to be checked for primality.
+    
+    # Return:
+    # return: bool, True if the length of the string is a prime number, False otherwise.
+    
+    # Test cases:
+    # >>> prime_length("hello")  # length is 5, which is prime, should return True
+    # >>> prime_length("hi")     # length is 2, which is prime, should return True
+    # >>> prime_length("abcd")   # length is 4, which is not prime, should return False
+    # >>> prime_length("")        # length is 0, should return False
+    # >>> prime_length("a")      # length is 1, should return False
+    
+    l = len(string)
+    if l == 0 or l == 1:
+        return False
+    for i in range(2, l):
+        if l % i == 0:
+            return False
+    return True
+```

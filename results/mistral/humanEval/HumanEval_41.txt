@@ -1,0 +1,3 @@
+ def car_race_collision(n: int):
+    # This function calculates the square of an integer input.
+    return n ** 2

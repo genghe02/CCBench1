@@ -1,0 +1,10 @@
+
+
+def max_element(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    m = l[0]
+    for e in l:
+        if e > m:
+            m = e
+    return m

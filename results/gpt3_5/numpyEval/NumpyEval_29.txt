@@ -1,0 +1,1 @@
+# Find the index of the maximum element along a given axis in the input array using numpy and return it.

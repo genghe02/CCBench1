@@ -1,0 +1,20 @@
+```python
+def fruit_distribution(s, n):
+    # This function calculates the remaining number of fruits after distributing some based on the input string.
+    # Parameters:
+    # s: str, a space-separated string of numbers representing the distributed fruits
+    # n: int, the total number of fruits available before distribution
+    # Return:
+    # return: int, the number of fruits remaining after distribution
+    # Test cases:
+    # >>> fruit_distribution("1 2 3", 10)  # Total 10 fruits, distributed 1+2+3=6, remaining 4
+    # >>> fruit_distribution("4 5", 20)    # Total 20 fruits, distributed 4+5=9, remaining 11
+    # >>> fruit_distribution("10 10", 25)   # Total 25 fruits, distributed 10+10=20, remaining 5
+    # >>> fruit_distribution("0 0 0", 5)    # Total 5 fruits, distributed 0, remaining 5
+    # >>> fruit_distribution("", 15)         # Total 15 fruits, nothing distributed, remaining 15
+    lis = list()
+    for i in s.split(' '):
+        if i.isdigit():
+            lis.append(int(i))
+    return n - sum(lis)
+```

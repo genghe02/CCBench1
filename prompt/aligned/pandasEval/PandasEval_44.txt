@@ -1,0 +1,1 @@
+# Delete a column from a Pandas DataFrame and return the changed DataFrame.

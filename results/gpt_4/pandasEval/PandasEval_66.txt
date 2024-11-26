@@ -1,0 +1,4 @@
+# This function takes in a Pandas Series object and returns the percentage of each unique value in the series. 
+# It is typically used to get the percentage distribution of a categorical variable. 
+# In this case, it is used to get the percentage of each gender in the provided series. 
+# The 'normalize=True' parameter in the value_counts() function ensures the result is the relative frequencies of the unique values.

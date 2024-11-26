@@ -1,0 +1,3 @@
+ # Divide each element in columns 'B' and 'C' by the corresponding element in column 'A' using element-wise division and assign the result back to columns 'B' and 'C'.
+
+Please note that the `axis=0` argument in the `div()` function call is used to perform element-wise division across rows, rather than columns. This ensures that each element in columns 'B' and 'C' is divided by the corresponding element in column 'A'.

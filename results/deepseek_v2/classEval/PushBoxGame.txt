@@ -1,0 +1,80 @@
+```python
+class PushBoxGame:
+    # This class represents a simple push-box game where the player moves boxes to target locations on a map.
+    def __init__(self, map):
+        # Initialize the game with a given map and set up the initial state of the game.
+        # param map: list of lists, representing the game map where each element is a character ('O' for player, 'G' for target, 'X' for box, '#' for wall, and ' ' for empty space)
+        # >>> game = PushBoxGame([[' ', ' ', ' ', ' '], [' ', 'O', ' ', ' '], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ']])
+        self.map = map
+        self.player_row = 0
+        self.player_col = 0
+        self.targets = []
+        self.boxes = []
+        self.target_count = 0
+        self.is_game_over = False
+
+        self.init_game()
+
+    def init_game(self):
+        # Initialize the game by locating the player, targets, and boxes on the map.
+        # >>> game = PushBoxGame([[' ', ' ', ' ', ' '], [' ', 'O', ' ', ' '], [' ', ' ', ' ', ' '], [' ', ' ', ' ', ' ']])
+        # >>> game.init_game()
+        for row in range(len(self.map)):
+            for col in range(len(self.map[row])):
+                if self.map[row][col] == "O":
+                    self.player_row = row
+                    self.player_col = col
+                elif self.map[row][col] == "G":
+                    self.targets.append((row, col))
+                    self.target_count += 1
+                elif self.map[row][col] == "X":
+                    self.boxes.append((row, col))
+
+    def check_win(self):
+        # Check if all boxes are on their respective targets, indicating the game is won.
+        # return: bool, True if all boxes are on targets, False otherwise
+        # >>> game = PushBoxGame([[' ', ' ', ' ', ' '], [' ', 'O', ' ', ' '], [' ', 'X', ' ', ' '], [' ', 'G', ' ', ' ']])
+        # >>> game.move("s")
+        # >>> game.check_win()
+        box_on_target_count = 0
+        for box in self.boxes:
+            if box in self.targets:
+                box_on_target_count += 1
+        if box_on_target_count == self.target_count:
+            self.is_game_over = True
+        return self.is_game_over
+
+    def move(self, direction):
+        # Move the player in the specified direction and update the game state accordingly.
+        # param direction: str, the direction in which the player should move ('w' for up, 's' for down, 'a' for left, 'd' for right)
+        # return: bool, True if the game is won after the move, False otherwise
+        # >>> game = PushBoxGame([[' ', ' ', ' ', ' '], [' ', 'O', ' ', ' '], [' ', 'X', ' ', ' '], [' ', 'G', ' ', ' ']])
+        # >>> game.move("s")
+        new_player_row = self.player_row
+        new_player_col = self.player_col
+
+        if direction == "w":
+            new_player_row -= 1
+        elif direction == "s":
+            new_player_row += 1
+        elif direction == "a":
+            new_player_col -= 1
+        elif direction == "d":
+            new_player_col += 1
+
+        if self.map[new_player_row][new_player_col] != "#":
+            if (new_player_row, new_player_col) in self.boxes:
+                new_box_row = new_player_row + (new_player_row - self.player_row)
+                new_box_col = new_player_col + (new_player_col - self.player_col)
+
+                if self.map[new_box_row][new_box_col] != "#":
+                    self.boxes.remove((new_player_row, new_player_col))
+                    self.boxes.append((new_box_row, new_box_col))
+                    self.player_row = new_player_row
+                    self.player_col = new_player_col
+            else:
+                self.player_row = new_player_row
+                self.player_col = new_player_col
+
+        return self.check_win()
+```

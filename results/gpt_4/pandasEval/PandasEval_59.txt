@@ -1,0 +1,1 @@
+# The function deletes all columns in the provided dataframe that only contain NaN values. It uses the dropna method with the 'all' option for the 'how' parameter, which causes any column (axis=1) composed entirely of NaN values to be dropped.

@@ -1,0 +1,14 @@
+def make_a_pile(n):
+    # Generates a list of integers based on the input value 'n' by adding multiples of 2 to it.
+    # The list starts from 'n' and increments by 2*i for i in the range from 0 to n-1.
+    # The function then returns the generated list.
+    
+    # Test Cases:
+    # 1. Input: 0
+    #    Output: []
+    # 2. Input: 3
+    #    Output: [3, 5, 7]
+    # 3. Input: 5
+    #    Output: [5, 7, 9, 11, 13, 15]
+    
+    return [n + 2*i for i in range(n)]

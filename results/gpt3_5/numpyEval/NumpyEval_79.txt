@@ -1,0 +1,1 @@
+# Perform element-wise string concatenation between two numpy arrays using np.core.defchararray.add.

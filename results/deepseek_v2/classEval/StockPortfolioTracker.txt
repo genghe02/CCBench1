@@ -1,0 +1,97 @@
+```python
+class StockPortfolioTracker:
+    # This class is designed to track a stock portfolio, including managing cash balance, adding and removing stocks, and calculating portfolio values.
+    
+    def __init__(self, cash_balance):
+        # Initialize the portfolio tracker with a given cash balance.
+        self.portfolio = []
+        self.cash_balance = cash_balance
+
+    def add_stock(self, stock):
+        # Add a stock to the portfolio or update the quantity if the stock already exists.
+        # param stock: dict, containing details of the stock to be added (name, quantity, price)
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 5, 'price': 150})
+        for pf in self.portfolio:
+            if pf['name'] == stock['name']:
+                pf['quantity'] += stock['quantity']
+                return
+
+        self.portfolio.append(stock)
+
+    def remove_stock(self, stock):
+        # Remove a specified quantity of a stock from the portfolio.
+        # param stock: dict, containing details of the stock to be removed (name, quantity)
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        # >>> tracker.remove_stock({'name': 'AAPL', 'quantity': 5})
+        # >>> tracker.remove_stock({'name': 'AAPL', 'quantity': 6})
+        for pf in self.portfolio:
+            if pf['name'] == stock['name'] and pf['quantity'] >= stock['quantity']:
+                pf['quantity'] -= stock['quantity']
+                if pf['quantity'] == 0:
+                    self.portfolio.remove(pf)
+                return True
+        return False
+
+    def buy_stock(self, stock):
+        # Attempt to buy a stock if the cash balance allows it.
+        # param stock: dict, containing details of the stock to be bought (name, quantity, price)
+        # return: bool, True if the purchase is successful, False otherwise
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.buy_stock({'name': 'AAPL', 'quantity': 5, 'price': 150})
+        # >>> tracker.buy_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        if stock['price'] * stock['quantity'] > self.cash_balance:
+            return False
+        else:
+            self.add_stock(stock)
+            self.cash_balance -= stock['price'] * stock['quantity']
+            return True
+
+    def sell_stock(self, stock):
+        # Attempt to sell a stock and update the cash balance.
+        # param stock: dict, containing details of the stock to be sold (name, quantity, price)
+        # return: bool, True if the sale is successful, False otherwise
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        # >>> tracker.sell_stock({'name': 'AAPL', 'quantity': 5, 'price': 150})
+        # >>> tracker.sell_stock({'name': 'AAPL', 'quantity': 6, 'price': 150})
+        if self.remove_stock(stock) == False:
+            return False
+        self.cash_balance += stock['price'] * stock['quantity']
+        return True
+
+    def calculate_portfolio_value(self):
+        # Calculate the total value of the portfolio including cash balance.
+        # return: float, the total value of the portfolio
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        # >>> tracker.calculate_portfolio_value()
+        total_value = self.cash_balance
+        for stock in self.portfolio:
+            total_value += stock['price'] * stock['quantity']
+        return total_value
+
+    def get_portfolio_summary(self):
+        # Get a summary of the portfolio including the value of each stock and the total portfolio value.
+        # return: tuple, (float, list), the total portfolio value and a list of stock summaries
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        # >>> tracker.get_portfolio_summary()
+        summary = []
+        for stock in self.portfolio:
+            value = self.get_stock_value(stock)
+            summary.append({"name": stock["name"], "value": value})
+        portfolio_value = self.calculate_portfolio_value()
+        return portfolio_value, summary
+
+    def get_stock_value(self, stock):
+        # Calculate the total value of a specific stock in the portfolio.
+        # param stock: dict, containing details of the stock (name, quantity, price)
+        # return: float, the total value of the stock
+        # >>> tracker = StockPortfolioTracker(1000)
+        # >>> tracker.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        # >>> tracker.get_stock_value({'name': 'AAPL', 'quantity': 10, 'price': 150})
+        return stock['price'] * stock['quantity']
+```

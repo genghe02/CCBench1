@@ -1,0 +1,28 @@
+<description for whole class>
+class AvgPartition:
+    def __init__(self, lst, limit):
+        <description for whole function>
+        self.lst = lst
+        self.limit = limit
+
+    def setNum(self):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        size = len(self.lst) // self.limit
+        remainder = len(self.lst) % self.limit
+        return size, remainder
+
+        
+    def get(self, index):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        size, remainder = self.setNum()
+        start = index * size + min(index, remainder)
+        end = start + size
+        if index + 1 <= remainder:
+            end += 1
+        return self.lst[start:end]

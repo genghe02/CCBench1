@@ -1,0 +1,78 @@
+```python
+# This class is designed to handle dictionary keys and convert them to camel case format
+class CamelCaseMap:
+    def __init__(self):
+        # This constructor initializes an empty dictionary
+        self._data = {}
+
+    def __getitem__(self, key):
+        # This method retrieves the value corresponding to the given key from the dictionary
+        # Parameter: key, the key of the item to be retrieved from the dictionary
+        # Returns the value corresponding to the given key
+        # Example: 
+        # map = CamelCaseMap()
+        # map["test_key"] = "value"
+        # print(map["test_key"]) -> "value"
+        return self._data[self._convert_key(key)]
+
+    def __setitem__(self, key, value):
+        # This method sets a value for the given key in the dictionary
+        # Parameters: key, the key of the item to be set; value, the value of the item to be set
+        # This method does not return anything
+        # Example: 
+        # map = CamelCaseMap()
+        # map["test_key"] = "value"
+        # print(map["test_key"]) -> "value"
+        self._data[self._convert_key(key)] = value
+
+    def __delitem__(self, key):
+        # This method deletes the item with the given key from the dictionary
+        # Parameter: key, the key of the item to be deleted from the dictionary
+        # This method does not return anything
+        # Example: 
+        # map = CamelCaseMap()
+        # map["test_key"] = "value"
+        # del map["test_key"]
+        # print(map["test_key"]) -> KeyError
+        del self._data[self._convert_key(key)]
+
+    def __iter__(self):
+        # This method returns an iterator over the dictionary's keys
+        # Returns an iterator over the dictionary's keys
+        # Example: 
+        # map = CamelCaseMap()
+        # map["test_key"] = "value"
+        # for key in map:
+        #     print(key) -> "testKey"
+        return iter(self._data)
+
+    def __len__(self):
+        # This method returns the number of items in the dictionary
+        # Returns the number of items in the dictionary
+        # Example: 
+        # map = CamelCaseMap()
+        # map["test_key"] = "value"
+        # print(len(map)) -> 1
+        return len(self._data)
+
+    def _convert_key(self, key):
+        # This method converts a given key to camel case if it is a string
+        # Parameter: key, the key to be converted to camel case
+        # Returns the camel case version of the key if it's a string, else returns the key itself
+        # Example: 
+        # map = CamelCaseMap()
+        # print(map._convert_key("test_key")) -> "testKey"
+        if isinstance(key, str):
+            return self._to_camel_case(key)
+        return key
+
+    @staticmethod
+    def _to_camel_case(key):
+        # This method converts a given string to camel case
+        # Parameter: key, the string to be converted to camel case
+        # Returns the camel case version of the string
+        # Example: 
+        # print(CamelCaseMap._to_camel_case("test_key")) -> "testKey"
+        parts = key.split('_')
+        return parts[0] + ''.join(part.title() for part in parts[1:])
+```

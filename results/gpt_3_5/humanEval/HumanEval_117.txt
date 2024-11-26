@@ -1,0 +1,21 @@
+def select_words(s, n):
+    # Select words from a given string that have exactly 'n' consonants in them.
+    # s: str, the input string
+    # n: int, the number of consonants required in each word
+    # return: list, a list of words that have 'n' consonants in them
+    
+    # Test cases:
+    # Test case 1: s = "apple banana cherry", n = 2
+    # Expected output: ["apple", "banana"]
+    # Test case 2: s = "hello world", n = 3
+    # Expected output: ["hello"]
+    
+    result = []
+    for word in s.split():
+        n_consonants = 0
+        for i in range(0, len(word)):
+            if word[i].lower() not in ["a","e","i","o","u"]:
+                n_consonants += 1 
+        if n_consonants == n:
+            result.append(word)
+    return result

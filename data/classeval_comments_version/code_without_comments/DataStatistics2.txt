@@ -1,0 +1,42 @@
+<description for whole class>
+class DataStatistics2:
+    def __init__(self, data):
+        <description for whole function>
+        <description for all parameters>
+        self.data = np.array(data)
+
+    def get_sum(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return np.sum(self.data)
+
+    def get_min(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return np.min(self.data)
+
+    def get_max(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return np.max(self.data)
+
+    def get_variance(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return round(np.var(self.data), 2)
+
+    def get_std_deviation(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return round(np.std(self.data), 2)
+
+    def get_correlation(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return np.corrcoef(self.data, rowvar=False)

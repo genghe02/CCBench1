@@ -1,0 +1,109 @@
+ <description for whole class>
+# A class for performing trigonometric calculations using Taylor series expansion.
+
+class TriCalculator:
+
+ def __init__(self):
+ pass
+
+ <description for whole function>
+ # Calculate the cosine of an angle using the Taylor series expansion.
+ # :param x: float, the angle in radians
+ # :return: float, the cosine value of the angle
+ def cos(self, x):
+ result = self.taylor(x, 50)
+
+ <description for whole function>
+ # Calculate the factorial of a number using a recursive method.
+ # :param a: int, the number to find the factorial of
+ # :return: int, the factorial value of the number
+ def factorial(self, a):
+ if a == 1:
+ return 1
+ else:
+ return self.factorial(a - 1) * a
+
+ <description for whole function>
+ # Calculate the value of a trigonometric function using the Taylor series expansion.
+ # :param x: float, the angle in radians
+ # :param n: int, the number of terms to calculate in the series
+ # :return: float, the value of the trigonometric function
+ def taylor(self, x, n):
+ a = 1
+ x = x / pi
+ count = 1
+ term = 1
+ while count <= n:
+ if count % 2 == 0:
+ term *= (x ** (2 * count)) / self.factorial(2 * count)
+ a += term
+ else:
+ term *= -(x ** (2 * count)) / self.factorial(2 * count)
+ a += term
+ count += 1
+ return a
+
+ <description for whole function>
+ # Calculate the sine of an angle using the Maclaurin series expansion.
+ # :param x: float, the angle in radians
+ # :return: float, the sine value of the angle
+ def sin(self, x):
+ x = x / pi
+ g = 0
+ t = x
+ n = 1
+ while fabs(t) >= 1e-15:
+ g += t
+ n += 1
+ t = -t * x * x / (2 * n - 1) / (2 * n - 2)
+ return g
+
+ <description for whole function>
+ # Calculate the tangent of an angle using the quotient of sine and cosine.
+ # :param x: float, the angle in radians
+ # :return: float, the tangent value of the angle
+ def tan(self, x):
+ if self.cos(x)!= 0:
+ result = self.sin(x) / self.cos(x)
+ return result
+ else:
+ return False
+
+ <some test cases for the function>
+ >>> calc = TriCalculator()
+ >>> calc.cos(pi / 2)
+ 1.0
+ >>> calc.sin(pi / 2)
+ 1.0
+ >>> calc.tan(pi / 4)
+ 1.0
+ >>> calc.cos(-pi / 2)
+ -1.0
+ >>> calc.sin(-pi / 2)
+ 0.0
+ >>> calc.tan(-pi / 2)
+ -1.0
+ >>> calc.cos(0)
+ 1.0
+ >>> calc.sin(0)
+ 0.0
+ >>> calc.tan(0)
+ 0.0
+ >>> calc.cos(pi)
+ -1.0
+ >>> calc.sin(pi)
+ 0.0
+ >>> calc.tan(pi)
+ None
+ >>> calc.cos(pi / 4)
+ 0.7071067811865476
+ >>> calc.sin(pi / 4)
+ 0.7071067811865476
+ >>> calc.tan(pi / 4)
+ 1.0
+ >>> calc.cos(-pi / 4)
+ -0.7071067811865476
+ >>> calc.sin(-pi / 4)
+ -0.7071067811865476
+ >>> calc.tan(-pi / 4)
+ -1.0

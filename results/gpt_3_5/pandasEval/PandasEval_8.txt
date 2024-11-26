@@ -1,0 +1,1 @@
+# Filter the DataFrame to only include rows where the value in the second column ('col2') is 'Jimmy'.

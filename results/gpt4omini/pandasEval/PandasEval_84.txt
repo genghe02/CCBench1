@@ -1,0 +1,20 @@
+```python
+import pandas as pd
+
+def dataframe2list_of_dict(df: pd.DataFrame) -> list:
+    """Convert a pandas DataFrame into a list of dictionaries, 
+    where each dictionary corresponds to a row of the DataFrame.
+    The keys of the dictionaries are the column names, and the values 
+    are the respective row values.
+    
+    If the DataFrame is empty, return an empty list.
+    
+    >>> df = pd.DataFrame({'A': [1, 2], 'B': [3, 4]})
+    >>> dataframe2list_of_dict(df)
+    [{'A': 1, 'B': 3}, {'A': 2, 'B': 4}]
+    >>> df_empty = pd.DataFrame(columns=['A', 'B'])
+    >>> dataframe2list_of_dict(df_empty)
+    []
+    """
+    return df.to_dict(orient='records')
+```

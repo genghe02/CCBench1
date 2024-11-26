@@ -1,0 +1,1 @@
+# Define the function c(i, j) as c(i, j) = a(i) + b(j) * 2.

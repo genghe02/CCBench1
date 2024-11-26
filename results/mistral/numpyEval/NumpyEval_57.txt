@@ -1,0 +1,3 @@
+ # Repeat each even number in the array 'a' by a given number 'n' using numpy's repeat function.
+
+result = np.concatenate((a[cond], m))

@@ -1,0 +1,1 @@
+# Check if a DataFrame exists by verifying if it is not None.

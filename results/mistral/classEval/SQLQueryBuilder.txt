@@ -1,0 +1,68 @@
+ class SQLQueryBuilder:
+
+    # A static class for building SQL queries using given inputs
+    <description for whole class>
+
+    @staticmethod
+    def select(table, columns='*', where=None):
+        # Builds and returns a SELECT query based on the given table name, columns to select, and optional filtering condition
+        <description for whole function>
+        <description for parameters>
+        :param table: str, name of the table to query
+        :param columns: str or list, columns to select. Default is '*' for all columns
+        :param where: dict or None, optional filtering condition as key-value pairs
+        <description for return statement>
+        :return: str, the generated SQL query
+
+        if columns!= '*':
+            columns = ', '.join(columns)
+        query = f"SELECT {columns} FROM {table}"
+        if where:
+            query += " WHERE " +'AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def insert(table, data):
+        # Builds and returns an INSERT query based on the given table name and data to be inserted
+        <description for whole function>
+        <description for parameters>
+        :param table: str, name of the table to insert data into
+        :param data: dict, key-value pairs of data to be inserted
+        <description for return statement>
+        :return: str, the generated SQL query
+
+        keys = ', '.join(data.keys())
+        values = ', '.join(f"'{v}'" for v in data.values())
+        return f"INSERT INTO {table} ({keys}) VALUES ({values})"
+
+    @staticmethod
+    def delete(table, where=None):
+        # Builds and returns a DELETE query based on the given table name and optional filtering condition
+        <description for whole function>
+        <description for parameters>
+        :param table: str, name of the table to delete data from
+        :param where: dict or None, optional filtering condition as key-value pairs
+        <description for return statement>
+        :return: str, the generated SQL query
+
+        query = f"DELETE FROM {table}"
+        if where:
+            query += " WHERE " +'AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def update(table, data, where=None):
+        # Builds and returns an UPDATE query based on the given table name, data to be updated, and optional filtering condition
+        <description for whole function>
+        <description for parameters>
+        :param table: str, name of the table to update
+        :param data: dict, key-value pairs of data to be updated
+        :param where: dict or None, optional filtering condition as key-value pairs
+        <description for return statement>
+        :return: str, the generated SQL query
+
+        update_str = ', '.join(f"{k}='{v}'" for k, v in data.items())
+        query = f"UPDATE {table} SET {update_str}"
+        if where:
+            query += " WHERE " +'AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query

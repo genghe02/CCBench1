@@ -1,0 +1,1 @@
+# Given a matrix `M` of shape 1*N, extract an array containing N elements in an elegant manner.

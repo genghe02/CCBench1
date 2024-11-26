@@ -1,0 +1,15 @@
+```python
+def derivative(xs: list):
+    # Calculate the derivative of a list of values, which represents the slope at each point.
+    # The derivative is computed as the product of the index and the value at that index.
+    # This function returns the derivatives starting from the first element.
+    # 
+    # :param xs: list, a list of numerical values for which the derivative is to be calculated.
+    # :return: list, a list of derivative values corresponding to the input list.
+    #
+    # Test cases:
+    # >>> derivative([0, 1, 2, 3])  # Should return [1, 4, 9] as [0*1, 1*1, 2*1] which is [0, 1, 4]
+    # >>> derivative([1, 2, 3])      # Should return [1, 6] as [0*1, 1*2] which is [0, 2] 
+    # >>> derivative([5, 10, 15])   # Should return [10, 30] as [1*5, 2*10]
+    return [(i * x) for i, x in enumerate(xs)][1:]
+```

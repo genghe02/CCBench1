@@ -1,0 +1,71 @@
+ <description for whole class>
+"""
+A class for parsing and processing URL paths by adding segments and fixing potential issues.
+"""
+
+class UrlPath:
+    def __init__(self):
+        """
+        Initialize an instance of UrlPath with an empty list to store segments and a flag to indicate if the path ends with a tag.
+        """
+        self.segments = []
+        self.with_end_tag = False
+
+    def add(self, segment):
+        """
+        Add a new segment to the list of segments.
+
+        :param segment: str, the segment to be added to the URL path.
+        """
+        self.segments.append(self.fix_path(segment))
+
+    def parse(self, path, charset):
+        """
+        Parse a given path and add its segments to the instance.
+
+        :param path: str, the URL path to be parsed.
+        :param charset: str, the character encoding to be used when decoding segments.
+        """
+        if path:
+            if path.endswith('/'):
+                self.with_end_tag = True
+
+            path = self.fix_path(path)
+            if path:
+                split = path.split('/')
+                for seg in split:
+                    decoded_seg = urllib.parse.unquote(seg, encoding=charset)
+                    self.segments.append(decoded_seg)
+
+    @staticmethod
+    def fix_path(path):
+        """
+        Fix potential issues in a given path by removing leading and trailing slashes.
+
+        :param path: str, the path to be fixed.
+        :return: str, the fixed path.
+        """
+        if not path:
+            return ''
+
+        segment_str = path.strip('/')
+        return segment_str
+
+<some test cases for the class>
+>>> url_path = UrlPath()
+>>> url_path.add('/home')
+>>> url_path.add('/about')
+>>> url_path.add('/contact')
+>>> url_path.parse('/home/about/contact')
+>>> url_path.parse('/home/about/contact/')
+>>> url_path.parse('/home')
+>>> url_path.parse('')
+>>> print(url_path.segments)
+['home', 'about', 'contact']
+>>> print(url_path.with_end_tag)
+False
+>>> url_path.parse('/home/about/contact/', 'utf-8')
+>>> print(url_path.segments)
+['home', 'about', 'contact']
+>>> print(url_path.with_end_tag)
+True

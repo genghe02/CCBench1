@@ -1,0 +1,5 @@
+import numpy as np
+
+myarray = np.array([("Hello",2.5,3),("World",3.6,2)])
+<Requirements for the code>
+newrecarray = np.core.records.fromarrays(myarray.T, names='col1, col2, col3')

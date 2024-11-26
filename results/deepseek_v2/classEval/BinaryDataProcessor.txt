@@ -1,0 +1,60 @@
+```python
+# This class is designed to process binary strings, including cleaning non-binary characters, calculating binary information, and converting binary strings to ASCII and UTF-8.
+class BinaryDataProcessor:
+    def __init__(self, binary_string):
+        # Initialize the class with a binary string and clean it by removing non-binary characters.
+        self.binary_string = binary_string
+        self.clean_non_binary_chars()
+
+    def clean_non_binary_chars(self):
+        # Remove all characters from the binary string that are not '0' or '1'.
+        # >>> processor = BinaryDataProcessor('0101a01b01')
+        # >>> processor.clean_non_binary_chars()
+        # >>> processor.binary_string
+        # '01010101'
+        self.binary_string = ''.join(filter(lambda x: x in '01', self.binary_string))
+
+    def calculate_binary_info(self):
+        # Calculate the percentage of '0's and '1's in the binary string, as well as the total bit length.
+        # >>> processor = BinaryDataProcessor('01010101')
+        # >>> processor.calculate_binary_info()
+        # {'Zeroes': 0.5, 'Ones': 0.5, 'Bit length': 8}
+        zeroes_count = self.binary_string.count('0')
+        ones_count = self.binary_string.count('1')
+        total_length = len(self.binary_string)
+
+        zeroes_percentage = (zeroes_count / total_length)
+        ones_percentage = (ones_count / total_length)
+
+        return {
+            'Zeroes': zeroes_percentage,
+            'Ones': ones_percentage,
+            'Bit length': total_length
+        }
+
+    def convert_to_ascii(self):
+        # Convert the cleaned binary string to an ASCII string by grouping bits into bytes and decoding them.
+        # >>> processor = BinaryDataProcessor('0110000101100010')
+        # >>> processor.convert_to_ascii()
+        # 'ab'
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('ascii')
+
+    def convert_to_utf8(self):
+        # Convert the cleaned binary string to a UTF-8 string by grouping bits into bytes and decoding them.
+        # >>> processor = BinaryDataProcessor('0110000101100010')
+        # >>> processor.convert_to_utf8()
+        # 'ab'
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('utf-8')
+```

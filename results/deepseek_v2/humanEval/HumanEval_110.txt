@@ -1,0 +1,34 @@
+```python
+def exchange(lst1, lst2):
+    # Determine if it's possible to exchange elements between two lists such that the number of odd elements in lst1 equals the number of even elements in lst2.
+    # param lst1: list, the first list of integers
+    # param lst2: list, the second list of integers
+    # return: str, "YES" if the exchange is possible, "NO" otherwise
+    
+    # Count the number of odd elements in lst1
+    odd = 0
+    even = 0
+    for i in lst1:
+        if i%2 == 1:
+            odd += 1
+    
+    # Count the number of even elements in lst2
+    for i in lst2:
+        if i%2 == 0:
+            even += 1
+    
+    # Determine if the exchange is possible
+    if even >= odd:
+        return "YES"
+    return "NO"
+
+# Test cases for the function
+# >>> exchange([1, 3, 5], [2, 4, 6])
+# "YES"
+# >>> exchange([1, 3, 5], [2, 4])
+# "NO"
+# >>> exchange([1, 2, 3], [4, 5, 6])
+# "YES"
+# >>> exchange([1, 2, 3], [4, 5])
+# "NO"
+```

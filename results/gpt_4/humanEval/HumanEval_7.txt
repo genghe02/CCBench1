@@ -1,0 +1,16 @@
+from typing import List
+
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    # This function filters a list of strings to only include strings that contain a specified substring.
+    # param strings: List[str], the list of strings to filter
+    # param substring: str, the substring to filter by
+    # return: List[str], a new list consisting of only strings that contain the specified substring.
+    # Test cases:
+    # >>> filter_by_substring(['hello', 'world', 'hell', 'word'], 'hell')
+    # ['hello', 'hell']
+    # >>> filter_by_substring(['python', 'java', 'c++', 'javascript'], 'java')
+    # ['java', 'javascript']
+    # >>> filter_by_substring(['apple', 'banana', 'cherry', 'date'], 'a')
+    # ['apple', 'banana', 'date']
+
+    return [x for x in strings if substring in x]

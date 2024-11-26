@@ -1,0 +1,6 @@
+# Convert NumPy array to a list of tuples using NumPy's vectorized function map() and tuple conversion.
+
+import numpy as np
+
+def arr2tuple(arr):
+    return tuple(map(tuple, arr.reshape(-1, 1).T.flatten()))

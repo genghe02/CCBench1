@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def concat_df(df1, df2):
+    # Concatenate two DataFrames along rows (axis=0) and return the resulting DataFrame.
+    return pd.concat([df1, df2])
+```

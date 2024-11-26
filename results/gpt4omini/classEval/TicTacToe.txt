@@ -1,0 +1,66 @@
+```python
+class TicTacToe:
+    # This is a class that implements a simple Tic Tac Toe game with a 3x3 board. 
+    def __init__(self, N=3):
+        # Initialize the game board and set the starting player.
+        # self.board is a 2D list representing the game board with spaces indicating empty slots.
+        # self.current_player is a string indicating whose turn it is, starting with 'X'.
+        self.board = [[' ' for _ in range(N)] for _ in range(3)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        # Attempt to place the current player's symbol at the specified row and column on the board.
+        # param row: int, the row index where the player wants to place their symbol (0-based).
+        # param col: int, the column index where the player wants to place their symbol (0-based).
+        # return: bool, True if the move is successful (the cell was empty), False otherwise.
+        # >>> game = TicTacToe()
+        # >>> game.make_move(0, 0)  # Should return True
+        # >>> game.make_move(0, 0)  # Should return False (cell already occupied)
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        else:
+            return False
+
+    def check_winner(self):
+        # Check the current board state to determine if there is a winner.
+        # return: str or None, returns the symbol of the winner ('X' or 'O') or None if there is no winner.
+        # >>> game = TicTacToe()
+        # >>> game.make_move(0, 0)
+        # >>> game.make_move(1, 0)
+        # >>> game.make_move(0, 1)
+        # >>> game.make_move(1, 1)
+        # >>> game.make_move(0, 2)  # Should return 'X' as the winner
+        for row in self.board:
+            if row[0] == row[1] == row[2] != ' ':
+                return row[0]
+        for col in range(3):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] != ' ':
+                return self.board[0][col]
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != ' ':
+            return self.board[0][0]
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != ' ':
+            return self.board[0][2]
+        return None
+
+    def is_board_full(self):
+        # Check if the board is full (i.e., no empty spaces are left).
+        # return: bool, True if the board is full, False otherwise.
+        # >>> game = TicTacToe()
+        # >>> game.is_board_full()  # Should return False
+        # >>> game.make_move(0, 0)
+        # >>> game.make_move(0, 1)
+        # >>> game.make_move(0, 2)
+        # >>> game.make_move(1, 0)
+        # >>> game.make_move(1, 1)
+        # >>> game.make_move(1, 2)
+        # >>> game.make_move(2, 0)
+        # >>> game.make_move(2, 1)
+        # >>> game.make_move(2, 2)  # All spots filled now
+        # >>> game.is_board_full()  # Should return True
+        for row in self.board:
+            if ' ' in row:
+                return False
+        return True
+```

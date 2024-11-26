@@ -1,0 +1,7 @@
+ # Remove duplicates rows based on column names using pandas efficiently by utilizing df.loc and df.columns.duplicated().
+
+import pandas as pd
+
+def remove_duplicates_by_col_names(df):
+    # Remove duplicates rows based on column names using pandas efficiently by utilizing df.loc and df.columns.duplicated().
+    return df.loc[:, ~df.columns.duplicated()]

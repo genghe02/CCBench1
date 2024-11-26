@@ -1,0 +1,12 @@
+def odd_count(lst):
+    # This function iterates over a list of arrays and counts the number of odd elements in each array. It then returns a list of strings, each of which reports the number of odd elements found in the corresponding input array.
+    # Test cases:
+    # >>> odd_count([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+    # ["the number of odd elements 3n the str3ng 3 of the 3nput.", "the number of odd elements 2n the str2ng 2 of the 2nput."]
+    # >>> odd_count([[11, 12, 13, 14, 15], [16, 17, 18, 19, 20]])
+    # ["the number of odd elements 3n the str3ng 3 of the 3nput.", "the number of odd elements 2n the str2ng 2 of the 2nput."]
+    res = []
+    for arr in lst:
+        n = sum(int(d)%2==1 for d in arr)
+        res.append("the number of odd elements " + str(n) + "n the str"+ str(n) +"ng "+ str(n) +" of the "+ str(n) +"nput.")
+    return res

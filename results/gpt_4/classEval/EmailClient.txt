@@ -1,0 +1,98 @@
+```python
+from datetime import datetime
+
+# This class represents an email client with address, capacity and an inbox
+class EmailClient:
+    # This function initializes an EmailClient object with address, capacity and an empty inbox
+    # addr: string, the email address of the client
+    # capacity: int, the maximum size of the inbox
+    def __init__(self, addr, capacity) -> None:
+        self.addr = addr
+        self.capacity = capacity
+        self.inbox = []
+    
+    # This function sends an email to the receiver if the receiver's inbox has enough space. If not, it clears the sender's inbox
+    # recv: EmailClient, the receiver of the email
+    # content: string, the content of the email
+    # size: int, the size of the email
+    # Returns True if the email was sent successfully, False otherwise
+    # Test cases:
+    # >>> emailClient1 = EmailClient('a@a.com', 10)
+    # >>> emailClient2 = EmailClient('b@b.com', 5)
+    # >>> emailClient1.send_to(emailClient2, 'Hello', 3) -> True
+    # >>> emailClient1.send_to(emailClient2, 'Hello', 3) -> False
+    def send_to(self, recv, content, size):
+        if not recv.is_full_with_one_more_email(size):
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            email = {
+                "sender": self.addr,
+                "receiver": recv.addr,
+                "content": content,
+                "size": size,
+                "time": timestamp,
+                "state": "unread"
+            }
+            recv.inbox.append(email)
+            return True
+        else:
+            self.clear_inbox(size)
+            return False
+    
+    # This function fetches the first unread email in the inbox
+    # Returns the first unread email if it exists, None otherwise
+    # Test cases:
+    # >>> emailClient1 = EmailClient('a@a.com', 10)
+    # >>> emailClient1.fetch() -> None
+    # >>> emailClient2 = EmailClient('b@b.com', 5)
+    # >>> emailClient2.send_to(emailClient1, 'Hello', 3)
+    # >>> emailClient1.fetch() -> {'sender': 'b@b.com', 'receiver': 'a@a.com', 'content': 'Hello', 'size': 3, 'time': '2022-02-12 10:10:10', 'state': 'read'}
+    def fetch(self):
+        if len(self.inbox) == 0:
+            return None
+        for i in range(len(self.inbox)):
+            if self.inbox[i]['state'] == "unread":
+                self.inbox[i]['state'] = "read"
+                return self.inbox[i]
+        return None
+
+    # This function checks if the inbox will be full with one more email of a certain size
+    # size: int, the size of the email to be sent
+    # Returns True if the inbox will be full, False otherwise
+    # Test cases:
+    # >>> emailClient1 = EmailClient('a@a.com', 10)
+    # >>> emailClient1.is_full_with_one_more_email(5) -> False
+    # >>> emailClient1.send_to(emailClient1, 'Hello', 6)
+    # >>> emailClient1.is_full_with_one_more_email(5) -> True
+    def is_full_with_one_more_email(self, size):
+        occupied_size = self.get_occupied_size()
+        return True if occupied_size + size > self.capacity else False
+        
+    # This function calculates the occupied size of the inbox
+    # Returns the occupied size
+    # Test cases:
+    # >>> emailClient1 = EmailClient('a@a.com', 10)
+    # >>> emailClient1.get_occupied_size() -> 0
+    # >>> emailClient1.send_to(emailClient1, 'Hello', 6)
+    # >>> emailClient1.get_occupied_size() -> 6
+    def get_occupied_size(self):
+        occupied_size = 0
+        for email in self.inbox:
+            occupied_size += email["size"]
+        return occupied_size
+
+    # This function clears the inbox by removing emails from oldest to newest until the the freed space is larger than or equal to the input size
+    # size: int, the size of the space to be freed
+    # Test cases:
+    # >>> emailClient1 = EmailClient('a@a.com', 10)
+    # >>> emailClient1.send_to(emailClient1, 'Hello', 6)
+    # >>> emailClient1.clear_inbox(6)
+    # >>> emailClient1.get_occupied_size() -> 0
+    def clear_inbox(self, size):
+        if len(self.addr) == 0:
+            return
+        freed_space = 0
+        while freed_space < size and self.inbox:
+            email = self.inbox[0]
+            freed_space += email['size']
+            del self.inbox[0]
+```

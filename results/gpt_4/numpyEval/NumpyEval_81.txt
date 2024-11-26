@@ -1,0 +1,1 @@
+# This function crops a two-dimensional numpy array by the given top, bottom, left, right indices. It returns a sliced section of the original array as per the given indices.

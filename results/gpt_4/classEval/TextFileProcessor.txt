@@ -1,0 +1,49 @@
+```python
+import json
+
+# This class provides methods to handle and process text files.
+class TextFileProcessor:
+    def __init__(self, file_path):
+        # Constructor method. It initializes the file_path attribute.
+        # param file_path: str, the path to the file to be processed.
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        # This method opens the file in read mode and loads the content as a JSON object.
+        # return: dict, the content of the file parsed as a JSON object.
+        # Test case:
+        # processor = TextFileProcessor('test.json')
+        # print(processor.read_file_as_json())  # Prints the content of test.json as a dictionary.
+        with open(self.file_path, 'r') as file:
+            data = json.load(file)
+
+        return data
+
+    def read_file(self):
+        # This method reads the file as plain text.
+        # return: str, the content of the file as a string.
+        # Test case:
+        # processor = TextFileProcessor('test.txt')
+        # print(processor.read_file())  # Prints the content of test.txt as a string.
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write_file(self, content):
+        # This method writes the input content into the file.
+        # param content: str, the content to be written into the file.
+        # Test case:
+        # processor = TextFileProcessor('test.txt')
+        # processor.write_file('Hello, World!')  # Writes 'Hello, World!' into test.txt.
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+    def process_file(self):
+        # This method reads the file, removes all non-alphabetic characters from the content, writes the processed content back into the file, and returns it.
+        # Test case:
+        # processor = TextFileProcessor('test.txt')
+        # print(processor.process_file())  # Prints the content of test.txt with all non-alphabetic characters removed.
+        content = self.read_file()
+        content = ''.join([char for char in content if char.isalpha()])
+        self.write_file(content)
+        return content
+```

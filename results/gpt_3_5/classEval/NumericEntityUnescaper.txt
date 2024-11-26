@@ -1,0 +1,67 @@
+class NumericEntityUnescaper:
+    # This class is responsible for unescaping numeric entities in a given string.
+
+    def __init__(self):
+        pass
+
+    def replace(self, string):
+        # Replace numeric entities in the input string with their corresponding characters.
+
+        # param string: str, the input string with numeric entities that need to be unescaped
+        # return: str, the input string with numeric entities replaced by their corresponding characters
+
+        # Test cases:
+        # Test with string containing numeric entity "&#65;" which represents capital letter 'A'
+        # Test with string containing multiple numeric entities "&#65;&#66;&#67;" which represent 'ABC'
+        # Test with string containing non-numeric entities to ensure they are not affected
+
+        out = []
+        pos = 0
+        length = len(string)
+
+        while pos < length - 2:
+            if string[pos] == '&' and string[pos + 1] == '#':
+                start = pos + 2
+                is_hex = False
+                first_char = string[start]
+
+                if first_char == 'x' or first_char == 'X':
+                    start += 1
+                    is_hex = True
+
+                if start == length:
+                    return ''.join(out)
+
+                end = start
+                while end < length and self.is_hex_char(string[end]):
+                    end += 1
+
+                if end < length and string[end] == ';':
+                    try:
+                        entity_value = int(string[start:end], 16 if is_hex else 10)
+                    except:
+                        return ''.join(out)
+
+                    out.append(chr(entity_value))
+                    pos = end + 1
+                    continue
+
+            out.append(string[pos])
+            pos += 1
+
+        return ''.join(out)
+
+    @staticmethod
+    def is_hex_char(char):
+        # Check if the given character is a hexadecimal character.
+
+        # param char: str, the character to be checked
+        # return: bool, True if the character is a hexadecimal character, False otherwise
+
+        # Test cases:
+        # Test with numeric characters '0', '1', ..., '9' to check if they are identified as hexadecimal
+        # Test with lowercase hexadecimal characters 'a', 'b', ..., 'f'
+        # Test with uppercase hexadecimal characters 'A', 'B', ..., 'F'
+        # Test with non-hexadecimal characters to ensure they are correctly identified as such
+
+        return char.isdigit() or ('a' <= char.lower() <= 'f')

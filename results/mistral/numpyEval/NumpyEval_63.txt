@@ -1,0 +1,4 @@
+ # Find the indices where elements in array B are present in array A using np.searchsorted,
+# and then delete those indices from the range of indices for array A using np.delete.
+
+D = np.delete(np.arange(np.alen(A)), C)

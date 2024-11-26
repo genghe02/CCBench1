@@ -1,0 +1,4 @@
+# Count consecutive positive values in a Python/Pandas array representing equity return data; 
+# for example, if a positive day is represented as 1 and a negative day as 0, 
+# a list y=[0,0,1,1,1,0,0,1,0,1,1] should return z=[0,0,1,2,3,0,0,1,0,1,2]. 
+# Return the result.

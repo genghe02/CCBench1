@@ -1,0 +1,54 @@
+ <description for whole class>
+# A utility class for handling IP addresses using socket library.
+
+class IpUtil:
+
+    @staticmethod
+    def is_valid_ipv4(ip_address):
+        # Validate if given IPv4 address is valid by converting it to binary format using socket library.
+        <description for whole function>
+        :param ip_address: str, the IPv4 address to be validated
+        :return: bool, True if the IPv4 address is valid, False otherwise
+        try:
+            socket.inet_pton(socket.AF_INET, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def is_valid_ipv6(ip_address):
+        # Validate if given IPv6 address is valid by converting it to binary format using socket library.
+        <description for whole function>
+        :param ip_address: str, the IPv6 address to be validated
+        :return: bool, True if the IPv6 address is valid, False otherwise
+        try:
+            socket.inet_pton(socket.AF_INET6, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def get_hostname(ip_address):
+        # Get the hostname associated with the given IP address using socket library.
+        <description for whole function>
+        :param ip_address: str, the IP address to get the hostname for
+        :return: str or None, the hostname if found, None otherwise
+        try:
+            hostname = socket.gethostbyaddr(ip_address)[0]
+            return hostname
+        except socket.herror:
+            return None
+
+    <some test cases for the class>
+    >>> IpUtil.is_valid_ipv4('192.168.1.1')
+    True
+    >>> IpUtil.is_valid_ipv4('256.0.0.1')
+    False
+    >>> IpUtil.is_valid_ipv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
+    True
+    >>> IpUtil.is_valid_ipv6('2001:0db8:85a3:0:0:8a2e:0370:7334')
+    False
+    >>> IpUtil.get_hostname('192.168.1.1')
+    'router'
+    >>> IpUtil.get_hostname('8.8.8.8')
+    'dns.google'

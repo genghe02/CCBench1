@@ -1,0 +1,41 @@
+```python
+# This class represents a simple bank account with basic operations such as deposit, withdraw, and transfer.
+class BankAccount:
+    def __init__(self, balance=0):
+        # Initialize the bank account with an optional starting balance.
+        self.balance = balance
+
+    def deposit(self, amount):
+        # This function allows a user to deposit a specific amount into the bank account.
+        # :param amount: float, the amount of money to be deposited into the account.
+        if amount < 0:
+            raise ValueError("Invalid amount")
+        self.balance += amount
+        return self.balance
+
+    def withdraw(self, amount):
+        # This function allows a user to withdraw a specific amount from the bank account.
+        # :param amount: float, the amount of money to be withdrawn from the account.
+        if amount < 0:
+            raise ValueError("Invalid amount")
+        if amount > self.balance:
+            raise ValueError("Insufficient balance.")
+        self.balance -= amount
+        return self.balance
+
+    def view_balance(self):
+        # This function returns the current balance of the bank account.
+        return self.balance
+
+    def transfer(self, other_account, amount):
+        # This function facilitates the transfer of a specific amount from this account to another account.
+        # :param other_account: BankAccount, the account to which the money will be transferred.
+        # :param amount: float, the amount of money to be transferred to the other account.
+        # Example test cases:
+        # account1 = BankAccount(100)
+        # account2 = BankAccount(50)
+        # account1.transfer(account2, 30)  # Should succeed; account1 balance is 70, account2 balance is 80.
+        # account1.transfer(account2, 80)  # Should raise ValueError for insufficient balance.
+        self.withdraw(amount)
+        other_account.deposit(amount)
+```

@@ -1,0 +1,6 @@
+ # Find each consecutive duplicate value and drop it from the series using pandas efficiently by comparing each element with its previous one and utilizing series.shift(-1) and loc[condition].
+
+import pandas as pd
+
+def drop_consecutive_duplicates(series):
+    return series.loc[series.shift(-1)!= series]

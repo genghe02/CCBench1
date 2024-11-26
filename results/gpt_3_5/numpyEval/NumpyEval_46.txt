@@ -1,0 +1,1 @@
+# Create a list of arrays where each array consists of two elements, being the result of multiplying each number from 0 to 4 with a two-element array filled with that number.

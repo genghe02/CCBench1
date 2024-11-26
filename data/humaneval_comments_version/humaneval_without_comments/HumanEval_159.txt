@@ -1,0 +1,9 @@
+
+def eat(number, need, remaining):
+    <Requirements for the code>
+    
+    <some test cases for the function>
+    if(need <= remaining):
+        return [ number + need , remaining-need ]
+    else:
+        return [ number + remaining , 0]

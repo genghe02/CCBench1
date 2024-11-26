@@ -1,0 +1,44 @@
+ def largest_prime_factor(n: int):
+    # Find the largest prime factor of a given number 'n'
+    <Description for the whole function>
+    <some test cases for the function>
+    
+    def is_prime(k):
+        # Check if a given number 'k' is prime or not
+        <Description for the inner function>
+        if k < 2:
+            return False
+        for i in range(2, k):
+            if k % i == 0:
+                return False
+        return True
+
+    largest = 1
+    <Description for the for loop>
+    for j in range(2, n + 1):
+        if n % j == 0 and is_prime(j):
+            largest = max(largest, j)
+    <Description for the return statement>
+    return largest
+
+    # Test cases
+    >>> largest_prime_factor(1)
+    1
+    >>> largest_prime_factor(12)
+    11
+    >>> largest_prime_factor(13)
+    13
+    >>> largest_prime_factor(15)
+    15
+    >>> largest_prime_factor(20)
+    20
+    >>> largest_prime_factor(21)
+    21
+    >>> largest_prime_factor(22)
+    22
+    >>> largest_prime_factor(23)
+    23
+    >>> largest_prime_factor(100)
+    50
+    >>> largest_prime_factor(101)
+    101

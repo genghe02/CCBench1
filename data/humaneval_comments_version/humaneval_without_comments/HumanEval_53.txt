@@ -1,0 +1,6 @@
+
+
+def add(x: int, y: int):
+    <Requirements for the code>
+    <some test cases for the function>
+    return x + y

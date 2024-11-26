@@ -1,0 +1,16 @@
+def fib(n: int):
+    # Recursive function to compute the nth Fibonacci number.
+    # Fibonacci sequence starts with 0, 1, 1, 2, 3, 5, ...
+    # Base cases are n = 0 and n = 1 where the result is n itself.
+    
+    # Test cases:
+    # fib(0) returns 0
+    # fib(1) returns 1
+    # fib(2) returns 1
+    # fib(5) returns 5
+    # fib(10) returns 55
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)

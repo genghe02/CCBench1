@@ -1,0 +1,1 @@
+# Filter out values larger than 2 using numpy masked arrays to create a mask where values are larger than 2, then apply the mask to the original array and return the compressed array without the masked values.

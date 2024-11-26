@@ -1,0 +1,20 @@
+```python
+def compare(game, guess):
+    # Compares the actual game numbers with the guessed numbers and returns a list of absolute differences.
+    # This helps in understanding how far each guess is from the actual value in the game.
+    # 
+    # :param game: list of int, the actual game numbers that need to be guessed
+    # :param guess: list of int, the numbers guessed by the player
+    #
+    # :return: list of int, containing absolute differences between the game numbers and the guessed numbers
+    #
+    # Some test cases for the function:
+    # >>> compare([1, 2, 3], [1, 2, 3])  # All guesses are correct
+    # [0, 0, 0]
+    # >>> compare([1, 2, 3], [4, 5, 6])  # All guesses are incorrect
+    # [3, 3, 3]
+    # >>> compare([1, 2, 3], [3, 2, 1])  # Some guesses are correct and some are incorrect
+    # [2, 0, 2]
+    
+    return [abs(x - y) for x, y in zip(game, guess)]
+```

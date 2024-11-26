@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def get_value_counts(df):
+    # Calculate the frequency of each unique value in the DataFrame and return a DataFrame with the unique values and their counts.
+    return df.value_counts().rename_axis('unique_values').reset_index(name='counts')
+```

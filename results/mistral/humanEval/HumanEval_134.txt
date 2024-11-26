@@ -1,0 +1,273 @@
+ def check\_if\_last\_char\_is\_a\_letter(txt):
+ # Check if the input string 'txt' has at least one word and verify if the last character of the last word is a letter.
+ # Requirements:
+ # - The function accepts a string 'txt' as an argument.
+ # - The function returns a boolean value indicating if the last character of the last word is a letter or not.
+
+ """
+ Check if the last character of the last word in the given string is a letter.
+
+ :param txt: str, the input string to check.
+ :return: bool, True if the last character of the last word is a letter, False otherwise.
+ """
+ check = txt.split(' ')[-1]
+ return True if len(check) > 0 and len(check) == 1 and (97 <= ord(check.lower()) <= 122) else False
+
+ # Test cases:
+ >>> check_if_last_char_is_a_letter("hello world")
+ False
+ >>> check_if_last_char_is_a_letter("hello world x")
+ False
+ >>> check_if_last_char_is_a_letter("hello world xyz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz z")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
+ True
+ >>> check_if_last_char_is_a_letter("hello world xyz zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")

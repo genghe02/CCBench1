@@ -1,0 +1,14 @@
+```python
+import pandas as pd
+
+def f(x):
+    a = x['Value'].iat[2] - x['Value'].iat[1]
+    b = x['Value'].iat[3] - x['Value'].iat[0]
+    c = x['ID'].iat[2] + ' - ' + x['ID'].iat[1]
+    d = x['ID'].iat[3] + ' - ' + x['ID'].iat[0]
+    return pd.DataFrame({'Value': [a,b], 'ID':[c,d]})
+
+def calculate_row_diff_groupwise(df):
+    # Calculate the difference between specific rows within each group and concatenate corresponding IDs.
+    return df.groupby('Group').apply(f).reset_index(level=1, drop=True).reset_index()
+```

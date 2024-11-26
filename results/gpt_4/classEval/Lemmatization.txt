@@ -1,0 +1,60 @@
+```python
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+import string
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+# This class is used for lemmatizing sentences, getting the part of speech tags of a sentence and removing punctuation from a sentence.
+class Lemmatization:
+    def __init__(self):
+        # This function initializes the WordNetLemmatizer.
+        self.lemmatizer = WordNetLemmatizer()
+
+    def lemmatize_sentence(self, sentence):
+        # This function lemmatizes each word in a sentence based on its part of speech and returns the lemmatized words.
+        # param sentence: str, the sentence to be lemmatized
+        # return: list, the lemmatized words
+        # >>> lem = Lemmatization()
+        # >>> lem.lemmatize_sentence("The cats are running")
+        lemmatized_words = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for word, tag in tagged_words:
+            if tag.startswith('V'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='v')
+            elif tag.startswith('J'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='a')
+            elif tag.startswith('R'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='r')
+            else:
+                lemmatized_word = self.lemmatizer.lemmatize(word)
+            lemmatized_words.append(lemmatized_word)
+        return lemmatized_words
+
+    def get_pos_tag(self, sentence):
+        # This function returns the part of speech tags for each word in a sentence.
+        # param sentence: str, the sentence whose words are to be tagged
+        # return: list, the part of speech tags for each word in the sentence
+        # >>> lem = Lemmatization()
+        # >>> lem.get_pos_tag("The cats are running")
+        pos_tags = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for tagged_word in tagged_words:
+            pos_tags.append(tagged_word[1])
+        return pos_tags
+
+    def remove_punctuation(self, sentence):
+        # This function removes all punctuation from a sentence and returns the sentence without punctuation.
+        # param sentence: str, the sentence from which punctuation is to be removed
+        # return: str, the sentence without punctuation
+        # >>> lem = Lemmatization()
+        # >>> lem.remove_punctuation("Hello, world!")
+        return sentence.translate(str.maketrans('', '', string.punctuation))
+```

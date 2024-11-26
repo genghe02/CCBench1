@@ -1,0 +1,5 @@
+ # Apply function 'f' to each group in 'df' and return the result as DataFrame, where 'f' calculates the difference of 'Value' between consecutive rows and the concatenated difference of 'ID' for each group.
+
+# Use pandas apply function with groupby to apply 'f' to each group and return the result as DataFrame.
+
+return df.groupby('Group').apply(lambda x: pd.DataFrame(f(x.iloc[1:].values.tolist()), index=x.index[1:])).reset_index(level=1, drop=True).reset_index()

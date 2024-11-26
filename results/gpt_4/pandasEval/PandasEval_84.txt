@@ -1,0 +1,2 @@
+# Convert a pandas DataFrame to a list of dictionaries, where each dictionary represents a row of the DataFrame, with the DataFrame's column names as the keys of the dictionaries and the row values as the values of the dictionaries.
+return df.to_dict(orient='records')

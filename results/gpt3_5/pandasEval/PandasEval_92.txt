@@ -1,0 +1,1 @@
+# Return the first n rows of the input DataFrame using the head() function provided by pandas.

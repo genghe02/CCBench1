@@ -1,0 +1,11 @@
+ def string_sequence(n: int) -> str:
+    # This function generates a string representation of a sequence of numbers up to the given integer 'n'.
+    # It returns a string where each number is separated by a single space character.
+
+    # Example test cases:
+    # >>> string_sequence(3)
+    # '1 2 3'
+    # >>> string_sequence(5)
+    # '1 2 3 4 5'
+
+    return''.join([str(x) for x in range(n + 1)])

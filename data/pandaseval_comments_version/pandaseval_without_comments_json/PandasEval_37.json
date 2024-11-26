@@ -1,0 +1,1 @@
+{"filename": "PandasEval_37.txt", "comments": "# What I want is to clip the values of `col_1` between -2 to 2 if `col_0` is `a`.\n# # Using `clip` function in pandas.\n"}

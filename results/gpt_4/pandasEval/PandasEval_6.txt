@@ -1,0 +1,2 @@
+# Select the columns in the dataframe that are of type 'float64' using the select_dtypes method of pandas DataFrame.
+# Then, convert these 'float64' columns to 'float32' using the astype method of pandas DataFrame to save memory usage.

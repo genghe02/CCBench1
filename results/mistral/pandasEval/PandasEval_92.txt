@@ -1,0 +1,18 @@
+ # Return the first 'n' rows of the given DataFrame 'df'.
+# This can be achieved efficiently using the 'head' method provided by pandas library.
+
+import pandas as pd
+
+def get_first_n_rows(df, n):
+    """
+    Returns the first 'n' rows of the given DataFrame 'df'.
+
+    Parameters:
+    df (pandas DataFrame): The DataFrame whose first 'n' rows are to be returned.
+    n (int): The number of rows to be returned.
+
+    Returns:
+    pandas DataFrame: A new DataFrame containing the first 'n' rows of the given DataFrame 'df'.
+    """
+    # Return the first 'n' rows of the given DataFrame 'df'.
+    return df.head(n)
