@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-df = pd.DataFrame({'a': [0, 1], 'b': [5, 3]})
-# Convert the DataFrame to a string representation without the index.
-df_string = df.to_string(index=False)
-```

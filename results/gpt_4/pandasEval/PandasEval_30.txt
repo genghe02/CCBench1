@@ -1,1 +1,0 @@
-# Convert the 'Email' column into object type in order to store a list or array. Assign the 'emails' set to the first row of 'Email' column.

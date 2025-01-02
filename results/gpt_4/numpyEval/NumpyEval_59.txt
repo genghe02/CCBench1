@@ -1,1 +1,0 @@
-# Reshape the 2D array 'a' to a 4D array 'b' with dimensions 2x4x2x4. Then, transpose 'b' into 'c' by swapping the second and third axes, while keeping the first and fourth axes unchanged.

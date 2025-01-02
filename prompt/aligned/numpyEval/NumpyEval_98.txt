@@ -1,1 +1,0 @@
-# Calculate the Euclidean distance using NumPy.

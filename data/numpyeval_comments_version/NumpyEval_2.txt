@@ -1,8 +1,0 @@
-import numpy as np
-
-arr = np.array([[1,2,3], [4,5,6], [7,8,9]])
-# How to get the cumulative distribution function with NumPy?
-# set bins to 10
-# and then generate a cumulative sum of the histogram contents to variable hist self
-hist, bin_edges = np.histogram(arr, bins=10)
-hist = hist.cumsum()

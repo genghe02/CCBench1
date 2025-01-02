@@ -1,1 +1,0 @@
-# Add a new column named 'Fruit Total' that sums the values of the other columns, ignoring the NaN values.

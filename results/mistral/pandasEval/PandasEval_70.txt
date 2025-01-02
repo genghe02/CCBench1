@@ -1,4 +1,0 @@
- # Drop the index with identical values in 'Day' and 'Visitors' columns using pandas inplace.
-
-# Find and drop the index where 'Day' and 'Visitors' have the same value.
-df.drop(df[df['Day'] == df['Visitors'].values].index, inplace=True)

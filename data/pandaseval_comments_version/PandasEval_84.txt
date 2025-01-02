@@ -1,6 +1,0 @@
-import pandas as pd
-
-def dataframe2list_of_dict(df):
-    # Pandas DataFrame to List of Dictionaries
-    # Use df.to_dict() to solve it and return the result
-    return df.to_dict(orient='records')

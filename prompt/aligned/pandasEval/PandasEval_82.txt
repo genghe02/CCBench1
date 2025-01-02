@@ -1,5 +1,0 @@
-# Parameters: 
-# df: The dataframe to append to. 
-# list_to_append: The list to append. 
-# column_name_list: The column names of the list to append.
-# Returns: The dataframe with the list appended.

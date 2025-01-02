@@ -1,2 +1,0 @@
-# Convert the pandas Series objects to sets for efficient set operations.
-# Compute the intersection of the two sets to find common elements.

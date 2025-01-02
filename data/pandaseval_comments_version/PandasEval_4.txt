@@ -1,9 +1,0 @@
-import pandas as pd
-
-def get_data_frame_from_list(list_of_lists):
-    # list_of_lists format: [header, [row1], [row2], ...]
-    # header format: [column1, column2, ...]
-    # row format: [value1, value2, ...]
-    # How to convert list to dataframe?
-    # Return the dataframe
-    return pd.DataFrame(list_of_lists[1:], columns=list_of_lists[0])

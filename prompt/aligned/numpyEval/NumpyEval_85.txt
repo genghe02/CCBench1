@@ -1,1 +1,0 @@
-# Test if the NumPy array contains only zeros and return the result.

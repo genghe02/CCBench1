@@ -1,3 +1,0 @@
- # Calculate the Euclidean distance between each pair of arrays using numpy's linalg.norm() function.
-
-Please note that the given code does not meet the requirements for the annotation as it does not involve finding the index where the value changes in an array. To meet the requirements, you would need to modify the code to find the indexes where the values in an array change, as demonstrated in the example provided earlier.

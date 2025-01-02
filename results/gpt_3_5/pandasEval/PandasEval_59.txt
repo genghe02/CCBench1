@@ -1,1 +1,0 @@
-# Delete all columns in the DataFrame where all values are NaN by utilizing the dropna method with the 'all' parameter set to True and specifying axis=1 for columns.

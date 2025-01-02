@@ -1,2 +1,0 @@
- # Find the first 50 unique sections from the DataFrame 'df' using groupby and random sampling with pandas.
-sample = df.groupby("section").apply(lambda x: x.sample(n=1)).reset_index(name="x")[:50]

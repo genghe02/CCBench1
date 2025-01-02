@@ -1,1 +1,0 @@
-# Divide each element in columns 'B' and 'C' by the corresponding element in column 'A' in the DataFrame 'df' to normalize the values.

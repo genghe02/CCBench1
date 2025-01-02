@@ -1,1 +1,0 @@
-# This function appends the provided list to a dataframe. It first converts the list into a DataFrame with specified column names and then appends it to the original dataframe. The resulting dataframe is then returned.

@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.arange(12).reshape(3,4)
-# Delete columns at indices 1 and 3 along the specified axis (axis=1) using np.delete.
-out = np.delete(a, [1, 3], axis=1)
-```

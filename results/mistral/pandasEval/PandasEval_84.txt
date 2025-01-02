@@ -1,4 +1,0 @@
- # Convert a given DataFrame to a list of dictionaries, where each dictionary represents a row in the DataFrame.
-
-# Requirements for the code:
-# Convert the DataFrame to a list of dictionaries using the to_dict method with the'records' orientation.

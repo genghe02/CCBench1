@@ -1,1 +1,0 @@
-# Normalize the values in the given DataFrame by applying a lambda function that performs min-max normalization on each column. Min-Max normalization is a method to transform features to be within a certain range. In this case, the range is [0,1]. This can improve the performance of machine learning algorithms.

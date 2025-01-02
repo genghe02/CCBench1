@@ -1,1 +1,0 @@
-# Merge two dataframes based on their indices using pandas merge() function. The 'left_index' and 'right_index' parameters are set to True to indicate that the indices should be used for merging.

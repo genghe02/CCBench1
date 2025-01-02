@@ -1,6 +1,0 @@
-# Delete the first n rows of a DataFrame.
-# Input:
-#   df: DataFrame
-#   n: int
-# Return:
-#   DataFrame after deleting the first n rows.

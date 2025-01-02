@@ -1,9 +1,0 @@
-```python
-import numpy as np
-
-dat = np.array([[1,2,3], [4,5,np.nan], [np.nan,6,np.nan]])
-mdat = np.ma.masked_array(dat,np.isnan(dat))
-# Create a masked array from the original array, masking NaN values.
-# Compute the mean of each row in the masked array, filling masked values with NaN.
-mm = np.mean(mdat,axis=1).filled(np.nan)
-```

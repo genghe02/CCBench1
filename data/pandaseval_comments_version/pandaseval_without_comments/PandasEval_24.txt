@@ -1,6 +1,0 @@
-import pandas as pd
-
-def round_a_single_column(df):
-    <Requirements for the code>
-    df.A = df.A.round()
-    return df

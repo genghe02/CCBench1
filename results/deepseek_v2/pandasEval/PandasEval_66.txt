@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def get_percentage_of_each_gender(series):
-    # Calculate the percentage of each gender in the series by normalizing the value counts.
-    return series.value_counts(normalize=True)
-```

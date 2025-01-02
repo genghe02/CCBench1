@@ -1,4 +1,0 @@
-{
-  "filename": "NumpyEval_0.txt",
-  "comments": "# Is there an efficient numpy way to find each index where the value changes? \n# You can get this functionality in numpy by comparing each element with it's neighbor\n# and then using np.where(condition).\n"
-}

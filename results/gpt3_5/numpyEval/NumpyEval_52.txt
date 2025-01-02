@@ -1,2 +1,0 @@
-# I have a 2D numpy array of shape (N,2) which is holding N points.
-# Sort the array 'a' based on the second column first, then based on the first column.

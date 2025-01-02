@@ -1,7 +1,0 @@
-import pandas as pd
-import numpy as np
-df = pd.DataFrame({'A': [1, 4, 7, np.nan], 'B': [np.nan, 2, 5, np.nan], 'C': [np.nan, np.nan, 3, 6]})
-# Move next value to first empty row pandas
-# how do i move each value from a column to the first empty "row/cell" in pandas?
-# use sorted to align non NULL data at the top, use dropna to drop all rows with all NaN
-new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how = 'all')

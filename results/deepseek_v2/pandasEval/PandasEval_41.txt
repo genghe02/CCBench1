@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def is_contain_particular_value(series, value):
-    # Check if a particular value exists in a pandas Series by converting the Series to a set of unique values and checking for membership.
-    return value in series.unique()
-```

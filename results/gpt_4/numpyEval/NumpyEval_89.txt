@@ -1,6 +1,0 @@
-# The function named "consecutive" takes two arguments, data (a numpy array) and stepsize (an integer with a default value of 1).
-# It returns the number of consecutive sequences in the data where the difference between each element and its following element equals the provided stepsize.
-# This function does so by first computing the differences between subsequent elements in the data (using np.diff).
-# Then, it checks where in these differences the value is not equal to the stepsize (using np.where).
-# The resulting indices are used to split the original data into multiple arrays (using np.split). 
-# The length of the list of these arrays is returned, indicating the number of consecutive sequences in the data.

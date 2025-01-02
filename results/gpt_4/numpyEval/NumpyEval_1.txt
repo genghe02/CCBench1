@@ -1,1 +1,0 @@
-# Expand the last dimension of the array 'a' by using 'newaxis' in numpy, so that we can perform operations that require an extra dimension.

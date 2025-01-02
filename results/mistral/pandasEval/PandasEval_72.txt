@@ -1,7 +1,0 @@
- # Apply element-wise normalization to each column of the DataFrame using NumPy functions.
-
-import numpy as np
-
-df = pd.DataFrame({'A': [1000, 765, 800], 'B': [10, 5, 7]})
-<Requirements for the code>
-normalized_df = df.apply(lambda x: np.array(x) / (np.max(np.abs(np.array(x) - np.min(np.array(x)))) + 1e-9))

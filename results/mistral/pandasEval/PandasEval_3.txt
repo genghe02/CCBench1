@@ -1,2 +1,0 @@
- # Add zeros to the left of each string in the specified column to make the length equal to 15.
-# This function uses the pandas apply method and a lambda function to format each string with leading zeros.

@@ -1,1 +1,0 @@
-# Add a new column C that is the sum of the values in columns A and B.

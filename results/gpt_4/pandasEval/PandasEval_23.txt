@@ -1,1 +1,0 @@
-# The function is designed to return a list of names of the columns from the input dataframe (df) which contain any NaN values. This is achieved by using the isna() function to find NaN values and the any() function to check if any exist in each column. The tolist() function is then used to convert the output to a list.

@@ -1,1 +1,0 @@
-# Create a new empty DataFrame with column names specified by the input list 'col_names'.

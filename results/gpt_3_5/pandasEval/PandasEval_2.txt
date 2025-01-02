@@ -1,1 +1,0 @@
-# Change the column names of a pandas DataFrame to ['a', 'b', 'c'].

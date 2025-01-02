@@ -1,5 +1,0 @@
-import numpy as np
-
-def find_index_within_range(arr, low, high):
-    <Requirements for the code>
-    return np.where(np.logical_and(arr >= low, arr <= high))[0]

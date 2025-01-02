@@ -1,1 +1,0 @@
-# Convert a numpy array into a tuple of tuples. This function takes a 2D numpy array as input and returns a tuple of tuples, where each tuple corresponds to a row in the input array.

@@ -1,8 +1,0 @@
-```python
-import pandas as pd
-
-def append_dict_to_df(df, dictionary):
-    # Append a dictionary to a DataFrame in an efficient way, ensuring that the index is reset to maintain consistency.
-    df = df.append(dictionary, ignore_index=True)
-    return df
-```

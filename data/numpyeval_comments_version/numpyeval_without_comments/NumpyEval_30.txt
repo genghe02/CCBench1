@@ -1,5 +1,0 @@
-import numpy as np
-
-a = np.zeros(4,dtype="float64")
-<Requirements for the code>
-b = a.astype("float32")

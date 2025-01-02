@@ -1,1 +1,0 @@
-# Filter the DataFrame to include only those rows where the value of 'line_num' is not equal to 0.

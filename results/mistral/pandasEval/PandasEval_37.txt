@@ -1,4 +1,0 @@
- # Replace 'a' values in column 'col_1' with clipped values between -2 and 2.
-# Apply clip function to 'col_1' column for rows where 'col_0' equals 'a'.
-
-df.loc[df['col_0']=='a','col_1'] = df.loc[df['col_0']=='a','col_1'].clip(lower=-2, upper=2)

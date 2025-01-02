@@ -1,7 +1,0 @@
-from typing import List
-
-
-def concatenate(strings: List[str]) -> str:
-    <Requirements for the code>
-    <some test cases for the function>
-    return ''.join(strings)

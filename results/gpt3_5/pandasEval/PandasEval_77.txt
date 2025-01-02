@@ -1,1 +1,0 @@
-# Filter rows in a pandas DataFrame where the value in column 'col_a' is greater than the value in column 'col_b'.

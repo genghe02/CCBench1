@@ -1,7 +1,0 @@
- # Drop specified columns 'A' and 'C' efficiently using df.drop(columns=['A', 'C'], axis=1).
-
-This is the code annotation you should add in the "<>":
-
-<Requirements for the code>: Drop specified columns 'A' and 'C' efficiently using df.drop(columns=['A', 'C'], axis=1).
-
-Please make sure that the code annotation style is consistent with the sample provided.

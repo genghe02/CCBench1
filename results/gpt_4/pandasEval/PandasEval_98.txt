@@ -1,1 +1,0 @@
-# This function is designed to get the list of column names from a given pandas dataframe. It utilizes the 'columns' property of the dataframe to get all the column names and then converts them to a list using 'tolist()' method.

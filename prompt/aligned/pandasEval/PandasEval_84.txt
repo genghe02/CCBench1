@@ -1,1 +1,0 @@
-# Convert Pandas DataFrame to a list of dictionaries using df.to_dict() and return the result.

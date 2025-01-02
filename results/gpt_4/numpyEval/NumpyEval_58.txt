@@ -1,1 +1,0 @@
-# Check if the array is sorted in ascending order by comparing each element with its next element. If all elements are smaller than or equal to their next element, the array is sorted.

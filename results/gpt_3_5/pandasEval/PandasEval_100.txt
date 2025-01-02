@@ -1,3 +1,0 @@
-
-x = pd.DataFrame({'a':1,'b':2}, index = range(1))
-# Repeat the DataFrame x for 5 times using pd.concat() to create 'repeated_x'.

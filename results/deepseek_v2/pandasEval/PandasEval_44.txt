@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def delete_column(df, column_name):
-    # Delete a specified column from the DataFrame by using the drop method with axis=1.
-    return df.drop(column_name, axis=1)
-```

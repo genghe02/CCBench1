@@ -1,1 +1,0 @@
-# For each row in the DataFrame, insert row['MSRA'] as the key and row['THU'] as the value into a rows_dict. The method iterrows() yields both the index and row (as a Series).

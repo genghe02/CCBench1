@@ -1,8 +1,0 @@
-```python
-import numpy as np
-
-a = np.arange(1, 10)
-a = a.reshape(len(a), 1)
-# Slice the array to get all elements from index 4 to the end.
-b = a[4:]
-```

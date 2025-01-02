@@ -1,7 +1,0 @@
- # Create a deep copy of the input DataFrame using iloc and copy method efficiently before making any modifications.
-
-import pandas as pd
-
-def creating_df_with_same_as_other(df_original):
-    df_copy = df_original.iloc[:0,:].copy()
-    # Create a deep copy of the input DataFrame using iloc and copy method efficiently before making any modifications.

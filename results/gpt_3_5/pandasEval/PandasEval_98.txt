@@ -1,1 +1,0 @@
-# Extract a list of column names from a pandas DataFrame and return it as a Python list.

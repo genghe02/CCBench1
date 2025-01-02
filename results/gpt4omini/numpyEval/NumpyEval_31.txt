@@ -1,9 +1,0 @@
-```python
-import numpy as np
-
-a = np.array([[1, 2],
-              [3, 4]])
-b = np.array([1, 1])
-# Use the elements of array 'b' as indices to access the corresponding rows of array 'a'.
-out = a[tuple(b)]
-```

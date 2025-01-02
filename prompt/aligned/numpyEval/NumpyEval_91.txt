@@ -1,1 +1,0 @@
-# Remove columns with index 1 and 3 in NumPy. To delete multiple columns, pass the indices of the columns to be deleted as a list to np.delete.

@@ -1,1 +1,0 @@
-# Identify and return the list of column names in the DataFrame where there are missing values by utilizing pandas functionality to check for NaN values and extracting the relevant column names as a list.

@@ -1,5 +1,0 @@
- # Find efficient way to find indices where elements in numpy array change using np.where().
-# In this code snippet, the array 'a' is created using numpy's arange function and then converted to a string using list comprehension and join method.
-# To find the indices where the values change in 'a', compare each element with its neighbor using numpy's equality operator and find the indices where the condition is met using np.where().
-
-result = np.where(np.diff(a)!= 0)[0]

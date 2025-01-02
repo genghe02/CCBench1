@@ -1,7 +1,0 @@
- # Find the unique values in the DataFrame and count their occurrences using pandas value_counts() function, then rename the index to 'unique_values' and reset it as a new column named 'counts'.
-
-import pandas as pd
-
-def get_value_counts(df):
-    <Find the unique values in the DataFrame and count their occurrences using pandas value_counts() function, then rename the index to 'unique_values' and reset it as a new column named 'counts'>
-    return df.value_counts().rename(axis=1).reset_index(name='counts')

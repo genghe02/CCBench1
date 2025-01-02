@@ -1,1 +1,0 @@
-# Return the indices of the minimum values along axis zero.

@@ -1,1 +1,0 @@
- # Reshape the given numpy array 'x' from shape (3, 1) to shape (3,) in an efficient way using numpy's reshape function.

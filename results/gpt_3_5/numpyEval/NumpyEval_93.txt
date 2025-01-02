@@ -1,1 +1,0 @@
-# Find the indices [2, 3, 6] in the data array and delete the elements at those indices using numpy's np.delete() function.

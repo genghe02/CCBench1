@@ -1,1 +1,0 @@
-# Convert the data type of array 'a' to float32 from float64 by using the astype() method.

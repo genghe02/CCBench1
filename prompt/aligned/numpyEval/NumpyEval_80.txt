@@ -1,1 +1,0 @@
-# Partition the array into 3 chunks using NumPy.

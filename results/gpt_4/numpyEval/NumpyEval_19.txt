@@ -1,1 +1,0 @@
-# Create a 5x5 numpy array filled with -1.0

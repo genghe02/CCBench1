@@ -1,9 +1,0 @@
-def add_elements(arr, k):
-    # Function to add elements in the array up to the kth element where the element has at most 2 digits.
-    
-    # Test Cases:
-    # Case 1: arr = [12, 3, 456, 78, 9, 10], k = 3
-    # Case 2: arr = [1, 23, 456, 789, 1234], k = 4
-    # Case 3: arr = [12, 3, 456, 78, 9], k = 5
-    
-    return sum(elem for elem in arr[:k] if len(str(elem)) <= 2)

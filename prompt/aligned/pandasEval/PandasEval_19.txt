@@ -1,1 +1,0 @@
-Create a new DataFrame that is identical to df_original, but with no rows, and return the new DataFrame.

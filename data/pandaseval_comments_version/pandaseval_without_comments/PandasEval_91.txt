@@ -1,6 +1,0 @@
-import pandas as pd
-
-a = [['a', '1.2'], ['b', '70'], ['x', '5']]
-<Requirements for the code>
-df = pd.DataFrame(a, columns=['one', 'two'])
-df['two'] = df['two'].astype(float)

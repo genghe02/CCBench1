@@ -1,1 +1,0 @@
-# Concatenate multiple numpy arrays along the first axis (axis=0). The input is a list of numpy arrays that all have the same number of columns. The output is a single numpy array that has the same number of columns as the input arrays but has a number of rows equal to the sum of the number of rows in the input arrays.

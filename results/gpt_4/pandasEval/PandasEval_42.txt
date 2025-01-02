@@ -1,1 +1,0 @@
-# The function is designed to delete the first n rows from a pandas DataFrame. It does this by returning a new DataFrame that starts from the (n+1)th row.

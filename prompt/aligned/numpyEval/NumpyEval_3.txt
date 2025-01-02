@@ -1,1 +1,0 @@
-# Convert an array of strings to an array of floats in NumPy and return the final result.

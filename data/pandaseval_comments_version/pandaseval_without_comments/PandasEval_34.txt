@@ -1,6 +1,0 @@
-import pandas as pd
-
-def append_dict_to_df(df, dictionary):
-    <Requirements for the code>
-    df = df.append(dictionary, ignore_index=True)
-    return df

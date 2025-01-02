@@ -1,1 +1,0 @@
-# Use b to index a to obtain the value 4 instead of the list [a[1], a[1]]. The code below provides the solution.

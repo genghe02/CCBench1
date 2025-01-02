@@ -1,4 +1,0 @@
-{
-  "response body": "ChatCompletion(id='chatcmpl-A6BGkn1sLen1CjGo9CeR5aPqMoG9e', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='# Determine which columns contain NaN values and return a list of the column names that contain NaNs.', refusal=None, role='assistant', function_call=None, tool_calls=None))], created=1726036650, model='gpt-4o-mini-2024-07-18', object='chat.completion', service_tier=None, system_fingerprint='fp_483d39d857', usage=CompletionUsage(completion_tokens=21, prompt_tokens=340, total_tokens=361))",
-  "filename": "PandasEval_23.txt"
-}

@@ -1,1 +1,0 @@
-# This function takes a pandas Series and a value as input. It counts the occurrences of the value in the given pandas Series by using the value_counts() function of pandas which returns the count of unique values in descending order so that the first element is the most frequently-occurring element. It then returns the count of the specified value.

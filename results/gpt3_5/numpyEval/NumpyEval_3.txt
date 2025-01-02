@@ -1,1 +1,0 @@
-# Convert the elements in a NumPy array from string to float data type.

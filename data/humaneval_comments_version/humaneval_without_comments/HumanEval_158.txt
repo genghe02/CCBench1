@@ -1,4 +1,0 @@
-
-def find_max(words):
-    <Requirements for the code>
-    return sorted(words, key = lambda x: (-len(set(x)), x))[0]

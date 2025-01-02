@@ -1,1 +1,0 @@
-# Create a slice object to extract a subarray from a numpy array 'm' along a specific axis defined by the variable 'axis', starting from index 'start' and ending at index 'end'.

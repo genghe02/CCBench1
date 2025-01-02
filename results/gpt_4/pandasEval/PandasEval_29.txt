@@ -1,2 +1,0 @@
-# The code sorts each column in the DataFrame in such a way that NaN values are placed at the end of each column. 
-# Then it drops the rows where all the values are NaN. The lambda function inside apply method makes the sorting possible by using the pd.isnull function as a key parameter to the sorted function.

@@ -1,1 +1,0 @@
-# This function takes as input a numpy array and returns the most frequent number in that array. It does this by using numpy's bincount() function to count the number of occurrences of each number in the array, and then uses argmax() to find the index of the maximum count, which corresponds to the most frequent number.

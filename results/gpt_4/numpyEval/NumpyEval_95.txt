@@ -1,1 +1,0 @@
-# Check if each element of array 'a' is also present in array 'b' using numpy's in1d function. The result is a boolean array 'c' of the same length as 'a' where a True value indicates the presence of the corresponding element in array 'b'.

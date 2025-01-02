@@ -1,8 +1,0 @@
- # Find each index where the value changes in an efficient way using pandas by comparing each element with its neighbor and utilizing df.series.diff().ne(0).index.
-
-import pandas as pd
-
-<Requirements for the code>
-my_series = pd.Series([56, 24, 421, 90])
-
-result = my_series.diff().ne(0).index

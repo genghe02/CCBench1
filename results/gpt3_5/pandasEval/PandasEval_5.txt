@@ -1,1 +1,0 @@
-# Make all columns in the DataFrame lowercase by applying the str.lower function to each column name.

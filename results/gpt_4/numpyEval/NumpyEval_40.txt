@@ -1,1 +1,0 @@
-# The function interweaves two given arrays - array a and array b. It creates a new array c having the size equal to the combined size of a and b. It then assigns elements from array a to the even indices of array c and elements from array b to the odd indices of array c. The resulting array c is a blend of a and b where the elements of a and b are placed alternatively.

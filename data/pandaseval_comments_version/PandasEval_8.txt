@@ -1,5 +1,0 @@
-import pandas as pd
-df = pd.DataFrame({'col1': [1,2,3], 'col2': ['Jimmy','Tom','Jimmy']})
-# I have a dataframe that has two columns, the second column is one of only a few values. 
-# I want to return a dataframe where only the rows where that col2 had a specific value 'Jimmy' are included.
-new_df = df[df.iloc[:, 1] == 'Jimmy']

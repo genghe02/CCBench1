@@ -1,7 +1,0 @@
- # Find each row where the value in column 'col_a' is greater than the value in column 'col_b' using efficient indexing with pandas DataFrame.
-
-import pandas as pd
-
-def find_col_a_gt_col_b_rows(df, col_a, col_b):
-    # Return DataFrame with rows where column 'col_a' values are greater than column 'col_b' values
-    return df[df[col_a] > df[col_b]]

@@ -1,9 +1,0 @@
-```python
-import pandas as pd
-
-def insert_row_at_arbitrary_in_dataframe(df, row_to_insert):
-    # Insert a row into a DataFrame at an arbitrary position by appending the row and then sorting the DataFrame by index.
-    df = df.append(row_to_insert, ignore_index=False)
-    df = df.sort_index().reset_index(drop=True)
-    return df
-```

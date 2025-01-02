@@ -1,1 +1,0 @@
-# Calculate the total number of True values in the input numpy array by summing up all the True values.

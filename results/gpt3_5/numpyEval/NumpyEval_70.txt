@@ -1,1 +1,0 @@
-# Calculate the mean along each row of the array 'mdat' after masking out any NaN values, then fill in the masked values with NaN.

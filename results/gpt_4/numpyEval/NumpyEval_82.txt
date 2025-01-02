@@ -1,1 +1,0 @@
-# This function takes as input a numpy array and appends the first element of the array to the end of the array.

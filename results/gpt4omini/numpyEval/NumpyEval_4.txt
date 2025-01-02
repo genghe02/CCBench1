@@ -1,8 +1,0 @@
-```python
-import numpy as np
-
-import itertools
-data = [[1], [1, 2]]
-# Combine lists of varying lengths into a 2D numpy array, filling missing values with zeros.
-result = np.array(list(itertools.zip_longest(*data, fillvalue=0)))
-```

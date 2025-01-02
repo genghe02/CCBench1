@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-x = np.arange(8.0)
-# Split the array into 3 equal parts (or as equal as possible) using numpy's array_split function.
-result = np.array_split(x, 3)
-```

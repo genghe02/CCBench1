@@ -1,6 +1,0 @@
-import pandas as pd
-
-def sorting_columns_based_on_column_name(df):
-    # Sorting columns in pandas dataframe based on column name
-    # Note that axis is one
-    return df.reindex(sorted(df.columns), axis=1)

@@ -1,1 +1,0 @@
-{"filename": "PandasEval_91.txt", "comments": "# I want to convert a table, represented as a list of lists, into a pandas DataFrame.\n# The columns are ['one', 'two']\n# What is the best way to convert the columns to the appropriate types, in this case the 'two' column into floats?\n"}

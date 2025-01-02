@@ -1,7 +1,0 @@
- def digitSum(s):
-    # Calculate the sum of digits represented by the given string.
-    # If the input string is empty, return 0.
-    if s == "": return 0
-    # Use a generator expression and list comprehension to filter out non-digit characters and convert them to their corresponding ASCII codes.
-    # Then, sum up the filtered digits using the'sum' function.
-    return sum(ord(char) for char in s if char.isdigit())

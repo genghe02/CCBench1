@@ -1,1 +1,0 @@
-# Count the number of NaN values in each column of a DataFrame using pandas isnull() function combined with the sum() function.

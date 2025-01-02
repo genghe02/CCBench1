@@ -1,1 +1,0 @@
-# Drop columns 'A' and 'C' from the DataFrame 'df' and return a new DataFrame 'new_df'.

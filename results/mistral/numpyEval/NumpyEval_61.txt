@@ -1,6 +1,0 @@
- # Slice the given array'm' along the specified axis (axis=2) from index start (1) to index end (3) efficiently.
-result = m[..., slices(axis, start, end)]
-
-# Alternatively, create a slice object and assign it to the corresponding axis index in the list'slc' for efficient slicing.
-slc[axis] = slice(start, end)
-result = m[tuple(slc)]

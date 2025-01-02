@@ -1,3 +1,0 @@
-# The function make_df_all_cols_lower takes a pandas DataFrame as input and changes all the column names to lowercase.
-# It uses the map function to apply the built-in str.lower function to each column name.
-# The modified DataFrame with all lowercase column names is then returned as the output.

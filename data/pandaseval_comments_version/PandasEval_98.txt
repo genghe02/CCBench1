@@ -1,7 +1,0 @@
-import pandas as pd
-
-def get_list_from_dataframe(df):
-    # I want to get a list of the column headers from a Pandas DataFrame. 
-    # The DataFrame will come from user input, so I won't know how many columns there will be or what they will be called.
-    # Return a list of the column headers.
-    return df.columns.tolist()

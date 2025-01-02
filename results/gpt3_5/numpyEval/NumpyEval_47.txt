@@ -1,1 +1,0 @@
-# Find the set exclusive-or of two arrays using numpy to get elements that are in only one of the arrays.

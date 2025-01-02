@@ -1,1 +1,0 @@
-# The requirement of this code is to drop two consecutive rows from the provided dataframe if the 'column2' of the odd-indexed row is 0. It first finds the odd-indexed rows where 'column2' is 0 and then appends the indices of the rows just above them to 'idx'. It then uses the 'drop' function of panda's DataFrame to drop these rows from the dataframe.

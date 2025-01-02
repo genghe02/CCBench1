@@ -1,1 +1,0 @@
-# This function is intended to find the minimum value in the provided numpy array using np.min function.

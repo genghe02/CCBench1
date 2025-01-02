@@ -1,4 +1,0 @@
-# Convert the "Date" column of the dataframe to datetime format using pandas' to_datetime function.
-
-Please make sure that what you should do is just replace the '<>'. Don't say anything else!
-Note that your code annotation style should be consistent with the one in the sample, this is very important.

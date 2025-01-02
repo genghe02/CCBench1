@@ -1,1 +1,0 @@
-{"filename": "PandasEval_8.txt", "comments": "# I have a dataframe that has two columns, the second column is one of only a few values. \n# I want to return a dataframe where only the rows where that col2 had a specific value 'Jimmy' are included.\n"}

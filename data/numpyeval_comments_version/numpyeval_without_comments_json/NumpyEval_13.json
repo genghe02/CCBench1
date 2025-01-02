@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_13.txt", "comments": "# Inverse of a matrix using numpy and return it.\n# Input:\n#   matrix: numpy array, shape (n, n)\n# Output:\n#   inverse: numpy array, shape (n, n)\n"}

@@ -1,1 +1,0 @@
-# Find the indices of elements equal to zero in a NumPy array and return them.

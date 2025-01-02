@@ -1,5 +1,0 @@
- # Convert each element in the array to its string representation using list comprehension and numpy vectorized function np.array().
-a_str = np.array([str(x) for x in a])
-
-# Find each index where the string representation of the array elements changes in an efficient way using numpy by comparing each element with its neighbor and utilizing np.where(condition).
-result = np.where(np.roll(a_str, 1)!= a_str)[0]

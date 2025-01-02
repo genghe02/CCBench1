@@ -1,5 +1,0 @@
-import numpy as np
-
-def get_multiply_diff(t):
-    <Requirements for the code>
-    return t[1:] / t[:-1]

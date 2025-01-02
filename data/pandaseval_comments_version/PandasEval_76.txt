@@ -1,7 +1,0 @@
-import pandas as pd
-
-source_series = pd.Series([32, 434, 542, 'BC2'])
-target_series = pd.Series(['B1', 'B3', 'B4', 123, 43, 54])
-
-# Appending the source series to the target series, with ignoring the index or resetting index
-merged_series = target_series.append(source_series, ignore_index=True)

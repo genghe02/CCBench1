@@ -1,1 +1,0 @@
-# This function is designed to delete a specific column from a pandas DataFrame. The DataFrame and the column name to be deleted are passed as parameters. The function uses the 'drop' method of pandas DataFrame to delete the specified column and returns the updated DataFrame.

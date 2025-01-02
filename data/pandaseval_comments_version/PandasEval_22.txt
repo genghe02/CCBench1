@@ -1,8 +1,0 @@
-import pandas as pd
-
-def normalize(df):
-    # Normalization using pandas
-    # We simply subtract the mean and divide by standard deviation on df.iloc[:,0,-1] obj with axis is zero.
-    # Return the normalized dataframe
-    df.iloc[:,0:-1] = df.iloc[:,0:-1].apply(lambda x: (x-x.mean())/ x.std(), axis=0)
-    return df

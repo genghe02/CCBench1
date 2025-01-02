@@ -1,1 +1,0 @@
-# Replace the column names of the DataFrame 'data' with lowercase letters 'a', 'b', and 'c'.

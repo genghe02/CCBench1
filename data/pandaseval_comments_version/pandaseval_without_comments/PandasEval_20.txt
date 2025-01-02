@@ -1,6 +1,0 @@
-import pandas as pd
-import numpy as np
-
-df = pd.DataFrame({'A':[1,4], 'B':[np.nan,301]})
-<Requirements for the code>
-count_series = df.isnull().sum()

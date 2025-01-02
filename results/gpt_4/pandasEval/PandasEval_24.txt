@@ -1,1 +1,0 @@
-# This function is designed to round all the values in the 'A' column of the given dataframe to the nearest whole number. The pandas Dataframe round() function is used in this case.

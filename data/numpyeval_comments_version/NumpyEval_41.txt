@@ -1,7 +1,0 @@
-import numpy as np
-
-a = np.arange(9)
-a = a.reshape((3, 3))
-b = np.zeros((5, 5))
-# Copy numpy array 'a' into part of another array 'b' in [1:4, 1:4]
-b[1:4, 1:4] = a

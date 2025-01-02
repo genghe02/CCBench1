@@ -1,1 +1,0 @@
-# Calculate the mean value of a specific column in a pandas DataFrame.

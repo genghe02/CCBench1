@@ -1,1 +1,0 @@
-# Concatenate two numpy arrays 'arr1' and 'arr2' efficiently using numpy's concatenate function.

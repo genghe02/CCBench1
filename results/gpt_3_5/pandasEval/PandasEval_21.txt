@@ -1,1 +1,0 @@
-# Filter out values in the DataFrame that are greater than the mean of each column, then apply a lambda function to drop any NaN values and return a new DataFrame.

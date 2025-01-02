@@ -1,4 +1,0 @@
-{
-  "filename": "PandasEval_14.txt",
-  "comments": "# I need to calculate the difference between two rows groupwise using pandas.\n# To calculate the sum I would use pandas.groupby('Group').sum(), but how do you calculate the difference between rows where the row ordering is important?\n# I think we need custom function with apply which return DataFrame for each group, for select by position is used iat:\n# Return the result\n"
-}

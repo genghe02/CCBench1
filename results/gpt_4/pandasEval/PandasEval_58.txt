@@ -1,1 +1,0 @@
-# Remove any numerical values present in the 'Name' column of the DataFrame by replacing them with an empty string.

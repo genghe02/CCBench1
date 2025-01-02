@@ -1,5 +1,0 @@
-import pandas as pd
-
-def get_row_index_values_as_list(df):
-    <Requirements for the code>
-    return df.index.values.tolist()

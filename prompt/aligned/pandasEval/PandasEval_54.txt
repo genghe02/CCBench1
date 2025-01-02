@@ -1,5 +1,0 @@
-# Extract the last year (YY) from a fiscal date string in the format of YYYY-YY. 
-# For example, the last year of '1999-00' would be 2000. 
-# Implement logic to handle cases where it is the end of the century by adding to the first two digits. 
-# The column_name refers to the column in the DataFrame that contains the date strings. 
-# Return the numerical Series object of the last year.

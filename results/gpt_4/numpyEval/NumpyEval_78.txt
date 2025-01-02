@@ -1,1 +1,0 @@
-# Map each element in the numpy array 'a' to its corresponding value in 'my_dict' using the np.vectorize() function which applies the function to all elements in the array.

@@ -1,7 +1,0 @@
-import pandas as pd
-
-def get_row_count(df):
-    """
-    Return the row count of df
-    """
-    return len(df.index)

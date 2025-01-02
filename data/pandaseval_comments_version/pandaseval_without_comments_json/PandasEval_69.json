@@ -1,1 +1,0 @@
-{"filename": "PandasEval_69.txt", "comments": "# Pandas dataframe fillna() only some columns in place\n# This function fills all columns with 0\n# Return the changed dataframe\n"}

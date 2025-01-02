@@ -1,1 +1,0 @@
-# Subtract the minimum value along each column(axis=0) from all elements in the numpy array 'a'.

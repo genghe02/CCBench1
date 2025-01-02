@@ -1,1 +1,0 @@
-{"filename": "PandasEval_72.txt", "comments": "# I have a dataframe in pandas where each column has different value range.\n# Any idea how I can normalize the columns of this dataframe where each value is between 0 and 1?\n"}

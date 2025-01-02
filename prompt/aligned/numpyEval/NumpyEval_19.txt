@@ -1,1 +1,0 @@
-# Create an array of shape (5, 5) where every entry is the same value, specifically -1.

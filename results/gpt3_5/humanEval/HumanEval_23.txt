@@ -1,8 +1,0 @@
-def strlen(string: str) -> int:
-    # Calculate the length of the input string.
-    # Test cases:
-    # >>> strlen("hello")
-    # 5
-    # >>> strlen("")
-    # 0
-    return len(string)

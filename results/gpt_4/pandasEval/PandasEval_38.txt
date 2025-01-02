@@ -1,1 +1,0 @@
-# The function takes a dataframe and two lists as inputs. The first list contains the original column names that need to be changed, and the second list contains the new column names. It uses the pandas dataframe method 'rename' to change the column names and returns the updated dataframe.

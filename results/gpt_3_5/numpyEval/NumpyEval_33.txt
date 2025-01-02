@@ -1,1 +1,0 @@
-# Reshape the input array 'arr' from a shape of (50, 100, 25) to a shape of (5000, 25) using np.reshape() function.

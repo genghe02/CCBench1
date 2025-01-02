@@ -1,1 +1,0 @@
-# The requirement for this code is to replace the values in 'col_1' where 'col_0' is 'a' with their clipped version between -2 and 2. The pandas clip() function is used to limit the values in the column 'col_1' between -2 and 2 where 'col_0' is 'a'.

@@ -1,5 +1,0 @@
-import pandas as pd
-def compute_mean_along_rows(df):
-    <Requirements for the code>
-    df['mean'] = df.mean(axis=1)
-    return df

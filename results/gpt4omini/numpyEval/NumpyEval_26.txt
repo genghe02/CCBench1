@@ -1,8 +1,0 @@
-```python
-import numpy as np
-
-# List of arrays.
-L = [np.random.randn(5,4,2,5,1,2) for i in range(10)]
-# Stack a list of 10 randomly generated arrays along a new axis, creating a multi-dimensional array.
-M = np.stack(L, axis=-1)
-```

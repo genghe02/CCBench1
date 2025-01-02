@@ -1,6 +1,0 @@
-import numpy as np
-
-a = np.array([[2,3,2],[5,6,1]])
-b = np.array([3,5])
-<Requirements for the code>
-c = a * b[:, np.newaxis]

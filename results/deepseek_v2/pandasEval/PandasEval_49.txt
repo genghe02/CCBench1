@@ -1,8 +1,0 @@
-```python
-import pandas as pd
-import numpy as np
-
-df = pd.DataFrame(np.random.randint(0,10,size=100).reshape(10,10))
-# Find all unique values in the DataFrame and return them as a flattened numpy array.
-unique_ndarray = np.unique(df.values.ravel())
-```

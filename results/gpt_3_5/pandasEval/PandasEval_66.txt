@@ -1,1 +1,0 @@
-# Calculate the percentage of each gender in the given pandas series by using the value_counts method with normalize parameter set to True.

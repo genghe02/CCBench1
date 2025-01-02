@@ -1,1 +1,0 @@
-# Check which elements of array 'a' are also present in array 'b' using numpy function np.in1d().

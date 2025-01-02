@@ -1,1 +1,0 @@
-# Stack 1-D arrays as columns into a 2-D array. Here we are stacking a and b as columns which results in a 2-D array.

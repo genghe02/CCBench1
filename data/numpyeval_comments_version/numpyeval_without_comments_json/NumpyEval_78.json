@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_78.txt", "comments": "# I am trying to translate every element of a numpy.array according to a given key\n# I don't know about efficient, but you could use np.vectorize on the .get method of dictionaries:\n"}

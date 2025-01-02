@@ -1,4 +1,0 @@
- # Extract the list of column names from a given DataFrame using pandas.
-
-# Requirements for the code:
-# Get the list of column names from a given DataFrame using pandas DataFrame.columns.tolist() method.

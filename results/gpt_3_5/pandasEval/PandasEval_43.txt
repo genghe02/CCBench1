@@ -1,2 +1,0 @@
-# Compute the mean along the rows of the input DataFrame.
-# Add a new column 'mean' to the DataFrame that contains the mean value of each row.

@@ -1,5 +1,0 @@
-import numpy as np
-
-x = np.arange(8.0)
-<Requirements for the code>
-result = np.array_split(x, 3)

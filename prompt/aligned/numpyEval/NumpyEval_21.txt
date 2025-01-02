@@ -1,1 +1,0 @@
-# Print a Numpy array without brackets by converting it into a string format, for example, converting a = np.array([1,2,3,4,5]) into a_string = "1 2 3 4 5".

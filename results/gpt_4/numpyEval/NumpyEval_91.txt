@@ -1,1 +1,0 @@
-# Delete the columns at index 1 and 3 from the 2D numpy array 'a'. The operation is performed along the columns (axis=1).

@@ -1,1 +1,0 @@
-# Select elements in the numpy array 'dists' that are within the range of 'r' to 'r+dr' inclusively using np.logical_and(condition1, condition2) and np.where().

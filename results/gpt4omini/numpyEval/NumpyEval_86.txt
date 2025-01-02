@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-x = np.array([[1], [2], [3]])
-# Reshape a 2D array with a single column into a 1D array.
-out = x.reshape(3,)
-```

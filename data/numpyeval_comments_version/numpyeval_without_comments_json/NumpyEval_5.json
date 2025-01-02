@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_5.txt", "comments": "# I am using numpy. I have a matrix with 1 column and N rows and I want to get an array from with N elements.\n# For example, if i have M = matrix([[1], [2], [3], [4]]), I want to get A = array([1,2,3,4]).\n# Return the array\n"}

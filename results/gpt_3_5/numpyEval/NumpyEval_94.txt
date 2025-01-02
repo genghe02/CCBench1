@@ -1,1 +1,0 @@
-# Select rows in the numpy array where all elements are not equal to zero.

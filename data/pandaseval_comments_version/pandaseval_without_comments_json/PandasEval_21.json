@@ -1,1 +1,0 @@
-{"filename": "PandasEval_21.txt", "comments": "# I would like to create new dataframe out of the old one in a way that there will only be values that exceed the mean value of the column. \n# We can compare values and then add NaNs by indexing or `where`\n# We want remove NaNs also in first rows add custom function with `dropna`\n"}

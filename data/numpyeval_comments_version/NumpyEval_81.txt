@@ -1,7 +1,0 @@
-import numpy as np
-
-def crop(arr, top, bottom, left, right):
-    # How do I extract a sub-array from a numpy 2d array? 
-    # I'd like to extract a numpy array with a specified size from a numpy 2d array--essentially I want to crop the array.
-    # Return a sub-array from a numpy 2d array.
-    return arr[top:bottom, left:right]

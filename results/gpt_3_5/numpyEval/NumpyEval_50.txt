@@ -1,1 +1,0 @@
-# Calculate the mean of the arrays a, b, and c along axis 0.

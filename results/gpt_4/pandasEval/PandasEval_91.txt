@@ -1,2 +1,0 @@
-# Create a pandas DataFrame from a given list 'a'. The DataFrame should have two columns named 'one' and 'two'.
-# Convert the 'two' column values to float data type.

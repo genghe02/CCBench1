@@ -1,3 +1,0 @@
-# Sort the dataframe by 'date' in ascending order. This is necessary to identify the last purchase of each 'id' correctly.
-# After sorting, group the dataframe by 'id' and take the last entry of each group.
-# This will give us the most recent purchase for each customer 'id'.

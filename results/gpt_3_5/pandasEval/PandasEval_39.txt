@@ -1,1 +1,0 @@
-# Convert all columns in a pandas DataFrame to numeric type using pd.to_numeric.

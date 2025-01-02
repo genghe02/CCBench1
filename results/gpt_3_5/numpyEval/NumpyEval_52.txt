@@ -1,1 +1,0 @@
-# Sort the array 'a' based on the second column first, then based on the first column.

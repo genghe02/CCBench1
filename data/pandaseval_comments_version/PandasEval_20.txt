@@ -1,7 +1,0 @@
-import pandas as pd
-import numpy as np
-
-df = pd.DataFrame({'A':[1,4], 'B':[np.nan,301]})
-# # counting the number of missing/NaN in each column
-# Get a series with the number of missing/NaN in each column
-count_series = df.isnull().sum()

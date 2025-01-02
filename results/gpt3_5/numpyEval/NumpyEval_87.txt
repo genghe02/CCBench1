@@ -1,1 +1,0 @@
-# Check if all rows in the numpy array 'a' are equal to the first row along axis 0.

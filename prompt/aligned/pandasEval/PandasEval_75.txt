@@ -1,1 +1,0 @@
-# Select rows where the value in column x2 is NaN.

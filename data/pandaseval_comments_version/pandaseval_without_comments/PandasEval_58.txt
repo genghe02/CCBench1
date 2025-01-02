@@ -1,9 +1,0 @@
-import pandas as pd
-
-# Example DataFrame
-df = pd.DataFrame.from_dict({'Name'  : ['May21', 'James', 'Adi22', 'Hello', 'Girl90'],
-                             'Volume': [23, 12, 11, 34, 56],
-                             'Value' : [21321, 12311, 4435, 32454, 654654]})
-
-<Requirements for the code>
-df['Name'] = df['Name'].str.replace('\d+', '')

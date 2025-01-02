@@ -1,1 +1,0 @@
-# Create a dictionary where the keys are values from the 'MSRA' column and the values are corresponding values from the 'THU' column by iterating over each row in the DataFrame 'df' and assigning the values accordingly.

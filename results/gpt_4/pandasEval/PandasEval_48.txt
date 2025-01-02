@@ -1,1 +1,0 @@
-# Filter the DataFrame 'df' to only include rows where the 'col' value is in the list 'targets'.

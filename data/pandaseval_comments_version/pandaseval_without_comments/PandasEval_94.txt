@@ -1,5 +1,0 @@
-import pandas as pd
-
-def select_multiple_columns(df, columns):
-    <Requirements for the code>
-    return df[columns]

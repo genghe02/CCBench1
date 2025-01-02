@@ -1,1 +1,0 @@
-# Convert a given matrix into a 1D array using numpy's asarray() function for the conversion and squeeze() function to remove single-dimensional entries from the shape of the array.

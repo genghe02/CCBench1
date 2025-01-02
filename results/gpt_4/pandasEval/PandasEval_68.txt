@@ -1,1 +1,0 @@
-# This function takes a pandas dataframe as input and removes all rows that contain any NaN values.

@@ -1,7 +1,0 @@
- # Perform bitwise XOR operation on input variables x, y, and z using NumPy's vectorized XOR operator.
-
-import numpy as np
-
-def xor_operation(x, y, z):
-    <Perform bitwise XOR operation on input variables x, y, and z using NumPy's vectorized XOR operator.>
-    return (np.bitwise_xor(x, y) ^ np.bitwise_xor(y, z))

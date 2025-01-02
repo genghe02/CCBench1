@@ -1,1 +1,0 @@
-# Count the number of elements in the array 'a' that are greater than 2 and less than 8.

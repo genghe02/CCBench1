@@ -1,1 +1,0 @@
- # Calculate the standard deviation of each column in the given 2D numpy array using np.std(arr, axis=0).

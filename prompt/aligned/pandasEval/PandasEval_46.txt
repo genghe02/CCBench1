@@ -1,1 +1,0 @@
-# Get the values of column `A` when column `B` equals 3.

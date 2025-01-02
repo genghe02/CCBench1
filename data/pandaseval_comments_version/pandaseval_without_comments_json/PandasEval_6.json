@@ -1,1 +1,0 @@
-{"filename": "PandasEval_6.txt", "comments": "# I need to change the dtype of multiple columns but the dataframe has different kind of dtypes. \n# Some columns dtypes are float64 whereas some columns are int64\n# I need to change all float64 to float32.\n"}

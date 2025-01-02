@@ -1,3 +1,0 @@
- # This line assigns the value of each element in 'z' starting from the second element to the value of the corresponding element before it.
-# It does not find the indices where the value changes, but rather modifies the array in-place.
-# To find the indices where the value changes, use np.where as shown in the example.

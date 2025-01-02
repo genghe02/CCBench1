@@ -1,5 +1,0 @@
-# Generate a list of one-dimensional numpy arrays in a loop and later convert this list to a 2D numpy array. 
-# Preallocate a 2D numpy array if the number of items is known ahead of time; otherwise, collect them in a list.
-# Evaluate if there is a more performance-efficient method to collect sequential numerical data (numpy arrays) 
-# other than using a list followed by conversion to a numpy array. 
-# Investigate the availability of an "expandable" matrix data structure in a well-tested module.

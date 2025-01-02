@@ -1,5 +1,0 @@
-import numpy as np
-
-def numpy_is_empty(arr):
-    <Requirements for the code>
-    return arr.size == 0

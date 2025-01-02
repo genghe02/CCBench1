@@ -1,6 +1,0 @@
-import pandas as pd
-
-def create_empty_df(col_names):
-    # Pandas create empty DataFrame with only column names
-    # Return: DataFrame
-    return pd.DataFrame(columns=col_names)

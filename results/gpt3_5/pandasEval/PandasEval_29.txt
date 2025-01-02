@@ -1,1 +1,0 @@
-# Apply a lambda function to sort each column in the DataFrame based on whether the values are null or not, and then drop rows where all values are null.

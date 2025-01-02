@@ -1,8 +1,0 @@
-import numpy as np
-
-a = np.array([1,2,3,4,5,6])
-b = np.array([2,3,5])
-
-# Perform a symmetric difference between two numpy arrays.
-# Don't convert the numpy array to a set to perform exclusive-or. Use setxor1d directly.
-diff_arr = np.setxor1d(a, b)

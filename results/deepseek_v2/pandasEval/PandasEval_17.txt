@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def remove_duplicates_by_column(df, col1, col2):
-    # Remove duplicates based on the specified column while keeping the last occurrence of each duplicate.
-    return df.drop_duplicates(subset=col1, keep="last")
-```

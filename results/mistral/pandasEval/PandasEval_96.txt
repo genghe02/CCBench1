@@ -1,3 +1,0 @@
- # Merge two DataFrames based on a common column 'company' using pandas merge function.
-
-This is the completed annotation for the given code snippet. Please make sure that the annotation style is consistent with the sample provided earlier.

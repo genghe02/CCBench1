@@ -1,1 +1,0 @@
-# Convert the array 'a' of 64-bit floating point numbers to an array of 32-bit floating point numbers.

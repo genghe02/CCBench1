@@ -1,1 +1,0 @@
-# Select columns with data type float64 in a pandas DataFrame and convert them to data type np.float32.

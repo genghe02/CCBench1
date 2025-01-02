@@ -1,6 +1,0 @@
- # Create a list of NumPy arrays, each with shape (5, 1) and filled with the values from the given range, multiplied by a 2x1 NumPy array of ones.
-# Use numpy's map function with a lambda function to generate the list of arrays.
-# Stack the list of arrays along the new axis created by the NumPy stack function to create a single NumPy array with shape (5, 2).
-
-result = np.where(np.not_equal(myarray[:, :-1], myarray[:, 1:]))[0]
-# Find each index where the value changes in the stacked NumPy array along any axis by comparing each element with its neighbor and utilizing np.where(condition).

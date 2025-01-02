@@ -1,3 +1,0 @@
- # Multiply each row of array 'a' with each element of array 'b' using broadcasting.
-# This operation is performed efficiently using numpy's element-wise multiplication and broadcasting capabilities.
-# The newaxis function is used to add an extra dimension to array 'b' to enable broadcasting.

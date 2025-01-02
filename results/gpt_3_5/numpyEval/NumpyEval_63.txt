@@ -1,2 +1,0 @@
-# Get the indices in array A where elements of array B could be inserted in sorted order using np.searchsorted().
-# Delete the elements at indices where B can be inserted in A to get the remaining indices using np.delete().

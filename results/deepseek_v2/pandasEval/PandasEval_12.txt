@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def get_row_count(df):
-    # Calculate the number of rows in the DataFrame efficiently using the index length.
-    return len(df.index)
-```

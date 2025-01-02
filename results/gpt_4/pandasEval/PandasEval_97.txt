@@ -1,1 +1,0 @@
-# The purpose of this function is to rename a specific column in a pandas dataframe. The old name of the column is replaced with a new name provided by the user. The function returns the modified dataframe.

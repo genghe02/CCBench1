@@ -1,7 +1,0 @@
-def right_angle_triangle(a, b, c):
-    # This function checks if a triangle with sides of length a, b, and c is a right angle triangle. It uses the Pythagorean theorem to determine this.
-    # Test case examples:
-    # >>> right_angle_triangle(3, 4, 5) should return True, as it is a right angle triangle (3^2 + 4^2 = 5^2)
-    # >>> right_angle_triangle(5, 4, 3) should return True, as it is a right angle triangle (3^2 + 4^2 = 5^2)
-    # >>> right_angle_triangle(1, 1, 1) should return False, as it is not a right angle triangle.
-    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b

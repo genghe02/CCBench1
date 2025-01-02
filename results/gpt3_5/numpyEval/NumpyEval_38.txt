@@ -1,1 +1,0 @@
-# Concatenate the arrays in the list L along the first axis to create a single array using np.concatenate() function.

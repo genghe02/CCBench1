@@ -1,1 +1,0 @@
-# The function inverse_matrix takes a matrix as an input parameter and returns its inverse using the numpy linalg.inv() method. Note that the input matrix should be a square matrix and non-singular (i.e., its determinant should not be zero), otherwise, the function will raise an error.

@@ -1,1 +1,0 @@
-# Find the minimum value of each column with axis 0, then subtract the minimum value from each element of the column.

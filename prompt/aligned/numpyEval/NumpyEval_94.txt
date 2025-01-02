@@ -1,1 +1,0 @@
-# Remove zero rows from a 2-D numpy array using np.all with an axis argument.

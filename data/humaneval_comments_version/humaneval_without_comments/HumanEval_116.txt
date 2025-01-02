@@ -1,5 +1,0 @@
-
-def sort_array(arr):
-    <Requirements for the code>
-    <some test cases for the function>
-    return sorted(sorted(arr), key=lambda x: bin(x)[2:].count('1'))

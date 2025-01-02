@@ -1,1 +1,0 @@
-# Flatten the array into a single array of N elements, where N is the total number of float elements in all the sub-arrays.

@@ -1,3 +1,0 @@
- # Apply the get method of dictionary my_dict to each element in array a using np.vectorize and return the result.
-# This will replace each element in array a with the corresponding value from my_dict.
-# Note that np.vectorize is a functional way to apply a function to an entire array element-wise.

@@ -1,1 +1,0 @@
-# Find the number of consecutive sequences in the input data array where the difference between consecutive elements is equal to the specified stepsize. Utilize numpy functions to split the array based on the condition of the difference not being equal to the stepsize.

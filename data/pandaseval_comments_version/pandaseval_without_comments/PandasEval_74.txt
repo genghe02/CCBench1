@@ -1,5 +1,0 @@
-import pandas as pd
-
-def counting_occurrences_of_a_value(series, value):
-    <Requirements for the code>
-    return series.value_counts()[value]

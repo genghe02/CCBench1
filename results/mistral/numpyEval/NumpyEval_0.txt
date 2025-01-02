@@ -1,3 +1,0 @@
- # Find each index where the value changes in the given NumPy array 'a' in an efficient way using numpy by comparing each element with its neighbor and utilizing np.where(a[1:]!= a[:-1]) condition.
-
-result = np.where(a[1:]!= a[:-1])[0]

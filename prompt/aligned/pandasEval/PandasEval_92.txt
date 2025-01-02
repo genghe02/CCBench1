@@ -1,1 +1,0 @@
-# Slice the DataFrame to take the first n rows and return the result.

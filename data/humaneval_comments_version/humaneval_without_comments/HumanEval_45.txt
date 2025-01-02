@@ -1,6 +1,0 @@
-
-
-def triangle_area(a, h):
-    <Requirements for the code>
-    <some test cases for the function>
-    return a * h / 2.0

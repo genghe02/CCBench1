@@ -1,1 +1,0 @@
-# This code searches for elements of array B in array A and returns the indices where they would be inserted to maintain the order of array A. Then, it removes the corresponding indices from an array of numbers from 0 to the length of array A - 1.

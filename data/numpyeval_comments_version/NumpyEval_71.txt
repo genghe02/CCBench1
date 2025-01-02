@@ -1,7 +1,0 @@
-import numpy as np
-
-def replace_elements_that_greater_than_value(arr, value, new_value):
-    # Replace all elements of Python NumPy Array that are greater than `value` with `new_value`
-    # Return the array
-    arr[arr > value] = new_value
-    return arr

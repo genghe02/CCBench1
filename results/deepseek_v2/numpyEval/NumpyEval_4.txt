@@ -1,9 +1,0 @@
-```python
-import numpy as np
-import itertools
-
-data = [[1], [1, 2]]
-
-# Flatten the list of lists into a single list, filling shorter lists with 0s to match the length of the longest list, and then transpose the result.
-result = np.array(list(itertools.zip_longest(*data, fillvalue=0)))
-```

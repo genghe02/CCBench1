@@ -1,1 +1,0 @@
-# Get the cumulative distribution function using NumPy by setting bins to 10 and generating a cumulative sum of the histogram contents to the variable hist.

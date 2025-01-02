@@ -1,7 +1,0 @@
-import pandas as pd
-
-def add_column_to_dataframe(df, column_name, column_data):
-    # How to add a new column to an existing DataFrame?
-    # I would like to add a new column data with the column name, to the existing dataframe
-    df[column_name] = column_data
-    return df

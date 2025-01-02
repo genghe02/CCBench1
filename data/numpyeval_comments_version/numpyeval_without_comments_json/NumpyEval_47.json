@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_47.txt", "comments": "# Perform a symmetric difference between two numpy arrays.\n# Don't convert the numpy array to a set to perform exclusive-or. Use setxor1d directly.\n"}

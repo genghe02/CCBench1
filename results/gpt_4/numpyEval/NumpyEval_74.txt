@@ -1,1 +1,0 @@
-# This function finds the indexes of all elements within a given range (inclusive) in a numpy array. It utilizes numpy's logical_and operation to compare each element with the lower and upper bounds and np.where to get the indices of these elements.

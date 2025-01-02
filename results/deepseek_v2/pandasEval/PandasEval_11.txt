@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def select_rows_from_column(df, col_name, values):
-    # Select rows from the DataFrame where the specified column contains any of the given values.
-    return df[df[col_name].isin(values)]
-```

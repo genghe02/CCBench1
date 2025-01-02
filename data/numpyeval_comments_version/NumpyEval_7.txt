@@ -1,8 +1,0 @@
-import numpy as np
-
-a = np.array([[[10, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4]],
-              [[1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4]]])
-
-# Conducting the reverse operation along with the last dimension
-
-b = a[:, :, ::-1]

@@ -1,2 +1,0 @@
-# We need to initialize a 2D array `result` with zeros, where the number of rows is equal to the size of `data` and the number of columns is equal to the maximum value in `data`.
-result = np.zeros((data.size, data.max()+1))

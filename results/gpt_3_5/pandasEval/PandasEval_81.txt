@@ -1,1 +1,0 @@
-# Group the DataFrame by 'Country' and 'Item_Code', then calculate the sum of 'Y1961', 'Y1962', 'Y1963' columns for each group.

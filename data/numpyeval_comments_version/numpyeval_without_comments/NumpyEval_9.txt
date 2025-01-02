@@ -1,6 +1,0 @@
-import numpy as np
-import pandas as pd
-
-df = pd.DataFrame({'A':[1,2,3], 'B':[1,2,3], 'C':[1,2,3]})
-<Requirements for the code>
-np.fill_diagonal(df.values, 0)

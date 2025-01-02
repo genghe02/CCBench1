@@ -1,9 +1,0 @@
-from typing import List
-
-
-def remove_duplicates(numbers: List[int]) -> List[int]:
-    <Requirements for the code>
-    <some test cases for the function>
-    import collections
-    c = collections.Counter(numbers)
-    return [n for n in numbers if c[n] <= 1]

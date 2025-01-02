@@ -1,7 +1,0 @@
-from typing import List, Any
-
-
-def filter_integers(values: List[Any]) -> List[int]:
-    <Requirements for the code>
-    <some test cases for the function>
-    return [x for x in values if isinstance(x, int)]

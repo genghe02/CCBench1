@@ -1,2 +1,0 @@
-# Move each value from a column to the first empty row in a Pandas DataFrame.
-# Use sorted to align non-NULL data at the top, and use dropna to remove all rows that contain only NaN.

@@ -1,1 +1,0 @@
-# Calculate the mean values along the rows of a matrix while excluding NaN values from the calculation. If all row values are NaN, the mean value is set to NaN.

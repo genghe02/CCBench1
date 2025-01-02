@@ -1,6 +1,0 @@
-import pandas as pd
-
-df = pd.DataFrame({'A': [1, 2, 3],'B': [100, 300, 500],'C': list('abc')})
-
-<Requirements for the code>
-new_df = df.drop(['A', 'C'], axis=1)

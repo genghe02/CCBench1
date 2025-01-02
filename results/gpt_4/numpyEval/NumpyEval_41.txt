@@ -1,3 +1,0 @@
-# Create a 2D array 'a' with values from 0 to 8 in a 3 by 3 shape.
-# Create a 2D array 'b' of zeros in a 5 by 5 shape.
-# Insert the smaller 2D array 'a' into the larger 2D array 'b' from the index [1,1] to [4,4].

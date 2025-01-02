@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-list_of_arrays = map(lambda x: x*np.ones(2), range(5))
-# Create a list of arrays where each array is a 1D array of shape (2,) populated with the value of the corresponding index.
-myarray = np.stack(list_of_arrays)
-```

@@ -1,1 +1,0 @@
-{"filename": "PandasEval_27.txt", "comments": "# I need to remain the rows where line_num is not equal to 0. What's the most efficient way to do it?\n# it should be as simple as:\n"}

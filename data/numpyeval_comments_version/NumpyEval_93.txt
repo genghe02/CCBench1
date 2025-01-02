@@ -1,7 +1,0 @@
-import numpy as np
-
-data = np.array([1,2,3,4,5,6,7,8,9])
-# How to remove specific elements in a numpy array？
-# I then want to remove 3,4,7 from a. All I know is the index of the values (index=[2,3,6]).
-index = [2, 3, 6]
-result =np.delete(data, index)

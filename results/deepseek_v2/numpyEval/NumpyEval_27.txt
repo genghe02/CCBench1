@@ -1,1 +1,0 @@
-# Calculate the standard deviation along the specified axis (axis=0) for the given 2D numpy array.

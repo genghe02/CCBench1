@@ -1,9 +1,0 @@
-
-
-def modp(n: int, p: int):
-    <Requirements for the code>
-    <some test cases for the function>
-    ret = 1
-    for i in range(n):
-        ret = (2 * ret) % p
-    return ret

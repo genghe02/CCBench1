@@ -1,6 +1,0 @@
-import numpy as np
-
-import itertools
-data = [[1], [1, 2]]
-<Requirements for the code>
-result = np.array(list(itertools.zip_longest(*data, fillvalue=0)))

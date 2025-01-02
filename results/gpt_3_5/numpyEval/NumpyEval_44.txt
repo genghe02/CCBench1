@@ -1,1 +1,0 @@
-# Perform element-wise multiplication between a 2D numpy array 'a' and a 1D numpy array 'b' by broadcasting 'b' to the same shape as 'a' using np.newaxis.

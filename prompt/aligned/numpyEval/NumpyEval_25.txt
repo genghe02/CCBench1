@@ -1,5 +1,0 @@
-# Implement a function that returns an array with the results of dividing each element by the previous one, similar to a "diff()" operation.
-# Example (non-numpy):
-# source = [1, 3, 6, 24, 36]
-# target = [j / i for i, j in zip(source[:-1], source[1:])]
-# Return the target array implemented in numpy.

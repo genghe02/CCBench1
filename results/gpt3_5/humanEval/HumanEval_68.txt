@@ -1,8 +1,0 @@
-def pluck(arr):
-    # Function to find the minimum even number and its index in the input array.
-
-    # Test cases:
-    if(len(arr) == 0): return []  # Empty input array case
-    evens = list(filter(lambda x: x%2 == 0, arr))  # Filter even numbers
-    if(evens == []): return []  # No even numbers case
-    return [min(evens), arr.index(min(evens))]  # Return minimum even number and its index in the original array

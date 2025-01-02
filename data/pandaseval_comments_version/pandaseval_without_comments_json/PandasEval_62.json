@@ -1,1 +1,0 @@
-{"filename": "PandasEval_62.txt", "comments": "# (for index, row in DataFrame.iterrows) is a generator which yields both the index and row (as a Series)\n# for each row in the DataFrame, we need put the row['MSRA'] (as key) and row['THU'] (as value) into a rows_dict\n"}

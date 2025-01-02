@@ -1,1 +1,0 @@
-# Concatenate a list of numpy arrays of shape (1, 1) into a single array and flatten it to a 1D array.

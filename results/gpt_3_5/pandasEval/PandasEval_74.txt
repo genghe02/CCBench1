@@ -1,1 +1,0 @@
-# Count the occurrences of a specific value in a pandas Series by utilizing the value_counts() method and indexing the result with the desired value.

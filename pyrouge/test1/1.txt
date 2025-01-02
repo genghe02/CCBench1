@@ -1,1 +1,0 @@
-Find the index of the minimum element in the given 2D NumPy array using argmin() function and then unravel the index to get the row and column indices.

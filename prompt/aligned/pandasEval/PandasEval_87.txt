@@ -1,1 +1,0 @@
-# Given that all the dataframes have the same columns, concatenate them and return the concatenated dataframe.

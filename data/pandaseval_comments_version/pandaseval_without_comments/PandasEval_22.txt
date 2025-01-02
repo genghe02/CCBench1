@@ -1,6 +1,0 @@
-import pandas as pd
-
-def normalize(df):
-    <Requirements for the code>
-    df.iloc[:,0:-1] = df.iloc[:,0:-1].apply(lambda x: (x-x.mean())/ x.std(), axis=0)
-    return df

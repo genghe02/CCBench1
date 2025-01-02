@@ -1,1 +1,0 @@
-# This code is used to find the unique rows in the 2D numpy array 'a' and stores the result in 'out'. This is done by using the np.unique function with the axis parameter set to 0.

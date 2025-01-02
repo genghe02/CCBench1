@@ -1,6 +1,0 @@
-import pandas as pd
-
-def add_zeros_to_string(df, col_name):
-    <Requirements for the code>
-    df[col_name] = df[col_name].apply(lambda x: '{0:0>15}'.format(x))
-    return df

@@ -1,1 +1,0 @@
-# Merge two pandas Series, 'source_series' and 'target_series', into a single Series 'merged_series' while ignoring the index of the source_series.

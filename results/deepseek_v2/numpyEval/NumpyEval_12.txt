@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.zeros((2,5))
-a_shape = a.shape
-# Retrieve the shape of the array 'a' and store it in the variable 'a_shape'.
-```

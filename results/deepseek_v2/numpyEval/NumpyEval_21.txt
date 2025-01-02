@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.arange(0,10)
-# Generate a string representation of the array by joining each element with a space.
-a_string = " ".join(str(i) for i in a)
-```

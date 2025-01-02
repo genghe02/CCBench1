@@ -1,1 +1,0 @@
-# Reshape the arrays 'a', 'b', and 'c' into a single array where the values are interleaved by column, utilizing numpy's transpose and flatten functions.

@@ -1,6 +1,0 @@
-
-def add_elements(arr, k):
-    <Requirements for the code>
-
-    <some test cases for the function>
-    return sum(elem for elem in arr[:k] if len(str(elem)) <= 2)

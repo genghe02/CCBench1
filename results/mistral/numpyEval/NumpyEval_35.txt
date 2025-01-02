@@ -1,9 +1,0 @@
- # Find each index where the sub-array value changes horizontally or vertically in an efficient way using numpy.
-
-# Horizontally: compare each element with its neighbor in the same row.
-# Vertically: compare each element with its neighbor in the next row.
-
-result_horiz = np.where(np.diff(np.asarray(array), axis=0))[0]
-result_vert = np.where(np.diff(np.asarray(array), axis=1))[0]
-
-result = np.concatenate((result_horiz, result_vert))

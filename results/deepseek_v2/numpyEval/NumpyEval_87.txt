@@ -1,1 +1,0 @@
-# Identify columns where all elements are identical by comparing each column with the first column and using np.all(condition, axis=0).

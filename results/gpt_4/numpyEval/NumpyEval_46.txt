@@ -1,1 +1,0 @@
-# Use the map function to multiply each number in the range by a numpy array of ones. Then, stack these arrays together using np.stack().

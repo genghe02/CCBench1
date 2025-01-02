@@ -1,1 +1,0 @@
-# Convert all column headers in the input dataframe to lowercase.

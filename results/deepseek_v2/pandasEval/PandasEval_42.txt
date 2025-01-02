@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def delete_first_n_rows(df, n):
-    # Delete the first n rows of the DataFrame df and return the resulting DataFrame.
-    return df.iloc[n:]
-```

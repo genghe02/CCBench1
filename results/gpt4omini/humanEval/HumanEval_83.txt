@@ -1,7 +1,0 @@
-```python
-def starts_one_ends(n):
-    # This function calculates the number of n-digit positive integers that start with 1 and end with 8.
-    if n == 1: 
-        return 1  # If n is 1, there is only one valid integer: 1.
-    return 18 * (10 ** (n - 2))  # For n > 1, the count is derived by fixing 1 at the start and allowing any digit in between before fixing 8 at the end.
-```

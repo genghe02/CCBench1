@@ -1,1 +1,0 @@
-# Replace the second column of the 2D numpy array 'a' with the 1D numpy array 'x' which is full of ones.

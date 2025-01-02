@@ -1,1 +1,0 @@
-# Calculate the standard deviation along the columns of the numpy array 'arr' using np.std with axis=0.

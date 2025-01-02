@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_72.txt", "comments": "I would like to slice a numpy array to obtain the i-th index in the last dimension.\n    Is there a way I can obtain this slice for any array without explicitly having to write the array dimensions?\n    There is ... or Ellipsis, which does exactly this\n    Returns: numpy array"}

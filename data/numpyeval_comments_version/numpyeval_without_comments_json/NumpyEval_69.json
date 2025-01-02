@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_69.txt", "comments": "# How can I know the (row, column) index of the minimum of a numpy array/matrix?\n# Use unravel_index()\n"}

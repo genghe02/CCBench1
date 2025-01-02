@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-myarray = np.array([("Hello",2.5,3),("World",3.6,2)])
-# Create a structured array from a 2D array by transposing it and specifying column names.
-newrecarray = np.core.records.fromarrays(myarray.T, names='col1, col2, col3')
-```

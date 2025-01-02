@@ -1,1 +1,0 @@
-# Subtract the minimum value of each column from every element in the respective column. This operation is performed column-wise using numpy's axis=0 option.

@@ -1,1 +1,0 @@
-{"filename": "PandasEval_82.txt", "comments": "Params:\n        df: The dataframe to append to.\n        list_to_append: The list to append.\n        column_name_list: The column names of the list to append.\n\n    Returns:\n        The dataframe with the list appended."}

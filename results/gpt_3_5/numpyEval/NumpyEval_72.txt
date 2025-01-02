@@ -1,1 +1,0 @@
-# Access the i-th index in the last dimension of the input array 'arr'.

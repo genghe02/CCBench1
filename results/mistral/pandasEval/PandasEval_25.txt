@@ -1,3 +1,0 @@
- # Sort the DataFrame 'df' in ascending order based on the 'date' column using the sort_values() method.
-# Then, group the DataFrame by the 'id' column and select the last row for each group using the groupby() and last() methods.
-last_df = df.sort_values('date', ascending=True).groupby('id').last()

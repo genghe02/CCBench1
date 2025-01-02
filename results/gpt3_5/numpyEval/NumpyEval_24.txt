@@ -1,1 +1,0 @@
-# Perform element-wise multiplication between array 'a' and each element in array 'b' after broadcasting 'b' to have the same shape as 'a'.

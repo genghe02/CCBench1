@@ -1,7 +1,0 @@
-import pandas as pd
-
-def convert_bool_to_int(df, col_name):
-    # How can I map True/False to 1/0 in a Pandas DataFrame?
-    # return the dataframe with the column converted to int
-    df[col_name] = df[col_name].astype(int)
-    return df

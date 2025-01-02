@@ -1,12 +1,0 @@
-Both `device` and `device_map` are specified. `device` will override `device_map`. You will most likely encounter unexpected behavior. Please remove `device` and keep `device_map`.
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:19,  6.51s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:15<00:16,  8.12s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:24<00:08,  8.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  5.60s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.42s/it]
-Traceback (most recent call last):
-  File "/hpc2hdd/home/hgeng777/CCBench/models/lamma_8B.py", line 10, in <module>
-    pipeline = transformers.pipeline(
-  File "/hpc2hdd/home/hgeng777/anaconda3/envs/CCBench/lib/python3.9/site-packages/transformers/pipelines/__init__.py", line 1097, in pipeline
-    return pipeline_class(model=model, framework=framework, task=task, **kwargs)
-  File "/hpc2hdd/home/hgeng777/anaconda3/envs/CCBench/lib/python3.9/site-packages/transformers/pipelines/text_generation.py", line 96, in __init__
-    super().__init__(*args, **kwargs)
-  File "/hpc2hdd/home/hgeng777/anaconda3/envs/CCBench/lib/python3.9/site-packages/transformers/pipelines/base.py", line 838, in __init__
-    raise ValueError(
-ValueError: The model has been loaded with `accelerate` and therefore cannot be moved to a specific device. Please discard the `device` argument when creating your pipeline object.

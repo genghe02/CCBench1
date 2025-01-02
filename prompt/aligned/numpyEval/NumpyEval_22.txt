@@ -1,1 +1,0 @@
-# Given a numpy array, create a new array that contains the average of every consecutive triplet of elements, resulting in an array that is one third the size of the original, and return it.

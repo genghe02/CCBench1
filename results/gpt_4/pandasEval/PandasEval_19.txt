@@ -1,1 +1,0 @@
-# The function "creating_df_with_same_as_other" is used to create a new dataframe with the same columns as the original dataframe, but without any rows. We achieve this by using iloc to slice the original dataframe at zero row and then copying it with the copy() method.

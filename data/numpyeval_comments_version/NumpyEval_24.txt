@@ -1,6 +1,0 @@
-import numpy as np
-
-a = np.array([1, 2, 3])
-b = np.array([4, 5])
-# if function is c(i, j) = a(i) + b(j)*2:
-c = a[:, None] + b*2

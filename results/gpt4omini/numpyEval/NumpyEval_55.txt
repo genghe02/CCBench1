@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.array([1, 2, 3, -4, 5])
-# Replace negative values in the array with 0, maintaining non-negative values.
-result = np.where(a < 0, 0, a)
-```

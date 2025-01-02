@@ -1,5 +1,0 @@
-
-def make_a_pile(n):
-    <Requirements for the code>
-    <some test cases for the function>
-    return [n + 2*i for i in range(n)]

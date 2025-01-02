@@ -1,1 +1,0 @@
-# Apply multiplication operation between a 2D array and a 1D array using broadcasting. The 1D array is reshaped to 2D using 'newaxis' which allows the multiplication operation to be performed on each row of the 2D array.

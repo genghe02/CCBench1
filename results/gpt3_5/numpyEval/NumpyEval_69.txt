@@ -1,1 +1,0 @@
-# Get the indices of the minimum value in a numpy array 'A' using np.unravel_index.

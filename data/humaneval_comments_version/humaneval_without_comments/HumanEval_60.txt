@@ -1,6 +1,0 @@
-
-
-def sum_to_n(n: int):
-    <Requirements for the code>
-    <some test cases for the function>
-    return sum(range(n + 1))

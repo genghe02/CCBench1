@@ -1,1 +1,0 @@
-# Remove all-zero rows from the numpy array using np.all() function along the row axis, and apply boolean indexing for filtering.

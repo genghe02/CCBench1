@@ -1,1 +1,0 @@
- # Group the DataFrame by 'Country' and 'Item_Code' and sum up the values in 'Y1961', 'Y1962', and 'Y1963' columns efficiently using pandas groupby and sum methods.

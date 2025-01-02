@@ -1,1 +1,0 @@
-# Multiply arrays row-wise, such that out[i] = a[i] * b[i], where a[i].shape is (2,) and b[i] is a scalar.

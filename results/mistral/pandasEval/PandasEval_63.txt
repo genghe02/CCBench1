@@ -1,3 +1,0 @@
- # Merge two DataFrames based on their indexes using pandas merge function.
-# This operation will combine the rows from both DataFrames where the indexes are equal.
-merged_df = pd.merge(df1, df2, left_index=True, right_index=True)

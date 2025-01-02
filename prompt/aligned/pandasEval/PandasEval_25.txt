@@ -1,1 +1,0 @@
-# Group values of Pandas DataFrame by `id` and select the latest entry by `date` after sorting values in ascending order by `date`.

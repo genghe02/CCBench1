@@ -1,3 +1,0 @@
-# Create a new dataframe by filtering values that exceed the mean value of the column from the original dataframe.
-# Use indexing or the `where` function to compare values and add NaNs where necessary.
-# Implement a custom function to remove NaNs, also ensure that NaNs are removed from the first rows by utilizing the `dropna` method.

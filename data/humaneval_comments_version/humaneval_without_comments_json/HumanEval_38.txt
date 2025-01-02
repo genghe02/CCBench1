@@ -1,7 +1,0 @@
-"""
-returns encoded string by cycling groups of three characters.
-"""
-
-"""
-takes as input string encoded with encode_cyclic function. Returns decoded string.
-"""

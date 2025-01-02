@@ -1,3 +1,0 @@
-# Create a new empty numpy array and append arr1 and arr2 to the new array using hstack and vstack methods. The hstack method is used to stack arrays in sequence horizontally and the vstack method is used to stack arrays in sequence vertically. The result is a new array with arr1 and arr2 appended.
-
-return np.vstack((np.hstack((new_arr, arr1)), arr2))

@@ -1,7 +1,0 @@
- # Extract the first and last rows from the given DataFrame using iloc indexing.
-
-import pandas as pd
-
-def extract_first_and_last_df(df):
-    <Return the first and last rows of the DataFrame>
-    return df.iloc[[0, -1]]

@@ -1,5 +1,0 @@
-import pandas as pd
-
-df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
-# I would like to add a new column C that is the sum value of A and B cell.
-df['C'] = df.A + df.B

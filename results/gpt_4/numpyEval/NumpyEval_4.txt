@@ -1,1 +1,0 @@
-# Combine the sublists in data into a single list. If sublists are of different lengths, fill the shorter ones with zero until they match the length of the longest sublist. This is achieved using itertools.zip_longest() function.

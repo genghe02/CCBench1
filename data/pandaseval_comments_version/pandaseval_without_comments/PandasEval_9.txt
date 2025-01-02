@@ -1,5 +1,0 @@
-import pandas as pd
-
-def extract_first_and_last_df(df):
-    <Requirements for the code>
-    return df.iloc[[0, -1]]

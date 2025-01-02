@@ -1,2 +1,0 @@
- # Reshape array 'a' to have an extra axis added to each element, allowing for element-wise comparison with the next slice.
-b = a[:, :, newaxis]

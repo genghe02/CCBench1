@@ -1,7 +1,0 @@
-import pandas as pd
-
-def divide_multiple_cols_by_first_col(df):
-    # I need to divide all ['B','C'] columns but the first column 'A' in a DataFrame by the first column.
-    # Return the result.
-    df[['B','C']] = df[['B','C']].div(df.A, axis=0)
-    return df

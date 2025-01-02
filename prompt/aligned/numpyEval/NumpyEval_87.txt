@@ -1,3 +1,0 @@
-# Check if all values in the columns of a numpy array/matrix are the same.
-# A column shares a common value if all the values in that column are True.
-# The code checks if all values in the columns are the same using a == a[0,:] with axis=0.

@@ -1,1 +1,0 @@
-# Add a new column 'C' to the DataFrame 'df' which is the sum of columns 'A' and 'B'.

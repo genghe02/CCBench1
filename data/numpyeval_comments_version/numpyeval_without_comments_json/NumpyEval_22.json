@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_22.txt", "comments": "# Averaging over every 3 elements of a numpy array\n# I have a numpy array. I want to create a new array which is the average over every consecutive triplet of elements. So the new array will be a third of the size as the original.\n# Return it\n"}

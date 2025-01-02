@@ -1,7 +1,0 @@
-
-idx = df[(df['column2'] == 0) & (df.index % 2 == 1)].index
-
-idx = idx.append(idx-1)
-# Drop rows based on the calculated index
-result = df.drop(idx)
-return result

@@ -1,1 +1,0 @@
-# Given a matrix with 1 column and N rows, extract an array with N elements and return it.

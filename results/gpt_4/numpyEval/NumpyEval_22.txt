@@ -1,1 +1,0 @@
-# This function takes an array as input and reshapes it into a 2D array with 3 elements in each row, then computes the mean of each row. This effectively calculates the average of every 3 elements in the original array.

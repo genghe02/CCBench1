@@ -1,8 +1,0 @@
-```python
-import pandas as pd
-
-df1 = pd.DataFrame({'a': [0, 1], 'b': [5, 3]})
-df2 = pd.DataFrame({'c': [0, 1], 'd': [10, 20]})
-# Merge two DataFrames on their indices, aligning rows based on the index values.
-merged_df = pd.merge(df1, df2, left_index=True, right_index=True)
-```

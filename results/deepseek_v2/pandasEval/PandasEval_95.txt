@@ -1,8 +1,0 @@
-```python
-import pandas as pd
-
-def divide_multiple_cols_by_first_col(df):
-    # Divide columns 'B' and 'C' by column 'A' element-wise, ensuring each element in 'B' and 'C' is divided by the corresponding element in 'A'.
-    df[['B','C']] = df[['B','C']].div(df.A, axis=0)
-    return df
-```

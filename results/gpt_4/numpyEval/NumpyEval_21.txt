@@ -1,1 +1,0 @@
-# Convert the numpy array 'a' to a string, with each element separated by a space. This is done by using a generator expression to convert each element to a string, and then joining them together with " ".join().

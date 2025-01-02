@@ -1,1 +1,0 @@
-# Slice a numpy array to obtain the i-th index in the last dimension without explicitly writing the array dimensions using Ellipsis. Returns a numpy array.

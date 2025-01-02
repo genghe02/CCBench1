@@ -1,6 +1,0 @@
-import pandas as pd
-
-def drop_consecutive_duplicates(series):
-    # Drop consecutive duplicates
-    # Return the result
-    return series.loc[series.shift(-1) != series]

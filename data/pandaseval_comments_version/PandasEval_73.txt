@@ -1,8 +1,0 @@
-import pandas as pd
-
-def get_value_counts(df):
-    # I want to get the counts of unique values of the dataframe. count_values implements this however I want to use its output somewhere else. 
-    # How can I convert .count_values output to a pandas dataframe.
-    # Use rename_axis('unique_values') for name ('counts') of column from index and reset_index
-    # return the final dataframe
-    return df.value_counts().rename_axis('unique_values').reset_index(name='counts')

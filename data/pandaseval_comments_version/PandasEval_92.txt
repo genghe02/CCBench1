@@ -1,6 +1,0 @@
-import pandas as pd
-
-def get_first_n_rows(df, n):
-    # I would simply like to slice the Data Frame and take the first n rows.
-    # Return the result
-    return df.head(n)

@@ -1,9 +1,0 @@
- # Calculate the mean value of a specific column in a DataFrame using pandas.
-# The function takes a DataFrame 'df' and a column name 'col_name' as arguments.
-# It returns the mean value of the specified column.
-
-import pandas as pd
-
-def get_mean_in_column(df, col_name):
-    <The function returns the mean value of the specified column in the DataFrame>
-    return df[col_name].mean()

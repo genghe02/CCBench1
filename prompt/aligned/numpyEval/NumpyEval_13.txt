@@ -1,5 +1,0 @@
-# Inverse a matrix using numpy and return it.
-# Input:
-#   matrix: numpy array, shape (n, n)
-# Output:
-#   inverse: numpy array, shape (n, n)

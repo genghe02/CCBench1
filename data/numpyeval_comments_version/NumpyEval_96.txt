@@ -1,4 +1,0 @@
-import numpy as np
-
-# How do I create a numpy array of arbitrary shape 3x4 filled with all True?
-data = np.ones((3, 4), dtype=bool)

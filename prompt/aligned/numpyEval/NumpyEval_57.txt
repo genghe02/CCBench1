@@ -1,1 +1,0 @@
-# Given an array a, repeat the elements of a n times if they are even or positive. Only elements that meet the specified condition will be repeated; other elements will not be displayed.

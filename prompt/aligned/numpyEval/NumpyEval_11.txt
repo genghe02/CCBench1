@@ -1,1 +1,0 @@
-# Flatten a list of NumPy arrays by using numpy.concatenate to concatenate all elements of the input list into a single NumPy array, and then apply numpy.ravel to flatten the array.

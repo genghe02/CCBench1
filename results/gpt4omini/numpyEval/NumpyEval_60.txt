@@ -1,6 +1,0 @@
-```python
-import numpy as np
-x = np.array([[0, 1], [3, 2]])
-# Find the indices of the minimum values along the specified axis (column-wise) in the given 2D numpy array.
-out = np.argmin(x, axis=0)
-```

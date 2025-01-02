@@ -1,7 +1,0 @@
- # Replace elements in the array 'a' with 0 where the value is less than 0.
-# This can be achieved efficiently using NumPy's element-wise comparison and np.where() function.
-
-import numpy as np
-
-a = np.array([1, 2, 3, -4, 5])
-result = np.where(a < 0, 0, a)

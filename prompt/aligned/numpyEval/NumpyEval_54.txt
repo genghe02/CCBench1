@@ -1,1 +1,0 @@
-# Access the elements from index 4 to the end.

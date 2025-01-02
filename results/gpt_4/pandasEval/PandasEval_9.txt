@@ -1,1 +1,0 @@
-# This function takes a pandas DataFrame as input and returns a new DataFrame containing only the first and last row of the input DataFrame. It uses the pandas function 'iloc' to access the rows by integer location.

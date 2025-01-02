@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.arange(0,10)
-# Create a string of space-separated numbers from the numpy array a.
-a_string = " ".join(str(i) for i in a)
-```

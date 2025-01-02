@@ -1,1 +1,0 @@
-# Find and return the rows in the DataFrame where col_a is greater than col_b.

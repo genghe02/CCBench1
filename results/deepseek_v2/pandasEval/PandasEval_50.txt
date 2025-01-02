@@ -1,1 +1,0 @@
-# Create a new column 'C' in the DataFrame by adding the values of columns 'A' and 'B'.

@@ -1,1 +1,0 @@
-{"filename": "PandasEval_4.txt", "comments": "# list_of_lists format: [header, [row1], [row2], ...]\n# header format: [column1, column2, ...]\n# row format: [value1, value2, ...]\n# How to convert list to dataframe?\n# Return the dataframe\n"}

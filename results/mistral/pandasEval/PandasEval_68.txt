@@ -1,1 +1,0 @@
- # Drop all rows with NaN values in the given DataFrame using pandas dropna() method.

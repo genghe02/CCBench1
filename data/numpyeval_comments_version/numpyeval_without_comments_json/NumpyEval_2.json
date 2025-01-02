@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_2.txt", "comments": "# How to get the cumulative distribution function with NumPy?\n# set bins to 10\n# and then generate a cumulative sum of the histogram contents to variable hist self\n"}

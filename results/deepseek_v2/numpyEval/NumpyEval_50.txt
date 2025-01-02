@@ -1,1 +1,0 @@
-# Calculate the mean of each corresponding element across multiple numpy arrays along the specified axis.

@@ -1,6 +1,0 @@
-
-
-def derivative(xs: list):
-    <Requirements for the code>
-    <some test cases for the function>
-    return [(i * x) for i, x in enumerate(xs)][1:]

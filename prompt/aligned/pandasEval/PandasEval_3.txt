@@ -1,1 +1,0 @@
-Add leading zeros to strings in the col_name column of a Pandas DataFrame, ensuring a maximum string length of 15 characters, and return the DataFrame.

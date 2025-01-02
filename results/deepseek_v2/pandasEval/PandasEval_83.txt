@@ -1,8 +1,0 @@
-```python
-import pandas as pd
-
-def convert_bool_to_int(df, col_name):
-    # Convert boolean values in the specified column to integers (1 for True, 0 for False) and return the modified DataFrame.
-    df[col_name] = df[col_name].astype(int)
-    return df
-```

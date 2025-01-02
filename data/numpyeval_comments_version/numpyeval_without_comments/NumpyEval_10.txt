@@ -1,5 +1,0 @@
-import numpy as np
-
-a = np.arange(2*3*2).reshape((2,3,2))
-<Requirements for the code>
-count_value = ((2 < a) & (a < 8)).sum()

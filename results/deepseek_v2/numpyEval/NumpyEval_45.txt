@@ -1,8 +1,0 @@
-```python
-import numpy as np
-
-a = np.array([[1,3,4],[1,2,3],[1,2,1]])
-b = np.array([1,2,3])
-# Combine the 2D array 'a' with the 1D array 'b' by stacking 'b' as an additional column to 'a'.
-c = np.column_stack((a, b))
-```

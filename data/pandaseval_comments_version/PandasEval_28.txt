@@ -1,9 +1,0 @@
-import pandas as pd
-
-def is_df_exist(df):
-    # In my code, I have several variables which can either contain a pandas DataFrame or nothing at all.
-    # Let's say I want to test and see if a certain DataFrame has been created yet or not.
-    if df is None:
-        return False
-    else:
-        return True

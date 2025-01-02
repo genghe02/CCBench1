@@ -1,1 +1,0 @@
-# Convert a 2D numpy array into a tuple of tuples using the map function to convert each row into a tuple.

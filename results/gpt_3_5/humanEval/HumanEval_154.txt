@@ -1,9 +1,0 @@
-def cycpattern_check(a , b):
-    # Check if the cyclic pattern 'b' exists in the string 'a' by repeating 'b' and comparing it with substrings of 'a'.
-    l = len(b)
-    pat = b + b
-    for i in range(len(a) - l + 1):  # Iterate through 'a' with substrings of length 'l'
-        for j in range(l + 1):  # Iterate through the repeated 'b' to compare with substrings of 'a'
-            if a[i:i+l] == pat[j:j+l]:  # Check if substring of 'a' matches with pattern 'b'
-                return True  # Return True if cyclic pattern is found
-    return False  # Return False if cyclic pattern is not found

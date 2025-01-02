@@ -1,5 +1,0 @@
-import numpy as np
-
-a = np.array([[1,1,0],[1,0,0],[1,0,0],[1,1,0]])
-<Requirements for the code>
-result = np.all(a == a[0,:], axis = 0)

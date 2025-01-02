@@ -1,1 +1,0 @@
-# Find the index of the k smallest values in a numpy array.

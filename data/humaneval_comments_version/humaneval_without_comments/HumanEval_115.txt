@@ -1,6 +1,0 @@
-
-def max_fill(grid, capacity):
-    import math
-    <Requirements for the code>
-    <some test cases for the function>
-    return sum([math.ceil(sum(arr)/capacity) for arr in grid])

@@ -1,1 +1,0 @@
-# Find the indices of elements in array A that are not present in array B using np.searchsorted to find the insertion points and np.delete to remove the corresponding indices from a range array.

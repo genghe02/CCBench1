@@ -1,1 +1,0 @@
-# Normalize each column in the DataFrame by subtracting the minimum value and dividing by the range (max - min).

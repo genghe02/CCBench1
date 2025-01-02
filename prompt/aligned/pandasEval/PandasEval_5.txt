@@ -1,2 +1,0 @@
-# Convert all column headers in the pandas DataFrame to lowercase.
-# Return the modified DataFrame.

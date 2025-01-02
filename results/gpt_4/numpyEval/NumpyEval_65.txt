@@ -1,4 +1,0 @@
-# Append a new row to the existing numpy array using np.vstack() function.
-
-def add_row_to_arr(arr, row):
-    return np.vstack((arr, row))

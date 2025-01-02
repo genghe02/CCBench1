@@ -1,1 +1,0 @@
-# Count the number of array elements between 2 and 8, exclusive. The array is reshaped to 2x3x2 for this operation. The sum() function is utilized to get the total count of such elements.

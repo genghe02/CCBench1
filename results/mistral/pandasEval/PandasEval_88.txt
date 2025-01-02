@@ -1,2 +1,0 @@
- # Find the last N rows of the DataFrame using the tail() method from pandas.
-result = df.tail(N)

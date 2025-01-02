@@ -1,3 +1,0 @@
- # Find the sub-arrays in 'arr' that have at least one non-zero element, and assign the result to 'new_arr'.
-# This can be achieved by using numpy's broadcasting and logical indexing with '~np.all(arr == 0, axis=1)' to create a boolean mask,
-# and then indexing 'arr' with this mask.

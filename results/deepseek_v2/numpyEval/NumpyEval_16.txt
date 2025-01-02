@@ -1,1 +1,0 @@
-# Find the indices where each element of `search` would be inserted into `master` to maintain order, using `np.searchsorted`.

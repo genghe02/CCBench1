@@ -1,6 +1,0 @@
-
-
-def flip_case(string: str) -> str:
-    <Requirements for the code>
-    <some test cases for the function>
-    return string.swapcase()

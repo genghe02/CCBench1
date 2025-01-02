@@ -1,1 +1,0 @@
-# Iterate through each row of the dataframe, and for each row, map the 'MSRA' value to the 'THU' value in the rows_dict dictionary. This results in a dictionary where each 'MSRA' value is a key, and the corresponding 'THU' value is the value.

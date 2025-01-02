@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-myarray = np.array([("Hello",2.5,3),("World",3.6,2)])
-# Convert a structured numpy array from regular numpy array where each field has a specific name.
-newrecarray = np.core.records.fromarrays(myarray.T, names='col1, col2, col3')
-```

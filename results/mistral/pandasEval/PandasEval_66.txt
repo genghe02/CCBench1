@@ -1,1 +1,0 @@
- # Calculate the percentage of occurrences for each gender in the given series using pandas value_counts() function with normalize set to True.

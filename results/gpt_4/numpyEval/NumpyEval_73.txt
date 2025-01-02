@@ -1,7 +1,0 @@
-# This function is designed to find the element in the array that is closest to the provided value.
-# It first converts the input array to a numpy array for efficient computations.
-# Then it calculates the absolute difference between each element in the array and the provided value.
-# Finally, it uses the numpy function argmin() to find the index of the smallest value in this difference array, which corresponds to the closest element in the original array.
-idx = (np.abs(array - value)).argmin()
-# Returns the element in the array that is closest to the provided value.
-return array[idx]

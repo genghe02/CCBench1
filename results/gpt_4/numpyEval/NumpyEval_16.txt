@@ -1,1 +1,0 @@
-# Use numpy's searchsorted function to find the indices into a sorted array 'master' such that, if the corresponding elements in 'search' were inserted before the indices, the order of 'master' would be preserved.

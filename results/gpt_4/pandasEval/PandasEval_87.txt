@@ -1,2 +1,0 @@
-# Concatenates two pandas DataFrames along the axis=0 (default behavior of pd.concat). This essentially appends df2 at the end of df1.
-return pd.concat([df1, df2])

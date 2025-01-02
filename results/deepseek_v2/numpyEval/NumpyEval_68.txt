@@ -1,9 +1,0 @@
-```python
-import numpy as np
-
-data = np.array([1, 0, 3])
-result = np.zeros((data.size, data.max()+1))
-
-# Set the specified elements in `result` to 1 based on the indices defined by `data`.
-result[np.arange(data.size), data] = 1
-```

@@ -1,1 +1,0 @@
- # Find the indices of 'b' and use them to index array 'a' to get the corresponding elements and assign the result to 'out'.

@@ -1,1 +1,0 @@
-# This function takes in two parameters: df (a DataFrame) and row_to_insert (the row to be inserted in the DataFrame). The function appends the row_to_insert to the DataFrame df and then sorts the DataFrame by index. It then resets the index, dropping the original index. The updated DataFrame is returned at the end.

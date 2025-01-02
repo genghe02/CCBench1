@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.zeros((2,5))
-# Create a 2D numpy array filled with zeros of shape (2, 5).
-a_shape = a.shape
-```

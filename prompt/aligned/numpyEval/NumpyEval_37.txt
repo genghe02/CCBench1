@@ -1,1 +1,0 @@
-# Find the most frequent number in a NumPy array and return it.

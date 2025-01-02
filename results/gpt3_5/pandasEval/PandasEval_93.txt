@@ -1,1 +1,0 @@
-# Transform a pandas timestamp object to a Python datetime object using the to_pydatetime() method.

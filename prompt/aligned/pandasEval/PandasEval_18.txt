@@ -1,1 +1,0 @@
-# Retrieve the value at the nth row of a given column name in a Pandas DataFrame and return it.

@@ -1,1 +1,0 @@
-# Rename a column in a pandas DataFrame from 'old_name' to 'new_name'.

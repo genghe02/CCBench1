@@ -1,4 +1,0 @@
-{
-  "filename": "PandasEval_64.txt",
-  "comments": "# I was wondering if there is an elegant and shorthand way in Pandas DataFrames to select columns by data type (dtype). \n# i.e. Select only float64 columns from a DataFrame\n"
-}

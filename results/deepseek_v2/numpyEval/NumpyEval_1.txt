@@ -1,1 +1,0 @@
-# Create a new array `b` by adding a new axis to the last dimension of `a`. This operation reshapes `a` from a 2D array to a 3D array.

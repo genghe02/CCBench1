@@ -1,5 +1,0 @@
-
-def anti_shuffle(s):
-    <Requirements for the code>
-    <some test cases for the function>
-    return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])

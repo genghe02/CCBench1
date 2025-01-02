@@ -1,1 +1,0 @@
-# Copy numpy array 'a' into the specified part of another array 'b' in the range [1:4, 1:4].

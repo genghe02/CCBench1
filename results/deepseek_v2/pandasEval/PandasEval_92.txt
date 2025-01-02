@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def get_first_n_rows(df, n):
-    # Return the first n rows of the DataFrame df.
-    return df.head(n)
-```

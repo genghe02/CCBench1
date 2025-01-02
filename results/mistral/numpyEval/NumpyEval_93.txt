@@ -1,8 +1,0 @@
- # Find each index where an element is to be deleted based on the given list 'index' and then delete those elements using numpy's 'np.delete' function.
-
-import numpy as np
-
-data = np.array([1,2,3,4,5,6,7,8,9])
-<Requirements for the code>
-index = np.array([2, 3, 6])
-result = np.delete(data, index)

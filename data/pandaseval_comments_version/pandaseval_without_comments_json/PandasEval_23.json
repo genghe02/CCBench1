@@ -1,1 +1,0 @@
-{"filename": "PandasEval_23.txt", "comments": "# How do I determine which columns contain NaN values? In particular, can I get a list of the column names containing NaNs?\n# Return a list of the column names containing NaNs\n"}

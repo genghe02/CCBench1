@@ -1,2 +1,0 @@
- # Transform all column names to lowercase using the map function and str.lower method from pandas.
-# Apply the transformation to the DataFrame's column names and return the modified DataFrame.

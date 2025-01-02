@@ -1,8 +1,0 @@
-import pandas as pd
-
-def remove_duplicates_by_col_names(df):
-    """
-    Here's a one solution to remove columns based on duplicate column names:
-    Return the duplicated dataframe
-    """
-    return df.loc[:,~df.columns.duplicated()]

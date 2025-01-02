@@ -1,1 +1,0 @@
-{"filename": "PandasEval_29.txt", "comments": "# Move next value to first empty row pandas\n# how do i move each value from a column to the first empty \"row/cell\" in pandas?\n# use sorted to align non NULL data at the top, use dropna to drop all rows with all NaN\n"}

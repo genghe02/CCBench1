@@ -1,1 +1,0 @@
-# Calculate the average of every 3 elements in the input array by reshaping the array into a 2D array with 3 columns and then calculating the mean along the rows.

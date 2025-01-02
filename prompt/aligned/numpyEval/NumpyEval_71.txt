@@ -1,1 +1,0 @@
-# Replace all elements of the Python NumPy array that are greater than `value` with `new_value` and return the array.

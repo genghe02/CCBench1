@@ -1,2 +1,0 @@
-# Create a DataFrame from a list of lists 'a' where the first element of each sublist represents column 'one' and the second element represents column 'two'.
-# Convert the values in column 'two' to float data type.

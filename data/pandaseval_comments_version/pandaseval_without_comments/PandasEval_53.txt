@@ -1,5 +1,0 @@
-import pandas as pd
-
-def get_number_columns(df):
-    <Requirements for the code>
-    return len(df.columns)

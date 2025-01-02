@@ -1,1 +1,0 @@
-# Rename the columns of a DataFrame by mapping the original column names to the new column names and utilizing the rename() function provided by pandas.

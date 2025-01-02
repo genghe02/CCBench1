@@ -1,6 +1,0 @@
-# Calculate the mean value of a specific column in a pandas DataFrame.
-# Input: 
-#   df: pandas DataFrame containing the data
-#   col_name: name of the column for which the mean needs to be calculated
-# Output:
-#   Mean value of the specified column.

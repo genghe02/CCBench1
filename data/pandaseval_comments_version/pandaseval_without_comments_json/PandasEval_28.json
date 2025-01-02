@@ -1,1 +1,0 @@
-{"filename": "PandasEval_28.txt", "comments": "# In my code, I have several variables which can either contain a pandas DataFrame or nothing at all.\n# Let's say I want to test and see if a certain DataFrame has been created yet or not.\n"}

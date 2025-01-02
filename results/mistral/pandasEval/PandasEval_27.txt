@@ -1,9 +1,0 @@
- # Filter out rows where 'line_num' is equal to zero in an efficient way using pandas boolean indexing.
-
-import pandas as pd
-
-df = pd.DataFrame({'line_date': [1, 2, 3], 'line_num': [1, 0, 6], 'line_text': list('abc')})
-
-<Requirements for the code>
-
-n_df = df[df.line_num!= 0]

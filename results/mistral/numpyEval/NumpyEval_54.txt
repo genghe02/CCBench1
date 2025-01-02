@@ -1,7 +1,0 @@
- # Find each row index where the value changes in the 2D numpy array 'a' starting from the 5th row, in an efficient way using numpy.
-
-<Requirements for the code>
-result = np.where(np.equal(a[4:], a[3:, :]) == False)[0] + 3
-
-# Alternatively, you can use np.diff to find the indices where the difference between consecutive rows is not zero.
-# result = np.where(np.diff(a, axis=0).any(axis=1)!= 0)[0] + 3

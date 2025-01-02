@@ -1,7 +1,0 @@
-```python
-def next_smallest(lst):
-    # This function returns the second smallest unique element from a list.
-    # If the list has fewer than two unique elements, it returns None.
-    lst = sorted(set(lst))  # Sort the unique elements in the list.
-    return None if len(lst) < 2 else lst[1]  # Return None if there are fewer than two unique elements, otherwise return the second smallest.
-```

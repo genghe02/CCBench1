@@ -1,1 +1,0 @@
-# Find the indices of the minimum values along the specified axis (axis=0) using np.argmin.

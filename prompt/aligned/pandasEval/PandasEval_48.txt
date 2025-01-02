@@ -1,1 +1,0 @@
-# Check if any word from `targets` is present in the sentence.

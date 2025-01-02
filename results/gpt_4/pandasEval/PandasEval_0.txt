@@ -1,1 +1,0 @@
-# The function drop_rows_col_nan takes a DataFrame and a column name as input. It drops all rows in the DataFrame where the specified column's value is NaN (Not a Number). The pd.dropna() function is used with the subset parameter to specify the column for NaN check.

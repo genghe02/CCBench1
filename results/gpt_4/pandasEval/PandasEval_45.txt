@@ -1,1 +1,0 @@
-# Convert the pandas series to sets, and then find the intersection of s1 and s2. The intersection operation in sets will return a set that contains all items that are present in both sets.

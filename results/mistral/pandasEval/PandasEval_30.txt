@@ -1,3 +1,0 @@
- # Assign the given emails list to the 'Email' column of the DataFrame as a list-like object.
-df.Email = df.Email.apply(lambda x: x if type(x) is list else [x])
-df.loc[0].Email = df.loc[0].Email.tolist() + list(emails)

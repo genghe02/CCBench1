@@ -1,1 +1,0 @@
-# Delete multiple columns (A and C) in a single operation.

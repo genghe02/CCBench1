@@ -1,1 +1,0 @@
-# Filter the DataFrame such that only the values greater than the mean of each column are kept. Then, apply a lambda function to drop NaN values and align remaining values at the start of each column.

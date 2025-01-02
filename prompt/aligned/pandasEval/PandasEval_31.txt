@@ -1,1 +1,0 @@
-# Drop consecutive duplicates and return the result.

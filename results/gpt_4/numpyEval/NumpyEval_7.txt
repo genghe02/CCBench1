@@ -1,1 +1,0 @@
-# Reverse the order of each sub-array in the 3rd dimension of the 3-dimensional numpy array 'a'.

@@ -1,1 +1,0 @@
-# Convert the array of arrays into a single array by using np.hstack function which horizontally stacks the arrays present in the input array.

@@ -1,1 +1,0 @@
-# The function get_value_when_condition takes a pandas DataFrame as input and returns the values in column 'A' where the corresponding value in column 'B' is equal to 3.

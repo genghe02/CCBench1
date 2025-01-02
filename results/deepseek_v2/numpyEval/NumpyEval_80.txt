@@ -1,1 +1,0 @@
-# Split the array into 3 approximately equal parts using numpy's array_split function.

@@ -1,6 +1,0 @@
-import pandas as pd
-
-def get_number_columns(df):
-    # How do I retrieve the number of columns in a Pandas data frame?
-    # Return the number of columns in the dataframe
-    return len(df.columns)

@@ -1,6 +1,0 @@
-```python
-def starts_one_ends(n):
-    # Calculate the number of integers with n digits that start with 1 and end with 1.
-    if n == 1: return 1
-    return 18 * (10 ** (n - 2))
-```

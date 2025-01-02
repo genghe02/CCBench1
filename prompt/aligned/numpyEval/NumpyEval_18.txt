@@ -1,1 +1,0 @@
-# Find and return the minimum value in the 2D array by implementing the following code.

@@ -1,6 +1,0 @@
-def same_chars(s0: str, s1: str):
-    # Check if the two input strings have the same set of characters by converting them into sets and comparing them.
-    # Test cases:
-    # Test case 1: s0 = 'abc', s1 = 'cba' -> The function should return True since both strings contain the same characters.
-    # Test case 2: s0 = 'abc', s1 = 'def' -> The function should return False since the strings have different characters.
-    return set(s0) == set(s1)

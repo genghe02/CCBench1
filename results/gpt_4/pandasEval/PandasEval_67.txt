@@ -1,1 +1,0 @@
-# Reindex the DataFrame to accommodate the newly added row at the top and then sort the DataFrame based on the index to reflect the addition at the top.

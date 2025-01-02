@@ -1,1 +1,0 @@
-# The function change_all_cols_type takes a DataFrame as input and converts all column data types to numeric if possible. If the column cannot be converted to numeric, it will remain unchanged. This is done using the pandas 'to_numeric' function.

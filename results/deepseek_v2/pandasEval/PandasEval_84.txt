@@ -1,7 +1,0 @@
-```python
-import pandas as pd
-
-def dataframe2list_of_dict(df):
-    # Convert a pandas DataFrame to a list of dictionaries, where each dictionary represents a row in the DataFrame.
-    return df.to_dict(orient='records')
-```

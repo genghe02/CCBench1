@@ -1,6 +1,0 @@
-```python
-import numpy as np
-
-# Create a 3x4 boolean array filled with True values.
-data = np.ones((3, 4), dtype=bool)
-```

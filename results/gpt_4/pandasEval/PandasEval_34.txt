@@ -1,1 +1,0 @@
-# The function takes a pandas dataframe and a dictionary as inputs. It appends the dictionary to the dataframe as a new row and returns the updated dataframe. To prevent the original indices from being altered, the 'ignore_index' parameter is set to True.

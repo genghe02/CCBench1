@@ -1,9 +1,0 @@
- # Round each element in column 'A' of the DataFrame to the nearest integer.
-
-import pandas as pd
-
-def round_a_single_column(df):
-    # Round each element in column 'A' of the DataFrame to the nearest integer.
-    df.A = df.A.apply(lambda x: pd.Series(x.round()))
-    df.A = df.A.values.flatten().reshape(df.shape)
-    return df

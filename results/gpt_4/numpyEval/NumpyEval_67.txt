@@ -1,1 +1,0 @@
-# This function receives a numpy array as input and returns the indices where the value is equal to zero. It uses np.where(condition) to achieve this.

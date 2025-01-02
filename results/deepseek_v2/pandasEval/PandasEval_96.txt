@@ -1,1 +1,0 @@
-# Merge two DataFrames on the 'company' column to combine the data based on the common 'company' values.

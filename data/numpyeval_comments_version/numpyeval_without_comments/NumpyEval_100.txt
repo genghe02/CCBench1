@@ -1,5 +1,0 @@
-import numpy as np
-
-def prepend_element_to_array(arr, element):
-    <Requirements for the code>
-    return np.insert(arr, 0, element)

@@ -1,3 +1,0 @@
-# Check if each element in a numpy array is in another array. 
-# Given two numpy arrays (A and B), obtain the indices of A where the elements of A are in B, 
-# as well as the indices of A where the elements are not in B.

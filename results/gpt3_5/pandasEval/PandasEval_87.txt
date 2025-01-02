@@ -1,1 +1,0 @@
-# Concatenate two pandas DataFrames df1 and df2 along axis 0 to combine them row-wise.

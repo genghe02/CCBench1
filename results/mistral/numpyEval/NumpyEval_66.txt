@@ -1,1 +1,0 @@
- # Reshape arrays a, b, and c into a single 1D numpy array d, using transpose operation to flatten the rows first.

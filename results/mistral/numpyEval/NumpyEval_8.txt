@@ -1,7 +1,0 @@
- # Filter out rows that contain at least one non-numeric value using numpy's vectorized operations.
-
-import numpy as np
-
-def remove_all_rows_contain_non_numeric_values(arr):
- <Requirements for the code>
- return arr[np.all(np.isnan(arr) == False, axis=1)]

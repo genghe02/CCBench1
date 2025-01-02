@@ -1,5 +1,0 @@
-import numpy as np
-
-def test_arr_contain_only_zeros(arr):
-    <Requirements for the code>
-    return not np.any(arr)

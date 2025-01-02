@@ -1,6 +1,0 @@
-# Fill None values in the specified columns of a pandas DataFrame with zero.
-
-# Test Cases:
-df = pd.DataFrame({'A': [1, None, 3, 4], 'B': [None, 2, None, 5]})
-col_names = ['A', 'B']
-result = fill_none_with_zero(df, col_names)

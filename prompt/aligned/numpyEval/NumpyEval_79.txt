@@ -1,1 +1,0 @@
-# Perform element-wise string concatenation using the appropriate method in numpy.

@@ -1,6 +1,0 @@
-import numpy as np
-
-def add_first_element_to_arr(arr):
-    # I want to add the first element on to the end of the array.
-    # Return the appended array.
-    return np.append(arr, arr[0])

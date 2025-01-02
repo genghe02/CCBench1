@@ -1,9 +1,0 @@
-```python
-import numpy as np
-
-master = np.array([1,2,3,4,5])
-search = np.array([4,2,2,3])
-
-# Find the indices in the `master` array where each value in the `search` array should be inserted to maintain order.
-out = np.searchsorted(master, search)
-```

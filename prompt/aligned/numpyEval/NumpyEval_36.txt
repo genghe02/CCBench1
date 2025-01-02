@@ -1,1 +1,0 @@
-# Given a NumPy array, retrieve the values at the index positions 1 and 4.

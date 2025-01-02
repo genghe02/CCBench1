@@ -1,6 +1,0 @@
-
-
-def truncate_number(number: float) -> float:
-    <Requirements for the code>
-    <some test cases for the function>
-    return number % 1.0

@@ -1,6 +1,0 @@
-import pandas as pd
-def creating_df_with_same_as_other(df_original):
-    # creating a new dataframe of all same with df_original one, but no any rows
-    # return the new dataframe
-    df_copy = df_original.iloc[:0,:].copy()
-    return df_copy

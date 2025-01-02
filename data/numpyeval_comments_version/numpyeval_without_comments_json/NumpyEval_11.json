@@ -1,1 +1,0 @@
-{"filename": "NumpyEval_11.txt", "comments": "# Flattening a list of NumPy arrays?\n# We can use numpy.concatenate, which as the name suggests, basically concatenates all the elements of such an input list into a single NumPy array\n# And then we can use numpy.ravel to flatten the array\n"}

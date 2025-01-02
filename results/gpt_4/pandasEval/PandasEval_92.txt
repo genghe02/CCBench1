@@ -1,1 +1,0 @@
-# The function get_first_n_rows is designed to return the first 'n' rows from the input dataframe 'df'.

@@ -1,1 +1,0 @@
-# This function takes a pandas DataFrame and a value as input. It assigns the given value to all elements of column 'B' in the DataFrame and returns the updated DataFrame.

@@ -1,4 +1,0 @@
-# Get the counts of unique values of the DataFrame using count_values, 
-# convert the output to a Pandas DataFrame, 
-# rename the axis to 'unique_values', 
-# and reset the index to return the final DataFrame.

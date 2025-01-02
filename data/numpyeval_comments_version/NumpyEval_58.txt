@@ -1,6 +1,0 @@
-import numpy as np
-
-a = np.array([1,2,3,4,5])
-# I have a numpy array and I like to check if it is sorted.
-# Using numpy.all to do this.
-is_sorted = np.all(a[:-1] <= a[1:])

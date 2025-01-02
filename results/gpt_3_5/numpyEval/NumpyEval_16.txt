@@ -1,1 +1,0 @@
-# Find the indices where elements from 'search' array can be inserted in 'master' array to maintain the sorted order using np.searchsorted() method.

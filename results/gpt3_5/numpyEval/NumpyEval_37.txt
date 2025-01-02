@@ -1,1 +1,0 @@
-# Find the most frequent number in the input array 'arr' using numpy's bincount function and return the index of the maximum count.

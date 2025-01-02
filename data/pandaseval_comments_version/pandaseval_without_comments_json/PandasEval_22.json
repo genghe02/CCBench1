@@ -1,1 +1,0 @@
-{"filename": "PandasEval_22.txt", "comments": "# Normalization using pandas\n# We simply subtract the mean and divide by standard deviation on df.iloc[:,0,-1] obj with axis is zero.\n# Return the normalized dataframe\n"}

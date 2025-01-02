@@ -1,1 +1,0 @@
-# Merge two DataFrames 'df1' and 'df2' on their indices using pandas merge function with the left and right indices.

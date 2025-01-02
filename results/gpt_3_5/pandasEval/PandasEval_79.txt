@@ -1,1 +1,0 @@
-# Return rows in a DataFrame with more than one NaN value by checking if any row has at least one NaN value using the isna() method and filtering using the any() method along axis=1.

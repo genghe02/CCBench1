@@ -1,1 +1,0 @@
-# Modify the 'col_1' values in the DataFrame where 'col_0' is 'a' to be within the range of -2 and 2 using the clip method in pandas.

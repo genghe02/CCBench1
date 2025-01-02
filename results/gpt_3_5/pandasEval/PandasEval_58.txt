@@ -1,1 +1,0 @@
-# Remove all digits from the 'Name' column in the DataFrame using the str.replace() method.

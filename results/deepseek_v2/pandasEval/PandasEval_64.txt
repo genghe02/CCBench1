@@ -1,1 +1,0 @@
-# Select only the columns with float64 data types from the DataFrame.

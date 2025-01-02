@@ -1,6 +1,0 @@
-import numpy as np
-
-def numpy_is_empty(arr):
-    # How can I check whether a numpy array is empty or not?
-    # Return the reuslt that contains True or False
-    return arr.size == 0

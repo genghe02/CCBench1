@@ -1,1 +1,0 @@
-# Select the last N number of rows from the DataFrame using the tail() method.

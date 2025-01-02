@@ -1,1 +1,0 @@
-# Select only float64 columns from a Pandas DataFrame using an elegant and shorthand method.

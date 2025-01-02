@@ -1,1 +1,0 @@
-# Determine the inverse of the NumPy cumsum function.

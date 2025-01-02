@@ -1,7 +1,0 @@
-```python
-import numpy as np
-
-a = np.array([[1,11], [3,9], [5,7]])
-# Calculate the difference between each element and the minimum value along each axis (column-wise) to normalize the array.
-result = a - a.min(axis=0)
-```

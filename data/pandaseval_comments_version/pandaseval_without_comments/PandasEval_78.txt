@@ -1,6 +1,0 @@
-import pandas as pd
-import numpy as np
-
-df = pd.DataFrame({'mycol':np.arange(5), 'dummy':np.arange(5)})
-<Requirements for the code>
-value = df.mycol.get(1, np.nan)

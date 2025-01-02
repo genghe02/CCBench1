@@ -1,5 +1,0 @@
-
-def multiply(a, b):
-    <Requirements for the code>
-    <some test cases for the function>
-    return abs(a % 10) * abs(b % 10)

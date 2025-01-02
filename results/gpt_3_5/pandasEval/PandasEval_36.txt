@@ -1,1 +1,0 @@
-# Convert the DataFrame to a string representation without including the index.

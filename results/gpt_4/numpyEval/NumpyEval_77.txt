@@ -1,1 +1,0 @@
-# This line of code shifts each element in the numpy array 'z' to its next position, effectively deleting the last element and retaining the first element at the first position.

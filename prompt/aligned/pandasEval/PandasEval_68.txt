@@ -1,1 +1,0 @@
-# Drop all rows containing NaN values and return the modified dataframe.

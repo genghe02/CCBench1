@@ -1,6 +1,0 @@
-
-def reverse_delete(s,c):
-    <Requirements for the code>
-    <some test cases for the function>
-    s = ''.join([char for char in s if char not in c])
-    return (s,s[::-1] == s)

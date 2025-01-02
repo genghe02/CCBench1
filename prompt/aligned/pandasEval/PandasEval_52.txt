@@ -1,1 +1,0 @@
-# Combine two dataframes while ignoring the index and return the concatenated dataframe.

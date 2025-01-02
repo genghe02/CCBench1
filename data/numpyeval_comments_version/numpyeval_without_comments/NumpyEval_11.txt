@@ -1,5 +1,0 @@
-import numpy as np
-
-input_list = [np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]])]
-<Requirements for the code>
-output = np.concatenate(input_list).ravel()
