@@ -1,0 +1,1 @@
+1<?>Extract URL arguments from a given URL.
