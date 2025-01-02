@@ -1,0 +1,14 @@
+[
+  "# This class validates input personal information data and sets invalid fields to None based to specific rules.",
+  "Initialize PersonRequest object with the provided information.",
+  ":param name: str, the name of the person\n        :param sex: str, the sex of the person\n        :param phoneNumber: str, the phone number of the person",
+  "Validate the name and return it. If name is empty or exceeds 33 characters in length, set to None.",
+  ":param name: str, the name to validate",
+  ":return: str, the validated name or None if invalid",
+  "Validate the sex and return it. If sex is not Man, Woman, or UGM, set to None.",
+  ":param sex: str, the sex to validate",
+  ":return: str, the validated sex or None if invalid",
+  "Validate the phone number and return it. If phoneNumber is empty or not an 11 digit number, set to None.",
+  ":param phoneNumber: str, the phone number to validate",
+  ":return: str, the validated phone number or None if invalid"
+]

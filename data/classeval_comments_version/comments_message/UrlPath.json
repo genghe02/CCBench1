@@ -1,0 +1,14 @@
+[
+  "# The  class is a utility for encapsulating and manipulating the path component of a URL, including adding nodes, parsing path strings, and building path strings with optional encoding.\n",
+  "Initializes the UrlPath object with an empty list of segments and a flag indicating the presence of an end tag.",
+  "Adds a segment to the list of segments in the UrlPath.",
+  ":param segment: str, the segment to add.",
+  ">>> url_path = UrlPath()\n        >>> url_path.add('foo')\n        >>> url_path.add('bar')\n\n        url_path.segments = ['foo', 'bar']",
+  "Parses a given path string and populates the list of segments in the UrlPath.",
+  ":param path: str, the path string to parse.\n        :param charset: str, the character encoding of the path string.",
+  ">>> url_path = UrlPath()\n        >>> url_path.parse('/foo/bar/', 'utf-8')\n\n        url_path.segments = ['foo', 'bar']",
+  "Fixes the given path string by removing leading and trailing slashes.",
+  ":param path: str, the path string to fix.",
+  ":return: str, the fixed path string.",
+  ">>> url_path = UrlPath()\n        >>> url_path.fix_path('/foo/bar/')\n        'foo/bar'"
+]

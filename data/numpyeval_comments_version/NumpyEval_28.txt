@@ -1,0 +1,5 @@
+import numpy as np
+def matrix2array(M):
+    # I am using numpy. I have a matrix `M` 1*N and I want to get an array from with N elements.
+    # To achieve it, Does anyone know a more elegant way to get the result?
+    return np.squeeze(np.asarray(M))

@@ -1,0 +1,12 @@
+[
+  "#This is a class that implements a manacher algorithm to find the Longest palindromic substring in a given string.",
+  "Initializes the Manacher class with the given input_string.",
+  ":param input_string: The input_string to be searched, str.",
+  "Recursively calculates the length of the palindromic substring based on a given center, difference value, and input string.",
+  ":param center: The center of the palindromic substring, int.\n        :param diff: The difference between the center and the current position, int.\n        :param string: The string to be searched, str.",
+  ":return: The length of the palindromic substring, int.",
+  ">>> manacher = Manacher('ababa')\n        >>> manacher.palindromic_length(2, 1, 'a|b|a|b|a')\n        2",
+  "Finds the longest palindromic substring in the given string.",
+  ":return: The longest palindromic substring, str.",
+  ">>> manacher = Manacher('ababaxse')\n        >>> manacher.palindromic_string()\n        'ababa'"
+]

@@ -1,0 +1,8 @@
+import numpy as np
+
+a = np.array([1,3,4])
+b = np.array([5,2,1])
+
+# I have two simple one-dimensional arrays in NumPy. 
+# I should be able to concatenate them using numpy.concatenate.
+c = np.concatenate([a, b])

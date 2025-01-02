@@ -1,0 +1,37 @@
+<description for whole class>
+class BookManagement:
+    def __init__(self):
+        <description for whole function>
+        self.inventory = {}
+
+    def add_book(self, title, quantity=1):
+        <description for whole function>
+        <description for all parameters>
+        if title in self.inventory:
+            self.inventory[title] += quantity
+        else:
+            self.inventory[title] = quantity
+
+    def remove_book(self, title, quantity):
+        <description for whole function>
+        <description for all parameters>
+        if title not in self.inventory or self.inventory[title] < quantity:
+            raise False
+        self.inventory[title] -= quantity
+        if self.inventory[title] == 0:
+            del (self.inventory[title])
+
+    def view_inventory(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        return self.inventory
+
+    def view_book_quantity(self, title):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        if title not in self.inventory:
+            return 0
+        return self.inventory[title]

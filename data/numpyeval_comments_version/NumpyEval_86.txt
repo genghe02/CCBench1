@@ -1,0 +1,5 @@
+import numpy as np
+
+x = np.array([[1], [2], [3]])
+# Numpy Vector (N,1) dimension -> (N,) dimension conversion
+out = x.reshape(3,)

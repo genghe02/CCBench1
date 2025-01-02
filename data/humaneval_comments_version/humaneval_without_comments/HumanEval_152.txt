@@ -1,0 +1,6 @@
+
+def compare(game,guess):
+    <Requirements for the code>
+    
+    <some test cases for the function>
+    return [abs(x-y) for x,y in zip(game,guess)]

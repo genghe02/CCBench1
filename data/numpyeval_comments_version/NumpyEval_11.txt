@@ -1,0 +1,7 @@
+import numpy as np
+
+input_list = [np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]])]
+# Flattening a list of NumPy arrays?
+# We can use numpy.concatenate, which as the name suggests, basically concatenates all the elements of such an input list into a single NumPy array
+# And then we can use numpy.ravel to flatten the array
+output = np.concatenate(input_list).ravel()

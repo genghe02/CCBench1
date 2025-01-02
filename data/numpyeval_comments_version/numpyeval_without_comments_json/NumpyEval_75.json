@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_75.txt", "comments": "#This will tell me those values\n# generate a mask to find all values that are even numbers\n# Is there an efficient Numpy mechanism to retrieve the integer indexes of locations in an array based on a condition is true as opposed to the Boolean mask array?\n"}

@@ -1,0 +1,17 @@
+from typing import List
+import pandas as pd
+import numpy as np
+
+def append_in_dataframe(df, list_to_append, column_name_list) -> pd.DataFrame:
+    """    
+    Params:
+        df: The dataframe to append to.
+        list_to_append: The list to append.
+        column_name_list: The column names of the list to append.
+
+    Returns:
+        The dataframe with the list appended.
+    """
+    list_to_append = pd.DataFrame(list_to_append, columns=column_name_list)
+    df = df.append(list_to_append)
+    return df

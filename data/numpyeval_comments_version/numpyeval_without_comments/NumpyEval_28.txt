@@ -1,0 +1,4 @@
+import numpy as np
+def matrix2array(M):
+    <Requirements for the code>
+    return np.squeeze(np.asarray(M))

@@ -1,0 +1,5 @@
+import pandas as pd
+
+def get_first_n_rows(df, n):
+    <Requirements for the code>
+    return df.head(n)

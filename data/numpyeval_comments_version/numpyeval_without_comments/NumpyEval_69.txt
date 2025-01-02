@@ -1,0 +1,6 @@
+import numpy as np
+
+A = np.array([[1, 2], [3, 0]])
+
+<Requirements for the code>
+out = np.unravel_index(A.argmin(), A.shape)

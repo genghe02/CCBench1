@@ -1,0 +1,5 @@
+import pandas as pd
+
+def transform_timestamp_to_pydatetime(timestamp):
+    <Requirements for the code>
+    return timestamp.to_pydatetime()

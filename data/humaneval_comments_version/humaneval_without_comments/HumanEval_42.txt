@@ -1,0 +1,6 @@
+
+
+def incr_list(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    return [(e + 1) for e in l]

@@ -1,0 +1,6 @@
+
+def solve(N):
+    <Requirements for the code>
+    
+    <some test cases for the function>
+    return bin(sum(int(i) for i in str(N)))[2:]

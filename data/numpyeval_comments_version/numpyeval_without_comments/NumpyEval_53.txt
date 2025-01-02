@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.array([[1,11], [3,9], [5,7]])
+<Requirements for the code>
+result = a - a.min(axis=0)

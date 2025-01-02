@@ -1,0 +1,1 @@
+{"filename": "PandasEval_11.txt", "comments": "# How do I select rows from a DataFrame df based on column values?\n# Return rows whose column value named `col_name` is in an iterable `values`\n"}

@@ -1,0 +1,17 @@
+[
+  "This is a class that provides methods for decryption, including the Caesar cipher, Vigenere cipher, and Rail Fence cipher.",
+  "Initializes the decryption utility with a key.",
+  ":param key: The key to use for decryption,str.",
+  "Deciphers the given ciphertext using the Caesar cipher",
+  ":param ciphertext: The ciphertext to decipher,str.\n        :param shift: The shift to use for decryption,int.",
+  ":return: The deciphered plaintext,str.",
+  ">>> d = DecryptionUtils('key')\n        >>> d.caesar_decipher('ifmmp', 1)\n        'hello'",
+  "Deciphers the given ciphertext using the Vigenere cipher",
+  ":param ciphertext: The ciphertext to decipher,str.",
+  ":return: The deciphered plaintext,str.",
+  ">>> d = DecryptionUtils('key')\n        >>> d.vigenere_decipher('ifmmp')\n        'ybocl'",
+  "Deciphers the given ciphertext using the Rail Fence cipher",
+  ":param encrypted_text: The ciphertext to decipher,str.\n        :param rails: The number of rails to use for decryption,int.",
+  ":return: The deciphered plaintext,str.",
+  ">>> d = DecryptionUtils('key')\n        >>> d.rail_fence_decipher('Hoo!el,Wrdl l', 3)\n        'Hello, World!'"
+]

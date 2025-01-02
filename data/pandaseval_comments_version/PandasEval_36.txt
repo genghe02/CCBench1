@@ -1,0 +1,6 @@
+import pandas as pd
+
+df = pd.DataFrame({'a': [0, 1], 'b': [5, 3]})
+# How to obtain pandas DataFrame without index
+# I want to print the whole dataframe, but I don't want to print the index
+df_string = df.to_string(index=False)

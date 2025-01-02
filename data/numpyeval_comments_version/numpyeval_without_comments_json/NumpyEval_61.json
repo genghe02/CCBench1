@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_61.txt", "comments": "# I would like to dynamically slice a numpy array along a specific axis.\n# I think one way would be to use slice(start, end):\n"}

@@ -1,0 +1,6 @@
+import numpy as np
+
+def count_true_number(arr):
+    # How to count the number of true elements in a NumPy bool array?
+    # return the count value
+    return arr.sum()

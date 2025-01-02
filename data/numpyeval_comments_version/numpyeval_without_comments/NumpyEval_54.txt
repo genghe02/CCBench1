@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.arange(1, 10)
+a = a.reshape(len(a), 1)
+<Requirements for the code>
+b = a[4:]

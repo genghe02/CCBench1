@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_63.txt", "comments": "# Check if each element in a numpy array is in another array\n# This problem seems easy but I cannot quite get a nice-looking solution. \n# I have two numpy arrays (A and B), and I want to get the indices of A where the elements of A are in B and also get the indices of A where the elements are not in B.\n"}

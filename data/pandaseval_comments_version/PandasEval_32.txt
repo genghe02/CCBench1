@@ -1,0 +1,4 @@
+import pandas as pd
+
+# creating a Series from a list [56, 24, 421, 90]
+my_series = pd.Series([56, 24, 421, 90])

@@ -1,0 +1,6 @@
+import pandas as pd
+
+def select_rows_from_column(df, col_name, values):
+    # How do I select rows from a DataFrame df based on column values?
+    # Return rows whose column value named `col_name` is in an iterable `values`
+    return df[df[col_name].isin(values)]

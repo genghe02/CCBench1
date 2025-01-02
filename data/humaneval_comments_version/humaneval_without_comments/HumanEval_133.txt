@@ -1,0 +1,10 @@
+
+
+def sum_squares(lst):
+    <Requirements for the code>
+    <some test cases for the function>
+    import math
+    squared = 0
+    for i in lst:
+        squared += math.ceil(i)**2
+    return squared

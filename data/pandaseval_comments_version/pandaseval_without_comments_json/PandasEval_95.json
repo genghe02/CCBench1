@@ -1,0 +1,1 @@
+{"filename": "PandasEval_95.txt", "comments": "# I need to divide all ['B','C'] columns but the first column 'A' in a DataFrame by the first column.\n# Return the result.\n"}

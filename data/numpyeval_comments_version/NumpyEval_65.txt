@@ -1,0 +1,6 @@
+import numpy as np
+
+def add_row_to_arr(arr, row):
+    # How does one add rows to a numpy array?
+    # Is there a numpythonic way to do this?
+    return np.vstack((arr, row))

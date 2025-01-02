@@ -1,0 +1,14 @@
+[
+  "# This is a class for processing excel files, including readring and writing excel data, as well as processing specific operations and saving as a new excel file.",
+  "Reading data from Excel files",
+  ":param file_name:str, Excel file name to read",
+  ":return:list of data, Data in Excel",
+  "Write data to the specified Excel file",
+  ":param data: list, Data to be written\n        :param file_name: str, Excel file name to write to",
+  ":return: 0 or 1, 1 represents successful writing, 0 represents failed writing",
+  ">>> processor = ExcelProcessor()\n        >>> new_data = [\n        >>>     ('Name', 'Age', 'Country'),\n        >>>     ('John', 25, 'USA'),\n        >>>     ('Alice', 30, 'Canada'),\n        >>>     ('Bob', 35, 'Australia'),\n        >>>     ('Julia', 28, 'Germany')\n        >>> ]\n        >>> data = processor.write_excel(new_data, 'test_data.xlsx')",
+  "Change the specified column in the Excel file to uppercase",
+  ":param N: int, The serial number of the column that want to change\n        :param save_file_name: str, source file name",
+  ":return:(int, str), The former is the return value of write_excel, while the latter is the saved file name of the processed data",
+  ">>> processor = ExcelProcessor()\n        >>> success, output_file = processor.process_excel_data(1, 'test_data.xlsx')"
+]

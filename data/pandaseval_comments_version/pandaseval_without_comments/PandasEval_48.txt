@@ -1,0 +1,7 @@
+import pandas as pd
+df = pd.DataFrame({'col': ["apple",
+                           "pear",
+                           "strawberry"]})
+targets = ['apple', 'banana']
+<Requirements for the code>
+result = df.loc[df['col'].isin(targets)]

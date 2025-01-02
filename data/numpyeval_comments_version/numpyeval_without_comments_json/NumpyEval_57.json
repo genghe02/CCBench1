@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_57.txt", "comments": "# I have an array a and I would like to repeat the elements of a n times if they are even or if they are positive. \n# I mean I want to repeat only the elements that respect some condition, other elements are not displayed.\n# In detail, if a meets the condition cond, I want to repeat it n times. \n"}

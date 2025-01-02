@@ -1,0 +1,1 @@
+{"filename": "PandasEval_30.txt", "comments": "# After you assign a list like or array like value to the columns, the column should be considered as type object\n# Now I want to assign the emails to first row and the 'Email' column\n"}

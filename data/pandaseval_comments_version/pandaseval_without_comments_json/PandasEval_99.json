@@ -1,0 +1,1 @@
+{"filename": "PandasEval_99.txt", "comments": "# Finding non-numeric rows in dataframe in pandas\n# Return the raws that contain non-numeric values\n# So to get the subDataFrame of rouges, (Note: the negation, ~, of the above finds the ones which have at least one rogue non-numeric):\n"}

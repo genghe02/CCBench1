@@ -1,0 +1,10 @@
+[
+  "# This is a class allows to add words to a list and find the longest word in a given sentence by comparing the words with the ones in the word list.",
+  "Initialize a list of word.",
+  "append the input word into self.word_list",
+  ":param word: str, input word",
+  "Remove punctuation marks and split a sentence into a list of word. Find the longest splited word that is in the self.word_list.\n        Words are strictly case sensitive.",
+  ":param sentence: a sentence str",
+  ":return str: longest splited word that is in the self.word_list. return '' if self.word_list is empty.",
+  ">>> longestWord = LongestWord()\n        >>> longestWord.add_word('A')\n        >>> longestWord.add_word('aM')\n        >>> longestWord.find_longest_word('I am a student.')\n        'a'"
+]

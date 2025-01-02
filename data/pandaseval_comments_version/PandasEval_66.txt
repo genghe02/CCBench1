@@ -1,0 +1,6 @@
+import pandas as pd
+
+def get_percentage_of_each_gender(series):
+    # Given a pandas series that represents frequencies of a value, how can I turn those frequencies into percentages?
+    # Return the percentage of each gender.
+    return series.value_counts(normalize=True)

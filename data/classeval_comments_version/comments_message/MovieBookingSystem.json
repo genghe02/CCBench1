@@ -1,0 +1,16 @@
+[
+  "# this is a class as movie booking system, which allows to add movies, book tickets and check the available movies within a given time range. ",
+  "Initialize movies contains the information about movies",
+  ">>> system.movies\n        [{'name': 'Batman', 'price': 49.9, 'start_time': datetime.datetime(1900, 1, 1, 17, 5), 'end_time': datetime.datetime(1900, 1, 1, 19, 25),\n        'seats': array([[0., 0., 0.],\n            [0., 0., 0.],\n            [0., 0., 0.]])}]",
+  "Add a new movie into self.movies",
+  ":param name: str, movie name\n        :param price: float, price for one ticket\n        :param start_time: str\n        :param end_time: str\n        :param n: int, the size of seats(n*n)",
+  ">>> system.add_movie('Batman', 49.9, '17:05', '19:25', 3)\n        >>> system.movies\n        [{'name': 'Batman', 'price': 49.9, 'start_time': datetime.datetime(1900, 1, 1, 17, 5), 'end_time': datetime.datetime(1900, 1, 1, 19, 25),\n        'seats': array([[0., 0., 0.],\n            [0., 0., 0.],\n            [0., 0., 0.]])}]",
+  "Book tickets for a movie. Change the seats value in self.movies if book successfully.",
+  ":param name: str, movie name\n        :param seats_to_book: list of tuples, representing seats to book [(row1, col1), (row2, col2), ...]",
+  ":return: str, booking status message. \"Movie not found.\" for no such movie.\n                \"Booking success.\" for successfully booking, or \"Booking failed.\" otherwise",
+  ">>> system.add_movie('Batman', 49.9, '17:05', '19:25', 3)\n        >>> system.book_ticket('Batman', [(0, 0), (0, 1)])\n        'Booking success.'\n        >>> system.book_ticket('Batman', [(0, 0)])\n        'Booking failed.'\n        >>> system.book_ticket('batman', [(0, 0)])\n        'Movie not found.'",
+  "Get a list of available movies within the specified time range",
+  ":param start_time: str, start time in HH:MM format\n        :param end_time: str, end time in HH:MM format",
+  ":return: list of str, names of available movies",
+  ">>> system.add_movie('Batman', 49.9, '17:05', '19:25', 3)\n        >>> system.available_movies('12:00', '22:00')\n        ['Batman']"
+]

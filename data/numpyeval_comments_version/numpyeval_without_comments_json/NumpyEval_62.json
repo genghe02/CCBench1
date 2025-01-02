@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_62.txt", "comments": "# Converting a 2D numpy array to a structured array\n# You can 'create a record array from a (flat) list of arrays' using numpy.core.records.fromarrays as follows:\n# Note that we need conduct the transpose on the array, and the names reset to 'col1, co2, col3'\n"}

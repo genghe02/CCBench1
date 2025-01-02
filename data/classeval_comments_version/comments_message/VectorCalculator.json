@@ -1,0 +1,19 @@
+[
+  "# The class provides vector operations, including calculating similarity, cosine similarities, average similarity, and IDF weights.",
+  "Compute the cosine similarity between one vector and another vector.",
+  ":param vector_1: numpy.ndarray, Vector from which similarities are to be computed, expected shape (dim,).\n        :param vector_2: numpy.ndarray, Vector from which similarities are to be computed, expected shape (dim,).",
+  ":return: numpy.ndarray, Contains cosine distance between `vector_1` and `vector_2`",
+  ">>> vector_1 = np.array([1, 1])\n        >>> vector_2 = np.array([1, 0])\n        >>> VectorUtil.similarity(vector_1, vector_2)\n        0.7071067811865475",
+  "Compute cosine similarities between one vector and a set of other vectors.",
+  ":param vector_1: numpy.ndarray, Vector from which similarities are to be computed, expected shape (dim,).\n        :param vectors_all: list of numpy.ndarray, For each row in vectors_all, distance from vector_1 is computed, expected shape (num_vectors, dim).",
+  ":return: numpy.ndarray, Contains cosine distance between `vector_1` and each row in `vectors_all`, shape (num_vectors,).",
+  ">>> vector1 = np.array([1, 2, 3])\n        >>> vectors_all = [np.array([4, 5, 6]), np.array([7, 8, 9])]\n        >>> VectorUtil.cosine_similarities(vector1, vectors_all)\n        [0.97463185 0.95941195]",
+  "Compute cosine similarity between two sets of vectors.",
+  ":param vector_list_1: list of numpy vector\n        :param vector_list_2: list of numpy vector",
+  ":return: numpy.ndarray, Similarities between vector_list_1 and vector_list_2.",
+  ">>> vector_list1 = [np.array([1, 2, 3]), np.array([4, 5, 6])]\n        >>> vector_list2 = [np.array([7, 8, 9]), np.array([10, 11, 12])]\n        >>> VectorUtil.n_similarity(vector_list1, vector_list2)\n        0.9897287473881233",
+  "Calculate log(total_num+1/count+1) for each count in number_dict",
+  ":param total_num: int\n        :param number_dict: dict",
+  ":return: dict",
+  ">>> num_dict = {'key1':0.1, 'key2':0.5}\n        >>> VectorUtil.compute_idf_weight_dict(2, num_dict)\n        {'key1': 1.0033021088637848, 'key2': 0.6931471805599453}"
+]

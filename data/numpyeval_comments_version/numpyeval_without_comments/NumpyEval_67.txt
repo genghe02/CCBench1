@@ -1,0 +1,5 @@
+import numpy as np
+
+def find_indices_zero(arr):
+    <Requirements for the code>
+    return np.where(arr == 0)[0]

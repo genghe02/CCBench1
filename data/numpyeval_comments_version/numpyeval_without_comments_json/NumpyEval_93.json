@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_93.txt", "comments": "# How to remove specific elements in a numpy array\uff1f\n# I then want to remove 3,4,7 from a. All I know is the index of the values (index=[2,3,6]).\n"}

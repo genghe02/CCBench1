@@ -1,0 +1,9 @@
+
+def circular_shift(x, shift):
+    <Requirements for the code>
+    <some test cases for the function>
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]

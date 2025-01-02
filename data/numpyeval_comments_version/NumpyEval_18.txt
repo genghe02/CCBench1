@@ -1,0 +1,5 @@
+import numpy as np
+def get_minimum_value(arr):
+    # I wish to find and return the minimum value in this 2D array
+    # The following code is aim to implement it
+    return np.min(arr)

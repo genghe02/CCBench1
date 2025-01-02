@@ -1,0 +1,5 @@
+import numpy as np
+
+list_of_arrays = map(lambda x: x*np.ones(2), range(5))
+<Requirements for the code>
+myarray = np.stack(list_of_arrays)

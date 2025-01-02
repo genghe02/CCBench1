@@ -1,0 +1,19 @@
+[
+  "This is a class representing a classroom, capable of adding and removing courses, checking availability at a given time, and detecting conflicts when scheduling new courses.",
+  "Initialize the classroom management system.",
+  ":param id: int, the id of classroom",
+  "Add course to self.courses list if the course wasn't in it.",
+  ":param course: dict, information of the course, including 'start_time', 'end_time' and 'name'",
+  ">>> classroom = Classroom(1)\n        >>> classroom.add_course({'name': 'math', 'start_time': '8:00', 'end_time': '9:40'})",
+  "Remove course from self.courses list if the course was in it.",
+  ":param course: dict, information of the course, including 'start_time', 'end_time' and 'name'",
+  ">>> classroom = Classroom(1)\n        >>> classroom.add_course({'name': 'math', 'start_time': '8:00', 'end_time': '9:40'})\n        >>> classroom.add_course({'name': 'math', 'start_time': '8:00', 'end_time': '9:40'})",
+  "change the time format as '%H:%M' and check the time is free or not in the classroom.",
+  ":param check_time: str, the time need to be checked",
+  ":return: True if the check_time does not conflict with every course time, or False otherwise.",
+  ">>> classroom = Classroom(1)\n        >>> classroom.add_course({'name': 'math', 'start_time': '8:00', 'end_time': '9:40'})\n        >>> classroom.is_free_at('10:00')\n        True\n        >>> classroom.is_free_at('9:00')\n        False",
+  "Before adding a new course, check if the new course time conflicts with any other course.",
+  ":param new_course: dict, information of the course, including 'start_time', 'end_time' and 'name'",
+  ":return: False if the new course time conflicts(including two courses have the same boundary time) with other courses, or True otherwise.",
+  ">>> classroom = Classroom(1)\n        >>> classroom.add_course({'name': 'math', 'start_time': '8:00', 'end_time': '9:40'})\n        >>> classroom.check_course_conflict({'name': 'SE', 'start_time': '9:40', 'end_time': '10:40'})\n        False"
+]

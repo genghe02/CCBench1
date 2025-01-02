@@ -1,0 +1,6 @@
+import pandas as pd
+
+def extract_the_last_year(df, column_name):
+    <Requirements for the code>
+    final_result = pd.to_numeric(df[column_name].str.split('-').str[0]) + 1
+    return final_result

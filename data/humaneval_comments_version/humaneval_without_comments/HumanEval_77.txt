@@ -1,0 +1,6 @@
+
+def iscube(a):
+    <Requirements for the code>
+    <some test cases for the function>
+    a = abs(a)
+    return int(round(a ** (1. / 3))) ** 3 == a

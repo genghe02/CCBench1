@@ -1,0 +1,6 @@
+import pandas as pd
+
+def is_contain_particular_value(series, value):
+    # How to determine whether a Pandas Column contains a particular value?
+    # Return the result
+    return value in series.unique()

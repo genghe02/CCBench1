@@ -1,0 +1,1 @@
+{"filename": "NumpyEval_23.txt", "comments": "    How can I define in numpy a matrix that uses operations modulo 2?\n    This operation is called \"xor\".\n    Arguments:\n        x: a numpy array\n        y: a numpy array\n        z: a numpy array\n    Returns:\n        a numpy array containing the result of the operation"}

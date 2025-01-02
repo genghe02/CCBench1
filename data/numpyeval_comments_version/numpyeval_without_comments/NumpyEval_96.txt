@@ -1,0 +1,4 @@
+import numpy as np
+
+<Requirements for the code>
+data = np.ones((3, 4), dtype=bool)

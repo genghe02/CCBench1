@@ -1,0 +1,1 @@
+{"filename": "PandasEval_17.txt", "comments": "# I have a dataframe with repeat values in column `col1`. I want to drop duplicates, keeping the row with the last value in column `col2`.\n# How would I do that?\n# return the final dataframe\n"}

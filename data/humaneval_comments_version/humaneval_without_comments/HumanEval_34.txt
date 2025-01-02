@@ -1,0 +1,6 @@
+
+
+def unique(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    return sorted(list(set(l)))

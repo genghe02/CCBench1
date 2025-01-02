@@ -1,0 +1,8 @@
+import numpy as np
+
+a = np.array([ 0,  3,  6,  9, 12])
+b = np.array([ 1,  4,  7, 10, 13])
+c = np.array([ 2,  5,  8, 11, 14])
+
+<Requirements for the code>
+d = np.array([a, b, c]).T.flatten()

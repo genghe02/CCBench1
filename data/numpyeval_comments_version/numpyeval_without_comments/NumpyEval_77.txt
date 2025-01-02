@@ -1,0 +1,5 @@
+import numpy as np
+
+z = np.array([ 0, 1, 3, 9, 18 ])
+<Requirements for the code>
+z[1:] = z[:-1]

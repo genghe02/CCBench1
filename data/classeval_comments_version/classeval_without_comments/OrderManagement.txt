@@ -1,0 +1,46 @@
+<description for whole class>
+class Order:
+
+    def __init__(self):
+        <description for whole function>
+        self.menu = []
+        # menu = [{"dish": dish name, "price": price, "count": count}, ...]
+        self.selected_dishes = []
+        # selected_dish = {"dish": dish name, "count": count, price: price}
+        self.sales = {}
+        # 
+
+
+    def add_dish(self, dish):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        for menu_dish in self.menu:
+            if dish["dish"] == menu_dish["dish"]:
+                if menu_dish["count"] < dish["count"]:
+                    return False
+                else:
+                    menu_dish["count"] -= dish["count"]
+                    break
+        self.selected_dishes.append(dish)
+        return True
+
+    def calculate_total(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        total = 0
+        for dish in self.selected_dishes:
+            total += dish["price"] * dish["count"] * self.sales[dish["dish"]]
+        return total
+
+    def checkout(self):
+        <description for whole function>
+        <description for return statement>
+        <some test cases for the function>
+        if len(self.selected_dishes) == 0:
+            return False
+        total = self.calculate_total()
+        self.selected_dishes = []
+        return total

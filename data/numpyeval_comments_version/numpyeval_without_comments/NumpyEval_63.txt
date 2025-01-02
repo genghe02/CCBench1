@@ -1,0 +1,7 @@
+import numpy as np
+
+A = np.array([1,2,3,4,5,6,7])
+B = np.array([2,4,6])
+C = np.searchsorted(A, B)
+<Requirements for the code>
+D = np.delete(np.arange(np.alen(A)), C)
