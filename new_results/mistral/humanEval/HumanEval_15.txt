@@ -1,0 +1,5 @@
+ def string_sequence(n: int) -> str:
+   # Generate a sequence of numbers as strings separated by spaces
+   >>> string_sequence(3) # "0 1 2"
+   >>> string_sequence(5) # "0 1 2 3 4"
+   return ' '.join([str(x) for x in range(n + 1)])</s>

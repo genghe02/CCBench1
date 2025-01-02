@@ -1,0 +1,4 @@
+ def car_race_collision(n: int):
+    # Ensure n is a non-negative integer
+    >>> type(n) == int and n >= 0
+    return n**2</s>

@@ -1,0 +1,12 @@
+ def can_arrange(arr):
+   # The function should return the index at which arr can be rearranged to form a palindrome, otherwise return -1
+
+   >>> can_arrange([1, 1, 2, 3, 3]) # should return -1
+   >>> can_arrange([1, 1, 1, 2, 2]) # should return 4
+   ind=-1
+   i=1
+   while i<len(arr):
+      if arr[i]<arr[i-1]:
+         ind=i
+      i+=1
+   return ind</s>

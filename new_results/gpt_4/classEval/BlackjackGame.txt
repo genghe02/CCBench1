@@ -1,0 +1,118 @@
+"""
+The class represents a Blackjack game, allowing to create a deck, calculate hand value and check the winner based on the hand values.
+"""
+
+import random
+
+
+class BlackjackGame:
+    def __init__(self):
+        """
+        Initialization method for the BlackjackGame class.
+        Initializes the deck, player hand, and dealer hand.
+        """
+        self.deck = self.create_deck()
+        self.player_hand = []
+        self.dealer_hand = []
+
+    def create_deck(self):
+        """
+        Creates a deck of cards, shuffles it and returns.
+
+        Returns:
+            list: A shuffled deck of cards in the format 'RS' where R is the rank and S is the suit
+        
+        Test cases:
+            # Test case 1: Check if the deck has the correct number of cards
+            assert len(create_deck()) == 52
+
+            # Test case 2: Check if the deck has all the cards
+            assert set(create_deck()) == set(['AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', '10S', 'JS', 'QS', 'KS',
+                                              'AC', '2C', '3C', '4C', '5C', '6C', '7C', '8C', '9C', '10C', 'JC', 'QC', 'KC',
+                                              'AD', '2D', '3D', '4D', '5D', '6D', '7D', '8D', '9D', '10D', 'JD', 'QD', 'KD',
+                                              'AH', '2H', '3H', '4H', '5H', '6H', '7H', '8H', '9H', '10H', 'JH', 'QH', 'KH'])
+        """
+        deck = []
+        suits = ['S', 'C', 'D', 'H']
+        ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        for suit in suits:
+            for rank in ranks:
+                deck.append(rank + suit)
+        random.shuffle(deck)
+        return deck
+
+    def calculate_hand_value(self, hand):
+        """
+        Calculate the value of a given hand.
+
+        Parameters:
+            hand (list): A list of strings representing the cards in a hand
+        
+        Returns:
+            int: The calculated value of the hand
+            
+        Test cases:
+            # Test case 1: Hand with no Ace
+            assert calculate_hand_value(['2S', '3S', '10S', 'KS']) == 25
+
+            # Test case 2: Hand with one Ace and total value <= 21
+            assert calculate_hand_value(['2S', 'AS']) == 13
+            
+            # Test case 3: Hand with one Ace and total value > 21
+            assert calculate_hand_value(['KS', 'QS', 'AS']) == 21
+        """
+
+        value = 0
+        num_aces = 0
+        for card in hand:
+            rank = card[:-1]
+            if rank.isdigit():
+                value += int(rank)
+            elif rank in ['J', 'Q', 'K']:
+                value += 10
+            elif rank == 'A':
+                value += 11
+                num_aces += 1
+        while value > 21 and num_aces > 0:
+            value -= 10
+            num_aces -= 1
+        return value
+
+    def check_winner(self, player_hand, dealer_hand):
+        """
+        Check the winner between player and dealer based on the hand values.
+
+        Parameters:
+            player_hand (list): A list of strings representing the player's cards
+            dealer_hand (list): A list of strings representing the dealer's cards
+        
+        Returns:
+            str: The result of the game, 'Player wins' or 'Dealer wins'
+            
+        Test cases:
+            # Test case 1: Both player and dealer have same hand value
+            assert check_winner(['2S', '3S', '10S'], ['KS', '5S']) == 'Dealer wins'
+            
+            # Test case 2: Player has higher hand value
+            assert check_winner(['KS', 'QS', 'AS'], ['KS', 'QS']) == 'Player wins'
+            
+            # Test case 3: Dealer has higher hand value
+            assert check_winner(['2S', '3S'], ['KS', '5S']) == 'Dealer wins'
+        """
+
+        player_value = self.calculate_hand_value(player_hand)
+        dealer_value = self.calculate_hand_value(dealer_hand)
+        if player_value > 21 and dealer_value > 21:
+            if player_value <= dealer_value:
+                return 'Player wins'
+            else:
+                return 'Dealer wins'
+        elif player_value > 21:
+            return 'Dealer wins'
+        elif dealer_value > 21:
+            return 'Player wins'
+        else:
+            if player_value <= dealer_value:
+                return 'Dealer wins'
+            else:
+                return 'Player wins'

@@ -1,0 +1,175 @@
+ """
+This class represents an SQL generator that can create different SQL queries based on the given table name and various data.
+"""
+
+import sqlalchemy as sa
+
+class SQLGenerator:
+
+    def __init__(self, table_name):
+        """
+        Initialize an SQL generator instance with the given table name.
+
+        Parameters:
+            table_name (str): The name of the table to generate SQL queries for
+        """
+        self.table_name = table_name
+        self.engine = sa.create_engine('sqlite:///:memory:')
+        self.metadata = sa.MetaData()
+        self.table = self.metadata.tables[self.table_name]
+
+    def select(self, fields=None, condition=None):
+        """
+        Generate an SQL query for a select operation.
+
+        Parameters:
+            fields (list or str, optional): The list or comma-separated string of fields to select
+            condition (str, optional): The condition to filter the records
+
+        Returns:
+            str: The generated SQL query as a string
+
+        Test cases:
+            # Test case 1: Select all records from a table
+            generator = SQLGenerator('test_table')
+            assert generator.select() == "SELECT * FROM test_table"
+
+            # Test case 2: Select specific fields
+            generator = SQLGenerator('test_table')
+            assert generator.select(['field1', 'field2']) == "SELECT field1, field2 FROM test_table"
+
+            # Test case 3: Select with a condition
+            generator = SQLGenerator('test_table')
+            assert generator.select(condition="age > 30") == "SELECT * FROM test_table WHERE age > 30"
+        """
+        select = self.table.select()
+        if fields:
+            select = select.with_only_columns(*[sa.column(col) for col in fields])
+        if condition:
+            select = select.where(sa.text(condition))
+        return str(select)
+
+    def insert(self, data):
+        """
+        Generate an SQL query for an insert operation.
+
+        Parameters:
+            data (dict): The data to be inserted into the table
+
+        Returns:
+            str: The generated SQL query as a string
+
+        Test cases:
+            # Test case 1: Insert data into the table
+            generator = SQLGenerator('test_table')
+            data = {'field1': 'value1', 'field2': 'value2'}
+            assert generator.insert(data) == "INSERT INTO test_table (field1, field2) VALUES ('value1', 'value2')"
+
+            # Test case 2: Insert multiple records at once
+            generator = SQLGenerator('test_table')
+            data1 = {'field1': 'value1', 'field2': 'value2'}
+            data2 = {'field1': 'value3', 'field2': 'value4'}
+            assert (
+                generator.insert([data1, data2])
+                == "INSERT INTO test_table (field1, field2) VALUES ('value1', 'value2'), ('value3', 'value4')"
+            )
+
+            # Test case 3: Insert a record without columns
+            assert generator.insert({}) == "INSERT INTO test_table DEFAULT VALUES"
+        """
+        values = [sa.literal(value) for value in data.values()]
+        insert = self.table.insert().values(sa.tuple(*values))
+        return str(insert)
+
+    def update(self, data, condition):
+        """
+        Generate an SQL query for an update operation.
+
+        Parameters:
+            data (dict): The data to be updated in the table
+            condition (str): The condition to filter the records for updating
+
+        Returns:
+            str: The generated SQL query as a string
+
+        Test cases:
+            # Test case 1: Update a single record
+            generator = SQLGenerator('test_table')
+            data = {'field1': 'new_value1', 'field2': 'new_value2'}
+            condition = "id = 1"
+            assert generator.update(data, condition) == "UPDATE test_table SET field1 = 'new_value1', field2 = 'new_value2' WHERE id = 1"
+
+            # Test case 2: Update multiple records
+            generator = SQLGenerator('test_table')
+            data = {'field1': 'new_value1', 'field2': 'new_value2'}
+            condition = "age > 20"
+            assert generator.update(data, condition) == "UPDATE test_table SET field1 = 'new_value1', field2 = 'new_value2' WHERE age > 20"
+        """
+        set_clause = []
+        for key, value in data.items():
+            set_clause.append(f"{sa.text(key)} = {sa.text(str(value))}")
+        set = sa.text(' SET ') + ", ".join(set_clause)
+        update = self.table.update().where(sa.text(condition)).values()
+        update = update.with_only_columns([sa.column(col.name) for col in self.table.columns])
+        return str(update.statement) + set
+
+    def delete(self, condition):
+        """
+        Generate an SQL query for a delete operation.
+
+        Parameters:
+            condition (str): The condition to filter the records for deletion
+
+        Returns:
+            str: The generated SQL query as a string
+
+        Test cases:
+            # Test case 1: Delete a single record
+            generator = SQLGenerator('test_table')
+            condition = "id = 1"
+            assert generator.delete(condition) == "DELETE FROM test_table WHERE id = 1"
+
+            # Test case 2: Delete multiple records
+            generator = SQLGenerator('test_table')
+            condition = "age > 20"
+            assert generator.delete(condition) == "DELETE FROM test_table WHERE age > 20"
+        """
+        delete = self.table.delete().where(sa.text(condition))
+        return str(delete.statement)
+
+    def select_female_under_age(self, age):
+        """
+        Generate an SQL query for selecting female records under a specific age.
+
+        Parameters:
+            age (int): The maximum allowed age for the records
+
+        Returns:
+            str: The generated SQL query as a string
+
+        Test cases:
+            # Test case 1: Select female records under 18 years old
+            generator = SQLGenerator('test_table')
+            assert generator.select_female_under_age(18) == "SELECT * FROM test_table WHERE age < 18 AND gender = 'female'"
+        """
+        condition = "age < {0} AND gender = 'female'".format(age)
+        return self.select(condition=condition)
+
+    def select_by_age_range(self, min_age, max_age):
+        """
+        Generate an SQL query for selecting records within a specific age range.
+
+        Parameters:
+            min_age (int): The minimum allowed age for the records
+            max_age (int): The maximum allowed age for the records
+
+        Returns:
+            str: The generated SQL query as a string
+
+        Test cases:
+            # Test case 1: Select records between 18 and 30 years old
+            generator = SQLGenerator('test_table')
+            assert generator.select_by_age_range(18, 30) == "SELECT * FROM test_table WHERE age BETWEEN 18 AND 30"
+        """
+        condition = "age BETWEEN {0} AND {1}".format(min_age, max_age)
+        return self.select(condition=condition)</s>

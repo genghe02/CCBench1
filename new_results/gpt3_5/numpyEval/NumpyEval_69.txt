@@ -1,0 +1,1 @@
+out = np.unravel_index(A.argmin(), A.shape) # Find the index of the minimum value in the array A

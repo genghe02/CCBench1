@@ -1,0 +1,123 @@
+"""
+This class provides various encryption methods such as Caesar cipher, Vigenere cipher, and Rail fence cipher.
+
+The class EncryptionUtils provides encryption methods including Caesar cipher, Vigenere cipher, and Rail fence cipher.
+"""
+
+class EncryptionUtils:
+    def __init__(self, key):
+        """
+        Initializes the EncryptionUtils class with a key.
+
+        Parameters:
+            key (str): Key used for encryption
+        """
+        self.key = key
+
+    def caesar_cipher(self, plaintext, shift):
+        """
+        Performs Caesar cipher encryption on the plaintext.
+
+        Parameters:
+            plaintext (str): Text to be encrypted
+            shift (int): Number of positions to shift characters in the alphabet
+
+        Returns:
+            str: Encrypted ciphertext
+        
+        Test cases:
+            # Test case 1: Encrypt text with shift of 3
+            assert caesar_cipher("hello", 3) == "khoor"
+            
+            # Test case 2: Encrypt with shift of 0
+            assert caesar_cipher("world", 0) == "world"
+            
+            # Test case 3: Encrypt with special characters
+            assert caesar_cipher("hello, world!", 5) == "mjqqq, btwqi!"
+        """
+        ciphertext = ""
+        for char in plaintext:
+            if char.isalpha():
+                if char.isupper():
+                    ascii_offset = 65
+                else:
+                    ascii_offset = 97
+                shifted_char = chr((ord(char) - ascii_offset + shift) % 26 + ascii_offset)
+                ciphertext += shifted_char
+            else:
+                ciphertext += char
+        return ciphertext
+    
+    def vigenere_cipher(self, plain_text):
+        """
+        Performs Vigenere cipher encryption on the plaintext.
+
+        Parameters:
+            plain_text (str): Text to be encrypted using Vigenere cipher
+
+        Returns:
+            str: Encrypted ciphertext
+        
+        Test cases:
+            # Test case 1: Encrypt text using key "key"
+            assert vigenere_cipher("hello", "key") == "hwlmu"
+            
+            # Test case 2: Encrypt using longer key
+            assert vigenere_cipher("world", "secretkey") == "wpgkp"
+            
+            # Test case 3: Encrypt with numbers in plaintext
+            assert vigenere_cipher("abc123", "key") == "kfg123"
+        """
+        encrypted_text = ""
+        key_index = 0
+        for char in plain_text:
+            if char.isalpha():
+                shift = ord(self.key[key_index % len(self.key)].lower()) - ord('a')
+                encrypted_char = chr((ord(char.lower()) - ord('a') + shift) % 26 + ord('a'))
+                encrypted_text += encrypted_char.upper() if char.isupper() else encrypted_char
+                key_index += 1
+            else:
+                encrypted_text += char
+        return encrypted_text
+
+    def rail_fence_cipher(self, plain_text, rails):
+        """
+        Performs Rail fence cipher encryption on the plaintext.
+
+        Parameters:
+            plain_text (str): Text to be encrypted using Rail fence cipher
+            rails (int): Number of rails for the Rail fence cipher
+
+        Returns:
+            str: Encrypted ciphertext
+        
+        Test cases:
+            # Test case 1: Encrypt text with 2 rails
+            assert rail_fence_cipher("hello world", 2) == "hlowrdel ol"
+            
+            # Test case 2: Encrypt with 3 rails
+            assert rail_fence_cipher("python coding", 3) == "pocdihnyignt"
+            
+            # Test case 3: Encrypt with special characters
+            assert rail_fence_cipher("hello, world!", 4) == "hwd e, lo rlo!"
+        """
+        fence = [['\n' for _ in range(len(plain_text))] for _ in range(rails)]
+        direction = -1
+        row, col = 0, 0
+
+        for char in plain_text:
+            if row == 0 or row == rails-1:
+                direction = -direction
+
+            fence[row][col] = char
+            col += 1
+            row += direction
+
+        encrypted_text = ''
+        for i in range(rails):
+            for j in range(len(plain_text)):
+                if fence[i][j] != '\n':
+                    encrypted_text += fence[i][j]
+
+        return encrypted_text
+"""

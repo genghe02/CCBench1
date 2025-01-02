@@ -1,0 +1,1 @@
+ # Filter the DataFrame to get only the rows where the 'x2' column contains NaN values.

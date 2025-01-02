@@ -1,0 +1,12 @@
+```python
+def fruit_distribution(s,n):
+    # Calculate the number of fruits to be distributed by subtracting the sum of existing fruits from the total
+    >>> fruit_distribution("5 apples and 3 oranges", 10) # returns 2
+    >>> fruit_distribution("1 apple and 2 bananas", 5) # returns 2
+    >>> fruit_distribution("10 fruits", 15) # returns 5
+    lis = list()
+    for i in s.split(' '):
+        if i.isdigit():
+            lis.append(int(i))
+    return n - sum(lis)
+```

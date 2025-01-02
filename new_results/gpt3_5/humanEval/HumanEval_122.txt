@@ -1,0 +1,6 @@
+# This function sums the elements of an array up to a certain index, based on their length being less than or equal to 2
+>>> add_elements([10, 20, 300, 4000, 50000], 3) # returns 330
+>>> add_elements([5, 10, 15, 20], 5) # returns 50
+>>> add_elements([1000, 10000, 100000], 2) # returns 0
+def add_elements(arr, k):
+    return sum(elem for elem in arr[:k] if len(str(elem)) <= 2)

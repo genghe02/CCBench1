@@ -1,0 +1,67 @@
+ """
+This class is an implementation of the Chandrasekhar sieve algorithm to find prime numbers up to a given limit.
+"""
+
+import math
+
+class ChandrasekharSieve:
+
+    def __init__(self, n):
+        """
+        Constructor method.
+
+        Parameters:
+            n (int): The number up to which prime numbers will be generated.
+        """
+        self.n = n
+        self.primes = self.generate_primes()
+
+    def generate_primes(self):
+        """
+        Generates prime numbers up to a given limit using the Chandrasekhar sieve algorithm.
+
+        Returns:
+            list: A list of prime numbers up to the given limit.
+        """
+
+        if self.n < 2:
+            return []
+
+        sieve = [True] * (self.n + 1)
+        sieve[0] = sieve[1] = False
+
+        p = 2
+        while p * p <= self.n:
+            if sieve[p]:
+                for i in range(p * p, self.n + 1, p):
+                    sieve[i] = False
+            p += 1
+
+        primes = []
+        for i in range(2, self.n + 1):
+            if sieve[i]:
+                primes.append(i)
+
+        return primes
+
+    def get_primes(self):
+        """
+        Returns the list of prime numbers generated in the constructor.
+
+        Returns:
+            list: A list of prime numbers up to the given limit.
+        """
+        return self.primes
+
+    # Test cases
+    # Test case 1: Generate prime numbers up to 10
+    c = ChandrasekharSieve(10)
+    assert c.get_primes() == [2, 3, 5, 7]
+
+    # Test case 2: Generate prime numbers up to 20
+    c = ChandrasekharSieve(20)
+    assert c.get_primes() == [2, 3, 5, 7, 11, 13, 17, 19]
+
+    # Test case 3: Generate prime numbers up to 30
+    c = ChandrasekharSieve(30)
+    assert c.get_primes() == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]</s>

@@ -1,0 +1,6 @@
+import pandas as pd
+
+def append_dict_to_df(df, dictionary):
+    # Append dictionary to dataframe as a new row and return the modified dataframe
+    df = df.append(dictionary, ignore_index=True)
+    return df

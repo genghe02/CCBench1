@@ -1,0 +1,10 @@
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame([[1, 2.2, 'three']], columns=['A', 'B', 'C'])
+# Create a DataFrame with mixed data types and select only the columns of type float64.
+# The resulting DataFrame will only contain the numerical columns, specifically those that hold 
+# float values. Useful for data preprocessing and analysis.
+new_df = df.select_dtypes(include=['float64'])
+```

@@ -1,0 +1,20 @@
+ # Reshape the list of arrays into a single 5-dimensional array using numpy's stack function along the last axis.
+# This operation is used to concatenate the given arrays along the last axis.
+# In this case, the arrays in the list L have different shapes, and stacking them will result in a single array with shape (10, 5, 4, 2, 1, 2).
+# To efficiently find the indices where the values change across the concatenated arrays, we can use np.where() with a custom comparison function.
+
+import numpy as np
+
+L = [np.random.randn(5,4,2,5,1,2) for i in range(10)]
+<Requirements for the code>
+
+# Define a custom comparison function to check if the elements are equal or not.
+def equal_neighbor(arr):
+ return np.equal(arr, arr[1:])
+
+# Apply the custom comparison function to each slice of the stacked array M.
+# The result will be a 3D array of shape (10, 5, 4), where each element is a boolean mask indicating the indices where the value changes.
+# Use np.sum(axis=1) to get the total number of value changes for each slice, and np.sum(axis=0) to get the total number of value changes across all slices.
+
+M = np.stack(L, axis=-1)
+result = np.sum(np.sum(np.where(equal_neighbor(M), 1, 0).astype(np.int32), axis=1), axis=0)

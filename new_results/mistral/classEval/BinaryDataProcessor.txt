@@ -1,0 +1,108 @@
+ """
+This class, named BinaryDataProcessor, handles processing and analyzing binary data by cleaning non-binary characters, calculating binary information, converting binary data to ASCII or UTF-8.
+"""
+
+import re
+
+
+class BinaryDataProcessor:
+
+    def __init__(self, binary_string):
+        """
+        Initialize the BinaryDataProcessor instance with a binary string.
+        
+        Parameters:
+            binary_string (str): A binary string to be processed.
+        
+        Test cases:
+            # Test case 1: Valid binary string
+            binary_data = BinaryDataProcessor('0110110101101100111111011101110011110101')
+            
+            # Test case 2: Empty binary string
+            binary_data = BinaryDataProcessor('')
+        """
+        self.binary_string = binary_string
+        self.clean_non_binary_chars()
+
+    def clean_non_binary_chars(self):
+        """
+        Remove non-binary characters from the binary string.
+        
+        Test cases:
+            # Test case 1: Successful processing
+            binary_data = BinaryDataProcessor('0110110101101100111111011101110011110101')
+            binary_data.clean_non_binary_chars()
+            assert binary_data.binary_string == '0110110101101100111111011101110011110101'
+            
+            # Test case 2: Empty string
+            binary_data = BinaryDataProcessor('')
+            binary_data.clean_non_binary_chars()
+            assert binary_data.binary_string == ''
+        """
+        self.binary_string = ''.join(filter(lambda x: x in '01', self.binary_string))
+
+    def calculate_binary_info(self):
+        """
+        Calculate the percentage of zeroes, ones, and the total bit length of the binary string.
+        
+        Test cases:
+            # Test case 1: Valid binary string
+            binary_data = BinaryDataProcessor('0110110101101100111111011101110011110101')
+            info = binary_data.calculate_binary_info()
+            assert info == {'Zeroes': 0.5, 'Ones': 0.5, 'Bit length': 32}
+            
+            # Test case 2: Empty string
+            binary_data = BinaryDataProcessor('')
+            info = binary_data.calculate_binary_info()
+            assert info == {'Zeroes': 1.0, 'Ones': 0.0, 'Bit length': 0}
+        """
+        zeroes_count = self.binary_string.count('0')
+        ones_count = self.binary_string.count('1')
+        total_length = len(self.binary_string)
+
+        zeroes_percentage = (zeroes_count / total_length)
+        ones_percentage = (ones_count / total_length)
+
+        return {
+            'Zeroes': zeroes_percentage,
+            'Ones': ones_percentage,
+            'Bit length': total_length
+        }
+
+    def convert_to_ascii(self):
+        """
+        Convert the binary data to an ASCII string.
+        
+        Test cases:
+            # Test case 1: Valid binary string
+            binary_data = BinaryDataProcessor('0110110101101100111111011101110011110101')
+            ascii_string = binary_data.convert_to_ascii()
+            assert ascii_string == 'abcdef'
+            
+            # Test case 2: Empty binary string
+            binary_data = BinaryDataProcessor('')
+            ascii_string = binary_data.convert_to_ascii()
+            assert ascii_string == ''
+        """
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i+8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('ascii')
+
+    def convert_to_utf8(self):
+        """
+        Convert the binary data to a UTF-8 string.
+        
+        Test cases:
+            # Test case 1: Valid binary string
+            binary_data = BinaryDataProcessor('0110110101101100111111011101110011110101')
+            utf8_string = binary_data.convert_to_utf8()
+            assert utf8_string == 'abcdef'
+            
+            # Test case 2: Empty binary string
+            binary_data = BinaryDataProcessor('')
+            utf8_string = binary_data.convert_to_utf8()
+            assert utf8_string == ''</s>

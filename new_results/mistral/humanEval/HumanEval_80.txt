@@ -1,0 +1,29 @@
+ # This function checks if a string is happy by checking if it contains the same characters repeated consecutively more than once
+# Returns True if the string is happy, False otherwise
+def is_happy(s):
+  # Requirements for the code
+  # Check if the length of the string is less than 3
+  # Return False if it is
+  if len(s) < 3:
+    return False
+  
+  # Test cases for the function
+  >>> is_happy("1") # returns False
+  >>> is_happy("12") # returns True
+  >>> is_happy("121") # returns False
+  # Repeat the loop for the entire string
+  for i in range(len(s) - 2):
+    
+    # Test cases for the function
+    >>> is_happy("abcd") # returns True
+    >>> is_happy("abcabc") # returns False
+    
+    # Check if the current character and the next one are the same
+    if s[i] == s[i+1]:
+       return False
+     
+    # Check if the current character and the next two characters are the same
+    if s[i] == s[i+1] or s[i+1] == s[i+2]:
+       return False
+  # If none of the conditions are met, return True
+  return True</s>

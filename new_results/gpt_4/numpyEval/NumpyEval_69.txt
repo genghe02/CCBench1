@@ -1,0 +1,6 @@
+import numpy as np
+
+A = np.array([[1, 2], [3, 0]])
+
+# Find the index of the smallest value in the array A
+out = np.unravel_index(A.argmin(), A.shape)

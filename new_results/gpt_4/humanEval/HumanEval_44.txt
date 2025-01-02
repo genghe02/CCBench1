@@ -1,0 +1,10 @@
+def change_base(x: int, base: int):
+    # Changes the base of the number x to the base specified
+    >>> change_base(10, 2) # returns '1010'
+    >>> change_base(15, 16) # returns 'F'
+    >>> change_base(255, 16) # returns 'FF'
+    ret = ""
+    while x > 0:
+        ret = str(x % base) + ret
+        x //= base
+    return ret

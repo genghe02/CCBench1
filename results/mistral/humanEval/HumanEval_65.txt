@@ -1,0 +1,35 @@
+ def circular_shift(x, shift):
+ # Shift the given list or string 'x' by the given number of positions'shift'.
+ # If'shift' is greater than the length of 'x', then the function returns the reversed string or list.
+
+ x = list(x) if isinstance(x, list) else x
+ <Description for the whole function>
+ result = ''
+ if len(x) is not None and shift > len(x):
+ <Description for the if statement>
+ result = x[::-1]
+ else:
+ <Description for the else block>
+ result = x[len(x) - shift:] + x[:len(x) - shift]
+ <Description for the return statement>
+ <Test cases for the function>
+ >>> circular_shift([1, 2, 3, 4], 2)
+ [4, 1, 2, 3]
+ >>> circular_shift([1, 2, 3, 4], 3)
+ [3, 1, 2, 4]
+ >>> circular_shift([1, 2, 3, 4], 4)
+ [2, 3, 4, 1]
+ >>> circular_shift([1, 2, 3, 4], 5)
+ [1, 2, 3, 4]
+ >>> circular_shift([1, 2, 3, 4], 6)
+ [4, 1, 2, 3]
+ >>> circular_shift('python', 2)
+ 'hotoyp'
+ >>> circular_shift('python', 3)
+ 'pthony'
+ >>> circular_shift('python', 4)
+ 'ythonp'
+ >>> circular_shift('python', 5)
+ 'python'
+ >>> circular_shift('python', 6)
+ 'hotoyp'

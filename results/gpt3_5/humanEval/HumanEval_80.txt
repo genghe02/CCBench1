@@ -1,0 +1,14 @@
+def is_happy(s):
+    # Check if a string is happy by ensuring no consecutive characters are the same.
+    # Test cases:
+    # is_happy("hello") should return True
+    # is_happy("h") should return True
+    # is_happy("hh") should return False
+    # is_happy("hhe") should return True
+    if len(s) < 3:
+        return False
+
+    for i in range(len(s) - 2):
+        if s[i] == s[i+1] or s[i+1] == s[i+2] or s[i] == s[i+2]:
+            return False
+    return True

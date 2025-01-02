@@ -1,0 +1,5 @@
+import pandas as pd
+
+def counting_consecutive_positive_values(y):
+    # Multiply each element of y with the cumulative count of consecutive positive values
+    return y * (y.groupby((y != y.shift()).cumsum()).cumcount() + 1)

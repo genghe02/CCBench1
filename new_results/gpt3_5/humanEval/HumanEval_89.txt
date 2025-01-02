@@ -1,0 +1,18 @@
+# Encrypts a string by shifting each letter forward by 4 positions 
+>>> encrypt("hello") # returns "lipps"
+>>> encrypt("world") # returns "asvph"
+>>> encrypt("abc") # returns "efg"
+
+def encrypt(s):
+    # Encrypts input string by shifting each letter 4 positions forward
+    >>> encrypt("hello") # returns "lipps"
+    >>> encrypt("world") # returns "asvph"
+    >>> encrypt("abc") # returns "efg"
+    d = 'abcdefghijklmnopqrstuvwxyz'
+    out = ''
+    for c in s:
+        if c in d:
+            out += d[(d.index(c)+2*2) % 26]
+        else:
+            out += c
+    return out

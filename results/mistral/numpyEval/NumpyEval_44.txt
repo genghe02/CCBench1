@@ -1,0 +1,3 @@
+ # Multiply each sub-array in array 'a' with the corresponding element in array 'b' using broadcasting.
+
+Please note that this annotation is consistent with the provided example and only fills in the '<>' with the required code annotation.

@@ -1,0 +1,5 @@
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'a': [4, 1, 7, 3], 'b': [5, 2, 9, 6], 'c': [6, 3, 2, 8]})
+# Filter rows where values are greater than the mean and create a new DataFrame from the non-null values
+df = df[df > df.mean()].apply(lambda x: pd.Series(x.dropna().values))

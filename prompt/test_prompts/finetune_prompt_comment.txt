@@ -1,0 +1,26 @@
+You are an expert in Python annotation writing. Here is a simple Python code, I need you to add comments in the<>area.
+For example:<description for whole class>:This is a class for parsing command line arguments to a dictionary.
+<description for whole function>：Filter the incoming request based on certain rules and conditions.
+<Requirements for the code>:Provide a brief explanation of the code following this tag, taking into account the context.
+
+Here are an example:
+
+User:
+```python
+import numpy as np
+
+a = np.array([1, 1, 1, 1, 1, 2, 2, 2, 3, 4, 3, 4, 3, 4, 3, 4, 5, 5, 5])
+<Requirements for the code>
+result = np.where(a[1:] != a[:-1])[0]
+```
+
+What you should respond:
+```python
+import numpy as np
+
+a = np.array([1, 1, 1, 1, 1, 2, 2, 2, 3, 4, 3, 4, 3, 4, 3, 4, 5, 5, 5])
+# Find each index where the value changes in an efficient way using numpy by comparing each element with its neighbor and utilizing np.where(condition).
+result = np.where(a[1:] != a[:-1])[0]
+```
+
+Next, please complete the annotation writing task:

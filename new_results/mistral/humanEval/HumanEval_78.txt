@@ -1,0 +1,12 @@
+ def hex_key(num):
+   # Check if the input is a hexadecimal string
+   # Primes used are '2', '3', '5', '7', 'B', 'D'
+   >>> hex_key('1A') # returns 3
+   >>> hex_key('0xF') # returns 3
+   >>> hex_key('12') # raises an error
+   primes = ('2', '3', '5', '7', 'B', 'D')
+   total = 0
+   for i in range(0, len(num)):
+       if num[i] in primes:
+           total += 1
+   return total</s>

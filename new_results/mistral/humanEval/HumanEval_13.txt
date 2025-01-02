@@ -1,0 +1,24 @@
+ # Ensure both inputs are integers
+ # Returns the greatest common divisor of two numbers using Euclid's algorithm
+ >>> greatest_common_divisor(4, 6) # returns 2
+ >>> greatest_common_divisor(15, 21) # returns 3
+ >>> greatest_common_divisor(10, 15) # returns 5
+ >>> greatest_common_divisor(-4, 6) # returns 2
+ >>> greatest_common_divisor(10, -15) # returns 5
+ return a
+
+def power_function(base: float, exponent: int) -> float:
+    <Requirements for the code>
+    <some test cases for the function>
+    return base ** exponent
+
+# Ensure base is a number
+ # Raises TypeError if exponent is not an integer
+ >>> power_function(2.5, 2) # returns 6.25
+ >>> power_function(3, 3) # returns 27.0
+ >>> power_function(-2.5, 2) # returns 6.25
+ # Test negative base and exponent
+ >>> power_function(-2, 3) # raises TypeError: unsupported operand type(s) for ** or pow(): 'float' and 'int'
+ # Test zero base
+ >>> power_function(0, 2) # returns 0.0
+ return base ** exponent</s>

@@ -1,0 +1,1 @@
+result # Find indexes where values in the array change

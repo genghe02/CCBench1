@@ -1,0 +1,7 @@
+```python
+def next_smallest(lst):
+    # Remove duplicates from the list and sort it in ascending order.
+    lst = sorted(set(lst))
+    # Return the second smallest element if there are at least two unique elements in the list, otherwise return None.
+    return None if len(lst) < 2 else lst[1]
+```

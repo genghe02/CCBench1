@@ -1,0 +1,6 @@
+import numpy as np
+
+import itertools
+data = [[1], [1, 2]]
+# Create a numpy array by zipping lists with fill value 0 for unequal lengths
+result = np.array(list(itertools.zip_longest(*data, fillvalue=0)))

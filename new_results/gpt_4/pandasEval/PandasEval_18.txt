@@ -1,0 +1,5 @@
+import pandas as pd
+
+def get_values_at_nth_rows(df, n, column_name):
+    # Returns the value in the specified column at the nth row of the dataframe
+    return df[column_name].iloc[n]

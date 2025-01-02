@@ -1,0 +1,1 @@
+# Append a dictionary as a row to a dataframe and return the updated dataframe

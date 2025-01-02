@@ -1,0 +1,3 @@
+ # Check if the array is sorted in an efficient way using numpy by comparing each element with its neighbor using np.all and a logical condition.
+
+# The code checks if all elements in the array are less than or equal to their corresponding next elements. If this condition is met, then the array is sorted.

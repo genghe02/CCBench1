@@ -1,0 +1,2 @@
+# Replace blank values with NaN in the dataframe
+    return df.replace(r'^\s*$', np.nan, regex=True)

@@ -1,0 +1,59 @@
+"""
+This class represents a utility for finding the longest word in a sentence based on a given list of words.
+"""
+
+import re
+import string
+
+
+class LongestWord:
+
+    def __init__(self):
+        """
+        Initialize the LongestWord class with an empty list of words.
+        """
+        self.word_list = []
+
+    def add_word(self, word):
+        """
+        Add a word to the list of words for comparison.
+
+        Parameters:
+            word (str): The word to add to the list.
+        """
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        """
+        Find the longest word in a sentence that exists in the word list.
+
+        Parameters:
+            sentence (str): The input sentence to search for the longest word.
+        
+        Returns:
+            str: The longest word found in the sentence that matches the words in the list.
+        
+        Test cases:
+            # Test case 1: Normal case with valid words
+            word_util = LongestWord()
+            word_util.add_word('apple')
+            word_util.add_word('banana')
+            assert word_util.find_longest_word('This is an apple') == 'apple'
+            
+            # Test case 2: Edge case with special characters
+            word_util.add_word('beauty')
+            assert word_util.find_longest_word('This is a beauty!') == 'beauty'
+            
+            # Test case 3: Error case with no matches
+            word_util.add_word('cherry')
+            assert word_util.find_longest_word('No matching words here.') == ''
+        """
+        longest_word = ""
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        sentence = re.split(' ', sentence)
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        return longest_word
+"""

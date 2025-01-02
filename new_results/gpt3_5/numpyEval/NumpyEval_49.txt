@@ -1,0 +1,2 @@
+# Create a new empty numpy array
+    new_arr = np.array([])

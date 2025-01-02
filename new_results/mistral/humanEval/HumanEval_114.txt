@@ -1,0 +1,18 @@
+ # Function requires a list of numbers as input and returns the minimum sum of a contiguous subarray
+# Test cases: Multiple inputs to check the functionality of the function
+def minSubArraySum(nums):
+    # Function requires a list of numbers as input and returns the minimum sum of a contiguous subarray
+    >>> minSubArraySum([1,2,3,4,5]) # returns 11 (sum of numbers from index 2 to 4)
+    >>> minSubArraySum([-1,-2,3,-1,4,-4]) # returns 5 (sum of numbers from index 3 and 4)
+    >>> minSubArraySum([0,0,0,0]) # returns 0
+    max_sum = 0
+    s = 0
+    for num in nums:
+        s += -num
+        if (s < 0):
+            s = 0
+        max_sum = max(s, max_sum)
+    if max_sum == 0:
+        max_sum = max(-i for i in nums)
+    min_sum = -max_sum
+    return min_sum</s>

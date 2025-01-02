@@ -1,0 +1,7 @@
+import numpy as np
+
+a = np.arange(9)
+a = a.reshape((3, 3))
+b = np.zeros((5, 5))
+# Replace the center part of matrix 'b' with matrix 'a'
+b[1:4, 1:4] = a

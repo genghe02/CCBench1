@@ -1,0 +1,165 @@
+```python
+"""
+This class represents a Vending Machine that manages inventory, handles transactions, and allows users to purchase items.
+"""
+
+class VendingMachine:
+    def __init__(self):
+        """
+        Initializes a new VendingMachine instance with an empty inventory and zero balance.
+        """
+        self.inventory = {}
+        self.balance = 0
+
+    def add_item(self, item_name, price, quantity):
+        """
+        Adds a new item to the vending machine inventory or restocks an existing item.
+
+        Parameters:
+            item_name (str): The name of the item to add or restock.
+            price (float): The price of the item.
+            quantity (int): The quantity of the item to add.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Add a new item
+            vending_machine = VendingMachine()
+            vending_machine.add_item('Soda', 1.5, 10)
+            assert vending_machine.inventory['Soda'] == {'price': 1.5, 'quantity': 10}
+
+            # Test case 2: Restock an existing item
+            vending_machine.add_item('Soda', 1.5, 5)
+            assert vending_machine.inventory['Soda'] == {'price': 1.5, 'quantity': 15}
+
+            # Test case 3: Add another new item
+            vending_machine.add_item('Chips', 1.0, 20)
+            assert vending_machine.inventory['Chips'] == {'price': 1.0, 'quantity': 20}
+        """
+        if not self.restock_item(item_name, quantity):
+            self.inventory[item_name] = {'price': price, 'quantity': quantity}
+
+    def insert_coin(self, amount):
+        """
+        Inserts a coin into the vending machine, increasing the balance.
+
+        Parameters:
+            amount (float): The amount of money to insert.
+
+        Returns:
+            float: The updated balance after inserting the coin.
+
+        Test cases:
+            # Test case 1: Insert a coin
+            vending_machine = VendingMachine()
+            assert vending_machine.insert_coin(1.0) == 1.0
+
+            # Test case 2: Insert multiple coins
+            assert vending_machine.insert_coin(0.5) == 1.5
+
+            # Test case 3: Insert a negative amount (invalid)
+            assert vending_machine.insert_coin(-1.0) == 1.5  # Balance remains unchanged
+        """
+        self.balance += amount
+        return self.balance
+
+    def purchase_item(self, item_name):
+        """
+        Purchases an item from the vending machine if available and sufficient balance.
+
+        Parameters:
+            item_name (str): The name of the item to purchase.
+
+        Returns:
+            float or bool: The updated balance after purchase if successful, False otherwise.
+
+        Test cases:
+            # Test case 1: Successful purchase
+            vending_machine = VendingMachine()
+            vending_machine.add_item('Soda', 1.5, 10)
+            vending_machine.insert_coin(2.0)
+            assert vending_machine.purchase_item('Soda') == 0.5
+
+            # Test case 2: Insufficient balance
+            vending_machine.insert_coin(1.0)
+            assert vending_machine.purchase_item('Soda') == False
+
+            # Test case 3: Item out of stock
+            vending_machine.add_item('Chips', 1.0, 0)
+            assert vending_machine.purchase_item('Chips') == False
+        """
+        if item_name in self.inventory:
+            item = self.inventory[item_name]
+            if item['quantity'] > 0 and self.balance >= item['price']:
+                self.balance -= item['price']
+                item['quantity'] -= 1
+                return self.balance
+            else:
+                return False
+        else:
+            return False
+
+    def restock_item(self, item_name, quantity):
+        """
+        Restocks an existing item in the vending machine inventory.
+
+        Parameters:
+            item_name (str): The name of the item to restock.
+            quantity (int): The quantity to add to the existing stock.
+
+        Returns:
+            bool: True if the item was restocked, False if the item does not exist.
+
+        Test cases:
+            # Test case 1: Restock an existing item
+            vending_machine = VendingMachine()
+            vending_machine.add_item('Soda', 1.5, 10)
+            assert vending_machine.restock_item('Soda', 5) == True
+            assert vending_machine.inventory['Soda']['quantity'] == 15
+
+            # Test case 2: Restock a non-existent item
+            assert vending_machine.restock_item('Chips', 10) == False
+
+            # Test case 3: Restock with zero quantity
+            assert vending_machine.restock_item('Soda', 0) == True
+            assert vending_machine.inventory['Soda']['quantity'] == 15
+        """
+        if item_name in self.inventory:
+            self.inventory[item_name]['quantity'] += quantity
+            return True
+        else:
+            return False
+
+    def display_items(self):
+        """
+        Displays all items in the vending machine inventory with their prices and quantities.
+
+        Returns:
+            str or bool: A formatted string of all items if inventory is not empty, False otherwise.
+
+        Test cases:
+            # Test case 1: Display items in a non-empty inventory
+            vending_machine = VendingMachine()
+            vending_machine.add_item('Soda', 1.5, 10)
+            vending_machine.add_item('Chips', 1.0, 20)
+            expected_output = "Soda - $1.5 [10]\nChips - $1.0 [20]"
+            assert vending_machine.display_items() == expected_output
+
+            # Test case 2: Display items in an empty inventory
+            empty_vending_machine = VendingMachine()
+            assert empty_vending_machine.display_items() == False
+
+            # Test case 3: Display items after restocking
+            vending_machine.restock_item('Soda', 5)
+            expected_output = "Soda - $1.5 [15]\nChips - $1.0 [20]"
+            assert vending_machine.display_items() == expected_output
+        """
+        if not self.inventory:
+            return False
+        else:
+            items = []
+            for item_name, item_info in self.inventory.items():
+                items.append(f"{item_name} - ${item_info['price']} [{item_info['quantity']}]")
+            return "\n".join(items)
+```

@@ -1,0 +1,134 @@
+"""
+This class represents a utility for managing cookie data, including saving, loading, and setting cookies.
+
+CookiesUtil:
+    Provides methods for managing cookies, including loading cookie data, saving cookies to a file, setting cookies in a request, and getting cookies from a response.
+"""
+
+import json
+
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        """
+        Initialize the CookiesUtil instance with the cookies file path.
+
+        Parameters:
+            cookies_file (str): The path to the file to store cookies.
+        """
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, response):
+        """
+        Extract cookies from an HTTP response object and save them.
+
+        Parameters:
+            response (dict): The response object containing cookies.
+
+        Test cases:
+            # Test case 1: Valid cookies in response
+            response = {'cookies': {'session_id': 'example'}}
+            get_cookies(response)
+            assert cookies == {'session_id': 'example'}
+
+            # Test case 2: No cookies in response
+            response = {}
+            get_cookies(response)
+            assert cookies == {}
+
+            # Test case 3: Malformed response data
+            response = {'cookies': None}
+            get_cookies(response)
+            assert cookies == {}
+
+        """
+        self.cookies = response.get('cookies', {})
+        self._save_cookies()
+
+    def load_cookies(self):
+        """
+        Load cookies data from the cookies file.
+
+        Returns:
+            dict: Cookies data loaded from file, or an empty dictionary if the file does not exist.
+
+        Test cases:
+            # Test case 1: Cookies file exists
+            cookies_data = load_cookies()
+            assert type(cookies_data) == dict
+
+            # Test case 2: Cookies file does not exist
+            cookies_data = load_cookies()
+            assert cookies_data == {}
+
+            # Test case 3: Invalid JSON in cookies file
+            cookies_data = load_cookies()
+            assert cookies_data == {}
+
+        """
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+        except json.JSONDecodeError:
+            return {}
+
+    def _save_cookies(self):
+        """
+        Save the current cookies data to the cookies file.
+
+        Returns:
+            bool: True if the cookies are saved successfully, otherwise False.
+
+        Test cases:
+            # Test case 1: Save cookies successfully
+            cookies = {'session_id': 'example'}
+            result = _save_cookies()
+            assert result == True
+
+            # Test case 2: Error when saving cookies
+            cookies = None
+            result = _save_cookies()
+            assert result == False
+
+            # Test case 3: Invalid data to save
+            cookies = 'invalid_data'
+            result = _save_cookies()
+            assert result == False
+
+        """
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        """
+        Set cookies in the request object.
+
+        Parameters:
+            request (dict): The request object to set cookies in.
+
+        Test cases:
+            # Test case 1: Set cookies successfully
+            cookies = {'session_id': 'example'}
+            set_cookies(request)
+            assert request['cookies'] == 'session_id=example'
+
+            # Test case 2: No cookies to set
+            cookies = {}
+            set_cookies(request)
+            assert request.get('cookies', '') == ''
+
+            # Test case 3: Invalid cookies data
+            cookies = 'invalid_data'
+            set_cookies(request)
+            assert request.get('cookies', '') == ''
+
+        """
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```

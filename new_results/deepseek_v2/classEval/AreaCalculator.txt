@@ -1,0 +1,139 @@
+```python
+"""
+This class provides methods to calculate the areas of various geometric shapes such as circles, spheres, cylinders, sectors, and annuli.
+"""
+
+import math
+
+
+class AreaCalculator:
+
+    def __init__(self, radius):
+        """
+        Initializes the AreaCalculator with a given radius.
+
+        Parameters:
+            radius (float): The radius of the circle or sphere, used in various area calculations.
+        """
+        self.radius = radius
+
+    def calculate_circle_area(self):
+        """
+        Calculates the area of a circle using the formula πr².
+
+        Returns:
+            float: The area of the circle.
+
+        Test cases:
+            # Test case 1: Normal usage
+            calculator = AreaCalculator(5)
+            assert math.isclose(calculator.calculate_circle_area(), 78.53981633974483)
+
+            # Test case 2: Zero radius
+            calculator = AreaCalculator(0)
+            assert calculator.calculate_circle_area() == 0
+
+            # Test case 3: Negative radius (invalid input)
+            calculator = AreaCalculator(-5)
+            assert calculator.calculate_circle_area() > 0  # Negative radius is treated as positive
+        """
+        return math.pi * self.radius ** 2
+
+    def calculate_sphere_area(self):
+        """
+        Calculates the surface area of a sphere using the formula 4πr².
+
+        Returns:
+            float: The surface area of the sphere.
+
+        Test cases:
+            # Test case 1: Normal usage
+            calculator = AreaCalculator(5)
+            assert math.isclose(calculator.calculate_sphere_area(), 314.1592653589793)
+
+            # Test case 2: Zero radius
+            calculator = AreaCalculator(0)
+            assert calculator.calculate_sphere_area() == 0
+
+            # Test case 3: Negative radius (invalid input)
+            calculator = AreaCalculator(-5)
+            assert calculator.calculate_sphere_area() > 0  # Negative radius is treated as positive
+        """
+        return 4 * math.pi * self.radius ** 2
+
+    def calculate_cylinder_area(self, height):
+        """
+        Calculates the surface area of a cylinder using the formula 2πr(r + h).
+
+        Parameters:
+            height (float): The height of the cylinder.
+
+        Returns:
+            float: The surface area of the cylinder.
+
+        Test cases:
+            # Test case 1: Normal usage
+            calculator = AreaCalculator(5)
+            assert math.isclose(calculator.calculate_cylinder_area(10), 471.23889803846896)
+
+            # Test case 2: Zero height
+            calculator = AreaCalculator(5)
+            assert math.isclose(calculator.calculate_cylinder_area(0), 157.07963267948966)
+
+            # Test case 3: Negative height (invalid input)
+            calculator = AreaCalculator(5)
+            assert calculator.calculate_cylinder_area(-10) > 0  # Negative height is treated as positive
+        """
+        return 2 * math.pi * self.radius * (self.radius + height)
+
+    def calculate_sector_area(self, angle):
+        """
+        Calculates the area of a sector of a circle using the formula (r² * angle) / 2.
+
+        Parameters:
+            angle (float): The angle of the sector in radians.
+
+        Returns:
+            float: The area of the sector.
+
+        Test cases:
+            # Test case 1: Normal usage
+            calculator = AreaCalculator(5)
+            assert math.isclose(calculator.calculate_sector_area(math.pi / 2), 19.634954084936208)
+
+            # Test case 2: Zero angle
+            calculator = AreaCalculator(5)
+            assert calculator.calculate_sector_area(0) == 0
+
+            # Test case 3: Negative angle (invalid input)
+            calculator = AreaCalculator(5)
+            assert calculator.calculate_sector_area(-math.pi / 2) > 0  # Negative angle is treated as positive
+        """
+        return self.radius ** 2 * angle / 2
+
+    def calculate_annulus_area(self, inner_radius, outer_radius):
+        """
+        Calculates the area of an annulus (ring-shaped object) using the formula π(R² - r²).
+
+        Parameters:
+            inner_radius (float): The radius of the inner circle.
+            outer_radius (float): The radius of the outer circle.
+
+        Returns:
+            float: The area of the annulus.
+
+        Test cases:
+            # Test case 1: Normal usage
+            calculator = AreaCalculator(5)
+            assert math.isclose(calculator.calculate_annulus_area(3, 5), 50.26548245743669)
+
+            # Test case 2: Inner radius equals outer radius
+            calculator = AreaCalculator(5)
+            assert calculator.calculate_annulus_area(5, 5) == 0
+
+            # Test case 3: Inner radius greater than outer radius (invalid input)
+            calculator = AreaCalculator(5)
+            assert calculator.calculate_annulus_area(6, 5) < 0  # Negative area indicates invalid input
+        """
+        return math.pi * (outer_radius ** 2 - inner_radius ** 2)
+```

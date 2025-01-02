@@ -1,0 +1,6 @@
+import numpy as np
+
+A = np.array([[1, 2], [3, 0]])
+
+# Get the index of the minimum value in the flattened array and convert it to a tuple of array indices
+out = np.unravel_index(A.argmin(), A.shape)

@@ -1,0 +1,3 @@
+# This function is used to add a new column to an existing pandas dataframe. 
+# The new column's name and its data are provided as arguments. 
+# The function will add this new column to the dataframe and then return the updated dataframe.

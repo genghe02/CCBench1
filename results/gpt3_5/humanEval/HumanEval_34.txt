@@ -1,0 +1,10 @@
+def unique(l: list):
+    # Remove duplicates from a list while maintaining the original order of elements.
+    # Test cases:
+    # >>> unique([1, 2, 3, 1, 2, 3])
+    # [1, 2, 3]
+    # >>> unique([1, 1, 1, 1, 1])
+    # [1]
+    # >>> unique([])
+    # []
+    return sorted(list(set(l)))

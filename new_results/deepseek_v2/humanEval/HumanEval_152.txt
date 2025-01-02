@@ -1,0 +1,8 @@
+```python
+def compare(game,guess):
+    # Calculate the absolute difference between corresponding elements in game and guess lists
+    >>> compare([1, 2, 3], [3, 2, 1]) # returns [2, 0, 2]
+    >>> compare([5, 5, 5], [5, 5, 5]) # returns [0, 0, 0]
+    >>> compare([10, 20, 30], [15, 25, 35]) # returns [5, 5, 5]
+    return [abs(x-y) for x,y in zip(game,guess)]
+```

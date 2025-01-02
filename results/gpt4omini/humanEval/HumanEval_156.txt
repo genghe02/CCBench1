@@ -1,0 +1,35 @@
+```python
+def int_to_mini_roman(number):
+    # Convert an integer to its corresponding mini Roman numeral representation.
+    
+    # Some common values and their corresponding Roman symbols.
+    num = [1, 4, 5, 9, 10, 40, 50, 90,  
+           100, 400, 500, 900, 1000] 
+    sym = ["I", "IV", "V", "IX", "X", "XL",  
+           "L", "XC", "C", "CD", "D", "CM", "M"] 
+    i = 12
+    res = ''
+    
+    # Loop until the input number is reduced to zero.
+    while number: 
+        div = number // num[i]  # Determine how many times the Roman numeral fits into the number.
+        number %= num[i]  # Reduce the number by the amount represented by that Roman numeral.
+        while div: 
+            res += sym[i]  # Append the Roman numeral to the result.
+            div -= 1  # Decrement the count of how many times we've added the numeral.
+        i -= 1  # Move to the next smaller Roman numeral.
+        
+    return res.lower()  # Convert the result to lowercase before returning.
+
+# Test cases for the function
+# Test with a small integer that converts to a single Roman numeral.
+assert int_to_mini_roman(1) == 'i'  # 1 -> 'i'
+# Test with a number that requires multiple symbols.
+assert int_to_mini_roman(4) == 'iv'  # 4 -> 'iv'
+assert int_to_mini_roman(9) == 'ix'  # 9 -> 'ix'
+# Test with numbers that involve multiple symbols.
+assert int_to_mini_roman(12) == 'xi'  # 12 -> 'xi'
+assert int_to_mini_roman(58) == 'lviii'  # 58 -> 'lviii'
+assert int_to_mini_roman(199) == 'cxcix'  # 199 -> 'cxcix'
+assert int_to_mini_roman(2023) == 'mmxxiii'  # 2023 -> 'mmxxiii'
+```

@@ -1,0 +1,1 @@
+# Return the minimum value of the numpy array.

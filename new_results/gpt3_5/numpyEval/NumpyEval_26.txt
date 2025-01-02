@@ -1,0 +1,5 @@
+import numpy as np
+
+# Create a list of 10 arrays, each of shape (5, 4, 2, 5, 1, 2)
+L = [np.random.randn(5, 4, 2, 5, 1, 2) for i in range(10)]
+M = np.stack(L, axis=-1)

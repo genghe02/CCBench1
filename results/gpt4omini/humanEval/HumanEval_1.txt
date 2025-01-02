@@ -1,0 +1,36 @@
+```python
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    # This function separates groups of parentheses from a string and returns them as a list of strings.
+    # :param paren_string: str, the input string containing parentheses
+    # :return: List[str], a list of separate groups of balanced parentheses
+    
+    # Test cases:
+    # >>> separate_paren_groups("(a(b)c)") 
+    # ['(a(b)c)']
+    # >>> separate_paren_groups("()()")
+    # ['()', '()']
+    # >>> separate_paren_groups("a(b(c)d)e(f)")
+    # ['(b(c)d)', '(f)']
+    # >>> separate_paren_groups(")(())(")
+    # ['(())']
+    
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':  # If the character is an opening parenthesis
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':  # If the character is a closing parenthesis
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:  # If all opened parentheses are closed
+                result.append(''.join(current_string))  # Add the complete group to the result
+                current_string.clear()  # Clear the current string for the next group
+
+    return result
+```

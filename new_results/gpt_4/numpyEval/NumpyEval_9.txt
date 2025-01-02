@@ -1,0 +1,6 @@
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame({'A':[1,2,3], 'B':[1,2,3], 'C':[1,2,3]})
+# Fill the diagonal of a Dataframe with zeros
+np.fill_diagonal(df.values, 0)

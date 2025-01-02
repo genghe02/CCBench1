@@ -1,0 +1,142 @@
+```python
+"""
+This class represents a Minesweeper game that allows players to sweep for hidden mines within a grid.
+"""
+
+import random
+
+class MinesweeperGame:
+    def __init__(self, n, k) -> None:
+        """
+        Initializes the Minesweeper game with a specified grid size and number of mines.
+
+        Parameters:
+            n (int): The size of the grid (n x n).
+            k (int): The number of mines to place on the grid.
+        """
+        self.n = n
+        self.k = k
+        self.minesweeper_map = self.generate_mine_sweeper_map()
+        self.player_map = self.generate_playerMap()
+        self.score = 0
+
+    def generate_mine_sweeper_map(self):
+        """
+        Generates the minesweeper map containing mines and the corresponding hints.
+
+        Returns:
+            list: A 2D list representing the minesweeper map where 'X' indicates a mine and integers indicate the number of adjacent mines.
+        
+        Test cases:
+            # Test case 1: Generate map with size 5 and 3 mines
+            game = MinesweeperGame(5, 3)
+            assert len(game.minesweeper_map) == 5 
+            assert sum(row.count('X') for row in game.minesweeper_map) == 3
+            
+            # Test case 2: Generate map with size 3 and no mines
+            game_no_mines = MinesweeperGame(3, 0)
+            assert sum(row.count('X') for row in game_no_mines.minesweeper_map) == 0
+            
+            # Test case 3: Generate map with mines within bounds
+            game_out_of_bounds = MinesweeperGame(10, 15)
+            assert sum(row.count('X') for row in game_out_of_bounds.minesweeper_map) == 15
+        """
+        arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        
+        for num in range(self.k):
+            x = random.randint(0, self.n-1)
+            y = random.randint(0, self.n-1)
+            arr[y][x] = 'X'
+            for i in range(max(0, y-1), min(self.n, y+2)):
+                for j in range(max(0, x-1), min(self.n, x+2)):
+                    if arr[i][j] != 'X':
+                        arr[i][j] += 1
+        return arr
+
+    def generate_playerMap(self):
+        """
+        Generates the player's map, initially filled with '-' symbols.
+
+        Returns:
+            list: A 2D list representing the player's map with all values initialized to '-'.
+        
+        Test cases:
+            # Test case 1: Player map size matches Minesweeper map size
+            game = MinesweeperGame(4, 2)
+            assert len(game.generate_playerMap()) == 4
+            
+            # Test case 2: All values should be '-'
+            player_map = game.generate_playerMap()
+            assert all(cell == '-' for row in player_map for cell in row)
+    
+            # Test case 3: Check for valid dimensions of player map
+            game_big = MinesweeperGame(10, 5)
+            assert len(game_big.generate_playerMap()) == 10
+        """
+        arr = [['-' for row in range(self.n)] for column in range(self.n)]
+        return arr
+
+    def check_won(self, map):
+        """
+        Checks if the player has won the game by revealing all non-mine cells.
+
+        Parameters:
+            map (list): The player's current map state to check for a win condition.
+        
+        Returns:
+            bool: True if the player has won (all non-mine cells revealed), False otherwise.
+        
+        Test cases:
+            # Test case 1: All cells revealed
+            game = MinesweeperGame(2, 1)
+            player_map_win = [['1', '1'], ['-', 'X']]
+            assert game.check_won(player_map_win) == False
+            
+            # Test case 2: Partial reveal 
+            player_map_partial = [['-', '1'], ['1', 'X']]
+            assert game.check_won(player_map_partial) == False
+
+            # Test case 3: Winning condition met 
+            player_map_win = [['1', '1'], ['1', 'X']]
+            assert game.check_won(player_map_win) == True
+        """
+        for i in range(self.n):
+            for j in range(self.n):
+                if map[i][j] == '-' and self.minesweeper_map[i][j] != 'X':
+                    return False
+        return True
+
+    def sweep(self, x, y):
+        """
+        Sweeps a cell in the minesweeper map.
+
+        Parameters:
+            x (int): The row index of the cell to sweep.
+            y (int): The column index of the cell to sweep.
+        
+        Returns:
+            bool: True if the player wins immediately after sweeping, False if a mine is swept.
+        
+        Test cases:
+            # Test case 1: Sweeping a mine
+            game = MinesweeperGame(2, 2)
+            assert game.sweep(1, 1) == False
+            
+            # Test case 2: Sweeping an empty cell
+            game_no_mines = MinesweeperGame(2, 0)
+            assert isinstance(game_no_mines.sweep(0, 1), list)
+            
+            # Test case 3: Winning after sweeping
+            game_win = MinesweeperGame(2, 1)
+            game_win.player_map = [['1', '1'], ['-', 'X']]
+            assert game_win.sweep(0, 1) == True
+        """
+        if self.minesweeper_map[x][y] == 'X':
+            return False
+        else:
+            self.player_map[x][y] = self.minesweeper_map[x][y]
+            self.score += 1
+            if self.check_won(self.player_map):
+                return True
+            return self.player_map
+```

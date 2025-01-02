@@ -1,0 +1,17 @@
+ def triangle_area(a: float, h: float):
+ # Calculate the area of a triangle given its base (a) and height (h).
+ result = a * h / 2.0
+
+ # Test cases:
+ # Triangle with base 5 and height 12
+ # >>> triangle_area(5, 12)
+ # 30.0
+ # Triangle with base 3 and height 4
+ # >>> triangle_area(3, 4)
+ # 6.0
+ # Triangle with base and height both equal to 1
+ # >>> triangle_area(1, 1)
+ # 0.5
+ # Triangle with base equal to zero and height positive
+ # >>> triangle_area(0, 5)
+ # ValueError: base cannot be zero.

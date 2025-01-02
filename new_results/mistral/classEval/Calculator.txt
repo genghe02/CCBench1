@@ -1,0 +1,176 @@
+ """
+This class, named AccessGatewayFilter, is responsible for filtering incoming requests based on specific criteria. It handles request authentication, filtering, and logging.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialize the AccessGatewayFilter instance.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Evaluates the request against defined access rules and returns a boolean value indicating if access is granted or denied.
+
+        Parameters:
+            request (dict): An HTTP request object, containing information such as the path, method, and headers.
+
+        Returns:
+            bool: True if the request passes the filters, False otherwise.
+
+        Test cases:
+            # Test case 1: Allow access for a valid request
+            request = {'path': '/api/users', 'method': 'GET'}
+            assert filter(request) == True
+
+            # Test case 2: Deny access for an invalid request (path not starting with '/api')
+            request = {'path': '/admin/users', 'method': 'GET'}
+            assert filter(request) == False
+
+            # Test case 3: Deny access for an unauthorized request (missing JWT token)
+            request = {'path': '/api/users', 'method': 'GET'}
+            del request['headers']
+            assert filter(request) == False
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            self.authenticate(request)
+            return True
+
+        return False
+
+    def is_start_with(self, request_uri):
+        """
+        Checks if the request URI starts with an allowed prefix.
+
+        Parameters:
+            request_uri (str): The request URI to check.
+
+        Returns:
+            bool: True if the URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: Allow access for an API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Deny access for a non-API endpoint
+            assert is_start_with('/login') == False
+
+            # Test case 3: Allow access for the login endpoint
+            assert is_start_with('/login') == True
+        """
+
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def authenticate(self, request):
+        """
+        Authenticates the request by validating the JWT token and checking the user's access level.
+
+        Parameters:
+            request (dict): An HTTP request object containing an 'headers' key with the JWT token.
+
+        Test cases:
+            # Test case 1: Allow access for a request with a valid JWT token and user with level 3.
+            request = {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}}
+            user = {'id': 1, 'level': 3}
+            authenticate(request)
+            assert current_user == user
+
+            # Test case 2: Deny access for a request with an invalid JWT token.
+            request = {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}}
+            token = {'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}
+            request['headers'] = token
+            assert authenticate(request) == False
+
+            # Test case 3: Deny access for a request with an unauthorized user (level < 3).
+            user = {'id': 1, 'level': 1}
+            authenticate(request)
+            assert current_user is None
+        """
+
+        token = self.get_jwt_user(request)
+        if token:
+            self.set_current_user_info_and_log(token)
+        else:
+            self.log_access_attempt('Denied (no token)', request)
+            raise ValueError('Authentication failed.')
+
+    def get_jwt_user(self, request):
+        """
+        Retrieves the user information from the provided JWT token.
+
+        Parameters:
+            request (dict): An HTTP request object containing a 'headers' key with the JWT token.
+
+        Returns:
+            dict: A dictionary containing the user information.
+
+        Test cases:
+            # Test case 1: Successfully extract user information from a valid JWT token.
+            request = {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}}
+            expected_token = {
+                'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+                'user': {'id': 1, 'level': 3}
+            }
+            assert get_jwt_user(request) == expected_token['user']
+
+            # Test case 2: Raise a ValueError for an invalid JWT token.
+            request = {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}}
+            request['headers']['Authorization'] = 'Bearer 1234567890'
+            with pytest.raises(ValueError):
+                get_jwt_user(request)
+
+            # Test case 3: Raise a KeyError for a request without the 'Authorization' header.
+            del request['headers']
+            with pytest.raises(KeyError):
+                get_jwt_user(request)
+        """
+        headers = request.get('headers', {})
+        auth_header = headers.get('Authorization', None)
+
+        if auth_header:
+            token_type, token_value = auth_header.split(' ')
+            if token_type != 'Bearer':
+                raise ValueError('Invalid authorization header.')
+
+            return json.loads(base64.b64decode(token_value.split(' ')[1]).decode('utf-8'))
+
+        raise ValueError('Authentication failed.')
+
+    current_user = None
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Updates the current_user variable and logs the access event.
+
+        Parameters:
+            user (dict): The user object containing the user information.
+        """
+        self.current_user = user
+        self.log_access_attempt('Allowed', self.current_user, request)
+
+    def log_access_attempt(self, status, user=None, request=None):
+        """
+        Logs an access attempt event with the specified status and optional user and request information.
+
+        Parameters:
+            status (str): The status of the access attempt (e.g., 'Allowed' or 'Denied').
+            user (dict, optional): The user object containing the user information. Defaults to None.
+            request (dict, optional): The request object containing the request information. Defaults to None.
+        """
+        now = datetime.datetime.now()
+        log_message = f"{now} - Access attempt {status}: User={user['id']} Level={user['level']} Request={request['path']} ({request['method']})"
+        logging.info(log_message)</s>

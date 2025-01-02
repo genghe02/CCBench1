@@ -1,0 +1,6 @@
+ def derivative(xs: list):
+   # Calculate the derivative of a list of numbers using the following formula: derivative[i] = x[i] * x[i-1]
+   >>> derivative([1, 2, 3, 4]) # [2, 4, 6, 8]
+   >>> derivative([0, 1, 2, 3]) # [0, 1, 2, 3]
+   >>> derivative([1, 1, 1, 1]) # [1, 1, 1, 1]
+   return [(i * x) for i, x in enumerate(xs)][1:]</s>

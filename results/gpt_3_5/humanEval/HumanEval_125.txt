@@ -1,0 +1,20 @@
+```python
+def split_words(txt):
+    # Define a function that takes a text input and splits it into words or counts lowercase characters with even ASCII values.
+    # Tests:
+    # Test when txt contains spaces
+    assert split_words("hello world") == ["hello", "world"]
+    
+    # Test when txt contains commas
+    assert split_words("hello,world") == ["hello", "world"]
+    
+    # Test when txt does not contain spaces or commas
+    assert split_words("Hello123") == 3
+    
+    if " " in txt:
+        return txt.split()
+    elif "," in txt:
+        return txt.replace(',', ' ').split()
+    else:
+        return len([i for i in txt if i.islower() and ord(i) % 2 == 0])
+```

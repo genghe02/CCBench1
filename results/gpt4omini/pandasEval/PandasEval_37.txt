@@ -1,0 +1,34 @@
+```python
+import pandas as pd
+
+data = {'col_0': ['a', 'a', 'a', 'a', 'b', 'b', 'b'], 'col_1': [-2, -7, 6, 8, -5, 2, 6]}
+df = pd.DataFrame(data)
+
+# Requirements for the code: 
+# This code creates a Pandas DataFrame from the given dictionary and modifies 
+# the 'col_1' values for all rows where 'col_0' is 'a', limiting them to a range 
+# between -2 and 2 using the clip method. Values outside this range will be capped 
+# at -2 and 2, respectively.
+
+# Example test cases for the operation:
+# Original DataFrame:
+#    col_0  col_1
+# 0      a     -2
+# 1      a     -7
+# 2      a      6
+# 3      a      8
+# 4      b     -5
+# 5      b      2
+# 6      b      6
+# After applying the clipping operation, the DataFrame should look like:
+#    col_0  col_1
+# 0      a     -2
+# 1      a     -2
+# 2      a      2
+# 3      a      2
+# 4      b     -5
+# 5      b      2
+# 6      b      6
+
+df.loc[df['col_0'] == 'a', 'col_1'] = df.loc[df['col_0'] == 'a', 'col_1'].clip(-2, 2)
+```

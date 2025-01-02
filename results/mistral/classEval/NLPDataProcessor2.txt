@@ -1,0 +1,49 @@
+ <description for whole class>
+# This class processes text data using regular expressions for English letters only and calculates the top 5 most frequent words.
+
+class NLPDataProcessor2:
+
+    def process_data(self, string_list):
+        # Process each string in the list by removing non-English letters, converting to lowercase, and splitting into words.
+        <description for whole function>
+        :param string_list: list, a list of strings to be processed
+        :return: list, a list of lists where each inner list contains the words of a string
+
+        words_list = []
+        for string in string_list:
+            processed_string = re.sub(r'[^a-zA-Z\s]', '', string.lower())
+            words = processed_string.split()
+            words_list.append(words)
+        return words_list
+
+    def calculate_word_frequency(self, words_list):
+        # Calculate the frequency of each word in the given list of lists and return the top 5 most frequent words.
+        <description for whole function>
+        :param words_list: list, a list of lists where each inner list contains the words of a string
+        :return: dict, a dictionary containing the top 5 most frequent words and their frequencies
+
+        word_frequency = Counter()
+        for words in words_list:
+            word_frequency.update(words)
+        sorted_word_frequency = dict(sorted(word_frequency.items(), key=lambda x: x[1], reverse=True))
+        top_5_word_frequency = dict(list(sorted_word_frequency.items())[:5])
+        return top_5_word_frequency
+
+    def process(self, string_list):
+        # Process the given list of strings by calling process_data and calculate_word_frequency functions and return the result.
+        <description for whole function>
+        :param string_list: list, a list of strings to be processed
+        :return: dict, a dictionary containing the top 5 most frequent words and their frequencies
+
+        words_list = self.process_data(string_list)
+        word_frequency_dict = self.calculate_word_frequency(words_list)
+        return word_frequency_dict
+
+    <some test cases for the function>
+    >>> processor = NLPDataProcessor2()
+    >>> string_list = ['This is a test string', 'Another test string', 'Third test string']
+    >>> processor.process(string_list)
+    {'the': 3, 'is': 3, 'a': 3, 'test': 2,'string': 2}
+    >>> string_list = ['Hello World', 'Hello Python', 'Hello Java']
+    >>> processor.process(string_list)
+    {'hello': 3, 'world': 1, 'python': 1, 'java': 1}

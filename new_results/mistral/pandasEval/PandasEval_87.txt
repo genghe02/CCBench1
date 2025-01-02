@@ -1,0 +1,2 @@
+ # Concatenate two dataframes along a specific axis (axis=0 by default)
+return pd.concat([df1, df2])</s>

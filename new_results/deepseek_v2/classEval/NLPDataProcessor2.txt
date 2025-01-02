@@ -1,0 +1,117 @@
+```python
+"""
+This class provides functionality for processing and analyzing natural language data. 
+It includes methods for cleaning and tokenizing text, calculating word frequencies, 
+and returning the most frequent words in a given list of strings.
+"""
+
+from collections import Counter
+import re
+
+class NLPDataProcessor2:
+
+    def process_data(self, string_list):
+        """
+        Processes a list of strings by removing non-English characters, converting to lowercase, 
+        and splitting each string into individual words.
+
+        Parameters:
+            string_list (list of str): A list of strings to be processed.
+
+        Returns:
+            list of list of str: A list where each element is a list of words from the corresponding string.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = ["Hello, world!", "Python is great."]
+            expected_output = [['hello', 'world'], ['python', 'is', 'great']]
+            
+            # Test case 2: Edge case with empty string
+            input = [""]
+            expected_output = [[]]
+            
+            # Test case 3: Error case with non-string input
+            input = [123]
+            expected_output = TypeError
+        """
+        words_list = []
+        for string in string_list:
+            # Remove non-English letters and convert to lowercase
+            processed_string = re.sub(r'[^a-zA-Z\s]', '', string.lower())
+            # Split the string into words
+            words = processed_string.split()
+            words_list.append(words)
+        return words_list
+
+    def calculate_word_frequency(self, words_list):
+        """
+        Calculates the frequency of each word across all lists of words and returns the top 5 most frequent words.
+
+        Parameters:
+            words_list (list of list of str): A list where each element is a list of words.
+
+        Returns:
+            dict: A dictionary where keys are words and values are their frequencies, sorted in descending order.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = [['hello', 'world'], ['hello', 'python']]
+            expected_output = {'hello': 2, 'world': 1, 'python': 1}
+            
+            # Test case 2: Edge case with empty list
+            input = [[]]
+            expected_output = {}
+            
+            # Test case 3: Error case with non-list input
+            input = "hello"
+            expected_output = TypeError
+        """
+        word_frequency = Counter()
+        for words in words_list:
+            word_frequency.update(words)
+        sorted_word_frequency = dict(sorted(word_frequency.items(), key=lambda x: x[1], reverse=True))
+        top_5_word_frequency = dict(list(sorted_word_frequency.items())[:5])
+        return top_5_word_frequency
+
+    def process(self, string_list):
+        """
+        Processes a list of strings and returns the top 5 most frequent words.
+
+        Parameters:
+            string_list (list of str): A list of strings to be processed.
+
+        Returns:
+            dict: A dictionary where keys are words and values are their frequencies, sorted in descending order.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = ["Hello, world!", "Hello, Python!"]
+            expected_output = {'hello': 2, 'world': 1, 'python': 1}
+            
+            # Test case 2: Edge case with empty string
+            input = [""]
+            expected_output = {}
+            
+            # Test case 3: Error case with non-string input
+            input = [123]
+            expected_output = TypeError
+        """
+        words_list = self.process_data(string_list)
+        word_frequency_dict = self.calculate_word_frequency(words_list)
+        return word_frequency_dict
+```
+
+### Explanation:
+1. **Class Documentation**: The class `NLPDataProcessor2` is described as a tool for processing and analyzing natural language data, with methods for cleaning text, calculating word frequencies, and returning the most frequent words.
+
+2. **Method Documentation**:
+   - **`process_data`**: This method processes a list of strings by removing non-English characters, converting to lowercase, and splitting each string into words. It returns a list of lists of words.
+   - **`calculate_word_frequency`**: This method calculates the frequency of each word across all lists of words and returns the top 5 most frequent words.
+   - **`process`**: This method combines the functionality of `process_data` and `calculate_word_frequency` to process a list of strings and return the top 5 most frequent words.
+
+3. **Test Cases**: Each method includes three test cases:
+   - **Normal usage**: Demonstrates typical input and expected output.
+   - **Edge case**: Demonstrates how the method handles unusual but valid input (e.g., empty strings or lists).
+   - **Error case**: Demonstrates how the method handles invalid input (e.g., non-string or non-list input).
+
+4. **Formatting**: The documentation follows the standard Python docstring format, with clear sections for parameters, returns, and test cases. The language is concise and descriptive, ensuring that the purpose and functionality of each method are easily understood.

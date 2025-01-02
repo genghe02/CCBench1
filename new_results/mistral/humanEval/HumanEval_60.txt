@@ -1,0 +1,6 @@
+ def sum_to_n(n: int):
+    # Calculate the sum of numbers up to the given integer
+    >>> sum_to_n(5) # returns 15
+    >>> sum_to_n(0) # returns 0
+    >>> sum_to_n(-3) # returns 0 (sum of numbers up to negative number)
+    return sum(range(n + 1))</s>

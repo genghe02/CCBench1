@@ -1,0 +1,166 @@
+```python
+"""
+This class provides functionality to convert numerical values into their corresponding English word representations.
+"""
+
+class NumberWordFormatter:
+    def __init__(self):
+        """
+        Initializes the NumberWordFormatter instance with pre-defined numeral word lists.
+        
+        The lists contain words representing single digits, teen numbers, tens, thousands, millions, and other suffixes.
+        """
+        self.NUMBER = ["", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
+        self.NUMBER_TEEN = ["TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN",
+                            "EIGHTEEN", "NINETEEN"]
+        self.NUMBER_TEN = ["TEN", "TWENTY", "THIRTY", "FORTY", "FIFTY", "SIXTY", "SEVENTY", "EIGHTY", "NINETY"]
+        self.NUMBER_MORE = ["", "THOUSAND", "MILLION", "BILLION"]
+        self.NUMBER_SUFFIX = ["k", "w", "", "m", "", "", "b", "", "", "t", "", "", "p", "", "", "e"]
+
+    def format(self, x):
+        """
+        Converts a number into its English word representation.
+
+        Parameters:
+            x (int or float): The number to be converted to words. Can be None, an integer, or a float.
+
+        Returns:
+            str: The English word representation of the number. Returns an empty string if x is None.
+
+        Test cases:
+            # Test case 1: Integer input
+            assert format(1234) == "ONE THOUSAND TWO HUNDRED AND THIRTY FOUR ONLY"
+
+            # Test case 2: Float input
+            assert format(12.34) == "TWELVE AND CENTS THIRTY FOUR ONLY"
+
+            # Test case 3: None input
+            assert format(None) == ""
+        """
+        if x is not None:
+            return self.format_string(str(x))
+        else:
+            return ""
+
+    def format_string(self, x):
+        """
+        Formats a string representation of a number into its English word form.
+
+        Parameters:
+            x (str): The string representation of the number.
+
+        Returns:
+            str: The English word representation of the number. Returns "ZERO ONLY" if the number is equivalent to zero.
+
+        Test cases:
+            # Test case 1: Simple integer representation
+            assert format_string("0") == "ZERO ONLY"
+
+            # Test case 2: Large number with decimals
+            assert format_string("1000000.99") == "ONE MILLION AND CENTS NINETY NINE ONLY"
+
+            # Test case 3: Normal number with no decimals
+            assert format_string("205") == "TWO HUNDRED AND FIVE ONLY"
+        """
+        lstr, rstr = (x.split('.') + [''])[:2]
+        lstrrev = lstr[::-1]
+        a = [''] * 5
+
+        if len(lstrrev) % 3 == 1:
+            lstrrev += "00"
+        elif len(lstrrev) % 3 == 2:
+            lstrrev += "0"
+
+        lm = ""
+        for i in range(len(lstrrev) // 3):
+            a[i] = lstrrev[3 * i:3 * i + 3][::-1]
+            if a[i] != "000":
+                lm = self.trans_three(a[i]) + " " + self.parse_more(i) + " " + lm
+            else:
+                lm += self.trans_three(a[i])
+
+        xs = f"AND CENTS {self.trans_two(rstr)} " if rstr else ""
+        if not lm.strip():
+            return "ZERO ONLY"
+        else:
+            return f"{lm.strip()} {xs}ONLY"
+
+    def trans_two(self, s):
+        """
+        Translates a two-digit string into its corresponding English words.
+
+        Parameters:
+            s (str): A two-digit string representing a number.
+
+        Returns:
+            str: The English word representation of the two-digit number.
+
+        Test cases:
+            # Test case 1: Single digit represented as two digits
+            assert trans_two("04") == "FOUR"
+            
+            # Test case 2: Teen number
+            assert trans_two("12") == "TWELVE"
+            
+            # Test case 3: Tens place number
+            assert trans_two("20") == "TWENTY"
+        """
+        s = s.zfill(2)
+        if s[0] == "0":
+            return self.NUMBER[int(s[-1])]
+        elif s[0] == "1":
+            return self.NUMBER_TEEN[int(s) - 10]
+        elif s[1] == "0":
+            return self.NUMBER_TEN[int(s[0]) - 1]
+        else:
+            return self.NUMBER_TEN[int(s[0]) - 1] + " " + self.NUMBER[int(s[-1])]
+
+    def trans_three(self, s):
+        """
+        Translates a three-digit string into its corresponding English words.
+
+        Parameters:
+            s (str): A three-digit string representing a number.
+
+        Returns:
+            str: The English word representation of the three-digit number.
+
+        Test cases:
+            # Test case 1: Simple hundreds
+            assert trans_three("300") == "THREE HUNDRED"
+
+            # Test case 2: Including tens
+            assert trans_three("245") == "TWO HUNDRED AND FORTY FIVE"
+
+            # Test case 3: Simple zero in three-place
+            assert trans_three("050") == "FIFTY"
+        """
+        if s[0] == "0":
+            return self.trans_two(s[1:])
+        elif s[1:] == "00":
+            return f"{self.NUMBER[int(s[0])]} HUNDRED"
+        else:
+            return f"{self.NUMBER[int(s[0])]} HUNDRED AND {self.trans_two(s[1:])}"
+
+    def parse_more(self, i):
+        """
+        Gets the word representation of thousand, million, billion, etc.
+
+        Parameters:
+            i (int): The index corresponding to the larger number suffix.
+
+        Returns:
+            str: The word representation for thousands, millions, or billions.
+
+        Test cases:
+            # Test case 1: Thousand
+            assert parse_more(1) == "THOUSAND"
+
+            # Test case 2: Million
+            assert parse_more(2) == "MILLION"
+
+            # Test case 3: Billion
+            assert parse_more(3) == "BILLION"
+        """
+        return self.NUMBER_MORE[i]
+```

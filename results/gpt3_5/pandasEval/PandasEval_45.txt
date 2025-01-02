@@ -1,0 +1,2 @@
+# Convert the pandas Series s1 and s2 into sets for efficient intersection operation
+# Find the intersection of the two sets s1 and s2 and store the result in intersection_result

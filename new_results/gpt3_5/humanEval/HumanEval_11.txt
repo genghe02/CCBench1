@@ -1,0 +1,41 @@
+Input:
+def truncate_number(number: float) -> float:
+   # This function truncates a float number
+   <some test cases for the function>
+   return number % 1.0
+
+❌ Wrong Output:
+# This function truncates a float number
+# Returns only the decimal part
+def truncate_number(number: float) -> float:
+   >>> truncate_number(3.5)
+   return number % 1.0
+
+✅ Correct Output:
+
+def truncate_number(number: float) -> float:
+   # Return the decimal part of a float number by using modulo 1.0
+   >>> truncate_number(3.5) # returns 0.5
+   >>> truncate_number(-3.5) # returns 0.5
+   >>> truncate_number(0.0) # returns 0.0
+   return number % 1.0
+
+Rules:
+- Replace ONLY text inside <>
+- Keep all other code exactly as is
+- Requirements: ONE line starting with #
+- Test cases: Multiple >>> format lines
+from typing import List
+
+
+def string_xor(a: str, b: str) -> str:
+    # Perform XOR operation on two strings bit by bit
+    >>> string_xor('1100', '1010') # returns '0110'
+    >>> string_xor('1111', '0000') # returns '1111'
+    def xor(i, j):
+        if i == j:
+            return '0'
+        else:
+            return '1'
+
+    return ''.join(xor(x, y) for x, y in zip(a, b))

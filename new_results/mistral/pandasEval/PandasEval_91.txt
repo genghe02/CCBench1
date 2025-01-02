@@ -1,0 +1,3 @@
+ # Create a DataFrame from a list and convert 'two' column to float type
+df = pd.DataFrame(a, columns=['one', 'two'])
+df['two'] = df['two'].astype(float)</s>

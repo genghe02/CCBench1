@@ -1,0 +1,96 @@
+ class Server:
+
+    def __init__(self):
+        # Initialize an empty white list to store allowed addresses
+        # Initialize empty dictionaries to store send and receive structures
+        self.white_list = []
+        self.send_struct = {}
+        self.receive_struct = {}
+
+    def add_white_list(self, addr):
+        # Add an address to the white list if it's not already present
+        # Return the updated white list
+        <description for function>
+        :param addr: str, the address to be added to the white list
+        :return: list, the updated white list
+
+        if addr in self.white_list:
+            return False
+        else:
+            self.white_list.append(addr)
+            return self.white_list
+
+    def del_white_list(self, addr):
+        # Remove an address from the white list if it's present
+        # Return the updated white list
+        <description for function>
+        :param addr: str, the address to be removed from the white list
+        :return: list, the updated white list
+
+        if addr not in self.white_list:
+            return False
+        else:
+            self.white_list.remove(addr)
+            return self.white_list
+
+    def recv(self, info):
+        # Receive information from a client and store it in the receive_struct
+        # Return the content of the received information if the address is in the white list
+        <description for function>
+        :param info: dict, the received information in the format {"addr": str, "content": str}
+        :return: str, the content of the received information or -1 if the address is not in the white list
+
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return -1
+        addr = info["addr"]
+        content = info["content"]
+        if addr not in self.white_list:
+            return False
+        else:
+            self.receive_struct = {"addr": addr, "content": content}
+            return self.receive_struct["content"]
+
+    def send(self, info):
+        # Send information to a client using the provided address and content
+        # Return a success message if the address is in the white list
+        <description for function>
+        :param info: dict, the information to be sent in the format {"addr": str, "content": str}
+        :return: str, a success message or an error message if the address is not in the white list
+
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return "info structure is not correct"
+        self.send_struct = {"addr": info["addr"], "content": info["content"]}
+
+    def show(self, type):
+        # Display the send or receive structure based on the provided type
+        # Return the structure if the type is valid, otherwise return False
+        <description for function>
+        :param type: str, either "send" or "receive" to display the corresponding structure
+        :return: dict, the send or receive structure or False if the type is invalid
+
+        if type == "send":
+            return self.send_struct
+        elif type == "receive":
+            return self.receive_struct
+        else:
+            return False
+
+# Test cases:
+# Adding an address to the white list
+filter = Server()
+filter.add_white_list("127.0.0.1")
+# Deleting an address from the white list
+filter.add_white_list("127.0.0.1")
+filter.del_white_list("127.0.0.1")
+# Receiving information from a client
+filter.add_white_list("127.0.0.1")
+info = {"addr": "127.0.0.1", "content": "Hello, World!"}
+content = filter.recv(info)
+# Sending information to a client
+filter.add_white_list("127.0.0.1")
+info = {"addr": "127.0.0.1", "content": "Hello, Server!"}
+status = filter.send(info)
+# Displaying the send structure
+status = filter.show("send")
+# Displaying the receive structure
+status = filter.show("receive")

@@ -1,0 +1,15 @@
+```python
+def get_max_triples(n):
+    # Generate a sequence A where each element is i*i - i + 1, then count the number of triplets (i,j,k) where A[i]+A[j]+A[k] is divisible by 3
+    >>> get_max_triples(5) # returns 2
+    >>> get_max_triples(10) # returns 36
+    >>> get_max_triples(3) # returns 0
+    A = [i*i - i + 1 for i in range(1,n+1)]
+    ans = []
+    for i in range(n):
+        for j in range(i+1,n):
+            for k in range(j+1,n):
+                if (A[i]+A[j]+A[k])%3 == 0:
+                    ans += [(A[i],A[j],A[k])]
+    return len(ans)
+```

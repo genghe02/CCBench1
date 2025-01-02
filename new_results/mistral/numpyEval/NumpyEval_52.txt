@@ -1,0 +1,6 @@
+ import numpy as np
+
+# Sort the 2D numpy array based on its first and second columns in ascending order
+# and return the sorted array
+ind = np.lexsort((a[:, 0], a[:, 1]))
+a = a[ind]</s>

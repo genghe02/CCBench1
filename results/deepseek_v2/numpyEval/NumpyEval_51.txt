@@ -1,0 +1,1 @@
+# Find the indices of the k smallest elements in the array A using np.argpartition, which efficiently partitions the array around the k-th smallest element and returns the first k indices of the partitioned array.

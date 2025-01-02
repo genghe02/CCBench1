@@ -1,0 +1,4 @@
+import pandas as pd
+
+# Normalize each column in the dataframe using min-max scaling
+normalized_df = df.apply(lambda x: (x - x.min()) / (x.max() - x.min()))

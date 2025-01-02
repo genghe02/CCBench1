@@ -1,0 +1,1 @@
+import numpy as np\n\ndef add_row_to_arr(arr, row):\n    # Append a new row to the existing array\n    return np.vstack((arr, row))

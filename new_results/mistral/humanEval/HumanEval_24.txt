@@ -1,0 +1,8 @@
+ def largest_divisor(n: int) -> int:
+   # Find the largest divisor of the given integer using a for loop
+   >>> largest_divisor(12) # returns 4
+   >>> largest_divisor(15) # returns 3
+   >>> largest_divisor(2) # returns 2
+   for i in reversed(range(n)):
+       if n % i == 0:
+           return i</s>

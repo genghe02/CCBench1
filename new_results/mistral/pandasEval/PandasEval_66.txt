@@ -1,0 +1,2 @@
+ # Return the percentage representation of each gender in the given series
+return series.value_counts(normalize=True)</s>

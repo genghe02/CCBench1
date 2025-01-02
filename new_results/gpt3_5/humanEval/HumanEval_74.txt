@@ -1,0 +1,17 @@
+# This function calculates the total length of strings in two lists and returns the list with the smaller total length
+>>> total_match(['a', 'bc', 'def'], ['xy', 'z']) # returns ['xy', 'z']
+>>> total_match(['aa', 'bbb'], ['cc', 'd']) # returns ['cc', 'd']
+
+def total_match(lst1, lst2):
+    l1 = 0
+    for st in lst1:
+        l1 += len(st)
+    
+    l2 = 0
+    for st in lst2:
+        l2 += len(st)
+    
+    if l1 <= l2:
+        return lst1
+    else:
+        return lst2

@@ -1,0 +1,4 @@
+# This function checks if a string has nested square brackets
+>>> is_nested("[[[]]]") # returns True
+>>> is_nested("[[[]]") # returns False
+>>> is_nested("[") # returns False

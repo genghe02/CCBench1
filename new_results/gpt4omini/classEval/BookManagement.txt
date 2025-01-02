@@ -1,0 +1,123 @@
+```python
+"""
+This class manages a collection of books, allowing for adding, removing, and viewing the inventory.
+"""
+
+class BookManagement:
+    def __init__(self):
+        """
+        Initializes the BookManagement instance with an empty inventory.
+
+        The inventory is represented as a dictionary, where the keys are book titles and the values are the quantities of each book.
+        """
+        self.inventory = {}
+
+    def add_book(self, title, quantity=1):
+        """
+        Adds a specified quantity of a book to the inventory. If the book already exists, the quantity is updated.
+
+        Parameters:
+            title (str): The title of the book to be added.
+            quantity (int): The quantity of the book to add. Defaults to 1.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Adding a new book
+            add_book('1984', 3)
+            assert inventory['1984'] == 3
+
+            # Test case 2: Adding to an existing book
+            add_book('1984', 2)
+            assert inventory['1984'] == 5
+
+            # Test case 3: Adding a book with default quantity
+            add_book('Brave New World')
+            assert inventory['Brave New World'] == 1
+        """
+        if title in self.inventory:
+            self.inventory[title] += quantity
+        else:
+            self.inventory[title] = quantity
+
+    def remove_book(self, title, quantity):
+        """
+        Removes a specified quantity of a book from the inventory. If the quantity to remove exceeds the available amount, an exception is raised.
+
+        Parameters:
+            title (str): The title of the book to be removed.
+            quantity (int): The quantity of the book to remove.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Successfully removing a book
+            add_book('To Kill a Mockingbird', 2)
+            remove_book('To Kill a Mockingbird', 1)
+            assert inventory['To Kill a Mockingbird'] == 1
+
+            # Test case 2: Removing the entire quantity
+            remove_book('To Kill a Mockingbird', 1)
+            assert 'To Kill a Mockingbird' not in inventory
+
+            # Test case 3: Attempting to remove a book not in inventory
+            try:
+                remove_book('Unknown Book', 1)
+            except Exception as e:
+                assert str(e) == "Book not found or insufficient quantity."
+        """
+        if title not in self.inventory or self.inventory[title] < quantity:
+            raise Exception("Book not found or insufficient quantity.")
+        self.inventory[title] -= quantity
+        if self.inventory[title] == 0:
+            del self.inventory[title]
+
+    def view_inventory(self):
+        """
+        Returns the current inventory of books.
+
+        Returns:
+            dict: A dictionary representing the inventory, where keys are book titles and values are quantities.
+
+        Test cases:
+            # Test case 1: Empty inventory
+            assert view_inventory() == {}
+
+            # Test case 2: Inventory with books
+            add_book('Fahrenheit 451', 5)
+            assert view_inventory() == {'Fahrenheit 451': 5}
+
+            # Test case 3: Inventory after adding multiple books
+            add_book('The Catcher in the Rye', 2)
+            assert view_inventory() == {'Fahrenheit 451': 5, 'The Catcher in the Rye': 2}
+        """
+        return self.inventory
+
+    def view_book_quantity(self, title):
+        """
+        Returns the quantity of a specific book in the inventory. If the book is not found, it returns 0.
+
+        Parameters:
+            title (str): The title of the book whose quantity is to be checked.
+
+        Returns:
+            int: The quantity of the specified book, or 0 if the book is not found.
+
+        Test cases:
+            # Test case 1: Book exists in inventory
+            add_book('Moby Dick', 1)
+            assert view_book_quantity('Moby Dick') == 1
+
+            # Test case 2: Book does not exist in inventory
+            assert view_book_quantity('Nonexistent Book') == 0
+
+            # Test case 3: Checking quantity after removal
+            remove_book('Moby Dick', 1)
+            assert view_book_quantity('Moby Dick') == 0
+        """
+        if title not in self.inventory:
+            return 0
+        return self.inventory[title]
+```

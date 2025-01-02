@@ -1,0 +1,5 @@
+```python
+def double_the_difference(lst):
+    # Calculate the sum of squares of elements in the list that are positive, odd, and not floating-point numbers.
+    return sum([i**2 for i in lst if i > 0 and i%2!=0 and "." not in str(i)])
+```

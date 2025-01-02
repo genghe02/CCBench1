@@ -1,0 +1,4 @@
+def double_the_difference(lst):
+    # This function takes a list of numbers as an input, filters out the positive odd integers, squares each of them, 
+    # and returns the sum. The function specifically ignores any float values even if they are odd.
+    return sum([i**2 for i in lst if i > 0 and i%2!=0 and "." not in str(i)])

@@ -1,0 +1,8 @@
+ # Filter the list by keeping only the strings that start with a given prefix
+ # Uses list comprehension and string startswith method
+ >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "a") # returns ["apple"]
+ >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "ba") # returns ["banana"]
+ >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "ch") # returns ["cherry"]
+ >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "or") # returns []
+ >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "") # returns []
+ return [x for x in strings if x.startswith(prefix)]</s>

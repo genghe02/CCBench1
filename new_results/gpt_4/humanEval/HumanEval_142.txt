@@ -1,0 +1,15 @@
+def sum_squares(lst):
+    # This function computes the sum of elements in a list where each element at an index divisible by 3 is squared, and each element at an index divisible by 4 (and not by 3) is cubed. All other elements remain the same.
+    
+    >>> sum_squares([1, 2, 3, 4, 5, 6]) # returns 86
+    >>> sum_squares([0, 0, 0, 0]) # returns 0
+    >>> sum_squares([-1, -2, -3, -4, -5, -6]) # returns -86
+    result =[]
+    for i in range(len(lst)):
+        if i %3 == 0:
+            result.append(lst[i]**2)
+        elif i % 4 == 0 and i%3 != 0:
+            result.append(lst[i]**3)
+        else:
+            result.append(lst[i])
+    return sum(result)

@@ -1,0 +1,5 @@
+# This function is used for encoding a string by shifting the characters by 5 positions
+>>> encode_shift("hello") # returns "mjqqt"
+
+# This function is used for decoding a string that was encoded with a shift of 5 positions
+>>> decode_shift("mjqqt") # returns "hello"

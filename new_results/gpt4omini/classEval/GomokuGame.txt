@@ -1,0 +1,154 @@
+```python
+"""
+This class implements a Gomoku game where two players take turns to place their pieces on a square grid.
+The objective is to connect five pieces in a row either horizontally, vertically, or diagonally.
+"""
+
+class GomokuGame:
+    def __init__(self, board_size):
+        """
+        Initializes the Gomoku game board with a specified size.
+
+        Parameters:
+            board_size (int): The size of the board, must be a positive integer.
+
+        Returns:
+            None: The constructor does not return a value.
+        
+        Test cases:
+            # Test case 1: Create a 15x15 board
+            game = GomokuGame(15)
+            assert len(game.board) == 15
+            assert len(game.board[0]) == 15
+            
+            # Test case 2: Create a 19x19 board
+            game = GomokuGame(19)
+            assert len(game.board) == 19
+            assert len(game.board[0]) == 19
+            
+            # Test case 3: Attempt to create a board with size 0 (not handled in this implementation)
+            try:
+                game = GomokuGame(0)
+            except Exception:
+                assert True
+        """
+        self.board_size = board_size
+        self.board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        """
+        Places the current player's piece on the specified board coordinates.
+
+        Parameters:
+            row (int): The row index where the player wants to place their piece.
+            col (int): The column index where the player wants to place their piece.
+
+        Returns:
+            bool: True if the move was successful, False if the spot was already taken.
+        
+        Test cases:
+            # Test case 1: Valid move
+            game = GomokuGame(15)
+            assert game.make_move(0, 0) == True
+            
+            # Test case 2: Move in an occupied position
+            assert game.make_move(0, 0) == False
+            
+            # Test case 3: Move out-of-bounds (will not occur in current implementation but can be tested)
+            assert game.make_move(15, 15) == False  # Should be handled appropriately
+        """
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        return False
+
+    def check_winner(self):
+        """
+        Checks the current game state to determine if there is a winner.
+
+        Returns:
+            str or None: Returns the symbol of the winning player ('X' or 'O') if a winner exists,
+            otherwise returns None.
+        
+        Test cases:
+            # Test case 1: No winner
+            game = GomokuGame(15)
+            assert game.check_winner() is None
+            
+            # Test case 2: Winner exists
+            game.make_move(0, 0)
+            game.make_move(1, 0)
+            game.make_move(0, 1)
+            game.make_move(1, 1)
+            game.make_move(0, 2)
+            game.make_move(1, 2)
+            game.make_move(0, 3)
+            game.make_move(1, 3)
+            assert game.make_move(0, 4) == True
+            assert game.check_winner() == 'X'  # 'X' wins
+            
+            # Test case 3: Check diagonal win
+            game = GomokuGame(15)
+            game.make_move(2, 2)
+            game.make_move(3, 3)
+            game.make_move(4, 4)
+            game.make_move(5, 5)
+            assert game.make_move(6, 6) == True
+            assert game.check_winner() == 'X'  # 'X' should win diagonally
+        """
+        directions = [(0, 1), (1, 0), (1, 1), (1, -1)]
+        for row in range(self.board_size):
+            for col in range(self.board_size):
+                if self.board[row][col] != ' ':
+                    for direction in directions:
+                        if self._check_five_in_a_row(row, col, direction):
+                            return self.board[row][col]
+        return None
+
+    def _check_five_in_a_row(self, row, col, direction):
+        """
+        Helper method to check if there are five consecutive pieces in a specified direction.
+
+        Parameters:
+            row (int): Current row position of the piece.
+            col (int): Current column position of the piece.
+            direction (tuple): A tuple indicating the direction to check (dx, dy).
+        
+        Returns:
+            bool: True if there are five pieces in a row in the specified direction, otherwise False.
+
+        Test cases:
+            # Test case 1: Check with valid five in a row
+            game = GomokuGame(15)
+            game.make_move(0, 0)
+            game.make_move(1, 0)
+            game.make_move(2, 0)
+            game.make_move(3, 0)
+            game.make_move(4, 0)
+            assert game._check_five_in_a_row(0, 0, (1, 0)) == True  # Vertical win
+            
+            # Test case 2: Check for no five in a row
+            game = GomokuGame(15)
+            game.make_move(0, 0)
+            game.make_move(1, 0)
+            game.make_move(2, 0)
+            assert game._check_five_in_a_row(0, 0, (1, 0)) == False  # Not enough pieces
+            
+            # Test case 3: Check out-of-bounds scenario
+            assert game._check_five_in_a_row(0, 0, (1, 1)) == False  # Will not get five out-of-bounds
+        """
+        dx, dy = direction
+        count = 1
+        symbol = self.board[row][col]
+        for i in range(1, 5):
+            new_row = row + dx * i
+            new_col = col + dy * i
+            if not (0 <= new_row < self.board_size and 0 <= new_col < self.board_size):
+                return False
+            if self.board[new_row][new_col] != symbol:
+                return False
+            count += 1
+        return count == 5
+```

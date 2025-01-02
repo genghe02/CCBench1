@@ -1,0 +1,12 @@
+```python
+def circular_shift(x, shift):
+    # Perform a circular shift on the digits of integer x by the specified shift amount
+    >>> circular_shift(12345, 2) # returns '45123'
+    >>> circular_shift(12345, 7) # returns '54321'
+    >>> circular_shift(12345, 0) # returns '12345'
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]
+```

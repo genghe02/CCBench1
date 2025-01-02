@@ -1,0 +1,5 @@
+ # Create an empty array with shape matching the desired output
+new_arr = np.empty((len(arr1), len(arr1[0]) + len(arr2[0])))
+
+# Vertically stack the two arrays to form the output
+return np.vstack((np.hstack((new_arr, arr1.T)), arr2.T))</s>

@@ -1,0 +1,2 @@
+ # Get shape of the 2x5 zero matrix
+a_shape = a.shape</s>

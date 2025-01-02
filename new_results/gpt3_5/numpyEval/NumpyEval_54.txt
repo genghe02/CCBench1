@@ -1,0 +1,4 @@
+# Reshape the array 'a' to a column vector containing numbers from 1 to 9
+a = a.reshape(len(a), 1)
+
+b = a[4:]

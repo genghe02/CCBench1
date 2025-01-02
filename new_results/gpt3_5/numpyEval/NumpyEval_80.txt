@@ -1,0 +1,2 @@
+# Split the input array x into 3 equal parts and return as a list of arrays
+result = np.array_split(x, 3)

@@ -1,0 +1,129 @@
+ """
+This class manages a book inventory and provides methods to add, remove, view books, and check book quantity.
+"""
+
+import dict
+
+class BookManagement:
+
+    def __init__(self):
+        """
+        Initializes an empty book inventory.
+        """
+        self.inventory = {}
+
+    def add_book(self, title, quantity=1):
+        """
+        Adds a book to the inventory with the given title and optionally the specified quantity.
+
+        Parameters:
+            title (str): The title of the book to add
+            quantity (int): The number of copies of the book to add (defaults to 1)
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Adding a new book
+            book_manager = BookManagement()
+            book_manager.add_book('The Great Gatsby')
+            assert 'The Great Gatsby' in book_manager.inventory
+            
+            # Test case 2: Adding an existing book with new quantity
+            book_manager = BookManagement()
+            book_manager.add_book('To Kill a Mockingbird', 2)
+            assert book_manager.inventory['To Kill a Mockingbird'] == 2
+            
+            # Test case 3: Adding a book with default quantity
+            book_manager = BookManagement()
+            book_manager.add_book('The Old Man and the Sea')
+            assert 'The Old Man and the Sea' in book_manager.inventory
+            assert book_manager.inventory['The Old Man and the Sea'] == 1
+        """
+
+    def remove_book(self, title, quantity):
+        """
+        Removes the specified number of copies of the book with the given title from the inventory.
+
+        Parameters:
+            title (str): The title of the book to remove
+            quantity (int): The number of copies of the book to remove
+        
+        Returns:
+            None
+        
+        Raises:
+            KeyError: If the book is not in the inventory
+            ValueError: If the requested removal exceeds the inventory quantity
+        
+        Test cases:
+            # Test case 1: Removing a single copy of a book
+            book_manager = BookManagement()
+            book_manager.add_book('The Catcher in the Rye')
+            book_manager.remove_book('The Catcher in the Rye', 1)
+            assert 'The Catcher in the Rye' not in book_manager.inventory
+            
+            # Test case 2: Removing all copies of a book
+            book_manager = BookManagement()
+            book_manager.add_book('The Catcher in the Rye', 5)
+            book_manager.remove_book('The Catcher in the Rye', 5)
+            assert 'The Catcher in the Rye' not in book_manager.inventory
+            
+            # Test case 3: Removing more copies than available
+            book_manager = BookManagement()
+            book_manager.add_book('The Catcher in the Rye', 2)
+            with pytest.raises(ValueError):
+                book_manager.remove_book('The Catcher in the Rye', 3)
+        """
+
+    def view_inventory(self):
+        """
+        Returns the current book inventory as a dictionary.
+
+        Parameters:
+            None
+
+        Returns:
+            dict: A dictionary containing book titles as keys and their respective quantities as values
+
+        Test cases:
+            # Test case 1: Empty inventory
+            assert BookManagement().view_inventory() == {}
+            
+            # Test case 2: Filled inventory
+            book_manager = BookManagement()
+            book_manager.add_book('The Great Gatsby')
+            book_manager.add_book('To Kill a Mockingbird')
+            assert book_manager.view_inventory() == {'The Great Gatsby': 1, 'To Kill a Mockingbird': 1}
+        """
+
+    def view_book_quantity(self, title):
+        """
+        Returns the number of copies of the book with the given title in the inventory.
+
+        Parameters:
+            title (str): The title of the book to check
+
+        Returns:
+            int: The current quantity of the book in the inventory
+
+        Raises:
+            KeyError: If the book is not in the inventory
+
+        Test cases:
+            # Test case 1: Unknown title
+            book_manager = BookManagement()
+            with pytest.raises(KeyError):
+                book_manager.view_book_quantity('1984')
+            
+            # Test case 2: Existing title with a known quantity
+            book_manager = BookManagement()
+            book_manager.add_book('The Great Gatsby')
+            book_manager.add_book('The Great Gatsby')
+            assert book_manager.view_book_quantity('The Great Gatsby') == 2
+            
+            # Test case 3: Title with zero copies
+            book_manager = BookManagement()
+            book_manager.add_book('The Great Gatsby')
+            book_manager.remove_book('The Great Gatsby', 1)
+            assert book_manager.view_book_quantity('The Great Gatsby') == 0</s>

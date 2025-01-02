@@ -1,0 +1,4 @@
+# Replace elements in the input array that are greater than a specified value with a new value efficiently using numpy. 
+# The function takes three parameters: arr (input numpy array), value (threshold value for replacement), and new_value (value to replace with).
+# The function directly modifies the input array 'arr' in place, replacing elements greater than 'value' with 'new_value'.
+# Finally, the modified array is returned.

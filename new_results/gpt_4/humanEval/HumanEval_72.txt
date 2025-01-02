@@ -1,0 +1,15 @@
+def will_it_fly(q,w):
+    # This function checks if the sum of the elements in list q is greater than w and if the list is a palindrome, returns False if either condition is not met.
+    >>> will_it_fly([1,2,3,2,1], 10) # returns True
+    >>> will_it_fly([1,2,3,2,1], 7) # returns False
+    >>> will_it_fly([1,2,3,4,5], 15) # returns False
+    if sum(q) > w:
+        return False
+
+    i, j = 0, len(q)-1
+    while i<j:
+        if q[i] != q[j]:
+            return False
+        i+=1
+        j-=1
+    return True

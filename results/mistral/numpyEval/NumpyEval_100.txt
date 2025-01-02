@@ -1,0 +1,7 @@
+ # Add the given element at the beginning of the array using numpy's np.insert() function.
+
+import numpy as np
+
+def prepend_element_to_array(arr, element):
+    <Add the given element at the beginning of the array using numpy's np.insert() function.>
+    return np.insert(arr, 0, element)

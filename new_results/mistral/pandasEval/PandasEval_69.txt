@@ -1,0 +1,2 @@
+ # Replace NaN values in specified columns with 0
+df[col_names] = df[col_names].fillna(0)</s>

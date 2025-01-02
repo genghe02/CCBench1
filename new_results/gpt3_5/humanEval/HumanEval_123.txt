@@ -1,0 +1,4 @@
+# This function generates a Collatz sequence with odd numbers only starting from n
+>>> get_odd_collatz(10) # returns []
+>>> get_odd_collatz(15) # returns [15, 23, 35, 53, 5, 1]
+>>> get_odd_collatz(30) # returns [5, 1]

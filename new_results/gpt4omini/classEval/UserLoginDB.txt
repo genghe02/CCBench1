@@ -1,0 +1,132 @@
+```python
+"""
+This class manages user login operations through a SQLite database.
+It provides methods to insert, search, delete, and validate users.
+"""
+
+import sqlite3
+
+class UserLoginDB:
+    def __init__(self, db_name):
+        """
+        Initializes the UserLoginDB class with a connection to the SQLite database.
+
+        Parameters:
+            db_name (str): The name of the database file to connect to.
+
+        Returns:
+            None
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+
+    def insert_user(self, username, password):
+        """
+        Inserts a new user into the database with the provided username and password.
+
+        Parameters:
+            username (str): The username of the new user.
+            password (str): The password of the new user.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Insert a user successfully.
+            input = ('testuser', 'securepassword')
+            expected_output = None
+            
+            # Test case 2: Try inserting a user with an existing username (if the constraint is added).
+            input = ('existinguser', 'anotherpassword')
+            expected_output = None  # Would depend on integrity constraints
+            
+            # Test case 3: Error handling when username or password is empty.
+            input = ('', '')
+            expected_output = None  # This would raise a constraint error if validations are in place.
+        """
+        self.cursor.execute('''
+            INSERT INTO users (username, password)
+            VALUES (?, ?)
+        ''', (username, password))
+        self.connection.commit()
+
+    def search_user_by_username(self, username):
+        """
+        Searches for a user in the database by username.
+
+        Parameters:
+            username (str): The username to search for.
+
+        Returns:
+            tuple: The user record if found, otherwise None.
+
+        Test cases:
+            # Test case 1: User exists.
+            assert search_user_by_username('testuser') == ('testuser', 'securepassword')
+            
+            # Test case 2: User does not exist.
+            assert search_user_by_username('nonexistentuser') == None
+            
+            # Test case 3: Search with an invalid type (should raise an error).
+            assert search_user_by_username(123) raises TypeError
+        """
+        self.cursor.execute('''
+            SELECT * FROM users WHERE username = ?
+        ''', (username,))
+        user = self.cursor.fetchone()
+        return user
+
+    def delete_user_by_username(self, username):
+        """
+        Deletes a user from the database by username.
+
+        Parameters:
+            username (str): The username of the user to delete.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: User exists and is deleted successfully.
+            input = 'testuser'
+            expected_output = None
+            
+            # Test case 2: Deleting a user that doesn't exist.
+            input = 'nonexistentuser'
+            expected_output = None  # No error should occur
+            
+            # Test case 3: Error handling when an empty username is passed.
+            input = ''
+            expected_output = None  # Would raise a constraint error if validations are in place.
+        """
+        self.cursor.execute('''
+            DELETE FROM users WHERE username = ?
+        ''', (username,))
+        self.connection.commit()
+
+    def validate_user_login(self, username, password):
+        """
+        Validates user login by checking if the provided username and password match.
+
+        Parameters:
+            username (str): The username of the user attempting to log in.
+            password (str): The password of the user attempting to log in.
+
+        Returns:
+            bool: True if the username and password match, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid username and password.
+            assert validate_user_login('testuser', 'securepassword') == True
+            
+            # Test case 2: Valid username but incorrect password.
+            assert validate_user_login('testuser', 'wrongpassword') == False
+            
+            # Test case 3: Invalid username.
+            assert validate_user_login('nonexistentuser', 'anything') == False
+        """
+        user = self.search_user_by_username(username)
+        if user is not None and user[1] == password:
+            return True
+        return False
+```

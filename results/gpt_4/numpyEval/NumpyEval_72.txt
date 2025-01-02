@@ -1,0 +1,1 @@
+# This function is designed to get the i-th index in the last dimension of a numpy array. It uses numpy's advanced indexing feature to achieve this.

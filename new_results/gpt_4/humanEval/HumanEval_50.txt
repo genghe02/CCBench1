@@ -1,0 +1,12 @@
+def encode_shift(s: str):
+    # Encode a string by shifting each character 5 places forward in the alphabet
+    >>> encode_shift("abc") # returns "fgh"
+    >>> encode_shift("xyz") # returns "cde"
+    return "".join([chr(((ord(ch) + 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+
+def decode_shift(s: str):
+    # Decode a string by shifting each character 5 places backward in the alphabet
+    >>> decode_shift("fgh") # returns "abc"
+    >>> decode_shift("cde") # returns "xyz"
+    return "".join([chr(((ord(ch) - 5 - ord("a")) % 26) + ord("a")) for ch in s])

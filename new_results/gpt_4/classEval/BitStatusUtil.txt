@@ -1,0 +1,114 @@
+"""
+This class provides utility methods for handling bitwise operations on status codes.
+"""
+
+class BitStatusUtil:
+    @staticmethod
+    def add(states, stat):
+        """
+        Adds a status code to the existing state bitfield.
+        
+        Parameters:
+            states (int): The current state bitfield
+            stat (int): The status code to add
+            
+        Returns:
+            int: The updated state bitfield
+            
+        Test cases:
+            # Test case 1: Adding a status to an empty bitfield
+            assert add(0b0000, 0b0100) == 0b0100
+            
+            # Test case 2: Adding a status to a non-empty bitfield
+            assert add(0b0100, 0b0010) == 0b0110
+            
+            # Test case 3: Adding a status that is already present
+            assert add(0b0100, 0b0100) == 0b0100
+        """
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    def has(states, stat):
+        """
+        Checks if a status code is present in the state bitfield.
+        
+        Parameters:
+            states (int): The current state bitfield
+            stat (int): The status code to check
+            
+        Returns:
+            bool: True if the status is present in the state bitfield, False otherwise
+            
+        Test cases:
+            # Test case 1: Checking for a status that is present
+            assert has(0b0100, 0b0100) == True
+            
+            # Test case 2: Checking for a status that is not present
+            assert has(0b0100, 0b0010) == False
+            
+            # Test case 3: Checking in an empty bitfield
+            assert has(0b0000, 0b0100) == False
+        """
+        BitStatusUtil.check([states, stat])
+        return (states & stat) == stat
+
+    @staticmethod
+    def remove(states, stat):
+        """
+        Removes a status code from the state bitfield.
+        
+        Parameters:
+            states (int): The current state bitfield
+            stat (int): The status code to remove
+            
+        Returns:
+            int: The updated state bitfield
+            
+        Test cases:
+            # Test case 1: Removing a status that is present
+            assert remove(0b0110, 0b0100) == 0b0010
+            
+            # Test case 2: Removing a status that is not present
+            assert remove(0b0100, 0b0010) == 0b0100
+            
+            # Test case 3: Removing from an empty bitfield
+            assert remove(0b0000, 0b0100) == 0b0000
+        """
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    def check(args):
+        """
+        Validates that the arguments are positive even integers.
+        
+        Parameters:
+            args (list of int): The arguments to check
+            
+        Raises:
+            ValueError: If any argument is not a positive even integer
+            
+        Test cases:
+            # Test case 1: Valid arguments
+            check([0b0100, 0b0010])  # No exception raised
+            
+            # Test case 2: Negative argument
+            try:
+                check([0b0100, -0b0010])
+            except ValueError as e:
+                assert str(e) == "-2 must be greater than or equal to 0"
+            
+            # Test case 3: Odd argument
+            try:
+                check([0b0100, 0b0001])
+            except ValueError as e:
+                assert str(e) == "1 not even"
+        """
+        for arg in args:
+            if arg < 0:
+                raise ValueError(f"{arg} must be greater than or equal to 0")
+            if arg % 2 != 0:
+                raise ValueError(f"{arg} not even")

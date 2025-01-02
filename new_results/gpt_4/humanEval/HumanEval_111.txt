@@ -1,0 +1,20 @@
+def histogram(test):
+    # This function creates a histogram from a string by splitting it into words and counting their occurrences
+    
+    >>> histogram("this is a test this is a test") # returns {'this': 2, 'is': 2, 'a': 2, 'test': 2}
+    >>> histogram("hello world") # returns {'hello': 1, 'world': 1}
+    >>> histogram("") # returns {}
+    
+    dict1={}
+    list1=test.split(" ")
+    t=0
+
+    for i in list1:
+        if(list1.count(i)>t) and i!='':
+            t=list1.count(i)
+    if t>0:
+        for i in list1:
+            if(list1.count(i)==t):
+                
+                dict1[i]=t
+    return dict1

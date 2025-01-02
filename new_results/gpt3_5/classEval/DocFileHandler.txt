@@ -1,0 +1,117 @@
+"""
+This class provides functionality to read, write, and modify text content in a Word document.
+
+The class DocFileHandler allows reading and writing text content, adding headings, and inserting tables into a Word document.
+
+"""
+
+from docx import Document
+from docx.shared import Pt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+
+
+class DocFileHandler:
+    def __init__(self, file_path):
+        """
+        Initialize the DocFileHandler with the path to the Word document.
+
+        Parameters:
+            file_path (str): The path to the Word document
+        """
+        self.file_path = file_path
+
+    def read_text(self):
+        """
+        Read and extract text content from the Word document.
+
+        Returns:
+            str: Text content of the Word document
+        """
+        doc = Document(self.file_path)
+        text = []
+        for paragraph in doc.paragraphs:
+            text.append(paragraph.text)
+        return "\n".join(text)
+
+    def write_text(self, content, font_size=12, alignment='left'):
+        """
+        Write text content to the Word document.
+
+        Parameters:
+            content (str): The text content to be written
+            font_size (int): The font size of the text (default is 12)
+            alignment (str): The alignment of the text (options: 'left', 'center', 'right')
+
+        Returns:
+            bool: True if writing is successful, False otherwise
+        """
+        try:
+            doc = Document()
+            paragraph = doc.add_paragraph()
+            run = paragraph.add_run(content)
+            font = run.font
+            font.size = Pt(font_size)
+            alignment_value = self._get_alignment_value(alignment)
+            paragraph.alignment = alignment_value
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_heading(self, heading, level=1):
+        """
+        Add a heading to the Word document.
+
+        Parameters:
+            heading (str): The text content of the heading
+            level (int): The level of the heading (default is 1)
+
+        Returns:
+            bool: True if heading addition is successful, False otherwise
+        """
+        try:
+            doc = Document(self.file_path)
+            doc.add_heading(heading, level)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_table(self, data):
+        """
+        Add a table to the Word document with the provided data.
+
+        Parameters:
+            data (list of lists): A 2D list representing the table data
+
+        Returns:
+            bool: True if table addition is successful, False otherwise
+        """
+        try:
+            doc = Document(self.file_path)
+            table = doc.add_table(rows=len(data), cols=len(data[0]))
+            for i, row in enumerate(data):
+                for j, cell_value in enumerate(row):
+                    table.cell(i, j).text = str(cell_value)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def _get_alignment_value(self, alignment):
+        """
+        Get the Word alignment value based on the provided alignment string.
+
+        Parameters:
+            alignment (str): The alignment option ('left', 'center', 'right')
+
+        Returns:
+            WD_PARAGRAPH_ALIGNMENT: The Word alignment enum value
+        """
+        alignment_options = {
+            'left': WD_PARAGRAPH_ALIGNMENT.LEFT,
+            'center': WD_PARAGRAPH_ALIGNMENT.CENTER,
+            'right': WD_PARAGRAPH_ALIGNMENT.RIGHT
+        }
+        return alignment_options.get(alignment.lower(), WD_PARAGRAPH_ALIGNMENT.LEFT)
+"""

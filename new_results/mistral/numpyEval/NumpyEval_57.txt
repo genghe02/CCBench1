@@ -1,0 +1,2 @@
+ # Repeat even numbers in array 'a' by 'n'
+m = np.repeat(a[cond], n)</s>

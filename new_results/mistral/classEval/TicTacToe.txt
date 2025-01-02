@@ -1,0 +1,131 @@
+ """
+This class represents a Tic Tac Toe game board.
+"""
+
+class TicTacToe:
+
+    def __init__(self, N=3):
+        """
+        Initialize an empty Tic Tac Toe board with the given size.
+
+        Parameters:
+            N (int, optional): The side length of the board. Default is 3.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Default initialization
+            board = TicTacToe()
+            assert len(board.board) == 3 and all(len(r) == 3 for r in board.board)
+
+            # Test case 2: Custom initialization
+            board = TicTacToe(5)
+            assert len(board.board) == 5 and all(len(r) == 5 for r in board.board)
+        """
+        self.board = [[' ' for _ in range(N)] for _ in range(N)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        """
+        Make a move for the current player on the given row and column.
+
+        Parameters:
+            row (int): The index of the row to make the move in.
+            col (int): The index of the column to make the move in.
+            
+        Returns:
+            bool: True if the move was successful, False otherwise.
+        
+        Test cases:
+            # Test case 1: Empty cell
+            board = TicTacToe()
+            assert board.make_move(0, 0) == True
+            assert board.board[0][0] == 'X'
+
+            # Test case 2: Full board
+            board = TicTacToe()
+            for _ in range(9):
+                board.make_move(int(input("Enter row: ")), int(input("Enter column: ")))
+            assert board.is_board_full() == True
+
+            # Test case 3: Out of bounds move
+            board = TicTacToe()
+            assert board.make_move(3, 3) == False
+        """
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        else:
+            return False
+
+    def check_winner(self):
+        """
+        Check if there is a winner in the current game state.
+
+        Returns:
+            str or None: The winner's mark if there is a winner, None otherwise.
+        
+        Test cases:
+            # Test case 1: Horizontal win
+            board = TicTacToe()
+            board.make_move(0, 0)
+            board.make_move(0, 1)
+            board.make_move(0, 2)
+            assert board.check_winner() == 'X'
+
+            # Test case 2: Vertical win
+            board = TicTacToe()
+            for _ in range(3):
+                board.make_move(int(input("Enter row: ")), int(input("Enter column: ")))
+            assert board.check_winner() == board.current_player
+
+            # Test case 3: Diagonal win
+            board = TicTacToe()
+            for i in range(3):
+                board.make_move(i, i)
+            assert board.check_winner() == board.current_player
+
+            # Test case 4: Draw game
+            board = TicTacToe()
+            for _ in range(9):
+                row = int(input("Enter row: "))
+                col = int(input("Enter column: "))
+                board.make_move(row, col)
+            assert board.is_board_full() == True and board.check_winner() is None
+        """
+        for row in self.board:
+            if row[0] == row[1] == row[2] != ' ':
+                return row[0]
+        for col in range(3):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] != ' ':
+                return self.board[0][col]
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != ' ':
+            return self.board[0][0]
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != ' ':
+            return self.board[0][2]
+        return None
+
+    def is_board_full(self):
+        """
+        Check if the board is full.
+
+        Returns:
+            bool: True if the board is full, False otherwise.
+        
+        Test cases:
+            # Test case 1: Empty board
+            assert TicTacToe().is_board_full() == False
+
+            # Test case 2: Full board
+            board = TicTacToe()
+            for _ in range(9):
+                board.make_move(int(input("Enter row: ")), int(input("Enter column: ")))
+            assert board.is_board_full() == True
+        
+        """
+        for row in self.board:
+            if ' ' in row:
+                return False
+        return True</s>

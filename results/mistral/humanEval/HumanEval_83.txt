@@ -1,0 +1,11 @@
+ def starts_one_ends(n):
+    # This function calculates the number of digits a number with the given integer n has at the beginning and end that are equal to 1.
+    if n == 1: return 1
+    # Base case: if n is equal to 1, the function returns 1.
+
+    # Calculate the number of digits of the given number n starting from the second digit and ending before the last digit that are not equal to 1.
+    # The number of such digits is equal to the number of digits in the decimal representation of n minus the number of digits equal to 1.
+    # To find the number of digits in the decimal representation of n, we can use the formula 10 ** (number of digits), where the base is 10.
+    # To find the number of digits equal to 1, we subtract the number of digits that are not equal to 1 from the total number of digits.
+    # Therefore, the number of digits equal to 1 at the beginning and end of the number is equal to 1 plus 18 times the number of digits that are not equal to 1.
+    return 1 + 18 * (10 ** (len(str(n)) - 2))

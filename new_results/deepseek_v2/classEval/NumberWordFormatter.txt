@@ -1,0 +1,165 @@
+```python
+"""
+This class provides functionality to format numbers into their word representations, 
+including handling large numbers with suffixes like thousand, million, billion, etc.
+"""
+
+class NumberWordFormatter:
+    def __init__(self):
+        """
+        Initializes the NumberWordFormatter class with predefined lists for number-to-word conversion.
+        """
+        self.NUMBER = ["", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
+        self.NUMBER_TEEN = ["TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN",
+                            "EIGHTEEN", "NINETEEN"]
+        self.NUMBER_TEN = ["TEN", "TWENTY", "THIRTY", "FORTY", "FIFTY", "SIXTY", "SEVENTY", "EIGHTY", "NINETY"]
+        self.NUMBER_MORE = ["", "THOUSAND", "MILLION", "BILLION"]
+        self.NUMBER_SUFFIX = ["k", "w", "", "m", "", "", "b", "", "", "t", "", "", "p", "", "", "e"]
+
+    def format(self, x):
+        """
+        Formats a given number into its word representation.
+
+        Parameters:
+            x (int or float or None): The number to be formatted. If None, returns an empty string.
+
+        Returns:
+            str: The word representation of the number.
+
+        Test cases:
+            # Test case 1: Normal integer
+            assert format(123) == "ONE HUNDRED AND TWENTY THREE ONLY"
+
+            # Test case 2: Floating point number
+            assert format(123.45) == "ONE HUNDRED AND TWENTY THREE AND CENTS FORTY FIVE ONLY"
+
+            # Test case 3: None input
+            assert format(None) == ""
+        """
+        if x is not None:
+            return self.format_string(str(x))
+        else:
+            return ""
+
+    def format_string(self, x):
+        """
+        Converts a string representation of a number into its word format.
+
+        Parameters:
+            x (str): The string representation of the number.
+
+        Returns:
+            str: The word representation of the number.
+
+        Test cases:
+            # Test case 1: Integer string
+            assert format_string("123") == "ONE HUNDRED AND TWENTY THREE ONLY"
+
+            # Test case 2: Floating point string
+            assert format_string("123.45") == "ONE HUNDRED AND TWENTY THREE AND CENTS FORTY FIVE ONLY"
+
+            # Test case 3: Zero
+            assert format_string("0") == "ZERO ONLY"
+        """
+        lstr, rstr = (x.split('.') + [''])[:2]
+        lstrrev = lstr[::-1]
+        a = [''] * 5
+
+        if len(lstrrev) % 3 == 1:
+            lstrrev += "00"
+        elif len(lstrrev) % 3 == 2:
+            lstrrev += "0"
+
+        lm = ""
+        for i in range(len(lstrrev) // 3):
+            a[i] = lstrrev[3 * i:3 * i + 3][::-1]
+            if a[i] != "000":
+                lm = self.trans_three(a[i]) + " " + self.parse_more(i) + " " + lm
+            else:
+                lm += self.trans_three(a[i])
+
+        xs = f"AND CENTS {self.trans_two(rstr)} " if rstr else ""
+        if not lm.strip():
+            return "ZERO ONLY"
+        else:
+            return f"{lm.strip()} {xs}ONLY"
+
+    def trans_two(self, s):
+        """
+        Converts a two-digit string into its word representation.
+
+        Parameters:
+            s (str): The two-digit string to be converted.
+
+        Returns:
+            str: The word representation of the two-digit number.
+
+        Test cases:
+            # Test case 1: Single digit
+            assert trans_two("05") == "FIVE"
+
+            # Test case 2: Teen number
+            assert trans_two("13") == "THIRTEEN"
+
+            # Test case 3: Tens number
+            assert trans_two("30") == "THIRTY"
+        """
+        s = s.zfill(2)
+        if s[0] == "0":
+            return self.NUMBER[int(s[-1])]
+        elif s[0] == "1":
+            return self.NUMBER_TEEN[int(s) - 10]
+        elif s[1] == "0":
+            return self.NUMBER_TEN[int(s[0]) - 1]
+        else:
+            return self.NUMBER_TEN[int(s[0]) - 1] + " " + self.NUMBER[int(s[-1])]
+
+    def trans_three(self, s):
+        """
+        Converts a three-digit string into its word representation.
+
+        Parameters:
+            s (str): The three-digit string to be converted.
+
+        Returns:
+            str: The word representation of the three-digit number.
+
+        Test cases:
+            # Test case 1: Hundreds number
+            assert trans_three("123") == "ONE HUNDRED AND TWENTY THREE"
+
+            # Test case 2: Number with zero in the middle
+            assert trans_three("103") == "ONE HUNDRED AND THREE"
+
+            # Test case 3: Number with zero at the end
+            assert trans_three("120") == "ONE HUNDRED AND TWENTY"
+        """
+        if s[0] == "0":
+            return self.trans_two(s[1:])
+        elif s[1:] == "00":
+            return f"{self.NUMBER[int(s[0])]} HUNDRED"
+        else:
+            return f"{self.NUMBER[int(s[0])]} HUNDRED AND {self.trans_two(s[1:])}"
+
+    def parse_more(self, i):
+        """
+        Returns the appropriate suffix for the number based on its position.
+
+        Parameters:
+            i (int): The index representing the position of the number.
+
+        Returns:
+            str: The suffix corresponding to the number's position.
+
+        Test cases:
+            # Test case 1: Thousand
+            assert parse_more(1) == "THOUSAND"
+
+            # Test case 2: Million
+            assert parse_more(2) == "MILLION"
+
+            # Test case 3: Billion
+            assert parse_more(3) == "BILLION"
+        """
+        return self.NUMBER_MORE[i]
+```

@@ -1,0 +1,15 @@
+```python
+def eat(number, need, remaining):
+    # This function calculates the new number and remaining amount after attempting to eat a specified amount.
+    
+    # Test cases for the function
+    # >>> eat(5, 3, 10) returns [8, 7]  # Enough remaining to satisfy need
+    # >>> eat(5, 10, 10) returns [15, 0] # Not enough remaining, all remaining is consumed
+    # >>> eat(2, 5, 3) returns [5, 0]    # Not enough remaining, all remaining is consumed
+    # >>> eat(0, 0, 0) returns [0, 0]    # Edge case with zero values
+    
+    if(need <= remaining):
+        return [ number + need , remaining - need ]
+    else:
+        return [ number + remaining , 0]
+```

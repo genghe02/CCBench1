@@ -1,0 +1,138 @@
+ """
+This class calculates statistical measures for given datasets.
+"""
+
+import math
+
+class DataStatistics4:
+
+    @staticmethod
+    def correlation_coefficient(data1, data2):
+        """
+        Calculate the correlation coefficient between two datasets.
+
+        Parameters:
+            data1 (list): The first dataset as a list
+            data2 (list): The second dataset as a list
+        
+        Returns:
+            float: The correlation coefficient, a value between -1 and 1
+        
+        Test cases:
+            # Test case 1: Perfect positive correlation
+            assert correlation_coefficient([1, 2, 3], [1, 2, 3]) == 1.0
+            
+            # Test case 2: Perfect negative correlation
+            assert correlation_coefficient([1, 2, 3], [-1, -2, -3]) == -1.0
+            
+            # Test case 3: Zero correlation
+            assert correlation_coefficient([1, 2, 3], [4, 5, 6]) == 0.0
+        """
+
+        n = len(data1)
+        mean1 = sum(data1) / n
+        mean2 = sum(data2) / n
+
+        numerator = sum((data1[i] - mean1) * (data2[i] - mean2) for i in range(n))
+        denominator = math.sqrt(sum((data1[i] - mean1) ** 2 for i in range(n))) * math.sqrt(sum((data2[i] - mean2) ** 2 for i in range(n)))
+
+        return numerator / denominator if denominator != 0 else 0
+
+    @staticmethod
+    def skewness(data):
+        """
+        Calculate the skewness of a given dataset.
+
+        Parameters:
+            data (list): The dataset as a list
+        
+        Returns:
+            float: The skewness value, represents the symmetry or asymmetry of the dataset
+        
+        Test cases:
+            # Test case 1: Normal distribution
+            assert skewness([1, 2, 3, 2, 1]) == 0.0
+            
+            # Test case 2: Positively skewed distribution
+            assert skewness([1, 2, 3, 4, 5]) > 0.0
+            
+            # Test case 3: Negatively skewed distribution
+            assert skewness([5, 4, 3, 2, 1]) < 0.0
+        """
+
+        n = len(data)
+        mean = sum(data) / n
+        variance = sum((x - mean) ** 2 for x in data) / n
+        std_deviation = math.sqrt(variance)
+
+        skewness = sum((x - mean) ** 3 for x in data) * n / ((n - 1) * (n - 2) * std_deviation ** 3) if std_deviation != 0 else 0
+
+        return skewness
+
+    @staticmethod
+    def kurtosis(data):
+        """
+        Calculate the kurtosis of a given dataset.
+
+        Parameters:
+            data (list): The dataset as a list
+        
+        Returns:
+            float: The kurtosis value, a measure of the peakedness or flatness of the dataset
+        
+        Test cases:
+            # Test case 1: Normal distribution
+            assert kurtosis([1, 2, 3, 2, 1]) == 0.0
+            
+            # Test case 2: Platykurtic distribution
+            assert kurtosis([1, 2, 3, 2, 1, 1]) < 0.0
+            
+            # Test case 3: Leptokurtic distribution
+            assert kurtosis([1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]) > 0.0
+        """
+
+        n = len(data)
+        mean = sum(data) / n
+        std_dev = math.sqrt(sum((x - mean) ** 2 for x in data) / n)
+
+        if std_dev == 0:
+            return math.nan
+
+        centered_data = [(x - mean) for x in data]
+        fourth_moment = sum(x ** 4 for x in centered_data) / n
+
+        kurtosis_value = (fourth_moment / std_dev ** 4) - 3
+
+        return kurtosis_value
+
+    @staticmethod
+    def pdf(data, mu, sigma):
+        """
+        Calculate the probability density function (pdf) of a given dataset based on a normal distribution.
+
+        Parameters:
+            data (list): The dataset as a list
+            mu (float): The expected value (mean) of the distribution
+            sigma (float): The standard deviation of the distribution
+        
+        Returns:
+            list: A list of probabilities representing the pdf for each data point
+        
+        Test cases:
+            # Test case 1: Mean and standard deviation are within the dataset
+            data = [1, 2, 3, 4, 5]
+            mu = 3
+            sigma = 1
+            assert all(round(pdf(x, mu, sigma)[0], 4) > 0 for x in data)
+
+            # Test case 2: Mean is far from the dataset
+            mu = 6
+            assert all(pdf(x, mu, sigma)[0] < 0.01 for x in data)
+            
+            # Test case 3: Standard deviation is too high, resulting in a flat distribution
+            sigma = 5
+            assert all(0 < pdf(x, mu, sigma)[0] < 0.05 for x in data)
+        """
+
+        pdf_values = [1 / (sigma * math.sqrt(2 * math.pi)) * math.exp(-0.5 * ((x - mu) / sigma) ** 2) for x in data]
+        return pdf_values</s>

@@ -1,0 +1,1 @@
+# Extract a subset of the numpy array 'a' starting from the 4th index till the end.

@@ -1,0 +1,9 @@
+def modp(n: int, p: int):
+    # This function calculates the modulus of the power of 2 to n with respect to p
+    >>> modp(5, 2) # returns 0
+    >>> modp(3, 3) # returns 2
+    >>> modp(4, 1) # returns 0
+    ret = 1
+    for i in range(n):
+        ret = (2 * ret) % p
+    return ret

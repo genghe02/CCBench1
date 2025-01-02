@@ -1,0 +1,5 @@
+ # Create an empty dictionary to store MSRA values as keys and THU values as values
+rows_dict = {}
+for index, row in df.iterrows():
+    # Add key-value pair to the dictionary using the MSRA value as the key and the THU value as the value
+    rows_dict[row['MSRA']] = row['THU']</s>

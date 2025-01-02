@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef divide_multiple_cols_by_first_col(df):\n    # Ensure that the B and C columns are divided by the A column\n    df[['B','C']] = df[['B','C']].div(df.A, axis=0)\n    return df

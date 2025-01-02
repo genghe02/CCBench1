@@ -1,0 +1,16 @@
+```python
+def encrypt(s):
+    # Encrypts a string by shifting letters by 4 positions
+    >>> encrypt("abc") # returns "efg"
+    >>> encrypt("xyz") # returns "bcd"
+    >>> encrypt("hello") # returns "lipps"
+    >>> encrypt("python3!") # returns "vdebrq3!"
+    d = 'abcdefghijklmnopqrstuvwxyz'
+    out = ''
+    for c in s:
+        if c in d:
+            out += d[(d.index(c)+2*2) % 26]
+        else:
+            out += c
+    return out
+```

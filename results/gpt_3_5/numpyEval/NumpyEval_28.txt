@@ -1,0 +1,1 @@
+# Convert a matrix into a 1D array by removing any single-dimensional entries and returning a flattened array.

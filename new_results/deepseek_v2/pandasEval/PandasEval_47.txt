@@ -1,0 +1,6 @@
+import pandas as pd
+
+def make_dataframe_column_headers_lowercase(data):
+    # Convert all column headers to lowercase
+    data.columns = map(str.lower, data.columns)
+    return data

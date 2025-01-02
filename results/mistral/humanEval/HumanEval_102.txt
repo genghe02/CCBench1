@@ -1,0 +1,58 @@
+ def choose_num(x, y):
+    # This function takes two arguments x and y, and returns an appropriate value based on certain conditions.
+
+    # x should be a number, y should be a number.
+    # If x is greater than y, return -1.
+    # If y is even, return y.
+    # If x is equal to y, return -1.
+    # Otherwise, return y - 1.
+
+    if type(x)!= type(y) or (not isinstance(x, (int, float)) or not isinstance(y, (int, float))):
+        raise TypeError("Both x and y should be numbers.")
+
+    if x > y:
+        return -1
+
+    if y % 2 == 0:
+        return y
+
+    if x == y:
+        return -1
+
+    return y - 1
+
+ # Test cases:
+ >>> choose_num(1, 2)
+ 1
+ >>> choose_num(2, 1)
+ -1
+ >>> choose_num(1, 1)
+ -1
+ >>> choose_num(3, 2)
+ 2
+ >>> choose_num(3, 4)
+ 4
+ >>> choose_num(3, 5)
+ 5
+ >>> choose_num(3, 6)
+ 6
+ >>> choose_num(3, 7)
+ 7
+ >>> choose_num(3, 8)
+ 8
+ >>> choose_num(3, 9)
+ 9
+ >>> choose_num(3, 10)
+ 10
+ >>> choose_num(3, 3)
+ -1
+ >>> choose_num(3, 3.0)
+ -1
+ >>> choose_num(3.0, 3)
+ -1
+ >>> choose_num(3.0, 3.0)
+ -1
+ >>> choose_num('a', 3)
+ TypeError: Both x and y should be numbers.
+ >>> choose_num(3, 'a')
+ TypeError: Both x and y should be numbers.

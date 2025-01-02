@@ -1,0 +1,107 @@
+```python
+"""
+This class manages the order processing, including adding dishes to the order, calculating totals, and finalizing the checkout.
+"""
+
+class Order:
+
+    def __init__(self):
+        """
+        Initializes a new Order instance with an empty menu, selected_dishes, and sales tracking.
+
+        Attributes:
+            menu (list): A list of available dishes along with their prices and available counts.
+            selected_dishes (list): A list of dishes that have been selected for the current order.
+            sales (dict): A dictionary tracking sales for each selected dish.
+        """
+        self.menu = []
+        # menu = [{"dish": dish name, "price": price, "count": count}, ...]
+        self.selected_dishes = []
+        # selected_dish = {"dish": dish name, "count": count, price: price}
+        self.sales = {}
+
+    def add_dish(self, dish):
+        """
+        Adds a dish to the order if it is available in the menu.
+
+        Parameters:
+            dish (dict): A dictionary containing the dish name and the count to be added.
+                          Example: {"dish": "Pasta", "count": 2}
+
+        Returns:
+            bool: True if the dish was added successfully, False if the dish was not available.
+
+        Test cases:
+            # Test case 1: Successful addition of a dish
+            input = {"dish": "Pasta", "count": 2}
+            expected_output = True
+            
+            # Test case 2: Dish count exceeds available count
+            input = {"dish": "Salad", "count": 10}
+            expected_output = False
+            
+            # Test case 3: Adding a dish that is not in the menu
+            input = {"dish": "Steak", "count": 1}
+            expected_output = False
+        """
+        for menu_dish in self.menu:
+            if dish["dish"] == menu_dish["dish"]:
+                if menu_dish["count"] < dish["count"]:
+                    return False
+                else:
+                    menu_dish["count"] -= dish["count"]
+                    break
+        self.selected_dishes.append(dish)
+        return True
+
+    def calculate_total(self):
+        """
+        Calculates the total amount for the selected dishes.
+
+        Returns:
+            float: The total amount for the current order.
+
+        Test cases:
+            # Test case 1: Total calculation when 2 selected dishes are present
+            input = [{"dish": "Pasta", "count": 2, "price": 10}, {"dish": "Salad", "count": 1, "price": 5}]
+            expected_output = 25
+            
+            # Test case 2: Total calculation when no dishes are selected
+            input = []
+            expected_output = 0
+            
+            # Test case 3: Total calculation for multiple items
+            input = [{"dish": "Pasta", "count": 2, "price": 10}, {"dish": "Pizza", "count": 1, "price": 15}]
+            expected_output = 35
+        """
+        total = 0
+        for dish in self.selected_dishes:
+            total += dish["price"] * dish["count"] * self.sales[dish["dish"]]
+        return total
+
+    def checkout(self):
+        """
+        Finalizes the order and resets the selected dishes.
+
+        Returns:
+            float|bool: The total amount for the order if successful, False if no dishes were selected.
+
+        Test cases:
+            # Test case 1: Successful checkout with selected dishes
+            input = [{"dish": "Pasta", "count": 2, "price": 10}]
+            expected_output = 20
+            
+            # Test case 2: Checkout with no selected dishes
+            input = []
+            expected_output = False
+            
+            # Test case 3: Successful checkout after total calculation
+            input = [{"dish": "Pizza", "count": 1, "price": 15}]
+            expected_output = 15
+        """
+        if len(self.selected_dishes) == 0:
+            return False
+        total = self.calculate_total()
+        self.selected_dishes = []
+        return total
+```

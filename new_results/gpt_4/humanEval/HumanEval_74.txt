@@ -1,0 +1,18 @@
+def total_match(lst1, lst2):
+    # This function checks the total number of characters in two lists and returns the one with lower or equal number of characters
+
+    >>> total_match(['apple', 'banana'], ['orange', 'grape']) # returns ['apple', 'banana']
+    >>> total_match(['apple', 'banana'], ['orange', 'grapefruit']) # returns ['orange', 'grapefruit']
+    >>> total_match(['apple'], ['orange']) # returns ['apple']
+    l1 = 0
+    for st in lst1:
+        l1 += len(st)
+    
+    l2 = 0
+    for st in lst2:
+        l2 += len(st)
+    
+    if l1 <= l2:
+        return lst1
+    else:
+        return lst2

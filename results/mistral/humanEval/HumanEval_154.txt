@@ -1,0 +1,12 @@
+ def cycpattern_check(a, b):
+ # Check if 'a' has a sub-sequence equal to the cyclic shift of 'b'
+ l = len(b)
+ pat = b + b
+ # Iterate through all possible sub-sequences of 'a' that have a length equal to or greater than 'l'
+ for i in range(len(a) - l + 1):
+ # Iterate through all possible shifts of 'b'
+ for j in range(l + 1):
+ if a[i:i+l] == pat[j:j+l]:
+ return True
+ # If no match is found, return False
+ return False

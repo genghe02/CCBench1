@@ -1,0 +1,4 @@
+# This function swaps the cases of alphabetic characters in a string or reverses the string if no alphabetic characters are present
+>>> solve("Hello, World!") # "hELLO, wORLD!"
+>>> solve("12345") # "54321"
+>>> solve("UPPER lower") # "upper LOWER"

@@ -1,0 +1,12 @@
+def longest(strings: List[str]) -> Optional[str]:
+    # This function returns the longest string from a list of strings
+    >>> longest([]) # returns None
+    >>> longest(['a', 'abc', 'ab']) # returns 'abc'
+    >>> longest(['a', 'b', 'c']) # returns 'a'
+    if not strings:
+        return None
+
+    maxlen = max(len(x) for x in strings)
+    for s in strings:
+        if len(s) == maxlen:
+            return s

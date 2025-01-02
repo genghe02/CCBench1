@@ -1,0 +1,15 @@
+ # Apply window of length L with stride S to array 'a' using numpy broadcasting.
+# This function returns a subarray of shape (nrows, L) for each window in 'a'.
+
+import numpy as np
+
+def broadcasting_app(a, L, S):  # Window len = L, Stride len/stepsize = S
+
+    # Calculate the number of windows that can fit in the array 'a'.
+    nrows = ((a.size-L)//S)+1
+
+    # Use numpy broadcasting to apply window of length L with stride S to array 'a'.
+    return a[np.ix_(np.arange(nrows), np.repeat(np.arange(L), nrows))]
+
+    # Alternatively, use slicing with strides to achieve the same result:
+    # return a[np.arange(nrows)*S:nrows*S, :L]

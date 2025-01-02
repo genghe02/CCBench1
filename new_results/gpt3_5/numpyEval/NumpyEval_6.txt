@@ -1,0 +1,3 @@
+# Convert an array to a tuple of tuples by mapping each inner array to a tuple and then converting the resulting list of tuples to a tuple
+def arr2tuple(arr):
+    return tuple(map(tuple, arr))

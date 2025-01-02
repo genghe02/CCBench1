@@ -1,0 +1,4 @@
+ # Add new column to dataframe using given name and data
+def add_column_to_dataframe(df, column_name, column_data):
+    df[column_name] = column_data
+    return df</s>

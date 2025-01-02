@@ -1,0 +1,39 @@
+ <description for whole class>
+# A class for calculating basic statistics of given data such as mean, median, and mode.
+
+class DataStatistics:
+    def mean(self, data):
+        # Calculate the average value of the given data using sum and length.
+        <description for whole function>
+        :param data: list or tuple, the data to calculate the mean of
+        <description for return statement>
+        :return: float, the average value of the data
+        <some test cases for the function>
+        test_data_1 = [1, 2, 3, 4, 5]
+        assert round(DataStatistics().mean(test_data_1), 2) == 3.0
+        test_data_2 = [1, 1, 1, 1, 1]
+        assert round(DataStatistics().mean(test_data_2), 2) == 1.0
+
+    def median(self, data):
+        # Find the middle value of the given data. If the length is even, return the average of the two middle values.
+        <description for whole function>
+        :param data: list or tuple, the data to calculate the median of
+        <description for return statement>
+        :return: float, the median value of the data
+        <some test cases for the function>
+        test_data_1 = [1, 2, 3, 4, 5]
+        assert round(DataStatistics().median(test_data_1), 2) == 3.0
+        test_data_2 = [1, 2, 2, 3, 4]
+        assert round(DataStatistics().median(test_data_2), 2) == 2.5
+
+    def mode(self, data):
+        # Find the most frequent value(s) in the given data using Counter from collections.
+        <description for whole function>
+        :param data: list or tuple, the data to find the mode of
+        <description for return statement>
+        :return: list, the mode value(s) of the data
+        <some test cases for the function>
+        test_data_1 = [1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+        assert DataStatistics().mode(test_data_1) == [3]
+        test_data_2 = [1, 1, 1, 2, 2, 2, 'apple', 'apple', 'apple', 'banana', 'banana', 'banana']
+        assert DataStatistics().mode(test_data_2) == ['apple', 'banana']

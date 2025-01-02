@@ -1,0 +1,2 @@
+ # Multiply each row of matrix 'a' with each element in matrix 'b' expanded to have shape (1, 4)
+out = a * b[:, newaxis]</s>

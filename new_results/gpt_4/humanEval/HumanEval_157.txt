@@ -1,0 +1,6 @@
+def right_angle_triangle(a, b, c):
+    # Checks if a triangle with sides a, b, c is a right angle triangle
+    >>> right_angle_triangle(3, 4, 5) # returns True
+    >>> right_angle_triangle(6, 8, 10) # returns True
+    >>> right_angle_triangle(1, 1, 1) # returns False
+    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b

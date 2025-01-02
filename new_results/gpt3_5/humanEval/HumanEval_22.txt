@@ -1,0 +1,6 @@
+# This function filters out integers from a list of values
+>>> filter_integers([1, 2, 3, 'a', 'b', 4.5]) # returns [1, 2, 3]
+>>> filter_integers([]) # returns []
+>>> filter_integers([1, 'a', 5.5]) # returns [1]
+def filter_integers(values: List[Any]) -> List[int]:
+    return [x for x in values if isinstance(x, int)]

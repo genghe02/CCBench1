@@ -1,0 +1,22 @@
+ # This function orders a list of numbers based on the sum of their digits
+# In case of negative numbers, the negation sign is included in the sum
+
+def order_by_points(nums):
+    # Requirement for the code
+
+    # Test cases for the function
+    >>> order_by_points([3, 1, 4, 1.5, -2.5, 2])
+    [1, 3, 2, 4, 1.5, -2.5]
+    # The numbers are ordered by the sum of their digits
+    # For example, 1 and 3 have the same digits sum (1),
+    # and they are located before the numbers with larger digits sum
+
+    # The inner function digits_sum calculates the sum of the digits of a number
+    def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+
+    return sorted(nums, key=digits_sum)</s>

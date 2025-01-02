@@ -1,0 +1,2 @@
+ # Create a new dataframe without columns 'A' and 'C'
+new_df = df.drop(['A', 'C'], axis=1)</s>

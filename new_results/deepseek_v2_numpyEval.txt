@@ -1,0 +1,49 @@
+["# Find indices where elements change in the array"][Block]["# Add a new axis to the array to create a 3D array"][Block]["# Count the number of elements in the array that are greater than 2 and less than 8"][Block]["# Insert element at the beginning of the array and return the new array"][Block]["# Concatenate arrays in input_list and flatten the result into a 1D array"][Block]["# Get the shape of the array 'a'"][Block]["# Compute and return the inverse of the input matrix"][Block]["# Check if the numpy array is empty by comparing its size to 0"][Block]["# Replace the second column of array 'a' with the values from array 'x'"][Block]["# Find indices where elements of search should be inserted to maintain order in master"][Block]["# Horizontally stack arrays in the list to create a single array"][Block]["# Return the minimum value from the input array"][Block]["# Create a 5x5 array filled with -1.0"][Block]["# Compute histogram of array values and calculate cumulative sum of histogram counts"][Block]["# Convert array to bytes and then back to array"][Block]["# Convert array elements to string and join with spaces"][Block]["# Calculate the average of every 3 consecutive elements in the array"][Block]["# Perform XOR operation on three input values and return the result"][Block]["# Perform element-wise addition between expanded array a and scaled array b"][Block]["# Calculate the ratio of each element to its previous element in the array"][Block]["# List of arrays.", "# Stack arrays along a new axis"][Block]["# Calculate standard deviation along axis 0"][Block]["# Convert matrix M to a flattened numpy array"][Block]["# Return the index of the maximum element along the specified axis"][Block]["# Convert string array to float array"][Block]["# Convert array from float64 to float32 type"][Block]["# Access element in array 'a' using tuple of indices from array 'b'"][Block][
+    "Window len = L, Stride len/stepsize = S",
+    "# Calculate the number of rows for the output array using window length and stride"
+][Block][
+    "# Reshape the 3D array into a 2D array with shape (5000, 25)"
+][Block][
+    "# filter out values larger than 2",
+    "# Get a flattened array with masked values removed"
+][Block][
+    "# Create a 3x3 numpy array with specified values"
+][Block][
+    "# I have a NumPy array that looks like this:",
+    "# Select elements at index 1 and 4 from the array"
+][Block]["# Find and return the most frequent number in the input array"][Block][
+    "# Create arrays of ones and zeros with different shapes",
+    "# Concatenate arrays along the first axis"
+][Block]["# Select rows where the first column is 0 and the second column is 1"][Block]["# Create a numpy array by zipping lists with fill value 0 for unequal lengths"][Block][
+    "# Create an empty array to store interweaved elements from arrays a and b"
+][Block]["# Fill the center 3x3 area of a 5x5 zero matrix with values from a 3x3 matrix"][Block]["# Get unique rows from the array"][Block]["# Concatenate arrays a and b into a single array"][Block]["# Multiply each row of matrix a by corresponding element in vector b"][Block]["# Stack the arrays column-wise to create a new array"][Block]["# Stack the list of arrays into a single 2D array"][Block]["# Find elements that are in either of the arrays but not in both"][Block]["# Return the sum of all True values in the input array"][Block]["# Stack arr1 horizontally with new_arr and then stack the result vertically with arr2"][Block][
+    "# Convert matrix to array and remove single-dimensional entries"
+][Block]["# Calculate the mean of arrays a, b, and c along axis 0"][Block]["# Get indices of the k smallest elements in array A"][Block][
+    "# I have a 2D numpy array of shape (N,2) which is holding N points.",
+    "# Sort array first by y-coordinate (second column) then by x-coordinate (first column)"
+][Block]["# Subtract the minimum value of each column from the corresponding column elements"][Block]["# Extract elements from index 4 to the end of the array"][Block]["# Replace negative values in array with 0 and keep positive values unchanged"][Block]["# Filter elements in dists array that are between r and r+dr (inclusive)"][Block]["#condition is True on even numbers", "# Repeat even numbers in array 'a' 'n' times"][Block]["# Check if array is sorted in ascending order"][Block][
+    "# Reshape the array into a 4-dimensional array with shape (2,4,2,4)",
+    "# Transpose the array to rearrange the dimensions"
+][Block]["# Convert numpy array to tuple of tuples"][Block]["# Find the indices of the minimum values along axis 0"][Block][
+    "# Create a slice object for the specified axis with given start and end indices"
+][Block]["# Convert a structured array to a record array with specified column names"][Block][
+    "# Create an array of indices excluding the positions where elements of B would be inserted in A"
+][Block][
+    "# Convert each element in the array to a string"
+][Block]["# Add a new row to the bottom of the array"][Block][
+    "# Transpose and flatten the array of arrays to create a single flattened array"
+][Block]["# Return indices of elements in array that are equal to zero"][Block][
+    "# We array `data` defines the columns of the nonzero elements in the output array.",
+    "# We need to also define the rows and then use fancy indexing in the following way:",
+    "# Set elements to 1 at positions specified by data array"
+][Block]["# Get the index of the minimum value in the flattened array and convert it to a tuple of array indices"][Block]["# Reverse the elements along the last axis of the array"][Block]["# Calculate mean along axis 1, filling masked values with NaN"][Block]["# Replace elements in array greater than specified value with new value"][Block]["# Return the i-th index along the last dimension of the array"][Block]["# Find the index of the element in the array that is closest to the given value"][Block]["# Find indices of elements within the specified range [low, high]"][Block][
+    "# Find indices where elements in array are even"
+][Block][
+    "# Convert dictionary to numpy array with specified dtype"
+][Block]["# Shift array elements one position to the right"][Block]["# Use vectorized dictionary lookup to map array values through dictionary"][Block]["# Concatenate corresponding elements from two character arrays"][Block][
+    "# Remove rows containing any non-numeric values from the array"
+][Block]["# Split the array into 3 sub-arrays"][Block]["# Crop the array using the specified top, bottom, left, and right indices"][Block]["# Append the first element of the array to the end of the array"][Block]["# Convert dictionary keys and values to numpy arrays"][Block][
+    "# Set real and imaginary parts to zero if their absolute values are below the tolerance"
+][Block]["# Check if array contains only zeros and return boolean result"][Block]["# Reshape the 3x1 array into a 1D array with 3 elements"][Block]["# Check if all elements in each column are equal to the first row's elements"][Block]["# Replace NaN values in the array with zero"][Block]["# Split array into consecutive sequences with specified step size and return count"][Block]["# Fill the diagonal elements of the dataframe with zeros"][Block]["# Concatenate two arrays along the first axis and return the result"][Block][
+    "# Delete columns at index 1 and 3 from the 3x4 array"
+][Block]["# Convert matrix to a flattened list"][Block]["# Delete elements at specified indices from the array"][Block]["# Remove rows that contain all zeros"][Block]["# Check if elements of array a are present in array b"][Block]["# Create a 3x4 boolean array filled with True values"][Block]["# Multiply each row of array 'a' with corresponding element in array 'b'"][Block]["# Calculate the Euclidean distance between two vectors"][Block]["# Calculate the sum of all values in the dataframe"][Block]

@@ -1,0 +1,11 @@
+def common(l1: list, l2: list):
+    # This function finds the common elements in two lists and returns them in a sorted list
+    >>> common([1, 2, 3, 4, 5], [2, 3, 6, 7, 8]) # returns [2, 3]
+    >>> common(['a', 'b', 'c'], ['b', 'c', 'd']) # returns ['b', 'c']
+    >>> common([1, 2], [3, 4]) # returns []
+    ret = set()
+    for e1 in l1:
+        for e2 in l2:
+            if e1 == e2:
+                ret.add(e1)
+    return sorted(list(ret))

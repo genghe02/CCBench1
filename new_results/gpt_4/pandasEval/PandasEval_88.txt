@@ -1,0 +1,6 @@
+import pandas as pd
+
+N = 2
+df = pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9]})
+# Fetch the last N rows from the dataframe df
+result = df.tail(N)

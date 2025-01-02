@@ -1,0 +1,25 @@
+ def closest_integer(value):
+    # The function takes a string value and returns the closest integer
+
+    >>> closest_integer('2.5') # returns 3
+    >>> closest_integer('3.99') # returns 4
+    >>> closest_integer('0.99999') # returns 1
+    from math import floor, ceil
+
+    if value.count('.') == 1:
+        # remove trailing zeros
+        while (value[-1] == '0'):
+            value = value[:-1]
+
+    num = float(value)
+    if value[-2:] == '.5':
+        if num > 0:
+            res = ceil(num)
+        else:
+            res = floor(num)
+    elif len(value) > 0:
+        res = int(round(num))
+    else:
+        res = 0
+
+    return res</s>

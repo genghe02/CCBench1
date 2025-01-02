@@ -1,0 +1,55 @@
+<description for whole class>
+This class provides utility functions for working with IP addresses, including validation and hostname retrieval.
+
+IpUtil:
+
+    @staticmethod
+    def is_valid_ipv4(ip_address):
+        <description for whole function>
+        Validate if the given IP address is a valid IPv4 address.
+        <description for all parameters>
+        :param ip_address: str, the IP address to be validated
+        <description for return statement>
+        :return: bool, True if the IP address is a valid IPv4 address, False otherwise
+        <some test cases for the function>
+        assert IpUtil.is_valid_ipv4('192.168.1.1') == True
+        assert IpUtil.is_valid_ipv4('256.256.256.256') == False
+        try:
+            socket.inet_pton(socket.AF_INET, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def is_valid_ipv6(ip_address):
+        <description for whole function>
+        Validate if the given IP address is a valid IPv6 address.
+        <description for all parameters>
+        :param ip_address: str, the IP address to be validated
+        <description for return statement>
+        :return: bool, True if the IP address is a valid IPv6 address, False otherwise
+        <some test cases for the function>
+        assert IpUtil.is_valid_ipv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334') == True
+        assert IpUtil.is_valid_ipv6('192.168.1.1') == False
+        try:
+            socket.inet_pton(socket.AF_INET6, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def get_hostname(ip_address):
+        <description for whole function>
+        Retrieve the hostname associated with the given IP address.
+        <description for all parameters>
+        :param ip_address: str, the IP address for which the hostname is to be retrieved
+        <description for return statement>
+        :return: str or None, the hostname associated with the IP address, None if not found
+        <some test cases for the function>
+        assert IpUtil.get_hostname('8.8.8.8') == 'dns.google'
+        assert IpUtil.get_hostname('invalid_ip') == None
+        try:
+            hostname = socket.gethostbyaddr(ip_address)[0]
+            return hostname
+        except socket.herror:
+            return None

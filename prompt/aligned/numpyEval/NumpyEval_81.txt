@@ -1,0 +1,1 @@
+# Extract a sub-array from a numpy 2D array with a specified size and return it.

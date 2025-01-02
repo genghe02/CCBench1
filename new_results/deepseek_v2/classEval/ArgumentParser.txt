@@ -1,0 +1,167 @@
+```python
+"""
+This class provides a command-line argument parser that allows for the definition, parsing, and retrieval of command-line arguments. It supports both short and long argument formats, type conversion, and required argument validation.
+"""
+
+class ArgumentParser:
+    def __init__(self):
+        """
+        Initializes the ArgumentParser instance with empty dictionaries for arguments, required arguments, and argument types.
+        
+        Test cases:
+            # Test case 1: Initialization
+            parser = ArgumentParser()
+            assert parser.arguments == {}
+            assert parser.required == set()
+            assert parser.types == {}
+        """
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    def parse_arguments(self, command_string):
+        """
+        Parses the command string and extracts arguments into the instance's arguments dictionary. Validates required arguments and performs type conversion.
+        
+        Parameters:
+            command_string (str): The command string to parse, typically from sys.argv or similar.
+            
+        Returns:
+            tuple: A tuple containing a boolean indicating success and a set of missing required arguments if any.
+            
+        Test cases:
+            # Test case 1: Successful parsing with all required arguments
+            parser = ArgumentParser()
+            parser.add_argument('foo', required=True, arg_type=int)
+            parser.add_argument('bar', arg_type=str)
+            success, missing = parser.parse_arguments('program --foo=42 --bar=hello')
+            assert success == True
+            assert missing == None
+            
+            # Test case 2: Missing required argument
+            parser = ArgumentParser()
+            parser.add_argument('foo', required=True, arg_type=int)
+            success, missing = parser.parse_arguments('program --bar=hello')
+            assert success == False
+            assert missing == {'foo'}
+            
+            # Test case 3: Type conversion failure
+            parser = ArgumentParser()
+            parser.add_argument('foo', arg_type=int)
+            success, missing = parser.parse_arguments('program --foo=not_an_int')
+            assert success == True
+            assert parser.get_argument('foo') == 'not_an_int'
+        """
+        args = command_string.split()[1:]
+        for i in range(len(args)):
+            arg = args[i]
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    self.arguments[key_value[0]] = self._convert_type(key_value[0], key_value[1])
+                else:
+                    self.arguments[key_value[0]] = True
+            elif arg.startswith('-'):
+                key = arg[1:]
+                if i + 1 < len(args) and not args[i + 1].startswith('-'):
+                    self.arguments[key] = self._convert_type(key, args[i + 1])
+                else:
+                    self.arguments[key] = True
+        missing_args = self.required - set(self.arguments.keys())
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    def get_argument(self, key):
+        """
+        Retrieves the value of a specified argument.
+        
+        Parameters:
+            key (str): The key of the argument to retrieve.
+            
+        Returns:
+            The value of the argument if it exists, otherwise None.
+            
+        Test cases:
+            # Test case 1: Retrieve existing argument
+            parser = ArgumentParser()
+            parser.parse_arguments('program --foo=42')
+            assert parser.get_argument('foo') == 42
+            
+            # Test case 2: Retrieve non-existent argument
+            parser = ArgumentParser()
+            parser.parse_arguments('program --foo=42')
+            assert parser.get_argument('bar') == None
+            
+            # Test case 3: Retrieve boolean flag
+            parser = ArgumentParser()
+            parser.parse_arguments('program --verbose')
+            assert parser.get_argument('verbose') == True
+        """
+        return self.arguments.get(key)
+
+    def add_argument(self, arg, required=False, arg_type=str):
+        """
+        Adds an argument to the parser with optional requirements and type conversion.
+        
+        Parameters:
+            arg (str): The name of the argument.
+            required (bool): Whether the argument is required.
+            arg_type (type): The type to which the argument's value should be converted.
+            
+        Returns:
+            None
+            
+        Test cases:
+            # Test case 1: Add optional argument
+            parser = ArgumentParser()
+            parser.add_argument('foo')
+            assert 'foo' in parser.types
+            assert 'foo' not in parser.required
+            
+            # Test case 2: Add required argument
+            parser = ArgumentParser()
+            parser.add_argument('foo', required=True)
+            assert 'foo' in parser.required
+            
+            # Test case 3: Add argument with custom type
+            parser = ArgumentParser()
+            parser.add_argument('foo', arg_type=int)
+            assert parser.types['foo'] == int
+        """
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    def _convert_type(self, arg, value):
+        """
+        Converts the value of an argument to the specified type.
+        
+        Parameters:
+            arg (str): The name of the argument.
+            value (str): The value to convert.
+            
+        Returns:
+            The converted value if successful, otherwise the original value.
+            
+        Test cases:
+            # Test case 1: Successful type conversion
+            parser = ArgumentParser()
+            parser.add_argument('foo', arg_type=int)
+            assert parser._convert_type('foo', '42') == 42
+            
+            # Test case 2: Failed type conversion
+            parser = ArgumentParser()
+            parser.add_argument('foo', arg_type=int)
+            assert parser._convert_type('foo', 'not_an_int') == 'not_an_int'
+            
+            # Test case 3: No type specified
+            parser = ArgumentParser()
+            assert parser._convert_type('foo', '42') == '42'
+        """
+        try:
+            return self.types[arg](value)
+        except (ValueError, KeyError):
+            return value
+```

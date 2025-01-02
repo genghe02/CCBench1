@@ -1,0 +1,191 @@
+"""
+The StockPortfolioTracker class provides functionality to manage a stock portfolio. It allows adding and removing stocks, 
+buying and selling stocks, and also calculating the total portfolio value.
+"""
+
+class StockPortfolioTracker:
+    def __init__(self, cash_balance):
+        """
+        Initializes a new instance of the StockPortfolioTracker class.
+        
+        Parameters:
+            cash_balance (float): The initial cash balance of the portfolio.
+        """
+        self.portfolio = []
+        self.cash_balance = cash_balance
+
+    def add_stock(self, stock):
+        """
+        Adds a stock to the portfolio.
+        
+        Parameters:
+            stock (dict): A dictionary containing 'name', 'quantity' and 'price' of the stock.
+        
+        Test cases:
+            # Test case 1: Adding a new stock
+            portfolio.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150.0})
+
+            # Test case 2: Adding more of the same stock
+            portfolio.add_stock({'name': 'AAPL', 'quantity': 5, 'price': 150.0})
+
+            # Test case 3: Adding a different stock
+            portfolio.add_stock({'name': 'GOOG', 'quantity': 2, 'price': 1000.0})
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name']:
+                pf['quantity'] += stock['quantity']
+                return
+
+        self.portfolio.append(stock)
+
+    def remove_stock(self, stock):
+        """
+        Removes a stock from the portfolio.
+        
+        Parameters:
+            stock (dict): A dictionary containing 'name', 'quantity' and 'price' of the stock.
+        
+        Returns:
+            bool: True if the stock was successfully removed, False otherwise.
+            
+        Test cases:
+            # Test case 1: Removing a stock that is in the portfolio
+            portfolio.remove_stock({'name': 'AAPL', 'quantity': 5, 'price': 150.0})
+
+            # Test case 2: Removing more of a stock than is in the portfolio
+            portfolio.remove_stock({'name': 'AAPL', 'quantity': 100, 'price': 150.0})
+
+            # Test case 3: Removing a stock that is not in the portfolio
+            portfolio.remove_stock({'name': 'TSLA', 'quantity': 2, 'price': 500.0})
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name'] and pf['quantity'] >= stock['quantity']:
+                pf['quantity'] -= stock['quantity']
+                if pf['quantity'] == 0:
+                    self.portfolio.remove(pf)
+                return True
+        return False
+
+    def buy_stock(self, stock):
+        """
+        Buys a stock and adds it to the portfolio.
+        
+        Parameters:
+            stock (dict): A dictionary containing 'name', 'quantity' and 'price' of the stock.
+        
+        Returns:
+            bool: True if the stock was successfully bought, False otherwise.
+            
+        Test cases:
+            # Test case 1: Buying a stock with sufficient cash balance
+            portfolio.buy_stock({'name': 'AAPL', 'quantity': 2, 'price': 150.0})
+
+            # Test case 2: Buying a stock with insufficient cash balance
+            portfolio.buy_stock({'name': 'GOOG', 'quantity': 10, 'price': 1000.0})
+
+            # Test case 3: Buying a negative quantity of a stock
+            portfolio.buy_stock({'name': 'AAPL', 'quantity': -2, 'price': 150.0})
+        """
+        if stock['price'] * stock['quantity'] > self.cash_balance:
+            return False
+        else:
+            self.add_stock(stock)
+            self.cash_balance -= stock['price'] * stock['quantity']
+            return True
+
+    def sell_stock(self, stock):
+        """
+        Sells a stock and removes it from the portfolio.
+        
+        Parameters:
+            stock (dict): A dictionary containing 'name', 'quantity' and 'price' of the stock.
+        
+        Returns:
+            bool: True if the stock was successfully sold, False otherwise.
+            
+        Test cases:
+            # Test case 1: Selling a stock that is in the portfolio
+            portfolio.sell_stock({'name': 'AAPL', 'quantity': 2, 'price': 150.0})
+
+            # Test case 2: Selling more of a stock than is in the portfolio
+            portfolio.sell_stock({'name': 'AAPL', 'quantity': 20, 'price': 150.0})
+
+            # Test case 3: Selling a stock that is not in the portfolio
+            portfolio.sell_stock({'name': 'TSLA', 'quantity': 2, 'price': 500.0})
+        """
+        if self.remove_stock(stock) == False:
+            return False
+        self.cash_balance += stock['price'] * stock['quantity']
+        return True
+
+    def calculate_portfolio_value(self):
+        """
+        Calculates the total value of the portfolio, including both stocks and cash.
+        
+        Returns:
+            float: The total value of the portfolio.
+            
+        Test cases:
+            # Test case 1: Calculating the value of an empty portfolio
+            portfolio.calculate_portfolio_value()
+
+            # Test case 2: Calculating the value of a portfolio with one stock
+            portfolio.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150.0})
+            portfolio.calculate_portfolio_value()
+
+            # Test case 3: Calculating the value of a portfolio with multiple stocks
+            portfolio.add_stock({'name': 'GOOG', 'quantity': 2, 'price': 1000.0})
+            portfolio.calculate_portfolio_value()
+        """
+        total_value = self.cash_balance
+        for stock in self.portfolio:
+            total_value += stock['price'] * stock['quantity']
+        return total_value
+
+    def get_portfolio_summary(self):
+        """
+        Gets a summary of the portfolio, including the value of each stock and the total portfolio value.
+        
+        Returns:
+            tuple: A tuple containing the total portfolio value and a list of dictionaries with the 'name' and 'value' of each stock.
+            
+        Test cases:
+            # Test case 1: Getting the summary of an empty portfolio
+            portfolio.get_portfolio_summary()
+
+            # Test case 2: Getting the summary of a portfolio with one stock
+            portfolio.add_stock({'name': 'AAPL', 'quantity': 10, 'price': 150.0})
+            portfolio.get_portfolio_summary()
+
+            # Test case 3: Getting the summary of a portfolio with multiple stocks
+            portfolio.add_stock({'name': 'GOOG', 'quantity': 2, 'price': 1000.0})
+            portfolio.get_portfolio_summary()
+        """
+        summary = []
+        for stock in self.portfolio:
+            value = self.get_stock_value(stock)
+            summary.append({"name": stock["name"], "value": value})
+        portfolio_value = self.calculate_portfolio_value()
+        return portfolio_value, summary
+
+    def get_stock_value(self, stock):
+        """
+        Calculates the total value of a specific stock in the portfolio.
+        
+        Parameters:
+            stock (dict): A dictionary containing 'name', 'quantity' and 'price' of the stock.
+            
+        Returns:
+            float: The total value of the specified stock.
+            
+        Test cases:
+            # Test case 1: Calculating the value of a stock that is in the portfolio
+            portfolio.get_stock_value({'name': 'AAPL', 'quantity': 10, 'price': 150.0})
+
+            # Test case 2: Calculating the value of a stock that is not in the portfolio
+            portfolio.get_stock_value({'name': 'TSLA', 'quantity': 2, 'price': 500.0})
+
+            # Test case 3: Calculating the value of a negative quantity of a stock
+            portfolio.get_stock_value({'name': 'AAPL', 'quantity': -2, 'price': 150.0})
+        """
+        return stock['price'] * stock['quantity']

@@ -1,0 +1,1 @@
+# Create an empty numpy array to store the concatenated arrays and then vertically stack the new array with arr2 and horizontally stack the result with arr1.

@@ -1,0 +1,2 @@
+ # Replace all digits in the 'Name' column with empty string
+df['Name'] = df['Name'].str.replace('\d+', '')</s>

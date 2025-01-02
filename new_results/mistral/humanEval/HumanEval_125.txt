@@ -1,0 +1,6 @@
+ # Splits a text string into words based on space or comma separators
+ # Returns a list of words
+>>> split_words("The quick brown fox jumps over the lazy dog") # ["The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"]
+>>> split_words("apple, banana, cherry") # ["apple", "banana", "cherry"]
+>>> split_words("abcdefg") # 3 # Returns the length of the sublist containing lowercase letters with even ASCII codes
+return (txt.split() if " " in txt else txt.replace(',', ' ').split())</s>

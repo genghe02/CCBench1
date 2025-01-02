@@ -1,0 +1,2 @@
+ # Check if elements in array 'a' are present in array 'b'
+c = np.in1d(a, b)</s>

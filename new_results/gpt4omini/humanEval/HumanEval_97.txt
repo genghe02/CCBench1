@@ -1,0 +1,10 @@
+```python
+def multiply(a, b):
+    # Multiply the last digits of two numbers
+    >>> multiply(23, 45) # returns 15
+    >>> multiply(-23, 45) # returns 15
+    >>> multiply(23, -45) # returns 15
+    >>> multiply(0, 0) # returns 0
+    >>> multiply(9, 8) # returns 72
+    return abs(a % 10) * abs(b % 10)
+```

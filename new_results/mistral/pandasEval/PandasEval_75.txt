@@ -1,0 +1,2 @@
+ # Dataframe containing only rows where 'x2' column has NaN values
+nan_df = df[df['x2'].isna()]</s>

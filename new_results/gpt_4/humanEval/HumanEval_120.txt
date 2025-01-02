@@ -1,0 +1,10 @@
+def maximum(arr, k):
+    # Function to return the k maximum elements from an array after sorting it
+    >>> maximum([1, 2, 3, 4, 5], 2) # returns [4, 5]
+    >>> maximum([1, 2, 3, 4, 5], 0) # returns []
+    >>> maximum([5, 4, 3, 2, 1], 3) # returns [3, 4, 5]
+    if k == 0:
+        return []
+    arr.sort()
+    ans = arr[-k:]
+    return ans

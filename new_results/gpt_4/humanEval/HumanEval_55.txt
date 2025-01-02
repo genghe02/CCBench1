@@ -1,0 +1,11 @@
+def fib(n: int):
+    # Returns the nth Fibonacci number
+    >>> fib(0) # returns 0
+    >>> fib(1) # returns 1
+    >>> fib(5) # returns 5
+    >>> fib(10) # returns 55
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)

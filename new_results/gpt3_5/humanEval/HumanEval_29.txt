@@ -1,0 +1,19 @@
+Input:
+def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+   <Requirements for the code>
+   <some test cases for the function>
+   return [x for x in strings if x.startswith(prefix)]
+
+❌ Wrong Output:
+# This function filters strings in a list based on a given prefix
+def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+   >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "ban")
+   return [x for x in strings if x.startswith(prefix)]
+
+✅ Correct Output:
+def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+   # Filter strings in a list based on a given prefix
+   >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "ban") # returns ["banana"]
+   >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "a") # returns ["apple"]
+   >>> filter_by_prefix(["apple", "banana", "cherry", "orange"], "grape") # returns []
+   return [x for x in strings if x.startswith(prefix)]

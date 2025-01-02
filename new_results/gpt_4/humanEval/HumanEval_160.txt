@@ -1,0 +1,9 @@
+def do_algebra(operator, operand):
+    # This function performs algebraic operations according to the provided operator and operand
+    >>> do_algebra(['+'], [1, 2]) # returns 3
+    >>> do_algebra(['-', '+'], [3, 2, 1]) # returns 2
+    >>> do_algebra(['*', '/', '+'], [1, 2, 3, 4]) # returns 3.0
+    expression = str(operand[0])
+    for oprt, oprn in zip(operator, operand[1:]):
+        expression+= oprt + str(oprn)
+    return eval(expression)

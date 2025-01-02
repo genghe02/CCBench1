@@ -1,0 +1,24 @@
+ def strange_sort_list(lst):
+ # Sort the input list in an unusual way by alternating between minimum and maximum elements.
+ # This function assumes that the input list is non-empty.
+
+ # Find each minimum or maximum element and append it to the result list.
+ # The switch variable determines whether to find the minimum or maximum element in each iteration.
+ res, switch = [], True
+ while lst:
+ res.append(min(lst) if switch else max(lst))
+ lst.remove(res[-1])
+ switch = not switch
+
+ # Return the sorted result list.
+ return res
+
+ # Test cases:
+ >>> strange_sort_list([3, 1, 4, 1, 5, 9, 2, 6, 5])
+ [9, 6, 5, 5, 4, 3, 2, 1, 1]
+ >>> strange_sort_list([1, 2, 3, 4, 5])
+ [5, 4, 3, 2, 1]
+ >>> strange_sort_list([1])
+ [1]
+ >>> strange_sort_list([])
+ []

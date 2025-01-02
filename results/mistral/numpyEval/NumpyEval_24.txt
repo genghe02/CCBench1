@@ -1,0 +1,2 @@
+ # Perform element-wise addition between 'a' and 'b' repeated along axis 0 using broadcasting, and then multiply 'b' with 2
+c = np.add(a[:, None], np.multiply(b, 2))

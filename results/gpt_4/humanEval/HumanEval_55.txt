@@ -1,0 +1,12 @@
+def fib(n: int):
+    # This function calculates the 'n'th number in the Fibonacci sequence. 
+    # The Fibonacci sequence is a series of numbers in which each number is the sum of the two preceding ones, usually starting with 0 and 1.
+    # The function uses a recursive approach to calculate the Fibonacci number.
+    # >>> fib(0) # Expected Output: 0
+    # >>> fib(1) # Expected Output: 1
+    # >>> fib(5) # Expected Output: 5 (The sequence being 0,1,1,2,3,5)
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)

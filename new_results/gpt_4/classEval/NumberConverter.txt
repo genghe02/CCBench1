@@ -1,0 +1,148 @@
+"""
+This class provides methods for converting numbers from one base to another.
+"""
+
+class NumberConverter:
+    @staticmethod
+    def decimal_to_binary(decimal_num):
+        """
+        Converts a decimal number to binary.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert
+
+        Returns:
+            str: The binary representation of the decimal number
+
+        Test cases:
+            # Test case 1: Small decimal number
+            assert decimal_to_binary(2) == '10'
+
+            # Test case 2: Large decimal number
+            assert decimal_to_binary(255) == '11111111'
+
+            # Test case 3: Zero
+            assert decimal_to_binary(0) == '0'
+        """
+        binary_num = bin(decimal_num)[2:]
+        return binary_num
+
+    @staticmethod
+    def binary_to_decimal(binary_num):
+        """
+        Converts a binary number to decimal.
+
+        Parameters:
+            binary_num (str): The binary number to convert
+
+        Returns:
+            int: The decimal representation of the binary number
+
+        Test cases:
+            # Test case 1: Small binary number
+            assert binary_to_decimal('10') == 2
+
+            # Test case 2: Large binary number
+            assert binary_to_decimal('11111111') == 255
+
+            # Test case 3: Zero
+            assert binary_to_decimal('0') == 0
+        """
+        decimal_num = int(binary_num, 2)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_octal(decimal_num):
+        """
+        Converts a decimal number to octal.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert
+
+        Returns:
+            str: The octal representation of the decimal number
+
+        Test cases:
+            # Test case 1: Small decimal number
+            assert decimal_to_octal(8) == '10'
+
+            # Test case 2: Large decimal number
+            assert decimal_to_octal(255) == '377'
+
+            # Test case 3: Zero
+            assert decimal_to_octal(0) == '0'
+        """
+        octal_num = oct(decimal_num)[2:]
+        return octal_num
+
+    @staticmethod
+    def octal_to_decimal(octal_num):
+        """
+        Converts an octal number to decimal.
+
+        Parameters:
+            octal_num (str): The octal number to convert
+
+        Returns:
+            int: The decimal representation of the octal number
+
+        Test cases:
+            # Test case 1: Small octal number
+            assert octal_to_decimal('10') == 8
+
+            # Test case 2: Large octal number
+            assert octal_to_decimal('377') == 255
+
+            # Test case 3: Zero
+            assert octal_to_decimal('0') == 0
+        """
+        decimal_num = int(octal_num, 8)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_hex(decimal_num):
+        """
+        Converts a decimal number to hexadecimal.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert
+
+        Returns:
+            str: The hexadecimal representation of the decimal number
+
+        Test cases:
+            # Test case 1: Small decimal number
+            assert decimal_to_hex(16) == '10'
+
+            # Test case 2: Large decimal number
+            assert decimal_to_hex(255) == 'ff'
+
+            # Test case 3: Zero
+            assert decimal_to_hex(0) == '0'
+        """
+        hex_num = hex(decimal_num)[2:]
+        return hex_num
+
+    @staticmethod
+    def hex_to_decimal(hex_num):
+        """
+        Converts a hexadecimal number to decimal.
+
+        Parameters:
+            hex_num (str): The hexadecimal number to convert
+
+        Returns:
+            int: The decimal representation of the hexadecimal number
+
+        Test cases:
+            # Test case 1: Small hexadecimal number
+            assert hex_to_decimal('10') == 16
+
+            # Test case 2: Large hexadecimal number
+            assert hex_to_decimal('ff') == 255
+
+            # Test case 3: Zero
+            assert hex_to_decimal('0') == 0
+        """
+        decimal_num = int(hex_num, 16)
+        return decimal_num

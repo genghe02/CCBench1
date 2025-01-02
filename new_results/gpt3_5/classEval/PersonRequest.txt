@@ -1,0 +1,94 @@
+"""
+This class represents a Person Request Handler to validate and store person information.
+
+The class initializes a PersonRequest object with validated name, sex, and phone number attributes.
+"""
+
+class PersonRequest:
+    def __init__(self, name: str, sex: str, phoneNumber: str):
+        """
+        Initialize the PersonRequest object with validated name, sex, and phone number attributes.
+
+        Parameters:
+            name (str): The name of the person
+            sex (str): The gender of the person
+            phoneNumber (str): The phone number of the person
+        
+        Returns:
+            None
+        """
+
+        self.name = self._validate_name(name)
+        self.sex = self._validate_sex(sex)
+        self.phoneNumber = self._validate_phoneNumber(phoneNumber)
+
+    def _validate_name(self, name: str) -> str:
+        """
+        Validate the name input for the person.
+
+        Parameters:
+            name (str): The name to validate
+        
+        Returns:
+            str: Validated name if within constraints, None otherwise
+        """
+
+        if not name:
+            return None
+        if len(name) > 33:
+            return None
+        return name
+
+    def _validate_sex(self, sex: str) -> str:
+        """
+        Validate the gender input for the person.
+
+        Parameters:
+            sex (str): The gender to validate
+        
+        Returns:
+            str: Validated gender if within constraints, None otherwise
+        """
+
+        if sex not in ["Man", "Woman", "UGM"]:
+            return None
+        return sex
+
+    def _validate_phoneNumber(self, phoneNumber: str) -> str:
+        """
+        Validate the phone number input for the person.
+
+        Parameters:
+            phoneNumber (str): The phone number to validate
+        
+        Returns:
+            str: Validated phone number if within constraints, None otherwise
+        """
+
+        if not phoneNumber:
+            return None
+        if len(phoneNumber) != 11 or not phoneNumber.isdigit():
+            return None
+        return phoneNumber
+"""
+
+# Test Cases for PersonRequest Class
+
+# Test successful instance initialization
+pr = PersonRequest("John Doe", "Man", "12345678901")
+assert pr.name == "John Doe"
+assert pr.sex == "Man"
+assert pr.phoneNumber == "12345678901"
+
+# Test edge case with long name
+pr = PersonRequest("ThisIsAVeryLongNameThatExceedsMaximumLength", "Woman", "12345678901")
+assert pr.name == None
+
+# Test error case with invalid gender
+pr = PersonRequest("Jane Doe", "Robot", "12345678901")
+assert pr.sex == None
+
+# Test error case with invalid phone number format
+pr = PersonRequest("Alice Smith", "Woman", "12345")
+assert pr.phoneNumber == None
+"""

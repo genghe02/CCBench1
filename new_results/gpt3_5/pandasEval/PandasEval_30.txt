@@ -1,0 +1,6 @@
+import pandas as pd
+
+# Convert 'Email' column to store objects
+df.Email = df.Email.astype(object)
+# Assign list of emails to the 'Email' column for row 0
+df.loc[0].Email = emails

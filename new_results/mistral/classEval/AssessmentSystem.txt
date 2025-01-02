@@ -1,0 +1,195 @@
+ ```python
+"""
+This class represents an assessment system for managing student data, including their names, grades, majors, courses, and scores.
+"""
+
+import typing
+
+
+class AssessmentSystem:
+    def __init__(self):
+        """
+        Initialize an AssessmentSystem instance.
+        """
+        self.students: typing.Dict[str, typing.Dict[str, typing.Union[str, int, typing.Dict[str, int]]]] = {}
+
+    def add_student(self, name: str, grade: int, major: str):
+        """
+        Add a new student to the assessment system.
+
+        Parameters:
+            name (str): Student name
+            grade (int): Student grade
+            major (str): Student major
+        
+        Test cases:
+            # Test case 1: Add a new student
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            
+            # Test case 2: Add an existing student
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+        """
+        self.students[name] = {'name': name, 'grade': grade, 'major': major, 'courses': {}}
+
+    def add_course_score(self, name: str, course: str, score: int):
+        """
+        Add a course score for an existing student.
+
+        Parameters:
+            name (str): Student name
+            course (str): Course name
+            score (int): Course score
+        
+        Test cases:
+            # Test case 1: Add a course score for an existing student
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            
+            # Test case 2: Add a non-existent student's course score
+            assessment_system = AssessmentSystem()
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+        """
+        if name in self.students:
+            self.students[name]['courses'][course] = score
+
+    def get_gpa(self, name: str):
+        """
+        Calculate and return a student's Grade Point Average (GPA).
+
+        Parameters:
+            name (str): Student name
+        
+        Returns:
+            float or None: Student GPA if available, None otherwise
+        
+        Test cases:
+            # Test case 1: Get the GPA for an existing student
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assert get_gpa(assessment_system, 'John Doe') == 8.0
+            
+            # Test case 2: Get the GPA for a non-existent student
+            assessment_system = AssessmentSystem()
+            assert get_gpa(assessment_system, 'John Doe') is None
+        """
+        if name in self.students and self.students[name]['courses']:
+            return sum(self.students[name]['courses'].values()) / len(self.students[name]['courses'])
+        else:
+            return None
+
+    def get_all_students_with_fail_course(self):
+        """
+        Return a list of all students with any failing courses.
+
+        Returns:
+            List[str]: List of student names with failing courses
+        
+        Test cases:
+            # Test case 1: Get students with failing courses
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 60)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assessment_system.add_student('Jane Doe', 12, 'Math')
+            assessment_system.add_course_score('Jane Doe', 'Math', 45)
+            assessment_system.add_course_score('Jane Doe', 'Science', 90)
+            assert get_all_students_with_fail_course(assessment_system) == ['John Doe']
+            
+            # Test case 2: Get students with no failing courses
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assert get_all_students_with_fail_course(assessment_system) == []
+        """
+        students = []
+        for name, student in self.students.items():
+            for course, score in student['courses'].items():
+                if score < 60:
+                    students.append(name)
+                    break
+        return students
+
+    def get_course_average(self, course: str):
+        """
+        Calculate and return the average score for a given course.
+
+        Parameters:
+            course (str): Course name
+        
+        Returns:
+            float or None: Course average if available, None otherwise
+        
+        Test cases:
+            # Test case 1: Get the course average for all students
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_student('Jane Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assessment_system.add_course_score('Jane Doe', 'Math', 90)
+            assessment_system.add_course_score('Jane Doe', 'English', 80)
+            assert get_course_average(assessment_system, 'Math') == 85.0
+            
+            # Test case 2: Get the course average for a non-existent course
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_student('Jane Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assessment_system.add_course_score('Jane Doe', 'Math', 90)
+            assessment_system.add_course_score('Jane Doe', 'English', 80)
+            assert get_course_average(assessment_system, 'History') is None
+        """
+        total = 0
+        count = 0
+        for student in self.students.values():
+            if course in student['courses']:
+                score = student['courses'][course]
+                if score is not None:
+                    total += score
+                    count += 1
+        return total / count if count > 0 else None
+
+    def get_top_student(self):
+        """
+        Return the name of the student with the highest GPA.
+
+        Returns:
+            str: The name of the student with the highest GPA
+        
+        Test cases:
+            # Test case 1: Get the top student
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assessment_system.add_student('Jane Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('Jane Doe', 'Math', 90)
+            assessment_system.add_course_score('Jane Doe', 'English', 80)
+            assert get_top_student(assessment_system) == 'John Doe'
+            
+            # Test case 2: Get the top student when all students have equal GPAs
+            assessment_system = AssessmentSystem()
+            assessment_system.add_student('John Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('John Doe', 'Math', 75)
+            assessment_system.add_course_score('John Doe', 'English', 85)
+            assessment_system.add_student('Jane Doe', 12, 'Computer Science')
+            assessment_system.add_course_score('Jane Doe', 'Math', 75)
+            assessment_system.add_course_score('Jane Doe', 'English', 85)
+            assert get_top_student(assessment_system) == 'John Doe'
+        """
+        top_student = None
+        top_gpa = 0
+        for name, student in self.students.items():
+            gpa = self.get_gpa(name)
+            if gpa is not None and gpa > top_gpa:
+                top_gpa = gpa
+                top_student = name
+        return top_student
+```</s>

@@ -1,0 +1,1 @@
+# Replace all negative numbers in the numpy array with 0 using np.where(condition).

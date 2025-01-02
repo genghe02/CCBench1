@@ -1,0 +1,89 @@
+```python
+import random
+
+# This class represents a Minesweeper game, including generation of the game maps and mechanics for playing.
+class MinesweeperGame:
+    def __init__(self, n, k) -> None:
+        # Initialize the Minesweeper game with a grid size of n and k mines.
+        # :param n: int, size of the grid (n x n)
+        # :param k: int, number of mines to place on the grid
+        self.n = n
+        self.k = k
+        self.minesweeper_map = self.generate_mine_sweeper_map()
+        self.player_map = self.generate_playerMap()
+        self.score = 0
+
+    def generate_mine_sweeper_map(self):
+        # Generates a Minesweeper map with mines and numbers indicating adjacent mines.
+        # :return: list, a 2D list representing the Minesweeper map with mines marked as 'X' and numbers indicating adjacent mines.
+        # >>> game = MinesweeperGame(5, 3)
+        # >>> minesweeper_map = game.generate_mine_sweeper_map()
+        arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        for num in range(self.k):
+            x = random.randint(0, self.n-1)
+            y = random.randint(0, self.n-1)
+            arr[y][x] = 'X'
+            if (x >=0 and x <= self.n-2) and (y >= 0 and y <= self.n-1):
+                if arr[y][x+1] != 'X':
+                    arr[y][x+1] += 1
+            if (x >=1 and x <= self.n-1) and (y >= 0 and y <= self.n-1):
+                if arr[y][x-1] != 'X':
+                    arr[y][x-1] += 1
+            if (x >= 1 and x <= self.n-1) and (y >= 1 and y <= self.n-1):
+                if arr[y-1][x-1] != 'X':
+                    arr[y-1][x-1] += 1
+            
+            if (x >= 0 and x <= self.n-2) and (y >= 1 and y <= self.n-1):
+                if arr[y-1][x+1] != 'X':
+                    arr[y-1][x+1] += 1 
+            if (x >= 0 and x <= self.n-1) and (y >= 1 and y <= self.n-1):
+                if arr[y-1][x] != 'X':
+                    arr[y-1][x] += 1
+            
+            if (x >=0 and x <= self.n-2) and (y >= 0 and y <= self.n-2):
+                if arr[y+1][x+1] != 'X':
+                    arr[y+1][x+1] += 1
+            if (x >= 1 and x <= self.n-1) and (y >= 0 and y <= self.n-2):
+                if arr[y+1][x-1] != 'X':
+                    arr[y+1][x-1] += 1
+            if (x >= 0 and x <= self.n-1) and (y >= 0 and y <= self.n-2):
+                if arr[y+1][x] != 'X':
+                    arr[y+1][x] += 1
+        return arr
+
+    def generate_playerMap(self):
+        # Creates a player map initialized with '-' to represent covered cells.
+        # :return: list, a 2D list representing the player's view of the Minesweeper grid, initially all cells are covered.
+        # >>> game = MinesweeperGame(3, 1)
+        # >>> player_map = game.generate_playerMap()
+        arr = [['-' for row in range(self.n)] for column in range(self.n)]
+        return arr
+
+    def check_won(self, map):
+        # Checks if the player has won by revealing all non-mine cells.
+        # :param map: list, the player's current view of the Minesweeper map.
+        # :return: bool, True if the player has won, False otherwise.
+        # >>> game = MinesweeperGame(4, 0)
+        # >>> won = game.check_won(game.player_map)
+        for i in range(self.n):
+            for j in range(self.n):
+                if map[i][j] == '-' and self.minesweeper_map[i][j] != 'X':
+                    return False
+        return True
+    
+    def sweep(self, x, y):
+        # Reveals the cell at the given coordinates and checks for game status.
+        # :param x: int, the row index of the cell to reveal.
+        # :param y: int, the column index of the cell to reveal.
+        # :return: bool, True if the player wins after the sweep, False if they hit a mine or if the game is ongoing.
+        # >>> game = MinesweeperGame(5, 5)
+        # >>> result = game.sweep(0, 0)
+        if (self.minesweeper_map[x][y] == 'X'):
+            return False
+        else:
+            self.player_map[x][y] = self.minesweeper_map[x][y]
+            self.score += 1
+            if self.check_won(self.player_map):
+                return True
+            return self.player_map
+```

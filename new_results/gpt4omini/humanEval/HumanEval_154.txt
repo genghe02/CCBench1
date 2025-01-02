@@ -1,0 +1,17 @@
+```python
+def cycpattern_check(a, b):
+    # Checks if string 'b' is a rotation of string 'a'
+    >>> cycpattern_check('abcde', 'deabc') # returns True
+    >>> cycpattern_check('abcde', 'abcde') # returns True
+    >>> cycpattern_check('abcde', 'edcba') # returns False
+    >>> cycpattern_check('abc', 'bca') # returns True
+    >>> cycpattern_check('abc', 'cab') # returns True
+    >>> cycpattern_check('abc', 'xyz') # returns False
+    l = len(b)
+    pat = b + b
+    for i in range(len(a) - l + 1):
+        for j in range(l + 1):
+            if a[i:i+l] == pat[j:j+l]:
+                return True
+    return False
+```

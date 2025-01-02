@@ -1,0 +1,55 @@
+<This class represents an assessment system that manages student data including grades, courses, and other relevant information.>
+
+class AssessmentSystem:
+    def __init__(self):
+        <Initialize an empty dictionary to store student information.>
+
+    def add_student(self, name, grade, major):
+        <Add a new student to the system with the provided name, grade, and major.>
+        <param name: str, the name of the student>
+        <param grade: int, the grade of the student>
+        <param major: str, the major of the student>
+        <return: None>
+        <Test case: 
+        >>> system.add_student('Alice', 10, 'Math')
+        Ensure that 'Alice' is added to the system with the correct information.>
+
+    def add_course_score(self, name, course, score):
+        <Add a course score for a specific student.>
+        <param name: str, the name of the student>
+        <param course: str, the course for which the score is being added>
+        <param score: int, the score achieved by the student in the course>
+        <return: None>
+        <Test case: 
+        >>> system.add_course_score('Alice', 'Mathematics', 85)
+        Ensure that 'Alice' has a score of 85 for the course 'Mathematics'.>
+
+    def get_gpa(self, name):
+        <Calculate the GPA of a student based on their course scores.>
+        <param name: str, the name of the student>
+        <return: float or None, the GPA of the student if available, else None>
+        <Test case: 
+        >>> system.get_gpa('Alice')
+        Ensure that the GPA for 'Alice' is calculated correctly.>
+
+    def get_all_students_with_fail_course(self):
+        <Retrieve a list of students who have failed courses.>
+        <return: list, names of students who have failed at least one course>
+        <Test case: 
+        >>> system.get_all_students_with_fail_course()
+        Identify students who have failed courses in the system.>
+
+    def get_course_average(self, course):
+        <Calculate the average score for a specific course across all students.>
+        <param course: str, the course for which the average score is being calculated>
+        <return: float or None, the average score for the course if available, else None>
+        <Test case: 
+        >>> system.get_course_average('Mathematics')
+        Calculate the average score for the course 'Mathematics' across all students.>
+
+    def get_top_student(self):
+        <Identify the top-performing student based on GPA.>
+        <return: str or None, the name of the top-performing student if available, else None>
+        <Test case: 
+        >>> system.get_top_student()
+        Determine the student with the highest GPA in the system.>

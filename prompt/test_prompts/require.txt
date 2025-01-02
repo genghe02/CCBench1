@@ -1,0 +1,27 @@
+You are an expert in Python annotation writing. Here is a simple Python code, I need you to add code annotation in the<>area.
+For example:<Requirements for the code>:Find each index where the value changes in an efficient way using numpy by comparing each element with its neighbor and utilizing np.where(condition).
+<some test cases for the function> >>> filter = AccessGatewayFilter()
+                                   >>> filter.filter({'path': '/login', 'method': 'POST'})
+In addition, when designing test samples, please try to cover all branches and situations of the function with as few samples as possible.
+<> The internal content is the requirement for this annotation.
+In the task, you should delete all "<>" and replace them like the real code annotation.
+Note: It's not about telling me how to design, but about you designing specific test cases based on your own understanding, like the example I provided above.
+Note: Do not add content where there is no '<>' symbol, simply replace '<>' with internal requirements where there is'<>'.
+Note that you should not do anything expect fill the requirements in '<>' with code annotation, you should not explain anything or do something else.
+Here is an example:
+
+User:
+```python
+import numpy as np
+
+a = np.array([1, 1, 1, 1, 1, 2, 2, 2, 3, 4, 3, 4, 3, 4, 3, 4, 5, 5, 5])
+<Requirements for the code>
+result = np.where(a[1:] != a[:-1])[0]
+```
+
+What you should respond:
+# Find each index where the value changes in an efficient way using numpy by comparing each element with its neighbor and utilizing np.where(condition).
+
+Please make sure that what you should do is just replace the '<>'. Don't say anything else!
+Note that your code annotation style should be consistent with the one in the sample, this is very important.
+Next, please complete the annotation writing task:

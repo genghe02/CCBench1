@@ -1,0 +1,16 @@
+```python
+def sum_squares(lst):
+    # Calculate the sum of squares for elements at indices divisible by 3, cubes for indices divisible by 4 (but not 3), and keep others as is
+    >>> sum_squares([1, 2, 3, 4, 5, 6, 7, 8, 9]) # returns 1 + 2 + 9 + 64 + 5 + 36 + 7 + 512 + 81
+    >>> sum_squares([0, 1, 2, 3, 4, 5, 6, 7, 8]) # returns 0 + 1 + 2 + 9 + 64 + 5 + 36 + 7 + 512
+    >>> sum_squares([10, 20, 30, 40, 50, 60, 70, 80, 90]) # returns 100 + 20 + 900 + 64000 + 50 + 3600 + 70 + 512000 + 8100
+    result =[]
+    for i in range(len(lst)):
+        if i %3 == 0:
+            result.append(lst[i]**2)
+        elif i % 4 == 0 and i%3 != 0:
+            result.append(lst[i]**3)
+        else:
+            result.append(lst[i])
+    return sum(result)
+```

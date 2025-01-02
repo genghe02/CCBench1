@@ -1,0 +1,23 @@
+```python
+def greatest_common_divisor(a: int, b: int) -> int:
+    # Calculate the greatest common divisor of two numbers using Euclidean algorithm.
+    # Parameters:
+    # a: int, the first number
+    # b: int, the second number
+    # Return:
+    # int, the greatest common divisor of a and b
+    
+    # Test cases:
+    # Check if the function returns the correct gcd for two prime numbers
+    assert greatest_common_divisor(7, 5) == 1
+    # Check if the function returns the correct gcd for two even numbers
+    assert greatest_common_divisor(12, 18) == 6
+    # Check if the function returns the correct gcd for two numbers with one being zero
+    assert greatest_common_divisor(0, 8) == 8
+    # Check if the function returns the correct gcd for two negative numbers
+    assert greatest_common_divisor(-15, -25) == 5
+    
+    while b:
+        a, b = b, a % b
+    return a
+```

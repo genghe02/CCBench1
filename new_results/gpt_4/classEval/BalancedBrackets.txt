@@ -1,0 +1,72 @@
+"""
+The class `BalancedBrackets` is used to check whether a given expression has balanced brackets. 
+This is achieved by checking if every opening bracket has a corresponding closing bracket.
+"""
+
+class BalancedBrackets:
+    def __init__(self, expr):
+        """
+        Constructor to initialize the BalancedBrackets object.
+        
+        Parameters:
+            expr (str): The expression to be checked for balanced brackets
+        """
+        self.stack = []
+        self.left_brackets = ["(", "{", "["]
+        self.right_brackets = [")", "}", "]"]
+        self.expr = expr
+
+    def clear_expr(self):
+        """
+        Method to clean the input expression by removing all characters except brackets.
+        
+        Test cases:
+            # Test case 1: Clearing an expression with alphanumeric and special characters
+            BalancedBrackets("a(b[c]d)e*f{g}").clear_expr()
+            # Expected output: "([]){}"
+            
+            # Test case 2: Clearing an expression with only brackets
+            BalancedBrackets("[{()}]").clear_expr()
+            # Expected output: "[{()}]"
+            
+            # Test case 3: Clearing an empty string
+            BalancedBrackets("").clear_expr()
+            # Expected output: ""
+        """
+        self.expr = ''.join(c for c in self.expr if (c in self.left_brackets or c in self.right_brackets))
+
+    def check_balanced_brackets(self):
+        """
+        Method to check if the brackets in the expression are balanced.
+        
+        Returns:
+            bool: True if the expression has balanced brackets, False otherwise
+            
+        Test cases:
+            # Test case 1: Checking a balanced expression
+            assert BalancedBrackets("(a+b)[c]{d}").check_balanced_brackets() == True
+            
+            # Test case 2: Checking an unbalanced expression
+            assert BalancedBrackets("(a+b[c{d}").check_balanced_brackets() == False
+            
+            # Test case 3: Checking an expression with only brackets
+            assert BalancedBrackets("[()]{}").check_balanced_brackets() == True
+        """
+        self.clear_expr()
+        for Brkt in self.expr:
+            if Brkt in self.left_brackets:
+                self.stack.append(Brkt)
+            else:
+                Current_Brkt = self.stack.pop()
+                if Current_Brkt == "(":
+                    if Brkt != ")":
+                        return False
+                if Current_Brkt == "{":
+                    if Brkt != "}":
+                        return False
+                if Current_Brkt == "[":
+                    if Brkt != "]":
+                        return False
+        if self.stack:
+            return False
+        return True

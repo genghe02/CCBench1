@@ -1,0 +1,10 @@
+ # Find each row where the value in the second column is equal to 'Jimmy'.
+
+import pandas as pd
+
+# Given DataFrame
+df = pd.DataFrame({'col1': [1, 2, 3], 'col2': ['Jimmy', 'Tom', 'Jimmy']})
+
+# Required code
+<Requirements for the code>
+new_df = df[df['col2'] == 'Jimmy']

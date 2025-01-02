@@ -1,0 +1,50 @@
+```python
+import json
+
+
+class TextFileProcessor:
+    # This class provides methods to read, write, and process text files, including reading JSON files.
+    def __init__(self, file_path):
+        # Initialize the TextFileProcessor with a file path.
+        # param file_path: str, the path to the file to be processed.
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        # Read the file as a JSON object and return it.
+        # return: dict, the JSON object loaded from the file.
+        # >>> processor = TextFileProcessor('data.json')
+        # >>> processor.read_file_as_json()
+        # {'key': 'value'}
+        with open(self.file_path, 'r') as file:
+            data = json.load(file)
+
+        return data
+
+    def read_file(self):
+        # Read the entire content of the file as a string.
+        # return: str, the content of the file.
+        # >>> processor = TextFileProcessor('data.txt')
+        # >>> processor.read_file()
+        # 'This is a test file.'
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write_file(self, content):
+        # Write the given content to the file.
+        # param content: str, the content to be written to the file.
+        # >>> processor = TextFileProcessor('data.txt')
+        # >>> processor.write_file('New content')
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+    def process_file(self):
+        # Read the file, filter out non-alphabetic characters, and write the processed content back to the file.
+        # return: str, the processed content of the file.
+        # >>> processor = TextFileProcessor('data.txt')
+        # >>> processor.process_file()
+        # 'Thisisatestfile'
+        content = self.read_file()
+        content = ''.join([char for char in content if char.isalpha()])
+        self.write_file(content)
+        return content
+```

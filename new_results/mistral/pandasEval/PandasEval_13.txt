@@ -1,0 +1,2 @@
+ # Create an empty DataFrame with the given column names
+return pd.DataFrame(columns=col_names)</s>

@@ -1,0 +1,124 @@
+ """
+This class, ZipFileProcessor, provides methods for processing Zip files. It can read, extract all files or a specific file, and create a new Zip file using a list of files.
+"""
+
+import zipfile
+
+class ZipFileProcessor:
+    def __init__(self, file_name):
+        """
+        Initialize the ZipFileProcessor instance with a given Zip file name.
+
+        Parameters:
+            file_name (str): The name of the Zip file to be processed.
+        """
+        self.file_name = file_name
+
+    def read_zip_file(self):
+        """
+        Read the contents of the Zip file.
+
+        Returns:
+            zipfile.ZipFile: An instance of the ZipFile class if successful. Otherwise, None.
+        
+        Test cases:
+            # Test case 1: Open a valid Zip file
+            processor = ZipFileProcessor('test.zip')
+            zip_file = processor.read_zip_file()
+            assert zip_file is not None
+
+            # Test case 2: Open an invalid file
+            processor = ZipFileProcessor('invalid_file')
+            zip_file = processor.read_zip_file()
+            assert zip_file is None
+        """
+
+    def extract_all(self, output_path):
+        """
+        Extract all files from the Zip file to the given output path.
+
+        Parameters:
+            output_path (str): The output path where the extracted files will be saved.
+
+        Returns:
+            bool: True if all files are extracted successfully, False otherwise.
+        
+        Test cases:
+            # Test case 1: Extract files from a valid Zip file
+            processor = ZipFileProcessor('test.zip')
+            processor.extract_all('/tmp')
+            assert os.path.exists('/tmp/extracted_file.txt')
+
+            # Test case 2: Extract files to an invalid output path
+            processor = ZipFileProcessor('test.zip')
+            processor.extract_all('not_a_valid_path')
+            assert not os.path.exists('not_a_valid_path/extracted_file.txt')
+        """
+
+        if self.read_zip_file():
+            try:
+                with zipfile.ZipFile(self.file_name, 'r') as zip_file:
+                    zip_file.extractall(output_path)
+                return True
+            except:
+                return False
+        else:
+            return False
+
+    def extract_file(self, file_name, output_path):
+        """
+        Extract a specific file from the Zip file to the given output path.
+
+        Parameters:
+            file_name (str): The name of the file to be extracted.
+            output_path (str): The output path where the extracted file will be saved.
+
+        Returns:
+            bool: True if the file is extracted successfully, False otherwise.
+        
+        Test cases:
+            # Test case 1: Extract a file from a valid Zip file
+            processor = ZipFileProcessor('test.zip')
+            processor.extract_file('test.txt', '/tmp')
+            assert os.path.exists('/tmp/test_extracted.txt')
+
+            # Test case 2: Extract a non-existent file
+            processor = ZipFileProcessor('test.zip')
+            processor.extract_file('non_existent_file.txt', '/tmp')
+            assert not os.path.exists('/tmp/non_existent_file_extracted.txt')
+        """
+
+        if self.read_zip_file():
+            try:
+                with zipfile.ZipFile(self.file_name, 'r') as zip_file:
+                    zip_file.extract(file_name, output_path)
+                    return True
+            except:
+                return False
+        else:
+            return False
+
+    def create_zip_file(self, files, output_file_name):
+        """
+        Create a new Zip file from a list of files.
+
+        Parameters:
+            files (list): A list of files to be added to the new Zip file.
+            output_file_name (str): The output file name of the new Zip file.
+
+        Returns:
+            bool: True if the new Zip file is created successfully, False otherwise.
+        
+        Test cases:
+            # Test case 1: Create a new Zip file with one file
+            files_to_add = ['test.txt']
+            processor = ZipFileProcessor('new_zip.zip')
+            processor.create_zip_file(files_to_add, 'new_zip.zip')
+            assert os.path.exists('new_zip.zip')
+
+            # Test case 2: Create a new Zip file with multiple files
+            files_to_add = ['file1.txt', 'file2.txt']
+            processor = ZipFileProcessor('new_zip.zip')
+            processor.create_zip_file(files_to_add, 'new_zip.zip')
+            assert os.path.exists('new_zip.zip')
+            assert len(os.listdir('new_zip.zip')) == 2</s>

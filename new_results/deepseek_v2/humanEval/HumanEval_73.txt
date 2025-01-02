@@ -1,0 +1,12 @@
+```python
+def smallest_change(arr):
+    # Calculate the minimum number of changes needed to make the array a palindrome
+    >>> smallest_change([1, 2, 3, 2, 1]) # returns 0
+    >>> smallest_change([1, 2, 3, 4, 5]) # returns 2
+    >>> smallest_change([1, 1, 2, 2, 3, 3]) # returns 3
+    ans = 0
+    for i in range(len(arr) // 2):
+        if arr[i] != arr[len(arr) - i - 1]:
+            ans += 1
+    return ans
+```

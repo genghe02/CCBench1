@@ -1,0 +1,1 @@
+# Filter the DataFrame to include only rows where the 'col' column contains any of the values in the 'targets' list using the isin method.

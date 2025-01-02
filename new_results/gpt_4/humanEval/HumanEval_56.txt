@@ -1,0 +1,16 @@
+def correct_bracketing(brackets: str):
+    # Check if the string has correct bracketing. Depth increases by 1 for "<" and decreases by 1 for ">". If depth is negative or not zero at the end, return False.
+    
+    >>> correct_bracketing("<<>>") # returns True
+    >>> correct_bracketing("<>") # returns True
+    >>> correct_bracketing("><") # returns False
+    >>> correct_bracketing("<<<<>>>") # returns False
+    depth = 0
+    for b in brackets:
+        if b == "<":
+            depth += 1
+        else:
+            depth -= 1
+        if depth < 0:
+            return False
+    return depth == 0

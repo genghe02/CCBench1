@@ -1,0 +1,5 @@
+import numpy as np
+
+def find_most_frequent_number(arr):
+    # Count the frequency of each number in the array and return the most frequent one
+    return np.bincount(arr).argmax()

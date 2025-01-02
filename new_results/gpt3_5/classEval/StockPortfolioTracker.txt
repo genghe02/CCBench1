@@ -1,0 +1,223 @@
+"""
+This class allows tracking a stock portfolio, adding, removing, buying, and selling stocks, and calculating the total portfolio value.
+
+The main purpose of this class is to facilitate managing a stock portfolio, including buying and selling stocks, calculating total portfolio value, and generating a portfolio summary.
+"""
+
+class StockPortfolioTracker:
+    def __init__(self, cash_balance):
+        """
+        Initialize the stock portfolio tracker with a cash balance.
+
+        Parameters:
+            cash_balance (float): The initial cash balance in the portfolio.
+        """
+        self.portfolio = []
+        self.cash_balance = cash_balance
+
+    def add_stock(self, stock):
+        """
+        Add a stock to the portfolio or update quantity if it already exists.
+
+        Parameters:
+            stock (dict): A dictionary containing stock information (name, price, quantity).
+
+        Test cases:
+            # Test case 1: Add new stock
+            input_stock = {'name': 'AAPL', 'price': 150.0, 'quantity': 10}
+            add_stock(input_stock)
+            assert portfolio contains input_stock
+
+            # Test case 2: Update existing stock quantity
+            input_stock = {'name': 'AAPL', 'price': 152.0, 'quantity': 5}
+            add_stock(input_stock)
+            assert portfolio stock quantity updated
+
+            # Test case 3: Empty stock information
+            input_stock = {}
+            add_stock(input_stock)
+            assert portfolio not modified
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name']:
+                pf['quantity'] += stock['quantity']
+                return
+
+        self.portfolio.append(stock)
+
+    def remove_stock(self, stock):
+        """
+        Remove stock from the portfolio or update quantity if there are enough stocks.
+
+        Parameters:
+            stock (dict): A dictionary containing stock information (name, price, quantity).
+
+        Returns:
+            bool: True if stock was successfully removed, False otherwise.
+
+        Test cases:
+            # Test case 1: Stock with enough quantity for removal
+            input_stock = {'name': 'AAPL', 'price': 150.0, 'quantity': 5}
+            remove_stock(input_stock)
+            assert stock quantity reduced in portfolio
+
+            # Test case 2: Stock with insufficient quantity for removal
+            input_stock = {'name': 'AAPL', 'price': 150.0, 'quantity': 20}
+            remove_stock(input_stock)
+            assert stock not removed
+
+            # Test case 3: Non-existent stock removal
+            input_stock = {'name': 'GOOGL', 'price': 2000.0, 'quantity': 10}
+            remove_stock(input_stock)
+            assert stock not removed
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name'] and pf['quantity'] >= stock['quantity']:
+                pf['quantity'] -= stock['quantity']
+                if pf['quantity'] == 0:
+                    self.portfolio.remove(pf)
+                return True
+        return False
+
+    def buy_stock(self, stock):
+        """
+        Buy a stock and add it to the portfolio if there are enough funds.
+
+        Parameters:
+            stock (dict): A dictionary containing stock information (name, price, quantity).
+
+        Returns:
+            bool: True if stock was successfully bought, False if there are insufficient funds.
+
+        Test cases:
+            # Test case 1: Sufficient funds for buying stock
+            input_stock = {'name': 'AAPL', 'price': 150.0, 'quantity': 5}
+            remaining_balance_before = cash_balance
+            buy_stock(input_stock)
+            assert stock added to portfolio and balance adjusted correctly
+
+            # Test case 2: Insufficient funds for buying stock
+            input_stock = {'name': 'GOOGL', 'price': 2000.0, 'quantity': 1}
+            remaining_balance_before = cash_balance
+            buy_stock(input_stock)
+            assert stock not added and balance not deducted
+
+            # Test case 3: Non-existent stock purchase attempt
+            input_stock = {}
+            buy_stock(input_stock)
+            assert no change in portfolio or balance
+        """
+        if stock['price'] * stock['quantity'] > self.cash_balance:
+            return False
+        else:
+            self.add_stock(stock)
+            self.cash_balance -= stock['price'] * stock['quantity']
+            return True
+
+    def sell_stock(self, stock):
+        """
+        Sell a stock from the portfolio and update cash balance accordingly.
+
+        Parameters:
+            stock (dict): A dictionary containing stock information (name, price, quantity).
+
+        Returns:
+            bool: True if stock was successfully sold, False if the stock is not available.
+
+        Test cases:
+            # Test case 1: Sell existing stock
+            input_stock = {'name': 'AAPL', 'price': 160.0, 'quantity': 3}
+            sell_stock(input_stock)
+            assert stock sold and balance updated
+
+            # Test case 2: Attempt to sell non-existent stock
+            input_stock = {'name': 'GOOGL', 'price': 2100.0, 'quantity': 4}
+            sell_stock(input_stock)
+            assert no change in portfolio or balance
+
+            # Test case 3: Sell more than available quantity
+            input_stock = {'name': 'AAPL', 'price': 175.0, 'quantity': 20}
+            sell_stock(input_stock)
+            assert no change in portfolio or balance
+        """
+        if self.remove_stock(stock) == False:
+            return False
+        self.cash_balance += stock['price'] * stock['quantity']
+        return True
+
+    def calculate_portfolio_value(self):
+        """
+        Calculate the total value of the stock portfolio including cash balance.
+
+        Returns:
+            float: Total value of the stock portfolio.
+
+        Test cases:
+            # Test case 1: Portfolio with multiple stocks
+            calculate_portfolio_value()
+            assert total portfolio value calculated correctly
+
+            # Test case 2: Portfolio with no stocks
+            calculate_portfolio_value()
+            assert total value equals the initial cash balance
+
+            # Test case 3: Portfolio with negative balance
+            calculate_portfolio_value()
+            assert total value is negative
+        """
+        total_value = self.cash_balance
+        for stock in self.portfolio:
+            total_value += stock['price'] * stock['quantity']
+        return total_value
+
+    def get_portfolio_summary(self):
+        """
+        Generate a summary of the stock portfolio showing individual stock values and total portfolio value.
+
+        Returns:
+            float, list: Tuple containing the total portfolio value and a list of stock summaries.
+
+        Test cases:
+            # Test case 1: Portfolio summary generation
+            get_portfolio_summary()
+            assert portfolio summary contains all stocks and total value
+
+            # Test case 2: Empty portfolio summary
+            get_portfolio_summary()
+            assert portfolio summary has zero value and empty stock summary
+
+            # Test case 3: Portfolio summary with single stock
+            get_portfolio_summary()
+            assert portfolio and stock summary are correct
+        """
+        summary = []
+        for stock in self.portfolio:
+            value = self.get_stock_value(stock)
+            summary.append({"name": stock["name"], "value": value})
+        portfolio_value = self.calculate_portfolio_value()
+        return portfolio_value, summary
+
+    def get_stock_value(self, stock):
+        """
+        Calculate the total value of a specific stock in the portfolio.
+
+        Parameters:
+            stock (dict): A dictionary containing stock information (name, price, quantity).
+
+        Returns:
+            float: Total value of the given stock.
+
+        Test cases:
+            # Test case 1: Stock value calculation
+            get_stock_value(stock)
+            assert calculated stock value is correct
+
+            # Test case 2: Stock with zero quantity value
+            get_stock_value(stock)
+            assert calculated value is zero
+
+            # Test case 3: Stock with negative price
+            get_stock_value(stock)
+            assert negative value calculated
+        """
+        return stock['price'] * stock['quantity']

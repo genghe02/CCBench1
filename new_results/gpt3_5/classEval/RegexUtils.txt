@@ -1,0 +1,250 @@
+"""
+The class provides utility functions for handling regular expressions and pattern matching operations.
+"""
+
+import re
+
+
+class RegexUtils:
+
+    def match(self, pattern, text):
+        """
+        Check if the pattern matches beginning of the text.
+        
+        Parameters:
+            pattern (str): Regular expression pattern to match
+            text (str): Text to match against pattern
+        
+        Returns:
+            bool: True if pattern matches beginning of text, False otherwise
+        
+        Test cases:
+            # Test case 1: Pattern matches
+            assert match(r'\d+', '123abc') == True
+            
+            # Test case 2: Pattern does not match
+            assert match(r'\d+', 'abc') == False
+            
+            # Test case 3: Empty pattern and empty text
+            assert match('', '') == True
+        """
+        
+        ans = re.match(pattern, text)
+        if ans:
+            return True
+        else:
+            return False
+
+    def findall(self, pattern, text):
+        """
+        Find all occurrences of a pattern in the text.
+        
+        Parameters:
+            pattern (str): Regular expression pattern to find
+            text (str): Text to search for the pattern
+        
+        Returns:
+            list: List of matching substrings
+        
+        Test cases:
+            # Test case 1: Match multiple occurrences
+            assert findall(r'\d+', 'a1b2c3') == ['1', '2', '3']
+            
+            # Test case 2: No matches found
+            assert findall(r'\d+', 'abc') == []
+            
+            # Test case 3: Empty pattern and text
+            assert findall('', '') == ['']
+        """
+        
+        return re.findall(pattern, text)
+
+    def split(self, pattern, text):
+        """
+        Split the text based on the pattern.
+        
+        Parameters:
+            pattern (str): Regular expression pattern to split on
+            text (str): Text to split
+        
+        Returns:
+            list: List of substrings after splitting
+        
+        Test cases:
+            # Test case 1: Split on whitespace
+            assert split(r'\s+', 'Hello World') == ['Hello', 'World']
+            
+            # Test case 2: No split occurs
+            assert split(r'\s+', 'HelloWorld') == ['HelloWorld']
+            
+            # Test case 3: Empty pattern and text
+            assert split('', '') == ['']
+        """
+        
+        return re.split(pattern, text)
+
+    def sub(self, pattern, replacement, text):
+        """
+        Substitute occurrences of pattern in text with replacement.
+        
+        Parameters:
+            pattern (str): Regular expression pattern to replace
+            replacement (str): Text to replace the pattern with
+            text (str): Text to perform substitution
+        
+        Returns:
+            str: Text after performing the substitution
+        
+        Test cases:
+            # Test case 1: Replace all digits with 'X'
+            assert sub(r'\d', 'X', '123abc') == 'XXXabc'
+            
+            # Test case 2: No substitution occurs
+            assert sub(r'\d', 'X', 'abc') == 'abc'
+            
+            # Test case 3: Empty pattern and text
+            assert sub('', 'X', '') == 'X'
+        """
+        
+        return re.sub(pattern, replacement, text)
+
+    def generate_email_pattern(self):
+        """
+        Generate a regular expression pattern to match email addresses.
+        
+        Returns:
+            str: Regular expression pattern for email validation
+        
+        Test cases:
+            # Test case 1: Valid email pattern
+            pattern = generate_email_pattern()
+            assert match(pattern, 'test@example.com') == True
+            
+            # Test case 2: Invalid email pattern
+            pattern = generate_email_pattern()
+            assert match(pattern, 'invalid-email') == False
+            
+            # Test case 3: Pattern not empty
+            assert generate_email_pattern() != ''
+        """
+        
+        pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        return pattern
+
+    def generate_phone_number_pattern(self):
+        """
+        Generate a regular expression pattern to match phone numbers.
+        
+        Returns:
+            str: Regular expression pattern for phone number validation
+        
+        Test cases:
+            # Test case 1: Valid phone number pattern
+            pattern = generate_phone_number_pattern()
+            assert match(pattern, '123-456-7890') == True
+            
+            # Test case 2: Invalid phone number pattern
+            pattern = generate_phone_number_pattern()
+            assert match(pattern, '123') == False
+            
+            # Test case 3: Pattern not empty
+            assert generate_phone_number_pattern() != ''
+        """
+        
+        pattern = r'\b\d{3}-\d{3}-\d{4}\b'
+        return pattern
+
+    def generate_split_sentences_pattern(self):
+        """
+        Generate a regular expression pattern to split text into sentences.
+        
+        Returns:
+            str: Regular expression pattern for splitting sentences
+        
+        Test cases:
+            # Test case 1: Valid split pattern
+            pattern = generate_split_sentences_pattern()
+            assert len(split(pattern, 'Hello! How are you?')) == 2
+            
+            # Test case 2: Incorrect split pattern
+            pattern = generate_split_sentences_pattern()
+            assert len(split(pattern, 'Hello.How are you?')) == 1
+            
+            # Test case 3: Pattern not empty
+            assert generate_split_sentences_pattern() != ''
+        """
+        
+        pattern = r'[.!?][\s]{1,2}(?=[A-Z])'
+        return pattern
+
+    def split_sentences(self, text):
+        """
+        Split the text into separate sentences.
+        
+        Parameters:
+            text (str): Text containing multiple sentences
+        
+        Returns:
+            list: List of sentences after splitting
+        
+        Test cases:
+            # Test case 1: Single sentence
+            assert split_sentences('Hello! How are you?') == ['Hello!', 'How are you?']
+            
+            # Test case 2: Multiple sentences separated by dots
+            assert split_sentences('Hello. How are you.') == ['Hello.', 'How are you.']
+            
+            # Test case 3: Empty text
+            assert split_sentences('') == ['']
+        """
+        
+        pattern = self.generate_split_sentences_pattern()
+        return self.split(pattern, text)
+
+    def validate_phone_number(self, phone_number):
+        """
+        Validate if the phone number matches the specified pattern.
+        
+        Parameters:
+            phone_number (str): Phone number to validate
+        
+        Returns:
+            bool: True if phone number matches the pattern, False otherwise
+        
+        Test cases:
+            # Test case 1: Valid phone number
+            assert validate_phone_number('123-456-7890') == True
+            
+            # Test case 2: Invalid phone number
+            assert validate_phone_number('123') == False
+            
+            # Test case 3: Empty number
+            assert validate_phone_number('') == False
+        """
+        
+        pattern = self.generate_phone_number_pattern()
+        return self.match(pattern, phone_number)
+
+    def extract_email(self, text):
+        """
+        Extract all email addresses from the text.
+        
+        Parameters:
+            text (str): Text containing email addresses
+        
+        Returns:
+            list: List of email addresses found in the text
+        
+        Test cases:
+            # Test case 1: Single email address
+            assert extract_email('Contact us at test@example.com') == ['test@example.com']
+            
+            # Test case 2: Multiple email addresses
+            assert extract_email('Email me at one@test.com or two@example.com') == ['one@test.com', 'two@example.com']
+            
+            # Test case 3: No email addresses
+            assert extract_email('No contact information') == []
+        """
+        
+        pattern = self.generate_email_pattern()
+        return self.findall(pattern, text)

@@ -1,0 +1,27 @@
+```python
+def prime_fib(n: int):
+    # Generate the nth Fibonacci prime number.
+    # Fibonacci sequence starts with 0 and 1, and each subsequent number is the sum of the two preceding numbers.
+    # A Fibonacci prime is a Fibonacci number that is also a prime number.
+    # The is_prime function checks if a number is prime by iterating from 2 to the square root of the number.
+    # Return the nth Fibonacci prime number when found.
+
+    import math
+
+    def is_prime(p):
+        # Check if a number is prime.
+        if p < 2:
+            return False
+        for k in range(2, min(int(math.sqrt(p)) + 1, p - 1)):
+            if p % k == 0:
+                return False
+        return True
+
+    f = [0, 1]
+    while True:
+        f.append(f[-1] + f[-2])
+        if is_prime(f[-1]):
+            n -= 1
+        if n == 0:
+            return f[-1]
+```

@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef get_list_from_dataframe(df):\n    # Convert the dataframe columns to a list\n    return df.columns.tolist()

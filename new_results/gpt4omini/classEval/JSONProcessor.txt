@@ -1,0 +1,114 @@
+```python
+"""
+This class handles operations related to JSON file processing, including reading, writing, and modifying JSON data.
+"""
+
+import json
+import os
+
+class JSONProcessor:
+    def read_json(self, file_path):
+        """
+        Reads JSON data from a specified file.
+
+        Parameters:
+            file_path (str): The path to the JSON file to read from.
+
+        Returns:
+            dict or int: The JSON data as a dictionary if successful, 0 if the file does not exist, -1 if an error occurs.
+        
+        Test cases:
+            # Test case 1: Successful read of existing JSON file
+            input = 'data.json'  # Assuming data.json contains valid JSON
+            expected_output = {...}  # The expected dictionary output
+            assert read_json(input) == expected_output
+
+            # Test case 2: File does not exist
+            input = 'nonexistent.json'
+            expected_output = 0
+            assert read_json(input) == expected_output
+            
+            # Test case 3: Invalid JSON file
+            input = 'invalid.json'  # Assuming this file contains invalid JSON
+            expected_output = -1
+            assert read_json(input) == expected_output
+        """
+        if not os.path.exists(file_path):
+            return 0
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            return data
+        except:
+            return -1
+
+    def write_json(self, data, file_path):
+        """
+        Writes JSON data to a specified file.
+
+        Parameters:
+            data (dict): The data to write to the JSON file.
+            file_path (str): The path where the JSON file should be written.
+
+        Returns:
+            int: 1 if write is successful, -1 if an error occurs.
+
+        Test cases:
+            # Test case 1: Successful write to file
+            input_data = {...}  # Some dictionary data to write
+            input_path = 'output.json'
+            expected_output = 1
+            assert write_json(input_data, input_path) == expected_output
+            
+            # Test case 2: Read-only file (in hypothetical scenario)
+            # assert write_json(input_data, '/readonly/output.json') == -1
+            
+            # Test case 3: Invalid data type (passing a string instead of dict)
+            input_data = 'Invalid data'
+            expected_output = -1
+            assert write_json(input_data, input_path) == expected_output
+        """
+        try:
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return 1
+        except:
+            return -1
+
+    def process_json(self, file_path, remove_key):
+        """
+        Processes a JSON file by removing a specified key from its contents.
+
+        Parameters:
+            file_path (str): The path to the JSON file to process.
+            remove_key (str): The key to remove from the JSON data.
+
+        Returns:
+            int: 1 if the key was successfully removed and the file was updated, 0 if the key was not found or file processing failed.
+
+        Test cases:
+            # Test case 1: Successful removal of a key
+            input_path = 'data.json'  # Assuming this file has key 'key_to_remove'
+            input_key = 'key_to_remove'
+            expected_output = 1
+            assert process_json(input_path, input_key) == expected_output
+            
+            # Test case 2: Key not present in JSON
+            input_key = 'nonexistent_key'
+            expected_output = 0
+            assert process_json(input_path, input_key) == expected_output
+            
+            # Test case 3: File does not exist
+            expected_output = 0
+            assert process_json('nonexistent.json', 'any_key') == expected_output
+        """
+        data = self.read_json(file_path)
+        if data == 0 or data == -1:
+            return 0
+        if remove_key in data:
+            del data[remove_key]
+            self.write_json(data, file_path)
+            return 1
+        else:
+            return 0
+```

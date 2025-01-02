@@ -1,0 +1,23 @@
+ # Function finds the largest prime factor of a given number
+ # Uses helper function is_prime() to check if a number is prime
+#-------------------------------------------------------------
+
+def largest_prime_factor(n: int):
+    <Requirements for the code>
+    # Test cases: multiple input-output pairs for the function
+    >>> largest_prime_factor(2) # returns 2
+    >>> largest_prime_factor(10) # returns 5
+    >>> largest_prime_factor(15) # returns 5
+    >>> largest_prime_factor(21) # returns 7
+    >>> largest_prime_factor(25) # returns 5
+    return (
+        # Loop through all numbers from 2 to n, and
+        # check if the number is prime and divides n
+        # If so, update the largest prime factor
+        def largest_prime_factor(n):
+            largest = 1
+            for j in range(2, n + 1):
+                if n % j == 0 and is_prime(j):
+                    largest = max(largest, j)
+            return largest
+    )(n)</s>

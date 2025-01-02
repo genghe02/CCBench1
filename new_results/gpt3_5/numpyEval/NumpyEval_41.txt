@@ -1,0 +1,2 @@
+# Assign values from 'a' to the center 3x3 area of a 5x5 zero matrix
+b[1:4, 1:4] = a

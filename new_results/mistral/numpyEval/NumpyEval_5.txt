@@ -1,0 +1,2 @@
+ # Convert the given matrix to a numpy array and remove any extra dimensions
+return np.squeeze(np.asarray(matrix))</s>

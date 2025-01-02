@@ -1,0 +1,65 @@
+ """
+This class is used to partition a given list into smaller sublists of a maximum size defined by 'limit'.
+"""
+
+import math
+
+class AvgPartition:
+
+    def __init__(self, lst, limit):
+        """
+        Initializes an instance of the AvgPartition class with the provided list and limit.
+
+        Parameters:
+            lst (list): The list to partition.
+            limit (int): The maximum size of each sublist.
+        """
+        self.lst = lst
+        self.limit = limit
+
+    def setNum(self):
+        """
+        Calculates the number of sublists and any remaining elements.
+
+        Returns:
+            tuple: A tuple containing the number of sublists and the number of remaining elements.
+        
+        Test cases:
+            # Test case 1: List length is a multiple of limit
+            input = AvgPartition([1, 2, 3, 4, 5, 6, 7], 3)
+            expected_output = (2, 2)
+            
+            # Test case 2: List length is one larger than a multiple of limit
+            input = AvgPartition([1, 2, 3, 4, 5, 6, 7], 3)
+            expected_output = (2, 1)
+            
+            # Test case 3: List length is much larger than a multiple of limit
+            input = AvgPartition([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], 3)
+            expected_output = (4, 0)
+        """
+        size = math.ceil(len(self.lst) / self.limit)
+        return int(size), len(self.lst) % self.limit
+
+    def get(self, index):
+        """
+        Retrieves the sublist at the specified index.
+
+        Parameters:
+            index (int): The index of the sublist to retrieve.
+
+        Returns:
+            list: The specified sublist.
+
+        Test cases:
+            # Test case 1: Index within the bounds of the number of sublists
+            input = AvgPartition([1, 2, 3, 4, 5, 6, 7], 3)
+            expected_output = [2, 3, 4]
+
+            # Test case 2: Index equals the total number of sublists
+            input = AvgPartition([1, 2, 3, 4, 5, 6, 7], 3)
+            expected_output = [5, 6, 7]
+
+            # Test case 3: Index out of bounds
+            input = AvgPartition([1, 2, 3, 4, 5, 6, 7], 3)
+            with pytest.raises(IndexError):
+                input.get(8)</s>

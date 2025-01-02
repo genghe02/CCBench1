@@ -1,0 +1,3 @@
+# Calculate the inverse of the input matrix using numpy
+def inverse_matrix(matrix):
+    return np.linalg.inv(matrix)

@@ -1,0 +1,2 @@
+ # Split the numpy array 'x' into three equal parts based on its length using np.array_split().
+# This function takes the input numpy array and a number of splits as arguments and returns a list of sub-arrays.

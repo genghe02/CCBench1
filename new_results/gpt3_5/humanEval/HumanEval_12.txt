@@ -1,0 +1,4 @@
+# Find the longest string in a list of strings
+>>> longest(["apple", "banana", "orange", "kiwi"]) # returns "banana"
+>>> longest(["cat", "dog", "elephant"]) # returns "elephant"
+>>> longest([]) # returns None

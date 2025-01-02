@@ -1,0 +1,3 @@
+ # Extract keys and values from a dictionary using numpy's fromiter function and specify the data type as float
+keys = np.fromiter(Samples.keys(), dtype=float)
+vals = np.fromiter(Samples.values(), dtype=float)</s>

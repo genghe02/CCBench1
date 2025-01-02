@@ -1,0 +1,2 @@
+ # Merge two Series objects by appending the second Series to the first one, ignoring index duplication.
+# This operation can be performed using the 'append' method of the Series object, with the second Series passed as an argument and 'ignore_index=True' as a keyword argument.

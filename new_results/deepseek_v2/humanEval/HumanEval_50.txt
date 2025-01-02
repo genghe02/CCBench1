@@ -1,0 +1,27 @@
+```python
+def encode_shift(s: str):
+    # Shift each character in the string by 5 positions in the alphabet, wrapping around if necessary
+    return "".join([chr(((ord(ch) + 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+
+def decode_shift(s: str):
+    # Shift each character in the string back by 5 positions in the alphabet, wrapping around if necessary
+    return "".join([chr(((ord(ch) - 5 - ord("a")) % 26) + ord("a")) for ch in s])
+```
+
+```python
+def encode_shift(s: str):
+    # Shift each character in the string by 5 positions in the alphabet, wrapping around if necessary
+    >>> encode_shift("hello") # returns "mjqqt"
+    >>> encode_shift("world") # returns "btwqi"
+    >>> encode_shift("abc") # returns "fgh"
+    return "".join([chr(((ord(ch) + 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+
+def decode_shift(s: str):
+    # Shift each character in the string back by 5 positions in the alphabet, wrapping around if necessary
+    >>> decode_shift("mjqqt") # returns "hello"
+    >>> decode_shift("btwqi") # returns "world"
+    >>> decode_shift("fgh") # returns "abc"
+    return "".join([chr(((ord(ch) - 5 - ord("a")) % 26) + ord("a")) for ch in s])
+```

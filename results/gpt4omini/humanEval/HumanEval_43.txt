@@ -1,0 +1,20 @@
+```python
+def pairs_sum_to_zero(l):
+    # Check if there are two distinct numbers in the list that sum to zero.
+    # The function iterates through pairs of numbers and returns True if a valid pair is found, otherwise returns False.
+    # param l: list, a list of integers to be checked for pairs that sum to zero
+    # return: bool, True if there exists at least one pair that sums to zero, False otherwise
+    
+    # Test cases:
+    # >>> pairs_sum_to_zero([1, 2, 3, -2])  # Expected: True, since 2 + (-2) == 0
+    # >>> pairs_sum_to_zero([1, 2, 3, 4])   # Expected: False, no pairs sum to 0
+    # >>> pairs_sum_to_zero([-1, 1])        # Expected: True, as -1 + 1 == 0
+    # >>> pairs_sum_to_zero([])              # Expected: False, an empty list has no pairs
+    # >>> pairs_sum_to_zero([0, 1, 2, -1])  # Expected: True, since 1 + (-1) == 0
+    
+    for i, l1 in enumerate(l):
+        for j in range(i + 1, len(l)):
+            if l1 + l[j] == 0:
+                return True
+    return False
+```

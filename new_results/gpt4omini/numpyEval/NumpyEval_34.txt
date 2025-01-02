@@ -1,0 +1,1 @@
+import numpy as np\n\ny = np.array([2,1,5,2])          # y axis\n# filter out values larger than 2\nm = np.ma.masked_where(y>2, y)   \n# Get the compressed array without masked elements\nout = m.compressed()

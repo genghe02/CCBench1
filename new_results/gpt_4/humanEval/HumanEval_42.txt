@@ -1,0 +1,6 @@
+def incr_list(l: list):
+    # This function will increment each element in the list by 1
+    >>> incr_list([1, 2, 3]) # returns [2, 3, 4]
+    >>> incr_list([0, 0, 0]) # returns [1, 1, 1]
+    >>> incr_list([-1, -2, -3]) # returns [0, -1, -2]
+    return [(e + 1) for e in l]

@@ -1,0 +1,10 @@
+```python
+import numpy as np
+
+m = np.arange(2*3*5).reshape((2,3,5))
+axis, start, end = 2, 1, 3
+target = m[:, :, 1:3]
+slc = [slice(None)] * len(m.shape)
+# Define a slice object to extract a specific range along the specified axis
+slc[axis] = slice(start, end)
+```

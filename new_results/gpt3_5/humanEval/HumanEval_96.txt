@@ -1,0 +1,20 @@
+# This function finds all prime numbers up to a given integer
+>>> count_up_to(10) # returns [2, 3, 5, 7]
+>>> count_up_to(20) # returns [2, 3, 5, 7, 11, 13, 17, 19]
+>>> count_up_to(2) # returns []
+
+def count_up_to(n):
+    # Find all prime numbers up to a given integer 'n'
+    >>> count_up_to(10) # returns [2, 3, 5, 7]
+    >>> count_up_to(20) # returns [2, 3, 5, 7, 11, 13, 17, 19]
+    >>> count_up_to(2) # returns []
+    primes = []
+    for i in range(2, n):
+        is_prime = True
+        for j in range(2, i):
+            if i % j == 0:
+                is_prime = False
+                break
+        if is_prime:
+            primes.append(i)
+    return primes

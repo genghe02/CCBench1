@@ -1,0 +1,79 @@
+"""
+This class provides functionalities to handle PDF files such as merging multiple PDFs into a single PDF and extracting text from PDFs.
+"""
+
+import PyPDF2
+
+
+class PDFHandler:
+    def __init__(self, filepaths):
+        """
+        Initialization method that associates the instance with the given list of PDF file paths.
+
+        Parameters:
+            filepaths (list): A list of file paths to PDF files.
+        """
+        self.filepaths = filepaths
+        self.readers = [PyPDF2.PdfReader(fp) for fp in filepaths]
+
+    def merge_pdfs(self, output_filepath):
+        """
+        Merges all the PDF files associated with this instance into a single PDF. The merged PDF is saved at the provided output file path.
+        
+        Parameters:
+            output_filepath (str): The file path where the merged PDF should be saved.
+
+        Returns:
+            str: A message indicating where the merged PDF has been saved.
+        
+        Test cases:
+            # Test case 1: Merging two PDFs
+            handler = PDFHandler(['pdf1.pdf', 'pdf2.pdf'])
+            print(handler.merge_pdfs('merged.pdf'))  # "Merged PDFs saved at merged.pdf"
+            
+            # Test case 2: Merging a single PDF (essentially a copy operation)
+            handler = PDFHandler(['pdf1.pdf'])
+            print(handler.merge_pdfs('copy.pdf'))  # "Merged PDFs saved at copy.pdf"
+            
+            # Test case 3: Merging no PDFs (should probably raise an error)
+            handler = PDFHandler([])
+            print(handler.merge_pdfs('empty.pdf'))  # Error
+        """
+        pdf_writer = PyPDF2.PdfWriter()
+
+        for reader in self.readers:
+            for page_num in range(len(reader.pages)):
+                page = reader.pages[page_num]
+                pdf_writer.add_page(page)
+
+        with open(output_filepath, 'wb') as out:
+            pdf_writer.write(out)
+        return f"Merged PDFs saved at {output_filepath}"
+
+    def extract_text_from_pdfs(self):
+        """
+        Extracts and returns the text from all the PDF files associated with this instance.
+        
+        Returns:
+            list: A list of strings where each string is the text extracted from a PDF page. The pages are processed in the order of the file paths provided during initialization, and within each file, in ascending page order.
+        
+        Test cases:
+            # Test case 1: Extracting text from two PDFs
+            handler = PDFHandler(['pdf1.pdf', 'pdf2.pdf'])
+            print(handler.extract_text_from_pdfs())  # ["Text from page 1 of pdf1", "Text from page 2 of pdf1", "Text from page 1 of pdf2", ...]
+            
+            # Test case 2: Extracting text from a single PDF
+            handler = PDFHandler(['pdf1.pdf'])
+            print(handler.extract_text_from_pdfs())  # ["Text from page 1 of pdf1", "Text from page 2 of pdf1", ...]
+            
+            # Test case 3: Extracting text from no PDFs
+            handler = PDFHandler([])
+            print(handler.extract_text_from_pdfs())  # []
+        """
+
+        pdf_texts = []
+        for reader in self.readers:
+            for page_num in range(len(reader.pages)):
+                page = reader.pages[page_num]
+                pdf_texts.append(page.extract_text())
+        return pdf_texts

@@ -1,0 +1,2 @@
+ # Return list of columns names from dataframe
+return df.columns.tolist()</s>

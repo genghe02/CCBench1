@@ -1,0 +1,5 @@
+import numpy as np
+
+# Sort points lexicographically based on the columns
+ind = np.lexsort((a[:, 0], a[:, 1]))
+a = a[ind]

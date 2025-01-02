@@ -1,0 +1,8 @@
+import numpy as np
+
+def interweaving_two_arrays(a, b):
+    # Create an empty array of size equal to the sum of sizes of a and b, then fill it alternately with elements from a and b
+    c = np.empty((a.size + b.size,), dtype=a.dtype)
+    c[0::2] = a
+    c[1::2] = b
+    return c

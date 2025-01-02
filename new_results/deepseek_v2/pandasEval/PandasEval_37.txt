@@ -1,0 +1,6 @@
+import pandas as pd
+
+data = {'col_0': ['a', 'a', 'a', 'a', 'b','b','b'], 'col_1': [-2, -7, 6, 8, -5, 2, 6]}
+df = pd.DataFrame(data)
+# Clip values in 'col_1' to range [-2, 2] for rows where 'col_0' is 'a'
+df.loc[df['col_0']=='a','col_1'] =  df.loc[df['col_0']=='a','col_1'].clip(-2,2)

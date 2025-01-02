@@ -1,0 +1,42 @@
+```python
+def closest_integer(value):
+    # This function takes a string representation of a number and returns the closest integer.
+    # It handles special cases like numbers ending in '.5' by rounding up or down based on the sign.
+
+    # Test cases for the function:
+    # >>> closest_integer('2.5')
+    # 3
+    # >>> closest_integer('-2.5')
+    # -3
+    # >>> closest_integer('2.4')
+    # 2
+    # >>> closest_integer('-2.4')
+    # -2
+    # >>> closest_integer('2')
+    # 2
+    # >>> closest_integer('')
+    # 0
+
+    from math import floor, ceil
+
+    if value.count('.') == 1:
+        # Remove trailing zeros after the decimal point
+        while (value[-1] == '0'):
+            value = value[:-1]
+
+    num = float(value)
+    if value[-2:] == '.5':
+        # Handle numbers ending in '.5' by rounding up or down based on the sign
+        if num > 0:
+            res = ceil(num)
+        else:
+            res = floor(num)
+    elif len(value) > 0:
+        # For other numbers, round to the nearest integer
+        res = int(round(num))
+    else:
+        # Handle empty string input
+        res = 0
+
+    return res
+```

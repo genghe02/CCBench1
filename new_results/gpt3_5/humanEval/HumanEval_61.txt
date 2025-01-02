@@ -1,0 +1,23 @@
+# Check if the string of brackets is properly balanced
+>>> correct_bracketing("(())") # True
+>>> correct_bracketing("((())") # False
+>>> correct_bracketing("()") # True
+>>> correct_bracketing(")(") # False
+>>> correct_bracketing("") # True
+
+def correct_bracketing(brackets: str):
+    # Check the balance of brackets by iterating through them
+    >>> correct_bracketing("(())") # returns True
+    >>> correct_bracketing("((())") # returns False
+    >>> correct_bracketing("()") # returns True
+    >>> correct_bracketing(")(") # returns False
+    >>> correct_bracketing("") # returns True
+    depth = 0
+    for b in brackets:
+        if b == "(":
+            depth += 1
+        else:
+            depth -= 1
+        if depth < 0:
+            return False
+    return depth == 0

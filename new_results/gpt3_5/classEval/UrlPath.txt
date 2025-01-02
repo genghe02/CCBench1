@@ -1,0 +1,104 @@
+"""
+This class provides functionality to handle URL paths, including adding segments, parsing paths, and fixing path issues.
+"""
+
+import urllib.parse
+
+class UrlPath:
+    def __init__(self):
+        """
+        Initialize UrlPath object with an empty list of segments and a flag for the end tag.
+        """
+        self.segments = []
+        self.with_end_tag = False
+
+    def add(self, segment):
+        """
+        Add a segment to the URL path.
+
+        Parameters:
+            segment (str): The segment to add to the path
+        
+        Test cases:
+            # Test case 1: Add a segment to the path
+            url_path = UrlPath()
+            url_path.add('users')
+            assert url_path.segments == ['users']
+            
+            # Test case 2: Add an empty segment
+            url_path = UrlPath()
+            url_path.add('')
+            assert url_path.segments == ['']
+            
+            # Test case 3: Add a segment with special characters
+            url_path = UrlPath()
+            url_path.add('users%20info')
+            assert url_path.segments == ['users info']
+        """
+        self.segments.append(self.fix_path(segment))
+
+    def parse(self, path, charset):
+        """
+        Parse the given path and encode the segments based on the provided charset.
+
+        Parameters:
+            path (str): The URL path to parse
+            charset (str): The character encoding to decode the path
+        
+        Test cases:
+            # Test case 1: Parse a normal URL path
+            url_path = UrlPath()
+            url_path.parse('/api/user/info', 'utf-8')
+            assert url_path.segments == ['api', 'user', 'info']
+            
+            # Test case 2: Parse a path with special characters
+            url_path = UrlPath()
+            url_path.parse('/admin/users%20info', 'utf-8')
+            assert url_path.segments == ['admin', 'users info']
+            
+            # Test case 3: Parse an empty path
+            url_path = UrlPath()
+            url_path.parse('', 'utf-8')
+            assert url_path.segments == []
+        """
+        if path:
+            if path.endswith('/'):
+                self.with_end_tag = True
+
+            path = self.fix_path(path)
+            if path:
+                split = path.split('/')
+                for seg in split:
+                    decoded_seg = urllib.parse.unquote(seg, encoding=charset)
+                    self.segments.append(decoded_seg)
+
+    @staticmethod
+    def fix_path(path):
+        """
+        Fix the path by removing leading and trailing slashes.
+
+        Parameters:
+            path (str): The string representing the path to be fixed
+        
+        Returns:
+            str: The fixed path string without leading and trailing slashes
+        
+        Test cases:
+            # Test case 1: Fix a path with leading and trailing slashes
+            input_path = '/users/info/'
+            assert fix_path(input_path) == 'users/info'
+            
+            # Test case 2: Fix an empty path
+            input_path = ''
+            assert fix_path(input_path) == ''
+            
+            # Test case 3: Fix a path without slashes
+            input_path = 'api/users'
+            assert fix_path(input_path) == 'api/users'
+        """
+        if not path:
+            return ''
+
+        segment_str = path.strip('/')
+        return segment_str
+```

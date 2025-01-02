@@ -1,0 +1,90 @@
+ """
+This class is designed to handle JSON files by providing methods for reading, writing, and processing JSON data.
+"""
+
+class JSONProcessor:
+    def read_json(self, file_path):
+        """
+        Reads the JSON data from a given file path and returns the parsed data.
+
+        Parameters:
+            file_path (str): The path to the JSON file
+
+        Returns:
+            dict: The parsed JSON data, or None if the file doesn't exist
+
+        Test cases:
+            # Test case 1: Read existing JSON file
+            json_processor = JSONProcessor()
+            test_file = "test.json"
+            expected_output = {"test": "test_value"}
+            json_processor.write_json(expected_output, test_file)
+            actual_output = json_processor.read_json(test_file)
+            assert actual_output == expected_output
+            
+            # Test case 2: Check for file not found
+            assert json_processor.read_json("nonexistent_file.json") is None
+
+            # Test case 3: Check for JSON parsing errors
+            input_file = "invalid_json.json"
+            assert json_processor.read_json(input_file) is None
+        """
+        if not os.path.exists(file_path):
+            return None
+        try:
+            with open(file_path, 'r') as file:
+                return json.load(file)
+        except:
+            return None
+
+    def write_json(self, data, file_path):
+        """
+        Writes the given JSON data to the specified file path.
+
+        Parameters:
+            data (dict): The JSON data to be written
+            file_path (str): The path to the JSON file
+
+        Returns:
+            1 if successful, or -1 if an error occurs
+
+        Test cases:
+            # Test case 1: Write JSON data to file
+            json_processor = JSONProcessor()
+            test_file = "test.json"
+            expected_output = {"test": "test_value"}
+            actual_output = json_processor.write_json(expected_output, test_file)
+            assert actual_output == 1
+            
+            # Test case 2: Invalid JSON data
+            input_data = {"test": 123}
+            assert json_processor.write_json(input_data, test_file) == 1
+            
+            # Test case 3: Write JSON data to file with errors
+            assert json_processor.write_json("invalid_data", test_file) == -1
+
+    def process_json(self, file_path, remove_key):
+        """
+        Reads JSON data from the file, removes the specified key, and writes the updated data back to the file.
+
+        Parameters:
+            file_path (str): The path to the JSON file
+            remove_key (str): The key to be removed
+
+        Returns:
+            1 if successful, or 0 if the key is not present in the JSON data
+
+        Test cases:
+            # Test case 1: Remove key from JSON file
+            json_processor = JSONProcessor()
+            test_file = "test.json"
+            expected_output = {"test2": "test_value2"}
+            json_processor.write_json({"test": "test_value", "test2": "test_value2"}, test_file)
+            actual_output = json_processor.process_json(test_file, "test")
+            assert actual_output == 1
+            
+            # Test case 2: Non-existent file
+            assert json_processor.process_json("nonexistent_file.json", "test") == 0
+
+            # Test case 3: Non-existing key
+            assert json_processor.process_json("test.json", "nonexistent_key") == 0</s>

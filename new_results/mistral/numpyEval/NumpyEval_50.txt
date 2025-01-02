@@ -1,0 +1,2 @@
+ # Calculate the mean of the given arrays along the axis=0
+mean_array = np.mean([a, b, c], axis=0)</s>

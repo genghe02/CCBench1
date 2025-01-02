@@ -1,0 +1,209 @@
+ """
+This class provides statistical functions for data analysis.
+"""
+
+import math
+import statistics
+
+
+class Statistics3:
+    @staticmethod
+    def median(data):
+        """
+        Calculate the median value of the given data.
+        
+        Parameters:
+            data (list or tuple): A list or tuple of numerical values
+        
+        Returns:
+            float: The median value of the given data
+        
+        Test cases:
+            # Test case 1: Median of odd-length list
+            assert median([1, 3, 5, 7]) == 4.0
+            
+            # Test case 2: Median of even-length list
+            assert median([1, 3, 5, 7, 9]) == 5.0
+            
+            # Test case 3: Median of empty list
+            assert median([]) is None
+        """
+        data = sorted(data)
+        n = len(data)
+        if n % 2 == 1:
+            return data[n // 2]
+        else:
+            return (data[n // 2 - 1] + data[n // 2]) / 2
+
+    @staticmethod
+    def mode(data):
+        """
+        Find the mode(s) of the given data.
+        
+        Parameters:
+            data (list or tuple): A list or tuple of numerical or string values
+        
+        Returns:
+            Union[float, int, List[Union[float, int]]]: The mode(s) of the given data, or None if there is no mode
+        
+        Test cases:
+            # Test case 1: Single mode
+            assert mode([1, 1, 1, 2, 2, 3]) == 1
+            
+            # Test case 2: Multiple modes
+            assert mode([1, 2, 2, 3, 3, 3]) == [2, 3]
+            
+            # Test case 3: No mode
+            assert mode([]) is None
+        """
+        counts = {}
+        for value in data:
+            counts[value] = counts.get(value, 0) + 1
+        max_count = max(counts.values())
+        mode_values = [value for value, count in counts.items() if count == max_count]
+        return mode_values
+
+    @staticmethod
+    def correlation(x, y):
+        """
+        Calculate the Pearson correlation coefficient between two sets of data.
+        
+        Parameters:
+            x (list or tuple): A list or tuple of numerical values
+            y (list or tuple): A list or tuple of numerical values
+        
+        Returns:
+            Union[float, None]: The Pearson correlation coefficient, or None if the data sets have zero length
+        
+        Test cases:
+            # Test case 1: Positive correlation
+            assert correlation([1, 2, 3], [2, 3, 4]) == 0.8
+            
+            # Test case 2: Negative correlation
+            assert correlation([1, 2, 3], [-2, -3, -4]) == -0.8
+            
+            # Test case 3: No correlation
+            assert correlation([1, 2, 3], [4, 5, 6]) is None
+        """
+        n = len(x)
+        if len(x) != len(y):
+            raise ValueError("X and Y must have the same length.")
+        mean_x = sum(x) / n
+        mean_y = sum(y) / n
+        numerator = sum((xi - mean_x) * (yi - mean_y) for xi, yi in zip(x, y))
+        denominator = math.sqrt(sum((xi - mean_x) ** 2 for xi in x) * sum((yi - mean_y) ** 2 for yi in y))
+        if denominator == 0:
+            return None
+        return numerator / denominator
+
+    @staticmethod
+    def mean(data):
+        """
+        Calculate the mean value of the given data.
+        
+        Parameters:
+            data (list or tuple): A list or tuple of numerical values
+        
+        Returns:
+            Union[float, None]: The mean value of the given data, or None if the data is empty
+        
+        Test cases:
+            # Test case 1: Mean of finite list
+            assert mean([1, 2, 3, 4]) == 2.5
+            
+            # Test case 2: Mean of infinite sequence
+            assert mean(iterate(lambda x: x + 1)) is None
+            
+            # Test case 3: Mean of empty list
+            assert mean([]) is None
+        """
+        if len(data) == 0:
+            return None
+        return sum(data) / len(data)
+
+    @staticmethod
+    def correlation_matrix(data):
+        """
+        Calculate the correlation matrix for the given data.
+        
+        Parameters:
+            data (list of lists or tuples of lists): A list of lists or tuples of numerical values, where each inner list
+                or tuple represents a data set to compare for correlation
+        
+        Returns:
+            list: A list of correlation coefficients, where the ith row and jth column contains the correlation
+                coefficient between the ith and jth data sets
+        
+        Test cases:
+            # Test case 1: 2x2 correlation matrix
+            assert correlation_matrix([[1, 2], [3, 4]]) == [[1.0, 0.8], [0.8, 1.0]]
+            
+            # Test case 2: 3x3 correlation matrix
+            assert correlation_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[1.0, 0.8, -0.4], [0.8, 1.0, 0.2], [-0.4, 0.2, 1.0]]
+            
+            # Test case 3: Correlation matrix of empty lists
+            assert correlation_matrix([[], []]) is None
+        """
+        matrix = []
+        for i in range(len(data)):
+            row = []
+            for j in range(len(data)):
+                correlation = correlation(data[i], data[j])
+                row.append(correlation)
+                matrix.append(row)
+        return matrix
+
+    @staticmethod
+    def standard_deviation(data):
+        """
+        Calculate the standard deviation of the given data.
+        
+        Parameters:
+            data (list or tuple): A list or tuple of numerical values
+        
+        Returns:
+            Union[float, None]: The standard deviation of the given data, or None if the data has zero length
+        
+        Test cases:
+            # Test case 1: Standard deviation of finite list
+            assert standard_deviation([1, 2, 3, 4]) == 1.0
+            
+            # Test case 2: Standard deviation of infinite sequence
+            assert standard_deviation(iterate(lambda x: x + 1)) is None
+            
+            # Test case 3: Standard deviation of empty list
+            assert standard_deviation([]) is None
+        """
+        n = len(data)
+        if n < 2:
+            return None
+        mean_value = mean(data)
+        variance = sum((x - mean_value) ** 2 for x in data) / (n - 1)
+        return math.sqrt(variance)
+
+    @staticmethod
+    def z_score(data):
+        """
+        Calculate the z-scores for the given data.
+        
+        Parameters:
+            data (list or tuple): A list or tuple of numerical values
+        
+        Returns:
+            list: A list of z-scores for each value in the data
+        
+        Test cases:
+            # Test case 1: Z-scores for finite list
+            assert z_score([1, 2, 3, 4]) == [0.67, 1.28, 1.65, 1.00]
+            
+            # Test case 2: Z-scores for infinite sequence
+            assert z_score(iterate(lambda x: x + 1)) is None
+            
+            # Test case 3: Z-scores for empty list
+            assert z_score([]) is None
+        """
+        mean = mean(data)
+        std_deviation = standard_deviation(data)
+        if std_deviation is None or std_deviation == 0:
+            return [None for _ in data]
+        return [(x - mean) / std_deviation for x in data]</s>

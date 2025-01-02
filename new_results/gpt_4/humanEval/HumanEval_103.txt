@@ -1,0 +1,11 @@
+def rounded_avg(n, m):
+    # This function calculates the average of all numbers in the range [n, m] and returns its binary representation.
+    >>> rounded_avg(1, 5) # returns '0b11'
+    >>> rounded_avg(5, 1) # returns -1
+    >>> rounded_avg(1, 1) # returns '0b1'
+    if m < n:
+        return -1
+    summation = 0
+    for i in range(n, m+1):
+        summation += i
+    return bin(round(summation/(m - n + 1)))

@@ -1,0 +1,1 @@
+# Filter rows in the dataframe where the second column (index 1) is equal to 'Jimmy'. The result is assigned to new_df.

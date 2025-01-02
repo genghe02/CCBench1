@@ -1,0 +1,159 @@
+```python
+"""
+This class implements various discount strategies for customer orders based on predefined rules.
+It calculates the total price of the cart, applies discounts, and returns the amount due.
+"""
+
+class DiscountStrategy:
+    def __init__(self, customer, cart, promotion=None):
+        """
+        Initializes a DiscountStrategy instance with a customer, cart and optional promotion.
+
+        Parameters:
+            customer (dict): A dictionary containing customer details such as 'fidelity'.
+            cart (list): A list of dictionaries representing items in the cart, each containing 'product', 'price', and 'quantity'.
+            promotion (callable, optional): A function that computes the discount applied to the order. Defaults to None.
+        """
+        self.customer = customer
+        self.cart = cart
+        self.promotion = promotion
+        self.__total = self.total()
+
+    def total(self):
+        """
+        Calculates the total price of the items in the cart.
+
+        Returns:
+            float: The total price of the cart before any discounts are applied.
+        
+        Test cases:
+            # Test case 1: Normal cart with multiple items
+            cart1 = [{'product': 'item1', 'price': 10.0, 'quantity': 2}, {'product': 'item2', 'price': 20.0, 'quantity': 1}]
+            order1 = DiscountStrategy({'fidelity': 500}, cart1)
+            assert order1.total() == 40.0  # 10*2 + 20*1
+            
+            # Test case 2: Empty cart
+            cart2 = []
+            order2 = DiscountStrategy({'fidelity': 500}, cart2)
+            assert order2.total() == 0.0  # No items in cart
+            
+            # Test case 3: Cart with one item
+            cart3 = [{'product': 'item3', 'price': 5.0, 'quantity': 5}]
+            order3 = DiscountStrategy({'fidelity': 500}, cart3)
+            assert order3.total() == 25.0  # 5*5
+        """
+        self.__total = sum(item['quantity'] * item['price'] for item in self.cart)
+        return self.__total
+
+    def due(self):
+        """
+        Calculates the final amount due after applying any discounts.
+
+        Returns:
+            float: The total amount due after applying applicable discounts.
+        
+        Test cases:
+            # Test case 1: No promotion applied
+            order1 = DiscountStrategy({'fidelity': 500}, [{'product': 'item1', 'price': 10.0, 'quantity': 2}])
+            assert order1.due() == 20.0  # No discounts
+            
+            # Test case 2: Applying promotion
+            order2 = DiscountStrategy({'fidelity': 1500}, [{'product': 'item2', 'price': 20.0, 'quantity': 1}], DiscountStrategy.FidelityPromo)
+            assert order2.due() == 15.0  # 20 * 0.05 = 1 ; 20 - 1 = 19
+            
+            # Test case 3: Cart with promotion that doesn't apply
+            order3 = DiscountStrategy({'fidelity': 500}, [{'product': 'item2', 'price': 20.0, 'quantity': 1}], DiscountStrategy.FidelityPromo)
+            assert order3.due() == 20.0  # No promotion applied since fidelity < 1000
+        """
+        if self.promotion is None:
+            discount = 0
+        else:
+            discount = self.promotion(self)
+        return self.__total - discount
+
+    @staticmethod
+    def FidelityPromo(order):
+        """
+        Calculates discount for customers with high fidelity points.
+
+        Parameters:
+            order (DiscountStrategy): The DiscountStrategy order to assess for discount.
+        
+        Returns:
+            float: The discount amount based on fidelity points.
+        
+        Test cases:
+            # Test case 1: Customer meets fidelity requirement
+            order1 = DiscountStrategy({'fidelity': 1000}, [{'product': 'item1', 'price': 10.0, 'quantity': 1}])
+            assert DiscountStrategy.FidelityPromo(order1) == 0.5  # 10 * 0.05
+            
+            # Test case 2: Customer does not meet fidelity requirement
+            order2 = DiscountStrategy({'fidelity': 999}, [{'product': 'item1', 'price': 10.0, 'quantity': 1}])
+            assert DiscountStrategy.FidelityPromo(order2) == 0.0  # No discount
+            
+            # Test case 3: Customer with exactly 1000 fidelity
+            order3 = DiscountStrategy({'fidelity': 1000}, [{'product': 'item1', 'price': 100.0, 'quantity': 1}])
+            assert DiscountStrategy.FidelityPromo(order3) == 5.0  # 100 * 0.05
+        """
+        return order.total() * 0.05 if order.customer['fidelity'] >= 1000 else 0
+
+    @staticmethod
+    def BulkItemPromo(order):
+        """
+        Calculates discount for bulk item purchases.
+
+        Parameters:
+            order (DiscountStrategy): The DiscountStrategy order to assess for discount.
+        
+        Returns:
+            float: The total discount for bulk items in the cart.
+        
+        Test cases:
+            # Test case 1: One bulk item
+            order1 = DiscountStrategy({'fidelity': 500}, [{'product': 'item1', 'price': 10.0, 'quantity': 20}])
+            assert DiscountStrategy.BulkItemPromo(order1) == 20.0  # 10 * 20 * 0.1
+            
+            # Test case 2: No bulk items
+            order2 = DiscountStrategy({'fidelity': 500}, [{'product': 'item2', 'price': 20.0, 'quantity': 10}])
+            assert DiscountStrategy.BulkItemPromo(order2) == 0.0  # No items > 20
+            
+            # Test case 3: Mixed quantities
+            order3 = DiscountStrategy({'fidelity': 500}, [{'product': 'item3', 'price': 50.0, 'quantity': 25}])
+            assert DiscountStrategy.BulkItemPromo(order3) == 125.0  # 50 * 25 * 0.1
+        """
+        discount = 0
+        for item in order.cart:
+            if item['quantity'] >= 20:
+                discount += item['quantity'] * item['price'] * 0.1
+        return discount
+
+    @staticmethod
+    def LargeOrderPromo(order):
+        """
+        Calculates discount for large orders based on the number of distinct items.
+
+        Parameters:
+            order (DiscountStrategy): The DiscountStrategy order to assess for discount.
+        
+        Returns:
+            float: The discount amount for large orders.
+        
+        Test cases:
+            # Test case 1: Large order with distinct items
+            order1 = DiscountStrategy({'fidelity': 500}, [{'product': 'item1', 'price': 10.0, 'quantity': 1},
+                                                           {'product': 'item2', 'price': 15.0, 'quantity': 1},
+                                                           {'product': 'item3', 'price': 20.0, 'quantity': 1}])
+            assert DiscountStrategy.LargeOrderPromo(order1) == 4.5  # 45 * 0.1
+            
+            # Test case 2: Small order with fewer distinct items
+            order2 = DiscountStrategy({'fidelity': 500}, [{'product': 'item1', 'price': 10.0, 'quantity': 1},
+                                                           {'product': 'item1', 'price': 10.0, 'quantity': 1}])
+            assert DiscountStrategy.LargeOrderPromo(order2) == 0.0  # Not enough distinct items
+            
+            # Test case 3: Exactly 10 distinct items
+            distinct_items = [{'product': f'item{i}', 'price': 10.0, 'quantity': 1} for i in range(10)]
+            order3 = DiscountStrategy({'fidelity': 500}, distinct_items)
+            assert DiscountStrategy.LargeOrderPromo(order3) == 7.0  # 70 * 0.1
+        """
+        return order.total() * 0.07 if len({item['product'] for item in order.cart}) >= 10 else 0
+```

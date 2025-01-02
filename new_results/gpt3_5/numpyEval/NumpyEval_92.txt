@@ -1,0 +1,2 @@
+# Convert the numpy matrix to a list and reshape it into a 1D array
+a_list = list(np.array(a).reshape(-1,) )

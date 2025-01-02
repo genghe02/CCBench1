@@ -1,0 +1,134 @@
+```python
+"""
+This class manages cookies by handling their retrieval, saving, and loading from a file.
+"""
+
+import json
+
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        """
+        Initializes the CookiesUtil with the specified cookies file.
+
+        Parameters:
+            cookies_file (str): The path to the JSON file used for storing cookies.
+        """
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, response):
+        """
+        Retrieves cookies from the given response and saves them to the cookies file.
+
+        Parameters:
+            response (dict): The response object containing the cookies.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Valid response with cookies
+            response = {'cookies': {'session_id': 'abc123', 'user_id': 'user456'}}
+            get_cookies(response)
+            assert self.cookies == {'session_id': 'abc123', 'user_id': 'user456'}
+
+            # Test case 2: Response without cookies
+            response = {}
+            get_cookies(response)
+            assert self.cookies == {}
+
+            # Test case 3: Invalid response format
+            response = "invalid_response"
+            get_cookies(response)
+            assert self.cookies is None
+        """
+        self.cookies = response.get('cookies', {})
+        self._save_cookies()
+
+    def load_cookies(self):
+        """
+        Loads cookies from the specified cookies file.
+
+        Returns:
+            dict: The cookies loaded from the file, or an empty dictionary if the file is not found.
+
+        Test cases:
+            # Test case 1: File exists and contains valid JSON
+            # Assume 'cookies.json' contains: {"session_id": "abc123"}
+            loaded = load_cookies()
+            assert loaded == {"session_id": "abc123"}
+
+            # Test case 2: File does not exist
+            loaded = load_cookies()  # Assume this raises FileNotFoundError
+            assert loaded == {}
+
+            # Test case 3: File exists but is empty
+            # Assuming 'empty_cookies.json' is empty
+            loaded = load_cookies()  # Assume it returns {}
+            assert loaded == {}
+        """
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+
+    def _save_cookies(self):
+        """
+        Saves the current cookies to the specified cookies file.
+
+        Returns:
+            bool: True if cookies were successfully saved, False otherwise.
+
+        Test cases:
+            # Test case 1: Save cookies successfully
+            self.cookies = {'session_id': 'abc123'}
+            assert _save_cookies() == True
+
+            # Test case 2: Handle file system errors
+            self.cookies = {'session_id': 'abc123'}
+            self.cookies_file = "/invalid/path/cookies.json"
+            assert _save_cookies() == False
+
+            # Test case 3: Save empty cookies
+            self.cookies = {}
+            assert _save_cookies() == True  # Check if it doesn't raise an error
+        """
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        """
+        Sets the cookies in the given request object.
+
+        Parameters:
+            request (dict): The request object to which cookies should be added.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Normal usage with existing cookies
+            self.cookies = {'session_id': 'abc123'}
+            request = {}
+            set_cookies(request)
+            assert request['cookies'] == 'session_id=abc123'
+
+            # Test case 2: No cookies set
+            self.cookies = {}
+            request = {}
+            set_cookies(request)
+            assert request['cookies'] == ''
+
+            # Test case 3: Non-dictionary request object
+            request = "not_a_dict"
+            set_cookies(request)  # Check if it doesn't raise error
+            assert isinstance(request, str)  # Ensure it is still a string
+        """
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```

@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.array([[1,11], [3,9], [5,7]])
+# Subtract the minimum value of each column in the array from all elements of that respective column
+result = a - a.min(axis=0)

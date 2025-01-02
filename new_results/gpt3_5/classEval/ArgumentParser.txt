@@ -1,0 +1,134 @@
+"""
+This class implements an Argument Parser that can parse command-line arguments in a specific format.
+
+The class contains methods to parse, retrieve, and add command-line arguments with support for specified types and required arguments.
+"""
+
+class ArgumentParser:
+    def __init__(self):
+        """
+        Constructor for ArgumentParser class.
+        Initializes internal data structures for storing arguments, required arguments, and argument types.
+        """
+
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    def parse_arguments(self, command_string):
+        """
+        Parse the command string and extract arguments into internal data structures.
+
+        Parameters:
+            command_string (str): The command string containing command-line arguments
+        
+        Returns:
+            tuple: A tuple containing a boolean value representing success or failure, and a set of missing required arguments (if any)
+        
+        Test cases:
+            # Test case 1: Basic arguments
+            assert parse_arguments("--verbose --output=results.txt -n 42") == (True, None)
+            
+            # Test case 2: Missing required argument
+            assert parse_arguments("--output=temp.txt") == (False, {'--verbose'})
+            
+            # Test case 3: No arguments provided
+            assert parse_arguments("") == (True, None)
+        """
+
+        args = command_string.split()[1:]
+        for i in range(len(args)):
+            arg = args[i]
+
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    self.arguments[key_value[0]] = self._convert_type(key_value[0], key_value[1])
+                else:
+                    self.arguments[key_value[0]] = True
+            elif arg.startswith('-'):
+                key = arg[1:]
+                if i + 1 < len(args) and not args[i + 1].startswith('-'):
+                    self.arguments[key] = self._convert_type(key, args[i + 1])
+                else:
+                    self.arguments[key] = True
+
+        missing_args = self.required - set(self.arguments.keys())
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    def get_argument(self, key):
+        """
+        Get the value of a specific argument.
+
+        Parameters:
+            key (str): The key identifying the argument
+        
+        Returns:
+            object: The value of the argument
+        
+        Test cases:
+            # Test case 1: Get existing argument
+            assert get_argument('--output') == 'results.txt'
+            
+            # Test case 2: Get non-existing argument
+            assert get_argument('--verbose') == None
+            
+            # Test case 3: Get argument with value conversion
+            assert get_argument('-n') == 42
+        """
+
+        return self.arguments.get(key)
+
+    def add_argument(self, arg, required=False, arg_type=str):
+        """
+        Add an argument with optional requirements and type.
+
+        Parameters:
+            arg (str): The argument identifier
+            required (bool): Whether the argument is required
+            arg_type (type): The expected type of the argument
+        
+        Test cases:
+            # Test case 1: Add optional argument
+            add_argument('--input')
+            
+            # Test case 2: Add required argument
+            add_argument('--output', required=True)
+            
+            # Test case 3: Add argument with specified type
+            add_argument('-n', arg_type=int)
+        """
+
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    def _convert_type(self, arg, value):
+        """
+        Convert the argument value to the specified type.
+
+        Parameters:
+            arg (str): The argument identifier
+            value (str): The value to convert into the specified type
+        
+        Returns:
+            object: The converted value or the original value in case of conversion errors
+        
+        Test cases:
+            # Test case 1: Convert string to integer
+            assert _convert_type('-n', '42') == 42
+            
+            # Test case 2: Conversion error handling
+            assert _convert_type('--input', 'data.txt') == 'data.txt'
+            
+            # Test case 3: Convert string to boolean
+            assert _convert_type('--verbose', 'True') == True
+        """
+
+        try:
+            return self.types[arg](value)
+        except (ValueError, KeyError):
+            return value

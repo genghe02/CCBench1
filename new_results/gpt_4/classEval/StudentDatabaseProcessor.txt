@@ -1,0 +1,148 @@
+"""
+This class handles database operations related to student data in an SQLite database.
+"""
+
+import sqlite3
+
+
+class StudentDatabaseProcessor:
+
+    def __init__(self, database_name):
+        """
+        Initializes the StudentDatabaseProcessor object with the given SQLite database name.
+
+        Parameters:
+            database_name (str): The name of the SQLite database to use
+        """
+        self.database_name = database_name
+
+    def create_student_table(self):
+        """
+        Creates a new students table in the SQLite database if it does not already exist.
+
+        Test cases:
+            # Test case 1: Successful creation of table
+            db_processor = StudentDatabaseProcessor("test.db")
+            db_processor.create_student_table()
+            # Check if table 'students' exists in 'test.db'
+            
+            # Test case 2: Attempt to create table when it already exists
+            db_processor = StudentDatabaseProcessor("test.db")
+            db_processor.create_student_table()
+            db_processor.create_student_table()
+            # Check if table 'students' still exists in 'test.db'
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        create_table_query = """
+        CREATE TABLE IF NOT EXISTS students (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            age INTEGER,
+            gender TEXT,
+            grade INTEGER
+        )
+        """
+        cursor.execute(create_table_query)
+
+        conn.commit()
+        conn.close()
+
+    def insert_student(self, student_data):
+        """
+        Inserts a new student record into the students table.
+
+        Parameters:
+            student_data (dict): A dictionary containing the student data to insert.
+                                 Must have 'name', 'age', 'gender', and 'grade' keys.
+
+        Test cases:
+            # Test case 1: Successful insertion of a student record
+            db_processor = StudentDatabaseProcessor("test.db")
+            student_data = {'name': 'John Doe', 'age': 20, 'gender': 'Male', 'grade': 80}
+            db_processor.insert_student(student_data)
+            # Check if 'John Doe' exists in the 'students' table in 'test.db'
+            
+            # Test case 2: Attempt to insert a student record with missing keys
+            db_processor = StudentDatabaseProcessor("test.db")
+            student_data = {'name': 'Jane Doe', 'age': 22}
+            try:
+                db_processor.insert_student(student_data)
+            except Exception as e:
+                print(str(e))
+            # Check if 'Jane Doe' does not exist in the 'students' table in 'test.db'
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        insert_query = """
+        INSERT INTO students (name, age, gender, grade)
+        VALUES (?, ?, ?, ?)
+        """
+        cursor.execute(insert_query,
+                       (student_data['name'], student_data['age'], student_data['gender'], student_data['grade']))
+
+        conn.commit()
+        conn.close()
+
+    def search_student_by_name(self, name):
+        """
+        Searches for a student record in the students table by the given name.
+
+        Parameters:
+            name (str): The name of the student to search for
+
+        Returns:
+            list: A list of tuples representing the matching student records
+
+        Test cases:
+            # Test case 1: Successful search for a student record
+            db_processor = StudentDatabaseProcessor("test.db")
+            result = db_processor.search_student_by_name('John Doe')
+            print(result)
+            # Output should be a list of tuples representing student records with the name 'John Doe'
+            
+            # Test case 2: Search for a non-existent student record
+            db_processor = StudentDatabaseProcessor("test.db")
+            result = db_processor.search_student_by_name('Non-existent student')
+            print(result)
+            # Output should be an empty list
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        select_query = "SELECT * FROM students WHERE name = ?"
+        cursor.execute(select_query, (name,))
+        result = cursor.fetchall()
+
+        conn.close()
+
+        return result
+
+    def delete_student_by_name(self, name):
+        """
+        Deletes a student record from the students table by the given name.
+
+        Parameters:
+            name (str): The name of the student to delete
+
+        Test cases:
+            # Test case 1: Successful deletion of a student record
+            db_processor = StudentDatabaseProcessor("test.db")
+            db_processor.delete_student_by_name('John Doe')
+            # Check if 'John Doe' does not exist in the 'students' table in 'test.db'
+            
+            # Test case 2: Attempt to delete a non-existent student record
+            db_processor = StudentDatabaseProcessor("test.db")
+            db_processor.delete_student_by_name('Non-existent student')
+            # Check if 'Non-existent student' still does not exist in the 'students' table in 'test.db'
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        delete_query = "DELETE FROM students WHERE name = ?"
+        cursor.execute(delete_query, (name,))
+
+        conn.commit()
+        conn.close()

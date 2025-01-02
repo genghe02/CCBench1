@@ -1,0 +1,241 @@
+```python
+"""
+This class manages a stock portfolio, allowing users to add, remove, buy, and sell stocks, 
+while tracking the portfolio's value and cash balance.
+"""
+
+class StockPortfolioTracker:
+    def __init__(self, cash_balance):
+        """
+        Initializes the StockPortfolioTracker with a given cash balance and an empty portfolio.
+
+        Parameters:
+            cash_balance (float): The initial cash balance available for buying stocks.
+        """
+        self.portfolio = []
+        self.cash_balance = cash_balance
+
+    def add_stock(self, stock):
+        """
+        Adds a stock to the portfolio. If the stock already exists, it updates the quantity.
+
+        Parameters:
+            stock (dict): A dictionary containing the stock's name, price, and quantity.
+                          Example: {'name': 'AAPL', 'price': 150, 'quantity': 10}
+
+        Test cases:
+            # Test case 1: Adding a new stock
+            tracker = StockPortfolioTracker(1000)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 10}]
+
+            # Test case 2: Adding an existing stock
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 5})
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 15}]
+
+            # Test case 3: Adding a different stock
+            tracker.add_stock({'name': 'GOOGL', 'price': 2800, 'quantity': 2})
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 15}, {'name': 'GOOGL', 'price': 2800, 'quantity': 2}]
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name']:
+                pf['quantity'] += stock['quantity']
+                return
+
+        self.portfolio.append(stock)
+
+    def remove_stock(self, stock):
+        """
+        Removes a specified quantity of a stock from the portfolio. If the quantity reaches zero, the stock is removed entirely.
+
+        Parameters:
+            stock (dict): A dictionary containing the stock's name and quantity to remove.
+                          Example: {'name': 'AAPL', 'quantity': 5}
+
+        Returns:
+            bool: True if the stock was successfully removed, False otherwise.
+
+        Test cases:
+            # Test case 1: Removing part of a stock
+            tracker = StockPortfolioTracker(1000)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            assert tracker.remove_stock({'name': 'AAPL', 'quantity': 5}) == True
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 5}]
+
+            # Test case 2: Removing all of a stock
+            assert tracker.remove_stock({'name': 'AAPL', 'quantity': 5}) == True
+            assert tracker.portfolio == []
+
+            # Test case 3: Attempting to remove more than available
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            assert tracker.remove_stock({'name': 'AAPL', 'quantity': 15}) == False
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 10}]
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name'] and pf['quantity'] >= stock['quantity']:
+                pf['quantity'] -= stock['quantity']
+                if pf['quantity'] == 0:
+                    self.portfolio.remove(pf)
+                return True
+        return False
+
+    def buy_stock(self, stock):
+        """
+        Buys a stock using the available cash balance. If there is insufficient cash, the purchase fails.
+
+        Parameters:
+            stock (dict): A dictionary containing the stock's name, price, and quantity.
+                          Example: {'name': 'AAPL', 'price': 150, 'quantity': 10}
+
+        Returns:
+            bool: True if the stock was successfully purchased, False otherwise.
+
+        Test cases:
+            # Test case 1: Successful purchase
+            tracker = StockPortfolioTracker(1000)
+            assert tracker.buy_stock({'name': 'AAPL', 'price': 150, 'quantity': 5}) == True
+            assert tracker.cash_balance == 250
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 5}]
+
+            # Test case 2: Insufficient cash
+            assert tracker.buy_stock({'name': 'GOOGL', 'price': 2800, 'quantity': 1}) == False
+            assert tracker.cash_balance == 250
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 5}]
+
+            # Test case 3: Buying an existing stock
+            assert tracker.buy_stock({'name': 'AAPL', 'price': 150, 'quantity': 2}) == True
+            assert tracker.cash_balance == -50
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 7}]
+        """
+        if stock['price'] * stock['quantity'] > self.cash_balance:
+            return False
+        else:
+            self.add_stock(stock)
+            self.cash_balance -= stock['price'] * stock['quantity']
+            return True
+
+    def sell_stock(self, stock):
+        """
+        Sells a stock from the portfolio and adds the proceeds to the cash balance.
+
+        Parameters:
+            stock (dict): A dictionary containing the stock's name and quantity to sell.
+                          Example: {'name': 'AAPL', 'quantity': 5}
+
+        Returns:
+            bool: True if the stock was successfully sold, False otherwise.
+
+        Test cases:
+            # Test case 1: Successful sale
+            tracker = StockPortfolioTracker(1000)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            assert tracker.sell_stock({'name': 'AAPL', 'quantity': 5}) == True
+            assert tracker.cash_balance == 1750
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 5}]
+
+            # Test case 2: Attempting to sell more than available
+            assert tracker.sell_stock({'name': 'AAPL', 'quantity': 10}) == False
+            assert tracker.cash_balance == 1750
+            assert tracker.portfolio == [{'name': 'AAPL', 'price': 150, 'quantity': 5}]
+
+            # Test case 3: Selling all of a stock
+            assert tracker.sell_stock({'name': 'AAPL', 'quantity': 5}) == True
+            assert tracker.cash_balance == 2500
+            assert tracker.portfolio == []
+        """
+        if self.remove_stock(stock) == False:
+            return False
+        self.cash_balance += stock['price'] * stock['quantity']
+        return True
+
+    def calculate_portfolio_value(self):
+        """
+        Calculates the total value of the portfolio, including cash balance and stock holdings.
+
+        Returns:
+            float: The total value of the portfolio.
+
+        Test cases:
+            # Test case 1: Portfolio with cash and stocks
+            tracker = StockPortfolioTracker(1000)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            assert tracker.calculate_portfolio_value() == 2500
+
+            # Test case 2: Portfolio with only cash
+            tracker = StockPortfolioTracker(1000)
+            assert tracker.calculate_portfolio_value() == 1000
+
+            # Test case 3: Portfolio with no cash and stocks
+            tracker = StockPortfolioTracker(0)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            assert tracker.calculate_portfolio_value() == 1500
+        """
+        total_value = self.cash_balance
+        for stock in self.portfolio:
+            total_value += stock['price'] * stock['quantity']
+        return total_value
+
+    def get_portfolio_summary(self):
+        """
+        Provides a summary of the portfolio, including the total value and individual stock values.
+
+        Returns:
+            tuple: A tuple containing the total portfolio value and a list of dictionaries with stock names and their values.
+                   Example: (2500, [{'name': 'AAPL', 'value': 1500}, {'name': 'GOOGL', 'value': 1000}])
+
+        Test cases:
+            # Test case 1: Portfolio with multiple stocks
+            tracker = StockPortfolioTracker(1000)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            tracker.add_stock({'name': 'GOOGL', 'price': 2800, 'quantity': 1})
+            total_value, summary = tracker.get_portfolio_summary()
+            assert total_value == 5300
+            assert summary == [{'name': 'AAPL', 'value': 1500}, {'name': 'GOOGL', 'value': 2800}]
+
+            # Test case 2: Portfolio with only cash
+            tracker = StockPortfolioTracker(1000)
+            total_value, summary = tracker.get_portfolio_summary()
+            assert total_value == 1000
+            assert summary == []
+
+            # Test case 3: Portfolio with no cash and stocks
+            tracker = StockPortfolioTracker(0)
+            tracker.add_stock({'name': 'AAPL', 'price': 150, 'quantity': 10})
+            total_value, summary = tracker.get_portfolio_summary()
+            assert total_value == 1500
+            assert summary == [{'name': 'AAPL', 'value': 1500}]
+        """
+        summary = []
+        for stock in self.portfolio:
+            value = self.get_stock_value(stock)
+            summary.append({"name": stock["name"], "value": value})
+        portfolio_value = self.calculate_portfolio_value()
+        return portfolio_value, summary
+
+    def get_stock_value(self, stock):
+        """
+        Calculates the total value of a specific stock in the portfolio.
+
+        Parameters:
+            stock (dict): A dictionary containing the stock's name, price, and quantity.
+                          Example: {'name': 'AAPL', 'price': 150, 'quantity': 10}
+
+        Returns:
+            float: The total value of the stock.
+
+        Test cases:
+            # Test case 1: Calculating value of a stock
+            tracker = StockPortfolioTracker(1000)
+            stock = {'name': 'AAPL', 'price': 150, 'quantity': 10}
+            assert tracker.get_stock_value(stock) == 1500
+
+            # Test case 2: Calculating value of a stock with zero quantity
+            stock = {'name': 'AAPL', 'price': 150, 'quantity': 0}
+            assert tracker.get_stock_value(stock) == 0
+
+            # Test case 3: Calculating value of a stock with negative quantity (edge case)
+            stock = {'name': 'AAPL', 'price': 150, 'quantity': -5}
+            assert tracker.get_stock_value(stock) == -750
+        """
+        return stock['price'] * stock['quantity']
+```

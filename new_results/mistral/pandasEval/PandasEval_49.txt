@@ -1,0 +1,2 @@
+ # Extract unique values from the DataFrame's numpy array representation
+unique_ndarray = np.unique(df.values.ravel())</s>

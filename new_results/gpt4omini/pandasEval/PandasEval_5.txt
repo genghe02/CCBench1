@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef make_df_all_cols_lower(data):\n    # Convert all column names in the dataframe to lowercase\n    data.columns = map(str.lower, data.columns)\n    return data

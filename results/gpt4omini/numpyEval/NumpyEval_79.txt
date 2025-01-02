@@ -1,0 +1,8 @@
+```python
+import numpy as np
+
+a1 = np.array(['a', 'b'])
+a2 = np.array(['E', 'F'])
+# Concatenate two arrays of strings element-wise using numpy's chararray functionality.
+result = np.core.defchararray.add(a1, a2)
+```

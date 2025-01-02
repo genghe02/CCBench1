@@ -1,0 +1,87 @@
+ """
+This class simulates the behavior of an automatic guitar that plays chords and tunes based on a text input.
+"""
+
+import re
+
+
+class AutomaticGuitarSimulator:
+    def __init__(self, text):
+        """
+        Initialize the AutomaticGuitarSimulator instance with the given text.
+
+        Parameters:
+            text (str): The text representation of chords and tunes to be played
+        """
+        self.play_text = text
+
+    def interpret(self, display=False):
+        """
+        Interprets the play_text and generates a list of (chord, tune) pairs.
+
+        Parameters:
+            display (bool, optional): Whether or not to display each chord and tune. Defaults to False.
+
+        Returns:
+            list: A list of {'Chord': str, 'Tune': str} representing the played chords and tunes
+        """
+        if len(self.play_text) == 0:
+            return []
+
+        play_list = []
+        play_segs = self.play_text.split(" ")
+
+        for play_seg in play_segs:
+            pos = 0
+            chord = ""
+            for ele in play_seg:
+                if ele.isalpha():
+                    pos += 1
+                    continue
+                else:
+                    break
+
+            chord = play_seg[0:pos]
+            tune = play_seg[pos:]
+            play_list.append({'Chord': chord, 'Tune': tune})
+
+            if display:
+                self.display(chord, tune)
+
+        return play_list
+
+    def display(self, key, value):
+        """
+        Display the chord and tune in a string format.
+
+        Parameters:
+            key (str): The chord name
+            value (str): The tune name or value
+
+        Returns:
+            str: The formatted string for displaying the chord and tune
+        """
+        return "Automatic Guitar Playing -- Chord: %s, Tune: %s" % (key, value)
+
+    # Test cases for the AutomaticGuitarSimulator
+    def test_automatic_guitar_simulator():
+        # Test case 1: Basic test
+        text = "G C D E F#m Dm G"
+        simulator = AutomaticGuitarSimulator(text)
+        output = simulator.interpret(display=True)
+        expected_output = [{'Chord': 'G', 'Tune': ''}, {'Chord': 'C', 'Tune': ''}, {'Chord': 'D', 'Tune': ''}, {'Chord': 'E', 'Tune': ''}, {'Chord': 'F#m', 'Tune': ''}, {'Chord': 'Dm', 'Tune': ''}, {'Chord': 'G', 'Tune': ''}]
+        assert output == expected_output
+
+        # Test case 2: Empty input
+        simulator = AutomaticGuitarSimulator("")
+        expected_output = []
+        assert simulator.interpret(display=False) == expected_output
+
+        # Test case 3: Text with invalid characters
+        text = "G cD! E F#m DmG!"
+        simulator = AutomaticGuitarSimulator(text)
+        output = simulator.interpret(display=True)
+        expected_output = [{'Chord': 'G', 'Tune': ''}, {'Chord': 'c', 'Tune': ''}, {'Chord': 'D', 'Tune': ''}, {'Chord': 'E', 'Tune': ''}, {'Chord': 'F#m', 'Tune': ''}, {'Chord': 'Dm', 'Tune': ''}, {'Chord': 'G', 'Tune': ''}]
+        assert output == expected_output
+
+        print("Automatic Guitar Simulator tests passed.")</s>

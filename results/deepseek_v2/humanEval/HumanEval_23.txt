@@ -1,0 +1,14 @@
+```python
+def strlen(string: str) -> int:
+    # Calculate the length of the input string.
+    # param string: str, the input string whose length is to be calculated
+    # return: int, the length of the input string
+    
+    # >>> strlen("hello")
+    # 5
+    # >>> strlen("")
+    # 0
+    # >>> strlen("a" * 1000)
+    # 1000
+    return len(string)
+```

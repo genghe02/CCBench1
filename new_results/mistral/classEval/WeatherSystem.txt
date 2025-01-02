@@ -1,0 +1,94 @@
+ """
+This class represents a Weather System that allows users to query the temperature and weather for a given city, as well as convert temperature units.
+"""
+
+import datetime
+
+
+class WeatherSystem:
+
+    def __init__(self, city):
+        """
+        Initialize a WeatherSystem instance for the given city.
+
+        Parameters:
+            city (str): The name of the city
+        """
+        self.temperature = None
+        self.weather = None
+        self.city = city
+        self.weather_list = {}
+
+    def query(self, weather_list, tmp_units='celsius'):
+        """
+        Query the temperature and weather for the city in the provided weather list.
+
+        Parameters:
+            weather_list (dict): A weather data dictionary, containing city names as keys and weather dictionaries as values
+            tmp_units (str, optional): The temperature units to return. Defaults to 'celsius'.
+
+        Returns:
+            tuple: A tuple containing the temperature (in the requested units) and the weather description.
+        """
+
+        if self.city not in weather_list:
+            return None
+
+        self.temperature = weather_list[self.city]['temperature']
+        self.weather = weather_list[self.city]['weather']
+
+        if self.weather_list[self.city]['temperature units'] != tmp_units:
+            if tmp_units == 'celsius':
+                return self.fahrenheit_to_celsius(), self.weather
+            elif tmp_units == 'fahrenheit':
+                return self.celsius_to_fahrenheit(), self.weather
+            else:
+                raise ValueError("Invalid temperature unit. Use 'celsius' or 'fahrenheit'.")
+
+        return self.temperature, self.weather
+
+    def set_city(self, city):
+        """
+        Set the city for the WeatherSystem instance.
+
+        Parameters:
+            city (str): The name of the city
+        """
+        self.city = city
+
+    def celsius_to_fahrenheit(self):
+        """
+        Convert temperature from Celsius to Fahrenheit.
+
+        Returns:
+            float: The temperature value in Fahrenheit
+        """
+        return (self.temperature * 9 / 5) + 32
+
+    def fahrenheit_to_celsius(self):
+        """
+        Convert temperature from Fahrenheit to Celsius.
+
+        Returns:
+            float: The temperature value in Celsius
+        """
+        return (self.temperature - 32) * 5 / 9
+    
+# Test cases:
+# Weather data for test cases
+weather_data = {
+    'Seattle': {'temperature': 12, 'temperature_units': 'celsius', 'weather': 'clouds'},
+    'Los Angeles': {'temperature': 72, 'temperature_units': 'fahrenheit', 'weather': 'sunny'},
+    'New York': {'temperature': -5, 'temperature_units': 'celsius', 'weather': 'rainy'},
+}
+# Test case 1: Query temperature in Celsius for a valid city
+wsystem = WeatherSystem('Seattle')
+assert wsystem.query(weather_data) == (12.0, 'clouds')
+
+# Test case 2: Query temperature in Fahrenheit for a valid city
+wsystem = WeatherSystem('Los Angeles')
+assert wsystem.query(weather_data, tmp_units='fahrenheit') == (72.0, 'sunny')
+
+# Test case 3: Query temperature for an invalid city
+wsystem = WeatherSystem('Boston')
+assert wsystem.query(weather_data) is None</s>

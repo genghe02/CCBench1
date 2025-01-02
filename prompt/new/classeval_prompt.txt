@@ -1,0 +1,171 @@
+# Task: Python Class Documentation Completion
+
+## Background
+You are given a Python class implementation of an Access Gateway Filter that handles request filtering, authentication, and logging. The class structure and implementation are complete, but it lacks proper documentation.
+
+## Task Description
+Complete the documentation for the given Python class by adding appropriate docstrings that include:
+
+1. Class-level documentation describing the overall purpose and functionality
+2. Method-level documentation for each method in the class
+3. Parameter descriptions for all methods
+4. Return value descriptions for all methods
+5. Test cases demonstrating the usage of each method
+
+## Requirements
+
+### For Class Documentation:
+- Start with "This class" or "The class" and briefly describe the purpose of the class in one sentence.
+
+### For Each Method Documentation:
+- Write a clear description of what the method does
+- List and describe all parameters with their types and purposes
+- Specify the return value type and meaning
+- Include at least 3 test cases showing:
+  * Normal/successful usage
+  * Edge case handling
+  * Error case handling
+
+### Documentation Format:
+- Use standard Python docstring format
+- Include appropriate sectioning (Parameters, Returns, Test cases)
+- Maintain consistent formatting across all documentation
+- Use clear and concise language
+
+## Input Format
+```python
+<description for whole class>
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        pass
+
+    def filter(self, request):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+        request_uri = request['path']
+        method = request['method']
+        
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        <description for whole function>
+        <description for all parameters>
+        <description for return statement>
+        <some test cases for the function>
+
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+```
+
+## Expected Output Format
+```python
+"""
+describe the purpose of the class here.
+Start with "This class" or "The class" and describe it in one sentence.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method documentation.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Method description.
+
+        Parameters:
+            request (dict): Parameter description with structure details
+        
+        Returns:
+            bool: Description of return value meaning
+        
+        Test cases:
+            # Test case 1: Description
+            input = {...}
+            expected_output = ...
+            
+            # Test case 2: Description
+            input = {...}
+            expected_output = ...
+            
+            # Test case 3: Description
+            input = {...}
+            expected_output = ...
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with any of the allowed prefixes.
+        
+        Parameters:
+            request_uri (str): The URI path to check
+            
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise
+            
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+            
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+            
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+        
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+```
+
+## Evaluation Criteria
+Your solution will be evaluated based on:
+1. Completeness of documentation
+2. Clarity and accuracy of descriptions
+3. Quality and coverage of test cases
+4. Adherence to Python documentation standards
+5. Practical usefulness of the documentation

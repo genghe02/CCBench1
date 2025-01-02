@@ -1,0 +1,39 @@
+<description for whole class>
+A class representing the Twenty-Four Point Game where players manipulate cards to achieve a target number.
+
+Twelve-FourPointGame:
+    def __init__(self) -> None:
+        self.nums = []
+
+    def _generate_cards(self):
+        <description for whole function>
+        Generate a random set of four integer cards between 1 and 9 and ensure there are exactly 4 numbers.
+
+    def get_my_cards(self):
+        <description for whole function>
+        Retrieve the player's randomly generated cards.
+        <description for return statement>
+        Return the list of numbers representing the player's cards.
+        <some test cases for the function>
+        Generate a new set of cards and return them to the player.
+
+    def answer(self, expression):
+        <description for whole function>
+        Evaluate the player's expression based on the available cards.
+        <description for all parameters>
+        :param expression: str, the mathematical expression provided by the player
+        <description for return statement>
+        :return: bool, True if the expression evaluates to 24 using the available cards, False otherwise
+        <some test cases for the function>
+        If the expression is 'pass', return the player's cards.
+        Check if the expression can be evaluated using the available cards, return True if it equals 24, False otherwise.
+
+    def evaluate_expression(self, expression):
+        <description for whole function>
+        Evaluate a mathematical expression.
+        <description for all parameters>
+        :param expression: str, the mathematical expression to be evaluated
+        <description for return statement>
+        :return: bool, True if the expression evaluates to 24, False otherwise
+        <some test cases for the function>
+        Try to evaluate the expression and return True if the result is 24, False otherwise.

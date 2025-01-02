@@ -1,0 +1,5 @@
+import pandas as pd
+import numpy as np
+def ceil_of_series(s):
+    # Return the ceiling of each value in the passed pandas series 
+    return np.ceil(s)

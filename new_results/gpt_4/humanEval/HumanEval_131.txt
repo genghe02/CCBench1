@@ -1,0 +1,16 @@
+def digits(n):
+    # This function calculates the product of all odd digits in a number. If there are no odd digits, it returns 0
+    >>> digits(123456) # returns 15
+    >>> digits(2468) # returns 0
+    >>> digits(13579) # returns 945
+    product = 1
+    odd_count = 0
+    for digit in str(n):
+        int_digit = int(digit)
+        if int_digit%2 == 1:
+            product= product*int_digit
+            odd_count+=1
+    if odd_count ==0:
+        return 0
+    else:
+        return product

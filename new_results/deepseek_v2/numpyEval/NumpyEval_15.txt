@@ -1,0 +1,10 @@
+import numpy as np
+
+a = np.array([[ 0.,  0.,  0.],
+       [ 0.,  0.,  0.],
+       [ 0.,  0.,  0.],
+       [ 0.,  0.,  0.],
+       [ 0.,  0.,  0.]])
+x = np.ones(5)
+# Replace the second column of array 'a' with the values from array 'x'
+a[:, 1] = x

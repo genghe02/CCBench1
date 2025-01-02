@@ -1,0 +1,198 @@
+```python
+"""
+This class serves as a metrics calculator for evaluating binary classification models, providing methods to compute precision, recall, F1 score, and accuracy based on predicted and true labels.
+"""
+
+class MetricsCalculator:
+    def __init__(self):
+        """
+        Initializes the MetricsCalculator with counters for true positives, false positives,
+        false negatives, and true negatives set to zero.
+        """
+        self.true_positives = 0
+        self.false_positives = 0
+        self.false_negatives = 0
+        self.true_negatives = 0
+
+    def update(self, predicted_labels, true_labels):
+        """
+        Updates the counts of true positives, false positives, false negatives, and true negatives
+        based on the predicted and true labels provided.
+
+        Parameters:
+            predicted_labels (list[int]): A list of predicted labels (0 or 1).
+            true_labels (list[int]): A list of true labels (0 or 1).
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: All predictions correct
+            calc = MetricsCalculator()
+            calc.update([1, 0, 1], [1, 0, 1])
+            assert calc.true_positives == 2
+            assert calc.true_negatives == 1
+            assert calc.false_positives == 0
+            assert calc.false_negatives == 0
+
+            # Test case 2: Some predictions incorrect
+            calc = MetricsCalculator()
+            calc.update([1, 1, 0], [1, 0, 1])
+            assert calc.true_positives == 1
+            assert calc.true_negatives == 0
+            assert calc.false_positives == 1
+            assert calc.false_negatives == 1
+
+            # Test case 3: Edge case with empty lists
+            calc = MetricsCalculator()
+            calc.update([], [])
+            assert calc.true_positives == 0
+            assert calc.true_negatives == 0
+            assert calc.false_positives == 0
+            assert calc.false_negatives == 0
+        """
+        for predicted, true in zip(predicted_labels, true_labels):
+            if predicted == 1 and true == 1:
+                self.true_positives += 1
+            elif predicted == 1 and true == 0:
+                self.false_positives += 1
+            elif predicted == 0 and true == 1:
+                self.false_negatives += 1
+            elif predicted == 0 and true == 0:
+                self.true_negatives += 1
+
+    def precision(self, predicted_labels, true_labels):
+        """
+        Computes and returns the precision of the predictions.
+
+        Parameters:
+            predicted_labels (list[int]): A list of predicted labels (0 or 1).
+            true_labels (list[int]): A list of true labels (0 or 1).
+
+        Returns:
+            float: The precision of the predictions, defined as the ratio of true positives to
+            the total predicted positives.
+
+        Test cases:
+            # Test case 1: Perfect precision
+            calc = MetricsCalculator()
+            calc.update([1, 1, 0], [1, 0, 1])
+            assert calc.precision([1, 1, 0], [1, 0, 1]) == 0.5
+
+            # Test case 2: No positive predictions
+            calc = MetricsCalculator()
+            calc.update([0, 0, 0], [1, 1, 1])
+            assert calc.precision([0, 0, 0], [1, 1, 1]) == 0.0
+
+            # Test case 3: No positive ground truth
+            calc = MetricsCalculator()
+            calc.update([1, 0, 0], [0, 0, 0])
+            assert calc.precision([1, 0, 0], [0, 0, 0]) == 0.0
+        """
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_positives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_positives)
+
+    def recall(self, predicted_labels, true_labels):
+        """
+        Computes and returns the recall of the predictions.
+
+        Parameters:
+            predicted_labels (list[int]): A list of predicted labels (0 or 1).
+            true_labels (list[int]): A list of true labels (0 or 1).
+
+        Returns:
+            float: The recall of the predictions, defined as the ratio of true positives to
+            the total actual positives.
+
+        Test cases:
+            # Test case 1: Perfect recall
+            calc = MetricsCalculator()
+            calc.update([1, 1, 0], [1, 1, 0])
+            assert calc.recall([1, 1, 0], [1, 1, 0]) == 1.0
+
+            # Test case 2: No actual positives
+            calc = MetricsCalculator()
+            calc.update([0, 0, 0], [0, 0, 0])
+            assert calc.recall([0, 0, 0], [0, 0, 0]) == 0.0
+
+            # Test case 3: Some actual positives missed
+            calc = MetricsCalculator()
+            calc.update([0, 1, 1], [1, 1, 0])
+            assert calc.recall([0, 1, 1], [1, 1, 0]) == 0.67  # 2 out of 3
+        """
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_negatives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_negatives)
+
+    def f1_score(self, predicted_labels, true_labels):
+        """
+        Computes and returns the F1 score of the predictions.
+
+        Parameters:
+            predicted_labels (list[int]): A list of predicted labels (0 or 1).
+            true_labels (list[int]): A list of true labels (0 or 1).
+
+        Returns:
+            float: The F1 score of the predictions, which is the harmonic mean of precision and
+            recall.
+
+        Test cases:
+            # Test case 1: Balanced precision and recall
+            calc = MetricsCalculator()
+            calc.update([1, 0, 1], [1, 0, 1])
+            assert calc.f1_score([1, 0, 1], [1, 0, 1]) == 1.0
+
+            # Test case 2: No true positives
+            calc = MetricsCalculator()
+            calc.update([0, 0, 0], [1, 1, 1])
+            assert calc.f1_score([0, 0, 0], [1, 1, 1]) == 0.0
+
+            # Test case 3: One positive example
+            calc = MetricsCalculator()
+            calc.update([1, 0, 1], [1, 1, 0])
+            assert calc.f1_score([1, 0, 1], [1, 1, 0]) == 0.67  # F1 score calculation
+        """
+        self.update(predicted_labels, true_labels)
+        precision = self.precision(predicted_labels, true_labels)
+        recall = self.recall(predicted_labels, true_labels)
+        if precision + recall == 0.0:
+            return 0.0
+        return (2 * precision * recall) / (precision + recall)
+
+    def accuracy(self, predicted_labels, true_labels):
+        """
+        Computes and returns the accuracy of the predictions.
+
+        Parameters:
+            predicted_labels (list[int]): A list of predicted labels (0 or 1).
+            true_labels (list[int]): A list of true labels (0 or 1).
+
+        Returns:
+            float: The accuracy of the predictions, defined as the ratio of correctly predicted
+            instances (both true positives and true negatives) to the total instances.
+
+        Test cases:
+            # Test case 1: All classifications correct
+            calc = MetricsCalculator()
+            calc.update([1, 0, 1], [1, 0, 1])
+            assert calc.accuracy([1, 0, 1], [1, 0, 1]) == 1.0
+
+            # Test case 2: All classifications wrong
+            calc = MetricsCalculator()
+            calc.update([0, 0, 0], [1, 1, 1])
+            assert calc.accuracy([0, 0, 0], [1, 1, 1]) == 0.0
+
+            # Test case 3: Mixed classifications
+            calc = MetricsCalculator()
+            calc.update([1, 0, 1], [1, 1, 0])
+            assert calc.accuracy([1, 0, 1], [1, 1, 0]) == 0.67  # 2 correct out of 3
+        """
+        self.update(predicted_labels, true_labels)
+        total = self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        if total == 0:
+            return 0.0
+        return (self.true_positives + self.true_negatives) / total
+```

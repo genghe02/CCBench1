@@ -1,0 +1,5 @@
+import numpy as np
+
+input_list = [np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]]), np.array([[ 0.00353654]])]
+# Concatenate the list of arrays and flatten them into a single 1D array
+output = np.concatenate(input_list).ravel()

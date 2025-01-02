@@ -1,0 +1,17 @@
+```python
+def Strongest_Extension(class_name, extensions):
+    # Find the extension with the highest difference between uppercase and lowercase letters
+    >>> Strongest_Extension("MyClass", ["A", "b", "Cc"]) # returns "MyClass.Cc"
+    >>> Strongest_Extension("Test", ["X", "YY", "ZzZ"]) # returns "Test.ZzZ"
+    >>> Strongest_Extension("Example", ["a", "b", "c"]) # returns "Example.a"
+    strong = extensions[0]
+    my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+    for s in extensions:
+        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+        if val > my_val:
+            strong = s
+            my_val = val
+
+    ans = class_name + "." + strong
+    return ans
+```

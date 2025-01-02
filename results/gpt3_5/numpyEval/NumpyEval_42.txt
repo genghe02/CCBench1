@@ -1,0 +1,1 @@
+# Find unique rows in a 2D numpy array 'a' by comparing rows along the specified axis (axis=0) using np.unique.

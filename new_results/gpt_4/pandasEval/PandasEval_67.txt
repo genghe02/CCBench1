@@ -1,0 +1,12 @@
+import pandas as pd
+
+df = pd.DataFrame({'name': ['jon','sam','jane','bob'],
+           'age': [30,25,18,26],
+           'sex':['male','male','female','male']})
+
+row = ['45', 'Dean', 'male']
+# Add the row at top in df
+df.loc[-1] = row
+df.index = df.index + 1
+# Sort the DataFrame by index in ascending order and modify the original DataFrame
+df.sort_index(inplace=True)

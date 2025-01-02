@@ -1,0 +1,2 @@
+# Find the indices of the k smallest elements in A using numpy.partition and return the first k elements
+idx = np.argpartition(A, k)[:k]

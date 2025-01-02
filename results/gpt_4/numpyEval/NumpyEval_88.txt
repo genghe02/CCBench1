@@ -1,0 +1,1 @@
+# This function converts all NaN (Not a Number) values in a numpy array to zero. The np.isnan(arr) creates a boolean mask of the same shape as arr where True indicates the location of NaNs. These locations are then set to zero.

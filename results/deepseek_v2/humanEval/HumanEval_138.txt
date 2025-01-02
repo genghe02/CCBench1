@@ -1,0 +1,17 @@
+```python
+def is_equal_to_sum_even(n):
+    # Check if the given number is even and greater than or equal to 8.
+    # param n: int, the number to be checked
+    # return: bool, True if the number is even and greater than or equal to 8, False otherwise
+
+    # >>> is_equal_to_sum_even(10)
+    # True
+    # >>> is_equal_to_sum_even(6)
+    # False
+    # >>> is_equal_to_sum_even(8)
+    # True
+    # >>> is_equal_to_sum_even(7)
+    # False
+
+    return n % 2 == 0 and n >= 8
+```

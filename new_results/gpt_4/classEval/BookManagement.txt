@@ -1,0 +1,97 @@
+"""
+This class manages a book inventory, allowing for the addition and removal of books, as well as querying the inventory.
+"""
+
+class BookManagement:
+    def __init__(self):
+        """
+        Initialization method that creates an empty inventory dictionary.
+        """
+        self.inventory = {}
+
+    def add_book(self, title, quantity=1):
+        """
+        Adds a book to the inventory. If the book already exists, it increments the quantity.
+
+        Parameters:
+            title (str): The title of the book to be added.
+            quantity (int, optional): The quantity of books to be added. Default is 1.
+        
+        Test cases:
+            # Test case 1: Adding a book that isn't in the inventory
+            add_book('To Kill a Mockingbird')
+            assert view_inventory() == {'To Kill a Mockingbird': 1}
+            
+            # Test case 2: Adding multiple copies of a book
+            add_book('To Kill a Mockingbird', 3)
+            assert view_inventory() == {'To Kill a Mockingbird': 4}
+            
+            # Test case 3: Adding a book that's already in the inventory
+            add_book('To Kill a Mockingbird')
+            assert view_inventory() == {'To Kill a Mockingbird': 5}
+        """
+        if title in self.inventory:
+            self.inventory[title] += quantity
+        else:
+            self.inventory[title] = quantity
+
+    def remove_book(self, title, quantity):
+        """
+        Removes a book from the inventory. If the quantity of the book is less than the quantity to be removed, it raises an error.
+
+        Parameters:
+            title (str): The title of the book to be removed.
+            quantity (int): The quantity of books to be removed.
+
+        Test cases:
+            # Test case 1: Removing a book that's in the inventory
+            remove_book('To Kill a Mockingbird', 1)
+            assert view_inventory() == {'To Kill a Mockingbird': 4}
+
+            # Test case 2: Removing a book that isn't in the inventory
+            try:
+                remove_book('The Great Gatsby', 1)
+            except:
+                assert True
+
+            # Test case 3: Removing more books than are in the inventory
+            try:
+                remove_book('To Kill a Mockingbird', 10)
+            except:
+                assert True
+        """
+        if title not in self.inventory or self.inventory[title] < quantity:
+            raise False
+        self.inventory[title] -= quantity
+        if self.inventory[title] == 0:
+            del (self.inventory[title])
+
+    def view_inventory(self):
+        """
+        Returns the current inventory of books.
+
+        Returns:
+            dict: The inventory of books, with book titles as keys and quantities as values.
+        """
+        return self.inventory
+
+    def view_book_quantity(self, title):
+        """
+        Returns the quantity of a specific book in the inventory.
+
+        Parameters:
+            title (str): The title of the book to query.
+
+        Returns:
+            int: The quantity of the specified book in the inventory.
+
+        Test cases:
+            # Test case 1: Querying a book that's in the inventory
+            assert view_book_quantity('To Kill a Mockingbird') == 4
+
+            # Test case 2: Querying a book that isn't in the inventory
+            assert view_book_quantity('The Great Gatsby') == 0
+        """
+        if title not in self.inventory:
+            return 0
+        return self.inventory[title]

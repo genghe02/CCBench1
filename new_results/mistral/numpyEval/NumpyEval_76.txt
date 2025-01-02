@@ -1,0 +1,7 @@
+ import numpy as np
+
+# Create a NumPy dtype object based on provided names and formats
+dtype = np.dtype([('names', '<f8'), ('formats', '<f8')])
+
+# Convert dictionary to list of tuples, and then to NumPy array with the defined dtype
+array = np.array(list(result.items()), dtype=dtype)</s>

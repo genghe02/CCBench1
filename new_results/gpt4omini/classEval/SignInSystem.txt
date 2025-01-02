@@ -1,0 +1,151 @@
+```python
+"""
+This class implements a simple sign-in system that manages user registrations and sign-in states.
+"""
+
+class SignInSystem:
+    def __init__(self):
+        """
+        Initializes the SignInSystem instance with an empty users dictionary.
+
+        The users dictionary will store usernames as keys and their sign-in status as values.
+        """
+        self.users = {}
+
+    def add_user(self, username: str) -> bool:
+        """
+        Adds a new user to the sign-in system.
+
+        Parameters:
+            username (str): The username of the user to be added.
+            
+        Returns:
+            bool: True if the user was added successfully, False if the user already exists.
+
+        Test cases:
+            # Test case 1: Add a new user
+            input = 'user1'
+            expected_output = True
+            
+            # Test case 2: Attempt to add the same user again
+            input = 'user1'
+            expected_output = False
+            
+            # Test case 3: Add another new user
+            input = 'user2'
+            expected_output = True
+        """
+        if username in self.users:
+            return False
+        else:
+            self.users[username] = False
+            return True
+
+    def sign_in(self, username: str) -> bool:
+        """
+        Signs in a user by updating their sign-in status.
+
+        Parameters:
+            username (str): The username of the user who wants to sign in.
+            
+        Returns:
+            bool: True if the user is successfully signed in, False if the user does not exist.
+
+        Test cases:
+            # Test case 1: Sign in an existing user
+            input = 'user1'
+            expected_output = True
+            
+            # Test case 2: Sign in a non-existent user
+            input = 'user3'
+            expected_output = False
+            
+            # Test case 3: Sign in a user that was added but not signed in yet
+            input = 'user2'
+            expected_output = True
+        """
+        if username not in self.users:
+            return False
+        else:
+            self.users[username] = True
+            return True
+
+    def check_sign_in(self, username: str) -> bool:
+        """
+        Checks whether a user is signed in.
+
+        Parameters:
+            username (str): The username of the user to check.
+            
+        Returns:
+            bool: True if the user is signed in, False if the user does not exist or is not signed in.
+
+        Test cases:
+            # Test case 1: Check signed in user
+            input = 'user1'
+            expected_output = True
+            
+            # Test case 2: Check not signed in user
+            input = 'user2'
+            expected_output = False
+            
+            # Test case 3: Check non-existent user
+            input = 'user3'
+            expected_output = False
+        """
+        if username not in self.users:
+            return False
+        else:
+            return self.users[username]
+
+    def all_signed_in(self) -> bool:
+        """
+        Checks if all users are signed in.
+
+        Returns:
+            bool: True if all users are signed in, False otherwise.
+
+        Test cases:
+            # Test case 1: All users signed in
+            input = {}
+            expected_output = True
+            
+            # Test case 2: Some users not signed in
+            input = {'user1': True, 'user2': False}
+            expected_output = False
+            
+            # Test case 3: No users present
+            input = {}
+            expected_output = True
+        """
+        if all(self.users.values()):
+            return True
+        else:
+            return False
+
+    def all_not_signed_in(self) -> list:
+        """
+        Retrieves a list of users who are not signed in.
+
+        Returns:
+            list: A list containing usernames of users who are not signed in.
+
+        Test cases:
+            # Test case 1: All users signed in
+            input = {'user1': True, 'user2': True}
+            expected_output = []
+            
+            # Test case 2: Some users not signed in
+            input = {'user1': True, 'user2': False}
+            expected_output = ['user2']
+            
+            # Test case 3: No users
+            input = {}
+            expected_output = []
+        """
+        not_signed_in_users = []
+        for username, signed_in in self.users.items():
+            if not signed_in:
+                not_signed_in_users.append(username)
+        return not_signed_in_users
+```

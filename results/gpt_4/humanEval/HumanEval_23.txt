@@ -1,0 +1,12 @@
+```python
+def strlen(string: str) -> int:
+    # This function accepts a string as input and returns the length of that string.
+    # Example Usage:
+    # >>> strlen('Hello World')
+    # 11
+    # >>> strlen('')
+    # 0
+    # >>> strlen('Python')
+    # 6
+    return len(string)
+```

@@ -1,0 +1,1 @@
+# Filter the DataFrame 'df' to exclude rows where the column 'line_num' is equal to 0.

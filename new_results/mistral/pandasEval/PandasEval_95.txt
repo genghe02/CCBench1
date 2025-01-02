@@ -1,0 +1,2 @@
+ # Divide columns 'B' and 'C' by column 'A'
+df[['B','C']] = df[['B','C']].div(df.A, axis=0)</s>

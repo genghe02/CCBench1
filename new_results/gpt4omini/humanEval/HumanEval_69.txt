@@ -1,0 +1,19 @@
+```python
+def search(lst):
+    # Return the largest integer `i` such that `i` appears at least `i` times in `lst`
+    >>> search([1, 2, 3, 3, 3]) # returns 3
+    >>> search([0, 0, 0, 0]) # returns 0
+    >>> search([1, 1, 2, 2, 2]) # returns 2
+    >>> search([3, 3, 3, 4, 4]) # returns 3
+    >>> search([1, 2, 3]) # returns -1
+    frq = [0] * (max(lst) + 1)
+    for i in lst:
+        frq[i] += 1;
+
+    ans = -1
+    for i in range(1, len(frq)):
+        if frq[i] >= i:
+            ans = i
+    
+    return ans
+```

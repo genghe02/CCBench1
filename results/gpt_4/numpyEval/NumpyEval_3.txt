@@ -1,0 +1,1 @@
+# Convert all elements in the numpy array from string type to float type using the astype() function

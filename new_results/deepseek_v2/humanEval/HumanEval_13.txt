@@ -1,0 +1,10 @@
+```python
+def greatest_common_divisor(a: int, b: int) -> int:
+    # Calculate the greatest common divisor (GCD) of two integers using the Euclidean algorithm
+    >>> greatest_common_divisor(48, 18) # returns 6
+    >>> greatest_common_divisor(17, 5) # returns 1
+    >>> greatest_common_divisor(0, 5) # returns 5
+    while b:
+        a, b = b, a % b
+    return a
+```

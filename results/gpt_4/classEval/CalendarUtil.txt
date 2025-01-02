@@ -1,0 +1,81 @@
+```python
+from datetime import datetime, timedelta
+
+# This class is a basic utility for managing a calendar of events, including adding and removing events, checking availability, and getting upcoming events.
+class CalendarUtil:
+    def __init__(self):
+        # This function initializes an empty list of events to be managed by the calendar.
+        self.events = []
+
+    def add_event(self, event):
+        # This function appends an event to the events list.
+        # Param event: dict, the details of the event to be added. It should include keys like 'date', 'start_time', and 'end_time'.
+        # Test case: >>> calendar = CalendarUtil()
+        #            >>> calendar.add_event({'date':datetime(2022, 12, 25), 'start_time':datetime(2022, 12, 25, 10, 0), 'end_time':datetime(2022, 12, 25, 11, 0)})
+        self.events.append(event)
+
+    def remove_event(self, event):
+        # This function removes an event from the events list if it exists.
+        # Param event: dict, the details of the event to be removed.
+        # Test case: >>> calendar = CalendarUtil()
+        #            >>> calendar.remove_event({'date':datetime(2022, 12, 25), 'start_time':datetime(2022, 12, 25, 10, 0), 'end_time':datetime(2022, 12, 25, 11, 0)})
+        if event in self.events:
+            self.events.remove(event)
+
+    def get_events(self, date):
+        # This function returns a list of all events on a given date.
+        # Param date: datetime, the date to fetch events for.
+        # Return: list, the list of all events happening on the given date.
+        # Test case: >>> calendar = CalendarUtil()
+        #            >>> calendar.get_events(datetime(2022, 12, 25))
+        events_on_date = []
+        for event in self.events:
+            if event['date'].date() == date.date():
+                events_on_date.append(event)
+        return events_on_date
+
+    def is_available(self, start_time, end_time):
+        # This function checks if the calendar is available between the given start_time and end_time.
+        # Param start_time: datetime, the starting time to check for availability.
+        # Param end_time: datetime, the ending time to check for availability.
+        # Return: bool, True if the calendar is available, False otherwise.
+        # Test case: >>> calendar = CalendarUtil()
+        #            >>> calendar.is_available(datetime(2022, 12, 25, 10, 0), datetime(2022, 12, 25, 11, 0))
+        for event in self.events:
+            if start_time < event['end_time'] and end_time > event['start_time']:
+                return False
+        return True
+
+    def get_available_slots(self, date):
+        # This function returns a list of all available 60-minute slots on a given date.
+        # Param date: datetime, the date to fetch available slots for.
+        # Return: list, a list of tuples where each tuple represents an available time slot.
+        # Test case: >>> calendar = CalendarUtil()
+        #            >>> calendar.get_available_slots(datetime(2022, 12, 25))
+        available_slots = []
+        start_time = datetime(date.year, date.month, date.day, 0, 0)
+        end_time = datetime(date.year, date.month, date.day, 23, 59)
+
+        while start_time < end_time:
+            slot_end_time = start_time + timedelta(minutes=60)
+            if self.is_available(start_time, slot_end_time):
+                available_slots.append((start_time, slot_end_time))
+            start_time += timedelta(minutes=60)
+
+        return available_slots
+
+    def get_upcoming_events(self, num_events):
+        # This function returns a list of the next num_events upcoming events.
+        # Param num_events: int, the number of upcoming events to fetch.
+        # Return: list, the list of upcoming events.
+        # Test case: >>> calendar = CalendarUtil()
+        #            >>> calendar.get_upcoming_events(5)
+        now = datetime.now()
+        upcoming_events = []
+        for event in self.events:
+            if event['start_time'] >= now:
+                upcoming_events.append(event)
+            if len(upcoming_events) == num_events:
+                break
+        return upcoming_events
+```

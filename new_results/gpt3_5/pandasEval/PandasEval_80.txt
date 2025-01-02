@@ -1,0 +1,2 @@
+# Round up each element in a pandas Series
+def ceil_of_series(s):

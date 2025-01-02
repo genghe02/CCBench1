@@ -1,0 +1,17 @@
+```python
+def is_happy(s):
+    # Check if a string is happy (no three consecutive characters are the same)
+    >>> is_happy("abc") # returns True
+    >>> is_happy("aaab") # returns False
+    >>> is_happy("ab") # returns True
+    >>> is_happy("aabb") # returns True
+    >>> is_happy("aaa") # returns False
+    if len(s) < 3:
+      return False
+
+    for i in range(len(s) - 2):
+      
+      if s[i] == s[i+1] or s[i+1] == s[i+2] or s[i] == s[i+2]:
+        return False
+    return True
+```

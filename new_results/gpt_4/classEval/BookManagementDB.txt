@@ -1,0 +1,153 @@
+"""
+This class provides methods to manage a book database, including adding and removing books, borrowing and returning books, and searching for books.
+"""
+import sqlite3
+
+class BookManagementDB:
+    def __init__(self, db_name):
+        """
+        Initializes the BookManagementDB class with a database name.
+        
+        Parameters:
+            db_name (str): The name of the database to connect to.
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+        self.create_table()
+
+    def create_table(self):
+        """
+        Creates the 'books' table in the database if it does not already exist.
+        
+        Test cases:
+            # Test case 1: Table creation
+            #   - No input needed, and no return to check. 
+            #   - Ensure that no error is raised when the method is called.
+        """
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS books (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                author TEXT,
+                available INTEGER
+            )
+        ''')
+        self.connection.commit()
+
+    def add_book(self, title, author):
+        """
+        Adds a book to the 'books' table in the database.
+        
+        Parameters:
+            title (str): The title of the book.
+            author (str): The author of the book.
+        
+        Test cases:
+            # Test case 1: Add a book
+            #   - Input: add_book('Test Book', 'Test Author')
+            #   - Ensure that the book is added to the database by checking the number of rows before and after the method call.
+            # Test case 2: Add a book with special characters
+            #   - Input: add_book('Test Book #2', 'Test Author')
+            #   - Ensure that the book is added to the database including the special characters.
+            # Test case 3: Add a book with no title or author
+            #   - Input: add_book('', '')
+            #   - Ensure that the book is not added to the database.
+        """
+        self.cursor.execute('''
+            INSERT INTO books (title, author, available)
+            VALUES (?, ?, 1)
+        ''', (title, author))
+        self.connection.commit()
+
+    def remove_book(self, book_id):
+        """
+        Removes a book from the 'books' table in the database.
+        
+        Parameters:
+            book_id (int): The ID of the book to remove.
+        
+        Test cases:
+            # Test case 1: Remove a book
+            #   - Input: remove_book(1)
+            #   - Ensure that the book is removed from the database by checking the number of rows before and after the method call.
+            # Test case 2: Remove a book that does not exist
+            #   - Input: remove_book(999)
+            #   - Ensure that no error is raised, and the number of rows in the database remains the same.
+            # Test case 3: Remove a book with invalid ID type
+            #   - Input: remove_book('1')
+            #   - Ensure that an error is raised.
+        """
+        self.cursor.execute('''
+            DELETE FROM books WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def borrow_book(self, book_id):
+        """
+        Marks a book as borrowed in the 'books' table in the database.
+        
+        Parameters:
+            book_id (int): The ID of the book to mark as borrowed.
+        
+        Test cases:
+            # Test case 1: Borrow a book
+            #   - Input: borrow_book(1)
+            #   - Ensure that the book is marked as borrowed in the database by checking the 'available' field.
+            # Test case 2: Borrow a book that is already borrowed
+            #   - Input: borrow_book(1)
+            #   - Ensure that no error is raised, and the 'available' field remains 0.
+            # Test case 3: Borrow a book that does not exist
+            #   - Input: borrow_book(999)
+            #   - Ensure that an error is raised.
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 0 WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def return_book(self, book_id):
+        """
+        Marks a book as returned in the 'books' table in the database.
+        
+        Parameters:
+            book_id (int): The ID of the book to mark as returned.
+        
+        Test cases:
+            # Test case 1: Return a book
+            #   - Input: return_book(1)
+            #   - Ensure that the book is marked as returned in the database by checking the 'available' field.
+            # Test case 2: Return a book that is already returned
+            #   - Input: return_book(1)
+            #   - Ensure that no error is raised, and the 'available' field remains 1.
+            # Test case 3: Return a book that does not exist
+            #   - Input: return_book(999)
+            #   - Ensure that an error is raised.
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 1 WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def search_books(self):
+        """
+        Returns all books in the 'books' table in the database.
+        
+        Returns:
+            list: A list of tuples, each containing the details of a book (ID, title, author, availability).
+        
+        Test cases:
+            # Test case 1: Search for books when the database is populated
+            #   - No input needed.
+            #   - Ensure that the method returns a list of all books in the database.
+            # Test case 2: Search for books when the database is empty
+            #   - No input needed.
+            #   - Ensure that the method returns an empty list.
+            # Test case 3: Search for books when the database contains both available and borrowed books
+            #   - No input needed.
+            #   - Ensure that the method returns a list of all books, regardless of their availability.
+        """
+        self.cursor.execute('''
+            SELECT * FROM books
+        ''')
+        books = self.cursor.fetchall()
+        return books

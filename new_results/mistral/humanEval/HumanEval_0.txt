@@ -1,0 +1,11 @@
+ # Check if there are any pairs of numbers in the list that have a difference less than the threshold
+ # O(n^2) time complexity due to nested for loop
+ >>> numbers = [1.1, 2.2, 1.5, 2.5, 3.0]
+ >>> threshold = 1.0
+ >>> has_close_elements(numbers, threshold) # returns True
+ >>> numbers = [1.0, 1.5, 2.0]
+ >>> has_close_elements(numbers, 0.5) # returns False
+ >>> has_close_elements([3.5], 2.0) # returns False
+ >>> has_close_elements([3.5], 1.5) # returns True
+
+return True if any pair of different elements has a difference less than the threshold, else False</s>

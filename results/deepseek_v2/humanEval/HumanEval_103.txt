@@ -1,0 +1,26 @@
+```python
+def rounded_avg(n, m):
+    # Calculate the rounded average of numbers from n to m and return it as a binary string.
+    # If m is less than n, return -1.
+    # param n: int, the starting number of the range
+    # param m: int, the ending number of the range
+    # return: str, the binary representation of the rounded average, or -1 if m < n
+    
+    # >>> rounded_avg(1, 5)
+    # '0b3'
+    # >>> rounded_avg(5, 1)
+    # -1
+    # >>> rounded_avg(0, 0)
+    # '0b0'
+    # >>> rounded_avg(1, 1)
+    # '0b1'
+    # >>> rounded_avg(1, 6)
+    # '0b4'
+
+    if m < n:
+        return -1
+    summation = 0
+    for i in range(n, m+1):
+        summation += i
+    return bin(round(summation/(m - n + 1)))
+```

@@ -1,0 +1,2 @@
+ # Flatten the given 2-dimensional NumPy array into a 1-dimensional NumPy array
+out = x.reshape(3,).ravel()</s>

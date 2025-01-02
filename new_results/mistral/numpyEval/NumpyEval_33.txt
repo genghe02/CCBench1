@@ -1,0 +1,6 @@
+ ✅ Correct Output:
+import numpy as np
+
+arr = np.zeros((50,100,25))
+# Reshape the 5D array into a 2D array with shape (5000, 25)
+result = np.reshape(arr, (5000,25))</s>

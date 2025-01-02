@@ -1,0 +1,25 @@
+def f(n):
+    # This function takes an integer n as input and returns a list. For every even number i up to n, it computes the factorial of i and appends it to the list. 
+    # For every odd number i, it calculates the sum of all numbers up to i and appends it to the list.
+    # param n: int, the number up to which factorials and sums are to be calculated and included in the list.
+    # return: list, a list of factorials of even numbers and sums of odd numbers up to n.
+
+    # Test cases:
+    # >>> f(5)
+    # [1, 2, 6, 24, 120] # 1 (sum of numbers up to 1), 2 (factorial of 2), 6 (sum of numbers up to 3), 24 (factorial of 4), 15 (sum of numbers up to 5)
+    # >>> f(3)
+    # [1, 2, 6] # 1 (sum of numbers up to 1), 2 (factorial of 2), 6 (sum of numbers up to 3)
+    # >>> f(0)
+    # [] # empty list as n is 0
+
+    ret = []
+    for i in range(1,n+1):
+        if i%2 == 0:
+            x = 1
+            for j in range(1,i+1): x *= j
+            ret += [x]
+        else:
+            x = 0
+            for j in range(1,i+1): x += j
+            ret += [x]
+    return ret

@@ -1,0 +1,1 @@
+# Shift the 'gdp' column values in the DataFrame up by one position by using the shift() function from pandas.

@@ -1,0 +1,118 @@
+ """
+This class, BitStatusUtil, provides utility methods for manipulating and checking bit statuses.
+"""
+
+import functools
+
+
+class BitStatusUtil:
+
+    @staticmethod
+    def add(states, stat):
+        """
+        Merge the given states with the given status by adding their binary representation.
+
+        Parameters:
+            states (int): A set of current states in binary form
+            stat (int): The new status in binary form to be added
+            
+        Returns:
+            int: The updated set of states
+
+        Test cases:
+            # Test case 1: Adding two non-overlapping states
+            assert BitStatusUtil.add(0b1010, 0b0111) == 0b1111
+            
+            # Test case 2: Adding overlapping states
+            assert BitStatusUtil.add(0b1010, 0b0101) == 0b1111
+            
+            # Test case 3: Check if states and stat are valid
+            assert BitStatusUtil.add(-1, 1) is None
+        """
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    def has(states, stat):
+        """
+        Check if the given states contain the given status.
+
+        Parameters:
+            states (int): A set of current states in binary form
+            stat (int): The status to check for presence in states
+
+        Returns:
+            bool: True if stat is set in states, False otherwise
+
+        Test cases:
+            # Test case 1: State does not have the status
+            assert BitStatusUtil.has(0b1010, 0b0111) == False
+            
+            # Test case 2: State has the status
+            assert BitStatusUtil.has(0b1010, 0b0101) == True
+            
+            # Test case 3: Check if states and stat are valid
+            assert BitStatusUtil.has(-1, 1) is False
+
+    @staticmethod
+    def remove(states, stat):
+        """
+        Remove the given status from the current set of states by inverting and ANDing the result with states.
+
+        Parameters:
+            states (int): A set of current states in binary form
+            stat (int): The status to be removed
+
+        Returns:
+            int: The updated set of states without the given status
+
+        Test cases:
+            # Test case 1: State does not have the status
+            assert BitStatusUtil.remove(0b1010, 0b0111) == 0b1010
+            
+            # Test case 2: State has the status
+            assert BitStatusUtil.remove(0b1010, 0b0101) == 0b1101
+            
+            # Test case 3: Check if states and stat are valid
+            assert BitStatusUtil.remove(-1, 1) is None
+        """
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    def check(args):
+        """
+        Utility method used to validate and check the passed arguments.
+
+        Parameters:
+            args (Any): One or more arguments for the bit status utility methods
+
+        Raises:
+            ValueError: If arguments contain invalid values
+
+        Test cases:
+            # Test case 1: Valid arguments
+            BitStatusUtil.check([10, 5])
+            
+            # Test case 2: Invalid arguments
+            with pytest.raises(ValueError):
+                BitStatusUtil.check([10, -5])
+            
+            # Test case 3: Empty arguments
+            with pytest.raises(TypeError):
+                BitStatusUtil.check([])
+        """
+        if len(args) < 2:
+            raise TypeError("check requires at least two arguments")
+        for arg in args:
+            if isinstance(arg, int):
+                if arg < 0:
+                    raise ValueError(f"{arg} must be greater than or equal to 0")
+                if arg % 2 != 0:
+                    raise ValueError(f"{arg} not even")
+            else:
+                raise TypeError("check only accepts integer arguments")
+
+BitStatusUtil.check = functools.wraps(BitStatusUtil.check)(BitStatusUtil.check)</s>

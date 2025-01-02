@@ -1,0 +1,19 @@
+def is_palindrome(string: str) -> bool:
+    # Check if a string is palindrome (reads the same forward and backward)
+    return string == string[::-1]
+
+
+def make_palindrome(string: str) -> str:
+    # Create a palindrome from a given string by adding characters to the end of it
+    >>> make_palindrome('abc') # returns 'abcba'
+    >>> make_palindrome('a') # returns 'a'
+    >>> make_palindrome('') # returns ''
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]

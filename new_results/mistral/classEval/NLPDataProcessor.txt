@@ -1,0 +1,93 @@
+ """
+This class is responsible for processing text data by removing stop words.
+"""
+
+import re
+
+class NLPDataProcessor:
+
+    def __init__(self):
+        """
+        Initialization method.
+        """
+        pass
+
+    def construct_stop_word_list(self):
+        """
+        Create a list of stop words for text processing.
+        
+        Returns:
+            list: List of stop words.
+        
+        Test cases:
+            # Test case 1: Minimal stop word list
+            assert self.construct_stop_word_list() == ['a', 'an', 'the']
+            
+            # Test case 2: Custom stop word list
+            custom_stop_words = ['is', 'are', 'in', 'on']
+            assert self.construct_stop_word_list() + custom_stop_words == ['a', 'an', 'the', 'is', 'are', 'in', 'on']
+        """
+        stop_word_list = ['a', 'an', 'the']
+        return stop_word_list
+
+    def remove_stop_words(self, string_list, stop_word_list):
+        """
+        Remove stop words from a list of strings.
+
+        Parameters:
+            string_list (list): List of strings to be processed
+            stop_word_list (list): List of stop words to be removed
+            
+        Returns:
+            list: List of strings with stop words removed
+        
+        Test cases:
+            # Test case 1: Removing stop words from a list of simple strings
+            strings = ['is this a test', 'test string', 'stop words']
+            expected_output = ['this', 'test', 'string']
+            assert self.remove_stop_words(strings, self.construct_stop_word_list()) == expected_output
+            
+            # Test case 2: Removing stop words with punctuation
+            strings = ['is this a test?', 'test . string', 'stop words.']
+            expected_output = ['this', 'test', 'string']
+            assert self.remove_stop_words(strings, self.construct_stop_word_list()) == expected_output
+            
+            # Test case 3: Removing stop words with uppercase letters
+            strings = ['IS THIS A TEST', 'Test STRING', 'Stop Words.']
+            expected_output = ['this', 'test', 'string']
+            assert self.remove_stop_words(strings, self.construct_stop_word_list()) == expected_output
+        """
+        answer = []
+        for string in string_list:
+            string_split = re.findall(r'\w+|\S', string)
+            for word in string_split:
+                if word in stop_word_list:
+                    string_split.remove(word)
+            answer.append(string_split)
+        return answer
+
+    def process(self, string_list):
+        """
+        Process a list of strings by constructing a stop word list and removing stop words.
+
+        Parameters:
+            string_list (list): List of strings to be processed
+            
+        Returns:
+            list: List of lists, where each inner list contains the words in a string with stop words removed
+        
+        Test cases:
+            # Test case 1: Processing a list of simple strings
+            strings = ['is this a test', 'test string', 'stop words']
+            expected_output = [['this', 'test'], ['test', 'string'], ['',]]
+            assert self.process(strings) == expected_output
+            
+            # Test case 2: Processing a list of strings with punctuation
+            strings = ['is this a test?', 'test . string', 'stop words.']
+            expected_output = [['this', 'test'], ['test', 'string'], ['',]]
+            assert self.process(strings) == expected_output
+            
+            # Test case 3: Processing a list of strings with uppercase letters
+            strings = ['IS THIS A TEST', 'Test STRING', 'Stop Words.']
+            expected_output = [['this', 'test'], ['test', 'string'], ['',]]
+            assert self.process(strings) == expected_output</s>

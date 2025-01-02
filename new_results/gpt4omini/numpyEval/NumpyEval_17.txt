@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.array([np.array([13.16]), np.array([1.58 , 1.2]), np.array([13.1]), np.array([1. , 2.6])], dtype=object)
+# Create a horizontal stack of arrays contained in a list of object arrays
+out = np.hstack(aa)
+```

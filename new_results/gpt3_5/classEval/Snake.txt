@@ -1,0 +1,152 @@
+"""
+This class represents a Snake game implementation in Python.
+
+The Snake class provides functionality to control the movement of a snake on a game screen, eat food, grow in length, and calculate the player's score.
+"""
+
+import random
+
+
+class Snake:
+    def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT, BLOCK_SIZE, food_position):
+        """
+        Initializes the Snake object with initial attributes.
+
+        Parameters:
+            SCREEN_WIDTH (int): Width of the game screen.
+            SCREEN_HEIGHT (int): Height of the game screen.
+            BLOCK_SIZE (int): Size of each block in the game grid.
+            food_position (tuple): Initial position of food on the game screen.
+        
+        Returns:
+            None
+        """
+
+        self.length = 1
+        self.SCREEN_WIDTH = SCREEN_WIDTH
+        self.SCREEN_HEIGHT = SCREEN_HEIGHT
+        self.BLOCK_SIZE = BLOCK_SIZE
+        self.positions = [((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))]
+        self.score = 0
+        self.food_position = food_position
+
+    def move(self, direction):
+        """
+        Moves the snake in the specified direction and updates its position.
+
+        Parameters:
+            direction (tuple): Tuple representing the direction of movement (x, y).
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Move down
+            assert positions[0] == ((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
+            move((0, 1))
+            assert positions[0] == ((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2) + BLOCK_SIZE)
+
+            # Test case 2: Move right
+            assert positions[0] == ((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
+            move((1, 0))
+            assert positions[0] == ((SCREEN_WIDTH / 2) + BLOCK_SIZE, (SCREEN_HEIGHT / 2))
+
+            # Test case 3: Eat food
+            move((1, 0))
+            assert positions[0] == ((SCREEN_WIDTH / 2) + BLOCK_SIZE + BLOCK_SIZE, (SCREEN_HEIGHT / 2))
+            assert length == 2
+        """
+
+        cur = self.positions[0]
+        x, y = direction
+
+        new = (
+            ((cur[0] + (x * self.BLOCK_SIZE)) % self.SCREEN_WIDTH),
+            (cur[1] + (y * self.BLOCK_SIZE)) % self.SCREEN_HEIGHT,
+        )
+
+        if new == self.food_position:
+            self.eat_food()
+
+        if len(self.positions) > 2 and new in self.positions[2:]:
+            self.reset()
+        else:
+            self.positions.insert(0, new)
+            if len(self.positions) > self.length:
+                self.positions.pop()
+
+    def random_food_position(self):
+        """
+        Generates a random position for food on the game screen.
+
+        Returns:
+            None
+        """
+
+        while self.food_position in self.positions:
+            self.food_position = (random.randint(0, self.SCREEN_WIDTH // self.BLOCK_SIZE - 1) * self.BLOCK_SIZE,
+                                  random.randint(0, self.SCREEN_HEIGHT // self.BLOCK_SIZE - 1) * self.BLOCK_SIZE)
+
+    def reset(self):
+        """
+        Resets the snake game to initial state.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Reset game
+            reset()
+            assert length == 1
+            assert positions == [((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))]
+            assert score == 0
+
+            # Test case 2: Reset with food
+            food_position = (50, 50)
+            reset()
+            assert food_position in positions
+            assert length == 1
+
+            # Test case 3: Reset after growth
+            length = 4
+            reset()
+            assert length == 1
+        """
+
+        self.length = 1
+        self.positions = [((self.SCREEN_WIDTH / 2), (self.SCREEN_HEIGHT / 2))]
+        self.score = 0
+        self.random_food_position()
+
+    def eat_food(self):
+        """
+        Handles the snake eating food by increasing length and updating score.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Eat food and grow
+            length = 3
+            score = 300
+            eat_food()
+            assert length == 4
+            assert score == 400
+
+            # Test case 2: Eat food at edge
+            length = 1
+            score = 0
+            eat_food()
+            assert length == 2
+            assert score == 100
+
+            # Test case 3: Eat food and randomize position
+            food_position = (50, 50)
+            eat_food()
+            assert food_position not in positions
+        """
+
+        self.length += 1
+        self.score += 100
+        self.random_food_position()
+```

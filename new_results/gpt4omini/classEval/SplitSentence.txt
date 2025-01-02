@@ -1,0 +1,96 @@
+```python
+"""
+This class provides methods for splitting sentences, counting words in a sentence, 
+and processing a text file to analyze sentence structures.
+"""
+
+import re
+
+class SplitSentence:
+
+    def split_sentences(self, sentences_string):
+        """
+        Splits a given string into separate sentences using regex.
+
+        Parameters:
+            sentences_string (str): A string containing multiple sentences to be split.
+
+        Returns:
+            list: A list of sentences extracted from the input string.
+
+        Test cases:
+            # Test case 1: Normal case with standard sentences
+            input = "This is the first sentence. This is the second sentence?"
+            expected_output = ["This is the first sentence.", "This is the second sentence?"]
+
+            # Test case 2: Sentences ending with different punctuation
+            input = "Hello! How are you? I'm fine."
+            expected_output = ["Hello!", "How are you?", "I'm fine."]
+
+            # Test case 3: Edge case with no sentence
+            input = ""
+            expected_output = [""]
+        """
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        """
+        Counts the number of words in a given sentence.
+
+        Parameters:
+            sentence (str): The sentence to count words from.
+
+        Returns:
+            int: The number of words in the sentence.
+
+        Test cases:
+            # Test case 1: Regular sentence
+            input = "This is a simple test."
+            expected_output = 5
+
+            # Test case 2: Sentence with punctuation
+            input = "Hello, world! How's it going?"
+            expected_output = 6
+
+            # Test case 3: Empty string
+            input = ""
+            expected_output = 0
+        """
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        """
+        Processes the given string, extracting sentences and finding 
+        the maximum word count among them.
+
+        Parameters:
+            sentences_string (str): A string containing multiple sentences to be processed.
+
+        Returns:
+            int: The maximum word count found among the sentences.
+
+        Test cases:
+            # Test case 1: Normal case with multiple sentences
+            input = "This is one sentence. This is another longer sentence."
+            expected_output = 7  # "another longer sentence" has 3 words
+
+            # Test case 2: Single long sentence
+            input = "Only one sentence here with quite a few words."
+            expected_output = 8
+
+            # Test case 3: Edge case with no sentences
+            input = ""
+            expected_output = 0
+        """
+        sentences = self.split_sentences(sentences_string)
+        max_count = 0
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        return max_count
+```

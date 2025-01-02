@@ -1,0 +1,39 @@
+import json
+
+class CookiesUtil:
+    # This class provides utility functions to manage cookies.
+    def __init__(self, cookies_file):
+        # Initialize the CookiesUtil class.
+        # :param cookies_file: str, the file path to store cookies
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, response):
+        # Get cookies from the response and save them.
+        # :param response: dict, the response containing cookies
+        self.cookies = response['cookies']
+        self._save_cookies()
+
+    def load_cookies(self):
+        # Load cookies from the cookies file.
+        # :return: dict, cookies data loaded from the file or an empty dict if file not found
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+
+    def _save_cookies(self):
+        # Save cookies to the cookies file.
+        # :return: bool, True if cookies saved successfully, False otherwise
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        # Set cookies in the request.
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])

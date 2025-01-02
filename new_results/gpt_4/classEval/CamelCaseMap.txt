@@ -1,0 +1,210 @@
+"""
+This class represents a dictionary that automatically converts keys to camelCase.
+"""
+
+class CamelCaseMap:
+    def __init__(self):
+        """
+        Initializes the CamelCaseMap dictionary.
+        """
+        self._data = {}
+
+    def __getitem__(self, key):
+        """
+        Gets a value from the dictionary based on the key.
+
+        Parameters:
+            key (str): The key to look up in the dictionary.
+
+        Returns:
+            value: The value corresponding to the given key in the dictionary.
+
+        Test cases:
+            # Test case 1: Normal usage
+            map = CamelCaseMap()
+            map['test_key'] = 'value'
+            assert map['test_key'] == 'value'
+
+            # Test case 2: Key does not exist
+            map = CamelCaseMap()
+            try:
+                map['nonexistent_key']
+            except KeyError:
+                print('KeyError raised as expected')
+
+            # Test case 3: Key is not a string
+            map = CamelCaseMap()
+            try:
+                map[123]
+            except TypeError:
+                print('TypeError raised as expected')
+        """
+        return self._data[self._convert_key(key)]
+
+    def __setitem__(self, key, value):
+        """
+        Sets a key-value pair in the dictionary.
+
+        Parameters:
+            key (str): The key to set.
+            value: The value to associate with the key.
+
+        Test cases:
+            # Test case 1: Normal usage
+            map = CamelCaseMap()
+            map['test_key'] = 'value'
+            assert map['test_key'] == 'value'
+
+            # Test case 2: Overwriting an existing key
+            map = CamelCaseMap()
+            map['test_key'] = 'value1'
+            map['test_key'] = 'value2'
+            assert map['test_key'] == 'value2'
+
+            # Test case 3: Key is not a string
+            map = CamelCaseMap()
+            try:
+                map[123] = 'value'
+            except TypeError:
+                print('TypeError raised as expected')
+        """
+        self._data[self._convert_key(key)] = value
+
+    def __delitem__(self, key):
+        """
+        Deletes a key-value pair from the dictionary based on the key.
+
+        Parameters:
+            key (str): The key to delete from the dictionary.
+
+        Test cases:
+            # Test case 1: Normal usage
+            map = CamelCaseMap()
+            map['test_key'] = 'value'
+            del map['test_key']
+            assert 'test_key' not in map
+
+            # Test case 2: Key does not exist
+            map = CamelCaseMap()
+            try:
+                del map['nonexistent_key']
+            except KeyError:
+                print('KeyError raised as expected')
+
+            # Test case 3: Key is not a string
+            map = CamelCaseMap()
+            try:
+                del map[123]
+            except TypeError:
+                print('TypeError raised as expected')
+        """
+        del self._data[self._convert_key(key)]
+
+    def __iter__(self):
+        """
+        Returns an iterator over the dictionary's keys.
+
+        Returns:
+            iterator: An iterator over the dictionary's keys.
+
+        Test cases:
+            # Test case 1: Iterating over an empty dictionary
+            map = CamelCaseMap()
+            for key in map:
+                print(key)  # Should not print anything
+
+            # Test case 2: Iterating over a non-empty dictionary
+            map = CamelCaseMap()
+            map['test_key'] = 'value'
+            for key in map:
+                print(key)  # Should print 'test_key'
+            
+            # Test case 3: Modifying the dictionary during iteration
+            map = CamelCaseMap()
+            map['test_key'] = 'value'
+            try:
+                for key in map:
+                    del map[key]
+            except RuntimeError:
+                print('RuntimeError raised as expected')
+        """
+        return iter(self._data)
+
+    def __len__(self):
+        """
+        Returns the number of items in the dictionary.
+
+        Returns:
+            int: The number of items in the dictionary.
+
+        Test cases:
+            # Test case 1: Empty dictionary
+            map = CamelCaseMap()
+            assert len(map) == 0
+
+            # Test case 2: Dictionary with one item
+            map = CamelCaseMap()
+            map['test_key'] = 'value'
+            assert len(map) == 1
+
+            # Test case 3: Dictionary with multiple items
+            map = CamelCaseMap()
+            map['test_key1'] = 'value1'
+            map['test_key2'] = 'value2'
+            assert len(map) == 2
+        """
+        return len(self._data)
+
+    def _convert_key(self, key):
+        """
+        Converts the key to camelCase.
+
+        Parameters:
+            key (str): The key to convert to camelCase.
+
+        Returns:
+            str: The key converted to camelCase.
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert _convert_key('test_key') == 'testKey'
+
+            # Test case 2: Key is already in camelCase
+            assert _convert_key('testKey') == 'testKey'
+
+            # Test case 3: Key is not a string
+            try:
+                _convert_key(123)
+            except TypeError:
+                print('TypeError raised as expected')
+        """
+        if isinstance(key, str):
+            return self._to_camel_case(key)
+        return key
+
+    @staticmethod
+    def _to_camel_case(key):
+        """
+        Converts the key to camelCase.
+
+        Parameters:
+            key (str): The key to convert to camelCase.
+
+        Returns:
+            str: The key converted to camelCase.
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert _to_camel_case('test_key') == 'testKey'
+
+            # Test case 2: Key is already in camelCase
+            assert _to_camel_case('testKey') == 'testKey'
+
+            # Test case 3: Key is not a string
+            try:
+                _to_camel_case(123)
+            except TypeError:
+                print('TypeError raised as expected')
+        """
+        parts = key.split('_')
+        return parts[0] + ''.join(part.title() for part in parts[1:])

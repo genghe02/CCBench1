@@ -1,0 +1,116 @@
+"""
+This class represents a Python implementation of a Blackjack game with methods for creating a deck of cards, calculating hand values, and determining the winner between the player and the dealer.
+"""
+
+import random
+
+class BlackjackGame:
+    def __init__(self):
+        """
+        Initializes a new Blackjack game with a shuffled deck of cards,
+        an empty player hand, and an empty dealer hand.
+        """
+        self.deck = self.create_deck()
+        self.player_hand = []
+        self.dealer_hand = []
+
+    def create_deck(self):
+        """
+        Create a new deck of cards by combining suits and ranks and shuffling them.
+
+        Returns:
+            list: Shuffled deck of cards represented as list of strings
+        
+        Test cases:
+            # Test case 1: Check deck creation
+            assert len(create_deck()) == 52
+
+            # Test case 2: Check card uniqueness
+            assert len(set(create_deck())) == 52
+
+            # Test case 3: Check card shuffling
+            assert create_deck() != create_deck()
+        """
+        deck = []
+        suits = ['S', 'C', 'D', 'H']
+        ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        for suit in suits:
+            for rank in ranks:
+                deck.append(rank + suit)
+        random.shuffle(deck)
+        return deck
+
+    def calculate_hand_value(self, hand):
+        """
+        Calculate the total value of a hand based on the card ranks.
+        
+        Parameters:
+            hand (list): List of cards represented as strings
+        
+        Returns:
+            int: Total value of the hand in Blackjack
+        
+        Test cases:
+            # Test case 1: Calculate hand value without Aces
+            assert calculate_hand_value(['10S', 'JH']) == 20
+
+            # Test case 2: Calculate hand value with Aces
+            assert calculate_hand_value(['AH', '2D', 'AC']) == 14
+
+            # Test case 3: Check hand value over 21 with Aces
+            assert calculate_hand_value(['10C', 'AD', '8H']) == 19
+        """
+        value = 0
+        num_aces = 0
+        for card in hand:
+            rank = card[:-1]
+            if rank.isdigit():
+                value += int(rank)
+            elif rank in ['J', 'Q', 'K']:
+                value += 10
+            elif rank == 'A':
+                value += 11
+                num_aces += 1
+        while value > 21 and num_aces > 0:
+            value -= 10
+            num_aces -= 1
+        return value
+
+    def check_winner(self, player_hand, dealer_hand):
+        """
+        Determine the winner of the game based on the hand values.
+        
+        Parameters:
+            player_hand (list): List of player's cards
+            dealer_hand (list): List of dealer's cards
+        
+        Returns:
+            str: Result of the game ('Player wins' or 'Dealer wins')
+
+        Test cases:
+            # Test case 1: Player and dealer both bust
+            assert check_winner(['10C', '9D', '3H'], ['10H', 'JD', '3S']) == 'Player wins'
+
+            # Test case 2: Player busts, dealer stays under 21
+            assert check_winner(['JC', 'QD'], ['10H', '2S', '9S']) == 'Dealer wins'
+
+            # Test case 3: Both under 21, dealer wins by value
+            assert check_winner(['5C', '3D'], ['2H', '9S', '7D']) == 'Dealer wins'
+        """
+        player_value = self.calculate_hand_value(player_hand)
+        dealer_value = self.calculate_hand_value(dealer_hand)
+        if player_value > 21 and dealer_value > 21:
+            if player_value <= dealer_value:
+                return 'Player wins'
+            else:
+                return 'Dealer wins'
+        elif player_value > 21:
+            return 'Dealer wins'
+        elif dealer_value > 21:
+            return 'Player wins'
+        else:
+            if player_value <= dealer_value:
+                return 'Dealer wins'
+            else:
+                return 'Player wins'
+"""

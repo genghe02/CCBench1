@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def counting_consecutive_positive_values(y):
+    # Count the number of consecutive positive values in a pandas Series by grouping based on changes in the values and using cumulative counting.
+    return y * (y.groupby((y != y.shift()).cumsum()).cumcount() + 1)
+```

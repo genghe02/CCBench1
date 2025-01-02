@@ -1,0 +1,4 @@
+ import numpy as np
+
+# Replace NaN values in the array with zeros
+arr[np.isnan(arr)] = 0</s>

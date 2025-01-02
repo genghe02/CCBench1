@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5])
+# Perform element-wise addition between expanded array a and scaled array b
+c = a[:, None] + b*2

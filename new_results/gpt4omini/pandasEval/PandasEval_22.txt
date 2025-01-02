@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+
+def normalize(df):
+    # Normalize each column except the last one using z-score
+    df.iloc[:,0:-1] = df.iloc[:,0:-1].apply(lambda x: (x-x.mean())/ x.std(), axis=0)
+    return df
+```

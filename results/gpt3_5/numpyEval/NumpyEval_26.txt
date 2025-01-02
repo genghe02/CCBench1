@@ -1,0 +1,4 @@
+# List of arrays.
+# Stack arrays in a sequence along the last dimension using numpy stack function.
+# The input arrays in the list L are of shape (5, 4, 2, 5, 1, 2).
+M = np.stack(L, axis=-1)

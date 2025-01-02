@@ -1,0 +1,23 @@
+def any_int(x, y, z):
+    # This function checks if any two of the three given parameters add up to the third one.
+    # All three parameters must be integers. If at least one of them is not an integer, the function will return False.
+
+    # Test cases:
+    # Test when x+y=z, should return True
+    # >>> any_int(1, 2, 3)
+    # Test when x+z=y, should return True
+    # >>> any_int(2, 3, 1)
+    # Test when y+z=x, should return True
+    # >>> any_int(3, 1, 2)
+    # Test when no two parameters add up to the third one, should return False
+    # >>> any_int(1, 2, 4)
+    # Test when at least one parameter is not an integer, should return False
+    # >>> any_int(1, '2', 3)
+    # >>> any_int('1', 2, 3)
+    # >>> any_int(1, 2, '3')
+    
+    if isinstance(x,int) and isinstance(y,int) and isinstance(z,int):
+        if (x+y==z) or (x+z==y) or (y+z==x):
+            return True
+        return False
+    return False

@@ -1,0 +1,14 @@
+```python
+def sorted_list_sum(lst):
+    # Sort the list and return elements with even lengths
+    >>> sorted_list_sum(["apple", "banana", "pear"]) # returns ['pear', 'banana']
+    >>> sorted_list_sum(["a", "ab", "abc", "abcd"]) # returns ['abcd']
+    >>> sorted_list_sum([]) # returns []
+    >>> sorted_list_sum(["hello", "world", "hi", "there"]) # returns ['there', 'hello', 'world']
+    lst.sort()
+    new_lst = []
+    for i in lst:
+        if len(i) % 2 == 0:
+            new_lst.append(i)
+    return sorted(new_lst, key=len)
+```

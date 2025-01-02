@@ -1,0 +1,16 @@
+```python
+from typing import List, Optional
+
+def longest(strings: List[str]) -> Optional[str]:
+    # Return the longest string from a list of strings. If the list is empty, return None.
+    >>> longest(["apple", "banana", "cherry"]) # returns "banana"
+    >>> longest(["a", "bb", "ccc"]) # returns "ccc"
+    >>> longest([]) # returns None
+    if not strings:
+        return None
+
+    maxlen = max(len(x) for x in strings)
+    for s in strings:
+        if len(s) == maxlen:
+            return s
+```

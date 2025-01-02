@@ -1,0 +1,250 @@
+```python
+"""
+This class represents a simple music player that manages a playlist, controls playback, and adjusts volume.
+"""
+
+class MusicPlayer:
+    def __init__(self):
+        """
+        Initializes the MusicPlayer with an empty playlist, no current song, and default volume set to 50.
+        """
+        self.playlist = []
+        self.current_song = None
+        self.volume = 50
+
+    def add_song(self, song):
+        """
+        Adds a song to the playlist.
+
+        Parameters:
+            song (str): The name of the song to be added to the playlist.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Add a single song
+            player = MusicPlayer()
+            player.add_song('Song1')
+            assert 'Song1' in player.playlist
+
+            # Test case 2: Add multiple songs
+            player.add_song('Song2')
+            player.add_song('Song3')
+            assert len(player.playlist) == 3
+
+            # Test case 3: Add an empty song name
+            player.add_song('')
+            assert '' in player.playlist
+        """
+        self.playlist.append(song)
+
+    def remove_song(self, song):
+        """
+        Removes a song from the playlist. If the song is currently playing, it stops the playback.
+
+        Parameters:
+            song (str): The name of the song to be removed from the playlist.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Remove an existing song
+            player = MusicPlayer()
+            player.add_song('Song1')
+            player.remove_song('Song1')
+            assert 'Song1' not in player.playlist
+
+            # Test case 2: Remove a song that is currently playing
+            player.add_song('Song2')
+            player.current_song = 'Song2'
+            player.remove_song('Song2')
+            assert player.current_song is None
+
+            # Test case 3: Remove a song that does not exist in the playlist
+            player.remove_song('Song3')
+            assert len(player.playlist) == 0
+        """
+        if song in self.playlist:
+            self.playlist.remove(song)
+            if self.current_song == song:
+                self.stop()
+
+    def play(self):
+        """
+        Starts playing the first song in the playlist if no song is currently playing.
+
+        Returns:
+            str: The name of the song that is now playing, or False if the playlist is empty.
+
+        Test cases:
+            # Test case 1: Play the first song in the playlist
+            player = MusicPlayer()
+            player.add_song('Song1')
+            assert player.play() == 'Song1'
+
+            # Test case 2: Play when no songs are in the playlist
+            player = MusicPlayer()
+            assert player.play() == False
+
+            # Test case 3: Play when a song is already playing
+            player.add_song('Song1')
+            player.current_song = 'Song1'
+            assert player.play() == 'Song1'
+        """
+        if self.playlist and self.current_song:
+            return self.playlist[0]
+        elif len(self.playlist): 
+            return False
+
+    def stop(self):
+        """
+        Stops the currently playing song.
+
+        Returns:
+            bool: True if a song was stopped, False if no song was playing.
+
+        Test cases:
+            # Test case 1: Stop a playing song
+            player = MusicPlayer()
+            player.current_song = 'Song1'
+            assert player.stop() == True
+
+            # Test case 2: Stop when no song is playing
+            player = MusicPlayer()
+            assert player.stop() == False
+
+            # Test case 3: Stop after removing the current song
+            player.add_song('Song1')
+            player.current_song = 'Song1'
+            player.remove_song('Song1')
+            assert player.stop() == False
+        """
+        if self.current_song:
+            self.current_song = None
+            return True
+        else:
+            return False
+
+    def switch_song(self):
+        """
+        Switches to the next song in the playlist.
+
+        Returns:
+            bool: True if the song was switched, False if there is no next song or no song is playing.
+
+        Test cases:
+            # Test case 1: Switch to the next song
+            player = MusicPlayer()
+            player.add_song('Song1')
+            player.add_song('Song2')
+            player.current_song = 'Song1'
+            assert player.switch_song() == True
+
+            # Test case 2: Switch when at the end of the playlist
+            player.current_song = 'Song2'
+            assert player.switch_song() == False
+
+            # Test case 3: Switch when no song is playing
+            player.current_song = None
+            assert player.switch_song() == False
+        """
+        if self.current_song:
+            current_index = self.playlist.index(self.current_song)
+            if current_index < len(self.playlist) - 1:
+                self.current_song = self.playlist[current_index + 1]
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def previous_song(self):
+        """
+        Switches to the previous song in the playlist.
+
+        Returns:
+            bool: True if the song was switched, False if there is no previous song or no song is playing.
+
+        Test cases:
+            # Test case 1: Switch to the previous song
+            player = MusicPlayer()
+            player.add_song('Song1')
+            player.add_song('Song2')
+            player.current_song = 'Song2'
+            assert player.previous_song() == True
+
+            # Test case 2: Switch when at the beginning of the playlist
+            player.current_song = 'Song1'
+            assert player.previous_song() == False
+
+            # Test case 3: Switch when no song is playing
+            player.current_song = None
+            assert player.previous_song() == False
+        """
+        if self.current_song:
+            current_index = self.playlist.index(self.current_song)
+            if current_index > 0:
+                self.current_song = self.playlist[current_index - 1]
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def set_volume(self, volume):
+        """
+        Sets the volume of the music player.
+
+        Parameters:
+            volume (int): The volume level to set, must be between 0 and 100.
+
+        Returns:
+            bool: True if the volume was set, False if the volume is out of range.
+
+        Test cases:
+            # Test case 1: Set a valid volume
+            player = MusicPlayer()
+            assert player.set_volume(75) == True
+
+            # Test case 2: Set volume to the minimum
+            assert player.set_volume(0) == True
+
+            # Test case 3: Set volume out of range
+            assert player.set_volume(150) == False
+        """
+        if 0 <= volume <= 100:
+            self.volume = volume
+        else:
+            return False
+
+    def shuffle(self):
+        """
+        Shuffles the playlist.
+
+        Returns:
+            bool: True if the playlist was shuffled, False if the playlist is empty.
+
+        Test cases:
+            # Test case 1: Shuffle a non-empty playlist
+            player = MusicPlayer()
+            player.add_song('Song1')
+            player.add_song('Song2')
+            assert player.shuffle() == True
+
+            # Test case 2: Shuffle an empty playlist
+            player = MusicPlayer()
+            assert player.shuffle() == False
+
+            # Test case 3: Shuffle a playlist with one song
+            player.add_song('Song1')
+            assert player.shuffle() == True
+        """
+        if self.playlist:
+            import random
+            random.shuffle(self.playlist)
+            return True
+        else:
+            return False
+```

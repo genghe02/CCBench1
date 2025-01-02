@@ -1,0 +1,1 @@
+import pandas as pd\nimport numpy as np\n\ndef replacing_blank_with_nan(df):\n    # Replace blank entries in dataframe with NaN values\n    return df.replace(r'^\\s*$', np.nan, regex=True)

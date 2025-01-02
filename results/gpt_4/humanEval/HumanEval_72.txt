@@ -1,0 +1,28 @@
+def will_it_fly(q,w):
+    # This function checks if a given arrangement will 'fly' or not based on a certain set of rules.
+    # The rules are: the total sum of the elements in the list 'q' should not exceed 'w', 
+    # and the elements at the same positions from the start and end of the list should be equal.
+    # 
+    # Test Cases:
+    # >>> will_it_fly([1, 2, 3, 2, 1], 10)
+    # True
+    # >>> will_it_fly([1, 2, 3, 2, 1], 5)
+    # False
+    # >>> will_it_fly([1, 2, 3, 4, 5], 20)
+    # False
+    # 
+    # Parameters:
+    # q: list, a list of integers representing the arrangement
+    # w: int, a total sum value that should not be exceeded
+
+    if sum(q) > w:
+        return False
+
+    i, j = 0, len(q)-1
+    while i<j:
+        if q[i] != q[j]:
+            return False
+        i+=1
+        j-=1
+    return True
+    # The function returns a boolean value; True if the given arrangement will 'fly', False otherwise.

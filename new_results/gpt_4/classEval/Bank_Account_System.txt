@@ -1,0 +1,140 @@
+"""
+This class represents a bank account with basic operations like deposit, withdraw, view balance and transfer.
+"""
+
+class BankAccount:
+
+    def __init__(self, balance=0):
+        """
+        Initialization method for BankAccount class.
+
+        Parameters:
+            balance (float, optional): Initial balance. Defaults to 0.
+        """
+        self.balance = balance
+
+    def deposit(self, amount):
+        """
+        Deposit a specified amount into the bank account.
+
+        Parameters:
+            amount (float): The amount to deposit
+
+        Returns:
+            float: The new balance after deposit
+
+        Test cases:
+            # Test case 1: Normal deposit
+            account = BankAccount(100)
+            assert account.deposit(50) == 150
+
+            # Test case 2: Deposit a negative amount
+            account = BankAccount(100)
+            try:
+                account.deposit(-50)
+            except ValueError:
+                print("Caught expected error")
+
+            # Test case 3: Deposit zero
+            account = BankAccount(100)
+            assert account.deposit(0) == 100
+        """
+        if amount < 0:
+            raise ValueError("Invalid amount")
+        self.balance += amount
+        return self.balance
+
+    def withdraw(self, amount):
+        """
+        Withdraw a specified amount from the bank account.
+
+        Parameters:
+            amount (float): The amount to withdraw
+
+        Returns:
+            float: The new balance after withdrawal
+
+        Test cases:
+            # Test case 1: Normal withdrawal
+            account = BankAccount(100)
+            assert account.withdraw(50) == 50
+
+            # Test case 2: Withdraw more than balance
+            account = BankAccount(100)
+            try:
+                account.withdraw(150)
+            except ValueError:
+                print("Caught expected error")
+
+            # Test case 3: Withdraw a negative amount
+            account = BankAccount(100)
+            try:
+                account.withdraw(-50)
+            except ValueError:
+                print("Caught expected error")
+        """
+        if amount < 0:
+            raise ValueError("Invalid amount")
+        if amount > self.balance:
+            raise ValueError("Insufficient balance.")
+        self.balance -= amount
+        return self.balance
+
+    def view_balance(self):
+        """
+        View the current balance of the bank account.
+
+        Returns:
+            float: The current balance
+
+        Test cases:
+            # Test case 1: Balance after deposit
+            account = BankAccount(100)
+            account.deposit(50)
+            assert account.view_balance() == 150
+
+            # Test case 2: Balance after withdrawal
+            account = BankAccount(100)
+            account.withdraw(50)
+            assert account.view_balance() == 50
+
+            # Test case 3: Initial balance
+            account = BankAccount(100)
+            assert account.view_balance() == 100
+        """
+        return self.balance
+
+    def transfer(self, other_account, amount):
+        """
+        Transfer a specified amount from this account to another account.
+
+        Parameters:
+            other_account (BankAccount): The account to transfer to
+            amount (float): The amount to transfer
+
+        Test cases:
+            # Test case 1: Normal transfer
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            account1.transfer(account2, 50)
+            assert account1.view_balance() == 50
+            assert account2.view_balance() == 100
+
+            # Test case 2: Transfer more than balance
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            try:
+                account1.transfer(account2, 150)
+            except ValueError:
+                print("Caught expected error")
+
+            # Test case 3: Transfer a negative amount
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            try:
+                account1.transfer(account2, -50)
+            except ValueError:
+                print("Caught expected error")
+        """
+        self.withdraw(amount)
+        other_account.deposit(amount)

@@ -1,0 +1,1 @@
+# Group the DataFrame by 'Group' column and calculate the differences between specific rows within each group for 'Value' and 'ID' columns. Return a DataFrame with the calculated differences and 'Group' column included.

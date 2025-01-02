@@ -1,0 +1,2 @@
+ # Create a NumPy record array from a transposed NumPy array
+newrecarray = np.core.records.fromarrays(myarray.T, names='col1, col2, col3')</s>

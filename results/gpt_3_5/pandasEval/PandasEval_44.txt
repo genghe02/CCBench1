@@ -1,0 +1,1 @@
+# Remove a specified column from a pandas DataFrame.

@@ -1,0 +1,8 @@
+ ✅ Correct Output:
+import pandas as pd
+
+def counting_consecutive_positive_values(y):
+ # Assign a new group based on changes in sign of y
+ grp = (y != y.shift()).cumsum()
+ # Count the number of consecutive positive values within each group
+ return y * (grp.diff() + 1)</s>

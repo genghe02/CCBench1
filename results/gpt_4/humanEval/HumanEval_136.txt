@@ -1,0 +1,15 @@
+def largest_smallest_integers(lst):
+    # This function takes a list of integers as an argument and returns a tuple. 
+    # The tuple contains the largest negative number and the smallest positive number in the list. 
+    # If there are no negative or positive numbers, it returns None for that value.
+
+    # Test cases: 
+    # Test case 1: largest_smallest_integers([-1, 0, 1]) should return (-1, 1)
+    # Test case 2: largest_smallest_integers([1, 2, 3]) should return (None, 1)
+    # Test case 3: largest_smallest_integers([-3, -2, -1]) should return (-1, None)
+    # Test case 4: largest_smallest_integers([0]) should return (None, None)
+    # Test case 5: largest_smallest_integers([]) should return (None, None)
+
+    smallest = list(filter(lambda x: x < 0, lst))  # Filter out the negative numbers in the list
+    largest = list(filter(lambda x: x > 0, lst))  # Filter out the positive numbers in the list
+    return (max(smallest) if smallest else None, min(largest) if largest else None) # Return the largest negative and smallest positive number, or None if they don't exist.

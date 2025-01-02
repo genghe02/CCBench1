@@ -1,0 +1,4 @@
+# Identify words in a sentence that are not divisible by any number other than 1 and themselves
+>>> words_in_sentence("The sky is blue") # returns "sky blue"
+>>> words_in_sentence("Python code") # returns "Python code"
+>>> words_in_sentence("Hello World!") # returns "Hello World!"

@@ -1,0 +1,18 @@
+# This function checks if any two integers sum up to the third integer
+>>> any_int(1, 2, 3) # returns True
+>>> any_int(-1, 0, -1) # returns True
+>>> any_int(5, 8, 2) # returns True
+>>> any_int(1, 2, 5) # returns False
+
+def any_int(x, y, z):
+    # This function checks if any two integers sum up to the third integer
+    >>> any_int(1, 2, 3) # returns True
+    >>> any_int(-1, 0, -1) # returns True
+    >>> any_int(5, 8, 2) # returns True
+    >>> any_int(1, 2, 5) # returns False
+    
+    if isinstance(x,int) and isinstance(y,int) and isinstance(z,int):
+        if (x+y==z) or (x+z==y) or (y+z==x):
+            return True
+        return False
+    return False

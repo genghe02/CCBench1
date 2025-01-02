@@ -1,0 +1,145 @@
+"""
+The class provides utility methods for handling paginated data.
+"""
+
+class PageUtil:
+    def __init__(self, data, page_size):
+        """
+        Initialization method for the PageUtil class.
+        
+        Parameters:
+            data (list): The list of data to be paginated.
+            page_size (int): The number of items per page.
+        """
+        self.data = data
+        self.page_size = page_size
+        self.total_items = len(data)
+        self.total_pages = (self.total_items + page_size - 1) // page_size
+
+    def get_page(self, page_number):
+        """
+        Returns a list of items on the specified page number.
+        
+        Parameters:
+            page_number (int): The page number to return items from.
+            
+        Returns:
+            list: A list of items on the specified page. If the page_number is out of range, returns an empty list.
+            
+        Test cases:
+            # Test case 1: Normal usage
+            data = [1, 2, 3, 4, 5, 6]
+            page_util = PageUtil(data, 2)
+            assert page_util.get_page(2) == [3, 4]
+
+            # Test case 2: Page number out of range
+            assert page_util.get_page(4) == []
+
+            # Test case 3: Page number less than 1
+            assert page_util.get_page(0) == []
+        """
+        if page_number < 1 or page_number > self.total_pages:
+            return []
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = start_index + self.page_size
+        return self.data[start_index:end_index]
+
+    def get_page_info(self, page_number):
+        """
+        Returns a dictionary containing information about the specified page.
+        
+        Parameters:
+            page_number (int): The page number to return information about.
+            
+        Returns:
+            dict: A dictionary with information about the page. If the page_number is out of range, returns an empty dictionary.
+            
+        Test cases:
+            # Test case 1: Normal usage
+            data = [1, 2, 3, 4, 5, 6]
+            page_util = PageUtil(data, 2)
+            expected_output = {
+                "current_page": 2,
+                "per_page": 2,
+                "total_pages": 3,
+                "total_items": 6,
+                "has_previous": True,
+                "has_next": True,
+                "data": [3, 4]
+            }
+            assert page_util.get_page_info(2) == expected_output
+
+            # Test case 2: Page number out of range
+            assert page_util.get_page_info(4) == {}
+
+            # Test case 3: Page number less than 1
+            assert page_util.get_page_info(0) == {}
+        """
+        if page_number < 1 or page_number > self.total_pages:
+            return {}
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = min(start_index + self.page_size, self.total_items)
+        page_data = self.data[start_index:end_index]
+
+        page_info = {
+            "current_page": page_number,
+            "per_page": self.page_size,
+            "total_pages": self.total_pages,
+            "total_items": self.total_items,
+            "has_previous": page_number > 1,
+            "has_next": page_number < self.total_pages,
+            "data": page_data
+        }
+        return page_info
+
+    def search(self, keyword):
+        """
+        Returns a dictionary containing search results and related information.
+        
+        Parameters:
+            keyword (str): The keyword to search for.
+            
+        Returns:
+            dict: A dictionary containing search results and related information.
+            
+        Test cases:
+            # Test case 1: Normal usage
+            data = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+            page_util = PageUtil(data, 2)
+            expected_output = {
+                "keyword": "a",
+                "total_results": 4,
+                "total_pages": 2,
+                "results": ['apple', 'banana', 'date', 'elderberry']
+            }
+            assert page_util.search('a') == expected_output
+
+            # Test case 2: Keyword not found in data
+            assert page_util.search('z') == {
+                "keyword": "z",
+                "total_results": 0,
+                "total_pages": 0,
+                "results": []
+            }
+
+            # Test case 3: Empty keyword
+            assert page_util.search('') == {
+                "keyword": "",
+                "total_results": 5,
+                "total_pages": 3,
+                "results": ['apple', 'banana', 'cherry', 'date', 'elderberry']
+            }
+        """
+        results = [item for item in self.data if keyword in str(item)]
+        num_results = len(results)
+        num_pages = (num_results + self.page_size - 1) // self.page_size
+
+        search_info = {
+            "keyword": keyword,
+            "total_results": num_results,
+            "total_pages": num_pages,
+            "results": results
+        }
+        return search_info

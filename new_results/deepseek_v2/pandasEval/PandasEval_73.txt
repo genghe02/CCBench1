@@ -1,0 +1,5 @@
+import pandas as pd
+
+def get_value_counts(df):
+    # Get value counts of dataframe and rename columns appropriately
+    return df.value_counts().rename_axis('unique_values').reset_index(name='counts')

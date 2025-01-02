@@ -1,0 +1,11 @@
+# The function returns the sum of elements that are odd and at even index positions in the list
+>>> solution([1, 2, 3, 4, 5, 6, 7]) # returns 8
+>>> solution([2, 4, 6, 8]) # returns 0
+>>> solution([1, 2, 1, 2, 1, 2]) # returns 3
+
+def solution(lst):
+    # The function returns the sum of elements that are odd and at even index positions in the list
+    >>> solution([1, 2, 3, 4, 5, 6, 7]) # returns 8
+    >>> solution([2, 4, 6, 8]) # returns 0
+    >>> solution([1, 2, 1, 2, 1, 2]) # returns 3
+    return sum([x for idx, x in enumerate(lst) if idx%2==0 and x%2==1])

@@ -1,0 +1,30 @@
+```python
+import pandas as pd
+
+# I want to create a dataframe with one of the column as a list or array.
+df = pd.DataFrame({'Name':['Juda','Pri']})
+emails = {'a@a.com','b@b.com'}
+df['Email'] = ''
+""" 
+This code initializes a pandas DataFrame with a ‘Name’ column and adds an ‘Email’ column. 
+The ‘Email’ column is initially filled with empty strings. 
+Later, we replace the first row of the 'Email' column with a set of emails. 
+This demonstrates how to insert a list or array-like structure into a single cell of a DataFrame.
+
+Test cases for checking the functionality could include:
+1. Ensure the 'Email' column can hold a set or a list:
+   >>> df.loc[0, 'Email'] = {'a@a.com', 'b@b.com'}
+   >>> df.iloc[0]['Email']
+   {'a@a.com', 'b@b.com'}
+
+2. Check the shape of the DataFrame after adding the Email column:
+   >>> df.shape
+   (2, 2)
+
+3. Confirm that other rows in the 'Email' column remain unchanged:
+   >>> df.iloc[1]['Email']
+   ''
+"""
+df.Email = df.Email.astype(object)
+df.loc[0].Email = emails
+```

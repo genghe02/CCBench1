@@ -1,0 +1,5 @@
+ import pandas as pd
+
+# Keep only the rows with unique values in the series, shifting by one position
+def drop_consecutive_duplicates(series):
+    return series.loc[series.shift(-1) != series]</s>

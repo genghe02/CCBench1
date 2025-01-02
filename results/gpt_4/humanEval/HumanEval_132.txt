@@ -1,0 +1,33 @@
+def is_nested(string):
+    # This function checks whether the given string has nested brackets. 
+    # It considers '[' as the opening bracket and any other character as the closing bracket.
+    opening_bracket_index = []
+    closing_bracket_index = []
+    for i in range(len(string)):
+        # Checks each character in the string and identifies the index of opening and closing brackets.
+        if string[i] == '[':
+            opening_bracket_index.append(i)
+        else:
+            closing_bracket_index.append(i)
+    # Reverses the list of closing bracket indices for the comparison logic below.
+    closing_bracket_index.reverse()
+    cnt = 0
+    i = 0
+    l = len(closing_bracket_index)
+    for idx in opening_bracket_index:
+        # Compares each opening bracket index with closing bracket index, 
+        # and if the closing bracket comes after the opening bracket, it is considered as a nested bracket.
+        if i < l and idx < closing_bracket_index[i]:
+            cnt += 1
+            i += 1
+    # Returns True if there are at least two nested brackets, else returns False.
+    return cnt >= 2
+    # Test cases:
+    # >>> is_nested("[[[]]]") -> True 
+    # >>> is_nested("[[") -> False 
+    # >>> is_nested("[[]") -> False 
+    # >>> is_nested("[]]") -> False 
+    # >>> is_nested("[[]]") -> True 
+    # >>> is_nested("[[][]]") -> False
+    # >>> is_nested("[[[]][]]") -> True
+    # >>> is_nested("[[[][[]]]]") -> True

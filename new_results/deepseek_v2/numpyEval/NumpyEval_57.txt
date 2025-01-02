@@ -1,0 +1,7 @@
+import numpy as np
+
+n = 2
+a = np.asarray([1,2,3,4,5])
+cond = (a % 2) == 0  #condition is True on even numbers
+# Repeat even numbers in array 'a' 'n' times
+m = np.repeat(a[cond], n)

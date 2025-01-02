@@ -1,0 +1,142 @@
+```python
+"""
+This class implements an Access Gateway Filter that handles request filtering, authentication, and logging. 
+It checks if a request should be allowed based on the URI path and user authentication level, and logs relevant information.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initializes the AccessGatewayFilter class.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Filters the incoming request based on the URI path and user authentication level.
+
+        Parameters:
+            request (dict): A dictionary containing the request details, including 'path' and 'method' keys.
+                           The 'path' key should contain the URI path, and the 'method' key should contain the HTTP method.
+
+        Returns:
+            bool: True if the request is allowed, False otherwise.
+
+        Test cases:
+            # Test case 1: Request with allowed URI path
+            input = {'path': '/api/users', 'method': 'GET'}
+            expected_output = True
+
+            # Test case 2: Request with disallowed URI path but valid user authentication
+            input = {'path': '/admin/users', 'method': 'GET', 'headers': {'Authorization': {'jwt': 'user1232023-10-01', 'user': {'name': 'user123', 'level': 3}}}}
+            expected_output = True
+
+            # Test case 3: Request with disallowed URI path and invalid user authentication
+            input = {'path': '/admin/users', 'method': 'GET', 'headers': {'Authorization': {'jwt': 'user1232023-09-01', 'user': {'name': 'user123', 'level': 1}}}}
+            expected_output = False
+        """
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Checks if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check.
+
+        Returns:
+            bool: True if the URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Extracts and validates the JWT token from the request headers.
+
+        Parameters:
+            request (dict): A dictionary containing the request details, including 'headers' key.
+                           The 'headers' key should contain the 'Authorization' key with the JWT token.
+
+        Returns:
+            dict: A dictionary containing the user information if the token is valid, None otherwise.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            input = {'headers': {'Authorization': {'jwt': 'user1232023-10-01', 'user': {'name': 'user123', 'level': 3}}}}
+            expected_output = {'jwt': 'user1232023-10-01', 'user': {'name': 'user123', 'level': 3}}
+
+            # Test case 2: Expired JWT token
+            input = {'headers': {'Authorization': {'jwt': 'user1232023-09-01', 'user': {'name': 'user123', 'level': 3}}}}
+            expected_output = None
+
+            # Test case 3: Invalid JWT token format
+            input = {'headers': {'Authorization': {'jwt': 'invalid', 'user': {'name': 'user123', 'level': 3}}}}
+            expected_output = None
+        """
+        token = request['headers']['Authorization']
+        user = token['user']
+        if token['jwt'].startswith(user['name']):
+            jwt_str_date = token['jwt'].split(user['name'])[1]
+            jwt_date = datetime.datetime.strptime(jwt_str_date, "%Y-%m-%d")
+            if datetime.datetime.today() - jwt_date >= datetime.timedelta(days=3):
+                return None
+        return token
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Logs the current user information including name, address, and timestamp.
+
+        Parameters:
+            user (dict): A dictionary containing the user details, including 'name' and 'address' keys.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Logging user information
+            input = {'name': 'user123', 'address': '192.168.1.1'}
+            expected_output = None  # Logs the user information
+
+            # Test case 2: Logging user information with missing address
+            input = {'name': 'user123', 'address': None}
+            expected_output = None  # Logs the user information with None address
+
+            # Test case 3: Logging user information with missing name
+            input = {'name': None, 'address': '192.168.1.1'}
+            expected_output = None  # Logs the user information with None name
+        """
+        host = user['address']
+        logging.log(msg=user['name'] + host + str(datetime.datetime.now()), level=1)
+```

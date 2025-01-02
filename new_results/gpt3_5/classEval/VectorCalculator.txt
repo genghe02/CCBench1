@@ -1,0 +1,140 @@
+"""
+The class provides utility functions for working with vectors, including computing similarity metrics and weights.
+
+VectorUtil:
+    This class contains static methods for various vector operations.
+
+Methods:
+    1. similarity(vector_1, vector_2)
+    2. cosine_similarities(vector_1, vectors_all)
+    3. n_similarity(vector_list_1, vector_list_2)
+    4. compute_idf_weight_dict(total_num, number_dict)
+"""
+
+import numpy as np
+from gensim import matutils
+from numpy import dot, array
+
+
+class VectorUtil:
+    @staticmethod
+    def similarity(vector_1, vector_2):
+        """
+        Compute the cosine similarity between two vectors.
+
+        Parameters:
+            vector_1 (numpy.ndarray): First vector
+            vector_2 (numpy.ndarray): Second vector
+
+        Returns:
+            float: Cosine similarity between the two input vectors
+
+        Test Cases:
+            # Test case 1: orthogonal vectors
+            assert similarity([1, 0], [0, 1]) == 0.0
+            
+            # Test case 2: identical vectors
+            assert similarity([1, 2, 3], [1, 2, 3]) == 1.0
+            
+            # Test case 3: opposite direction vectors
+            assert similarity([1, 0], [-1, 0]) == -1.0
+        """
+        return dot(matutils.unitvec(vector_1), matutils.unitvec(vector_2))
+
+    @staticmethod
+    def cosine_similarities(vector_1, vectors_all):
+        """
+        Compute cosine similarity between a vector and a list of vectors.
+
+        Parameters:
+            vector_1 (numpy.ndarray): Reference vector
+            vectors_all (numpy.ndarray): List of vectors to compare against
+
+        Returns:
+            numpy.ndarray: Array of cosine similarities between vector_1 and vectors_all
+
+        Test Cases:
+            # Test case 1: single vector similarity
+            assert all(cosine_similarities([1, 0], [[1, 0], [0, 1]]) == [1.0, 0.0])
+            
+            # Test case 2: vector not in the list
+            assert all(cosine_similarities([1, 1], [[0, 1], [2, 2]]) == [0.70710678, 0.92387953])
+            
+            # Test case 3: empty input list
+            assert cosine_similarities([0, 0], []) == []
+        """
+        norm = np.linalg.norm(vector_1)
+        all_norms = np.linalg.norm(vectors_all, axis=1)
+        dot_products = dot(vectors_all, vector_1)
+        similarities = dot_products / (norm * all_norms)
+        return similarities
+
+    @staticmethod
+    def n_similarity(vector_list_1, vector_list_2):
+        """
+        Calculate the average cosine similarity between two lists of vectors.
+
+        Parameters:
+            vector_list_1 (list): List of vectors
+            vector_list_2 (list): List of vectors to compare with
+
+        Returns:
+            float: Average cosine similarity between the two lists of vectors
+
+        Test Cases:
+            # Test case 1: identical vector lists
+            assert n_similarity([[1, 0], [0, 1]], [[1, 0], [0, 1]]) == 1.0
+            
+            # Test case 2: opposite direction vector lists
+            assert n_similarity([[1, 0], [-1, 0]], [[-1, 0], [1, 0]]) == -1.0
+            
+            # Test case 3: empty vector list
+            assert n_similarity([], []) == None
+        """
+        if not (len(vector_list_1) and len(vector_list_2)):
+            raise ZeroDivisionError('At least one of the passed lists is empty.')
+        
+        return dot(matutils.unitvec(array(vector_list_1).mean(axis=0)),
+                   matutils.unitvec(array(vector_list_2).mean(axis=0)))
+
+    @staticmethod
+    def compute_idf_weight_dict(total_num, number_dict):
+        """
+        Calculate inverse document frequency (IDF) weights.
+
+        Parameters:
+            total_num (int): Total number of documents
+            number_dict (dict): Dictionary mapping index/ID to term frequency
+
+        Returns:
+            dict: Dictionary containing IDF weights for each term
+
+        Test Cases:
+            # Test case 1: basic IDF calculation
+            assert compute_idf_weight_dict(100, {'term1': 10, 'term2': 5}) == {'term1': 2.30258509, 'term2': 3.912023005 }
+            
+            # Test case 2: zero frequency term
+            assert compute_idf_weight_dict(100, {'term1': 0, 'term2': 1}) == {'term1': 4.60517019, 'term2': 2.30258509}
+            
+            # Test case 3: empty input dictionary
+            assert compute_idf_weight_dict(100, {}) == {}
+        """
+        index_2_key_map = {}
+        index = 0
+
+        count_list = []
+        for key, count in number_dict.items():
+            index_2_key_map[index] = key
+            count_list.append(count)
+            index = index + 1
+
+        a = np.array(count_list)
+        # Smooth to avoid divide by zero error
+        a = np.log((total_num + 1) / (a + 1))
+        result = {}
+
+        for index, w in enumerate(a):
+            key = index_2_key_map[index]
+            result[key] = w
+
+        return result

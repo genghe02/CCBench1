@@ -1,0 +1,2 @@
+# Define the slice for the desired subset of the 3-dimensional array
+slc[axis] = slice(start, end)

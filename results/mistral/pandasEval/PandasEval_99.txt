@@ -1,0 +1,10 @@
+ # Find non-numeric rows in a given DataFrame 'df' using NumPy's np.isreal function and pandas DataFrame indexing.
+
+import pandas as pd
+import numpy as np
+
+def find_non_numeric_rows(df):
+    # Check if each element in DataFrame is real number using NumPy's np.isreal function
+    is_numeric = df.applymap(np.isreal)
+    # Select rows where any element is not a real number
+    return df[~is_numeric.all(1)]

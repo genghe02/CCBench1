@@ -1,0 +1,14 @@
+# This function counts the occurrences of digit 7 in a string created by joining numbers that are either divisible by 11 or 13
+>>> fizz_buzz(20) # returns 1
+>>> fizz_buzz(100) # returns 4
+>>> fizz_buzz(50) # returns 2
+def fizz_buzz(n: int):
+    ns = []
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            ns.append(i)
+    s = ''.join(list(map(str, ns)))
+    ans = 0
+    for c in s:
+        ans += (c == '7')
+    return ans

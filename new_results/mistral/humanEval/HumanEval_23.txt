@@ -1,0 +1,6 @@
+ # Function returns the length of a given string
+ # Use Len() function to get the length of a string
+ >>> strlen("Hello, World!") # returns 13
+ >>> strlen("") # returns 0
+ >>> strlen("abcd1234") # returns 7
+ return len(string)</s>

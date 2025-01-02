@@ -1,0 +1,137 @@
+"""
+This class represents a server that sends and receives messages. It maintains a whitelist of addresses and handles message communication with these addresses.
+"""
+
+class Server:
+
+    def __init__(self):
+        """
+        Initializes a new server object. Sets up the whitelist and the send and receive structures.
+        """
+        self.white_list = []
+        self.send_struct = {}
+        self.receive_struct = {}
+
+    def add_white_list(self, addr):
+        """
+        Adds an address to the whitelist.
+        
+        Parameters:
+            addr (str): The address to add to the whitelist.
+        
+        Returns:
+            list: The updated whitelist, or False if the address was already in the whitelist.
+        
+        Test cases:
+            # Test case 1: Adding an address that is not in the whitelist
+            assert add_white_list('192.168.1.1') == ['192.168.1.1']
+            
+            # Test case 2: Adding an address that is already in the whitelist
+            assert add_white_list('192.168.1.1') == False
+        """
+        if addr in self.white_list:
+            return False
+        else:
+            self.white_list.append(addr)
+            return self.white_list
+
+    def del_white_list(self, addr):
+        """
+        Deletes an address from the whitelist.
+        
+        Parameters:
+            addr (str): The address to remove from the whitelist.
+        
+        Returns:
+            list: The updated whitelist, or False if the address was not in the whitelist.
+        
+        Test cases:
+            # Test case 1: Deleting an address that is in the whitelist
+            assert del_white_list('192.168.1.1') == []
+            
+            # Test case 2: Deleting an address that is not in the whitelist
+            assert del_white_list('192.168.1.2') == False
+        """
+        if addr not in self.white_list:
+            return False
+        else:
+            self.white_list.remove(addr)
+            return self.white_list
+
+    def recv(self, info):
+        """
+        Receives a message from a whitelisted address.
+        
+        Parameters:
+            info (dict): Information about the message, including the sender's address and the content of the message.
+        
+        Returns:
+            str: The content of the received message, or -1 if the message structure is incorrect, or False if the address is not in the whitelist.
+        
+        Test cases:
+            # Test case 1: Receiving a message from a whitelisted address
+            assert recv({'addr': '192.168.1.1', 'content': 'Hello'}) == 'Hello'
+            
+            # Test case 2: Receiving a message with incorrect structure
+            assert recv({'addr': '192.168.1.1'}) == -1
+            
+            # Test case 3: Receiving a message from a non-whitelisted address
+            assert recv({'addr': '192.168.1.2', 'content': 'Hello'}) == False
+        """
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return -1
+        addr = info["addr"]
+        content = info["content"]
+        if addr not in self.white_list:
+            return False
+        else:
+            self.receive_struct = {"addr": addr, "content": content}
+            return self.receive_struct["content"]
+
+    def send(self, info):
+        """
+        Sends a message to an address.
+        
+        Parameters:
+            info (dict): Information about the message, including the recipient's address and the content of the message.
+        
+        Returns:
+            str: A string indicating an error if the message structure is incorrect, or None if the message is sent successfully.
+        
+        Test cases:
+            # Test case 1: Sending a message with correct structure
+            assert send({'addr': '192.168.1.1', 'content': 'Hello'}) == None
+            
+            # Test case 2: Sending a message with incorrect structure
+            assert send({'addr': '192.168.1.1'}) == 'info structure is not correct'
+        """
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return "info structure is not correct"
+        self.send_struct = {"addr": info["addr"], "content": info["content"]}
+
+    def show(self, type):
+        """
+        Shows the last sent or received message.
+        
+        Parameters:
+            type (str): The type of message to show. Can be "send" or "receive".
+        
+        Returns:
+            dict: The last sent or received message, or False if the type is not valid.
+        
+        Test cases:
+            # Test case 1: Showing the last sent message
+            assert show('send') == {'addr': '192.168.1.1', 'content': 'Hello'}
+            
+            # Test case 2: Showing the last received message
+            assert show('receive') == {'addr': '192.168.1.1', 'content': 'Hello'}
+            
+            # Test case 3: Showing an invalid type
+            assert show('invalid') == False
+        """
+        if type == "send":
+            return self.send_struct
+        elif type == "receive":
+            return self.receive_struct
+        else:
+            return False

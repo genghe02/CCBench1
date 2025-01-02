@@ -1,0 +1,22 @@
+```python
+FIX = """
+Add more test cases.
+"""
+
+def vowels_count(s):
+    # Count the number of vowels in a given string, considering 'y' as a vowel if it is the last character.
+    
+    # Test cases for the function:
+    # >>> print(vowels_count("hello"))  # 2 (e, o)
+    # >>> print(vowels_count("sky"))    # 0 (y is not counted as a vowel)
+    # >>> print(vowels_count("Yummy"))   # 2 (u, y)
+    # >>> print(vowels_count("abcdefg")) # 3 (a, e)
+    # >>> print(vowels_count(""))        # 0 (empty string)
+    # >>> print(vowels_count("rhythm"))  # 0 (y is not counted)
+    
+    vowels = "aeiouAEIOU"
+    n_vowels = sum(c in vowels for c in s)
+    if s[-1] == 'y' or s[-1] == 'Y':
+        n_vowels += 1
+    return n_vowels
+```

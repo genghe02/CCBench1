@@ -1,0 +1,2 @@
+ # Convert 'date' column to datetime format with coerced errors
+df['date'] = pd.to_datetime(df['date'], errors='coerce')</s>

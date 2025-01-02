@@ -1,0 +1,2 @@
+ # Extract unique sub-arrays along axis=0 from the given numpy array
+out = np.unique(a, axis=0)</s>

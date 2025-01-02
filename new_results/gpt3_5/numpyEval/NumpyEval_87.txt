@@ -1,0 +1,4 @@
+import numpy as np
+a = np.array([[1,1,0],[1,0,0],[1,0,0],[1,1,0]])
+# Check if all elements in 'a' are equal to the first row of 'a' along axis 0
+result = np.all(a == a[0,:], axis = 0)

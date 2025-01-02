@@ -1,0 +1,6 @@
+def filter_integers(values: List[Any]) -> List[int]:
+    # This function filters out non-integer values from a list
+    >>> filter_integers([1, "2", 3.0, 4, "five"]) # returns [1, 4]
+    >>> filter_integers([True, False, "True", "False"]) # returns []
+    >>> filter_integers([1, 2, 3, 4, 5]) # returns [1, 2, 3, 4, 5]
+    return [x for x in values if isinstance(x, int)]

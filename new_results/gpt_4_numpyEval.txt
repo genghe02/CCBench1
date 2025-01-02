@@ -1,0 +1,51 @@
+["# Find the indices where the value changes in the array"][Block][
+    "# Add a new axis to the array to convert it into a 3D array"
+][Block][
+    "# Count the number of elements in a 3D array that are between 2 and 8"
+][Block]["# Insert the specified element at the beginning of the array"][Block]["# Concatenate a list of numpy arrays into a single 1D array"][Block]["# Get the shape of the array and assign it to a_shape"][Block]["# Return the inverse of the provided matrix using numpy's linalg.inv function"][Block]["# Check if the numpy array is empty"][Block]["# Replace the second column of array 'a' with the array 'x'"][Block]["# Find indices where elements should be inserted to maintain order"][Block]["# Stacking the arrays in sequence horizontally (column wise)"][Block][
+    "# Compute and return the minimum value in the array"
+][Block]["# Create a 5x5 matrix filled with -1"][Block]["# Compute the histogram of array elements and apply cumulative sum on the histogram"][Block]["# Convert array to string and then convert it back to an array"][Block]["# Convert the numpy array to a string with space separated values"][Block]["# Reshape the input array into multiple rows of 3 elements each, then compute the average of each row"][Block]["# Perform XOR operation on three inputs and return the result"][Block]["# Add each element of array 'a' with twice of each element of array 'b' and store it in 'c'"][Block]["# Calculate the ratio of each pair of successive elements in the input array"][Block][
+    "# List of arrays.",
+    "# Stack arrays in sequence depth wise (along third axis)"
+][Block]["# Calculate the standard deviation of each column in the array"][Block][
+    "# Convert the given matrix M to an array and return the array"
+][Block][
+    "# Return the index of the maximum element along the specified axis in the given array"
+][Block]["# Convert all string elements in a numpy array to float type"][Block]["# Convert dtype of array from float64 to float32"][Block]["# Get element from the array 'a' using indices from 'b'"][Block][
+    "# Window len = L, Stride len/stepsize = S",
+    "# Calculate the number of rows in the output array based on the window length and stride length"
+][Block]["# Reshape 3D array to 2D array with the same number of columns"][Block][
+    "# y axis",
+    "# filter out values larger than 2",
+    "# Compress the masked array and return the data as an ndarray"
+][Block]["# Creating a 2D numpy array with specific elements"][Block][
+    "# I have a NumPy array that looks like this:",
+    "# Get elements at index 1 and 4 from the array"
+][Block][
+    "# Count the frequency of each number in the array and return the most frequent one"
+][Block]["# Create three arrays, and concatenate them vertically into one array"][Block][
+    "# Extract rows from array 'a' where first element is 0 and second element is 1"
+][Block]["# Convert the list of lists into a 2D numpy array, filling missing values with zero"][Block]["# Create an empty array of size equal to the sum of sizes of a and b, then fill it alternately with elements from a and b"][Block]["# Replace the center part of matrix 'b' with matrix 'a'"][Block]["# Find the unique rows in the 2D numpy array 'a' and store them in 'out'"][Block]["# Concatenate arrays a and b into a new array c"][Block]["# Multiply each row in 'a' with corresponding element in 'b'"][Block]["# Stack 1-D array 'b' as columns into 2-D array 'a' and assign it to 'c'"][Block]["# Stack arrays in sequence vertically (row wise)"][Block]["# Find the elements that are only in one, not both, of the input arrays and return them in a sorted array"][Block][
+    "# Calculate and return the sum of all elements in the array"
+][Block]["# Stack arr1 horizontally to new_arr and then stack arr2 vertically to the result"][Block]["# Convert the input matrix into a 1-D array"][Block]["# Calculate the mean of three arrays, 'a', 'b', and 'c', along the 0th axis"][Block]["# Find the indices of the k smallest elements in array A"][Block]["# Sorting the 2D numpy array based on the second column and then the first column"][Block]["# Subtract the minimum value of each column in the array from all elements of that respective column"][Block]["# Select the elements from the 5th position onwards in the reshaped array 'a' and assign them to 'b'"][Block]["# Replace all negative values in the array with 0"][Block]["# Filter the 'dists' array to include only elements that fall within the range [r, r+dr]"][Block]["#condition is True on even numbers", "# Repeat each element of the array 'a' that satisfies the condition 'cond' for 'n' times"][Block]["# Check if the array is sorted in ascending order"][Block]["# Reshape 'a' into a 4-dimensional array and then reorder its dimensions using the transpose function"][Block]["# Convert a numpy array into a tuple of tuples"][Block]["# Find the indices of the minimum values along an axis in a Numpy array"][Block]["# Define the slice for the desired subset of the 3-dimensional array"][Block][
+    "# Convert the 2D array to a record array with named fields"
+][Block][
+    "# Remove indices in A that match elements in B and store the result in D"
+][Block]["# Convert each element of the array to string"][Block]["# Add a new row to the bottom of the existing array and return the new array"][Block]["# Transpose and flatten a nested numpy array"][Block]["# Return the indices of zero elements in the numpy array"][Block][
+    "# Array `data` defines the columns of the nonzero elements in the output array.",
+    "# We need to also define the rows and then use fancy indexing in the following way:",
+    "# Set the element at each row `i` and column `data[i]` to be 1"
+][Block][
+    "# Find the index of the smallest value in the array A"
+][Block]["# Reverse the order of elements in each dimension of the array a"][Block]["# Calculate the mean of each row, ignoring NaN values, and fill missing values with NaN again"][Block]["# Replace elements in array that are greater than a certain value with a new value"][Block]["# Return the i-th index of the last dimension of the array"][Block][
+    "# Finding the index of the element in the array closest to the given value"
+][Block][
+    "# Return the indices of array elements that are within the specified range (low, high)"
+][Block]["# Identify indexes where elements of the array are even"][Block]["# Convert dictionary into a structured numpy array with specified data types"][Block]["# Shift elements in the array one position to the right"][Block]["# Replace elements in the numpy array using a dictionary mapping"][Block]["# Concatenate corresponding elements of a1 and a2"][Block]["# Remove any rows in the array that contain non-numeric values"][Block]["# Split an array into multiple sub-arrays of equal or near-equal size"][Block]["# Crop the array from top to bottom and left to right and return the cropped array"][Block]["# Append the first element of the array to its end"][Block][
+    "# Convert dictionary keys to numpy array",
+    "# Convert dictionary values to numpy array"
+][Block]["# Set the real and imaginary parts of elements in array 'a' to 0 if they are less than the tolerance level"][Block]["# Check if all elements in the array are zeros"][Block]["# Reshape the 2D array to a 1D array"][Block]["# Check if all rows in array 'a' are equal to the first row"][Block]["# Replace all NaN values in the array with zero"][Block][
+    "# Split the data where the difference between consecutive elements is not equal to the stepsize and return the number of such splits"
+][Block]["# Fill the diagonal of a Dataframe with zeros"][Block]["# Concatenate two given numpy arrays along the same axis"][Block]["# Delete second and fourth columns from the 2D numpy array"][Block]["# Convert the matrix to a list"][Block]["# Delete the elements at the indices 2, 3 and 6 from the data array"][Block]["# Remove all-zero rows from the array"][Block]["# Find the common elements between arrays 'a' and 'b'"][Block]["# Create a 3x4 matrix filled with boolean True"][Block][
+    "# Multiply each row of matrix 'a' by corresponding element in vector 'b'"
+][Block]["# Calculate Euclidean distance between two numpy arrays"][Block]["# Calculate the sum of all elements in the dataframe"][Block]

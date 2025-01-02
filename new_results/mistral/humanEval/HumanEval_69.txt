@@ -1,0 +1,15 @@
+ def search(lst):
+    # Check if input is a list and its elements are integers
+    >>> search([1, 2, 3, 4, 5]) # returns 5
+    # Return the last number that appears more than itself in the list
+    >>> search([1, 1, 2, 2, 3, 3, 4, 4, 5]) # returns 4
+    frq = [0] * (max(lst) + 1)
+    for i in lst:
+        frq[i] += 1;
+
+    ans = -1
+    for i in range(1, len(frq)):
+        if frq[i] >= i:
+            ans = i
+    
+    return ans</s>

@@ -1,0 +1,153 @@
+"""
+This class is used to parse command-line arguments and options.
+"""
+
+class ArgumentParser:
+    def __init__(self):
+        """
+        Initializes an instance of ArgumentParser.
+
+        Test cases:
+            # Test case 1: Initializing a new instance
+            parser = ArgumentParser()
+            assert isinstance(parser, ArgumentParser)
+        """
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    def parse_arguments(self, command_string):
+        """
+        Parses the given command string into arguments and options.
+
+        Parameters:
+            command_string (str): The command string to parse.
+
+        Returns:
+            tuple: A tuple where the first element is a boolean indicating if parsing was successful and
+            the second element is None if successful or a set of missing arguments if unsuccessful.
+
+        Test cases:
+            # Test case 1: Parsing a command string with arguments
+            parser = ArgumentParser()
+            parser.add_argument('--name', required=True)
+            success, missing = parser.parse_arguments('program --name=John')
+            assert success == True
+            assert missing == None
+
+            # Test case 2: Parsing a command string without required arguments
+            parser = ArgumentParser()
+            parser.add_argument('--name', required=True)
+            success, missing = parser.parse_arguments('program')
+            assert success == False
+            assert missing == {'--name'}
+
+            # Test case 3: Parsing a command string with options
+            parser = ArgumentParser()
+            parser.add_argument('-v', required=False)
+            success, missing = parser.parse_arguments('program -v')
+            assert success == True
+            assert missing == None
+        """
+        args = command_string.split()[1:]
+        for i in range(len(args)):
+            arg = args[i]
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    self.arguments[key_value[0]] = self._convert_type(key_value[0], key_value[1])
+                else:
+                    self.arguments[key_value[0]] = True
+            elif arg.startswith('-'):
+                key = arg[1:]
+                if i + 1 < len(args) and not args[i + 1].startswith('-'):
+                    self.arguments[key] = self._convert_type(key, args[i + 1])
+                else:
+                    self.arguments[key] = True
+        missing_args = self.required - set(self.arguments.keys())
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    def get_argument(self, key):
+        """
+        Retrieves the value of an argument.
+
+        Parameters:
+            key (str): The key of the argument.
+
+        Returns:
+            any: The value of the argument.
+
+        Test cases:
+            # Test case 1: Retrieving an existing argument
+            parser = ArgumentParser()
+            parser.parse_arguments('program --name=John')
+            assert parser.get_argument('--name') == 'John'
+
+            # Test case 2: Retrieving a non-existing argument
+            parser = ArgumentParser()
+            parser.parse_arguments('program')
+            assert parser.get_argument('--name') == None
+        """
+        return self.arguments.get(key)
+
+    def add_argument(self, arg, required=False, arg_type=str):
+        """
+        Adds an argument to the parser.
+
+        Parameters:
+            arg (str): The key of the argument.
+            required (bool, optional): Whether the argument is required. Defaults to False.
+            arg_type (type, optional): The type of the argument. Defaults to str.
+
+        Test cases:
+            # Test case 1: Adding a required argument
+            parser = ArgumentParser()
+            parser.add_argument('--name', required=True)
+            assert '--name' in parser.required
+
+            # Test case 2: Adding an optional argument
+            parser = ArgumentParser()
+            parser.add_argument('-v')
+            assert '-v' not in parser.required
+
+            # Test case 3: Adding an argument with a specific type
+            parser = ArgumentParser()
+            parser.add_argument('--count', arg_type=int)
+            assert parser.types['--count'] == int
+        """
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    def _convert_type(self, arg, value):
+        """
+        Converts the value of an argument to its specified type.
+
+        Parameters:
+            arg (str): The key of the argument.
+            value (str): The value of the argument.
+
+        Returns:
+            any: The converted value of the argument.
+
+        Test cases:
+            # Test case 1: Converting an integer argument
+            parser = ArgumentParser()
+            parser.add_argument('--count', arg_type=int)
+            assert parser._convert_type('--count', '10') == 10
+
+            # Test case 2: Converting a string argument
+            parser = ArgumentParser()
+            assert parser._convert_type('--name', 'John') == 'John'
+
+            # Test case 3: Converting an argument without a specified type
+            parser = ArgumentParser()
+            assert parser._convert_type('--unknown', 'value') == 'value'
+        """
+        try:
+            return self.types[arg](value)
+        except (ValueError, KeyError):
+            return value

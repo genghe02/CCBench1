@@ -1,0 +1,11 @@
+```python
+from typing import List
+
+def parse_music(music_string: str) -> List[int]:
+    # Convert a string of music notes into a list of integers representing their values
+    >>> parse_music("o o| .|") # returns [4, 2, 1]
+    >>> parse_music("o| o o") # returns [2, 4, 4]
+    >>> parse_music("") # returns []
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    return [note_map[x] for x in music_string.split(' ') if x]
+```

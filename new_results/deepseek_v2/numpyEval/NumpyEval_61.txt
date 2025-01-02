@@ -1,0 +1,8 @@
+import numpy as np
+
+m = np.arange(2*3*5).reshape((2,3,5))
+axis, start, end = 2, 1, 3
+target = m[:, :, 1:3]
+slc = [slice(None)] * len(m.shape)
+# Create a slice object for the specified axis with given start and end indices
+slc[axis] = slice(start, end)

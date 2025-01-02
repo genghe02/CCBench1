@@ -1,0 +1,131 @@
+"""
+This class represents a shopping cart with methods to add, remove items and calculate the total price.
+"""
+
+class ShoppingCart:
+    def __init__(self):
+        """
+        Initialization method for ShoppingCart class, initializes an empty dictionary to hold items.
+        """
+        self.items = {}
+
+    def add_item(self, item, price, quantity=1):
+        """
+        Method to add an item to shopping cart. If the item already exists, updates the price and quantity.
+
+        Parameters:
+            item (str): The name of the item.
+            price (float): The price of the item.
+            quantity (int, optional): The quantity of the item. Default is 1.
+        
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Adding a new item
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            assert cart.view_items() == {'apple': {'price': 1.0, 'quantity': 3}}
+
+            # Test case 2: Adding an existing item
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            cart.add_item('apple', 1.5, 2)
+            assert cart.view_items() == {'apple': {'price': 1.5, 'quantity': 2}}
+
+            # Test case 3: Adding item with no quantity specified
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0)
+            assert cart.view_items() == {'apple': {'price': 1.0, 'quantity': 1}}
+        """
+        if item in self.items:
+            self.items[item] = {'price': price, 'quantity': quantity}
+        else:
+            self.items[item] = {'price': price, 'quantity': quantity}
+
+    def remove_item(self, item, quantity=1):
+        """
+        Method to remove a specified quantity of an item from shopping cart. If the item doesn't exist, does nothing.
+
+        Parameters:
+            item (str): The name of the item.
+            quantity (int, optional): The quantity of the item to be removed. Default is 1.
+        
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Removing item that exists
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            cart.remove_item('apple', 1)
+            assert cart.view_items() == {'apple': {'price': 1.0, 'quantity': 2}}
+
+            # Test case 2: Removing item that doesn't exist
+            cart = ShoppingCart()
+            cart.remove_item('apple', 1)
+            assert cart.view_items() == {}
+
+            # Test case 3: Removing more quantity than exists
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            cart.remove_item('apple', 5)
+            assert cart.view_items() == {'apple': {'price': 1.0, 'quantity': -2}}
+        """
+
+        if item in self.items:
+            self.items[item]['quantity'] -= quantity
+        else:
+            pass
+
+    def view_items(self) -> dict:
+        """
+        Method to view all items in the shopping cart.
+
+        Returns:
+            dict: A dictionary with all items in the shopping cart, each represented as a sub-dictionary with price and quantity.
+
+        Test cases:
+            # Test case 1: Viewing items in a non-empty cart
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            assert cart.view_items() == {'apple': {'price': 1.0, 'quantity': 3}}
+
+            # Test case 2: Viewing items in an empty cart
+            cart = ShoppingCart()
+            assert cart.view_items() == {}
+
+            # Test case 3: Viewing items after removing some
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            cart.remove_item('apple', 1)
+            assert cart.view_items() == {'apple': {'price': 1.0, 'quantity': 2}}
+        """
+        return self.items
+
+    def total_price(self) -> float:
+        """
+        Method to calculate the total price of all items in the shopping cart.
+
+        Returns:
+            float: The total price of all items in the shopping cart.
+
+        Test cases:
+            # Test case 1: Total price for non-empty cart
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            cart.add_item('orange', 0.5, 5)
+            assert cart.total_price() == 5.5
+
+            # Test case 2: Total price for empty cart
+            cart = ShoppingCart()
+            assert cart.total_price() == 0.0
+
+            # Test case 3: Total price after removing items
+            cart = ShoppingCart()
+            cart.add_item('apple', 1.0, 3)
+            cart.add_item('orange', 0.5, 5)
+            cart.remove_item('apple', 1)
+            assert cart.total_price() == 4.5
+        """
+        return sum([item['quantity'] * item['price'] for item in self.items.values()])

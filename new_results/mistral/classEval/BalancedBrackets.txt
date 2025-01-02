@@ -1,0 +1,77 @@
+ """
+This class, named BalancedBrackets, is designed to check the balance and correctness of brackets in a given expression.
+"""
+
+class BalancedBrackets:
+    def __init__(self, expr):
+        """
+        Initialize the BalancedBrackets class with the input expression.
+
+        Parameters:
+            expr (str): The input expression string
+        """
+        self.stack = []
+        self.left_brackets = ["(", "{", "["]
+        self.right_brackets = [")", "}", "]"]
+        self.expr = expr
+
+    def clear_expr(self):
+        """
+        Clean the expression string by keeping only the left and right brackets.
+        
+        Test cases:
+            # Test case 1: Simple expression
+            input_expr = "((())"
+            balance_brackets = BalancedBrackets(input_expr)
+            balance_brackets.clear_expr()
+            assert balance_brackets.expr == "((())"
+
+            # Test case 2: Complex expression
+            input_expr = "((() {})[] [] () ({})"
+            balance_brackets = BalancedBrackets(input_expr)
+            balance_brackets.clear_expr()
+            assert balance_brackets.expr == "((() {})[] [] () ({})"
+        """
+        self.expr = ''.join(c for c in self.expr if (c in self.left_brackets or c in self.right_brackets))
+
+    def check_balanced_brackets(self):
+        """
+        Method for checking if the expression has correctly balanced brackets.
+
+        Returns:
+            bool: True if the brackets are balanced, False otherwise
+
+        Test cases:
+            # Test case 1: Balanced expression
+            input_expr = "((()) {} [] [] () ({})"
+            balance_brackets = BalancedBrackets(input_expr)
+            assert balance_brackets.check_balanced_brackets() == True
+
+            # Test case 2: Imbalanced expression
+            input_expr = "((() {} [] [] () ({}}"
+            balance_brackets = BalancedBrackets(input_expr)
+            assert balance_brackets.check_balanced_brackets() == False
+
+            # Test case 3: Empty expression
+            input_expr = ""
+            balance_brackets = BalancedBrackets(input_expr)
+            assert balance_brackets.check_balanced_brackets() == True
+        """
+        self.clear_expr()
+        for Brkt in self.expr:
+            if Brkt in self.left_brackets:
+                self.stack.append(Brkt)
+            else:
+                Current_Brkt = self.stack.pop()
+                if Current_Brkt == "(":
+                    if Brkt != ")":
+                        return False
+                if Current_Brkt == "{":
+                    if Brkt != "}":
+                        return False
+                if Current_Brkt == "[":
+                    if Brkt != "]":
+                        return False
+        if self.stack:
+            return False
+        return True</s>

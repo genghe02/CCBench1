@@ -1,0 +1,1 @@
+# Find the indices of elements in the input array 'arr' that fall within the range specified by 'low' and 'high' values using numpy by applying logical_and operation with np.where().

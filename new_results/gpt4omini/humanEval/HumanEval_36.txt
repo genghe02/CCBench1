@@ -1,0 +1,16 @@
+```python
+def fizz_buzz(n: int):
+    # Return the count of '7's in the concatenation of numbers from 0 to n that are divisible by 11 or 13
+    >>> fizz_buzz(0) # returns 0
+    >>> fizz_buzz(77) # returns 1 (only 7 is in the concatenation)
+    >>> fizz_buzz(100) # returns 2 (from 77 and 0)
+    ns = []
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            ns.append(i)
+    s = ''.join(list(map(str, ns)))
+    ans = 0
+    for c in s:
+        ans += (c == '7')
+    return ans
+```

@@ -1,0 +1,8 @@
+```python
+def decimal_to_binary(decimal):
+    # Convert a decimal number to binary format and return it with 'db' prefix
+    >>> decimal_to_binary(5) # returns 'db101db'
+    >>> decimal_to_binary(0) # returns 'db0db'
+    >>> decimal_to_binary(10) # returns 'db1010db'
+    return "db" + bin(decimal)[2:] + "db"
+```

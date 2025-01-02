@@ -1,0 +1,2 @@
+ # Merge two dataframes based on the 'company' column
+merged_df = pd.merge(df1, df2, on='company')</s>

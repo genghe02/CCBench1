@@ -1,0 +1,15 @@
+```python
+import pandas as pd
+
+def create_empty_df(col_names):
+    """Create an empty DataFrame with specified column names.
+    The function takes a list of column names and returns a pandas DataFrame
+    initialized with those columns but contains no rows.
+    
+    >>> create_empty_df(['A', 'B', 'C']).columns.tolist()
+    ['A', 'B', 'C']
+    >>> create_empty_df([]).shape
+    (0, 0)
+    """
+    return pd.DataFrame(columns=col_names)
+```

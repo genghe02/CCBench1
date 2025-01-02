@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef dataframe2list_of_dict(df):\n    # Convert a DataFrame into a list of dictionaries\n    return df.to_dict(orient='records')

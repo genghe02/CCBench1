@@ -1,0 +1,144 @@
+```python
+"""
+This class provides utility functions for vector operations, including similarity calculations and IDF weight computations.
+"""
+
+import numpy as np
+from gensim import matutils
+from numpy import dot, array
+
+
+class VectorUtil:
+    @staticmethod
+    def similarity(vector_1, vector_2):
+        """
+        Computes the cosine similarity between two vectors.
+
+        Parameters:
+            vector_1 (array-like): The first vector.
+            vector_2 (array-like): The second vector.
+
+        Returns:
+            float: The cosine similarity between the two vectors, ranging from -1 to 1.
+
+        Test cases:
+            # Test case 1: Identical vectors
+            assert VectorUtil.similarity([1, 0], [1, 0]) == 1.0
+
+            # Test case 2: Orthogonal vectors
+            assert VectorUtil.similarity([1, 0], [0, 1]) == 0.0
+
+            # Test case 3: Opposite vectors
+            assert VectorUtil.similarity([1, 0], [-1, 0]) == -1.0
+        """
+        return dot(matutils.unitvec(vector_1), matutils.unitvec(vector_2))
+
+    @staticmethod
+    def cosine_similarities(vector_1, vectors_all):
+        """
+        Computes the cosine similarities between a single vector and a list of vectors.
+
+        Parameters:
+            vector_1 (array-like): The single vector.
+            vectors_all (array-like): The list of vectors to compare against.
+
+        Returns:
+            array-like: An array of cosine similarities between the single vector and each vector in the list.
+
+        Test cases:
+            # Test case 1: Single vector and list of identical vectors
+            assert np.allclose(VectorUtil.cosine_similarities([1, 0], [[1, 0], [1, 0]]), [1.0, 1.0])
+
+            # Test case 2: Single vector and list of orthogonal vectors
+            assert np.allclose(VectorUtil.cosine_similarities([1, 0], [[0, 1], [0, 1]]), [0.0, 0.0])
+
+            # Test case 3: Single vector and list of opposite vectors
+            assert np.allclose(VectorUtil.cosine_similarities([1, 0], [[-1, 0], [-1, 0]]), [-1.0, -1.0])
+        """
+        norm = np.linalg.norm(vector_1)
+        all_norms = np.linalg.norm(vectors_all, axis=1)
+        dot_products = dot(vectors_all, vector_1)
+        similarities = dot_products / (norm * all_norms)
+        return similarities
+
+    @staticmethod
+    def n_similarity(vector_list_1, vector_list_2):
+        """
+        Computes the cosine similarity between the mean vectors of two lists of vectors.
+
+        Parameters:
+            vector_list_1 (list of array-like): The first list of vectors.
+            vector_list_2 (list of array-like): The second list of vectors.
+
+        Returns:
+            float: The cosine similarity between the mean vectors of the two lists.
+
+        Raises:
+            ZeroDivisionError: If at least one of the lists is empty.
+
+        Test cases:
+            # Test case 1: Lists with identical mean vectors
+            assert VectorUtil.n_similarity([[1, 0], [1, 0]], [[1, 0], [1, 0]]) == 1.0
+
+            # Test case 2: Lists with orthogonal mean vectors
+            assert VectorUtil.n_similarity([[1, 0], [1, 0]], [[0, 1], [0, 1]]) == 0.0
+
+            # Test case 3: Empty list
+            try:
+                VectorUtil.n_similarity([], [[1, 0]])
+            except ZeroDivisionError as e:
+                assert str(e) == 'At least one of the passed list is empty.'
+        """
+        if not (len(vector_list_1) and len(vector_list_2)):
+            raise ZeroDivisionError('At least one of the passed list is empty.')
+
+        return dot(matutils.unitvec(array(vector_list_1).mean(axis=0)),
+                   matutils.unitvec(array(vector_list_2).mean(axis=0)))
+
+    @staticmethod
+    def compute_idf_weight_dict(total_num, number_dict):
+        """
+        Computes the IDF (Inverse Document Frequency) weights for a given dictionary of term counts.
+
+        Parameters:
+            total_num (int): The total number of documents.
+            number_dict (dict): A dictionary where keys are terms and values are the counts of documents containing each term.
+
+        Returns:
+            dict: A dictionary where keys are terms and values are the IDF weights for each term.
+
+        Test cases:
+            # Test case 1: Single term
+            assert VectorUtil.compute_idf_weight_dict(10, {'term1': 1}) == {'term1': np.log(11 / 2)}
+
+            # Test case 2: Multiple terms
+            result = VectorUtil.compute_idf_weight_dict(10, {'term1': 1, 'term2': 5})
+            expected = {'term1': np.log(11 / 2), 'term2': np.log(11 / 6)}
+            assert all(np.isclose(result[key], expected[key]) for key in result)
+
+            # Test case 3: Zero counts
+            result = VectorUtil.compute_idf_weight_dict(10, {'term1': 0, 'term2': 0})
+            expected = {'term1': np.log(11 / 1), 'term2': np.log(11 / 1)}
+            assert all(np.isclose(result[key], expected[key]) for key in result)
+        """
+        index_2_key_map = {}
+
+        index = 0
+
+        count_list = []
+        for key, count in number_dict.items():
+            index_2_key_map[index] = key
+            count_list.append(count)
+            index = index + 1
+
+        a = np.array(count_list)
+        ## smooth, in case the divide by zero error
+        a = np.log((total_num + 1) / (a + 1))
+        result = {}
+
+        for index, w in enumerate(a):
+            key = index_2_key_map[index]
+            result[key] = w
+
+        return result
+```

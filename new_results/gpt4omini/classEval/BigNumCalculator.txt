@@ -1,0 +1,163 @@
+```python
+"""
+This class provides methods to perform arithmetic operations on very large integers represented as strings.
+"""
+
+class BigNumCalculator:
+    
+    @staticmethod
+    def add(num1, num2):
+        """
+        Adds two large numbers represented as strings.
+
+        Parameters:
+            num1 (str): The first large number as a string.
+            num2 (str): The second large number as a string.
+
+        Returns:
+            str: The sum of num1 and num2 as a string.
+
+        Test cases:
+            # Test case 1: Normal addition
+            input_num1, input_num2 = "123456789123456789", "987654321987654321"
+            expected_output = "1111111111111111110"
+            assert BigNumCalculator.add(input_num1, input_num2) == expected_output
+
+            # Test case 2: Adding with carry
+            input_num1, input_num2 = "999", "1"
+            expected_output = "1000"
+            assert BigNumCalculator.add(input_num1, input_num2) == expected_output
+
+            # Test case 3: Zero addition
+            input_num1, input_num2 = "0", "0"
+            expected_output = "0"
+            assert BigNumCalculator.add(input_num1, input_num2) == expected_output
+        """
+        max_length = max(len(num1), len(num2))
+        num1 = num1.zfill(max_length)
+        num2 = num2.zfill(max_length)
+
+        carry = 0
+        result = []
+        for i in range(max_length - 1, -1, -1):
+            digit_sum = int(num1[i]) + int(num2[i]) + carry
+            carry = digit_sum // 10
+            digit = digit_sum % 10
+            result.insert(0, str(digit))
+
+        if carry > 0:
+            result.insert(0, str(carry))
+
+        return ''.join(result)
+
+    @staticmethod
+    def subtract(num1, num2):
+        """
+        Subtracts the second large number from the first, both represented as strings.
+
+        Parameters:
+            num1 (str): The number from which to subtract, as a string.
+            num2 (str): The number to subtract, as a string.
+
+        Returns:
+            str: The result of the subtraction as a string. Negative results are indicated with a leading '-'.
+
+        Test cases:
+            # Test case 1: Normal subtraction
+            input_num1, input_num2 = "1000", "999"
+            expected_output = "1"
+            assert BigNumCalculator.subtract(input_num1, input_num2) == expected_output
+
+            # Test case 2: Subtraction resulting in zero
+            input_num1, input_num2 = "1000", "1000"
+            expected_output = "0"
+            assert BigNumCalculator.subtract(input_num1, input_num2) == expected_output
+
+            # Test case 3: Subtraction resulting in negative
+            input_num1, input_num2 = "500", "1000"
+            expected_output = "-500"
+            assert BigNumCalculator.subtract(input_num1, input_num2) == expected_output
+        """
+        if len(num1) < len(num2):
+            num1, num2 = num2, num1
+            negative = True
+        elif len(num1) > len(num2):
+            negative = False
+        else:
+            if num1 < num2:
+                num1, num2 = num2, num1
+                negative = True
+            else:
+                negative = False
+
+        max_length = max(len(num1), len(num2))
+        num1 = num1.zfill(max_length)
+        num2 = num2.zfill(max_length)
+
+        borrow = 0
+        result = []
+        for i in range(max_length - 1, -1, -1):
+            digit_diff = int(num1[i]) - int(num2[i]) - borrow
+
+            if digit_diff < 0:
+                digit_diff += 10
+                borrow = 1
+            else:
+                borrow = 0
+
+            result.insert(0, str(digit_diff))
+
+        while len(result) > 1 and result[0] == '0':
+            result.pop(0)
+
+        if negative:
+            result.insert(0, '-')
+
+        return ''.join(result)
+
+    @staticmethod
+    def multiply(num1, num2):
+        """
+        Multiplies two large numbers represented as strings.
+
+        Parameters:
+            num1 (str): The first large number as a string.
+            num2 (str): The second large number as a string.
+
+        Returns:
+            str: The product of num1 and num2 as a string.
+
+        Test cases:
+            # Test case 1: Normal multiplication
+            input_num1, input_num2 = "123", "456"
+            expected_output = "56088"
+            assert BigNumCalculator.multiply(input_num1, input_num2) == expected_output
+
+            # Test case 2: Multiplication by zero
+            input_num1, input_num2 = "123456", "0"
+            expected_output = "0"
+            assert BigNumCalculator.multiply(input_num1, input_num2) == expected_output
+
+            # Test case 3: Multiplication resulting in very large number
+            input_num1, input_num2 = "999", "999"
+            expected_output = "998001"
+            assert BigNumCalculator.multiply(input_num1, input_num2) == expected_output
+        """
+        len1, len2 = len(num1), len(num2)
+        result = [0] * (len1 + len2)
+
+        for i in range(len1 - 1, -1, -1):
+            for j in range(len2 - 1, -1, -1):
+                mul = int(num1[i]) * int(num2[j])
+                p1, p2 = i + j, i + j + 1
+                total = mul + result[p2]
+
+                result[p1] += total // 10
+                result[p2] = total % 10
+
+        start = 0
+        while start < len(result) - 1 and result[start] == 0:
+            start += 1
+
+        return ''.join(map(str, result[start:]))
+```

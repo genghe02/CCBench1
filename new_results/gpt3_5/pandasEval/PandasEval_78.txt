@@ -1,0 +1,2 @@
+# Get the value at index 1 from the 'mycol' column of the dataframe, if not found return np.nan
+value = df.mycol.get(1, np.nan)

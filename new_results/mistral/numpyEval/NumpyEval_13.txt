@@ -1,0 +1,5 @@
+ import numpy as np
+
+# Inverse of a given matrix
+def inverse_matrix(matrix):
+    return np.linalg.inv(matrix)</s>

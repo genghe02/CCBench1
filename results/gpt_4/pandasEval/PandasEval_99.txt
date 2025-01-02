@@ -1,0 +1,1 @@
+# This function is used to find and return all rows in a dataframe that contain non-numeric data. It applies the np.isreal function to each element of the dataframe and checks if all elements in a row are numeric. The "~" operator is used to reverse the boolean values returned by the all() function.

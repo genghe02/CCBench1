@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def remove_duplicates_by_col_names(df):
+    # Remove duplicate columns from the dataframe
+    return df.loc[:,~df.columns.duplicated()]
+```

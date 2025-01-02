@@ -1,0 +1,110 @@
+```python
+"""
+This class handles the representation and validation of a person's request including their name, sex, and phone number.
+"""
+
+class PersonRequest:
+    def __init__(self, name: str, sex: str, phoneNumber: str):
+        """
+        Initializes a PersonRequest instance with the given name, sex, and phone number.
+
+        Parameters:
+            name (str): The name of the person. It should not be empty and must not exceed 33 characters.
+            sex (str): The sex of the person. Must be one of "Man", "Woman", or "UGM".
+            phoneNumber (str): The phone number of the person. It must be 11 digits long and consist only of numbers.
+        
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Successful initialization
+            person = PersonRequest("John Doe", "Man", "12345678901")
+
+            # Test case 2: Invalid name (too long)
+            person = PersonRequest("A very long name that exceeds thirty-three characters", "Woman", "12345678901")
+
+            # Test case 3: Invalid phone number (not 11 digits)
+            person = PersonRequest("Jane Doe", "Woman", "1234567890")
+        """
+        self.name = self._validate_name(name)
+        self.sex = self._validate_sex(sex)
+        self.phoneNumber = self._validate_phoneNumber(phoneNumber)
+
+    def _validate_name(self, name: str) -> str:
+        """
+        Validates the name input.
+
+        Parameters:
+            name (str): The name to validate.
+
+        Returns:
+            str: The validated name if valid, None otherwise.
+        
+        Test cases:
+            # Test case 1: Valid name
+            assert self._validate_name("John Doe") == "John Doe"
+
+            # Test case 2: Name is empty
+            assert self._validate_name("") == None
+
+            # Test case 3: Name exceeds length limit
+            assert self._validate_name("A very long name that exceeds thirty-three characters") == None
+        """
+        if not name:
+            return None
+        if len(name) > 33:
+            return None
+        return name
+
+    def _validate_sex(self, sex: str) -> str:
+        """
+        Validates the sex input.
+
+        Parameters:
+            sex (str): The sex to validate.
+
+        Returns:
+            str: The validated sex if valid, None otherwise.
+        
+        Test cases:
+            # Test case 1: Valid sex
+            assert self._validate_sex("Man") == "Man"
+
+            # Test case 2: Invalid sex
+            assert self._validate_sex("Child") == None
+
+            # Test case 3: Valid sex
+            assert self._validate_sex("Woman") == "Woman"
+        """
+        if sex not in ["Man", "Woman", "UGM"]:
+            return None
+        return sex
+
+    def _validate_phoneNumber(self, phoneNumber: str) -> str:
+        """
+        Validates the phone number input.
+
+        Parameters:
+            phoneNumber (str): The phone number to validate.
+
+        Returns:
+            str: The validated phone number if valid, None otherwise.
+        
+        Test cases:
+            # Test case 1: Valid phone number
+            assert self._validate_phoneNumber("12345678901") == "12345678901"
+
+            # Test case 2: Phone number is empty
+            assert self._validate_phoneNumber("") == None
+            
+            # Test case 3: Phone number is not 11 digits
+            assert self._validate_phoneNumber("12345") == None
+        """
+        if not phoneNumber:
+            return None
+        if len(phoneNumber) != 11 or not phoneNumber.isdigit():
+            return None
+        return phoneNumber
+``` 
+
+This code includes detailed docstrings that provide information about the purpose of the class, functions, parameters, return values, and test cases for each method.

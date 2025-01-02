@@ -1,0 +1,68 @@
+```python
+# This class is designed to build SQL queries for various operations such as SELECT, INSERT, DELETE, and UPDATE.
+class SQLQueryBuilder:
+
+    @staticmethod
+    # This function is used to create a SELECT query string for a specified table and columns. It also supports WHERE conditions.
+    # Params:
+    # table: string, name of the table to select from
+    # columns: string or list of strings, names of the columns to select. Defaults to '*'
+    # where: dict, conditions for the WHERE clause. Defaults to None
+    # Returns: string, a SQL SELECT query string
+    # Examples:
+    # >>> SQLQueryBuilder.select('users', ['name', 'email'], {'age': 18})
+    # "SELECT name, email FROM users WHERE age='18'"
+    def select(table, columns='*', where=None):
+        if columns != '*':
+            columns = ', '.join(columns)
+        query = f"SELECT {columns} FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    # This function is used to create an INSERT query string for a specified table and data.
+    # Params:
+    # table: string, name of the table to insert into
+    # data: dict, data to insert (key: column name, value: data)
+    # Returns: string, a SQL INSERT query string
+    # Examples:
+    # >>> SQLQueryBuilder.insert('users', {'name': 'John', 'email': 'john@doe.com'})
+    # "INSERT INTO users (name, email) VALUES ('John', 'john@doe.com')"
+    def insert(table, data):
+        keys = ', '.join(data.keys())
+        values = ', '.join(f"'{v}'" for v in data.values())
+        return f"INSERT INTO {table} ({keys}) VALUES ({values})"
+
+    @staticmethod
+    # This function is used to create a DELETE query string for a specified table. It also supports WHERE conditions.
+    # Params:
+    # table: string, name of the table to delete from
+    # where: dict, conditions for the WHERE clause. Defaults to None
+    # Returns: string, a SQL DELETE query string
+    # Examples:
+    # >>> SQLQueryBuilder.delete('users', {'name': 'John'})
+    # "DELETE FROM users WHERE name='John'"
+    def delete(table, where=None):
+        query = f"DELETE FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    # This function is used to create an UPDATE query string for a specified table and data. It also supports WHERE conditions.
+    # Params:
+    # table: string, name of the table to update
+    # data: dict, data to update (key: column name, value: new data)
+    # where: dict, conditions for the WHERE clause. Defaults to None
+    # Returns: string, a SQL UPDATE query string
+    # Examples:
+    # >>> SQLQueryBuilder.update('users', {'email': 'john@new.com'}, {'name': 'John'})
+    # "UPDATE users SET email='john@new.com' WHERE name='John'"
+    def update(table, data, where=None):
+        update_str = ', '.join(f"{k}='{v}'" for k, v in data.items())
+        query = f"UPDATE {table} SET {update_str}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+```

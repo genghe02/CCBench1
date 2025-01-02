@@ -1,0 +1,1 @@
+ # Replace all digits in the 'Name' column with empty string using string method str.replace() in pandas DataFrame.

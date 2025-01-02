@@ -1,0 +1,5 @@
+import numpy as np
+
+arr = np.zeros((50,100,25))
+# Reshape a 3D array into a 2D array
+result = np.reshape(arr, (5000,25))

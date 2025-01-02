@@ -1,0 +1,136 @@
+```python
+"""
+This class provides functionality for lemmatizing sentences and extracting part-of-speech (POS) tags using NLTK's WordNetLemmatizer and POS tagging capabilities.
+"""
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+import string
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+
+class Lemmatization:
+    def __init__(self):
+        """
+        Initializes the Lemmatization class by setting up the WordNetLemmatizer.
+        """
+        self.lemmatizer = WordNetLemmatizer()
+
+    def lemmatize_sentence(self, sentence):
+        """
+        Lemmatizes each word in the given sentence based on its part-of-speech tag.
+
+        Parameters:
+            sentence (str): The input sentence to be lemmatized.
+
+        Returns:
+            list: A list of lemmatized words from the sentence.
+
+        Test cases:
+            # Test case 1: Normal sentence with verbs, adjectives, and nouns
+            input = "The quick brown foxes are jumping over the lazy dogs"
+            expected_output = ['The', 'quick', 'brown', 'fox', 'be', 'jump', 'over', 'the', 'lazy', 'dog']
+            
+            # Test case 2: Sentence with punctuation
+            input = "Hello, world! How are you?"
+            expected_output = ['Hello', 'world', 'How', 'be', 'you']
+            
+            # Test case 3: Empty sentence
+            input = ""
+            expected_output = []
+        """
+        lemmatized_words = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for word, tag in tagged_words:
+            if tag.startswith('V'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='v')
+            elif tag.startswith('J'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='a')
+            elif tag.startswith('R'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='r')
+            else:
+                lemmatized_word = self.lemmatizer.lemmatize(word)
+            lemmatized_words.append(lemmatized_word)
+        return lemmatized_words
+
+    def get_pos_tag(self, sentence):
+        """
+        Extracts the part-of-speech tags for each word in the given sentence.
+
+        Parameters:
+            sentence (str): The input sentence to extract POS tags from.
+
+        Returns:
+            list: A list of POS tags corresponding to each word in the sentence.
+
+        Test cases:
+            # Test case 1: Normal sentence with various POS tags
+            input = "The quick brown fox jumps over the lazy dog"
+            expected_output = ['DT', 'JJ', 'JJ', 'NN', 'VBZ', 'IN', 'DT', 'JJ', 'NN']
+            
+            # Test case 2: Sentence with punctuation
+            input = "Hello, world! How are you?"
+            expected_output = ['NNP', ',', 'NN', '.', 'WRB', 'VBP', 'PRP', '.']
+            
+            # Test case 3: Empty sentence
+            input = ""
+            expected_output = []
+        """
+        pos_tags = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for tagged_word in tagged_words:
+            pos_tags.append(tagged_word[1])
+        return pos_tags
+
+    def remove_punctuation(self, sentence):
+        """
+        Removes punctuation from the given sentence.
+
+        Parameters:
+            sentence (str): The input sentence from which punctuation is to be removed.
+
+        Returns:
+            str: The sentence without any punctuation.
+
+        Test cases:
+            # Test case 1: Sentence with punctuation
+            input = "Hello, world!"
+            expected_output = "Hello world"
+            
+            # Test case 2: Sentence without punctuation
+            input = "Hello world"
+            expected_output = "Hello world"
+            
+            # Test case 3: Empty sentence
+            input = ""
+            expected_output = ""
+        """
+        return sentence.translate(str.maketrans('', '', string.punctuation))
+```
+
+### Explanation:
+1. **Class Documentation**: The class-level docstring describes the overall purpose of the `Lemmatization` class, which is to provide functionality for lemmatizing sentences and extracting POS tags using NLTK.
+
+2. **Method Documentation**:
+   - Each method (`__init__`, `lemmatize_sentence`, `get_pos_tag`, `remove_punctuation`) has a detailed docstring that includes:
+     - A description of what the method does.
+     - A `Parameters` section listing and describing each parameter.
+     - A `Returns` section describing the return value.
+     - A `Test cases` section with at least three test cases demonstrating normal usage, edge cases, and error handling.
+
+3. **Test Cases**:
+   - Test cases are provided for each method to demonstrate its functionality under different scenarios, including normal usage, edge cases, and error handling.
+
+4. **Formatting**:
+   - The documentation follows the standard Python docstring format with clear sectioning (`Parameters`, `Returns`, `Test cases`).
+   - Consistent and clear language is used throughout the documentation.
+
+This documentation should be practical and useful for anyone using the `Lemmatization` class, providing clear guidance on how to use each method and what to expect in different scenarios.

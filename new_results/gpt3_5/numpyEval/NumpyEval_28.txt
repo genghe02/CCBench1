@@ -1,0 +1,4 @@
+import numpy as np
+def matrix2array(M):
+    # Convert the matrix M to an array and remove single-dimensional entries
+    return np.squeeze(np.asarray(M))

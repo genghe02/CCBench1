@@ -1,0 +1,1 @@
+# Extract specific elements from the NumPy array 'arr' based on the indices 1 and 4.

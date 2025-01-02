@@ -1,0 +1,47 @@
+```python
+def int_to_mini_roman(number):
+    # Convert an integer to a minimal Roman numeral representation in lowercase.
+
+    # Define the list of integer values and their corresponding Roman numeral symbols.
+    num = [1, 4, 5, 9, 10, 40, 50, 90,  
+           100, 400, 500, 900, 1000] 
+    sym = ["I", "IV", "V", "IX", "X", "XL",  
+           "L", "XC", "C", "CD", "D", "CM", "M"] 
+    
+    # Initialize the index to the highest value in the num list.
+    i = 12
+    
+    # Initialize the result string to store the Roman numeral.
+    res = ''
+    
+    # Loop until the number is reduced to zero.
+    while number: 
+        # Determine how many times the current Roman numeral symbol can fit into the number.
+        div = number // num[i] 
+        
+        # Reduce the number by the value of the Roman numeral symbol.
+        number %= num[i] 
+        
+        # Append the Roman numeral symbol to the result string the appropriate number of times.
+        while div: 
+            res += sym[i] 
+            div -= 1
+        
+        # Move to the next lower Roman numeral symbol.
+        i -= 1
+    
+    # Convert the result to lowercase and return it.
+    return res.lower()
+
+# Test cases for the function
+# >>> int_to_mini_roman(14)
+# 'xiv'
+# >>> int_to_mini_roman(90)
+# 'xc'
+# >>> int_to_mini_roman(3999)
+# 'mmmcmxcix'
+# >>> int_to_mini_roman(4)
+# 'iv'
+# >>> int_to_mini_roman(58)
+# 'lviii'
+```

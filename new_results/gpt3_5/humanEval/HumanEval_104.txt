@@ -1,0 +1,14 @@
+# This function finds numbers in the list where all digits are odd
+# It then sorts and returns those numbers in a list
+>>> unique_digits([345, 6789, 135, 97531]) # returns [135, 97531]
+>>> unique_digits([246, 8024, 73200]) # returns [] 
+
+def unique_digits(x):
+    # Find numbers in the list where all digits are odd and return them sorted
+    >>> unique_digits([345, 6789, 135, 97531]) # returns [135, 97531]
+    >>> unique_digits([246, 8024, 73200]) # returns []
+    odd_digit_elements = []
+    for i in x:
+        if all (int(c) % 2 == 1 for c in str(i)):
+            odd_digit_elements.append(i)
+    return sorted(odd_digit_elements)

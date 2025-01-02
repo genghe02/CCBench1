@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.zeros((2,5))
+# Get the shape of the array and assign it to a_shape
+a_shape = a.shape

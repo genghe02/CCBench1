@@ -1,0 +1,160 @@
+```python
+"""
+This class provides utility methods for paginating and searching through a list of data. 
+It allows for retrieving specific pages of data, getting detailed page information, and searching for items containing a specific keyword.
+"""
+
+class PageUtil:
+    def __init__(self, data, page_size):
+        """
+        Initializes the PageUtil class with the data to paginate and the size of each page.
+        
+        Parameters:
+            data (list): The list of items to paginate.
+            page_size (int): The number of items to include on each page.
+        """
+        self.data = data
+        self.page_size = page_size
+        self.total_items = len(data)
+        self.total_pages = (self.total_items + page_size - 1) // page_size
+
+    def get_page(self, page_number):
+        """
+        Retrieves the items for a specific page number.
+        
+        Parameters:
+            page_number (int): The page number to retrieve (1-based index).
+        
+        Returns:
+            list: A list of items for the specified page. Returns an empty list if the page number is out of range.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            page_util = PageUtil(data, 3)
+            assert page_util.get_page(2) == [4, 5, 6]
+            
+            # Test case 2: Edge case - first page
+            assert page_util.get_page(1) == [1, 2, 3]
+            
+            # Test case 3: Error case - page number out of range
+            assert page_util.get_page(5) == []
+        """
+        if page_number < 1 or page_number > self.total_pages:
+            return []
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = start_index + self.page_size
+        return self.data[start_index:end_index]
+
+    def get_page_info(self, page_number):
+        """
+        Retrieves detailed information about a specific page, including pagination metadata.
+        
+        Parameters:
+            page_number (int): The page number to retrieve information for (1-based index).
+        
+        Returns:
+            dict: A dictionary containing pagination details and the data for the specified page. 
+                  Returns an empty dictionary if the page number is out of range.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            page_util = PageUtil(data, 3)
+            expected_output = {
+                "current_page": 2,
+                "per_page": 3,
+                "total_pages": 4,
+                "total_items": 10,
+                "has_previous": True,
+                "has_next": True,
+                "data": [4, 5, 6]
+            }
+            assert page_util.get_page_info(2) == expected_output
+            
+            # Test case 2: Edge case - last page
+            expected_output = {
+                "current_page": 4,
+                "per_page": 3,
+                "total_pages": 4,
+                "total_items": 10,
+                "has_previous": True,
+                "has_next": False,
+                "data": [10]
+            }
+            assert page_util.get_page_info(4) == expected_output
+            
+            # Test case 3: Error case - page number out of range
+            assert page_util.get_page_info(5) == {}
+        """
+        if page_number < 1 or page_number > self.total_pages:
+            return {}
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = min(start_index + self.page_size, self.total_items)
+        page_data = self.data[start_index:end_index]
+
+        page_info = {
+            "current_page": page_number,
+            "per_page": self.page_size,
+            "total_pages": self.total_pages,
+            "total_items": self.total_items,
+            "has_previous": page_number > 1,
+            "has_next": page_number < self.total_pages,
+            "data": page_data
+        }
+        return page_info
+
+    def search(self, keyword):
+        """
+        Searches the data for items containing the specified keyword and returns search results with pagination details.
+        
+        Parameters:
+            keyword (str): The keyword to search for in the data.
+        
+        Returns:
+            dict: A dictionary containing the search results and pagination details.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            data = ["apple", "banana", "cherry", "date", "elderberry"]
+            page_util = PageUtil(data, 2)
+            expected_output = {
+                "keyword": "a",
+                "total_results": 4,
+                "total_pages": 2,
+                "results": ["apple", "banana", "cherry", "date"]
+            }
+            assert page_util.search("a") == expected_output
+            
+            # Test case 2: Edge case - no results
+            expected_output = {
+                "keyword": "z",
+                "total_results": 0,
+                "total_pages": 0,
+                "results": []
+            }
+            assert page_util.search("z") == expected_output
+            
+            # Test case 3: Error case - empty keyword
+            expected_output = {
+                "keyword": "",
+                "total_results": 5,
+                "total_pages": 3,
+                "results": ["apple", "banana", "cherry", "date", "elderberry"]
+            }
+            assert page_util.search("") == expected_output
+        """
+        results = [item for item in self.data if keyword in str(item)]
+        num_results = len(results)
+        num_pages = (num_results + self.page_size - 1) // self.page_size
+
+        search_info = {
+            "keyword": keyword,
+            "total_results": num_results,
+            "total_pages": num_pages,
+            "results": results
+        }
+        return search_info
+```

@@ -1,0 +1,21 @@
+```python
+def digits(n):
+    # Calculate the product of all odd digits in the given number and return 0 if there are no odd digits.
+    # >>> digits(12345)
+    # 15
+    # >>> digits(2468)
+    # 0
+    # >>> digits(13579)
+    # 945
+    product = 1
+    odd_count = 0
+    for digit in str(n):
+        int_digit = int(digit)
+        if int_digit%2 == 1:
+            product= product*int_digit
+            odd_count+=1
+    if odd_count ==0:
+        return 0
+    else:
+        return product
+```

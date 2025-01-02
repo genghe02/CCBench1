@@ -1,0 +1,155 @@
+```python
+"""
+This class provides functionality to calculate and generate arrangements (permutations) of a given set of data. 
+It includes methods to count the number of possible arrangements, generate all possible arrangements, and compute factorials.
+"""
+
+import itertools
+
+
+class ArrangementCalculator:
+    def __init__(self, datas):
+        """
+        Initializes the ArrangementCalculator with a set of data.
+
+        Parameters:
+            datas (list): A list of elements for which arrangements will be calculated.
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n, m=None):
+        """
+        Calculates the number of possible arrangements (permutations) of `n` elements taken `m` at a time.
+        If `m` is not provided, it calculates the factorial of `n`.
+
+        Parameters:
+            n (int): The total number of elements.
+            m (int, optional): The number of elements to arrange at a time. Defaults to None.
+
+        Returns:
+            int: The number of possible arrangements.
+
+        Test cases:
+            # Test case 1: Calculate factorial of 5
+            assert ArrangementCalculator.count(5) == 120
+
+            # Test case 2: Calculate permutations of 5 elements taken 3 at a time
+            assert ArrangementCalculator.count(5, 3) == 60
+
+            # Test case 3: Calculate permutations of 5 elements taken 5 at a time
+            assert ArrangementCalculator.count(5, 5) == 120
+        """
+        if m is None or n == m:
+            return ArrangementCalculator.factorial(n)
+        else:
+            return ArrangementCalculator.factorial(n) // ArrangementCalculator.factorial(n - m)
+
+    @staticmethod
+    def count_all(n):
+        """
+        Calculates the total number of possible arrangements for all subset sizes from 1 to `n`.
+
+        Parameters:
+            n (int): The total number of elements.
+
+        Returns:
+            int: The total number of possible arrangements.
+
+        Test cases:
+            # Test case 1: Calculate total arrangements for 3 elements
+            assert ArrangementCalculator.count_all(3) == 15
+
+            # Test case 2: Calculate total arrangements for 1 element
+            assert ArrangementCalculator.count_all(1) == 1
+
+            # Test case 3: Calculate total arrangements for 0 elements
+            assert ArrangementCalculator.count_all(0) == 0
+        """
+        total = 0
+        for i in range(1, n + 1):
+            total += ArrangementCalculator.count(n, i)
+        return total
+
+    def select(self, m=None):
+        """
+        Generates all possible arrangements (permutations) of the data taken `m` at a time.
+        If `m` is not provided, it generates all possible arrangements of the entire dataset.
+
+        Parameters:
+            m (int, optional): The number of elements to arrange at a time. Defaults to None.
+
+        Returns:
+            list: A list of all possible arrangements.
+
+        Test cases:
+            # Test case 1: Generate all permutations of 3 elements taken 2 at a time
+            calculator = ArrangementCalculator([1, 2, 3])
+            assert calculator.select(2) == [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
+
+            # Test case 2: Generate all permutations of 2 elements taken 2 at a time
+            calculator = ArrangementCalculator([1, 2])
+            assert calculator.select(2) == [[1, 2], [2, 1]]
+
+            # Test case 3: Generate all permutations of 1 element taken 1 at a time
+            calculator = ArrangementCalculator([1])
+            assert calculator.select(1) == [[1]]
+        """
+        if m is None:
+            m = len(self.datas)
+        result = []
+        for permutation in itertools.permutations(self.datas, m):
+            result.append(list(permutation))
+        return result
+
+    def select_all(self):
+        """
+        Generates all possible arrangements (permutations) for all subset sizes from 1 to the length of the dataset.
+
+        Returns:
+            list: A list of all possible arrangements.
+
+        Test cases:
+            # Test case 1: Generate all permutations for 2 elements
+            calculator = ArrangementCalculator([1, 2])
+            assert calculator.select_all() == [[1], [2], [1, 2], [2, 1]]
+
+            # Test case 2: Generate all permutations for 1 element
+            calculator = ArrangementCalculator([1])
+            assert calculator.select_all() == [[1]]
+
+            # Test case 3: Generate all permutations for 0 elements
+            calculator = ArrangementCalculator([])
+            assert calculator.select_all() == []
+        """
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    @staticmethod
+    def factorial(n):
+        """
+        Calculates the factorial of a given number `n`.
+
+        Parameters:
+            n (int): The number to calculate the factorial for.
+
+        Returns:
+            int: The factorial of `n`.
+
+        Test cases:
+            # Test case 1: Calculate factorial of 5
+            assert ArrangementCalculator.factorial(5) == 120
+
+            # Test case 2: Calculate factorial of 1
+            assert ArrangementCalculator.factorial(1) == 1
+
+            # Test case 3: Calculate factorial of 0
+            assert ArrangementCalculator.factorial(0) == 1
+        """
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+```

@@ -1,0 +1,12 @@
+def any_int(x, y, z):
+    # Checks if any two numbers in the input add up to the third number
+    >>> any_int(1, 2, 3) # returns True
+    >>> any_int(5, 5, 10) # returns True
+    >>> any_int(10, 20, 30) # returns True
+    >>> any_int(1, 2, 4) # returns False
+
+    if isinstance(x,int) and isinstance(y,int) and isinstance(z,int):
+        if (x+y==z) or (x+z==y) or (y+z==x):
+            return True
+        return False
+    return False

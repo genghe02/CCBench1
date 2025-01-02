@@ -1,0 +1,46 @@
+["# Remove rows with NaN values in a specific column from a dataframe"][Block]["# Replace blank values with NaN in the dataframe"][Block][
+    "# Group dataframe by 'Mt' column and select rows with maximum value in 'num' column for each group"
+][Block]["# Concatenate the DataFrame 'x' five times and store the result in 'repeated_x'"][Block]["# Filter rows of a dataframe where the values in a specific column are present in the given list of values"][Block]["# Returns the row count of the dataframe"][Block]["# Create an empty dataframe with specified column names"][Block][
+    "# Calculate the difference between specific rows grouped by 'Group' column in the dataframe"
+][Block]["# Check if DataFrame contains any NaN values and return a boolean value"][Block]["# Add a new column to a Pandas DataFrame with the specified column name and data values"][Block]["# Remove duplicates based on values in column col1, keeping the last occurrence of duplicate values"][Block]["# Return the values at the nth row of a specified column within a dataframe"][Block]["# Create a new dataframe with the same columns as the original dataframe"][Block]["# Change column names of the dataframe to 'a', 'b', and 'c'"][Block]["# Count the number of missing values in each column of the dataframe"][Block][
+    "# Filter rows where values are greater than the mean and create a new DataFrame from the non-null values"
+][Block]["# Standardize all columns in the dataframe except the last one by calculating the z-score formula and applying it using lambda function on each column's values"][Block]["# Return a list of column names that contain NaN values in a dataframe"][Block]["# Round the values in column A to the nearest whole number"][Block][
+    "# Sort the dataframe by date in ascending order",
+    "# Group by 'id' and keep the last row for each group"
+][Block]["# Shift the 'gdp' column values up by one row in the dataframe"][Block]["# Filter the dataframe to include rows where line_num is not equal to 0"][Block]["# Check if input dataframe exists"][Block][
+    "# Sort the dataframe columns based on the presence of NaN values and drop rows that are all NaN"
+][Block][
+    "# Add zeros to the beginning of a string in a dataframe column to ensure a total length of 15 characters"
+][Block][
+    "# Convert 'Email' column to store objects",
+    "# Assign list of emails to the 'Email' column for row 0"
+][Block]["# Return a Series without consecutive duplicates by comparing each value to the next one in the series"][Block]["# Create a Pandas Series with the specified values"][Block]["# Return the last n rows of a dataframe as a new dataframe"][Block]["# Append a dictionary as a row to a dataframe and return the updated dataframe"][Block]["# Remove duplicates based on column names and return the dataframe without duplicate columns"][Block]["# Convert dataframe to a string format without including the row index"][Block]["# Filter rows where col_0 is 'a' and clip values in col_1 between -2 and 2 inclusive."][Block]["# Change column names of a dataframe based on origin_names and new_names lists"][Block]["# Convert the data types of all columns in a dataframe to numeric using pd.to_numeric function"][Block]["# Create a pandas DataFrame from a list of lists, excluding the first list which contains column names, and assign column names with the first list values."][Block]["# Calculate and return the mean value of a specific column in the dataframe"][Block]["# Check if the specified value is present in the unique values of a pandas Series"][Block]["# Drop the first n rows from the given dataframe and return the modified dataframe"][Block][
+    "# Calculate mean value along rows of the dataframe and store it in a new column named 'mean'"
+][Block][
+    "# Delete specified column from dataframe and return the modified dataframe"
+][Block][
+    "# Convert both Series to sets"
+][Block]["# Filter dataframe to return values from column A where column B has value 3."][Block]["# Convert column headers to lowercase"][Block]["# Filter rows from the dataframe where 'col' values are in the 'targets' list"][Block][
+    "# Get unique values from flattened dataframe values"
+][Block]["# Convert all column names to lowercase"][Block]["# Add a new column 'C' to the dataframe that stores the sum of columns 'A' and 'B']"][Block]["# Calculate the sum of each row and add a new column 'Fruit Total'"][Block]["# Concatenate two dataframes row-wise and reset index"][Block]["# Return the number of columns in a dataframe"][Block]["# Extract the last year from a column in a dataframe and add 1 to it"][Block]["# Generate a sequence of integers to count consecutive positive values in a series object."][Block]["# Find the largest value in column 'a' of the dataframe and select it"][Block]["# Sort columns in a dataframe based on column name"][Block]["# Remove digits from the 'Name' column in the DataFrame"][Block]["# Remove columns with all NaN values from the dataframe and return the modified dataframe"][Block]["# Select columns of float64 data type and convert them to float32"][Block]["# Convert \"Date\" column in the dataframe to datetime format"][Block]["# Add a new row at any given position in the dataframe and rearrange the index values"][Block][
+    "# make sure indexes pair with number of rows",
+    "# Create a dictionary to map 'MSRA' values to 'THU' values in the DataFrame"
+][Block][
+    "# Merge two dataframes based on their indices"
+][Block][][Block]["# Merge two dataframes based on their indices"][Block]["# Return the percentage of each gender from a given series as normalized value counts"][Block]["# Sort the dataframe index in ascending order"][Block]["# Drop all rows with NaN values from the input dataframe and return the modified dataframe"][Block]["# Replace None values in specified columns of a dataframe with zeros"][Block][
+    "# Convert 'date' column to datetime format with handling of errors"
+][Block][
+    "# Clear the dataframe by dropping all rows"
+][Block][
+    "# Randomly sample 50 rows from each section in the dataframe"
+][Block]["# Normalize each column in the dataframe using min-max scaling"][Block]["# Compute value counts for a dataframe and reset the index with column names 'unique_values' and 'counts' "][Block]["# Determine the number of occurrences of a specified value in a Series."][Block]["# Create a new dataframe containing rows where 'x2' column values are NaN"][Block]["# Merge the source_series with target_series and ignore the original index values"][Block][
+    "# Filter rows in DataFrame where the value in column A is greater than the value in column B"
+][Block]["# Get the value at index 1 from the 'mycol' column of the dataframe, if not found return np.nan"][Block]["# Return rows with greater than 1 NaN value in the given dataframe"][Block]["# Filter dataframe to include rows where values in column 2 are 'Jimmy'"][Block]["# Round up each element in a pandas Series"][Block]["# Group the original DataFrame by 'Country' and 'Item_Code' columns and sum the values in 'Y1961', 'Y1962', 'Y1963' columns. Create a new DataFrame with the grouped data."][Block]["# Create a new dataframe from the list to append with specified column names and append it to the main dataframe"][Block]["# Convert boolean values in a specified column of dataframe to integer values"][Block]["# Convert pandas dataframe to a list of dictionaries using 'records' orientation"][Block][
+    "# Add a new column named 'B' to the dataframe and set all values equal to 'value'"
+][Block][
+    "# Drop columns 'A' and 'C' from the dataframe and return the modified dataframe"
+][Block]["# Concatenate two dataframes vertically and return the resulting dataframe"][Block]["# Get the last N rows of the dataframe as a new dataframe"][Block]["# Return a list of row index values from a dataframe as a list"][Block]["# Extract and return the first and last rows of the dataframe using their index positions."][Block][
+    "# Drop rows with zero in column2 and odd index, along with the row above them, from the dataframe"
+][Block]["# Create a dataframe from a list 'a' with specified column names", "# Convert the column 'two' to float datatype"][Block]["# Get the first n rows of a dataframe and return those rows"][Block]["# Convert a pandas timestamp object to a Python datetime object "][Block][
+    "# Select specified columns from a dataframe and return the resulting dataframe"
+][Block]["# Divide values in columns B and C of DataFrame by values in column A. Returns modified DataFrame"][Block]["# Merge two dataframes on 'company' column"][Block]["# Rename a column in a dataframe from old_name to new_name"][Block]["# Retrieve and return a list of column names from a dataframe"][Block]["# Return rows in the dataframe where all elements are non-numeric"][Block]

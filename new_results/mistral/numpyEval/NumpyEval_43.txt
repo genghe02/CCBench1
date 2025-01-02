@@ -1,0 +1,2 @@
+ # Concatenate arrays a and b along axis 0
+c = np.concatenate([a, b])</s>

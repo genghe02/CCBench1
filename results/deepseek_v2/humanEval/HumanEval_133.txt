@@ -1,0 +1,17 @@
+```python
+def sum_squares(lst):
+    # Calculate the sum of the squares of the ceiling values of the elements in the list.
+    # >>> sum_squares([1.4, 2.5, 3.1])
+    # 29
+    # >>> sum_squares([-1.4, -2.5, -3.1])
+    # 14
+    # >>> sum_squares([0, 0, 0])
+    # 0
+    # >>> sum_squares([1.4, -1.4, 2.5, -2.5])
+    # 21
+    import math
+    squared = 0
+    for i in lst:
+        squared += math.ceil(i)**2
+    return squared
+```

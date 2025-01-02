@@ -1,0 +1,1 @@
+# Convert each element in the numpy array 'a' to a string and store the result in a new numpy array 'a_str'.

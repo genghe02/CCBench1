@@ -1,0 +1,2 @@
+ # Use itertools.zip\_longest to merge lists with fillvalue for missing elements, then convert to NumPy array
+result = np.array(list(itertools.zip\_longest(*data, fillvalue=0)))</s>

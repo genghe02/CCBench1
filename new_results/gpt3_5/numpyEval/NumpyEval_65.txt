@@ -1,0 +1,3 @@
+# Concatenate a row to an existing numpy array as a new row
+def add_row_to_arr(arr, row):
+    return np.vstack((arr, row))

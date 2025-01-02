@@ -1,0 +1,20 @@
+```python
+def flip_case(string: str) -> str:
+    # Flip the case of each character in the input string.
+    # param string: str, the input string to be case-flipped
+    # return: str, the string with all characters case-flipped
+
+    # Test cases for the function
+    # >>> flip_case('Hello World')
+    # 'hELLO wORLD'
+    # >>> flip_case('Python3.8')
+    # 'pYTHON3.8'
+    # >>> flip_case('')
+    # ''
+    # >>> flip_case('12345')
+    # '12345'
+    # >>> flip_case('aAaA')
+    # 'AaAa'
+
+    return string.swapcase()
+```

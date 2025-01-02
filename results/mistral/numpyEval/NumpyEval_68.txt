@@ -1,0 +1,3 @@
+ # Fill the array `result` with ones at the specified indices in an efficient way using numpy.
+
+# First, create an index array using np.arange() and then use fancy indexing to assign ones to the corresponding elements in `result`.

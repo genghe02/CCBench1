@@ -1,0 +1,91 @@
+"""
+The class SplitSentence is used to split a given string into sentences and perform some operations on those sentences.
+"""
+
+import re
+
+
+class SplitSentence:
+
+    def __init__(self):
+        """
+        Initializes the SplitSentence class.
+        """
+        pass
+
+    def split_sentences(self, sentences_string):
+        """
+        Splits the input string into sentences using regular expressions.
+
+        Parameters:
+            sentences_string (str): The input string to be split into sentences.
+        
+        Returns:
+            list: A list of sentences extracted from the input string.
+
+        Test cases:
+            # Test case 1: Normal usage with multiple sentences
+            assert split_sentences("Hello world. How are you? I'm fine, thanks.") == 
+                ["Hello world.", "How are you?", "I'm fine, thanks."]
+
+            # Test case 2: Edge case with a single sentence
+            assert split_sentences("Hello world.") == ["Hello world."]
+
+            # Test case 3: Error case with an empty string
+            assert split_sentences("") == []
+        """
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        """
+        Counts the number of words in a sentence.
+
+        Parameters:
+            sentence (str): The sentence whose words are to be counted.
+        
+        Returns:
+            int: The number of words in the sentence.
+
+        Test cases:
+            # Test case 1: Normal usage with multiple words
+            assert count_words("Hello world. How are you?") == 5
+
+            # Test case 2: Edge case with a single word
+            assert count_words("Hello.") == 1
+
+            # Test case 3: Error case with an empty string
+            assert count_words("") == 0
+        """
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        """
+        Processes the input string, splits it into sentences, counts the words in each sentence and returns the maximum word count.
+
+        Parameters:
+            sentences_string (str): The input string to be processed.
+        
+        Returns:
+            int: The maximum number of words in any sentence in the input string.
+
+        Test cases:
+            # Test case 1: Normal usage with multiple sentences
+            assert process_text_file("Hello world. How are you? I'm fine, thanks.") == 3
+
+            # Test case 2: Edge case with a single sentence
+            assert process_text_file("Hello world.") == 2
+
+            # Test case 3: Error case with an empty string
+            assert process_text_file("") == 0
+        """
+        sentences = self.split_sentences(sentences_string)
+        max_count = 0
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        return max_count

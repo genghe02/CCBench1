@@ -1,0 +1,1 @@
+# Convert a boolean column in a pandas DataFrame to an integer type by using the astype(int) function.

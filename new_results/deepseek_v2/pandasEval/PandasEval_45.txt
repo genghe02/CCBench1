@@ -1,0 +1,7 @@
+import pandas as pd
+
+s1 = pd.Series([3,4,5])
+s2 = pd.Series([1,2,3,5])
+# Convert Series to sets and find their intersection
+s1, s2 = set(s1), set(s2)
+intersection_result = s1.intersection(s2)

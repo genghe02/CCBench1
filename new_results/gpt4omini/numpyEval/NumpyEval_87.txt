@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.array([[1,1,0],[1,0,0],[1,0,0],[1,1,0]])
+# Check if all elements in each column are the same as the first row
+result = np.all(a == a[0,:], axis = 0)
+```

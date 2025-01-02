@@ -1,0 +1,163 @@
+ ```python
+"""
+This class represents an RPG character with attributes: name, hit points (hp), attack power, defense, level, and experience points (exp).
+"""
+
+class RPGCharacter:
+    def __init__(self, name, hp, attack_power, defense, level=1):
+        """
+        Initialize a new RPG character instance with the given name, hit points (hp), attack power, defense, and level.
+
+        Parameters:
+            name (str): The character's name
+            hp (int): The character's initial hit points
+            attack_power (int): The character's attack power
+            defense (int): The character's defense
+            level (int, optional): The character's initial level. Defaults to 1.
+        
+        Initializes the following instance attributes:
+            name (str)
+            hp (int)
+            attack_power (int)
+            defense (int)
+            level (int)
+            exp (int)
+        """
+        self.name = name
+        self.hp = hp
+        self.attack_power = attack_power
+        self.defense = defense
+        self.level = level
+        self.exp = 0
+
+    def attack(self, other_character):
+        """
+        Attacks the given other_character, reducing their hit points based on the attack power difference.
+
+        Parameters:
+            other_character (RPGCharacter): The character to attack
+        
+        Test cases:
+            # Test case 1: Attack a weak character
+            input = RPGCharacter("Player1", 50, 10, 5)
+            enemy = RPGCharacter("Enemy1", 30, 5, 3)
+            assert input.attack(enemy) is True
+            assert enemy.hp == 15
+
+            # Test case 2: Attack a stronger character
+            input = RPGCharacter("Player1", 50, 15, 10)
+            enemy = RPGCharacter("Enemy1", 40, 12, 8)
+            assert input.attack(enemy) is True
+            assert enemy.hp == 22
+
+            # Test case 3: Attack a character with the same defense
+            input = RPGCharacter("Player1", 50, 12, 12)
+            enemy = RPGCharacter("Enemy1", 40, 12, 12)
+            assert input.attack(enemy) is True
+            assert enemy.hp == 38
+        """
+        damage = max(self.attack_power - other_character.defense, 1)
+        other_character.hp -= damage
+
+    def heal(self):
+        """
+        Heal the character by restoring a certain amount of hit points.
+
+        Returns:
+            int: The current hit points of the character
+        
+        Test cases:
+            # Test case 1: Heal a character with less than full hit points
+            input = RPGCharacter("Player1", 50, 10, 5)
+            assert input.heal() == 60
+
+            # Test case 2: Heal a character with full hit points
+            input = RPGCharacter("Player1", 100, 20, 15)
+            assert input.heal() == 100
+
+            # Test case 3: Heal a character beyond full hit points
+            input = RPGCharacter("Player1", 150, 30, 20)
+            assert input.heal() == 100
+        """
+        self.hp += 10
+        if self.hp > 100:
+            self.hp = 100
+        return self.hp
+
+    def gain_exp(self, amount):
+        """
+        Gain experience points based on the given amount.
+
+        Parameters:
+            amount (int): The amount of experience points to gain
+        
+        Test cases:
+            # Test case 1: Gain enough experience points to level up
+            input = RPGCharacter("Player1", 50, 10, 5)
+            assert input.gain_exp(100) is True
+            assert input.level == 2
+
+            # Test case 2: Gain too little experience points
+            input = RPGCharacter("Player1", 50, 10, 5)
+            assert input.gain_exp(50) is False
+
+            # Test case 3: Gain enough experience points to reach the maximum level
+            input = RPGCharacter("Player1", 50, 10, 5)
+            assert input.gain_exp(11000) is True
+            assert input.level == 100
+        """
+        while amount != 0:
+            if self.exp + amount >= self.level * 100:
+                amount -= (self.level * 100 - self.exp)
+                self.level_up()
+            else:
+                self.exp += amount
+                amount = 0
+
+    def level_up(self):
+        """
+        Increase the character's level when they have enough experience points.
+
+        Returns:
+            tuple: A tuple containing the new level, hit points, attack power, and defense
+        
+        Test cases:
+            # Test case 1: Level up a character
+            input = RPGCharacter("Player1", 50, 10, 5)
+            assert input.level_up() == (2, 60, 15, 10)
+
+            # Test case 2: Reach the maximum level
+            input = RPGCharacter("Player1", 121000, 150, 25)
+            assert input.level_up() == (100, 121200, 205, 30)
+
+            # Test case 3: Attempt to level up with insufficient experience points
+            input = RPGCharacter("Player1", 50, 10, 5)
+            assert input.level_up() is None
+        """
+        if self.level < 100:
+            self.level += 1
+            self.exp = 0
+            self.hp += 20
+            self.attack_power += 5
+            self.defense += 5
+        return self.level, self.hp, self.attack_power, self.defense
+
+    def is_alive(self):
+        """
+        Check if the character's hit points are greater than 0.
+
+        Returns:
+            bool: True if the character is alive, False otherwise
+        
+        Test cases:
+            # Test case 1: Character is alive
+            assert RPGCharacter("Player1", 50, 10, 5).is_alive() is True
+
+            # Test case 2: Character is dead
+            input = RPGCharacter("Player1", 0, 10, 5)
+            assert input.is_alive() is False
+
+            # Test case 3: Character has 1 hit point left
+            input = RPGCharacter("Player1", 1, 10, 5)
+            assert input.is_alive() is True
+```</s>

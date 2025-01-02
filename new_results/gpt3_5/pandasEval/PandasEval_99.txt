@@ -1,0 +1,1 @@
+# Return rows in the dataframe where all elements are non-numeric

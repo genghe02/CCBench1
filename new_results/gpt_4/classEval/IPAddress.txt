@@ -1,0 +1,94 @@
+"""
+This class provides methods for validating and manipulating an IP address.
+"""
+
+class IPAddress:
+    def __init__(self, ip_address):
+        """
+        Initialization method for IPAddress class.
+        
+        Parameters:
+            ip_address (str): A string representation of an IP address.
+        """
+        self.ip_address = ip_address
+
+    def is_valid(self):
+        """
+        Validates if the given IP address is correctly formatted as per IPv4 standards.
+        
+        Returns:
+            bool: True if the IP address is valid, False otherwise.
+        
+        Test cases:
+            # Test case 1: Normal valid IP address
+            ip = IPAddress('192.168.1.1')
+            assert ip.is_valid() == True
+            
+            # Test case 2: IP address with more than 4 octets
+            ip = IPAddress('192.168.1.1.1')
+            assert ip.is_valid() == False
+            
+            # Test case 3: IP address with an octet more than 255
+            ip = IPAddress('192.168.1.256')
+            assert ip.is_valid() == False
+        """
+        octets = self.ip_address.split('.')
+        if len(octets) != 4:
+            return False
+        for octet in octets:
+            if not octet.isdigit() or int(octet) < 0 or int(octet) > 255:
+                return False
+        return True
+
+    def get_octets(self):
+        """
+        Splits a valid IP address into its octets.
+        
+        Returns:
+            list: A list of strings representing the octets of the IP address if valid, empty list otherwise.
+
+        Test cases:
+            # Test case 1: Normal valid IP address
+            ip = IPAddress('192.168.1.1')
+            assert ip.get_octets() == ['192', '168', '1', '1']
+            
+            # Test case 2: Invalid IP address
+            ip = IPAddress('192.168.1.1.1')
+            assert ip.get_octets() == []
+            
+            # Test case 3: Empty IP address
+            ip = IPAddress('')
+            assert ip.get_octets() == []
+        """
+        if self.is_valid():
+            return self.ip_address.split('.')
+        else:
+            return []
+
+    def get_binary(self):
+        """
+        Converts a valid IP address into its binary representation.
+        
+        Returns:
+            str: A string representation of the binary IP address if valid, empty string otherwise.
+
+        Test cases:
+            # Test case 1: Normal valid IP address
+            ip = IPAddress('192.168.1.1')
+            assert ip.get_binary() == '11000000.10101000.00000001.00000001'
+            
+            # Test case 2: Invalid IP address
+            ip = IPAddress('192.168.1.1.1')
+            assert ip.get_binary() == ''
+            
+            # Test case 3: Empty IP address
+            ip = IPAddress('')
+            assert ip.get_binary() == ''
+        """
+        if self.is_valid():
+            binary_octets = []
+            for octet in self.get_octets():
+                binary_octets.append(format(int(octet), '08b'))
+            return '.'.join(binary_octets)
+        else:
+            return ''

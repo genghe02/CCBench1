@@ -1,0 +1,10 @@
+ # Reshape the given NumPy array 'a' into a 4-dimensional array with shape (8, 2, 4, 8) and then transpose it along the first and last axes to get a 4-dimensional array with shape (8, 4, 8, 2).
+
+import numpy as np
+
+a = np.arange(8)[:,None].repeat(8,axis=1)
+<Requirements for the code>
+
+b = a.reshape(2,4,2,4)
+# Reshape the given 4-dimensional NumPy array 'b' into a 4-dimensional array with shape (8, 4, 8, 2) by transposing its first and last axes.
+c = b.transpose(0,2,1,3)

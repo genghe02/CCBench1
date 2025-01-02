@@ -1,0 +1,2 @@
+ # Function to find indices of elements within a given range in a NumPy array
+return np.where(np.logical_and(arr >= low, arr <= high))[0]</s>

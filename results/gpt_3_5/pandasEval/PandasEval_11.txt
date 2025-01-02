@@ -1,0 +1,7 @@
+# Select rows from a DataFrame based on the values in a specific column.
+# Parameters:
+# df (pd.DataFrame): The input DataFrame.
+# col_name (str): The name of the column to filter on.
+# values (list): A list of values to filter the DataFrame on.
+# Returns:
+# pd.DataFrame: The filtered DataFrame containing rows where the specified column matches the values provided.

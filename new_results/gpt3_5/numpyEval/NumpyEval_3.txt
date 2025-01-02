@@ -1,0 +1,3 @@
+# Convert string elements in an array to float data type using numpy's astype function
+def convert_string_in_array_to_float(arr):
+    return arr.astype(np.float)

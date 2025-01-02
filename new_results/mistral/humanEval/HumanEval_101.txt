@@ -1,0 +1,21 @@
+ # Function converts a string of words into a list of words
+ # Returns an empty list if the input string is empty
+def words_string(s):
+
+ >>> words_string("hello, world")  # ["hello", "world"]
+ >>> words_string("")               # []
+ >>> words_string("Hi, Mom")          # ["Hi", "Mom"]
+
+ if not s:
+     return []
+
+ s_list = []
+
+ for letter in s:
+     if letter == ',':
+         s_list.append(' ')
+     else:
+         s_list.append(letter)
+
+ s_list = "".join(s_list)
+ return s_list.split()</s>

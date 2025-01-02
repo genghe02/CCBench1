@@ -1,0 +1,96 @@
+```python
+"""
+This class provides methods for computing Kappa statistics, which are used to measure inter-rater agreement.
+"""
+import numpy as np
+
+
+class KappaCalculator:
+
+    @staticmethod
+    def kappa(testData, k):
+        """
+        Calculates Cohen's Kappa coefficient for a given confusion matrix.
+
+        Parameters:
+            testData (list of list of int): A confusion matrix where testData[i][j] represents the number of observations 
+                                              that are classified by both raters as belonging to category j.
+            k (int): The number of categories in the confusion matrix.
+
+        Returns:
+            float: Cohen's Kappa coefficient indicating inter-rater agreement.
+            
+        Test cases:
+            # Test case 1: Basic example with perfect agreement
+            input_data = [[10, 2], [1, 7]]
+            expected_output = 0.7593  # This may vary based on actual calculations
+            
+            # Test case 2: Example with no agreement
+            input_data = [[0, 12], [0, 8]]
+            expected_output = -0.4000  # This may vary based on actual calculations
+            
+            # Test case 3: Example with random classification
+            input_data = [[5, 5], [5, 5]]
+            expected_output = 0.0000  # This may vary based on actual calculations
+        """
+        dataMat = np.mat(testData)
+        P0 = 0.0
+        for i in range(k):
+            P0 += dataMat[i, i] * 1.0
+        xsum = np.sum(dataMat, axis=1)
+        ysum = np.sum(dataMat, axis=0)
+        total_sum = np.sum(dataMat)
+        Pe = float(ysum * xsum) / total_sum / total_sum
+        P0 = float(P0 / total_sum * 1.0)
+        cohens_coefficient = float((P0 - Pe) / (1 - Pe))
+        return cohens_coefficient
+
+    @staticmethod
+    def fleiss_kappa(testData, N, k, n):
+        """
+        Calculates Fleiss' Kappa, a statistic for assessing the reliability of agreement between a fixed number of raters 
+        assigning categorical ratings to a number of items.
+
+        Parameters:
+            testData (list of list of int): A matrix where testData[i][j] is the number of raters that assigned the 
+                                              j-th category to the i-th item.
+            N (int): The number of items being rated.
+            k (int): The number of categories being used.
+            n (int): The number of raters.
+
+        Returns:
+            float: Fleiss' Kappa indicating the level of agreement among raters.
+            
+        Test cases:
+            # Test case 1: Basic example with perfect agreement
+            input_data = [[10, 0, 0], [0, 10, 0], [0, 0, 10]]
+            expected_output = 1.0  # Perfect agreement
+            
+            # Test case 2: Example with low agreement
+            input_data = [[2, 2, 6], [3, 3, 4], [5, 1, 4]]
+            expected_output = 0.148  # Low agreement
+            
+            # Test case 3: Example with complete disagreement
+            input_data = [[10, 0], [0, 10]]
+            expected_output = -1.0  # Complete disagreement
+        """
+        dataMat = np.mat(testData, float)
+        oneMat = np.ones((k, 1))
+        total_sum = 0.0
+        P0 = 0.0
+        for i in range(N):
+            temp = 0.0
+            for j in range(k):
+                total_sum += dataMat[i, j]
+                temp += 1.0 * dataMat[i, j] ** 2
+            temp -= n
+            temp /= (n - 1) * n
+            P0 += temp
+        P0 = 1.0 * P0 / N
+        ysum = np.sum(dataMat, axis=0)
+        for i in range(k):
+            ysum[0, i] = (ysum[0, i] / total_sum) ** 2
+        Pe = ysum * oneMat * 1.0
+        ans = (P0 - Pe) / (1 - Pe)
+        return ans[0, 0]
+```

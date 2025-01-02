@@ -1,0 +1,143 @@
+```python
+"""
+This class represents a Snake game implementation that includes the functionality to control the movement of the snake, manage food positioning, track the snake's length and score, and reset the game state when necessary.
+"""
+
+import random
+
+class Snake:
+    def __init__(self, SCREEN_WIDTH, SCREEN_HEIGHT, BLOCK_SIZE, food_position):
+        """
+        Initializes the Snake object with the specified screen dimensions and block size.
+
+        Parameters:
+            SCREEN_WIDTH (int): The width of the game screen.
+            SCREEN_HEIGHT (int): The height of the game screen.
+            BLOCK_SIZE (int): The size of each block in the game.
+            food_position (tuple): The initial position of the food on the game screen.
+
+        Returns:
+            None
+        """
+        self.length = 1
+        self.SCREEN_WIDTH = SCREEN_WIDTH
+        self.SCREEN_HEIGHT = SCREEN_HEIGHT
+        self.BLOCK_SIZE = BLOCK_SIZE
+        self.positions = [((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))]
+        self.score = 0
+        self.food_position = food_position
+
+    def move(self, direction):
+        """
+        Moves the snake in the specified direction.
+
+        Parameters:
+            direction (tuple): A tuple representing the direction of movement (x, y), where
+                               x and y are either -1, 0, or 1.
+
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Normal movement
+            snake = Snake(600, 400, 20, (100, 100))
+            snake.move((1, 0))  # Move right
+            assert snake.positions[0] == (300, 200)
+
+            # Test case 2: Eating food
+            snake.food_position = (320, 200)
+            snake.length = 1  # Reset length for test
+            snake.move((1, 0))  # Move right to eat the food
+            assert snake.length == 2  # Should have grown
+
+            # Test case 3: Collision with self
+            snake.positions = [(300, 200), (320, 200), (340, 200)]
+            snake.move((1, 0))  # Moving into itself should reset the snake
+            assert snake.length == 1  # Should reset length
+        """
+        cur = self.positions[0]
+        x, y = direction
+
+        new = (
+            ((cur[0] + (x * self.BLOCK_SIZE)) % self.SCREEN_WIDTH),
+            (cur[1] + (y * self.BLOCK_SIZE)) % self.SCREEN_HEIGHT,
+        )
+
+        if new == self.food_position:
+            self.eat_food()
+
+        if len(self.positions) > 2 and new in self.positions[2:]:
+            self.reset()
+        else:
+            self.positions.insert(0, new)
+            if len(self.positions) > self.length:
+                self.positions.pop()
+
+    def random_food_position(self):
+        """
+        Randomly generates a new food position that does not overlap with the snake.
+
+        Returns:
+            None
+        """
+        while self.food_position in self.positions:
+            self.food_position = (random.randint(0, self.SCREEN_WIDTH // self.BLOCK_SIZE - 1) * self.BLOCK_SIZE,
+                                  random.randint(0, self.SCREEN_HEIGHT // self.BLOCK_SIZE - 1) * self.BLOCK_SIZE)
+
+    def reset(self):
+        """
+        Resets the snake's state to the initial configuration.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Resetting the game
+            snake = Snake(600, 400, 20, (100, 100))
+            snake.length = 5
+            snake.reset()
+            assert snake.length == 1  # Should reset length
+            assert snake.positions == [((300, 200)]  # Should reset position to center
+        
+            # Test case 2: Position after reset
+            snake.food_position = (250, 250)
+            snake.reset()
+            assert snake.food_position != (250, 250)  # Food position should change
+
+            # Test case 3: Score reset
+            snake.score = 150
+            snake.reset()
+            assert snake.score == 0  # Should reset score
+        """
+        self.length = 1
+        self.positions = [((self.SCREEN_WIDTH / 2), (self.SCREEN_HEIGHT / 2))]
+        self.score = 0
+        self.random_food_position()
+
+    def eat_food(self):
+        """
+        Increments the score and length of the snake upon eating food and generates a new food position.
+
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Eating food increases length
+            snake = Snake(600, 400, 20, (100, 100))
+            snake.eat_food()  # Eating food
+            assert snake.length == 2  # Should increase length
+            
+            # Test case 2: Score increment
+            snake.score = 0
+            snake.eat_food()  # Eating food
+            assert snake.score == 100  # Should increase score by 100
+            
+            # Test case 3: Positioning food
+            old_food_position = snake.food_position
+            snake.eat_food()
+            assert snake.food_position != old_food_position  # Food position should change after eating
+        """
+        self.length += 1
+        self.score += 100
+        self.random_food_position()
+```

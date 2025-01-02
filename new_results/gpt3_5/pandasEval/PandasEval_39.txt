@@ -1,0 +1,3 @@
+# Convert the data types of all columns in a dataframe to numeric using pd.to_numeric function
+def change_all_cols_type(df):
+    return df.apply(pd.to_numeric)

@@ -1,0 +1,21 @@
+def order_by_points(nums):
+    # Sort the list of numbers based on the sum of their digits where negative numbers have their sign preserved.
+    
+    # Test Cases:
+    # Sorting an empty list should return an empty list.
+    # Sorting a list with single element should return the same list.
+    # Sorting a list with positive integers.
+    # Sorting a list with negative integers.
+    # Sorting a list with mix of positive and negative integers.
+    
+    def digits_sum(n):
+        # Calculate the sum of digits of a number where the sign is preserved for negative numbers.
+        
+        neg = 1
+        if n < 0: 
+            n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    
+    return sorted(nums, key=digits_sum)

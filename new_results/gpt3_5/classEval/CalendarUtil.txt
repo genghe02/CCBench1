@@ -1,0 +1,183 @@
+"""
+This class provides a set of utility functions for managing calendar events and availability.
+"""
+
+from datetime import datetime, timedelta
+
+class CalendarUtil:
+    def __init__(self):
+        """
+        Initialize the CalendarUtil class.
+
+        Initializes a list to store calendar events.
+        """
+        self.events = []
+
+    def add_event(self, event):
+        """
+        Add an event to the calendar.
+
+        Parameters:
+            event (dict): A dictionary representing the event to be added.
+
+        Test cases:
+            # Test case 1: Adding a new event
+            input_event = {'title': 'Meeting', 'date': datetime(2023, 9, 14, 14, 30), 'duration': timedelta(hours=1)}
+            add_event(input_event)
+            assert events == [input_event]
+
+            # Test case 2: Adding duplicate event
+            input_event = {'title': 'Meeting', 'date': datetime(2023, 9, 14, 14, 30), 'duration': timedelta(hours=1)}
+            add_event(input_event)
+            assert events == [input_event, input_event]
+
+            # Test case 3: Adding invalid event
+            input_event = None
+            add_event(input_event)
+            assert events == [input_event, input_event]
+
+        """
+        self.events.append(event)
+
+    def remove_event(self, event):
+        """
+        Remove an event from the calendar.
+
+        Parameters:
+            event (dict): A dictionary representing the event to be removed.
+
+        Test cases:
+            # Test case 1: Remove existing event
+            remove_event(events[0])
+            assert events == []
+
+            # Test case 2: Remove non-existent event
+            invalid_event = {'title': 'Exam', 'date': datetime(2023, 10, 10, 9, 0), 'duration': timedelta(hours=2)}
+            remove_event(invalid_event)
+            assert events == []
+
+            # Test case 3: Remove first occurrence of event
+            add_event(invalid_event)
+            add_event(events[0])
+            remove_event(invalid_event)
+            assert events == [events[0]]
+        """
+        if event in self.events:
+            self.events.remove(event)
+
+    def get_events(self, date):
+        """
+        Get all events scheduled for a specific date.
+
+        Parameters:
+            date (datetime): Date for which events need to be retrieved.
+
+        Returns:
+            list: A list of events scheduled for the specified date.
+        
+        Test cases:
+            # Test case 1: Events on specific date
+            assert get_events(datetime(2023, 9, 14, 0, 0)) == [events[0]]
+
+            # Test case 2: No events on date
+            assert get_events(datetime(2023, 10, 10, 0, 0)) == []
+
+            # Test case 3: Invalid input date
+            assert get_events(None) == []
+        """
+
+        events_on_date = []
+        for event in self.events:
+            if event['date'].date() == date.date():
+                events_on_date.append(event)
+        return events_on_date
+
+    def is_available(self, start_time, end_time):
+        """
+        Check if a time slot is available for scheduling.
+
+        Parameters:
+            start_time (datetime): Start time of the slot
+            end_time (datetime): End time of the slot
+
+        Returns:
+            bool: True if the slot is available; False otherwise
+
+        Test cases:
+            # Test case 1: Available slot
+            assert is_available(datetime(2023, 9, 14, 15, 0), datetime(2023, 9, 14, 16, 0)) == True
+
+            # Test case 2: Slot overlap
+            assert is_available(datetime(2023, 9, 12, 8, 30), datetime(2023, 9, 12, 9, 30)) == False
+
+            # Test case 3: Empty slot
+            assert is_available(datetime(2023, 10, 10, 10, 0), datetime(2023, 10, 10, 12, 0)) == True
+        """
+
+        for event in self.events:
+            if start_time < event['end_time'] and end_time > event['start_time']:
+                return False
+        return True
+
+    def get_available_slots(self, date):
+        """
+        Get available time slots for a specific date.
+
+        Parameters:
+            date (datetime): Date for which to find available slots
+
+        Returns:
+            list: List of tuples representing available time slots
+        
+        Test cases:
+            # Test case 1: Available slots on date
+            assert get_available_slots(datetime(2023, 9, 14, 0, 0)) == [(datetime(2023, 9, 14, 0, 0), datetime(2023, 9, 14, 1, 0))]
+
+            # Test case 2: No slots available
+            assert get_available_slots(datetime(2023, 9, 12, 0, 0)) == []
+
+            # Test case 3: Invalid date
+            assert get_available_slots(None) == []
+        """
+
+        available_slots = []
+        start_time = datetime(date.year, date.month, date.day, 0, 0)
+        end_time = datetime(date.year, date.month, date.day, 23, 59)
+
+        while start_time < end_time:
+            slot_end_time = start_time + timedelta(minutes=60)
+            if self.is_available(start_time, slot_end_time):
+                available_slots.append((start_time, slot_end_time))
+            start_time += timedelta(minutes=60)
+
+        return available_slots
+
+    def get_upcoming_events(self, num_events):
+        """
+        Retrieve a specified number of upcoming events.
+        
+        Parameters:
+            num_events (int): Number of upcoming events to return
+
+        Returns:
+            list: List of upcoming events
+        
+        Test cases:
+            # Test case 1: All upcoming events
+            assert get_upcoming_events(5) == [events[0]]
+
+            # Test case 2: No upcoming events
+            assert get_upcoming_events(0) == []
+
+            # Test case 3: Limited number of events
+            assert get_upcoming_events(2) == [events[0]]
+        """
+
+        now = datetime.now()
+        upcoming_events = []
+        for event in self.events:
+            if event['start_time'] >= now:
+                upcoming_events.append(event)
+            if len(upcoming_events) == num_events:
+                break
+        return upcoming_events

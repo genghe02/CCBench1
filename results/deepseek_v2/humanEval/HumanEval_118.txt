@@ -1,0 +1,27 @@
+```python
+def get_closest_vowel(word):
+    # This function finds and returns the closest vowel in a word that is surrounded by consonants.
+    # If no such vowel is found, it returns an empty string.
+
+    # Test cases for the function:
+    # >>> get_closest_vowel("apple")
+    # 'e'
+    # >>> get_closest_vowel("sky")
+    # ''
+    # >>> get_closest_vowel("banana")
+    # 'a'
+    # >>> get_closest_vowel("rhythm")
+    # ''
+    # >>> get_closest_vowel("Aeiou")
+    # ''
+
+    if len(word) < 3:
+        return ""
+
+    vowels = {"a", "e", "i", "o", "u", "A", "E", 'O', 'U', 'I'}
+    for i in range(len(word)-2, 0, -1):
+        if word[i] in vowels:
+            if (word[i+1] not in vowels) and (word[i-1] not in vowels):
+                return word[i]
+    return ""
+```

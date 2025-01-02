@@ -1,0 +1,2 @@
+# Check for common elements between two arrays and return boolean array
+c = np.in1d(a, b)

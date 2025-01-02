@@ -1,0 +1,1 @@
+# Returns the ratio between each element and its preceding element in a numpy array. This function assumes that there are no zero values in the array, as division by zero would raise an exception.

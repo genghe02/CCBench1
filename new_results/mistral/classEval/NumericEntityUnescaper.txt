@@ -1,0 +1,92 @@
+ """
+This class is designed to unescape special characters in a string using Numeric Entities.
+"""
+
+import re
+
+class NumericEntityUnescaper:
+
+    def __init__(self):
+        """
+        Initialization method.
+        """
+        pass
+
+    def replace(self, string):
+        """
+        Replace special characters in a string with their corresponding character using Numeric Entities.
+
+        Parameters:
+            string (str): The input string to be unescaped
+
+        Returns:
+            str: The unescaped string
+
+        Test cases:
+            # Test case 1: Basic unescaping
+            assert replace('Test%20String') == 'Test String'
+            
+            # Test case 2: Complex unescaping
+            assert replace('Test%61%6D%79%20%63%61%6C%68%65%72%20%64%6F%6D') == 'Test awful is'
+            
+            # Test case 3: Empty string
+            assert replace('') == ''
+        """
+        out = []
+        pos = 0
+        length = len(string)
+
+        while pos < length - 2:
+            if string[pos] == '&' and string[pos + 1] == '#':
+                start = pos + 2
+                is_hex = False
+                first_char = string[start]
+
+                if first_char == 'x' or first_char == 'X':
+                    start += 1
+                    is_hex = True
+
+                if start == length:
+                    return ''.join(out)
+
+                end = start
+                while end < length and self.is_hex_char(string[end]):
+                    end += 1
+
+                if end < length and string[end] == ';':
+                    try:
+                        entity_value = int(string[start:end], 16 if is_hex else 10)
+                    except:
+                        return ''.join(out)
+
+                    out.append(chr(entity_value))
+                    pos = end + 1
+                    continue
+
+            out.append(string[pos])
+            pos += 1
+
+        return ''.join(out)
+
+    @staticmethod
+    def is_hex_char(char):
+        """
+        Check if a character is a valid hexadecimal character.
+
+        Parameters:
+            char (str): The character to be checked
+
+        Returns:
+            bool: True if the character is valid hexadecimal character, False otherwise
+
+        Test cases:
+            # Test case 1: Valid hexadecimal character
+            assert is_hex_char('0') == True
+            
+            # Test case 2: Valid lowercase hexadecimal character
+            assert is_hex_char('a') == True
+            
+            # Test case 3: Invalid character
+            assert is_hex_char('!') == False
+        """
+        return re.match(r'[0-9A-Fa-f]', char) is not None</s>

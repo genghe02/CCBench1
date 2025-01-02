@@ -1,0 +1,3 @@
+ # Convert NumPy array to string and then back to array of integers
+ts = arr.tostring()
+new_arr = np.fromstring(ts, dtype=int)</s>

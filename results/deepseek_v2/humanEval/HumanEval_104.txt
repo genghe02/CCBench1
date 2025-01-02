@@ -1,0 +1,19 @@
+```python
+def unique_digits(x):
+    # This function filters out numbers with only odd digits from the input list and returns them sorted.
+    # It iterates through each number in the input list, converts it to a string, checks if all digits are odd,
+    # and if so, appends the number to a list. Finally, it returns the sorted list of these numbers.
+    
+    # >>> unique_digits([135, 246, 111, 333, 456, 777])
+    # [111, 135, 333, 777]
+    # >>> unique_digits([123, 456, 789, 111, 333])
+    # [111, 333]
+    # >>> unique_digits([246, 468, 680])
+    # []
+    
+    odd_digit_elements = []
+    for i in x:
+        if all (int(c) % 2 == 1 for c in str(i)):
+            odd_digit_elements.append(i)
+    return sorted(odd_digit_elements)
+```

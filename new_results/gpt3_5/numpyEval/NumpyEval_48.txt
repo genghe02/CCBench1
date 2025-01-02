@@ -1,0 +1,1 @@
+# Find and return the total number of true values in the input array

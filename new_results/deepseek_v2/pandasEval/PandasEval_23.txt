@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+import numpy as np
+
+def find_columns_name_lists(df):
+    # Return list of column names containing missing values
+    return df.columns[df.isna().any()].tolist()
+```

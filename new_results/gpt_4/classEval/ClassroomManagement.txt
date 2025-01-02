@@ -1,0 +1,148 @@
+"""
+This class represents a classroom, maintaining a list of courses and providing methods to manage the courses and check 
+scheduling conflicts.
+"""
+
+from datetime import datetime
+
+
+class Classroom:
+    def __init__(self, id):
+        """
+        Initialization method for the Classroom object.
+        
+        Parameters:
+            id (int): A unique identifier for the Classroom.
+        """
+        self.id = id
+        self.courses = []
+
+    def add_course(self, course):
+        """
+        Add a new course to the classroom.
+        
+        Parameters:
+            course (dict): A dictionary representing a course. Should contain 'name', 'start_time', and 'end_time' fields.
+
+        Test cases:
+            # Test case 1: Adding a course to an empty classroom
+            classroom = Classroom(1)
+            classroom.add_course({'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'})
+            assert classroom.courses == [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+
+            # Test case 2: Adding a course to a classroom with existing courses
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            classroom.add_course({'name': 'English', 'start_time': '10:30', 'end_time': '11:30'})
+            assert classroom.courses == [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}, {'name': 'English', 'start_time': '10:30', 'end_time': '11:30'}]
+
+            # Test case 3: Trying to add a duplicate course
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            classroom.add_course({'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'})
+            assert classroom.courses == [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+        """
+        
+        if course not in self.courses:
+            self.courses.append(course)
+
+    def remove_course(self, course):
+        """
+        Remove a course from the classroom.
+        
+        Parameters:
+            course (dict): A dictionary representing the course to be removed. Should match one of the courses in the list.
+
+        Test cases:
+            # Test case 1: Removing a course from the classroom
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            classroom.remove_course({'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'})
+            assert classroom.courses == []
+
+            # Test case 2: Trying to remove a course that isn't in the classroom
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            classroom.remove_course({'name': 'English', 'start_time': '10:30', 'end_time': '11:30'})
+            assert classroom.courses == [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+
+            # Test case 3: Trying to remove a course from an empty classroom
+            classroom = Classroom(1)
+            classroom.remove_course({'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'})
+            assert classroom.courses == []
+        """
+        
+        if course in self.courses:
+            self.courses.remove(course)
+
+    def is_free_at(self, check_time):
+        """
+        Check whether the classroom is free at a specific time.
+        
+        Parameters:
+            check_time (str): The time to check, in 'HH:MM' format.
+            
+        Returns:
+            bool: True if the classroom is free at the specified time, False otherwise.
+            
+        Test cases:
+            # Test case 1: Checking a time when the classroom is occupied
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            assert classroom.is_free_at('09:30') == False
+
+            # Test case 2: Checking a time when the classroom is free
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            assert classroom.is_free_at('10:30') == True
+
+            # Test case 3: Checking a time on an empty classroom
+            classroom = Classroom(1)
+            assert classroom.is_free_at('09:30') == True
+        """
+
+        check_time = datetime.strptime(check_time, '%H:%M')
+
+        for course in self.courses:
+            if datetime.strptime(course['start_time'], '%H:%M') <= check_time <= datetime.strptime(course['end_time'], '%H:%M'):
+                return False
+        return True
+
+    def check_course_conflict(self, new_course):
+        """
+        Check whether a new course conflicts with any existing courses in the classroom.
+        
+        Parameters:
+            new_course (dict): A dictionary representing the new course. Should contain 'start_time' and 'end_time' fields.
+            
+        Returns:
+            bool: True if the new course doesn't conflict with any existing courses, False otherwise.
+            
+        Test cases:
+            # Test case 1: Adding a course with no conflicts
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            assert classroom.check_course_conflict({'name': 'English', 'start_time': '10:30', 'end_time': '11:30'}) == True
+
+            # Test case 2: Adding a course that conflicts with an existing course
+            classroom = Classroom(1)
+            classroom.courses = [{'name': 'Math', 'start_time': '09:00', 'end_time': '10:00'}]
+            assert classroom.check_course_conflict({'name': 'English', 'start_time': '09:30', 'end_time': '10:30'}) == False
+
+            # Test case 3: Adding a course to an empty classroom
+            classroom = Classroom(1)
+            assert classroom.check_course_conflict({'name': 'English', 'start_time': '09:30', 'end_time': '10:30'}) == True
+        """
+        
+        new_start_time = datetime.strptime(new_course['start_time'], '%H:%M')
+        new_end_time = datetime.strptime(new_course['end_time'], '%H:%M')
+
+        flag = True
+        for course in self.courses:
+            start_time = datetime.strptime(course['start_time'], '%H:%M')
+            end_time = datetime.strptime(course['end_time'], '%H:%M')
+            if start_time <= new_start_time and end_time >= new_start_time:
+                flag = False
+            if start_time <= new_end_time and end_time >= new_end_time:
+                flag = False
+        return flag

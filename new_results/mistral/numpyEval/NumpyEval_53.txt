@@ -1,0 +1,2 @@
+ # Subtract the minimum values in each row from the matrix
+result = a - a.min(axis=0)</s>

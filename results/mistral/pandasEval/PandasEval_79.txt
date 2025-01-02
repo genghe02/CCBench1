@@ -1,0 +1,16 @@
+ # Find each row where there is at least one NaN value using pandas' isna() method and the any() aggregation function along the axis of 1.
+# Return the dataframe with only those rows.
+
+import pandas as pd
+import numpy as np
+
+def display_rows_with_gt_1_nan(df):
+    """
+    Find and return rows in the given DataFrame where there is at least one NaN value.
+
+    :param df: The input DataFrame.
+    :return: A new DataFrame containing only the rows with at least one NaN value.
+    """
+    # Find each row where there is at least one NaN value using pandas' isna() method and the any() aggregation function along the axis of 1.
+    # Return the dataframe with only those rows.
+    return df[df.isna().any(axis=1)]

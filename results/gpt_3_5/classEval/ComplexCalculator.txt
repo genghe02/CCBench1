@@ -1,0 +1,58 @@
+<description for whole class>
+class ComplexCalculator:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def add(c1, c2):
+        # Function to add two complex numbers c1 and c2.
+        # param c1: complex, first complex number
+        # param c2: complex, second complex number
+        # return: complex, sum of c1 and c2
+        # Test cases: 
+        # >>> ComplexCalculator.add(complex(2, 3), complex(1, 2))
+        # (3+5j)
+        real = c1.real + c2.real
+        imaginary = c1.imag + c2.imag
+        answer = complex(real, imaginary)
+        return answer
+    
+    @staticmethod
+    def subtract(c1, c2):
+        # Function to subtract two complex numbers c1 and c2.
+        # param c1: complex, first complex number
+        # param c2: complex, second complex number
+        # return: complex, difference of c1 and c2
+        # Test cases: 
+        # >>> ComplexCalculator.subtract(complex(2, 3), complex(1, 2))
+        # (1+1j)
+        real = c1.real - c2.real
+        imaginary = c1.imag - c2.imag
+        return complex(real, imaginary)
+    
+    @staticmethod
+    def multiply(c1, c2):
+        # Function to multiply two complex numbers c1 and c2.
+        # param c1: complex, first complex number
+        # param c2: complex, second complex number
+        # return: complex, product of c1 and c2
+        # Test cases: 
+        # >>> ComplexCalculator.multiply(complex(2, 3), complex(1, 2))
+        # (-4+7j)
+        real = c1.real * c2.real - c1.imag * c2.imag
+        imaginary = c1.real * c2.imag + c1.imag * c2.real
+        return complex(real, imaginary)
+    
+    @staticmethod
+    def divide(c1, c2):
+        # Function to divide two complex numbers c1 by c2.
+        # param c1: complex, numerator complex number
+        # param c2: complex, denominator complex number
+        # return: complex, result of division c1 by c2
+        # Test cases: 
+        # >>> ComplexCalculator.divide(complex(2, 3), complex(1, 2))
+        # (1.6-0.2j)
+        denominator = c2.real**2 + c2.imag**2
+        real = (c1.real * c2.real + c1.imag * c2.imag) / denominator
+        imaginary = (c1.imag * c2.real - c1.real * c2.imag) / denominator
+        return complex(real, imaginary)

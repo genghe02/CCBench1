@@ -1,0 +1,5 @@
+import numpy as np
+
+arr = np.array([[ 1.41421356, 0.70710678, 0.70710678], [0., 1.22474487,1.22474487], [0., 0., 0.]])
+# Remove rows that contain all zeros
+new_arr = arr[~np.all(arr == 0, axis=1)]

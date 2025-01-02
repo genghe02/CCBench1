@@ -1,0 +1,3 @@
+# Sort columns in a dataframe based on column name
+def sorting_columns_based_on_column_name(df):
+    return df.reindex(sorted(df.columns), axis=1)

@@ -1,0 +1,13 @@
+```python
+def fruit_distribution(s, n):
+    # Distribute fruits based on input string and return remaining count
+    >>> fruit_distribution("1 2 3", 10) # returns 4
+    >>> fruit_distribution("4 5", 20) # returns 11
+    >>> fruit_distribution("0 0 0", 5) # returns 5
+    >>> fruit_distribution("10 10 10", 30) # returns 0
+    lis = list()
+    for i in s.split(' '):
+        if i.isdigit():
+            lis.append(int(i))
+    return n - sum(lis)
+```

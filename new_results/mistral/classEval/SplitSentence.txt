@@ -1,0 +1,77 @@
+ """
+This class, named `SplitSentence`, is designed to handle text processing tasks such as splitting sentences and counting words.
+"""
+
+import re
+
+
+class SplitSentence:
+
+    def split_sentences(self, sentences_string):
+        """
+        Splits a given string into a list of sentences using regular expressions.
+
+        Parameters:
+            sentences_string (str): A string containing multiple sentences, separated by periods or question marks followed by a space.
+
+        Returns:
+            list: A list of individual sentences as strings.
+
+        Test cases:
+            # Test case 1: Splitting multiple sentences with periods
+            assert split_sentences("This is sentence 1. This is sentence 2.") == ['This is sentence 1.', 'This is sentence 2.']
+            
+            # Test case 2: Splitting multiple sentences with question marks
+            assert split_sentences("This is sentence 1? This is sentence 2!") == ['This is sentence 1?', 'This is sentence 2!']
+            
+            # Test case 3: Splitting a single sentence
+            assert split_sentences("This is a single sentence.") == ['This is a single sentence.']
+        """
+
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        """
+        Counts the total number of words present in a given sentence.
+
+        Parameters:
+            sentence (str): A string containing a single sentence.
+
+        Returns:
+            int: The total number of words in the given sentence.
+
+        Test cases:
+            # Test case 1: Counting words in a simple sentence
+            assert count_words("The quick brown fox jumps over the lazy dog") == 7
+            
+            # Test case 2: Counting words in a sentence with multiple words
+            assert count_words("Four score and seven years ago our fathers brought forth on this continent a new nation") == 9
+            
+            # Test case 3: Counting words in an empty sentence
+            assert count_words("") == 0
+        """
+
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)  # Remove non-alphanumeric characters
+        words = sentence.split()
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        """
+        Identifies the sentence with the maximum number of words in a given text string.
+
+        Parameters:
+            sentences_string (str): A string containing multiple sentences, each separated by a single newline character.
+
+        Returns:
+            int: The total number of words in the sentence with the highest word count.
+
+        Test cases:
+            # Test case 1: Processing a text containing multiple sentences with varying word counts
+            assert process_text_file("This is the first sentence.\nThis is the second sentence with six words.\nThis is the third sentence with eight words.") == 8
+            
+            # Test case 2: Processing a text containing multiple sentences with the same word count
+            assert process_text_file("This is the first sentence.\nThis is the second sentence.\nThis is the third sentence.") == 3
+            
+            # Test case 3: Processing a text containing a single sentence
+            assert process_text_file("This is a sentence.") == 1</s>

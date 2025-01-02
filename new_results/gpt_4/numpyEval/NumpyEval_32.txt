@@ -1,0 +1,6 @@
+import numpy as np
+
+def broadcasting_app(a, L, S):  # Window len = L, Stride len/stepsize = S
+    # Calculate the number of rows in the output array based on the window length and stride length
+    nrows = ((a.size-L)//S)+1
+    return a[S*np.arange(nrows)[:,None] + np.arange(L)]

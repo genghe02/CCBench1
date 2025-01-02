@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+a = np.array([[[10, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4]],
+              [[1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4]]])
+
+# Reverse the order of the last axis of the array
+b = a[:, :, ::-1]
+```

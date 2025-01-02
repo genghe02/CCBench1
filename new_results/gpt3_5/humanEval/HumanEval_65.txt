@@ -1,0 +1,12 @@
+# This function performs a circular shift on a number by shifting its digits
+# Shift should be a non-negative integer
+
+>>> circular_shift(123456, 2) # returns 561234
+>>> circular_shift(987654321, 4) # returns 321987654
+>>> circular_shift(123, 6) # returns 321
+def circular_shift(x, shift):
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]

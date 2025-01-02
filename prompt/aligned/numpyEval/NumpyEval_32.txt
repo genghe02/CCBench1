@@ -1,0 +1,1 @@
+# Create a matrix of sub-sequences from the given array of length L with stride S and return the numpy array of sub-sequences.

@@ -1,0 +1,17 @@
+```python
+def specialFilter(nums):
+    # Filter numbers greater than 10 where both the first and last digits are odd
+    >>> specialFilter([15, 33, 12, 27, 44]) # returns 2
+    >>> specialFilter([11, 22, 13, 19, 20]) # returns 3
+    >>> specialFilter([9, 10, 21, 31, 41]) # returns 1
+    
+    count = 0
+    for num in nums:
+        if num > 10:
+            odd_digits = (1, 3, 5, 7, 9)
+            number_as_string = str(num)
+            if int(number_as_string[0]) in odd_digits and int(number_as_string[-1]) in odd_digits:
+                count += 1
+        
+    return count 
+```

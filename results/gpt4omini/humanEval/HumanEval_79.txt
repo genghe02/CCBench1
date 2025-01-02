@@ -1,0 +1,12 @@
+```python
+def decimal_to_binary(decimal):
+    # Convert a decimal number to its binary representation, formatted with 'db' prefix and suffix.
+    
+    # Test cases to validate the function:
+    # >>> decimal_to_binary(5)  # Expected output: 'db101db'
+    # >>> decimal_to_binary(0)  # Expected output: 'db0db'
+    # >>> decimal_to_binary(10)  # Expected output: 'db1010db'
+    # >>> decimal_to_binary(15)  # Expected output: 'db1111db'
+    
+    return "db" + bin(decimal)[2:] + "db"
+```

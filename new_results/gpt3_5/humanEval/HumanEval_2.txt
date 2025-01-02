@@ -1,0 +1,6 @@
+def truncate_number(number: float) -> float:
+    # Return the decimal part of a float number by using modulo 1.0
+    >>> truncate_number(3.5) # returns 0.5
+    >>> truncate_number(-3.5) # returns 0.5
+    >>> truncate_number(0.0) # returns 0.0
+    return number % 1.0

@@ -1,0 +1,1 @@
+# Filter out values larger than 2 using numpy's masked arrays and compress the masked array to get the unmasked values.

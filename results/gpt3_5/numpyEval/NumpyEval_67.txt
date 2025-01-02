@@ -1,0 +1,1 @@
+# Find the indices of elements in the input array that are equal to zero using numpy and return them.

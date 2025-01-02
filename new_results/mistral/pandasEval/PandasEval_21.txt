@@ -1,0 +1,7 @@
+ ✅ Correct Output:
+import pandas as pd
+import numpy as np
+
+# Filter dataframe rows where each element is greater than mean
+# And apply a function to each row, dropping NA values and converting to Series
+df = df[df > df.mean()].apply(lambda x: pd.Series(x.dropna().values), axis=1)</s>

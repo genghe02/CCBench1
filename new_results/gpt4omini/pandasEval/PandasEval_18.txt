@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef get_values_at_nth_rows(df, n, column_name):\n    # Retrieve values at specified row indices for a given column\n    return df[column_name].iloc[n]

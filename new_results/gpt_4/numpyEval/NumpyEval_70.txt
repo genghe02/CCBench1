@@ -1,0 +1,6 @@
+import numpy as np
+
+dat = np.array([[1,2,3], [4,5,np.nan], [np.nan,6,np.nan]])
+mdat = np.ma.masked_array(dat,np.isnan(dat))
+# Calculate the mean of each row, ignoring NaN values, and fill missing values with NaN again
+mm = np.mean(mdat,axis=1).filled(np.nan)

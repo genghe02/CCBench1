@@ -1,0 +1,1 @@
+# Delete all the rows of the pandas dataframe df in place by using the drop() function with the index of the dataframe as argument. The inplace=True argument ensures that the operation is done on the dataframe itself.

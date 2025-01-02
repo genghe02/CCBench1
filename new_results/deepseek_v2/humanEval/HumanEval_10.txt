@@ -1,0 +1,43 @@
+```python
+def is_palindrome(string: str) -> bool:
+    # Check if a string is the same when reversed
+    return string == string[::-1]
+
+
+def make_palindrome(string: str) -> str:
+    # Create a palindrome by appending the reverse of the necessary prefix
+    <some test cases for the function>
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]
+```
+
+✅ Correct Output:
+
+```python
+def is_palindrome(string: str) -> bool:
+    # Check if a string is the same when reversed
+    return string == string[::-1]
+
+
+def make_palindrome(string: str) -> str:
+    # Create a palindrome by appending the reverse of the necessary prefix
+    >>> make_palindrome("abc") # returns "abcba"
+    >>> make_palindrome("a") # returns "a"
+    >>> make_palindrome("abba") # returns "abba"
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]
+```

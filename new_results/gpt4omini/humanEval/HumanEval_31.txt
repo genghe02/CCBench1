@@ -1,0 +1,15 @@
+```python
+def is_prime(n):
+    # Check if a number is prime
+    >>> is_prime(2) # returns True
+    >>> is_prime(3) # returns True
+    >>> is_prime(4) # returns False
+    >>> is_prime(5) # returns True
+    >>> is_prime(-1) # returns False
+    if n < 2:
+        return False
+    for k in range(2, n - 1):
+        if n % k == 0:
+            return False
+    return True
+```

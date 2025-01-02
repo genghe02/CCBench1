@@ -1,0 +1,14 @@
+```python
+def hex_key(num):
+    # Count the number of prime hexadecimal digits in the input string
+    >>> hex_key("ABCDEF") # returns 0
+    >>> hex_key("12345")  # returns 3
+    >>> hex_key("275B")   # returns 2
+    >>> hex_key("BDA")    # returns 2
+    primes = ('2', '3', '5', '7', 'B', 'D')
+    total = 0
+    for i in range(0, len(num)):
+        if num[i] in primes:
+            total += 1
+    return total
+```

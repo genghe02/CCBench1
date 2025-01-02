@@ -1,0 +1,129 @@
+"""
+This class implements a movie booking system that allows users to add movies, book tickets and check available movies within a certain timeframe.
+"""
+
+from datetime import datetime
+import numpy as np
+
+class MovieBookingSystem:
+    def __init__(self):
+        """
+        Initializes an instance of the MovieBookingSystem class with an empty list of movies.
+        
+        Test cases:
+            # Test case 1: Successful instantiation
+            mbs = MovieBookingSystem()
+            assert mbs.movies == []
+        """
+        self.movies = []
+
+    def add_movie(self, name, price, start_time, end_time, n):
+        """
+        Adds a movie to the list of available movies in the system.
+
+        Parameters:
+            name (str): The name of the movie.
+            price (float): The price of a ticket for the movie.
+            start_time (str): The start time of the movie in 'HH:MM' format.
+            end_time (str): The end time of the movie in 'HH:MM' format.
+            n (int): The number of seats in the theatre for the movie (the theatre is assumed to be a square with n rows and n columns).
+        
+        Test cases:
+            # Test case 1: Adding a movie
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            assert mbs.movies[0]['name'] == "Inception"
+            
+            # Test case 2: Adding two movies
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            mbs.add_movie("Interstellar", 12.0, "17:00", "20:00", 5)
+            assert len(mbs.movies) == 2
+        """
+        movie = {
+            'name': name,
+            'price': price,
+            'start_time': datetime.strptime(start_time, '%H:%M'),
+            'end_time': datetime.strptime(end_time, '%H:%M'),
+            'seats': np.zeros((n, n))
+        }
+        self.movies.append(movie)
+
+    def book_ticket(self, name, seats_to_book):
+        """
+        Books a ticket for a specific movie and seat.
+
+        Parameters:
+            name (str): The name of the movie.
+            seats_to_book (list): A list of tuples representing the seats to be booked. Each tuple is in the format (row number, column number).
+
+        Returns:
+            str: A success message if the booking is successful, or an error message if the booking fails.
+            
+        Test cases:
+            # Test case 1: Successful booking
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            assert mbs.book_ticket("Inception", [(1, 1)]) == "Booking success."
+            
+            # Test case 2: Failed booking due to seat being taken
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            mbs.book_ticket("Inception", [(1, 1)])
+            assert mbs.book_ticket("Inception", [(1, 1)]) == "Booking failed."
+            
+            # Test case 3: Failed booking due to movie not being found
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            assert mbs.book_ticket("Interstellar", [(1, 1)]) == "Movie not found."
+        """
+        for movie in self.movies:
+            if movie['name'] == name:
+                for seat in seats_to_book:
+                    if movie['seats'][seat[0]][seat[1]] == 0:
+                        movie['seats'][seat[0]][seat[1]] = 1
+                    else:
+                        return "Booking failed."
+                return "Booking success."
+        return "Movie not found."
+
+
+    def available_movies(self, start_time, end_time):
+        """
+        Lists all the movies that are available within a certain timeframe.
+
+        Parameters:
+            start_time (str): The start of the timeframe in 'HH:MM' format.
+            end_time (str): The end of the timeframe in 'HH:MM' format.
+
+        Returns:
+            list: A list of movie names that are available within the given timeframe.
+            
+        Test cases:
+            # Test case 1: Finding available movies
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            mbs.add_movie("Interstellar", 12.0, "17:00", "20:00", 5)
+            assert mbs.available_movies("13:00", "18:00") == ["Inception"]
+            
+            # Test case 2: No available movies
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            mbs.add_movie("Interstellar", 12.0, "17:00", "20:00", 5)
+            assert mbs.available_movies("10:00", "13:00") == []
+            
+            # Test case 3: All movies are available
+            mbs = MovieBookingSystem()
+            mbs.add_movie("Inception", 10.0, "14:00", "16:00", 5)
+            mbs.add_movie("Interstellar", 12.0, "17:00", "20:00", 5)
+            assert mbs.available_movies("10:00", "22:00") == ["Inception", "Interstellar"]
+        """
+        start_time = datetime.strptime(start_time, '%H:%M')
+        end_time = datetime.strptime(end_time, '%H:%M')
+
+        available_movies = []
+        for movie in self.movies:
+            if start_time <= movie['start_time'] and movie['end_time'] <= end_time:
+                available_movies.append(movie['name'])
+
+        return available_movies

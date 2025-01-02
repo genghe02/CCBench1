@@ -1,0 +1,5 @@
+import numpy as np
+
+def crop(arr, top, bottom, left, right):
+    # Crop the array using the specified top, bottom, left, and right indices
+    return arr[top:bottom, left:right]

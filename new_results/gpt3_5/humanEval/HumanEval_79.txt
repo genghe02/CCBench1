@@ -1,0 +1,11 @@
+# Convert a decimal number to a binary representation
+>>> decimal_to_binary(10) # returns 'db1010db'
+>>> decimal_to_binary(25) # returns 'db11001db'
+>>> decimal_to_binary(0) # returns 'db0db'
+
+def decimal_to_binary(decimal):
+    # Convert a decimal number to its binary representation
+    >>> decimal_to_binary(10) # returns 'db1010db'
+    >>> decimal_to_binary(25) # returns 'db11001db'
+    >>> decimal_to_binary(0) # returns 'db0db'
+    return "db" + bin(decimal)[2:] + "db"

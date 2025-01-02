@@ -1,0 +1,1 @@
+# Append the dictionary to the DataFrame and return the DataFrame.

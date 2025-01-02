@@ -1,0 +1,164 @@
+ ```python
+"""
+This class serves as a filter for managing whitelisted addresses and handling incoming and outgoing data.
+"""
+
+import logging
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method.
+        Initialize empty lists and dictionaries for storing whitelisted addresses and received/sent data.
+        """
+        self.white_list = []
+        self.send_struct = {}
+        self.receive_struct = {}
+
+    def add_white_list(self, addr):
+        """
+        Add an address to the whitelist.
+
+        Parameters:
+            addr (str): The address to add to the whitelist.
+
+        Returns:
+            list: The updated whitelist.
+
+        Test cases:
+            # Test case 1: Add a valid address to the whitelist
+            assert add_white_list('127.0.0.1') == ['127.0.0.1']
+
+            # Test case 2: Add an existing address to the whitelist
+            assert add_white_list('127.0.0.1') == ['127.0.0.1']
+
+            # Test case 3: Fail to add an invalid address to the whitelist
+            assert add_white_list(5) == []
+        """
+        if addr in self.white_list:
+            return self.white_list
+        self.white_list.append(addr)
+        return self.white_list
+
+    def del_white_list(self, addr):
+        """
+        Remove an address from the whitelist.
+
+        Parameters:
+            addr (str): The address to remove from the whitelist.
+
+        Returns:
+            list: The updated whitelist.
+
+        Test cases:
+            # Test case 1: Remove a valid address from the whitelist
+            access_gateway = AccessGatewayFilter()
+            access_gateway.add_white_list('127.0.0.1')
+            access_gateway.add_white_list('192.168.1.1')
+            assert del_white_list('127.0.0.1') == ['192.168.1.1']
+
+            # Test case 2: Remove an invalid address from the whitelist
+            access_gateway = AccessGatewayFilter()
+            assert del_white_list('192.168.1.1') == []
+
+            # Test case 3: Fail to remove a non-existent address from the whitelist
+            access_gateway = AccessGatewayFilter()
+            access_gateway.add_white_list('127.0.0.1')
+            assert del_white_list('192.168.1.1') == []
+        """
+        if addr not in self.white_list:
+            return self.white_list
+        self.white_list.remove(addr)
+        return self.white_list
+
+    def recv(self, info):
+        """
+        Handle incoming data.
+
+        Parameters:
+            info (dict): A dictionary containing the address and content of the data.
+
+        Returns:
+            str: The content of the received data, or an error message if the information format is invalid.
+
+        Test cases:
+            # Test case 1: Receive valid data
+            assert recv({'addr': '127.0.0.1', 'content': 'test content'}) == 'test content'
+
+            # Test case 2: Receive data with an invalid format
+            assert recv({'addr': '127.0.0.1'}) == "info structure is not correct"
+
+            # Test case 3: Receive data from an unauthorized address
+            access_gateway = AccessGatewayFilter()
+            access_gateway.add_white_list('127.0.0.1')
+            assert recv({'addr': '192.168.1.1', 'content': 'test content'}) == "Unauthorized"
+        """
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return "info structure is not correct"
+        addr = info["addr"]
+        if addr not in self.white_list:
+            return "Unauthorized"
+        self.receive_struct = {"addr": addr, "content": info["content"]}
+        return self.receive_struct["content"]
+
+    def send(self, info):
+        """
+        Handle outgoing data.
+
+        Parameters:
+            info (dict): A dictionary containing the address and content of the data.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Send valid data
+            access_gateway = AccessGatewayFilter()
+            assert send({'addr': '127.0.0.1', 'content': 'test content'}) is None
+
+            # Test case 2: Send data with an invalid format
+            assert send({'addr': '127.0.0.1'}) is None
+
+            # Test case 3: Send data to an unauthorized address
+            access_gateway = AccessGatewayFilter()
+            access_gateway.add_white_list('127.0.0.1')
+            assert send({'addr': '192.168.1.1', 'content': 'test content'}) is None
+        """
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return
+        self.send_struct = {"addr": info["addr"], "content": info["content"]}
+
+    def show(self, type):
+        """
+        Display the current received and/or sent data.
+
+        Parameters:
+            type (str): 'send' for sent data or 'receive' for received data.
+
+        Returns:
+            dict: A dictionary containing the address and data if the type is valid, otherwise an empty dictionary.
+
+        Test cases:
+            # Test case 1: Show sent data
+            access_gateway = AccessGatewayFilter()
+            access_gateway.send({'addr': '127.0.0.1', 'content': 'test content'})
+            assert show('send') == {'addr': '127.0.0.1', 'content': 'test content'}
+
+            # Test case 2: Show received data
+            access_gateway = AccessGatewayFilter()
+            access_gateway.add_white_list('127.0.0.1')
+            access_gateway.recv({'addr': '127.0.0.1', 'content': 'test content'})
+            assert show('receive') == {'addr': '127.0.0.1', 'content': 'test content'}
+
+            # Test case 3: Show neither sent nor received data
+            access_gateway = AccessGatewayFilter()
+            assert show('unknown') == {}
+        """
+        if type == "send":
+            return self.send_struct
+        elif type == "receive":
+            return self.receive_struct
+        else:
+            return {}
+```</s>

@@ -1,0 +1,6 @@
+import pandas as pd
+
+def add_column_to_dataframe(df, column_name, column_data):
+    # Add a new column with specified name and data to the dataframe
+    df[column_name] = column_data
+    return df

@@ -1,0 +1,125 @@
+```python
+"""
+This class implements a simple Tic Tac Toe game with a 3x3 board.
+"""
+
+class TicTacToe:
+    def __init__(self, N=3):
+        """
+        Initializes a new game with an empty 3x3 board and the first player set to 'X'.
+        
+        Parameters:
+            N (int, optional): Size of the board. Defaults to 3.
+        """
+        self.board = [[' ' for _ in range(N)] for _ in range(N)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        """
+        Makes a move for the current player at the specified position.
+        
+        Parameters:
+            row (int): Zero-based row index for the move
+            col (int): Zero-based column index for the move
+            
+        Returns:
+            bool: True if the move was successful, False otherwise.
+        
+        Test cases:
+            # Test case 1: Move to an empty cell
+            game = TicTacToe()
+            assert game.make_move(1, 1) == True
+            
+            # Test case 2: Move to an already occupied cell
+            game = TicTacToe()
+            game.make_move(1, 1)
+            assert game.make_move(1, 1) == False
+            
+            # Test case 3: Move out of bounds
+            game = TicTacToe()
+            assert game.make_move(3, 3) == False
+        """
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        else:
+            return False
+
+    def check_winner(self):
+        """
+        Checks if there is a winner in the current game.
+        
+        Returns:
+            str or None: 'X' or 'O' if there is a winner, None otherwise.
+            
+        Test cases:
+            # Test case 1: Game with a winner
+            game = TicTacToe()
+            game.make_move(0, 0)
+            game.make_move(1, 0)
+            game.make_move(0, 1)
+            game.make_move(1, 1)
+            game.make_move(0, 2)
+            assert game.check_winner() == 'X'
+            
+            # Test case 2: Game without a winner
+            game = TicTacToe()
+            game.make_move(0, 0)
+            game.make_move(1, 1)
+            assert game.check_winner() == None
+            
+            # Test case 3: Game with a full board but no winner
+            game = TicTacToe()
+            game.make_move(0, 0)
+            game.make_move(0, 1)
+            game.make_move(1, 0)
+            game.make_move(1, 1)
+            game.make_move(2, 0)
+            game.make_move(2, 2)
+            game.make_move(0, 2)
+            game.make_move(2, 1)
+            game.make_move(1, 2)
+            assert game.check_winner() == None
+        """
+        for row in self.board:
+            if row[0] == row[1] == row[2] != ' ':
+                return row[0]
+        for col in range(3):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] != ' ':
+                return self.board[0][col]
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != ' ':
+            return self.board[0][0]
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != ' ':
+            return self.board[0][2]
+        return None
+
+    def is_board_full(self):
+        """
+        Checks if the game board is full.
+        
+        Returns:
+            bool: True if the board is full, False otherwise.
+            
+        Test cases:
+            # Test case 1: Full board
+            game = TicTacToe()
+            for i in range(3):
+                for j in range(3):
+                    game.make_move(i, j)
+            assert game.is_board_full() == True
+            
+            # Test case 2: Empty board
+            game = TicTacToe()
+            assert game.is_board_full() == False
+            
+            # Test case 3: Partially filled board
+            game = TicTacToe()
+            game.make_move(1, 1)
+            assert game.is_board_full() == False
+        """
+        for row in self.board:
+            if ' ' in row:
+                return False
+        return True
+```

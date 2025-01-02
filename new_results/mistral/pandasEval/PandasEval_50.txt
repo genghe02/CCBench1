@@ -1,0 +1,2 @@
+ # Add a new column 'C' to the dataframe by adding the values of columns 'A' and 'B'
+df['C'] = df['A'] + df['B']</s>

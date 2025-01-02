@@ -1,0 +1,184 @@
+"""
+This class provides utility functions to work with dates and times.
+"""
+
+import datetime
+import time
+
+class TimeUtils:
+
+    def __init__(self):
+        """
+        Initialize the TimeUtils class with the current datetime.
+        """
+        self.datetime = datetime.datetime.now()
+
+    def get_current_time(self):
+        """
+        Get the current time in HH:MM:SS format.
+
+        Returns:
+            str: Current time string
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert get_current_time() == "14:25:36"
+            
+            # Test case 2: Edge case
+            assert get_current_time() == "00:00:00"
+            
+            # Test case 3: Error case
+            assert get_current_time() != ""
+        """
+
+        format = "%H:%M:%S"
+        return self.datetime.strftime(format)
+
+    def get_current_date(self):
+        """
+        Get the current date in YYYY-MM-DD format.
+
+        Returns:
+            str: Current date string
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert get_current_date() == "2023-07-18"
+            
+            # Test case 2: Edge case
+            assert get_current_date() == "2000-01-01"
+            
+            # Test case 3: Error case
+            assert get_current_date() != ""
+        """
+
+        format = "%Y-%m-%d"
+        return self.datetime.strftime(format)
+
+    def add_seconds(self, seconds):
+        """
+        Add seconds to the current datetime.
+
+        Parameters:
+            seconds (int): Number of seconds to add
+        
+        Returns:
+            str: New datetime in HH:MM:SS format
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert add_seconds(60) == "14:25:56"
+            
+            # Test case 2: Edge case
+            assert add_seconds(86400) == "14:25:36"
+            
+            # Test case 3: Error case
+            assert add_seconds(-10) != "14:25:36"
+        """
+
+        new_datetime = self.datetime + datetime.timedelta(seconds=seconds)
+        format = "%H:%M:%S"
+        return new_datetime.strftime(format)
+
+    def string_to_datetime(self, string):
+        """
+        Convert a string to a datetime object.
+
+        Parameters:
+            string (str): Datetime string in format "%Y-%m-%d %H:%M:%S"
+        
+        Returns:
+            datetime: Datetime object
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert string_to_datetime("2023-07-18 14:30:00") == datetime(2023, 07, 18, 14, 30, 0)
+            
+            # Test case 2: Edge case
+            assert string_to_datetime("2000-01-01 00:00:00") == datetime(2000, 01, 01, 0, 0, 0)
+            
+            # Test case 3: Error case
+            assert string_to_datetime("2203-31-45 89:90:00") != datetime(2023, 07, 18, 14, 30, 0)
+        """
+
+        return datetime.datetime.strptime(string, "%Y-%m-%d %H:%M:%S")
+
+    def datetime_to_string(self, dt):
+        """
+        Convert a datetime object to a string.
+
+        Parameters:
+            dt (datetime): Datetime object
+        
+        Returns:
+            str: Datetime string in format "%Y-%m-%d %H:%M:%S"
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert datetime_to_string(datetime(2023, 07, 18, 14, 30, 0)) == "2023-07-18 14:30:00"
+            
+            # Test case 2: Edge case
+            assert datetime_to_string(datetime(2000, 01, 01, 0, 0, 0)) == "2000-01-01 00:00:00"
+            
+            # Test case 3: Error case
+            assert datetime_to_string(datetime(2203, 31, 45, 89, 90, 00)) != "2023-07-18 14:30:00"
+        """
+
+        return dt.strftime("%Y-%m-%d %H:%M:%S")
+
+    def get_minutes(self, string_time1, string_time2):
+        """
+        Calculate the difference in minutes between two time strings.
+
+        Parameters:
+            string_time1 (str): First datetime string
+            string_time2 (str): Second datetime string
+        
+        Returns:
+            int: Time difference in minutes
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert get_minutes("2023-07-18 12:30:00", "2023-07-18 14:30:00") == 120
+            
+            # Test case 2: Edge case
+            assert get_minutes("2000-01-01 00:00:00", "2000-01-01 01:00:00") == 60
+            
+            # Test case 3: Error case
+            assert get_minutes("2023-07-18 12:30:00", "2023-07-18 1:30:00") != 60
+        """
+
+        time1 = self.string_to_datetime(string_time1)
+        time2 = self.string_to_datetime(string_time2)
+        return round((time2 - time1).seconds / 60)
+
+    def get_format_time(self, year, month, day, hour, minute, second):
+        """
+        Get a formatted time string based on input parameters.
+
+        Parameters:
+            year (int): Year
+            month (int): Month
+            day (int): Day
+            hour (int): Hour
+            minute (int): Minute
+            second (int): Second
+        
+        Returns:
+            str: Formatted time string in "%Y-%m-%d %H:%M:%S" format
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert get_format_time(2023, 7, 18, 14, 30, 0) == "2023-07-18 14:30:00"
+            
+            # Test case 2: Edge case
+            assert get_format_time(2000, 1, 1, 0, 0, 0) == "2000-01-01 00:00:00"
+            
+            # Test case 3: Error case
+            assert get_format_time(2203, 31, 45, 89, 90, 00) != "2023-07-18 14:30:00"
+        """
+
+        format = "%Y-%m-%d %H:%M:%S"
+        time_item = datetime.datetime(year, month, day, hour, minute, second)
+        return time_item.strftime(format)
+"""

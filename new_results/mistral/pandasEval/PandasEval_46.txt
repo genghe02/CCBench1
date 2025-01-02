@@ -1,0 +1,8 @@
+ ❌ Wrong Output (omits code):
+def get_value_when_condition(df):
+    return df[df['B'] == 3]['A'].values
+
+✅ Correct Output:
+def get_value_when_condition(df):
+    # Filter dataframe by condition and return the 'A' column values
+    return df[df['B'] == 3]['A'].values</s>

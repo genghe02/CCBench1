@@ -1,0 +1,168 @@
+```python
+"""
+This class represents a hotel management system that handles room booking, check-in, check-out, and availability checks.
+"""
+
+class Hotel:
+    def __init__(self, name, rooms):
+        """
+        Initializes a Hotel instance with a name and available rooms.
+
+        Parameters:
+            name (str): The name of the hotel.
+            rooms (dict): A dictionary where keys are room types (str) and values are the number of available rooms (int).
+
+        Test cases:
+            # Test case 1: Initialize with valid name and rooms
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            assert hotel.name == "Grand Hotel"
+            assert hotel.available_rooms == {'single': 5, 'double': 3}
+
+            # Test case 2: Initialize with empty rooms
+            hotel = Hotel("Empty Hotel", {})
+            assert hotel.available_rooms == {}
+
+            # Test case 3: Initialize with invalid room types
+            hotel = Hotel("Invalid Hotel", {'suite': 0})
+            assert hotel.available_rooms == {'suite': 0}
+        """
+        self.name = name
+        self.available_rooms = rooms
+        self.booked_rooms = {}
+
+    def book_room(self, room_type, room_number, name):
+        """
+        Books a specified number of rooms of a given type for a guest.
+
+        Parameters:
+            room_type (str): The type of room to book.
+            room_number (int): The number of rooms to book.
+            name (str): The name of the guest booking the rooms.
+
+        Returns:
+            str or int or bool: "Success!" if booking is successful, the remaining available rooms if partial booking is possible, or False if booking is not possible.
+
+        Test cases:
+            # Test case 1: Successful booking
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            assert hotel.book_room('single', 2, 'Alice') == "Success!"
+            assert hotel.available_rooms == {'single': 3, 'double': 3}
+
+            # Test case 2: Partial booking
+            hotel = Hotel("Grand Hotel", {'single': 1, 'double': 3})
+            assert hotel.book_room('single', 2, 'Bob') == 1
+            assert hotel.available_rooms == {'single': 1, 'double': 3}
+
+            # Test case 3: Unavailable room type
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            assert hotel.book_room('suite', 1, 'Charlie') == False
+        """
+        if room_type not in self.available_rooms.keys():
+            return False
+
+        if room_number <= self.available_rooms[room_type]:
+            if room_type not in self.booked_rooms.keys():
+                self.booked_rooms[room_type] = {}
+            self.booked_rooms[room_type][name] = room_number
+            self.available_rooms[room_type] -= room_number
+            return "Success!"
+        elif self.available_rooms[room_type] != 0:
+            return self.available_rooms[room_type]
+        else:
+            return False
+
+    def check_in(self, room_type, room_number, name):
+        """
+        Checks in a specified number of rooms of a given type for a guest.
+
+        Parameters:
+            room_type (str): The type of room to check in.
+            room_number (int): The number of rooms to check in.
+            name (str): The name of the guest checking in.
+
+        Returns:
+            bool: True if check-in is successful, False otherwise.
+
+        Test cases:
+            # Test case 1: Successful check-in
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            hotel.book_room('single', 2, 'Alice')
+            assert hotel.check_in('single', 2, 'Alice') == True
+            assert hotel.booked_rooms == {'single': {}}
+
+            # Test case 2: Partial check-in
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            hotel.book_room('single', 3, 'Bob')
+            assert hotel.check_in('single', 2, 'Bob') == True
+            assert hotel.booked_rooms == {'single': {'Bob': 1}}
+
+            # Test case 3: Invalid check-in
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            assert hotel.check_in('single', 2, 'Charlie') == False
+        """
+        if room_type not in self.booked_rooms.keys():
+            return False
+        if name in self.booked_rooms[room_type]:
+            if room_number > self.booked_rooms[room_type][name]:
+                return False
+            elif room_number == self.booked_rooms[room_type][name]:
+                self.booked_rooms[room_type].pop(name)
+            else:
+                self.booked_rooms[room_type][name] -= room_number
+            return True
+        return False
+
+    def check_out(self, room_type, room_number):
+        """
+        Checks out a specified number of rooms of a given type.
+
+        Parameters:
+            room_type (str): The type of room to check out.
+            room_number (int): The number of rooms to check out.
+
+        Test cases:
+            # Test case 1: Successful check-out
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            hotel.check_out('single', 2)
+            assert hotel.available_rooms == {'single': 7, 'double': 3}
+
+            # Test case 2: Check-out with new room type
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            hotel.check_out('suite', 1)
+            assert hotel.available_rooms == {'single': 5, 'double': 3, 'suite': 1}
+
+            # Test case 3: Check-out with zero rooms
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            hotel.check_out('single', 0)
+            assert hotel.available_rooms == {'single': 5, 'double': 3}
+        """
+        if room_type in self.available_rooms:
+            self.available_rooms[room_type] += room_number
+        else:
+            self.available_rooms[room_type] = room_number
+
+    def get_available_rooms(self, room_type):
+        """
+        Retrieves the number of available rooms of a specified type.
+
+        Parameters:
+            room_type (str): The type of room to check availability for.
+
+        Returns:
+            int: The number of available rooms of the specified type.
+
+        Test cases:
+            # Test case 1: Available rooms
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            assert hotel.get_available_rooms('single') == 5
+
+            # Test case 2: Unavailable room type
+            hotel = Hotel("Grand Hotel", {'single': 5, 'double': 3})
+            assert hotel.get_available_rooms('suite') == None
+
+            # Test case 3: Zero available rooms
+            hotel = Hotel("Grand Hotel", {'single': 0, 'double': 3})
+            assert hotel.get_available_rooms('single') == 0
+        """
+        return self.available_rooms.get(room_type, None)
+```

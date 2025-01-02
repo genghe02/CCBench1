@@ -1,0 +1,148 @@
+"""
+This class provides functionality to convert numbers between decimal, binary, octal, and hexadecimal representations.
+"""
+
+class NumberConverter:
+    @staticmethod
+    def decimal_to_binary(decimal_num):
+        """
+        Convert a decimal number to binary.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert to binary
+
+        Returns:
+            str: Binary representation of the input decimal number
+        
+        Test cases:
+            # Test case 1: Positive number
+            assert decimal_to_binary(10) == '1010'
+            
+            # Test case 2: Zero
+            assert decimal_to_binary(0) == '0'
+
+            # Test case 3: Negative number
+            assert decimal_to_binary(-5) == '-101'
+        """
+        binary_num = bin(decimal_num)[2:]
+        return binary_num
+
+    @staticmethod
+    def binary_to_decimal(binary_num):
+        """
+        Convert a binary number to decimal.
+
+        Parameters:
+            binary_num (str): The binary number to convert to decimal
+
+        Returns:
+            int: Decimal representation of the input binary number
+        
+        Test cases:
+            # Test case 1: Binary number with 1s and 0s
+            assert binary_to_decimal('1010') == 10
+            
+            # Test case 2: Binary number with leading zeros
+            assert binary_to_decimal('00001111') == 15
+            
+            # Test case 3: Binary number as a negative value
+            assert binary_to_decimal('-101') == -5
+        """
+        decimal_num = int(binary_num, 2)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_octal(decimal_num):
+        """
+        Convert a decimal number to octal.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert to octal
+
+        Returns:
+            str: Octal representation of the input decimal number
+        
+        Test cases:
+            # Test case 1: Positive number
+            assert decimal_to_octal(10) == '12'
+            
+            # Test case 2: Zero
+            assert decimal_to_octal(0) == '0'
+
+            # Test case 3: Negative number
+            assert decimal_to_octal(-8) == '-10'
+        """
+        octal_num = oct(decimal_num)[2:]
+        return octal_num
+
+    @staticmethod
+    def octal_to_decimal(octal_num):
+        """
+        Convert an octal number to decimal.
+
+        Parameters:
+            octal_num (str): The octal number to convert to decimal
+
+        Returns:
+            int: Decimal representation of the input octal number
+        
+        Test cases:
+            # Test case 1: Octal number with digits
+            assert octal_to_decimal('12') == 10
+            
+            # Test case 2: Octal number as a negative value
+            assert octal_to_decimal('-10') == -8
+            
+            # Test case 3: Octal number with leading zeros
+            assert octal_to_decimal('0001') == 1
+        """
+        decimal_num = int(octal_num, 8)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_hex(decimal_num):
+        """
+        Convert a decimal number to hexadecimal.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert to hexadecimal
+
+        Returns:
+            str: Hexadecimal representation of the input decimal number
+        
+        Test cases:
+            # Test case 1: Positive number
+            assert decimal_to_hex(255) == 'ff'
+            
+            # Test case 2: Zero
+            assert decimal_to_hex(0) == '0'
+
+            # Test case 3: Negative number
+            assert decimal_to_hex(-16) == '-10'
+        """
+        hex_num = hex(decimal_num)[2:]
+        return hex_num
+
+    @staticmethod
+    def hex_to_decimal(hex_num):
+        """
+        Convert a hexadecimal number to decimal.
+
+        Parameters:
+            hex_num (str): The hexadecimal number to convert to decimal
+
+        Returns:
+            int: Decimal representation of the input hexadecimal number
+        
+        Test cases:
+            # Test case 1: Hexadecimal number without leading '0x'
+            assert hex_to_decimal('1a') == 26
+            
+            # Test case 2: Hexadecimal number as a negative value
+            assert hex_to_decimal('-10') == -16
+            
+            # Test case 3: Hexadecimal number with uppercase letters
+            assert hex_to_decimal('FF') == 255
+        """
+        decimal_num = int(hex_num, 16)
+        return decimal_num

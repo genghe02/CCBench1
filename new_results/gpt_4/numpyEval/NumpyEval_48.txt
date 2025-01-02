@@ -1,0 +1,5 @@
+import numpy as np
+
+def count_true_number(arr):
+    # Calculate and return the sum of all elements in the array
+    return arr.sum()

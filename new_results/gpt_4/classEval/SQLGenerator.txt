@@ -1,0 +1,139 @@
+"""
+This class provides a utility for generating SQL statements for a specified table.
+"""
+
+class SQLGenerator:
+    def __init__(self, table_name):
+        """
+        Initialization method for the SQLGenerator class.
+
+        Parameters:
+            table_name (str): The name of the table to generate SQL statements for.
+        """
+        self.table_name = table_name
+
+    def select(self, fields=None, condition=None):
+        """
+        Generate a SQL SELECT statement for the specified fields and condition.
+
+        Parameters:
+            fields (list of str): The fields to select. If None, selects all fields.
+            condition (str): The WHERE clause condition. If None, no condition is applied.
+        
+        Returns:
+            str: The generated SQL SELECT statement.
+        
+        Test cases:
+            # Test case 1: Select all fields with no condition
+            assert select() == "SELECT * FROM table_name;"
+
+            # Test case 2: Select specific fields with no condition
+            assert select(['field1', 'field2']) == "SELECT field1, field2 FROM table_name;"
+
+            # Test case 3: Select all fields with a condition
+            assert select(condition="field1 = 'value'") == "SELECT * FROM table_name WHERE field1 = 'value';"
+        """
+        if fields is None:
+            fields = "*"
+        else:
+            fields = ", ".join(fields)
+        sql = f"SELECT {fields} FROM {self.table_name}"
+        if condition is not None:
+            sql += f" WHERE {condition}"
+        return sql + ";"
+
+    def insert(self, data):
+        """
+        Generate a SQL INSERT statement for the specified data.
+
+        Parameters:
+            data (dict): The data to insert, with field names as keys and values as values.
+        
+        Returns:
+            str: The generated SQL INSERT statement.
+        
+        Test cases:
+            # Test case 1: Insert data with one field
+            assert insert({'field1': 'value1'}) == "INSERT INTO table_name (field1) VALUES ('value1');"
+
+            # Test case 2: Insert data with multiple fields
+            assert insert({'field1': 'value1', 'field2': 'value2'}) == "INSERT INTO table_name (field1, field2) VALUES ('value1', 'value2');"
+        """
+        fields = ", ".join(data.keys())
+        values = ", ".join([f"'{value}'" for value in data.values()])
+        sql = f"INSERT INTO {self.table_name} ({fields}) VALUES ({values})"
+        return sql + ";"
+
+    def update(self, data, condition):
+        """
+        Generate a SQL UPDATE statement for the specified data and condition.
+
+        Parameters:
+            data (dict): The data to update, with field names as keys and new values as values.
+            condition (str): The WHERE clause condition for the update.
+        
+        Returns:
+            str: The generated SQL UPDATE statement.
+        
+        Test cases:
+            # Test case 1: Update one field with a condition
+            assert update({'field1': 'new_value1'}, "field1 = 'value1'") == "UPDATE table_name SET field1 = 'new_value1' WHERE field1 = 'value1';"
+
+            # Test case 2: Update multiple fields with a condition
+            assert update({'field1': 'new_value1', 'field2': 'new_value2'}, "field1 = 'value1' AND field2 = 'value2'") == "UPDATE table_name SET field1 = 'new_value1', field2 = 'new_value2' WHERE field1 = 'value1' AND field2 = 'value2';"
+        """
+        set_clause = ", ".join([f"{field} = '{value}'" for field, value in data.items()])
+        sql = f"UPDATE {self.table_name} SET {set_clause} WHERE {condition}"
+        return sql + ";"
+
+    def delete(self, condition):
+        """
+        Generate a SQL DELETE statement for the specified condition.
+
+        Parameters:
+            condition (str): The WHERE clause condition for the deletion.
+        
+        Returns:
+            str: The generated SQL DELETE statement.
+        
+        Test cases:
+            # Test case 1: Delete records with a condition
+            assert delete("field1 = 'value1'") == "DELETE FROM table_name WHERE field1 = 'value1';"
+        """
+        sql = f"DELETE FROM {self.table_name} WHERE {condition}"
+        return sql + ";"
+
+    def select_female_under_age(self, age):
+        """
+        Generate a SQL SELECT statement for females under the specified age.
+
+        Parameters:
+            age (int): The age threshold.
+        
+        Returns:
+            str: The generated SQL SELECT statement.
+        
+        Test cases:
+            # Test case 1: Select females under age 20
+            assert select_female_under_age(20) == "SELECT * FROM table_name WHERE age < 20 AND gender = 'female';"
+        """
+        condition = f"age < {age} AND gender = 'female'"
+        return self.select(condition=condition)
+
+    def select_by_age_range(self, min_age, max_age):
+        """
+        Generate a SQL SELECT statement for records within the specified age range.
+
+        Parameters:
+            min_age (int): The minimum age.
+            max_age (int): The maximum age.
+        
+        Returns:
+            str: The generated SQL SELECT statement.
+        
+        Test cases:
+            # Test case 1: Select records between ages 20 and 30
+            assert select_by_age_range(20, 30) == "SELECT * FROM table_name WHERE age BETWEEN 20 AND 30;"
+        """
+        condition = f"age BETWEEN {min_age} AND {max_age}"
+        return self.select(condition=condition)

@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.zeros((2,5))
+# Get the shape of the array 'a'
+a_shape = a.shape
+```

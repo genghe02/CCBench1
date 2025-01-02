@@ -1,0 +1,1 @@
+# Join the arrays using numpy methods by transposing and flattening them.

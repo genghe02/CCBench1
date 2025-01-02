@@ -1,0 +1,2 @@
+# Return rows with greater than 1 NaN value in the given dataframe
+def display_rows_with_gt_1_nan(df):

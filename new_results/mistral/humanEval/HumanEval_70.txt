@@ -1,0 +1,10 @@
+ def strange_sort_list(lst):
+    # Sort the list in an alternate manner: min first, then max
+    >>> strange_sort_list([1, 2, 3, 4]) # [1, 3, 2, 4]
+    >>> strange_sort_list([5, 4, 3, 2, 1]) # [5, 2, 3, 4, 1]
+    res, switch = [], True
+    while lst:
+        res.append(min(lst) if switch else max(lst))
+        lst.remove(res[-1])
+        switch = not switch
+    return res</s>

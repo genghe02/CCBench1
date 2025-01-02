@@ -1,0 +1,1 @@
+# Calculate the value counts for each unique value in a pandas DataFrame and reset the index to have two columns: one for unique values and one for their corresponding counts.

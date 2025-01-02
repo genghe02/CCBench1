@@ -1,0 +1,15 @@
+ # This function calculates the n-th number in the fibonacci sequence
+ # Uses recursion to find the answer
+ >>> fib(0) # returns 0
+ >>> fib(1) # returns 1
+ >>> fib(2) # returns 1
+ >>> fib(3) # returns 2
+ >>> fib(4) # returns 3
+ >>> fib(5) # returns 5
+ >>> fib(6) # returns 8
+ >>> fib(7) # returns 13
+ >>> fib(8) # returns 21
+ >>> fib(9) # returns 34
+ >>> fib(10) # returns 55
+ >>> fib(11) # returns 89
+ return fib(n - 1) + fib(n - 2)</s>

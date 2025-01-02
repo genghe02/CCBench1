@@ -1,0 +1,1 @@
+import numpy as np\n\na = np.arange(1, 10)\na = a.reshape(len(a), 1)\n# Assign values from the 5th element onward of array a to b\nb = a[4:]

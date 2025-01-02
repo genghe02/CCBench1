@@ -1,0 +1,19 @@
+def is_palindrome(string: str) -> bool:
+    # Check if the input string is a palindrome by comparing it to its reverse
+    return string == string[::-1]
+
+
+def make_palindrome(string: str) -> str:
+    # Generate a palindrome by finding the shortest suffix to append to the input string
+    >>> make_palindrome("race") # returns "racecar"
+    >>> make_palindrome("level") # returns "level"
+    >>> make_palindrome("hello") # returns "helloleh"
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]

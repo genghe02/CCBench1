@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def change_all_cols_type(df):
+    # Convert all columns in the dataframe to numeric types
+    return df.apply(pd.to_numeric)
+```

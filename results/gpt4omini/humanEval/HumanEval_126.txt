@@ -1,0 +1,32 @@
+```python
+def is_sorted(lst):
+    # Check if the given list is sorted in non-descending order with additional conditions on element occurrence.
+    
+    # Test case: Empty list
+    # Expected: True, since an empty list is considered sorted.
+    
+    # Test case: Single element list
+    # Expected: True, since a single element is trivially sorted.
+    
+    # Test case: Already sorted list
+    # Expected: True, e.g., [1, 2, 2, 3] should return True.
+    
+    # Test case: Unsorted list
+    # Expected: False, e.g., [3, 1, 2] should return False.
+    
+    # Test case: List with more than two occurrences of an element
+    # Expected: False, e.g., [1, 1, 1, 2] should return False.
+    
+    # Test case: List that is sorted but has an element appearing more than twice
+    # Expected: False, e.g., [1, 2, 2, 2, 3] should return False.
+    
+    count_digit = dict([(i, 0) for i in lst])
+    for i in lst:
+        count_digit[i] += 1 
+    if any(count_digit[i] > 2 for i in lst):
+        return False
+    if all(lst[i - 1] <= lst[i] for i in range(1, len(lst))):
+        return True
+    else:
+        return False
+```

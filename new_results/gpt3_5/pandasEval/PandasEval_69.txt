@@ -1,0 +1,4 @@
+# Replace None values in specified columns of a dataframe with zeros
+def fill_none_with_zero(df, col_names):
+    df[col_names] = df[col_names].fillna(0)
+    return df

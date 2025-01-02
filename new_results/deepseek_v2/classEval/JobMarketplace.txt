@@ -1,0 +1,208 @@
+```python
+"""
+This class represents a job marketplace where employers can post job listings and job seekers can submit resumes. 
+It provides functionalities to manage job postings, resumes, and match job seekers with job listings based on criteria.
+"""
+
+class JobMarketplace:
+    def __init__(self):
+        """
+        Initializes a JobMarketplace instance with empty lists for job listings and resumes.
+        """
+        self.job_listings = []
+        self.resumes = []
+
+    def post_job(self, job_title, company, requirements):
+        """
+        Posts a new job listing to the marketplace.
+
+        Parameters:
+            job_title (str): The title of the job.
+            company (str): The company offering the job.
+            requirements (list): A list of skills or qualifications required for the job.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Post a job with valid details
+            marketplace = JobMarketplace()
+            marketplace.post_job("Software Engineer", "Tech Corp", ["Python", "Java"])
+            assert len(marketplace.job_listings) == 1
+
+            # Test case 2: Post a job with empty requirements
+            marketplace.post_job("Data Analyst", "Data Inc", [])
+            assert len(marketplace.job_listings) == 2
+
+            # Test case 3: Post a job with invalid job title (edge case)
+            marketplace.post_job("", "Empty Corp", ["Python"])
+            assert len(marketplace.job_listings) == 3
+        """
+        job = {"job_title": job_title, "company": company, "requirements": requirements}
+        self.job_listings.append(job)
+
+    def remove_job(self, job):
+        """
+        Removes a job listing from the marketplace.
+
+        Parameters:
+            job (dict): The job listing to remove.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Remove an existing job
+            marketplace = JobMarketplace()
+            job = {"job_title": "Software Engineer", "company": "Tech Corp", "requirements": ["Python", "Java"]}
+            marketplace.job_listings.append(job)
+            marketplace.remove_job(job)
+            assert len(marketplace.job_listings) == 0
+
+            # Test case 2: Remove a non-existent job (edge case)
+            marketplace.remove_job({"job_title": "Non-existent", "company": "None", "requirements": []})
+            assert len(marketplace.job_listings) == 0
+
+            # Test case 3: Remove a job with incomplete details (error case)
+            marketplace.remove_job({"job_title": "Incomplete"})
+            assert len(marketplace.job_listings) == 0
+        """
+        self.job_listings.remove(job)
+
+    def submit_resume(self, name, skills, experience):
+        """
+        Submits a resume to the marketplace.
+
+        Parameters:
+            name (str): The name of the job seeker.
+            skills (list): A list of skills the job seeker possesses.
+            experience (int): The number of years of experience the job seeker has.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Submit a resume with valid details
+            marketplace = JobMarketplace()
+            marketplace.submit_resume("John Doe", ["Python", "SQL"], 5)
+            assert len(marketplace.resumes) == 1
+
+            # Test case 2: Submit a resume with no skills (edge case)
+            marketplace.submit_resume("Jane Doe", [], 3)
+            assert len(marketplace.resumes) == 2
+
+            # Test case 3: Submit a resume with negative experience (error case)
+            marketplace.submit_resume("Invalid", ["Java"], -1)
+            assert len(marketplace.resumes) == 3
+        """
+        resume = {"name": name, "skills": skills, "experience": experience}
+        self.resumes.append(resume)
+
+    def withdraw_resume(self, resume):
+        """
+        Withdraws a resume from the marketplace.
+
+        Parameters:
+            resume (dict): The resume to withdraw.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Withdraw an existing resume
+            marketplace = JobMarketplace()
+            resume = {"name": "John Doe", "skills": ["Python", "SQL"], "experience": 5}
+            marketplace.resumes.append(resume)
+            marketplace.withdraw_resume(resume)
+            assert len(marketplace.resumes) == 0
+
+            # Test case 2: Withdraw a non-existent resume (edge case)
+            marketplace.withdraw_resume({"name": "Non-existent", "skills": [], "experience": 0})
+            assert len(marketplace.resumes) == 0
+
+            # Test case 3: Withdraw a resume with incomplete details (error case)
+            marketplace.withdraw_resume({"name": "Incomplete"})
+            assert len(marketplace.resumes) == 0
+        """
+        self.resumes.remove(resume)
+
+    def search_jobs(self, criteria):
+        """
+        Searches for job listings that match the given criteria.
+
+        Parameters:
+            criteria (str): The search term to match against job titles or requirements.
+
+        Returns:
+            list: A list of job listings that match the criteria.
+
+        Test cases:
+            # Test case 1: Search for jobs matching a specific skill
+            marketplace = JobMarketplace()
+            marketplace.post_job("Software Engineer", "Tech Corp", ["Python", "Java"])
+            marketplace.post_job("Data Analyst", "Data Inc", ["SQL", "Python"])
+            results = marketplace.search_jobs("Python")
+            assert len(results) == 2
+
+            # Test case 2: Search for jobs with no matches (edge case)
+            results = marketplace.search_jobs("C++")
+            assert len(results) == 0
+
+            # Test case 3: Search for jobs with empty criteria (error case)
+            results = marketplace.search_jobs("")
+            assert len(results) == 2
+        """
+        matching_jobs = []
+        for job_listing in self.job_listings:
+            if criteria.lower() in job_listing["job_title"].lower() or criteria.lower() in [r.lower() for r in job_listing["requirements"]]:
+                matching_jobs.append(job_listing)
+        return matching_jobs
+
+    def get_job_applicants(self, job):
+        """
+        Retrieves a list of resumes that match the requirements of a specific job.
+
+        Parameters:
+            job (dict): The job listing to match resumes against.
+
+        Returns:
+            list: A list of resumes that match the job requirements.
+
+        Test cases:
+            # Test case 1: Get applicants for a job with matching resumes
+            marketplace = JobMarketplace()
+            job = {"job_title": "Software Engineer", "company": "Tech Corp", "requirements": ["Python", "Java"]}
+            marketplace.submit_resume("John Doe", ["Python", "SQL"], 5)
+            marketplace.submit_resume("Jane Doe", ["Java", "C++"], 3)
+            applicants = marketplace.get_job_applicants(job)
+            assert len(applicants) == 2
+
+            # Test case 2: Get applicants for a job with no matching resumes (edge case)
+            job = {"job_title": "Data Analyst", "company": "Data Inc", "requirements": ["R", "Python"]}
+            applicants = marketplace.get_job_applicants(job)
+            assert len(applicants) == 0
+
+            # Test case 3: Get applicants for a job with incomplete requirements (error case)
+            job = {"job_title": "Incomplete", "company": "None", "requirements": []}
+            applicants = marketplace.get_job_applicants(job)
+            assert len(applicants) == 2
+        """
+        applicants = []
+        for resume in self.resumes:
+            if self.matches_requirements(resume, job["requirements"]):
+                applicants.append(resume)
+        return applicants
+
+    def matches_requirements(self, resume, requirements):
+        """
+        Helper method to check if a resume matches the job requirements.
+
+        Parameters:
+            resume (dict): The resume to check.
+            requirements (list): The list of requirements to match against.
+
+        Returns:
+            bool: True if the resume matches the requirements, False otherwise.
+        """
+        return any(skill in resume["skills"] for skill in requirements)
+```

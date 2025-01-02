@@ -1,0 +1,3 @@
+ # Convert NumPy array to a list of tuples
+def arr2tuple(arr):
+    return tuple(map(tuple, arr.flatten()))</s>

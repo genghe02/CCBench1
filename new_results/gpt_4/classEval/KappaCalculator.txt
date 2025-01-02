@@ -1,0 +1,94 @@
+"""
+This class provides methods to calculate the Cohen's Kappa and Fleiss' Kappa, which are statistical measures of inter-rater reliability.
+"""
+
+import numpy as np
+
+
+class KappaCalculator:
+
+    @staticmethod
+    def kappa(testData, k):
+        """
+        Calculates the Cohen's Kappa for the given data.
+
+        Parameters:
+            testData (list): a 2D list where each element is a row of ratings.
+            k (int): the number of raters.
+        
+        Returns:
+            float: the Cohen's Kappa calculated from the data.
+        
+        Test cases:
+            # Test case 1: Normal case
+            data = [[1, 0], [0, 1]]
+            assert kappa(data, 2) == 1.0
+
+            # Test case 2: Edge case (all ratings are the same)
+            data = [[1, 1], [1, 1]]
+            assert kappa(data, 2) == 1.0
+
+            # Test case 3: Error case (inconsistent number of ratings)
+            data = [[1, 0, 1], [0, 1]]
+            assert kappa(data, 2) raises ValueError
+        """
+
+        dataMat = np.mat(testData)
+        P0 = 0.0
+        for i in range(k):
+            P0 += dataMat[i, i] * 1.0
+        xsum = np.sum(dataMat, axis=1)
+        ysum = np.sum(dataMat, axis=0)
+        sum = np.sum(dataMat)
+        Pe = float(ysum * xsum) / sum / sum
+        P0 = float(P0 / sum * 1.0)
+        cohens_coefficient = float((P0 - Pe) / (1 - Pe))
+        return cohens_coefficient
+
+    @staticmethod
+    def fleiss_kappa(testData, N, k, n):
+        """
+        Calculates the Fleiss' Kappa for the given data.
+
+        Parameters:
+            testData (list): a 2D list where each element is a row of ratings.
+            N (int): the number of subjects.
+            k (int): the number of categories.
+            n (int): the number of ratings per subject.
+        
+        Returns:
+            float: the Fleiss' Kappa calculated from the data.
+        
+        Test cases:
+            # Test case 1: Normal case
+            data = [[1, 0], [0, 1]]
+            assert fleiss_kappa(data, 2, 2, 1) == 1.0
+
+            # Test case 2: Edge case (all ratings are the same)
+            data = [[1, 1], [1, 1]]
+            assert fleiss_kappa(data, 2, 2, 1) == 1.0
+
+            # Test case 3: Error case (inconsistent number of ratings)
+            data = [[1, 0, 1], [0, 1]]
+            assert fleiss_kappa(data, 2, 2, 1) raises ValueError
+        """
+
+        dataMat = np.mat(testData, float)
+        oneMat = np.ones((k, 1))
+        sum = 0.0
+        P0 = 0.0
+        for i in range(N):
+            temp = 0.0
+            for j in range(k):
+                sum += dataMat[i, j]
+                temp += 1.0 * dataMat[i, j] ** 2
+            temp -= n
+            temp /= (n - 1) * n
+            P0 += temp
+        P0 = 1.0 * P0 / N
+        ysum = np.sum(dataMat, axis=0)
+        for i in range(k):
+            ysum[0, i] = (ysum[0, i] / sum) ** 2
+        Pe = ysum * oneMat * 1.0
+        ans = (P0 - Pe) / (1 - Pe)
+        return ans[0, 0]

@@ -1,0 +1,68 @@
+```python
+import itertools
+
+# This class is responsible for calculating arrangements and permutations of a set of data.
+class ArrangementCalculator:
+    def __init__(self, datas):
+        # Initialize the ArrangementCalculator with the given data.
+        # :param datas: list, the data items for which arrangements and permutations will be calculated
+        self.datas = datas
+
+    @staticmethod
+    def count(n, m=None):
+        # Count the number of arrangements of n items taken m at a time.
+        # :param n: int, the total number of items
+        # :param m: int or None, the number of items to arrange; if None, all items are taken
+        # :return: int, the number of arrangements possible
+        # >>> ArrangementCalculator.count(5) # Should return 120 (5!)
+        # >>> ArrangementCalculator.count(5, 3) # Should return 60 (5! / (5-3)!)
+        if m is None or n == m:
+            return ArrangementCalculator.factorial(n)
+        else:
+            return ArrangementCalculator.factorial(n) // ArrangementCalculator.factorial(n - m)
+
+    @staticmethod
+    def count_all(n):
+        # Count all possible arrangements of n items.
+        # :param n: int, the total number of items
+        # :return: int, the total number of arrangements possible for all sizes
+        # >>> ArrangementCalculator.count_all(3) # Should return 6 (1! + 2! + 3!)
+        total = 0
+        for i in range(1, n + 1):
+            total += ArrangementCalculator.count(n, i)
+        return total
+
+    def select(self, m=None):
+        # Select all permutations of the data items.
+        # :param m: int or None, the number of items to select; if None, all items are selected
+        # :return: list of lists, containing all permutations of the selected items
+        # >>> calc = ArrangementCalculator([1, 2, 3]) 
+        # >>> calc.select() # Should return all permutations of [1, 2, 3]
+        if m is None:
+            m = len(self.datas)
+        result = []
+        for permutation in itertools.permutations(self.datas, m):
+            result.append(list(permutation))
+        return result
+
+    def select_all(self):
+        # Select all possible permutations of the data items for all lengths.
+        # :return: list of lists, containing all permutations of the data items
+        # >>> calc = ArrangementCalculator([1, 2]) 
+        # >>> calc.select_all() # Should return permutations of lengths 1 and 2
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    @staticmethod
+    def factorial(n):
+        # Calculate the factorial of a given number.
+        # :param n: int, the number to calculate the factorial for
+        # :return: int, the factorial of n
+        # >>> ArrangementCalculator.factorial(5) # Should return 120
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+```

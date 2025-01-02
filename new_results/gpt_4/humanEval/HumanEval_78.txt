@@ -1,0 +1,11 @@
+def hex_key(num):
+    # This function counts the number of prime numbers (2, 3, 5, 7, B, D) in the given hexadecimal number.
+    >>> hex_key("2B3D5") # returns 5
+    >>> hex_key("00000") # returns 0
+    >>> hex_key("7BD") # returns 3
+    primes = ('2', '3', '5', '7', 'B', 'D')
+    total = 0
+    for i in range(0, len(num)):
+        if num[i] in primes:
+            total += 1
+    return total

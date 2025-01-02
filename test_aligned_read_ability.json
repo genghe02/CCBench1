@@ -1,0 +1,11 @@
+{
+  "flesch_reading_ease": 54.584126533188964,
+  "flesch_kincaid_grade": 8.495319264069238,
+  "smog_index": 3.702750721500697,
+  "coleman_liau_index": 12.489291125541152,
+  "automated_readability_index": 12.327633477633327,
+  "dale_chall_readability_score": 11.688115530302976,
+  "difficult_words": 9.061688311688311,
+  "linsear_write_formula": 6.598253866674571,
+  "gunning_fog": 9.340442370130246
+}

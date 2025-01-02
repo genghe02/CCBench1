@@ -1,0 +1,110 @@
+"""
+This class provides functionality to read, write, and process text files.
+
+The purpose of this class is to facilitate reading, writing, and processing of text files.
+
+"""
+
+import json
+
+class TextFileProcessor:
+
+    def __init__(self, file_path):
+        """
+        Initialize the TextFileProcessor instance with the provided file path.
+
+        Parameters:
+            file_path (str): The path to the text file to be processed
+        """
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        """
+        Read the contents of the file and return it as JSON data.
+
+        Returns:
+            dict: JSON data read from the file
+
+        Test cases:
+            # Test case 1: Read valid JSON data
+            assert read_file_as_json() == {'key': 'value'}
+
+            # Test case 2: Read empty JSON data
+            assert read_file_as_json() == {}
+
+            # Test case 3: File not found
+            assert read_file_as_json() == None
+        """
+        with open(self.file_path, 'r') as file:
+            data = json.load(file)
+
+        return data
+
+    def read_file(self):
+        """
+        Read the contents of the file and return it as a string.
+
+        Returns:
+            str: Content of the file as a string
+
+        Test cases:
+            # Test case 1: Read valid content
+            assert read_file() == 'This is the file content.'
+
+            # Test case 2: Read empty file
+            assert read_file() == ''
+
+            # Test case 3: Read binary data
+            assert read_file() == b'This is binary data.'
+        """
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write_file(self, content):
+        """
+        Write the specified content to the file.
+
+        Parameters:
+            content (str): The content to be written to the file
+
+        Test cases:
+            # Test case 1: Write valid content
+            write_file('New content')
+            assert read_file() == 'New content'
+
+            # Test case 2: Write empty content
+            write_file('')
+            assert read_file() == ''
+
+            # Test case 3: Write special characters
+            write_file('!@#$%^&*()_+')
+            assert read_file() == '!@#$%^&*()_+'
+        """
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+    def process_file(self):
+        """
+        Read the file, remove non-alphabetic characters, write processed content back to the file, and return it.
+
+        Returns:
+            str: Processed content of the file
+
+        Test cases:
+            # Test case 1: Process content with alphabetic characters
+            write_file('abc123DEF456')
+            assert process_file() == 'abcDEF'
+
+            # Test case 2: Process content with special characters
+            write_file('!@#$%^&*()_+')
+            assert process_file() == ''
+
+            # Test case 3: Process empty file
+            write_file('')
+            assert process_file() == ''
+        """
+        content = self.read_file()
+        content = ''.join([char for char in content if char.isalpha()])
+        self.write_file(content)
+        return content
+"""

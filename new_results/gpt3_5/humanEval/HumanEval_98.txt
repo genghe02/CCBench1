@@ -1,0 +1,16 @@
+# Count the number of uppercase vowels in a string
+>>> count_upper("Hello World") # returns 1
+>>> count_upper("PYTHON") # returns 2
+>>> count_upper("aEiOu") # returns 2
+
+def count_upper(s):
+    # Count the number of uppercase vowels in a string
+    
+    >>> count_upper("Hello World") # returns 1
+    >>> count_upper("PYTHON") # returns 2
+    >>> count_upper("aEiOu") # returns 2
+    count = 0
+    for i in range(0,len(s),2):
+        if s[i] in "AEIOU":
+            count += 1
+    return count

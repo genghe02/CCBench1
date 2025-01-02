@@ -1,0 +1,111 @@
+```python
+"""
+This class is designed to unescape numeric HTML entities in a given string. It handles both decimal and hexadecimal numeric entities, converting them to their corresponding Unicode characters.
+"""
+
+class NumericEntityUnescaper:
+    def __init__(self):
+        """
+        Initializes the NumericEntityUnescaper class.
+        """
+        pass
+
+    def replace(self, string):
+        """
+        Replaces numeric HTML entities in the input string with their corresponding Unicode characters.
+
+        Parameters:
+            string (str): The input string containing numeric HTML entities to be unescaped.
+
+        Returns:
+            str: The string with numeric HTML entities replaced by their corresponding Unicode characters.
+
+        Test cases:
+            # Test case 1: Normal usage with decimal entity
+            input_str = "Hello &#65;"
+            expected_output = "Hello A"
+            assert NumericEntityUnescaper().replace(input_str) == expected_output
+
+            # Test case 2: Normal usage with hexadecimal entity
+            input_str = "Hello &#x41;"
+            expected_output = "Hello A"
+            assert NumericEntityUnescaper().replace(input_str) == expected_output
+
+            # Test case 3: Edge case with incomplete entity
+            input_str = "Hello &#"
+            expected_output = "Hello &#"
+            assert NumericEntityUnescaper().replace(input_str) == expected_output
+
+            # Test case 4: Error case with invalid entity
+            input_str = "Hello &#xG;"
+            expected_output = "Hello &#xG;"
+            assert NumericEntityUnescaper().replace(input_str) == expected_output
+        """
+        out = []
+        pos = 0
+        length = len(string)
+
+        while pos < length - 2:
+            if string[pos] == '&' and string[pos + 1] == '#':
+                start = pos + 2
+                is_hex = False
+                first_char = string[start]
+
+                if first_char == 'x' or first_char == 'X':
+                    start += 1
+                    is_hex = True
+
+                if start == length:
+                    return ''.join(out)
+
+                end = start
+                while end < length and self.is_hex_char(string[end]):
+                    end += 1
+
+                if end < length and string[end] == ';':
+                    try:
+                        entity_value = int(string[start:end], 16 if is_hex else 10)
+                    except:
+                        return ''.join(out)
+
+                    out.append(chr(entity_value))
+                    pos = end + 1
+                    continue
+
+            out.append(string[pos])
+            pos += 1
+
+        return ''.join(out)
+
+    @staticmethod
+    def is_hex_char(char):
+        """
+        Checks if a character is a valid hexadecimal digit.
+
+        Parameters:
+            char (str): The character to check.
+
+        Returns:
+            bool: True if the character is a valid hexadecimal digit, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid hexadecimal digit
+            assert NumericEntityUnescaper.is_hex_char('a') == True
+
+            # Test case 2: Valid hexadecimal digit (uppercase)
+            assert NumericEntityUnescaper.is_hex_char('F') == True
+
+            # Test case 3: Invalid hexadecimal digit
+            assert NumericEntityUnescaper.is_hex_char('g') == False
+
+            # Test case 4: Valid decimal digit
+            assert NumericEntityUnescaper.is_hex_char('5') == True
+        """
+        return char.isdigit() or ('a' <= char.lower() <= 'f')
+```
+
+### Explanation:
+1. **Class Documentation**: The class `NumericEntityUnescaper` is documented with a brief description of its purpose.
+2. **Method Documentation**: Each method (`__init__`, `replace`, `is_hex_char`) is documented with a description, parameter details, return value description, and test cases.
+3. **Test Cases**: Test cases are provided for normal usage, edge cases, and error cases to demonstrate the functionality of each method.
+4. **Formatting**: The documentation follows the standard Python docstring format with clear sectioning and consistent formatting.

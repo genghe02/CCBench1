@@ -1,0 +1,27 @@
+```python
+def is_prime(n):
+    # Check if a number is prime. A prime number is greater than 1 and has no divisors other than 1 and itself.
+    # Parameters:
+    # param n: int, the number to check for primality
+    # Return:
+    # return: bool, True if the number is prime, False otherwise
+    # Test cases:
+    # >>> is_prime(1)
+    # False
+    # >>> is_prime(2)
+    # True
+    # >>> is_prime(3)
+    # True
+    # >>> is_prime(4)
+    # False
+    # >>> is_prime(17)
+    # True
+    # >>> is_prime(18)
+    # False
+    if n < 2:
+        return False
+    for k in range(2, n - 1):
+        if n % k == 0:
+            return False
+    return True
+```

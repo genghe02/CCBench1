@@ -1,0 +1,13 @@
+```python
+def sort_third(l: list):
+    # Sorts every third element in the input list in ascending order, while keeping other elements unchanged.
+    # Example test cases:
+    # >>> sort_third([3, 1, 2, 6, 5, 4])  # should return [1, 1, 2, 3, 5, 4]
+    # >>> sort_third([9, 8, 7, 6, 5, 4, 3, 2, 1])  # should return [7, 8, 1, 6, 5, 4, 3, 2, 9]
+    # >>> sort_third([])  # should return []
+    # >>> sort_third([1])  # should return [1]
+    # >>> sort_third([1, 2])  # should return [1, 2]
+    l = list(l)
+    l[::3] = sorted(l[::3])
+    return l
+```

@@ -1,0 +1,6 @@
+# This function checks if two strings have the same characters just in different order
+>>> same_chars('hello', 'ohell') # returns True
+>>> same_chars('world', 'hello') # returns False
+>>> same_chars('', '') # returns True
+def same_chars(s0: str, s1: str):
+    return set(s0) == set(s1)

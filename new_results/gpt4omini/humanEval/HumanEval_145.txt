@@ -1,0 +1,15 @@
+```python
+def order_by_points(nums):
+    # Sort the list of numbers based on the sum of their digits
+    >>> order_by_points([23, 45, 12]) # returns [12, 23, 45]
+    >>> order_by_points([-12, -10, 20]) # returns [-10, -12, 20]
+    >>> order_by_points([0, 1, 2]) # returns [0, 1, 2]
+    >>> order_by_points([1, 10, 100]) # returns [1, 10, 100]
+    def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return sorted(nums, key=digits_sum)
+```

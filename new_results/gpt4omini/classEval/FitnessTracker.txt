@@ -1,0 +1,108 @@
+```python
+"""
+This class represents a fitness tracker that allows users to calculate BMI, assess their physical condition, and estimate their daily calorie intake.
+"""
+
+class FitnessTracker:
+    def __init__(self, height: float, weight: float, age: int, sex: str) -> None:
+        """
+        Initializes the fitness tracker with user-specific attributes.
+
+        Parameters:
+            height (float): User's height in meters.
+            weight (float): User's weight in kilograms.
+            age (int): User's age in years.
+            sex (str): User's gender, either 'male' or 'female'.
+        """
+        self.height = height
+        self.weight = weight
+        self.age = age
+        self.sex = sex
+        self.BMI_std = [
+            {"male": [20, 25]},
+            {"female": [19, 24]}
+        ]
+
+    def get_BMI(self) -> float:
+        """
+        Calculates the Body Mass Index (BMI) based on weight and height.
+
+        Returns:
+            float: The calculated BMI value.
+    
+        Test cases:
+            # Test case 1: Normal BMI
+            input = (1.75, 70)  # height in meters, weight in kg
+            expected_output = 22.86
+            
+            # Test case 2: Underweight case
+            input = (1.75, 50)
+            expected_output = 16.33
+            
+            # Test case 3: Obesity case
+            input = (1.75, 95)
+            expected_output = 31.07
+        """
+        return self.weight / self.height ** 2
+
+    def condition_judge(self) -> int:
+        """
+        Evaluates the user's BMI against standard ranges to determine their physical condition.
+
+        Returns:
+            int: Returns 1 if overweight, -1 if underweight, and 0 if normal.
+        
+        Test cases:
+            # Test case 1: Overweight
+            input = (1.75, 90, "male")  # returns 1
+            
+            # Test case 2: Underweight
+            input = (1.75, 50, "female")  # returns -1
+            
+            # Test case 3: Normal weight
+            input = (1.75, 70, "male")  # returns 0
+        """
+        BMI = self.get_BMI()
+        if self.sex == "male":
+            BMI_range = self.BMI_std[0]["male"]
+        else:
+            BMI_range = self.BMI_std[1]["female"]
+         
+        if BMI > BMI_range[1]:
+            return 1  # too fat
+        elif BMI < BMI_range[0]:
+            return -1  # too thin
+        else:
+            return 0  # normal
+
+    def calculate_calorie_intake(self) -> float:
+        """
+        Estimates the daily calorie intake based on BMR and physical condition.
+
+        Returns:
+            float: The calculated daily calorie intake.
+        
+        Test cases:
+            # Test case 1: Sedentary, overweight male
+            input = (1.75, 90, 30, "male")  # returns value of BMR * 1.2
+            
+            # Test case 2: Active, underweight female
+            input = (1.65, 50, 25, "female")  # returns value of BMR * 1.6
+            
+            # Test case 3: Moderate lifestyle, normal weight male
+            input = (1.80, 75, 40, "male")  # returns value of BMR * 1.4
+        """
+        if self.sex == "male":
+            BMR = 10 * self.weight + 6.25 * self.height - 5 * self.age + 5
+        else:
+            BMR = 10 * self.weight + 6.25 * self.height - 5 * self.age - 161
+            
+        if self.condition_judge() == 1:
+            calorie_intake = BMR * 1.2  # Sedentary lifestyle
+        elif self.condition_judge() == -1:
+            calorie_intake = BMR * 1.6  # Active lifestyle
+        else:
+            calorie_intake = BMR * 1.4  # Moderate lifestyle
+        
+        return calorie_intake
+```

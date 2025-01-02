@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'a': [4, 1, 7, 3], 'b': [5, 2, 9, 6], 'c': [6, 3, 2, 8]})
+# Filter dataframe to keep values greater than the mean and align results
+df = df[df>df.mean()].apply(lambda x: pd.Series(x.dropna().values))
+```

@@ -1,0 +1,170 @@
+"""
+This class defines an SQL generator that creates SQL queries for various operations on a specific table.
+"""
+
+class SQLGenerator:
+    def __init__(self, table_name):
+        """
+        Initialize the SQLGenerator object with the specified table name.
+
+        Parameters:
+            table_name (str): The name of the database table to operate on.
+        """
+        self.table_name = table_name
+
+    def select(self, fields=None, condition=None):
+        """
+        Generate a SELECT SQL query.
+
+        Parameters:
+            fields (list): List of fields to select. If None, select all (*).
+            condition (str): Conditional expression for the WHERE clause.
+
+        Returns:
+            str: The constructed SELECT query.
+
+        Test cases:
+            # Test case 1: Select all fields
+            assert select() == "SELECT * FROM <table_name>;"
+
+            # Test case 2: Select specific fields with condition
+            assert select(fields=["name", "age"], condition="age > 18") == "SELECT name, age FROM <table_name> WHERE age > 18;"
+
+            # Test case 3: No condition provided
+            assert select(fields=["name"]) == "SELECT name FROM <table_name>;"
+        """
+
+        if fields is None:
+            fields = "*"
+        else:
+            fields = ", ".join(fields)
+        sql = f"SELECT {fields} FROM {self.table_name}"
+        if condition is not None:
+            sql += f" WHERE {condition}"
+        return sql + ";"
+
+    def insert(self, data):
+        """
+        Generate an INSERT SQL query.
+
+        Parameters:
+            data (dict): A dictionary of field-value pairs to insert.
+
+        Returns:
+            str: The constructed INSERT query.
+
+        Test cases:
+            # Test case 1: Insert data with multiple fields
+            assert insert({"name": "Alice", "age": 25}) == "INSERT INTO <table_name> (name, age) VALUES ('Alice', '25');"
+
+            # Test case 2: Insert data with a single field
+            assert insert({"name": "Bob"}) == "INSERT INTO <table_name> (name) VALUES ('Bob');"
+
+            # Test case 3: Insert empty data
+            assert insert({}) == "INSERT INTO <table_name> ();"
+        """
+
+        fields = ", ".join(data.keys())
+        values = ", ".join([f"'{value}'" for value in data.values()])
+        sql = f"INSERT INTO {self.table_name} ({fields}) VALUES ({values})"
+        return sql + ";"
+
+    def update(self, data, condition):
+        """
+        Generate an UPDATE SQL query.
+
+        Parameters:
+            data (dict): A dictionary of field-value pairs to update.
+            condition (str): Conditional expression for the WHERE clause.
+
+        Returns:
+            str: The constructed UPDATE query.
+
+        Test cases:
+            # Test case 1: Update data with a single field
+            assert update({"age": 30}, "name = 'Alice'") == "UPDATE <table_name> SET age = '30' WHERE name = 'Alice';"
+
+            # Test case 2: Update data with multiple fields 
+            assert update({"name": "Bob", "age": 22}, "age > 18") == "UPDATE <table_name> SET name = 'Bob', age = '22' WHERE age > 18;"
+
+            # Test case 3: Update data with an empty field
+            assert update({"name": ""}, "age = 25") == "UPDATE <table_name> SET name = '' WHERE age = 25;"
+        """
+
+        set_clause = ", ".join([f"{field} = '{value}'" for field, value in data.items()])
+        sql = f"UPDATE {self.table_name} SET {set_clause} WHERE {condition}"
+        return sql + ";"
+
+    def delete(self, condition):
+        """
+        Generate a DELETE SQL query.
+
+        Parameters:
+            condition (str): Conditional expression for the WHERE clause.
+
+        Returns:
+            str: The constructed DELETE query.
+
+        Test cases:
+            # Test case 1: Delete all rows
+            assert delete("") == "DELETE FROM <table_name> ;"
+
+            # Test case 2: Delete rows with condition
+            assert delete("age < 18") == "DELETE FROM <table_name> WHERE age < 18;"
+            
+            # Test case 3: Delete rows with numeric condition
+            assert delete("id = 10") == "DELETE FROM <table_name> WHERE id = 10;"
+        """
+
+        sql = f"DELETE FROM {self.table_name} WHERE {condition}"
+        return sql + ";"
+
+    def select_female_under_age(self, age):
+        """
+        Generate a SELECT SQL query for females under a certain age.
+
+        Parameters:
+            age (int): The maximum age for females.
+
+        Returns:
+            str: The constructed SELECT query.
+
+        Test cases:
+            # Test case 1: Select females under the age limit
+            assert select_female_under_age(25) == "SELECT * FROM <table_name> WHERE age < 25 AND gender = 'female';"
+            
+            # Test case 2: Select females at the age limit
+            assert select_female_under_age(18) == "SELECT * FROM <table_name> WHERE age < 18 AND gender = 'female';"
+
+            # Test case 3: Select females over the age limit
+            assert select_female_under_age(30) == "SELECT * FROM <table_name> WHERE age < 30 AND gender = 'female';"
+        """
+
+        condition = f"age < {age} AND gender = 'female'"
+        return self.select(condition=condition)
+
+    def select_by_age_range(self, min_age, max_age):
+        """
+        Generate a SELECT SQL query to select rows within a specific age range.
+
+        Parameters:
+            min_age (int): The minimum age in the range.
+            max_age (int): The maximum age in the range.
+
+        Returns:
+            str: The constructed SELECT query.
+
+        Test cases:
+            # Test case 1: Select by age range
+            assert select_by_age_range(20, 30) == "SELECT * FROM <table_name> WHERE age BETWEEN 20 AND 30;"
+            
+            # Test case 2: Select by same age range
+            assert select_by_age_range(25, 25) == "SELECT * FROM <table_name> WHERE age BETWEEN 25 AND 25;"
+            
+            # Test case 3: Select by invalid range
+            assert select_by_age_range(30, 20) == "SELECT * FROM <table_name> WHERE age BETWEEN 30 AND 20;"
+        """
+
+        condition = f"age BETWEEN {min_age} AND {max_age}"
+        return self.select(condition=condition)
+```

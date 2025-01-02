@@ -1,0 +1,12 @@
+ # Requires the use of the math module for squaring numbers
+# Test cases for the sum_squares function
+def sum_squares(lst):
+    <Requirements for the code>
+    >>> sum_squares([]) # returns 0
+    >>> sum_squares([1, 2, 3]) # returns 14 (1^2 + 2^2 + 3^2)
+    >>> sum_squares([-1, 0, 1.5]) # returns 2.25 ((-1)^2 + 0^2 + 1.5^2)
+    import math
+    squared = 0
+    for i in lst:
+        squared += math.ceil(i)**2
+    return squared</s>

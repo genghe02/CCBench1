@@ -1,0 +1,31 @@
+```python
+def minSubArraySum(nums):
+    # Find the minimum sum of a contiguous subarray in a given list of integers.
+    # This function uses a variation of the Kadane's algorithm to find the maximum sum of the negated array,
+    # which corresponds to the minimum sum of the original array.
+    # If the maximum sum of the negated array is zero, it means all elements are non-positive,
+    # and the function returns the maximum of the negated elements as the minimum sum.
+    
+    # >>> minSubArraySum([-2, 1, -3, 4, -1, 2, 1, -5, 4])
+    # 6
+    # >>> minSubArraySum([1, 2, 3, 4, 5])
+    # 1
+    # >>> minSubArraySum([-1, -2, -3, -4, -5])
+    # -15
+    # >>> minSubArraySum([0, 0, 0, 0])
+    # 0
+    # >>> minSubArraySum([-1, 2, -1, 2, -1, 2])
+    # -1
+
+    max_sum = 0
+    s = 0
+    for num in nums:
+        s += -num
+        if (s < 0):
+            s = 0
+        max_sum = max(s, max_sum)
+    if max_sum == 0:
+        max_sum = max(-i for i in nums)
+    min_sum = -max_sum
+    return min_sum
+```

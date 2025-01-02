@@ -1,0 +1,14 @@
+ def eat(number, need, remaining):
+    # Ensure that number, need, and remaining are valid float or int numbers
+    # return a new list with updated number and remaining
+    
+    >>> eat(5, 3.5, 7) # returns [8.5, 3.5]
+    >>> eat(10, 2.5, 5) # returns [12.5, 2.5]
+    >>> eat(3, 4, 6) # returns [7, 2]
+    if isinstance(number, (int, float)) and isinstance(need, (int, float)) and isinstance(remaining, (int, float)):
+        if(need <= remaining):
+            return [ number + need , remaining-need ]
+        else:
+            return [ number + remaining , 0]
+    else:
+        raise TypeError("number, need and remaining should be either int or float.")</s>

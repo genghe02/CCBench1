@@ -1,0 +1,6 @@
+# Merge two DataFrames with different column names but the same number of rows. 
+# Given two DataFrames in Pandas, df1 and df2, where df1 has columns 'a' and 'b',
+# and df2 has a column 'c', merge them to create a new DataFrame with columns 'a', 'b', and 'c'. 
+# Two methods can be used to achieve this, both resulting in the same output.
+# Use the merge function with additional arguments to utilize the indexes, 
+# specifically setting left_index and right_index to True.

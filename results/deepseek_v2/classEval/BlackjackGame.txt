@@ -1,0 +1,73 @@
+```python
+import random
+
+
+class BlackjackGame:
+    # This class represents a simple Blackjack game, including methods to create a deck, calculate hand values, and determine the winner.
+    def __init__(self):
+        # Initialize the game by creating a deck, and setting up empty hands for the player and dealer.
+        self.deck = self.create_deck()
+        self.player_hand = []
+        self.dealer_hand = []
+
+    def create_deck(self):
+        # Create a standard 52-card deck, shuffle it, and return the shuffled deck.
+        # return: list, a shuffled list of 52 cards in the format 'rank+suit' (e.g., 'AS' for Ace of Spades).
+        # >>> game = BlackjackGame()
+        # >>> len(game.create_deck())
+        # 52
+        # >>> game.create_deck()[0] in ['AS', '2S', '3S', '4S', '5S', '6S', '7S', '8S', '9S', '10S', 'JS', 'QS', 'KS']
+        # True
+        deck = []
+        suits = ['S', 'C', 'D', 'H']
+        ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        for suit in suits:
+            for rank in ranks:
+                deck.append(rank + suit)
+        random.shuffle(deck)
+        return deck
+
+    def calculate_hand_value(self, hand):
+        # Calculate the total value of a given hand, taking into account the special rules for Aces.
+        # param hand: list, a list of cards in the format 'rank+suit' (e.g., ['AS', '10H']).
+        # return: int, the total value of the hand, adjusted for Aces.
+        # >>> game = BlackjackGame()
+        # >>> game.calculate_hand_value(['AS', '10H'])
+        # 21
+        # >>> game.calculate_hand_value(['AS', 'AH', '10H'])
+        # 12
+        value = 0
+        num_aces = 0
+        for card in hand:
+            rank = card[:-1]
+            if rank.isdigit():
+                value += int(rank)
+            elif rank in ['J', 'Q', 'K']:
+                value += 10
+            elif rank == 'A':
+                value += 11
+                num_aces += 1
+        while value > 21 and num_aces > 0:
+            value -= 10
+            num_aces -= 1
+        return value
+
+    def check_winner(self, player_hand, dealer_hand):
+        # Determine the winner based on the values of the player's and dealer's hands.
+        player_value = self.calculate_hand_value(player_hand)
+        dealer_value = self.calculate_hand_value(dealer_hand)
+        if player_value > 21 and dealer_value > 21:
+            if player_value <= dealer_value:
+                return 'Player wins'
+            else:
+                return 'Dealer wins'
+        elif player_value > 21:
+            return 'Dealer wins'
+        elif dealer_value > 21:
+            return 'Player wins'
+        else:
+            if player_value <= dealer_value:
+                return 'Dealer wins'
+            else:
+                return 'Player wins'
+```

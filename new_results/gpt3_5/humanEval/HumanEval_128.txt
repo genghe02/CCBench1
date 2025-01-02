@@ -1,0 +1,16 @@
+# This function calculates the product of signs in the input array and multiplies it by the sum of absolute values of elements
+
+>>> prod_signs([1, 2, 3]) # returns 6
+>>> prod_signs([-1, 2, 3]) # returns -6
+>>> prod_signs([0, 1, 2, 3]) # returns 6
+>>> prod_signs([]) # returns None
+
+def prod_signs(arr):
+    # Calculate the product of signs and multiply by the sum of absolute values
+    >>> prod_signs([1, 2, 3]) # returns 6
+    >>> prod_signs([-1, 2, 3]) # returns -6
+    >>> prod_signs([0, 1, 2, 3]) # returns 6
+    >>> prod_signs([]) # returns None
+    if not arr: return None
+    prod = 0 if 0 in arr else (-1) ** len(list(filter(lambda x: x < 0, arr)))
+    return prod * sum([abs(i) for i in arr])

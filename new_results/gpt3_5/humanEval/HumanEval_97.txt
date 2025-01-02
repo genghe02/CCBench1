@@ -1,0 +1,6 @@
+# Multiply two numbers by taking the last digit of each number
+>>> multiply(123, 456) # returns 8
+>>> multiply(-12, 5) # returns 0
+>>> multiply(0, 9) # returns 0
+def multiply(a, b):
+    return abs(a % 10) * abs(b % 10)

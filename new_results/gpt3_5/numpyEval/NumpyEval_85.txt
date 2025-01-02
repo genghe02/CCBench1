@@ -1,0 +1,2 @@
+# Check if the array contains only zeros
+def test_arr_contain_only_zeros(arr):

@@ -1,0 +1,2 @@
+ # Create a new dataframe with only the rows where the second column equals 'Jimmy'
+new_df = df[df.iloc[:, 1] == 'Jimmy']</s>

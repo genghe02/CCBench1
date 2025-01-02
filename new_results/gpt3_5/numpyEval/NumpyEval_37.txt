@@ -1,0 +1,1 @@
+# Return the most frequently occurring number in the given array based on binary counting frequency and indexing argument maximum value position.

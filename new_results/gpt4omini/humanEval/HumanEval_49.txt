@@ -1,0 +1,13 @@
+```python
+def modp(n: int, p: int):
+    # Calculate 2^n mod p
+    >>> modp(0, 5) # returns 1
+    >>> modp(1, 5) # returns 2
+    >>> modp(2, 5) # returns 4
+    >>> modp(3, 5) # returns 3
+    >>> modp(5, 5) # returns 0
+    ret = 1
+    for i in range(n):
+        ret = (2 * ret) % p
+    return ret
+```

@@ -1,0 +1,2 @@
+ # Delete elements at specified indices from the array and return the modified array
+result = np.delete(data, index)</s>

@@ -1,0 +1,173 @@
+ This class, named `AccessGatewayFilter`, is designed to handle request filtering, authentication, and logging for an access gateway.
+
+```python
+"""
+This class, named `AccessGatewayFilter`, is designed to handle request filtering, authentication, and logging for an access gateway.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method.
+        """
+        self.logger = logging.getLogger(__name__)
+
+    def filter(self, request):
+        """
+        Filters and authenticates the given request, updating the current user info and logging accordingly.
+
+        Parameters:
+            request (dict): Request data containing the method and URI path.
+
+        Returns:
+            bool: True if the request is valid and authorized, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid request
+            request = {"path": "/api/users", "method": "GET"}
+            assert self.filter(request) is True
+            
+            # Test case 2: Unauthenticated request
+            request = {"path": "/api/users", "method": "GET"}
+            with patch.object(self, 'get_jwt_user', side_effect=Exception) as mock:
+                mock.side_effect = Exception()
+                assert self.filter(request) is False
+            
+            # Test case 3: Unauthorized request
+            user = {"level": 1}
+            request = {"path": "/api/admin_users", "method": "GET", "headers": {"Authorization": "Bearer test_token"}}
+            assert self.filter(request) is False
+        """
+        self.logger.debug(f"Filtering request: {request}")
+        request_uri = request["path"]
+        if not self.is_start_with(request_uri):
+            return False
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token["user"]
+            if user["level"] <= 2:
+                self.logger.error(f"Unauthorized user '{user['username']}' attempted access to '{request_uri}'.")
+                return False
+            self.set_current_user_info_and_log(user)
+            self.logger.info(f"Request '{request_uri}' authorized for user '{user['username']}'.")
+            return True
+        except (KeyError, ValueError, Exception):
+            self.logger.error("Failed to authenticate request.")
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Checks if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check.
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert self.is_start_with("/api/users") is True
+            
+            # Test case 2: Login endpoint
+            assert self.is_start_with("/login") is True
+            
+            # Test case 3: Protected endpoint
+            assert self.is_start_with("/admin/users") is False
+        """
+        allowed_prefixes = ["/api", "/login"]
+        return any(request_uri.startswith(prefix) for prefix in allowed_prefixes)
+
+    def get_jwt_user(self, request):
+        """
+        Retrieves and verifies the JSON Web Token (JWT) from the request headers and returns the corresponding user data.
+
+        Parameters:
+            request (dict): The request data containing headers.
+
+        Raises:
+            ValueError: If no JWT token is present or the JWT is invalid.
+
+        Returns:
+            dict: The decoded JWT token's user data.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            headers = {"Authorization": "Bearer valid_token"}
+            jwt_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            request = {"headers": headers}
+            expected_output = {"user": {"username": "John Doe", "level": 3}}
+            assert self.get_jwt_user(request) == expected_output
+            
+            # Test case 2: Expired JWT token
+            headers = {"Authorization": "Bearer expired_token"}
+            request = {"headers": headers}
+            with patch("time.time") as mock:
+                mock.return_value = time.time() - 86400  # One day ago
+                assert self.get_jwt_user(request) raises(ValueError)
+            
+            # Test case 3: Malformed JWT token
+            headers = {"Authorization": "Bearer malformed_token"}
+            request = {"headers": headers}
+            assert self.get_jwt_user(request) raises(ValueError)
+        """
+        jwt_header = None
+        jwt_claims = None
+
+        for header in request["headers"].get("Authorization", ""):
+            if header.startswith("Bearer"):
+                jwt_token = header[7:]
+                token_parts = jwt_token.split(".")
+
+                if len(token_parts) != 3:
+                    raise ValueError("Invalid token structure.")
+
+                jwt_header = json.loads(base64.b64decode(token_parts[0]))
+                jwt_claims = json.loads(base64.b64decode(token_parts[1]))
+                break
+
+        if not jwt_header or not jwt_claims:
+            raise ValueError("Invalid token structure.")
+
+        if jwt_header["alg"] != "RS256" or jwt_header["typ"] != "at+jwt":
+            raise ValueError("Invalid algorithm or token type.")
+
+        # Decode the private key for RSA signature verification
+        # Replace this placeholder with actual RSA key decoding code
+        private_key = rsa.newkeys(2048)[1]
+
+        signature = base64.b64decode(token_parts[2])
+        jwt_signature = rsa.verify(
+            msg=json.dumps(jwt_claims).encode(),
+            key=private_key,
+            sig=signature,
+            algorithm="RSA-SHA256"
+        )
+
+        if not jwt_signature:
+            raise ValueError("Invalid signature.")
+
+        return jwt_claims
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Sets the current user info and logs the user activity.
+
+        Parameters:
+            user (dict): The user data.
+
+        Test cases:
+            # Test case 1: User info set
+            assert self.current_user == user
+        """
+        self.current_user = user
+        self.logger.info(f"Current user: {user}")
+```
+
+Please note that this solution uses `patch` and `json` for testing purposes, make sure you have them installed in your virtual environment. Also, for the `get_jwt_user` method, the RSA key decoding is not implemented and needs to be replaced with the proper code.</s>

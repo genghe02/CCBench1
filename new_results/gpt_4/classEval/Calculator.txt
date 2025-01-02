@@ -1,0 +1,144 @@
+"""
+This class provides functionality to evaluate mathematical expressions using basic operations (addition, subtraction,
+multiplication, division, exponentiation) with proper operator precedence and parentheses support.
+"""
+
+class Calculator:
+    def __init__(self):
+        """
+        Initialization method that sets up the dictionary of operator functions.
+        
+        This dictionary maps operator symbols to their corresponding mathematical operations.
+        """
+        self.operators = {
+            '+': lambda x, y: x + y,
+            '-': lambda x, y: x - y,
+            '*': lambda x, y: x * y,
+            '/': lambda x, y: x / y,
+            '^': lambda x, y: x ** y
+        }
+
+    def calculate(self, expression):
+        """
+        Evaluates the given mathematical expression.
+
+        Parameters:
+            expression (str): A string representing a mathematical expression with numbers, operators and parentheses.
+        
+        Returns:
+            float: The result of evaluating the expression. Returns None if the expression is invalid.
+        
+        Test cases:
+            # Test case 1: Normal usage with all operators and parentheses
+            assert calculate("2+3*4^2/(1-5)^2") == -4.0
+            
+            # Test case 2: Expression with floating point numbers
+            assert calculate("1.5*3") == 4.5
+            
+            # Test case 3: Invalid expression
+            assert calculate("2+3*") == None
+        """
+
+        operand_stack = []
+        operator_stack = []
+        num_buffer = ''
+
+        for char in expression:
+            if char.isdigit() or char == '.':
+                num_buffer += char
+            else:
+                if num_buffer:
+                    operand_stack.append(float(num_buffer))
+                    num_buffer = ''
+
+                if char in '+-*/^':
+                    while (
+                            operator_stack and
+                            operator_stack[-1] != '(' and
+                            self.precedence(operator_stack[-1]) >= self.precedence(char)
+                    ):
+                        operand_stack, operator_stack = self.apply_operator(operand_stack, operator_stack)
+
+                    operator_stack.append(char)
+                elif char == '(':
+                    operator_stack.append(char)
+                elif char == ')':
+                    while operator_stack and operator_stack[-1] != '(':
+                        operand_stack, operator_stack = self.apply_operator(operand_stack, operator_stack)
+
+                    operator_stack.pop()
+
+        if num_buffer:
+            operand_stack.append(float(num_buffer))
+
+        while operator_stack:
+            operand_stack, operator_stack = self.apply_operator(operand_stack, operator_stack)
+
+        return operand_stack[-1] if operand_stack else None
+
+    def precedence(self, operator):
+        """
+        Returns the precedence of the given operator.
+        
+        Parameters:
+            operator (str): A string representing a mathematical operator.
+            
+        Returns:
+            int: The precedence of the operator. Higher number means higher precedence.
+            
+        Test cases:
+            # Test case 1: High precedence operator
+            assert precedence('^') == 3
+            
+            # Test case 2: Low precedence operator
+            assert precedence('+') == 1
+            
+            # Test case 3: Non-operator character
+            assert precedence('a') == 0
+        """
+        precedences = {
+            '+': 1,
+            '-': 1,
+            '*': 2,
+            '/': 2,
+            '^': 3
+        }
+        return precedences.get(operator, 0)
+
+    def apply_operator(self, operand_stack, operator_stack):
+        """
+        Pops the top two operands and the top operator from their respective stacks, applies the operator to the operands,
+        and pushes the result back onto the operand stack.
+        
+        Parameters:
+            operand_stack (list): A list of operands (numbers).
+            operator_stack (list): A list of operators.
+            
+        Returns:
+            tuple: A tuple containing the updated operand stack and operator stack.
+            
+        Test cases:
+            # Test case 1: Apply addition operator
+            operand_stack = [1, 2], operator_stack = ['+']
+            apply_operator(operand_stack, operator_stack) should return ([3], [])
+            
+            # Test case 2: Apply multiplication operator
+            operand_stack = [2, 3], operator_stack = ['*']
+            apply_operator(operand_stack, operator_stack) should return ([6], [])
+            
+            # Test case 3: Apply exponentiation operator
+            operand_stack = [2, 3], operator_stack = ['^']
+            apply_operator(operand_stack, operator_stack) should return ([8], [])
+        """
+        operator = operator_stack.pop()
+        if operator == '^':
+            operand2 = operand_stack.pop()
+            operand1 = operand_stack.pop()
+            result = self.operators[operator](operand1, operand2)
+            operand_stack.append(result)
+        else:
+            operand2 = operand_stack.pop()
+            operand1 = operand_stack.pop()
+            result = self.operators[operator](operand1, operand2)
+            operand_stack.append(result)
+        return operand_stack, operator_stack

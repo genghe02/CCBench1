@@ -1,0 +1,10 @@
+```python
+def largest_divisor(n: int) -> int:
+    # Return the largest divisor of n that is less than n
+    >>> largest_divisor(15) # returns 5
+    >>> largest_divisor(17) # returns 1
+    >>> largest_divisor(100) # returns 50
+    for i in reversed(range(n)):
+        if n % i == 0:
+            return i
+```

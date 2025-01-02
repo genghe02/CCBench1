@@ -1,0 +1,1 @@
+# Calculate the total sum of each row in the DataFrame 'df' by applying the sum function on each row using the apply method with axis=1.

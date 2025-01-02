@@ -1,0 +1,183 @@
+```python
+"""
+This class is responsible for generating SQL statements for various operations on a specified database table.
+"""
+
+class SQLGenerator:
+    def __init__(self, table_name):
+        """
+        Initializes the SQLGenerator with the given table name.
+
+        Parameters:
+            table_name (str): The name of the database table for which SQL statements are to be generated.
+        """
+        self.table_name = table_name
+
+    def select(self, fields=None, condition=None):
+        """
+        Generates a SQL SELECT statement.
+
+        Parameters:
+            fields (list, optional): A list of fields to select from the table. If None, selects all fields.
+            condition (str, optional): A SQL condition string for the WHERE clause. If None, no WHERE clause is added.
+
+        Returns:
+            str: The constructed SQL SELECT statement.
+
+        Test cases:
+            # Test case 1: Select all fields
+            input = (None, None)
+            expected_output = "SELECT * FROM table_name;"
+            
+            # Test case 2: Select specific fields
+            input = (["name", "age"], None)
+            expected_output = "SELECT name, age FROM table_name;"
+            
+            # Test case 3: Select with a condition
+            input = (["name"], "age > 30")
+            expected_output = "SELECT name FROM table_name WHERE age > 30;"
+        """
+        if fields is None:
+            fields = "*"
+        else:
+            fields = ", ".join(fields)
+        sql = f"SELECT {fields} FROM {self.table_name}"
+        if condition is not None:
+            sql += f" WHERE {condition}"
+        return sql + ";"
+
+    def insert(self, data):
+        """
+        Generates a SQL INSERT statement.
+
+        Parameters:
+            data (dict): A dictionary mapping column names to values to be inserted into the table.
+
+        Returns:
+            str: The constructed SQL INSERT statement.
+
+        Test cases:
+            # Test case 1: Insert single record
+            input = {'name': 'Alice', 'age': 25}
+            expected_output = "INSERT INTO table_name (name, age) VALUES ('Alice', '25');"
+            
+            # Test case 2: Insert multiple fields
+            input = {'product': 'Widget', 'price': 19.99, 'quantity': 100}
+            expected_output = "INSERT INTO table_name (product, price, quantity) VALUES ('Widget', '19.99', '100');"
+            
+            # Test case 3: Empty data
+            input = {}
+            expected_output = "INSERT INTO table_name () VALUES ();"
+        """
+        fields = ", ".join(data.keys())
+        values = ", ".join([f"\'{value}\'" for value in data.values()])
+        sql = f"INSERT INTO {self.table_name} ({fields}) VALUES ({values})"
+        return sql + ";"
+
+    def update(self, data, condition):
+        """
+        Generates a SQL UPDATE statement.
+
+        Parameters:
+            data (dict): A dictionary mapping column names to new values to be updated in the table.
+            condition (str): A SQL condition string for the WHERE clause.
+
+        Returns:
+            str: The constructed SQL UPDATE statement.
+
+        Test cases:
+            # Test case 1: Basic update
+            input = ({'age': 26}, "name = 'Alice'")
+            expected_output = "UPDATE table_name SET age = '26' WHERE name = 'Alice';"
+            
+            # Test case 2: Update multiple fields
+            input = ({'name': 'Bob', 'age': 30}, "id = 1")
+            expected_output = "UPDATE table_name SET name = 'Bob', age = '30' WHERE id = 1;"
+            
+            # Test case 3: No condition
+            input = ({'age': 31}, "")
+            expected_output = "UPDATE table_name SET age = '31' WHERE ;"
+        """
+        set_clause = ", ".join([f"{field} = \'{value}\'" for field, value in data.items()])
+        sql = f"UPDATE {self.table_name} SET {set_clause} WHERE {condition}"
+        return sql + ";"
+
+    def delete(self, condition):
+        """
+        Generates a SQL DELETE statement.
+
+        Parameters:
+            condition (str): A SQL condition string for the WHERE clause.
+
+        Returns:
+            str: The constructed SQL DELETE statement.
+
+        Test cases:
+            # Test case 1: Basic delete
+            input = "id = 1"
+            expected_output = "DELETE FROM table_name WHERE id = 1;"
+            
+            # Test case 2: Delete with multiple conditions
+            input = "age < 18 AND gender = 'female'"
+            expected_output = "DELETE FROM table_name WHERE age < 18 AND gender = 'female';"
+            
+            # Test case 3: Delete without condition (deletes all records)
+            input = ""
+            expected_output = "DELETE FROM table_name WHERE ;"
+        """
+        sql = f"DELETE FROM {self.table_name} WHERE {condition}"
+        return sql + ";"
+
+    def select_female_under_age(self, age):
+        """
+        Generates a SQL SELECT statement to find female individuals under a certain age.
+
+        Parameters:
+            age (int): The upper limit of age for selecting records.
+
+        Returns:
+            str: The constructed SQL SELECT statement.
+
+        Test cases:
+            # Test case 1: Select females under 30
+            input = 30
+            expected_output = "SELECT * FROM table_name WHERE age < 30 AND gender = 'female';"
+            
+            # Test case 2: Select females under 18
+            input = 18
+            expected_output = "SELECT * FROM table_name WHERE age < 18 AND gender = 'female';"
+            
+            # Test case 3: Edge case with age 0
+            input = 0
+            expected_output = "SELECT * FROM table_name WHERE age < 0 AND gender = 'female';"
+        """
+        condition = f"age < {age} AND gender = 'female'"
+        return self.select(condition=condition)
+
+    def select_by_age_range(self, min_age, max_age):
+        """
+        Generates a SQL SELECT statement to find individuals within a certain age range.
+
+        Parameters:
+            min_age (int): The minimum age for selecting records.
+            max_age (int): The maximum age for selecting records.
+
+        Returns:
+            str: The constructed SQL SELECT statement.
+
+        Test cases:
+            # Test case 1: Valid age range
+            input = (18, 30)
+            expected_output = "SELECT * FROM table_name WHERE age BETWEEN 18 AND 30;"
+            
+            # Test case 2: Invalid age range (min > max)
+            input = (30, 18)
+            expected_output = "SELECT * FROM table_name WHERE age BETWEEN 30 AND 18;"
+            
+            # Test case 3: Edge case (both ages the same)
+            input = (25, 25)
+            expected_output = "SELECT * FROM table_name WHERE age BETWEEN 25 AND 25;"
+        """
+        condition = f"age BETWEEN {min_age} AND {max_age}"
+        return self.select(condition=condition)
+```

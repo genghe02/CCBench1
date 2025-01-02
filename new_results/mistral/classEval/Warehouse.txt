@@ -1,0 +1,157 @@
+ """
+This class represents a Warehouse system to manage inventory and orders.
+"""
+
+import datetime
+
+class Warehouse:
+
+    def __init__(self):
+        """
+        Initialize the Warehouse instance.
+        """
+        self.inventory = {}  # Product ID: Product
+        self.orders = {}  # Order ID: Order
+
+    def add_product(self, product_id, name, quantity):
+        """
+        Add a new product to the inventory.
+
+        Parameters:
+            product_id (str): The unique identifier for the product
+            name (str): The name of the product
+            quantity (int): The initial quantity of the product
+
+        Test cases:
+            # Test case 1: New product added
+            assert add_product('P1', 'Apple', 25) is None
+            
+            # Test case 2: Existing product updated
+            assert add_product('P1', 'Apple', 50) is None
+            assert self.inventory['P1']['quantity'] == 50
+            
+            # Test case 3: Invalid product ID
+            assert add_product('', 'Banana', 30) is TypeError
+        """
+        if product_id not in self.inventory:
+            self.inventory[product_id] = {'name': name, 'quantity': quantity}
+
+    def update_product_quantity(self, product_id, quantity):
+        """
+        Update the quantity of a product in the inventory.
+
+        Parameters:
+            product_id (str): The unique identifier for the product
+            quantity (int): The new quantity of the product
+
+        Test cases:
+            # Test case 1: Product quantity updated
+            assert update_product_quantity('P1', 75) is None
+            assert self.inventory['P1']['quantity'] == 75
+            
+            # Test case 2: Invalid product ID
+            assert update_product_quantity('P2', 50) is KeyError
+            
+            # Test case 3: Insufficient inventory
+            assert update_product_quantity('P1', -10) is ValueError
+        """
+        if product_id in self.inventory:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def get_product_quantity(self, product_id):
+        """
+        Get the current quantity of a product in the inventory.
+
+        Parameters:
+            product_id (str): The unique identifier for the product
+
+        Returns:
+            int: The current quantity of the product
+
+        Test cases:
+            # Test case 1: Get product quantity
+            assert get_product_quantity('P1') == 75
+            
+            # Test case 2: Invalid product ID
+            assert get_product_quantity('P2') is False
+        """
+        if product_id in self.inventory:
+            return self.inventory[product_id]['quantity']
+        else:
+            return False
+
+    def create_order(self, order_id, product_id, quantity):
+        """
+        Create a new order with a specified product and quantity.
+
+        Parameters:
+            order_id (str): The unique identifier for the order
+            product_id (str): The unique identifier for the product
+            quantity (int): The quantity of the product for the order
+
+        Returns:
+            bool: True if the order was successfully created, False otherwise
+
+        Test cases:
+            # Test case 1: Create a new order
+            assert create_order('O1', 'P1', 5) is True
+            assert 'O1' in self.orders
+            
+            # Test case 2: Insufficient inventory
+            assert create_order('O2', 'P1', 12) is False
+            
+            # Test case 3: Invalid product ID
+            assert create_order('O1', 'P3', 3) is KeyError
+        """
+        if self.get_product_quantity(product_id) >= quantity:
+            self.update_product_quantity(product_id, -quantity)
+            self.orders[order_id] = {'product_id': product_id, 'quantity': quantity, 'status': 'Pending'}
+            return True
+
+    def change_order_status(self, order_id, status):
+        """
+        Change the status of an order.
+
+        Parameters:
+            order_id (str): The unique identifier for the order
+            status (str): The new status of the order
+
+        Returns:
+            bool: True if the order status was successfully changed, False otherwise
+
+        Test cases:
+            # Test case 1: Change order status
+            assert change_order_status('O1', 'Shipped') is True
+            assert self.orders['O1']['status'] == 'Shipped'
+            
+            # Test case 2: Invalid order ID
+            assert change_order_status('O4', 'Shipped') is KeyError
+            
+            # Test case 3: Invalid status
+            assert change_order_status('O1', 'Failed') is ValueError
+        """
+        if order_id in self.orders:
+            self.orders[order_id]['status'] = status
+            return True
+
+    def track_order(self, order_id):
+        """
+        Get the status of an order.
+
+        Parameters:
+            order_id (str): The unique identifier for the order
+
+        Returns:
+            str: The current status of the order
+
+        Test cases:
+            # Test case 1: Track order status
+            assert track_order('O1') == 'Pending'
+            
+            # Test case 2: Invalid order ID
+            assert track_order('O4') is False
+        """
+        if order_id in self.orders:
+            return self.orders[order_id]['status']
+        else:
+            return False</s>

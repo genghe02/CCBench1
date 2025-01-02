@@ -1,0 +1,4 @@
+# Find the groups of consecutive elements in a NumPy array and return the number of consecutive elements. 
+# Given a NumPy array, cluster the consecutive elements considering a specified difference limit. 
+# For example, for the array a = [0, 47, 48, 49, 50, 97, 98, 99], the output should be a list of tuples as follows: 
+# [(0), (47, 48, 49, 50), (97, 98, 99)].

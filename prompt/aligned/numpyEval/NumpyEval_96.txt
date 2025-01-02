@@ -1,0 +1,1 @@
+# Create a NumPy array of arbitrary shape 3x4 filled with all True values.

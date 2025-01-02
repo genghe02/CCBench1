@@ -1,0 +1,2 @@
+ # Stack columns a and b together to create new array c
+c = np.column_stack((a, b))</s>

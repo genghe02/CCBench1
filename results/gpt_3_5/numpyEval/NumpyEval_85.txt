@@ -1,0 +1,1 @@
+# Check if the input numpy array contains only zeros by utilizing np.any() function to return True if any element is non-zero, False otherwise.

@@ -1,0 +1,33 @@
+def is_palindrome(string: str) -> bool:
+    # This function checks if the input string is a palindrome. 
+    # A palindrome is a string that reads the same forward and backward.
+    # The function does this by reversing the string and comparing it to the original.
+    # If they are the same, then the string is a palindrome, and the function returns True.
+    # If they are not, the function returns False.
+    return string == string[::-1]
+
+
+def make_palindrome(string: str) -> str:
+    # This function takes an input string and transforms it into a palindrome.
+    # It does this by appending characters from the beginning of the string to the end of the string.
+    # This is done until the string is a palindrome.
+    # If the input string is empty, the function returns an empty string.
+    # If the input string is already a palindrome, the function returns the input string as it is.
+
+    # Some test cases:
+    # >>> make_palindrome("abc")
+    # "abcba"
+    # >>> make_palindrome("radar")
+    # "radar"
+    # >>> make_palindrome("")
+    # ""
+
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]

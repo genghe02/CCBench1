@@ -1,0 +1,5 @@
+# This function is designed to convert boolean values in a specified column of a pandas DataFrame to integer type.
+# It does this by using the astype() function which changes the data type of a Series.
+# The function receives a DataFrame (df) and a column name (col_name) as arguments,
+# then it applies the astype() function to the specified column,
+# converting its boolean values to integer (True to 1 and False to 0), and returns the modified DataFrame.

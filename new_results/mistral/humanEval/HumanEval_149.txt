@@ -1,0 +1,12 @@
+ def sorted_list_sum(lst):
+    # Sort the list and create a new list to store the even length strings
+    # Finally, sort and return the new list based on the length of strings
+    >>> sorted_list_sum([1, "apple", 2, "banana", 3]) # returns ['apple', 'banana']
+    lst.sort()
+    new_lst = []
+    >>> sorted_list_sum([1, "apple", 2, "banana", 3]) # sorts the list first
+    >>> sorted_list_sum([1, "apple", 2, "banana", 3]) # then creates a new list with even length strings
+    >>> sorted_list_sum([1, "apple", 2, "banana", 3]) # sorts the new list based on the length of strings
+    for i in lst:
+        return # Remove this line and add the requirement and test cases below
+    return sorted(new_lst, key=len)</s>

@@ -1,0 +1,88 @@
+ """
+This class provides functionalities for lemmatizing English words using NLTK library.
+"""
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+import string
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+class Lemmatization:
+"""
+Initialization method documentation.
+"""
+
+def __init__(self):
+self.lemmatizer = WordNetLemmatizer()
+"""
+Method description:
+Lemmatize an entire sentence.
+
+Parameters:
+sentence (str): Input sentence for lemmatization
+
+Returns:
+list: A list of lemmatized words
+
+Test cases:
+# Test case 1: Lemmatize a simple sentence
+assert Lemmatization().lemmatize_sentence('The cat is on the mat') == ['The', 'cat', 'is', 'on', 'the', 'mat', '.', 'the', 'cat', 'is', 'be', '[VERB.01]', 'on', '[VERB.20]', 'the', '[DET.00]', 'mat', '.', '[Determiner]', 'the', '[PROPN.01]', 'cat']
+
+# Test case 2: Lemmatize a sentence with multiple parts of speech
+assert Lemmatization().lemmatize_sentence('She eats apples when she is happy, but she drinks tea when she is sad') == ['She', 'eats', 'apples', 'when', 'she', 'is', 'happy', ',', 'but', 'she', 'drinks', 'tea', 'when', 'she', 'is', 'sad']
+"""
+def lemmatize_sentence(self, sentence):
+lemmatized_words = []
+sentence = self.remove_punctuation(sentence)
+words = word_tokenize(sentence)
+tagged_words = pos_tag(words)
+for word, tag in tagged_words:
+if tag.startswith('V'):
+lemmatized_word = self.lemmatizer.lemmatize(word, pos='v')
+elif tag.startswith('J'):
+lemmatized_word = self.lemmatizer.lemmatize(word, pos='a')
+elif tag.startswith('R'):
+lemmatized_word = self.lemmatizer.lemmatize(word, pos='r')
+else:
+lemmatized_word = self.lemmatizer.lemmatize(word)
+lemmatized_words.append(lemmatized_word)
+return lemmatized_words
+"""
+Method description:
+Get the part of speech (POS) tags for words in a given sentence.
+
+Parameters:
+sentence (str): Input sentence
+
+Returns:
+list: A list containing the part of speech (POS) tags for each word
+
+Test cases:
+# Test case 1: Get the POS tags for a simple sentence
+assert Lemmatization().get_pos_tag('The cat is on the mat') == ['DET.', 'NOUN.', 'VERB.ZI', 'DET.', 'NOUN.', '.', 'DET.', 'NOUN', '.]']
+
+# Test case 2: Get the POS tags for a sentence with multiple parts of speech
+assert Lemmatization().get_pos_tag('She eats apples when she is happy, but she drinks tea when she is sad') == ['PRP$', 'VERB.ZV', 'DET.', 'NOUN', 'VBZ', 'DT', 'CC', 'PRP$', 'VERB.ZV', 'VBZ', 'PRP$', 'CC', 'PRP$', 'VERB.ZV', 'DT', 'DET.', 'PROPN', '.]', 'PRP$', 'VBZ', 'DET.', 'NOUN', 'DT', 'CC', 'PRP$', 'VBZ', 'DT', 'PRP$', 'PROPN']
+"""
+Method description:
+Remove punctuation marks from a given string.
+
+Parameters:
+sentence (str): The input string containing punctuation marks
+
+Returns:
+str: A string without any punctuation marks
+
+Test cases:
+# Test case 1: Remove punctuation marks from a simple string
+assert Lemmatization().remove_punctuation('The cat is on the mat.') == 'The cat is on the mat'
+
+# Test case 2: Remove punctuation marks from a complex string
+assert Lemmatization().remove_punctuation('She eats apples when she is happy, but she drinks tea when she is sad.') == 'She eats apples when she is happy but she drinks tea when she is sad'
+"""
+def remove_punctuation(self, sentence):
+return sentence.translate(str.maketrans('', '', string.punctuation))</s>

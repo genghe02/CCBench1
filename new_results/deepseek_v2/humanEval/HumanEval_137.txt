@@ -1,0 +1,12 @@
+```python
+def compare_one(a, b):
+    # Compare two values (int, float, or string) after converting strings to float and handling commas
+    >>> compare_one(1, 2.5) # returns 2.5
+    >>> compare_one("3,14", "3.14") # returns None
+    >>> compare_one("10,5", 10) # returns "10,5"
+    temp_a, temp_b = a, b
+    if isinstance(temp_a, str): temp_a = temp_a.replace(',','.')
+    if isinstance(temp_b, str): temp_b = temp_b.replace(',','.')
+    if float(temp_a) == float(temp_b): return None
+    return a if float(temp_a) > float(temp_b) else b 
+```

@@ -1,0 +1,3 @@
+a = np.zeros(4, dtype="float64")
+# Change the data type of array a from float64 to float32
+b = a.astype("float32")

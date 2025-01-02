@@ -1,0 +1,6 @@
+ import pandas as pd
+
+def make\_dataframe\_column\_headers\_lowercase(data):
+# Convert all column names to lowercase using list comprehension
+data.columns = [col.lower() for col in data.columns]
+return data</s>

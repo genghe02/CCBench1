@@ -1,0 +1,6 @@
+import pandas as pd
+
+# Create a DataFrame with columns 'a' and 'b' and a single row with values 1 and 2 respectively
+x = pd.DataFrame({'a':1,'b':2}, index = range(1))
+# Repeat the DataFrame 'x' 5 times and concatenate the results
+repeated_x = pd.concat([x]*5)

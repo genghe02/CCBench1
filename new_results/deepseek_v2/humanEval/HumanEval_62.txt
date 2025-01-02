@@ -1,0 +1,8 @@
+```python
+def derivative(xs: list):
+    # Compute the derivative of a polynomial represented by a list of coefficients
+    >>> derivative([3, 0, 2]) # returns [0, 4]
+    >>> derivative([1, 2, 3, 4]) # returns [2, 6, 12]
+    >>> derivative([0]) # returns []
+    return [(i * x) for i, x in enumerate(xs)][1:]
+```

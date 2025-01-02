@@ -1,0 +1,6 @@
+import numpy as np
+
+y = np.array([2,1,5,2])          # y axis
+# Create a masked array where values larger than 2 are masked
+m = np.ma.masked_where(y>2, y)   
+out = m.compressed()

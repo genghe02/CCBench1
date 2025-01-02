@@ -1,0 +1,3 @@
+ # Function to return the minimum value in a NumPy array
+def get_minimum_value(arr):
+return np.min(arr)</s>

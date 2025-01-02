@@ -1,0 +1,18 @@
+```python
+from typing import List
+
+def below_zero(operations: List[int]) -> bool:
+    # Check if any cumulative sum of operations goes below zero
+    >>> below_zero([1, 2, -3]) # returns True
+    >>> below_zero([1, -1, 1]) # returns False
+    >>> below_zero([-1, -1]) # returns True
+    >>> below_zero([5, -6, 1]) # returns False
+    balance = 0
+
+    for op in operations:
+        balance += op
+        if balance < 0:
+            return True
+
+    return False
+```

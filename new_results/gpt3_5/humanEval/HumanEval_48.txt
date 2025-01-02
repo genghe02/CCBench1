@@ -1,0 +1,10 @@
+# Check if the input text is a palindrome
+
+>>> is_palindrome("racecar") # returns True
+>>> is_palindrome("hello") # returns False
+>>> is_palindrome("level") # returns True
+def is_palindrome(text: str):
+    for i in range(len(text)):
+        if text[i] != text[len(text) - 1 - i]:
+            return False
+    return True

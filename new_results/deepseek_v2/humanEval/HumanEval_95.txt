@@ -1,0 +1,31 @@
+```python
+def check_dict_case(dict):
+    # Check if all keys in the dictionary are either uppercase or lowercase strings
+    >>> check_dict_case({"KEY": "value", "ANOTHER_KEY": "another_value"}) # returns True
+    >>> check_dict_case({"key": "value", "another_key": "another_value"}) # returns True
+    >>> check_dict_case({"Key": "value", "Another_Key": "another_value"}) # returns False
+    >>> check_dict_case({"KEY": "value", "another_key": "another_value"}) # returns False
+    >>> check_dict_case({}) # returns False
+    if len(dict.keys()) == 0:
+        return False
+    else:
+        state = "start"
+        for key in dict.keys():
+
+            if isinstance(key, str) == False:
+                state = "mixed"
+                break
+            if state == "start":
+                if key.isupper():
+                    state = "upper"
+                elif key.islower():
+                    state = "lower"
+                else:
+                    break
+            elif (state == "upper" and not key.isupper()) or (state == "lower" and not key.islower()):
+                    state = "mixed"
+                    break
+            else:
+                break
+        return state == "upper" or state == "lower"
+```

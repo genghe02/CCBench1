@@ -1,0 +1,7 @@
+def digitSum(s):
+    # This function calculates the sum of ASCII values of uppercase letters in the input string s
+    >>> digitSum("") # returns 0
+    >>> digitSum("abc") # returns 0
+    >>> digitSum("ABC") # returns 198 (ASCII values: A=65, B=66, C=67)
+    if s == "": return 0
+    return sum(ord(char) if char.isupper() else 0 for char in s)

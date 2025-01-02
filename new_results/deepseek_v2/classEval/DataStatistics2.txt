@@ -1,0 +1,155 @@
+```python
+"""
+This class provides statistical operations on a given dataset. It includes methods to calculate sum, minimum, maximum, variance, standard deviation, and correlation of the data.
+"""
+
+import numpy as np
+
+class DataStatistics2:
+    def __init__(self, data):
+        """
+        Initializes the DataStatistics2 class with the provided dataset.
+
+        Parameters:
+            data (list or np.array): The dataset on which statistical operations will be performed.
+        """
+        self.data = np.array(data)
+
+    def get_sum(self):
+        """
+        Calculates the sum of all elements in the dataset.
+
+        Returns:
+            float: The sum of the dataset.
+
+        Test cases:
+            # Test case 1: Normal usage
+            ds = DataStatistics2([1, 2, 3, 4, 5])
+            assert ds.get_sum() == 15
+
+            # Test case 2: Empty dataset
+            ds = DataStatistics2([])
+            assert ds.get_sum() == 0
+
+            # Test case 3: Negative numbers
+            ds = DataStatistics2([-1, -2, -3])
+            assert ds.get_sum() == -6
+        """
+        return np.sum(self.data)
+
+    def get_min(self):
+        """
+        Finds the minimum value in the dataset.
+
+        Returns:
+            float: The minimum value in the dataset.
+
+        Test cases:
+            # Test case 1: Normal usage
+            ds = DataStatistics2([1, 2, 3, 4, 5])
+            assert ds.get_min() == 1
+
+            # Test case 2: All negative numbers
+            ds = DataStatistics2([-1, -2, -3])
+            assert ds.get_min() == -3
+
+            # Test case 3: Single element
+            ds = DataStatistics2([10])
+            assert ds.get_min() == 10
+        """
+        return np.min(self.data)
+
+    def get_max(self):
+        """
+        Finds the maximum value in the dataset.
+
+        Returns:
+            float: The maximum value in the dataset.
+
+        Test cases:
+            # Test case 1: Normal usage
+            ds = DataStatistics2([1, 2, 3, 4, 5])
+            assert ds.get_max() == 5
+
+            # Test case 2: All negative numbers
+            ds = DataStatistics2([-1, -2, -3])
+            assert ds.get_max() == -1
+
+            # Test case 3: Single element
+            ds = DataStatistics2([10])
+            assert ds.get_max() == 10
+        """
+        return np.max(self.data)
+
+    def get_variance(self):
+        """
+        Calculates the variance of the dataset.
+
+        Returns:
+            float: The variance of the dataset, rounded to 2 decimal places.
+
+        Test cases:
+            # Test case 1: Normal usage
+            ds = DataStatistics2([1, 2, 3, 4, 5])
+            assert ds.get_variance() == 2.0
+
+            # Test case 2: Single element
+            ds = DataStatistics2([10])
+            assert ds.get_variance() == 0.0
+
+            # Test case 3: Negative numbers
+            ds = DataStatistics2([-1, -2, -3])
+            assert ds.get_variance() == 0.67
+        """
+        return round(np.var(self.data), 2)
+
+    def get_std_deviation(self):
+        """
+        Calculates the standard deviation of the dataset.
+
+        Returns:
+            float: The standard deviation of the dataset, rounded to 2 decimal places.
+
+        Test cases:
+            # Test case 1: Normal usage
+            ds = DataStatistics2([1, 2, 3, 4, 5])
+            assert ds.get_std_deviation() == 1.41
+
+            # Test case 2: Single element
+            ds = DataStatistics2([10])
+            assert ds.get_std_deviation() == 0.0
+
+            # Test case 3: Negative numbers
+            ds = DataStatistics2([-1, -2, -3])
+            assert ds.get_std_deviation() == 0.82
+        """
+        return round(np.std(self.data), 2)
+
+    def get_correlation(self):
+        """
+        Calculates the correlation matrix of the dataset.
+
+        Returns:
+            np.array: The correlation matrix of the dataset.
+
+        Test cases:
+            # Test case 1: Normal usage
+            ds = DataStatistics2([[1, 2], [2, 3], [3, 4]])
+            assert np.array_equal(ds.get_correlation(), np.array([[1., 1.], [1., 1.]]))
+
+            # Test case 2: Single column
+            ds = DataStatistics2([[1], [2], [3]])
+            assert np.array_equal(ds.get_correlation(), np.array([[1.]]))
+
+            # Test case 3: Negative correlation
+            ds = DataStatistics2([[1, -1], [2, -2], [3, -3]])
+            assert np.array_equal(ds.get_correlation(), np.array([[1., -1.], [-1., 1.]]))
+        """
+        return np.corrcoef(self.data, rowvar=False)
+```
+
+### Explanation:
+1. **Class Documentation**: The class `DataStatistics2` is described as providing statistical operations on a given dataset.
+2. **Method Documentation**: Each method is documented with a description, parameters, return values, and test cases.
+3. **Test Cases**: Each method includes three test cases: normal usage, edge case handling, and error case handling.
+4. **Formatting**: The documentation follows the standard Python docstring format with clear sectioning and consistent formatting.

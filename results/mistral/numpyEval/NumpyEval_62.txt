@@ -1,0 +1,12 @@
+ # Transpose the input numpy array and create a new records array using np.core.records.fromarrays() function.
+# This function is used to create a record array from an array of data and a list of field names.
+# In this case, we are transposing the input numpy array using its T property before passing it to the function.
+# The names argument is a list of field names for the new record array.
+
+import numpy as np
+
+myarray = np.array([["Hello", 2.5, 3], ["World", 3.6, 2]])
+
+<Requirements for the code>
+
+newrecarray = np.core.records.fromarrays(myarray.T.T, names=['col1', 'col2', 'col3'])

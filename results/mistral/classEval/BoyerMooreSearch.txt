@@ -1,0 +1,55 @@
+ <description for whole class>
+# This is a class for implementing the Boyer-Moore string search algorithm.
+class BoyerMooreSearch:
+
+ <description for whole function>
+ # Initializes the Boyer-Moore search object with the given text and pattern.
+ def __init__(self, text, pattern):
+ <description for all parameters>
+ # text: str, the text to search in.
+ # pattern: str, the pattern to search for.
+ self.text, self.pattern = text, pattern
+ self.textLen, self.patLen = len(text), len(pattern)
+
+ <description for function'match_in_pattern'>
+ # Returns the index of the first occurrence of a character in the pattern.
+ def match_in_pattern(self, char):
+ param char: str, the character to search for in the pattern.
+ <description for return statement>
+ # return: int, the index of the first occurrence of the character in the pattern, or -1 if not found.
+ for i in range(self.patLen - 1, -1, -1):
+ if char == self.pattern[i]:
+ return i
+ return -1
+
+ <description for function'mismatch_in_text'>
+ # Returns the index of the mismatch between the text and the pattern starting from the given position.
+ def mismatch_in_text(self, currentPos):
+ param currentPos: int, the current position in the text to start the search.
+ <description for return statement>
+ # return: int, the index of the mismatch, or -1 if no mismatch is found.
+ for i in range(self.patLen - 1, -1, -1):
+ if self.pattern[i]!= self.text[currentPos + i]:
+ return currentPos + i
+ return -1
+
+ <description for function 'bad_character_heuristic'>
+ # Returns the positions of the bad characters in the text.
+ def bad_character_heuristic(self):
+ <description for return statement>
+ # return: list, a list of positions of the bad characters in the text.
+ positions = []
+ for i in range(self.textLen - self.patLen + 1):
+ mismatch_index = self.mismatch_in_text(i)
+ if mismatch_index == -1:
+ positions.append(i)
+ else:
+ match_index = self.match_in_pattern(self.text[mismatch_index])
+ i = (mismatch_index - match_index)
+ # Test cases:
+ # >>> filter = BoyerMooreSearch("ababababababababab", "ab")
+ # >>> filter.bad_character_heuristic()
+ # [0, 5, 10, 15]
+ # >>> filter = BoyerMooreSearch("mississippi", "iss")
+ # >>> filter.bad_character_heuristic()
+ # [0, 4, 8]

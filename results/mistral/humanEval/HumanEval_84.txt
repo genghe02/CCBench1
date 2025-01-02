@@ -1,0 +1,26 @@
+ def solve(N):
+ # This function takes an integer N as an argument and returns the binary representation of the sum of its digits.
+
+ # Requirements for the code
+ # N: int, the given integer
+
+ result = 0
+ # Calculate the sum of digits of N
+ for digit in str(N):
+ result += int(digit)
+
+ # Find binary representation of the sum
+ binary_sum = bin(result)[2:]
+
+ # Return the binary representation of the sum
+ return binary_sum
+
+ # Some test cases for the function
+ >>> solve(10)
+ '1010'
+ >>> solve(15)
+ '1111'
+ >>> solve(21)
+ '101011'
+ >>> solve(33)
+ '1001011011'

@@ -1,0 +1,1 @@
+# Find the elements that are in either of the input arrays 'a' and 'b' but not both. This is done using the 'setxor1d' function from numpy, which takes two input arrays and returns an array that represents the symmetric difference of input arrays.

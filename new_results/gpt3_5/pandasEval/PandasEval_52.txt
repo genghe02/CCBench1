@@ -1,0 +1,2 @@
+# Concatenate two dataframes row-wise and reset index
+    return df1.append(df2, ignore_index=True)

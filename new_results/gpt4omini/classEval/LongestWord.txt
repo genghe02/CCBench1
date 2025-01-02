@@ -1,0 +1,60 @@
+```python
+"""
+This class provides functionality to manage a collection of words and find the longest word among them based on a given sentence.
+"""
+
+import re
+import string
+
+class LongestWord:
+    
+    def __init__(self):
+        """
+        Initializes the LongestWord instance with an empty list to store words.
+        """
+        self.word_list = []
+
+    def add_word(self, word: str):
+        """
+        Adds a word to the word list.
+
+        Parameters:
+            word (str): The word to be added to the list.
+        """
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence: str) -> str:
+        """
+        Finds the longest word from the added words that appears in the given sentence.
+
+        Parameters:
+            sentence (str): The sentence in which to search for the longest word.
+
+        Returns:
+            str: The longest word found in the sentence from the word list. If no words are found, returns an empty string.
+
+        Test cases:
+            # Test case 1: Normal usage with words present in the list
+            longest_word = find_longest_word("I love programming in Python")
+            expected_output = "programming"  # Assuming "programming" is added to the word list
+
+            # Test case 2: Edge case with no words found
+            longest_word = find_longest_word("This is a test sentence.")
+            expected_output = ""  # No words in the word_list
+
+            # Test case 3: Handling punctuation in a sentence
+            add_word("hello")
+            longest_word = find_longest_word("Hello, how are you?")
+            expected_output = "hello"  # Assuming "hello" was added (case insensitive)
+        """
+        longest_word = ""
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        sentence = re.split(' ', sentence)
+
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        
+        return longest_word
+```

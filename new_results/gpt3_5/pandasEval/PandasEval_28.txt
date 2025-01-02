@@ -1,0 +1,6 @@
+# Check if input dataframe exists
+def is_df_exist(df): 
+    if df is None:
+        return False
+    else:
+        return True

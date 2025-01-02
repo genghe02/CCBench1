@@ -1,0 +1,15 @@
+ # Shift encoding function encodes each character by shifting it 5 positions to the right in the alphabet
+def encode_shift(s: str):
+    # Requirement for the code
+    return "".join([chr(((ord(ch) + 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+    >>> encode_shift("hello") # returns "khoor"
+    >>> encode_shift("Python") # returns "Zqytrh"
+
+# Shift decoding function decodes each character by shifting it 5 positions to the left in the alphabet
+def decode_shift(s: str):
+    # Requirement for the code
+    return "".join([chr(((ord(ch) - 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+    >>> decode_shift("khoor") # returns "hello"
+    >>> decode_shift("Zqytrh") # returns "Python"</s>

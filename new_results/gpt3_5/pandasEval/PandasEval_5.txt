@@ -1,0 +1,6 @@
+import pandas as pd
+
+def make_df_all_cols_lower(data):
+    # Convert all column names to lowercase
+    data.columns = map(str.lower, data.columns)
+    return data

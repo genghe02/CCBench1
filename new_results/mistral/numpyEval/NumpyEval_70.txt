@@ -1,0 +1,2 @@
+ # Calculate mean of each row in masked array and replace nan values with nan
+mm = np.mean(mdat, axis=1).filled(np.nan)</s>

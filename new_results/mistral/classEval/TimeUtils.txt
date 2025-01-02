@@ -1,0 +1,207 @@
+ """
+This class, TimeUtils, provides utility functions related to handling and manipulating date and time in Python.
+"""
+
+import datetime
+import time
+
+class TimeUtils:
+
+    def __init__(self):
+        """
+        Initialization method. Creates a DateTime object with the current date and time.
+        """
+        self.datetime = datetime.datetime.now()
+
+    def get_current_time(self):
+        """
+        Get the current time as a string in HH:MM:SS format.
+
+        Returns:
+            str: Current time in HH:MM:SS format
+
+        Test cases:
+            # Test case 1: Current time
+            utils = TimeUtils()
+            assert utils.get_current_time() == utils.datetime.strftime("%H:%M:%S")
+            
+            # Test case 2: Test different date and time
+            utils = TimeUtils()
+            utils.datetime = datetime.datetime(2023, 5, 20, 14, 30, 25)
+            assert utils.get_current_time() == utils.datetime.strftime("%H:%M:%S")
+        """
+        format = "%H:%M:%S"
+        return self.datetime.strftime(format)
+
+    def get_current_date(self):
+        """
+        Get the current date as a string in YYYY-MM-DD format.
+
+        Returns:
+            str: Current date in YYYY-MM-DD format
+
+        Test cases:
+            # Test case 1: Current date
+            utils = TimeUtils()
+            assert utils.get_current_date() == utils.datetime.strftime("%Y-%m-%d")
+            
+            # Test case 2: Test different date
+            utils = TimeUtils()
+            utils.datetime = datetime.datetime(2023, 5, 20)
+            assert utils.get_current_date() == utils.datetime.strftime("%Y-%m-%d")
+        """
+        format = "%Y-%m-%d"
+        return self.datetime.strftime(format)
+
+    def add_seconds(self, seconds):
+        """
+        Add the specified number of seconds to the current DateTime object.
+
+        Parameters:
+            seconds (int): Number of seconds to be added
+
+        Returns:
+            str: New DateTime in HH:MM:SS format after adding the number of seconds
+
+        Test cases:
+            # Test case 1: Add 1 second
+            utils = TimeUtils()
+            input = 1
+            expected_output = utils.datetime.strftime("%H:%M:%S")
+            utils.datetime += datetime.timedelta(seconds=input)
+            assert utils.get_current_time() == expected_output
+
+            # Test case 2: Add 1 minute
+            utils = TimeUtils()
+            input = 60
+            expected_output = (utils.datetime + datetime.timedelta(seconds=input)).strftime("%H:%M:%S")
+            utils.datetime += datetime.timedelta(seconds=input)
+            assert utils.get_current_time() == expected_output
+
+            # Test case 3: Add 1 hour
+            utils = TimeUtils()
+            input = 3600
+            expected_output = (utils.datetime + datetime.timedelta(seconds=input)).strftime("%H:%M:%S")
+            utils.datetime += datetime.timedelta(seconds=input)
+            assert utils.get_current_time() == expected_output
+        """
+        new_datetime = self.datetime + datetime.timedelta(seconds=seconds)
+        format = "%H:%M:%S"
+        return new_datetime.strftime(format)
+
+    def string_to_datetime(self, string):
+        """
+        Convert the given string representation of a datetime into a datetime object.
+
+        Parameters:
+            string (str): A valid datetime string in YYYY-MM-DD HH:MM:SS format
+
+        Returns:
+            datetime.datetime: The parsed datetime object
+
+        Test cases:
+            # Test case 1: String to datetime
+            utils = TimeUtils()
+            input = "2023-05-20 14:30:25"
+            expected_output = datetime.datetime.strptime(input, "%Y-%m-%d %H:%M:%S")
+            assert utils.string_to_datetime(input) == expected_output
+            
+            # Test case 2: Test with different formats
+            utils = TimeUtils()
+            input = "2023-05-20 14:30:25.000"
+            expected_output = datetime.datetime.strptime(input, "%Y-%m-%d %H:%M:%S.%f")
+            assert utils.string_to_datetime(input) == expected_output
+        """
+        return datetime.datetime.strptime(string, "%Y-%m-%d %H:%M:%S.%f") if string.endswith('.%f') else datetime.datetime.strptime(string, "%Y-%m-%d %H:%M:%S")
+
+    def datetime_to_string(self, datetime):
+        """
+        Convert the given datetime object into a string representation.
+
+        Parameters:
+            datetime (datetime.datetime): The datetime object to be converted
+
+        Returns:
+            str: The datetime string in YYYY-MM-DD HH:MM:SS format
+
+        Test cases:
+            # Test case 1: Datetime to string
+            utils = TimeUtils()
+            input = datetime.datetime(2023, 5, 20, 14, 30, 25)
+            expected_output = input.strftime("%Y-%m-%d %H:%M:%S")
+            assert utils.datetime_to_string(input) == expected_output
+            
+            # Test case 2: Test with different formats
+            utils = TimeUtils()
+            input = datetime.datetime(2023, 5, 20, 14, 30, 25, 500000)
+            expected_output = input.strftime("%Y-%m-%d %H:%M:%S.%f")
+            assert utils.datetime_to_string(input) == expected_output
+        """
+        return datetime.datetime.strftime(datetime, "%Y-%m-%d %H:%M:%S.%f") if hasattr(datetime, 'microsecond') else datetime.datetime.strftime(datetime, "%Y-%m-%d %H:%M:%S")
+
+    def get_minutes(self, string_time1, string_time2):
+        """
+        Get the difference between two given datetime strings in minutes.
+
+        Parameters:
+            string_time1 (str): First datetime string in YYYY-MM-DD HH:MM:SS format
+            string_time2 (str): Second datetime string in YYYY-MM-DD HH:MM:SS format
+
+        Returns:
+            int: The difference between the two datetime strings in minutes
+
+        Test cases:
+            # Test case 1: Difference of 1 minute
+            utils = TimeUtils()
+            input1 = "2023-05-20 14:30:25"
+            input2 = "2023-05-20 14:31:25"
+            assert utils.get_minutes(input1, input2) == 1
+            
+            # Test case 2: Difference of 1 hour
+            utils = TimeUtils()
+            input1 = "2023-05-20 14:30:25"
+            input2 = "2023-05-20 15:30:25"
+            assert utils.get_minutes(input1, input2) == 60
+
+            # Test case 3: Difference of 1 day
+            utils = TimeUtils()
+            input1 = "2023-05-20 14:30:25"
+            input2 = "2023-05-21 14:30:25"
+            assert utils.get_minutes(input1, input2) == 1440
+        """
+        time1 = self.string_to_datetime(string_time1)
+        time2 = self.string_to_datetime(string_time2)
+        return round((time2 - time1).seconds / 60)
+
+    def get_format_time(self, year, month, day, hour, minute, second):
+        """
+        Create a datetime object with the given year, month, day, hour, minute and second.
+        Then convert it to a string in YYYY-MM-DD HH:MM:SS format.
+
+        Parameters:
+            year (int): Year
+            month (int): Month (0-11)
+            day (int): Day of the month
+            hour (int): Hour (0-23)
+            minute (int): Minute (0-59)
+            second (int): Second (0-59)
+
+        Returns:
+            str: The formatted datetime string in YYYY-MM-DD HH:MM:SS format
+
+        Test cases:
+            # Test case 1: Valid inputs
+            utils = TimeUtils()
+            input = (2023, 5, 20, 14, 30, 25)
+            expected_output = "2023-05-20 14:30:25"
+            assert utils.get_format_time(*input) == expected_output
+            
+            # Test case 2: Test invalid inputs
+            with pytest.raises(ValueError):
+                utils.get_format_time(2023, 14, 20, 14, 30, 25)  # Month should be between 0-11
+
+            with pytest.raises(ValueError):
+                utils.get_format_time(2023, 5, 20, 25, 30, 25)  # Hour should be between 0-23
+        """
+        time_item = datetime.datetime(year, month, day, hour, minute, second)
+        return time_item.strftime("%Y-%m-%d %H:%M:%S")</s>

@@ -1,0 +1,36 @@
+ def total_match(lst1, lst2):
+    # This function compares two lists and returns the one with more total length of strings.
+
+    # Find the total length of all strings in the first list.
+    l1 = 0
+    for string in lst1:
+        l1 += len(string)
+
+    # Find the total length of all strings in the second list.
+    l2 = 0
+    for string in lst2:
+        l2 += len(string)
+
+    # If the total length of strings in the first list is less than or equal to the total length of strings in the second list, return the first list.
+    if l1 <= l2:
+        return lst1
+
+    # Otherwise, return the second list.
+    else:
+        return lst2
+
+ # Test cases
+ lst1 = ['hello', 'world', 'python']
+ lst2 = ['hello', 'world', 'python', 'anaconda']
+ >>> total_match(lst1, lst2)
+ ['hello', 'world', 'python']
+
+ lst1 = ['hello', 'world', 'python']
+ lst2 = ['hello', 'world', 'python', 'anaconda', 'numpy']
+ >>> total_match(lst1, lst2)
+ ['hello', 'world', 'python', 'anaconda', 'numpy']
+
+ lst1 = ['hello', 'world', 'python']
+ lst2 = ['anaconda', 'numpy', 'hello', 'world', 'python']
+ >>> total_match(lst1, lst2)
+ ['anaconda', 'numpy', 'hello', 'world', 'python']

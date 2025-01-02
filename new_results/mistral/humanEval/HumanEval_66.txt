@@ -1,0 +1,7 @@
+ def digitSum(s):
+   # Check if input is an empty string and return 0 if it is
+   >>> digitSum("") # returns 0
+   # Sum up the ASCII values of digits in the given string
+   >>> digitSum("1234") # returns 1 + 2 + 3 + 4 = 10
+   >>> digitSum("aBc123") # returns 1 + 2 + 3 = 6
+   return sum(ord(char) if char.isdigit() else 0 for char in s)</s>

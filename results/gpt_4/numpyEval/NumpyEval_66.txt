@@ -1,0 +1,1 @@
+# Combine arrays 'a', 'b', and 'c' into a 2D array using np.array(). Then transpose the 2D array to align the corresponding values in 'a', 'b', and 'c' in the same row. Finally, flatten the transposed 2D array into a 1D array using flatten().

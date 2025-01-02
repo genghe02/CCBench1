@@ -1,0 +1,22 @@
+```python
+from typing import List
+
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    # Return a list of numbers interspersed with a given delimiter
+    >>> intersperse([1, 2, 3], 0) # returns [1, 0, 2, 0, 3]
+    >>> intersperse([], 0) # returns []
+    >>> intersperse([1], 0) # returns [1]
+    >>> intersperse([1, 2], 0) # returns [1, 0, 2]
+    if not numbers:
+        return []
+
+    result = []
+
+    for n in numbers[:-1]:
+        result.append(n)
+        result.append(delimeter)
+
+    result.append(numbers[-1])
+
+    return result
+```

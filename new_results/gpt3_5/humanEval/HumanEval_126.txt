@@ -1,0 +1,5 @@
+# Check if a list is sorted in non-decreasing order and has at most 2 occurrences of each number
+>>> is_sorted([1, 2, 3, 3, 3, 4]) # True
+>>> is_sorted([1, 4, 4, 3, 2, 7]) # False
+>>> is_sorted([1, 1, 2]) # True
+>>> is_sorted([]) # True

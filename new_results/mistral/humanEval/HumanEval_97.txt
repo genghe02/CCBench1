@@ -1,0 +1,6 @@
+ # Multiply the absolute values of the last digit of two numbers
+ # The result will also have the last digit as its only digit
+ >>> multiply(12, 34) # returns 2 (1 * 4)
+ >>> multiply(-15, 7) # returns 1 (5 * 1)
+ >>> multiply(0, 5) # returns 0
+ return abs(a % 10) * abs(b % 10)</s>

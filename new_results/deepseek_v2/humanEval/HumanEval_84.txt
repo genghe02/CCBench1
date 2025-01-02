@@ -1,0 +1,8 @@
+```python
+def solve(N):
+    # Calculate the sum of digits of N and return its binary representation as a string
+    >>> solve(123) # returns '110'
+    >>> solve(456) # returns '1111'
+    >>> solve(789) # returns '11000'
+    return bin(sum(int(i) for i in str(N)))[2:]
+```

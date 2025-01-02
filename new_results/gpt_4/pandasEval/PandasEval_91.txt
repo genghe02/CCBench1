@@ -1,0 +1,6 @@
+import pandas as pd
+
+a = [['a', '1.2'], ['b', '70'], ['x', '5']]
+# Convert list to DataFrame and change the data type of column 'two' to float
+df = pd.DataFrame(a, columns=['one', 'two'])
+df['two'] = df['two'].astype(float)

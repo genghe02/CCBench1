@@ -1,0 +1,1 @@
+# Convert the keys and values of the dictionary 'Samples' into numpy arrays using np.fromiter() method. The data type for both arrays is set as float.

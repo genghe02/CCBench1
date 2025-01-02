@@ -1,0 +1,2 @@
+ # Check if the array is sorted in ascending order
+is_sorted = np.all(a[:-1] <= a[1:])</s>

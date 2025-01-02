@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.array([1,2,3,4,5])
+# Check if the array is sorted in ascending order
+is_sorted = np.all(a[:-1] <= a[1:])

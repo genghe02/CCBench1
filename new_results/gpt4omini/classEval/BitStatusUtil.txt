@@ -1,0 +1,109 @@
+```python
+"""
+This class provides utility methods for manipulating and checking bit status flags.
+It offers methods to add, check, remove, and validate bit status values.
+"""
+
+class BitStatusUtil:
+    @staticmethod
+    def add(states, stat):
+        """
+        Adds the specified status bits to the current states using bitwise OR.
+
+        Parameters:
+            states (int): The current status bits represented as an integer.
+            stat (int): The status bits to add, also represented as an integer.
+
+        Returns:
+            int: The updated status bits after adding the specified bits.
+
+        Test cases:
+            # Test case 1: Adding status bits
+            assert BitStatusUtil.add(0b0001, 0b0010) == 0b0011
+            # Test case 2: Adding existing status bits
+            assert BitStatusUtil.add(0b0011, 0b0001) == 0b0011
+            # Test case 3: Adding a zero value
+            assert BitStatusUtil.add(0b0101, 0b0000) == 0b0101
+        """
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    def has(states, stat):
+        """
+        Checks if the specified status bits are included in the current states.
+
+        Parameters:
+            states (int): The current status bits represented as an integer.
+            stat (int): The status bits to check for inclusion.
+
+        Returns:
+            bool: True if all specified bits are included in the current states, False otherwise.
+
+        Test cases:
+            # Test case 1: Checking for included bits
+            assert BitStatusUtil.has(0b0110, 0b0100) == True
+            # Test case 2: Checking for bits not included
+            assert BitStatusUtil.has(0b0011, 0b0100) == False
+            # Test case 3: Checking for an exact match
+            assert BitStatusUtil.has(0b1111, 0b1111) == True
+        """
+        BitStatusUtil.check([states, stat])
+        return (states & stat) == stat
+
+    @staticmethod
+    def remove(states, stat):
+        """
+        Removes the specified status bits from the current states using bitwise XOR.
+
+        Parameters:
+            states (int): The current status bits represented as an integer.
+            stat (int): The status bits to remove.
+
+        Returns:
+            int: The updated status bits after removing the specified bits, or the original states if not present.
+
+        Test cases:
+            # Test case 1: Removing existing bits
+            assert BitStatusUtil.remove(0b0111, 0b0011) == 0b0100
+            # Test case 2: Removing bits that are not set
+            assert BitStatusUtil.remove(0b0010, 0b0100) == 0b0010
+            # Test case 3: Removing zero value
+            assert BitStatusUtil.remove(0b0101, 0b0000) == 0b0101
+        """
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    def check(args):
+        """
+        Validates that all provided arguments are non-negative and even integers.
+
+        Parameters:
+            args (list of int): List of integers to validate.
+
+        Returns:
+            None: Raises a ValueError if any argument is invalid.
+
+        Test cases:
+            # Test case 1: Valid input
+            BitStatusUtil.check([0, 2, 4])  # Should not raise an exception
+            # Test case 2: Negative number
+            try:
+                BitStatusUtil.check([-1])
+            except ValueError as e:
+                assert str(e) == "-1 must be greater than or equal to 0"
+            # Test case 3: Odd number
+            try:
+                BitStatusUtil.check([1])
+            except ValueError as e:
+                assert str(e) == "1 not even"
+        """
+        for arg in args:
+            if arg < 0:
+                raise ValueError(f"{arg} must be greater than or equal to 0")
+            if arg % 2 != 0:
+                raise ValueError(f"{arg} not even")
+```

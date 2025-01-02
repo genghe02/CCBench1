@@ -1,0 +1,13 @@
+ def prime_length(string):
+   # Check if the length of the string is a prime number
+   >>> prime_length("") # False
+   >>> prime_length("1") # False
+   >>> prime_length("2") # True
+   # Prime number check for numbers greater than 1
+   l = len(string)
+   if l <= 1:
+       return False
+   for i in range(2, l):
+       if l % i == 0:
+           return False
+   return True</s>

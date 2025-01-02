@@ -1,0 +1,25 @@
+```python
+def search(lst):
+    # This function searches for the smallest integer in the list 'lst' such that the frequency of the integer is greater than or equal to the integer itself.
+    # If no such integer exists, it returns -1.
+    # >>> search([1, 2, 2, 3, 3, 3])
+    # 3
+    # >>> search([1, 1, 1, 2, 2, 2, 2])
+    # 2
+    # >>> search([1, 2, 3, 4, 5])
+    # -1
+    # >>> search([1, 1, 2, 2, 2, 3, 3, 3, 3])
+    # 3
+    # >>> search([1])
+    # -1
+    frq = [0] * (max(lst) + 1)
+    for i in lst:
+        frq[i] += 1;
+
+    ans = -1
+    for i in range(1, len(frq)):
+        if frq[i] >= i:
+            ans = i
+    
+    return ans
+```

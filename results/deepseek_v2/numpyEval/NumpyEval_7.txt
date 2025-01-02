@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+a = np.array([[[10, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4]],
+              [[1, 1, 1, 2], [2, 2, 2, 3], [3, 3, 3, 4]]])
+
+# Reverse the order of elements in the innermost dimension of each sub-array.
+b = a[:, :, ::-1]
+```

@@ -1,0 +1,3 @@
+# Initialize a dictionary containing web statistics data for different days
+# Create a DataFrame using the web_stats dictionary
+# Drop all rows from the DataFrame to clear the data

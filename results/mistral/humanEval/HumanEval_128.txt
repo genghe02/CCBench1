@@ -1,0 +1,33 @@
+ def prod_signs(arr):
+    # This function calculates the product of the signs of the numbers in the given array and the absolute value of the product of all numbers in the array.
+
+    # Check if the input array is empty and return None if it is.
+    if not arr: return None
+
+    # Initialize the product with 0 if there is a zero in the array, otherwise initialize it with the product of all negative numbers in the array raised to the power of the number of negative numbers.
+    prod = 0 if 0 in arr else (-1) ** len(list(filter(lambda x: x < 0, arr)))
+
+    # Multiply the product of signs with the product of absolute values of all numbers in the array.
+    return prod * sum([abs(i) for i in arr])
+
+    <some test cases for the function>
+    >>> prod_signs([1, 2, 3, 4])
+    20
+    >>> prod_signs([-1, -2, -3, -4])
+    16
+    >>> prod_signs([1, -1, 1, -1])
+    0
+    >>> prod_signs([])
+    None
+    >>> prod_signs([0])
+    0
+    >>> prod_signs([-1])
+    -1
+    >>> prod_signs([1, 1, 1])
+    0
+    >>> prod_signs([-1, 1, -1, 1])
+    0
+    >>> prod_signs([-1, -2, -3, -4, -5])
+    -120
+    >>> prod_signs([-1, -2, -3, -4, -5, -6])
+    -720

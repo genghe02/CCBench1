@@ -1,0 +1,207 @@
+```python
+"""
+This class implements a Mahjong Connect game with a specified board size and icon set.
+It provides methods to create the game board, validate moves, check for paths, 
+remove icons, and determine if the game is over.
+"""
+
+import random
+
+
+class MahjongConnect:
+    def __init__(self, BOARD_SIZE, ICONS):
+        """
+        Initializes the MahjongConnect game with a specified board size and icons.
+
+        Parameters:
+            BOARD_SIZE (tuple): A tuple representing the dimensions of the board (rows, columns).
+            ICONS (list): A list of icons to be used in the game.
+
+        Test cases:
+            # Test case 1: Normal initialization
+            game = MahjongConnect((4, 4), ['A', 'B', 'C', 'D'])
+            assert game.BOARD_SIZE == (4, 4)
+            assert len(game.ICONS) == 4
+            assert len(game.board) == 4
+            
+            # Test case 2: Checking board elements
+            game_check = MahjongConnect((2, 2), ['X', 'Y'])
+            assert len(game_check.board) == 2
+            assert len(game_check.board[0]) == 2
+            
+            # Test case 3: Empty icon set
+            game_empty_icons = MahjongConnect((3, 3), [])
+            assert game_empty_icons.ICONS == []
+        """
+        self.BOARD_SIZE = BOARD_SIZE
+        self.ICONS = ICONS
+        self.board = self.create_board()
+
+    def create_board(self):
+        """
+        Creates the game board by randomly placing icons.
+
+        Returns:
+            list: A 2D list representing the game board, where each cell contains an icon.
+
+        Test cases:
+            # Test case 1: Board size and icons are as expected
+            board = self.create_board()
+            assert len(board) == self.BOARD_SIZE[0]
+            assert len(board[0]) == self.BOARD_SIZE[1]
+            
+            # Test case 2: Valid icons in the board
+            board = self.create_board()
+            assert all(icon in self.ICONS for row in board for icon in row) 
+            
+            # Test case 3: Empty board check (though it should not be possible)
+            game_empty = MahjongConnect((0, 0), [])
+            assert game_empty.create_board() == []
+        """
+        board = [[random.choice(self.ICONS) for _ in range(self.BOARD_SIZE[1])] for _ in range(self.BOARD_SIZE[0])]
+        return board
+
+    def is_valid_move(self, pos1, pos2):
+        """
+        Validates if the move between two positions is allowed.
+
+        Parameters:
+            pos1 (tuple): The first position (x1, y1).
+            pos2 (tuple): The second position (x2, y2).
+
+        Returns:
+            bool: True if the move is valid, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid move
+            assert is_valid_move((0, 0), (1, 1)) == True
+            
+            # Test case 2: Invalid move (same position)
+            assert is_valid_move((0, 0), (0, 0)) == False
+            
+            # Test case 3: Out of bounds
+            assert is_valid_move((0, 0), (5, 5)) == False
+        """
+        x1, y1 = pos1
+        x2, y2 = pos2
+
+        # Check if positions are within the game board range
+        if not (0 <= x1 < self.BOARD_SIZE[0] and 0 <= y1 < self.BOARD_SIZE[1] and 
+                0 <= x2 < self.BOARD_SIZE[0] and 0 <= y2 < self.BOARD_SIZE[1]):
+            return False
+
+        # Check if the two positions are the same
+        if pos1 == pos2:
+            return False
+
+        # Check if the two positions have the same icon
+        if self.board[x1][y1] != self.board[x2][y2]:
+            return False
+
+        # Check if there is a valid path between the two positions
+        if not self.has_path(pos1, pos2):
+            return False
+
+        return True
+
+    def has_path(self, pos1, pos2):
+        """
+        Checks if there is a valid path between two positions on the board.
+
+        Parameters:
+            pos1 (tuple): The starting position (x1, y1).
+            pos2 (tuple): The ending position (x2, y2).
+
+        Returns:
+            bool: True if a path exists, False otherwise.
+
+        Test cases:
+            # Test case 1: Direct path
+            assert has_path((0, 0), (0, 1)) == True
+            
+            # Test case 2: No path
+            assert has_path((0, 0), (1, 2)) == False
+            
+            # Test case 3: Same icons and valid path
+            self.board = [['X', ' ', 'X'], [' ', 'X', ' '], ['X', ' ', 'X']]
+            assert has_path((0, 0), (2, 0)) == True
+        """
+        visited = set()
+        stack = [pos1]
+
+        while stack:
+            current_pos = stack.pop()
+            if current_pos == pos2:
+                return True
+
+            if current_pos in visited:
+                continue
+
+            visited.add(current_pos)
+            x, y = current_pos
+
+            # Check adjacent positions (up, down, left, right)
+            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                new_x, new_y = x + dx, y + dy
+                if 0 <= new_x < self.BOARD_SIZE[0] and 0 <= new_y < self.BOARD_SIZE[1]:
+                    if (new_x, new_y) not in visited and self.board[new_x][new_y] == self.board[x][y]:
+                        stack.append((new_x, new_y))
+
+        return False
+
+    def remove_icons(self, pos1, pos2):
+        """
+        Removes the icons at the given positions from the board.
+
+        Parameters:
+            pos1 (tuple): The first position (x1, y1).
+            pos2 (tuple): The second position (x2, y2).
+
+        Test cases:
+            # Test case 1: Valid removal
+            self.board = [['X', 'O'], ['O', 'X']]
+            remove_icons((0, 0), (1, 0))
+            assert self.board[0][0] == ' '
+            assert self.board[1][0] == ' '
+            
+            # Test case 2: Removing already empty position
+            self.board = [[' ', 'O'], ['O', 'X']]
+            remove_icons((0, 0), (1, 0))
+            assert self.board[0][0] == ' '
+            assert self.board[1][0] == ' '
+            
+            # Test case 3: Out of bounds removal (Should not raise errors)
+            remove_icons((5, 5), (6, 6))
+        """
+        x1, y1 = pos1
+        x2, y2 = pos2
+        if 0 <= x1 < self.BOARD_SIZE[0] and 0 <= y1 < self.BOARD_SIZE[1]:
+            self.board[x1][y1] = ' '
+        if 0 <= x2 < self.BOARD_SIZE[0] and 0 <= y2 < self.BOARD_SIZE[1]:
+            self.board[x2][y2] = ' '
+
+    def is_game_over(self):
+        """
+        Checks if the game is over by determining if all icons have been removed.
+
+        Returns:
+            bool: True if the game is over (all icons removed), False otherwise.
+
+        Test cases:
+            # Test case 1: Game not over
+            self.board = [['X', 'O'], ['O', 'X']]
+            assert is_game_over() == False
+            
+            # Test case 2: Game over
+            self.board = [[' ', ' '], [' ', ' ']]
+            assert is_game_over() == True
+            
+            # Test case 3: Mixed board
+            self.board = [['X', 'O'], [' ', ' ']]
+            assert is_game_over() == False
+        """
+        for row in self.board:
+            if any(icon != ' ' for icon in row):
+                return False
+        return True
+```

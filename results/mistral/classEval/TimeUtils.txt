@@ -1,0 +1,92 @@
+ <description for whole class>
+# A utility class for handling various time-related operations using Python's datetime module.
+class TimeUtils:
+
+ <description for whole function>
+ # Initializes the TimeUtils class with the current datetime.
+ def __init__(self):
+ self.datetime = datetime.datetime.now()
+
+ <description for whole function>
+ # Returns the current date and time as a formatted string.
+ def get_current_time(self):
+ <description for return statement>
+ # Returns the current time as a formatted string in the format "HH:MM:SS".
+ format = "%H:%M:%S"
+ return self.datetime.strftime(format)
+
+ <description for whole function>
+ # Returns the current date as a formatted string.
+ def get_current_date(self):
+ <description for return statement>
+ # Returns the current date as a formatted string in the format "YYYY-MM-DD".
+ format = "%Y-%m-%d"
+ return self.datetime.strftime(format)
+
+ <description for whole function>
+ # Adds the given number of seconds to the current datetime and returns the new datetime as a formatted string.
+ def add_seconds(self, seconds):
+ <description for all parameters>
+ # Adds the given number of seconds to the current datetime.
+ <description for return statement>
+ # Returns the new datetime as a formatted string in the format "HH:MM:SS".
+ new_datetime = self.datetime + datetime.timedelta(seconds=seconds)
+ format = "%H:%M:%S"
+ return new_datetime.strftime(format)
+
+ <description for whole function>
+ # Converts a given datetime string to a datetime object.
+ def string_to_datetime(self, string):
+ <description for all parameters>
+ # Converts a given datetime string in the format "YYYY-MM-DD HH:MM:SS" to a datetime object.
+ <description for return statement>
+ # Returns the datetime object.
+ return datetime.datetime.strptime(string, "%Y-%m-%d %H:%M:%S")
+
+ <description for whole function>
+ # Converts a given datetime object to a formatted string.
+ def datetime_to_string(self, datetime):
+ <description for all parameters>
+ # Converts a given datetime object to a formatted string in the format "YYYY-MM-DD HH:MM:SS".
+ <description for return statement>
+ # Returns the formatted string.
+ return datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+ <description for whole function>
+ # Calculates the difference in minutes between two given datetime strings.
+ def get_minutes(self, string_time1, string_time2):
+ <description for all parameters>
+ # Converts the given datetime strings to datetime objects.
+ <description for return statement>
+ # Returns the difference in minutes between the two datetime objects.
+ time1 = self.string_to_datetime(string_time1)
+ time2 = self.string_to_datetime(string_time2)
+ return round((time2 - time1).seconds / 60)
+
+ <description for whole function>
+ # Creates a datetime object with the given year, month, day, hour, minute, and second.
+ def get_format_time(self, year, month, day, hour, minute, second):
+ <description for all parameters>
+ # Creates a datetime object with the given year, month, day, hour, minute, and second.
+ <description for return statement>
+ # Returns the datetime object as a formatted string in the format "YYYY-MM-DD HH:MM:SS".
+ format = "%Y-%m-%d %H:%M:%S"
+ time_item = datetime.datetime(year, month, day, hour, minute, second)
+ return time_item.strftime(format)
+
+ <some test cases for the function>
+ >>> utils = TimeUtils()
+ >>> print(utils.get_current_time())
+ "14:32:15"
+ >>> print(utils.get_current_date())
+ "2023-03-23"
+ >>> utils.add_seconds(3600)
+ >>> print(utils.get_current_time())
+ "15:32:15"
+ >>> utils.string_to_datetime("2023-03-23 14:32:15")
+ >>> print(utils.datetime_to_string(datetime.datetime(2023, 3, 23, 14, 32, 15)))
+ "2023-03-23 14:32:15"
+ >>> print(utils.get_minutes("2023-03-23 14:32:15", "2023-03-23 15:32:15"))
+ 60
+ >>> utils.get_format_time(2023, 3, 23, 14, 32, 15)
+ "2023-03-23 14:32:15"

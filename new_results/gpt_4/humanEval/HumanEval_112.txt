@@ -1,0 +1,7 @@
+def reverse_delete(s,c):
+    # This function removes all instances of a certain character from a string, then checks if the result is a palindrome
+    >>> reverse_delete("radar", "r") # returns ('ada', True)
+    >>> reverse_delete("python", "p") # returns ('ython', False)
+    >>> reverse_delete("level", "l") # returns ('eve', True)
+    s = ''.join([char for char in s if char not in c])
+    return (s,s[::-1] == s)

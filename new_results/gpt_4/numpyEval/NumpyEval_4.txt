@@ -1,0 +1,6 @@
+import numpy as np
+
+import itertools
+data = [[1], [1, 2]]
+# Convert the list of lists into a 2D numpy array, filling missing values with zero
+result = np.array(list(itertools.zip_longest(*data, fillvalue=0)))

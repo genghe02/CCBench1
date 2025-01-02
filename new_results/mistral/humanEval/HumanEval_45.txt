@@ -1,0 +1,5 @@
+ def triangle_area(a, h):
+    # Calculate the area of a triangle given its base and height
+    >>> triangle_area(5.0, 3.0) # returns 7.5
+    >>> triangle_area(10.0, 5.0) # returns 25.0
+    return a * h / 2.0</s>

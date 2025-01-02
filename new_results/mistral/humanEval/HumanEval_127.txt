@@ -1,0 +1,10 @@
+ def intersection(interval1, interval2):
+    # The function returns "YES" if there is an intersection between two given intervals and "NO" otherwise
+    # Intervals are represented as tuples of length 2, first element is the start, second element is the end
+
+    >>> intersection((1, 2), (2, 3)) # returns "NO"
+    >>> intersection((-1, 1), (0, 4)) # returns "NO"
+    >>> intersection((-3, -1), (-5, 5)) # returns "YES"
+
+    [input/output] samples:
+    return "YES" if (interval1[1] >= interval2[0] and interval1[0] <= interval2[1]) else "NO"</s>

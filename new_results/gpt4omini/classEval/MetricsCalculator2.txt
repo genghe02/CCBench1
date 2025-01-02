@@ -1,0 +1,165 @@
+```python
+"""
+This class provides methods to calculate metrics related to Mean Reciprocal Rank (MRR) 
+and Average Precision (AP) for lists of query results.
+"""
+
+import numpy as np
+
+
+class MetricsCalculator2:
+    def __init__(self):
+        """
+        Initialization method for the MetricsCalculator2 class.
+        """
+        pass
+
+    @staticmethod
+    def mrr(data):
+        """
+        Calculate the Mean Reciprocal Rank (MRR) from the provided data.
+
+        Parameters:
+            data (list or tuple): A list of tuples or a single tuple containing:
+                - A list of scores (float), or an array-like structure
+                - An integer representing the total number of items (total_num).
+
+        Returns:
+            tuple: A tuple where the first element is the MRR (float),
+                   and the second element is a list containing the individual
+                   MRR values for each sub-list.
+
+        Test cases:
+            # Test case 1: Normal case with multiple items
+            input_data = ([1, 0, 1, 0], 4)
+            expected_output = (1.0, [1.0])
+            
+            # Test case 2: Edge case with empty input
+            input_data = []
+            expected_output = (0.0, [0.0])
+
+            # Test case 3: Error case with invalid data type
+            try:
+                MetricsCalculator2.mrr('invalid_type')
+            except Exception as e:
+                expected_output = "the input must be a tuple([0,...,1,...],int) or an iteration of list of tuple"
+        """
+        if type(data) != list and type(data) != tuple:
+            raise Exception("the input must be a tuple([0,...,1,...],int) or an iteration of list of tuple")
+
+        if len(data) == 0:
+            return 0.0, [0.0]
+        if type(data) == tuple:
+            (sub_list, total_num) = data
+            sub_list = np.array(sub_list)
+            if total_num == 0:
+                return 0.0, [0.0]
+            else:
+                ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+                mr_np = sub_list * ranking_array
+
+                mr = 0.0
+                for team in mr_np:
+                    if team > 0:
+                        mr = team
+                        break
+                return mr, [mr]
+
+        if type(data) == list:
+            separate_result = []
+            for (sub_list, total_num) in data:
+                sub_list = np.array(sub_list)
+
+                if total_num == 0:
+                    mr = 0.0
+                else:
+                    ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+                    mr_np = sub_list * ranking_array
+
+                    mr = 0.0
+                    for team in mr_np:
+                        if team > 0:
+                            mr = team
+                            break
+
+                separate_result.append(mr)
+            return np.mean(separate_result), separate_result
+
+    @staticmethod
+    def map(data):
+        """
+        Calculate the Average Precision (AP) from the provided data.
+
+        Parameters:
+            data (list or tuple): A list of tuples or a single tuple containing:
+                - A list of binary indicators (1 for relevant, 0 for non-relevant)
+                - An integer representing the total number of relevant items.
+
+        Returns:
+            tuple: A tuple where the first element is the Average Precision (AP, float),
+                   and the second element is a list containing the individual AP values for each sub-list.
+
+        Test cases:
+            # Test case 1: Normal case with multiple items
+            input_data = ([1, 0, 1, 0], 2)
+            expected_output = (0.75, [0.75])
+
+            # Test case 2: Edge case with empty input
+            input_data = []
+            expected_output = (0.0, [0.0])
+
+            # Test case 3: Error case with invalid data type
+            try:
+                MetricsCalculator2.map('invalid_type')
+            except Exception as e:
+                expected_output = "the input must be a tuple([0,...,1,...],int) or an iteration of list of tuple"
+        """
+        if type(data) != list and type(data) != tuple:
+            raise Exception("the input must be a tuple([0,...,1,...],int) or an iteration of list of tuple")
+
+        if len(data) == 0:
+            return 0.0, [0.0]
+        if type(data) == tuple:
+            (sub_list, total_num) = data
+            sub_list = np.array(sub_list)
+            if total_num == 0:
+                return 0.0, [0.0]
+            else:
+                ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+
+                right_ranking_list = []
+                count = 1
+                for t in sub_list:
+                    if t == 0:
+                        right_ranking_list.append(0)
+                    else:
+                        right_ranking_list.append(count)
+                        count += 1
+
+                ap = np.sum(np.array(right_ranking_list) * ranking_array) / total_num
+                return ap, [ap]
+
+        if type(data) == list:
+            separate_result = []
+            for (sub_list, total_num) in data:
+                sub_list = np.array(sub_list)
+
+                if total_num == 0:
+                    ap = 0.0
+                else:
+                    ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+
+                    right_ranking_list = []
+                    count = 1
+                    for t in sub_list:
+                        if t == 0:
+                            right_ranking_list.append(0)
+                        else:
+                            right_ranking_list.append(count)
+                            count += 1
+
+                    ap = np.sum(np.array(right_ranking_list) * ranking_array) / total_num
+
+                separate_result.append(ap)
+            return np.mean(separate_result), separate_result
+```

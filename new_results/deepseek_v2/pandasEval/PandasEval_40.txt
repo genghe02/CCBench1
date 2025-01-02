@@ -1,0 +1,5 @@
+import pandas as pd
+
+def get_mean_in_column(df, col_name):
+    # Calculate and return the mean of the specified column in the dataframe
+    return df[col_name].mean()

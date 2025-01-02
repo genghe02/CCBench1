@@ -1,0 +1,18 @@
+# This function checks if the number x is a simple power of n
+# A simple power is defined as n^m, where m is a positive integer
+
+>>> is_simple_power(9, 3) # returns True
+>>> is_simple_power(27, 3) # returns True
+>>> is_simple_power(4, 2) # returns True
+>>> is_simple_power(5, 2) # returns False
+>>> is_simple_power(1, 2) # returns True
+>>> is_simple_power(1, 1) # returns True
+
+def is_simple_power(x, n):
+    # This function checks if a number is a simple power of another number
+    if (n == 1): 
+        return (x == 1) 
+    power = 1
+    while (power < x): 
+        power = power * n 
+    return (power == x) 

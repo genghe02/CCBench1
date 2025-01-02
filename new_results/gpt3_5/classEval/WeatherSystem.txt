@@ -1,0 +1,104 @@
+"""
+This class implements a Weather System that allows querying weather information for a specific city.
+"""
+
+class WeatherSystem:
+    def __init__(self, city) -> None:
+        """
+        Initialization method for WeatherSystem.
+
+        Parameters:
+            city (str): The city for which weather information is queried
+        """
+        self.temperature = None
+        self.weather = None
+        self.city = city
+        self.weather_list = {}
+    
+    def query(self, weather_list, tmp_units='celsius'):
+        """
+        Query weather information for the specified city.
+
+        Parameters:
+            weather_list (dict): A dictionary containing weather information for various cities
+            tmp_units (str): The temperature units to convert to (default is 'celsius')
+
+        Returns:
+            tuple: Two elements - temperature (float) and weather condition (str)
+
+        Test cases:
+            # Test case 1: Normal query in Celsius
+            assert query({'New York': {'temperature': 25, 'weather': 'Sunny'}}, 'celsius') == (25, 'Sunny')
+            # Test case 2: Fahrenheit conversion
+            assert query({'Los Angeles': {'temperature': 70, 'weather': 'Cloudy'}}, 'fahrenheit') == (21.111, 'Cloudy')
+            # Test case 3: City not found
+            assert query({}, 'celsius') == False
+        """
+        self.weather_list = weather_list
+        if self.city not in weather_list:
+            return False
+        else:
+            self.temperature = self.weather_list[self.city]['temperature']
+            self.weather = self.weather_list[self.city]['weather']
+        if self.weather_list[self.city]['temperature units'] != tmp_units:
+            if tmp_units == 'celsius':
+                return self.fahrenheit_to_celsius(), self.weather
+            elif tmp_units == 'fahrenheit':
+                return self.celsius_to_fahrenheit(), self.weather
+        else:
+            return self.temperature, self.weather
+    
+    def set_city(self, city):
+        """
+        Set the city for which weather information is retrieved.
+
+        Parameters:
+            city (str): The city to set as the current city
+
+        Test cases:
+            # Test case 1: Set city to New York
+            set_city('New York')
+            assert city == 'New York'
+            # Test case 2: Set city to Los Angeles
+            set_city('Los Angeles')
+            assert city == 'Los Angeles'
+            # Test case 3: Set city to an empty string
+            set_city('')
+            assert city == ''
+        """
+        self.city = city
+
+    def celsius_to_fahrenheit(self):
+        """
+        Convert temperature from Celsius to Fahrenheit.
+
+        Returns:
+            float: Temperature in Fahrenheit
+
+        Test cases:
+            # Test case 1: 0°C to Fahrenheit
+            assert celsius_to_fahrenheit(0) == 32.0
+            # Test case 2: Negative temperature conversion
+            assert celsius_to_fahrenheit(-10) == 14.0
+            # Test case 3: Positive temperature conversion
+            assert celsius_to_fahrenheit(100) == 212.0
+        """
+        return (self.temperature * 9/5) + 32
+
+    def fahrenheit_to_celsius(self):
+        """
+        Convert temperature from Fahrenheit to Celsius.
+
+        Returns:
+            float: Temperature in Celsius
+
+        Test cases:
+            # Test case 1: 32°F to Celsius
+            assert fahrenheit_to_celsius(32) == 0.0
+            # Test case 2: Negative temperature conversion
+            assert fahrenheit_to_celsius(14) == -10.0
+            # Test case 3: Positive temperature conversion
+            assert fahrenheit_to_celsius(212) == 100.0
+        """
+        return (self.temperature - 32) * 5/9
+"""

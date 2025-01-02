@@ -1,0 +1,67 @@
+```python
+# This class is designed to manage a simple student registration system for classes.
+class ClassRegistrationSystem:
+
+    # The initializer for the class registration system. It initializes two empty dictionaries:
+    # - students: a list that will store the student names.
+    # - students_registration_classes: a dictionary that will store the classes each student has registered for.
+    def __init__(self):
+        self.students = []
+        self.students_registration_classes = {}
+
+    # This function is used to register a new student into the system.
+    # :param student: dict, the student details. 
+    # :return: int, returns 0 if the student is already registered, 1 if the registration is successful.
+    def register_student(self, student):
+        if student in self.students:
+            return 0
+        else:
+            self.students.append(student)
+            return 1
+
+    # This function is used to register a student for a class.
+    # :param student_name: str, the name of the student.
+    # :param class_name: str, the name of the class.
+    # :return: list, the updated list of classes the student is registered for.
+    # >>> crs = ClassRegistrationSystem()
+    # >>> crs.register_class("John Doe", "Math 101")
+    def register_class(self, student_name, class_name):
+        if student_name in self.students_registration_classes:
+            self.students_registration_classes[student_name].append(class_name)
+        else:
+            self.students_registration_classes[student_name] = [class_name]
+        return self.students_registration_classes[student_name]
+
+    # This function is used to get a list of students by their major.
+    # :param major: str, the major to filter students by.
+    # :return: list, the names of all students who major in the provided major.
+    # >>> crs.get_students_by_major("Computer Science")
+    def get_students_by_major(self, major):
+        student_list = []
+        for student in self.students:
+            if student["major"] == major:
+                student_list.append(student["name"])
+        return student_list
+
+    # This function is used to get a list of all majors in the system.
+    # :return: list, the names of all majors in the system.
+    # >>> crs.get_all_major()
+    def get_all_major(self):
+        major_list = []
+        for student in self.students:
+            if student["major"] not in major_list:
+                major_list.append(student["major"])
+        return major_list
+
+    # This function is used to get the most popular class in a specific major.
+    # :param major: str, the major to filter by.
+    # :return: str, the name of the most popular class in the major.
+    # >>> crs.get_most_popular_class_in_major("Mathematics")
+    def get_most_popular_class_in_major(self, major):
+        class_list = []
+        for student in self.students:
+            if student["major"] == major:
+                class_list += self.students_registration_classes[student["name"]]
+        most_popular_class = max(set(class_list), key=class_list.count)
+        return most_popular_class
+```

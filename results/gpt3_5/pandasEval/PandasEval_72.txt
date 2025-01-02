@@ -1,0 +1,1 @@
+# Normalize the dataframe by applying a lambda function to each column, calculating the normalized value for each element based on the column's minimum and maximum values.

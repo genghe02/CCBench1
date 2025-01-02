@@ -1,0 +1,11 @@
+# Convert the input number to binary after summing its digits
+>>> solve(123) # returns '1111011'
+>>> solve(456) # returns '1000000'
+>>> solve(789) # returns '110001' 
+
+def solve(N):
+    # Convert the input number to binary after summing its digits
+    >>> solve(123) # returns '1111011'
+    >>> solve(456) # returns '1000000'
+    >>> solve(789) # returns '110001'
+    return bin(sum(int(i) for i in str(N)))[2:]

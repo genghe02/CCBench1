@@ -1,0 +1,6 @@
+ def same_chars(s0: str, s1: str):
+   # Check if two strings have the same characters by converting them to sets and comparing
+   >>> same_chars("hello", "hell") # returns True
+   >>> same_chars("hello", "world") # returns False
+   >>> same_chars("aabbc", "abbbc") # returns True
+   return set(s0) == set(s1)</s>

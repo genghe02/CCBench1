@@ -1,0 +1,101 @@
+```python
+"""
+This class provides utility methods for handling IP addresses, including validation for IPv4 and IPv6 formats, and retrieving hostnames from IP addresses.
+"""
+
+import socket
+
+
+class IpUtil:
+
+    @staticmethod
+    def is_valid_ipv4(ip_address):
+        """
+        Validates whether the given IP address is a valid IPv4 address.
+
+        Parameters:
+            ip_address (str): The IP address to validate.
+
+        Returns:
+            bool: True if the IP address is a valid IPv4 address, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid IPv4 address
+            assert IpUtil.is_valid_ipv4('192.168.1.1') == True
+
+            # Test case 2: Invalid IPv4 address
+            assert IpUtil.is_valid_ipv4('256.256.256.256') == False
+
+            # Test case 3: Non-IP string
+            assert IpUtil.is_valid_ipv4('not.an.ip.address') == False
+        """
+        try:
+            socket.inet_pton(socket.AF_INET, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def is_valid_ipv6(ip_address):
+        """
+        Validates whether the given IP address is a valid IPv6 address.
+
+        Parameters:
+            ip_address (str): The IP address to validate.
+
+        Returns:
+            bool: True if the IP address is a valid IPv6 address, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid IPv6 address
+            assert IpUtil.is_valid_ipv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334') == True
+
+            # Test case 2: Invalid IPv6 address
+            assert IpUtil.is_valid_ipv6('2001:0db8:85a3:0000:0000:8a2e:0370:7334:extra') == False
+
+            # Test case 3: Non-IP string
+            assert IpUtil.is_valid_ipv6('not.an.ip.address') == False
+        """
+        try:
+            socket.inet_pton(socket.AF_INET6, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def get_hostname(ip_address):
+        """
+        Retrieves the hostname associated with the given IP address.
+
+        Parameters:
+            ip_address (str): The IP address to resolve to a hostname.
+
+        Returns:
+            str: The hostname associated with the IP address, or None if the resolution fails.
+
+        Test cases:
+            # Test case 1: Valid IP address with a hostname
+            # Note: This test case assumes that the IP address resolves to a hostname.
+            # Replace '8.8.8.8' with a known IP address that resolves to a hostname.
+            assert IpUtil.get_hostname('8.8.8.8') == 'dns.google'
+
+            # Test case 2: Invalid IP address
+            assert IpUtil.get_hostname('999.999.999.999') == None
+
+            # Test case 3: Non-IP string
+            assert IpUtil.get_hostname('not.an.ip.address') == None
+        """
+        try:
+            hostname = socket.gethostbyaddr(ip_address)[0]
+            return hostname
+        except socket.herror:
+            return None
+```
+
+### Explanation:
+1. **Class Documentation**: The class `IpUtil` is described as a utility class for handling IP addresses, including validation and hostname resolution.
+2. **Method Documentation**:
+   - Each method (`is_valid_ipv4`, `is_valid_ipv6`, `get_hostname`) is documented with a clear description, parameter details, return value explanation, and test cases.
+   - Test cases cover normal usage, edge cases, and error handling to ensure comprehensive documentation.
+3. **Formatting**: The documentation follows the standard Python docstring format, with clear sectioning for Parameters, Returns, and Test cases.
+4. **Clarity and Accuracy**: Descriptions are concise and accurate, ensuring that users understand the purpose and usage of each method.

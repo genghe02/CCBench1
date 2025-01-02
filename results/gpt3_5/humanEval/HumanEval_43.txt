@@ -1,0 +1,14 @@
+def pairs_sum_to_zero(l):
+    # Check if there are any pairs in the input list that sum up to zero.
+    # The function takes a list of integers as input and returns True if there exists a pair of elements whose sum is zero, False otherwise.
+    # The function iterates through all pairs of elements in the list and checks if their sum equals zero.
+    
+    # Test cases:
+    # Test Case 1: l = [1, 2, 3, 4, -2, -3] -> Expected Output: True (1 and -1 sum up to 0)
+    # Test Case 2: l = [1, 2, 3, 4] -> Expected Output: False (No pair sums up to 0)
+    
+    for i, l1 in enumerate(l):
+        for j in range(i + 1, len(l)):
+            if l1 + l[j] == 0:
+                return True
+    return False

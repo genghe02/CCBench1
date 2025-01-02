@@ -1,0 +1,10 @@
+```python
+def iscube(a):
+    # Returns True if a number is a perfect cube
+    >>> iscube(27) # returns True
+    >>> iscube(-8) # returns True
+    >>> iscube(16) # returns False
+    >>> iscube(0) # returns True
+    a = abs(a)
+    return int(round(a ** (1. / 3))) ** 3 == a
+```

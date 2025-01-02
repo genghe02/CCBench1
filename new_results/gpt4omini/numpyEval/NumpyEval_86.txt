@@ -1,0 +1,1 @@
+import numpy as np\n\nx = np.array([[1], [2], [3]])\n# Reshape the array to a 1-dimensional array\nout = x.reshape(3,)

@@ -1,0 +1,5 @@
+ # Insert a new row into the dataframe before the current index and return the modified dataframe
+def insert_row_at_arbitrary_in_dataframe(df, row_to_insert):
+    df = df.append(row_to_insert, ignore_index=False)
+    df = df.sort_index().reset_index(drop=True)
+    return df</s>

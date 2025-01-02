@@ -1,0 +1,134 @@
+ """
+This class represents a simple bank account filter, handling deposit, withdrawal, and balance view operations.
+"""
+
+import logging
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initializes an instance of AccessGatewayFilter.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Filters an incoming request based on request URI and user authentication.
+
+        Parameters:
+            request (dict): An HTTP request with 'path' and 'method' keys.
+
+        Returns:
+            bool: Returns True if the request should be granted, False otherwise.
+
+        Test cases:
+            # Test case 1: Allowed request
+            input = {'path': '/api/users', 'method': 'GET'}
+            output = True
+
+            # Test case 2: Disallowed request
+            input = {'path': '/admin/users', 'method': 'GET'}
+            output = False
+
+            # Test case 3: Unauthenticated request
+            input = {'path': '/api/users', 'method': 'GET'}
+            output = False
+        """
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Checks if the request URI starts with an allowed prefix.
+
+        Parameters:
+            request_uri (str): The URI path to check.
+
+        Returns:
+            bool: Returns True if the request URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+        
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Retrieves user information from the JSON Web Token in the request.
+
+        Parameters:
+            request (dict): An HTTP request with a valid JWT token.
+
+        Raises:
+            Exception: Raises an exception if the token is not valid or missing.
+
+        Returns:
+            dict: Returns the user information contained in the JWT token.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            input_request = {"headers": {"Authorization": "Bearer " + token}}
+            output = {"user": {"name": "John", "level": 5}}
+
+            # Test case 2: Invalid JWT token
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+            input_request = {"headers": {"Authorization": "Bearer " + token + "X"}}
+            output = Exception("Invalid Token")
+
+            # Test case 3: Missing token
+            input_request = {"headers": {}}
+            output = Exception("Missing Token")
+        """
+        # Implement get_jwt_user method here
+        pass
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Sets the current user information and logs the access event.
+
+        Parameters:
+            user (dict): User information, containing name and level.
+        """
+        self.current_user = user
+        self.log_event('access', self.current_user['name'])
+
+    def log_event(self, event, user_name):
+        """
+        Logs an event with the given event type and user name.
+
+        Parameters:
+            event (str): The event type, such as 'access' or 'deny'.
+            user_name (str): The name of the user performing the action.
+        """
+        log_entry = {
+            'event': event,
+            'timestamp': datetime.datetime.now(),
+            'user': user_name
+        }
+        logging.info(log_entry)</s>

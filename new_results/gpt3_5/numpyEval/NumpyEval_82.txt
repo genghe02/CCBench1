@@ -1,0 +1,2 @@
+# Add the first element of the input array to the end of the array and return the updated array
+def add_first_element_to_arr(arr):

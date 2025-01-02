@@ -1,0 +1,203 @@
+Here's the completed documentation for the `TimeUtils` class based on the provided requirements:
+
+```python
+"""
+This class provides utility functions for handling and formatting date and time.
+"""
+
+import datetime
+import time
+
+class TimeUtils:
+
+    def __init__(self):
+        """
+        Initializes the TimeUtils with the current datetime.
+        """
+        self.datetime = datetime.datetime.now()
+
+    def get_current_time(self):
+        """
+        Gets the current time in HH:MM:SS format.
+
+        Returns:
+            str: Current time formatted as "HH:MM:SS".
+
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            assert time_utils.get_current_time() == datetime.datetime.now().strftime("%H:%M:%S")
+
+            # Test case 2: Call after some delay
+            time.sleep(1)  # Wait a second
+            assert time_utils.get_current_time() != datetime.datetime.now().strftime("%H:%M:%S")
+
+            # Test case 3: Get time at initialization
+            time_utils2 = TimeUtils()
+            assert time_utils2.get_current_time() == datetime.datetime.now().strftime("%H:%M:%S")
+        """
+        format = "%H:%M:%S"
+        return self.datetime.strftime(format)
+
+    def get_current_date(self):
+        """
+        Gets the current date in YYYY-MM-DD format.
+
+        Returns:
+            str: Current date formatted as "YYYY-MM-DD".
+
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            assert time_utils.get_current_date() == datetime.datetime.now().strftime("%Y-%m-%d")
+
+            # Test case 2: Check that changing the time does not change the date
+            time.sleep(1)  # Wait a second
+            assert time_utils.get_current_date() == datetime.datetime.now().strftime("%Y-%m-%d")
+
+            # Test case 3: Date at initialization
+            time_utils2 = TimeUtils()
+            assert time_utils2.get_current_date() == datetime.datetime.now().strftime("%Y-%m-%d")
+        """
+        format = "%Y-%m-%d"
+        return self.datetime.strftime(format)
+
+    def add_seconds(self, seconds):
+        """
+        Adds a given number of seconds to the current time and returns the new time.
+
+        Parameters:
+            seconds (int): The number of seconds to add.
+
+        Returns:
+            str: New time formatted as "HH:MM:SS".
+
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            assert time_utils.add_seconds(60) == (datetime.datetime.now() + datetime.timedelta(seconds=60)).strftime("%H:%M:%S")
+
+            # Test case 2: Adding zero seconds
+            assert time_utils.add_seconds(0) == time_utils.get_current_time()
+
+            # Test case 3: Negative seconds
+            assert time_utils.add_seconds(-60) == (datetime.datetime.now() - datetime.timedelta(seconds=60)).strftime("%H:%M:%S")
+        """
+        new_datetime = self.datetime + datetime.timedelta(seconds=seconds)
+        format = "%H:%M:%S"
+        return new_datetime.strftime(format)
+
+    def string_to_datetime(self, string):
+        """
+        Converts a string representing date and time to a datetime object.
+
+        Parameters:
+            string (str): String in the format "YYYY-MM-DD HH:MM:SS" to convert.
+
+        Returns:
+            datetime.datetime: Corresponding datetime object.
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert isinstance(self.string_to_datetime("2023-10-01 12:00:00"), datetime.datetime)
+
+            # Test case 2: Invalid format
+            try:
+                self.string_to_datetime("incorrect_format")
+            except ValueError:
+                assert True  # Expected ValueError for incorrect format
+
+            # Test case 3: Boundary case for leap year
+            assert self.string_to_datetime("2020-02-29 12:00:00").day == 29
+        """
+        return datetime.datetime.strptime(string, "%Y-%m-%d %H:%M:%S")
+
+    def datetime_to_string(self, datetime):
+        """
+        Converts a datetime object to a formatted string.
+
+        Parameters:
+            datetime (datetime.datetime): The datetime object to convert.
+
+        Returns:
+            str: Formatted string in the format "YYYY-MM-DD HH:MM:SS".
+
+        Test cases:
+            # Test case 1: Normal usage
+            dt = datetime.datetime(2023, 10, 1, 12, 0, 0)
+            assert self.datetime_to_string(dt) == "2023-10-01 12:00:00"
+
+            # Test case 2: Edge case with time zero
+            dt2 = datetime.datetime(2023, 1, 1)
+            assert self.datetime_to_string(dt2) == "2023-01-01 00:00:00"
+
+            # Test case 3: Check the output for current time
+            assert self.datetime_to_string(datetime.datetime.now()) == datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        """
+        return datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+    def get_minutes(self, string_time1, string_time2):
+        """
+        Calculates the difference in minutes between two time strings.
+
+        Parameters:
+            string_time1 (str): The first time string in "YYYY-MM-DD HH:MM:SS" format.
+            string_time2 (str): The second time string in "YYYY-MM-DD HH:MM:SS" format.
+
+        Returns:
+            int: The difference in minutes between the two times.
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert self.get_minutes("2023-10-01 12:00:00", "2023-10-01 12:10:00") == 10
+
+            # Test case 2: Same time
+            assert self.get_minutes("2023-10-01 12:00:00", "2023-10-01 12:00:00") == 0
+
+            # Test case 3: Reverse order
+            assert self.get_minutes("2023-10-01 12:10:00", "2023-10-01 12:00:00") == -10
+        """
+        time1 = self.string_to_datetime(string_time1)
+        time2 = self.string_to_datetime(string_time2)
+        return round((time2 - time1).seconds / 60)
+
+    def get_format_time(self, year, month, day, hour, minute, second):
+        """
+        Generates a formatted time string for a specified date and time.
+
+        Parameters:
+            year (int): The year of the date.
+            month (int): The month of the date.
+            day (int): The day of the date.
+            hour (int): The hour of the time.
+            minute (int): The minute of the time.
+            second (int): The second of the time.
+
+        Returns:
+            str: The formatted time string in "YYYY-MM-DD HH:MM:SS".
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert self.get_format_time(2023, 10, 1, 12, 0, 0) == "2023-10-01 12:00:00"
+
+            # Test case 2: Boundary value for leap year
+            assert self.get_format_time(2020, 2, 29, 12, 0, 0) == "2020-02-29 12:00:00"
+
+            # Test case 3: Edge case for invalid date
+            try:
+                self.get_format_time(2023, 4, 31, 12, 0, 0)
+            except ValueError:
+                assert True  # Expected ValueError for invalid date
+        """
+        format = "%Y-%m-%d %H:%M:%S"
+        time_item = datetime.datetime(year, month, day, hour, minute, second)
+        return time_item.strftime(format)
+```
+
+### Explanation
+1. **Class Documentation**: The class-level docstring briefly describes the purpose of the `TimeUtils` class.
+2. **Method Documentation**: Each method has docstring documentation that describes its functionality, parameters, return values, and test cases.
+3. **Parameters and Returns**: Detailed descriptions for parameters and return values are provided to clarify the usage of each method.
+4. **Test Cases**: Each method includes at least three test cases covering normal, edge, and error handling scenarios. 
+
+This structure allows any developer using or maintaining the `TimeUtils` class to easily understand its purpose and usage.

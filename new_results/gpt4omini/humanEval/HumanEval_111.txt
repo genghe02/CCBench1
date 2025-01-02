@@ -1,0 +1,20 @@
+```python
+def histogram(test):
+    # Return a dictionary with the frequency of the most common words in the input string
+    >>> histogram("apple banana apple orange apple banana") # returns {'apple': 3}
+    >>> histogram("dog cat dog dog cat") # returns {'dog': 3}
+    >>> histogram("hello world hello") # returns {'hello': 2}
+    >>> histogram("") # returns {}
+    dict1={}
+    list1=test.split(" ")
+    t=0
+
+    for i in list1:
+        if(list1.count(i)>t) and i!='':
+            t=list1.count(i)
+    if t>0:
+        for i in list1:
+            if(list1.count(i)==t):
+                dict1[i]=t
+    return dict1
+```

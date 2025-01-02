@@ -1,0 +1,30 @@
+ # Check if a number is prime by checking if it has any divisors other than 1 and itself
+# Return True if the number is prime, False otherwise
+>>> is_prime(2) # returns True
+>>> is_prime(3) # returns True
+>>> is_prime(4) # returns False
+>>> is_prime(5) # returns True
+>>> is_prime(6) # returns False
+>>> is_prime(7) # returns True
+>>> is_prime(10) # returns False
+>>> is_prime(11) # returns True
+return True if n > 1 and not any(n % i == 0 for i in range(2, int(n ** 0.5) + 1)) else False
+
+>>> is_prime(12) # returns False
+>>> is_prime(13) # returns True
+>>> is_prime(14) # returns False
+>>> is_prime(15) # returns False
+>>> is_prime(17) # returns True
+>>> is_prime(18) # returns False
+>>> is_prime(19) # returns True
+>>> is_prime(20) # returns False
+>>> is_prime(21) # returns True
+>>> is_prime(22) # returns False
+>>> is_prime(23) # returns True
+>>> is_prime(24) # returns False
+>>> is_prime(25) # returns False
+>>> is_prime(26) # returns False
+>>> is_prime(27) # returns True
+>>> is_prime(28) # returns False
+>>> is_prime(29) # returns True
+>>> is_prime(30) # returns False</s>

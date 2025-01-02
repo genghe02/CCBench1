@@ -1,0 +1,6 @@
+ import numpy as np
+
+# Create a list of arrays with each element multiplied by a 2x2 numpy array of ones
+list_of_arrays = map(lambda x: x*np.ones((2, 2)), range(5))
+# Stack the list of arrays along a new axis to create a single numpy array
+myarray = np.stack(list_of_arrays)</s>

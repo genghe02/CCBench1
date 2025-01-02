@@ -1,0 +1,23 @@
+ def pluck(arr):
+    # This function takes a list as an argument and returns a tuple containing the minimum even number and its index in the list.
+    # If the list is empty, it returns an empty list.
+
+    if len(arr) == 0: return []
+    # Filter out even numbers from the list using a lambda function and list comprehension.
+    evens = list(filter(lambda x: x % 2 == 0, arr))
+    # Check if there are any even numbers in the list, if not return an empty list.
+    if evens == []: return []
+    # Return a tuple containing the minimum even number and its index in the list.
+    return [min(evens), arr.index(min(evens))]
+
+    <some test cases for the function>
+    >>> pluck([])
+    []
+    >>> pluck([1, 2, 3, 4, 5])
+    [4, 3]
+    >>> pluck([1, 2, 3, 4, 5, 6])
+    [2, 4]
+    >>> pluck([1, 2, 3, 4, 5, 6, 7])
+    [2, 5]
+    >>> pluck([1, 2, 3, 4, 5, 6, 7, 8])
+    [2, 6]

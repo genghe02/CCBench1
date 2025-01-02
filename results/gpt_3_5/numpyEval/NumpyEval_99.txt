@@ -1,0 +1,1 @@
+# Calculate the sum of all elements in the DataFrame by converting it to a numpy array and then summing all values.

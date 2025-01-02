@@ -1,0 +1,18 @@
+```python
+def will_it_fly(q, w):
+    # Determine if the sum of array q exceeds w and if q is a palindrome
+    >>> will_it_fly([1, 2, 3], 5)  # returns True
+    >>> will_it_fly([1, 2, 3], 6)  # returns False
+    >>> will_it_fly([1, 2, 1], 3)  # returns True
+    >>> will_it_fly([], 1)          # returns True
+    if sum(q) > w:
+        return False
+
+    i, j = 0, len(q) - 1
+    while i < j:
+        if q[i] != q[j]:
+            return False
+        i += 1
+        j -= 1
+    return True
+```

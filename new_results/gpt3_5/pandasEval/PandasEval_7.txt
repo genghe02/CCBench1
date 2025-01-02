@@ -1,0 +1,9 @@
+import pandas as pd
+
+df = pd.DataFrame({
+'date': ["2022-01-01", "2022-01-02", "2022-01-03", "friday"],
+'value': [1, 2, 3, 4]
+})
+
+# Convert 'date' column to datetime format with handling of errors
+df['date'] = pd.to_datetime(df['date'], errors='coerce')

@@ -1,0 +1,2 @@
+ # Check if all elements in each row are equal to the first element of that row
+result = np.all(a == a[0,:], axis = 0)</s>

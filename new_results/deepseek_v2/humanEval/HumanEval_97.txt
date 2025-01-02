@@ -1,0 +1,8 @@
+```python
+def multiply(a, b):
+    # Multiply the last digits of two integers by taking modulo 10 and multiplying their absolute values
+    >>> multiply(123, 456) # returns 18
+    >>> multiply(-123, 456) # returns 18
+    >>> multiply(0, 456) # returns 0
+    return abs(a % 10) * abs(b % 10)
+```

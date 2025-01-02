@@ -1,0 +1,10 @@
+def encode(message):
+    # This function encodes a message by swapping case and replacing vowels with next two vowels
+
+    >>> encode('Hello World') # returns 'jOnnO dQrld'
+    >>> encode('Python') # returns 'pYTHQN'
+    >>> encode('AEIOU') # returns 'wKQsW'
+    vowels = "aeiouAEIOU"
+    vowels_replace = dict([(i, chr(ord(i) + 2)) for i in vowels])
+    message = message.swapcase()
+    return ''.join([vowels_replace[i] if i in vowels else i for i in message])

@@ -1,0 +1,8 @@
+```python
+def make_a_pile(n):
+    # Generate a list of numbers starting from n, increasing by 2 for each subsequent element
+    >>> make_a_pile(3) # returns [3, 5, 7]
+    >>> make_a_pile(5) # returns [5, 7, 9, 11, 13]
+    >>> make_a_pile(1) # returns [1]
+    return [n + 2*i for i in range(n)]
+```

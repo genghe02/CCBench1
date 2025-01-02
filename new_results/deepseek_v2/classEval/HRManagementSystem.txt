@@ -1,0 +1,173 @@
+```python
+"""
+This class manages employee records within an HR management system. 
+It provides functionalities to add, remove, update, retrieve, and list employee details.
+"""
+
+class HRManagementSystem:
+    def __init__(self):
+        """
+        Initializes the HRManagementSystem with an empty dictionary to store employee records.
+        """
+        self.employees = {}
+
+    def add_employee(self, employee_id, name, position, department, salary):
+        """
+        Adds a new employee to the system.
+
+        Parameters:
+            employee_id (int): Unique identifier for the employee
+            name (str): Full name of the employee
+            position (str): Job position of the employee
+            department (str): Department where the employee works
+            salary (float): Salary of the employee
+
+        Returns:
+            bool: True if the employee was successfully added, False if the employee_id already exists
+
+        Test cases:
+            # Test case 1: Add a new employee
+            hr_system = HRManagementSystem()
+            assert hr_system.add_employee(1, 'John Doe', 'Developer', 'IT', 50000) == True
+
+            # Test case 2: Add an employee with an existing ID
+            assert hr_system.add_employee(1, 'Jane Doe', 'Manager', 'HR', 60000) == False
+
+            # Test case 3: Add another new employee
+            assert hr_system.add_employee(2, 'Alice Smith', 'Analyst', 'Finance', 55000) == True
+        """
+        if employee_id in self.employees:
+            return False
+        else:
+            self.employees[employee_id] = {
+                'name': name,
+                'position': position,
+                'department': department,
+                'salary': salary
+            }
+            return True
+
+    def remove_employee(self, employee_id):
+        """
+        Removes an employee from the system.
+
+        Parameters:
+            employee_id (int): Unique identifier of the employee to be removed
+
+        Returns:
+            bool: True if the employee was successfully removed, False if the employee_id does not exist
+
+        Test cases:
+            # Test case 1: Remove an existing employee
+            hr_system = HRManagementSystem()
+            hr_system.add_employee(1, 'John Doe', 'Developer', 'IT', 50000)
+            assert hr_system.remove_employee(1) == True
+
+            # Test case 2: Remove a non-existing employee
+            assert hr_system.remove_employee(2) == False
+
+            # Test case 3: Remove another existing employee
+            hr_system.add_employee(2, 'Alice Smith', 'Analyst', 'Finance', 55000)
+            assert hr_system.remove_employee(2) == True
+        """
+        if employee_id in self.employees:
+            del self.employees[employee_id]
+            return True
+        else:
+            return False
+
+    def update_employee(self, employee_id: int, employee_info: dict):
+        """
+        Updates the details of an existing employee.
+
+        Parameters:
+            employee_id (int): Unique identifier of the employee to be updated
+            employee_info (dict): Dictionary containing the fields to update and their new values
+
+        Returns:
+            bool: True if the employee was successfully updated, False if the employee_id does not exist or if any key in employee_info is invalid
+
+        Test cases:
+            # Test case 1: Update an existing employee's position
+            hr_system = HRManagementSystem()
+            hr_system.add_employee(1, 'John Doe', 'Developer', 'IT', 50000)
+            assert hr_system.update_employee(1, {'position': 'Senior Developer'}) == True
+
+            # Test case 2: Update a non-existing employee
+            assert hr_system.update_employee(2, {'position': 'Manager'}) == False
+
+            # Test case 3: Update with an invalid key
+            assert hr_system.update_employee(1, {'age': 30}) == False
+        """
+        employee = self.get_employee(employee_id)
+        if employee == False:
+            return False
+        else:
+            for key, value in employee_info.items():
+                if key not in employee:
+                    return False
+            for key, value in employee_info.items():
+                employee[key] = value
+            return True
+
+    def get_employee(self, employee_id):
+        """
+        Retrieves the details of a specific employee.
+
+        Parameters:
+            employee_id (int): Unique identifier of the employee to retrieve
+
+        Returns:
+            dict or bool: Dictionary containing the employee details if the employee_id exists, False otherwise
+
+        Test cases:
+            # Test case 1: Retrieve an existing employee
+            hr_system = HRManagementSystem()
+            hr_system.add_employee(1, 'John Doe', 'Developer', 'IT', 50000)
+            assert hr_system.get_employee(1) == {'name': 'John Doe', 'position': 'Developer', 'department': 'IT', 'salary': 50000}
+
+            # Test case 2: Retrieve a non-existing employee
+            assert hr_system.get_employee(2) == False
+
+            # Test case 3: Retrieve another existing employee
+            hr_system.add_employee(2, 'Alice Smith', 'Analyst', 'Finance', 55000)
+            assert hr_system.get_employee(2) == {'name': 'Alice Smith', 'position': 'Analyst', 'department': 'Finance', 'salary': 55000}
+        """
+        if employee_id in self.employees:
+            return self.employees[employee_id]
+        else:
+            return False
+
+    def list_employees(self):
+        """
+        Lists all employees in the system.
+
+        Returns:
+            dict: Dictionary containing all employee details, indexed by employee_id
+
+        Test cases:
+            # Test case 1: List employees in an empty system
+            hr_system = HRManagementSystem()
+            assert hr_system.list_employees() == {}
+
+            # Test case 2: List employees with one employee
+            hr_system.add_employee(1, 'John Doe', 'Developer', 'IT', 50000)
+            assert hr_system.list_employees() == {1: {'employee_ID': 1, 'name': 'John Doe', 'position': 'Developer', 'department': 'IT', 'salary': 50000}}
+
+            # Test case 3: List employees with multiple employees
+            hr_system.add_employee(2, 'Alice Smith', 'Analyst', 'Finance', 55000)
+            assert hr_system.list_employees() == {
+                1: {'employee_ID': 1, 'name': 'John Doe', 'position': 'Developer', 'department': 'IT', 'salary': 50000},
+                2: {'employee_ID': 2, 'name': 'Alice Smith', 'position': 'Analyst', 'department': 'Finance', 'salary': 55000}
+            }
+        """
+        employee_data = {}
+        if self.employees:
+            for employee_id, employee_info in self.employees.items():
+                employee_details = {}
+                employee_details["employee_ID"] = employee_id
+                for key, value in employee_info.items():
+                    employee_details[key] = value
+                employee_data[employee_id] = employee_details
+        return employee_data
+```

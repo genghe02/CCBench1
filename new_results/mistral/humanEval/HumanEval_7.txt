@@ -1,0 +1,7 @@
+ def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    # Filter list of strings using 'in' operator
+    # Return new list with strings containing the given substring
+    >>> filter_by_substring(["apple", "banana", "cherry"], "an") # returns ['banana']
+    >>> filter_by_substring(["python", "java", "csharp"], "java") # returns ['java']
+    >>> filter_by_substring(["hello", "world", "goodbye"], "world") # returns ['world']
+    return [x for x in strings if substring in x]</s>

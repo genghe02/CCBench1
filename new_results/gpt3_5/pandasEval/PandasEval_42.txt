@@ -1,0 +1,1 @@
+# Drop the first n rows from the given dataframe and return the modified dataframe

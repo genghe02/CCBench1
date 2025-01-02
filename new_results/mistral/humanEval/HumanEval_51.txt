@@ -1,0 +1,6 @@
+ def remove_vowels(text):
+   # Remove vowels from given text
+   >>> remove_vowels("Hello World") # returns 'Hll Wrld'
+   >>> remove_vowels("Python is awesome") # returns 'Pth n s wm'
+   >>> remove_vowels("The quick brown fox jumps over the lazy dog") # returns 'Th qck brwn fx jmp vr th lzy dg'
+   return "".join([s for s in text if s.lower() not in ["a", "e", "i", "o", "u"]])</s>

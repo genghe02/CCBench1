@@ -1,0 +1,130 @@
+```python
+"""
+This class manages a simple chat application allowing users to communicate through messages.
+"""
+
+from datetime import datetime
+
+class Chat:
+    def __init__(self):
+        """
+        Initializes a new chat instance with an empty user dictionary.
+
+        Attributes:
+            users (dict): A dictionary to hold users and their corresponding messages.
+        """
+        self.users = {}
+
+    def add_user(self, username):
+        """
+        Adds a user to the chat system.
+
+        Parameters:
+            username (str): The name of the user to be added.
+
+        Returns:
+            bool: True if the user was added successfully, False if the user already exists.
+
+        Test cases:
+            # Test case 1: Adding a new user
+            assert add_user('Alice') == True
+
+            # Test case 2: Adding the same user again
+            assert add_user('Alice') == False
+
+            # Test case 3: Adding another user
+            assert add_user('Bob') == True
+        """
+        if username in self.users:
+            return False
+        else:
+            self.users[username] = []
+            return True
+
+    def remove_user(self, username):
+        """
+        Removes a user from the chat system.
+
+        Parameters:
+            username (str): The name of the user to be removed.
+
+        Returns:
+            bool: True if the user was removed successfully, False if the user does not exist.
+
+        Test cases:
+            # Test case 1: Removing an existing user
+            assert remove_user('Alice') == True
+
+            # Test case 2: Removing a user that does not exist
+            assert remove_user('Charlie') == False
+
+            # Test case 3: Removing a user again
+            assert remove_user('Alice') == False
+        """
+        if username in self.users:
+            del self.users[username]
+            return True
+        else:
+            return False
+
+    def send_message(self, sender, receiver, message):
+        """
+        Sends a message from one user to another.
+
+        Parameters:
+            sender (str): The name of the user sending the message.
+            receiver (str): The name of the user receiving the message.
+            message (str): The message content.
+
+        Returns:
+            bool: True if the message was sent successfully, False if either user does not exist.
+
+        Test cases:
+            # Test case 1: Sending a message between two existing users
+            assert send_message('Alice', 'Bob', 'Hello Bob!') == True
+
+            # Test case 2: Sending a message from a non-existing sender
+            assert send_message('Charlie', 'Bob', 'Hey!') == False
+
+            # Test case 3: Sending a message to a non-existing receiver
+            assert send_message('Alice', 'Charlie', 'Hi there!') == False
+        """
+        if sender not in self.users or receiver not in self.users:
+            return False
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        message_info = {
+            'sender': sender,
+            'receiver': receiver,
+            'message': message,
+            'timestamp': timestamp
+        }
+        self.users[sender].append(message_info)
+        self.users[receiver].append(message_info)
+        return True
+
+    def get_messages(self, username):
+        """
+        Retrieves the messages for a specific user.
+
+        Parameters:
+            username (str): The name of the user whose messages are to be retrieved.
+
+        Returns:
+            list: A list of message dictionaries if the user exists, otherwise an empty list.
+
+        Test cases:
+            # Test case 1: Retrieving messages for an existing user
+            send_message('Alice', 'Bob', 'Hi Bob!')
+            assert get_messages('Alice') == [{'sender': 'Alice', 'receiver': 'Bob', 'message': 'Hi Bob!', 'timestamp': ...}] # timestamp will vary
+
+            # Test case 2: Retrieving messages for a user with no messages
+            assert get_messages('Bob') == []
+
+            # Test case 3: Retrieving messages for a non-existing user
+            assert get_messages('Charlie') == []
+        """
+        if username not in self.users:
+            return []
+        return self.users[username]
+```

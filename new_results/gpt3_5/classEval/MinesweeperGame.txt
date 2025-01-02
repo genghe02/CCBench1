@@ -1,0 +1,133 @@
+"""
+This class represents a Minesweeper game that generates a minefield map and tracks a player's progress scoring.
+
+Usage of the MinesweeperGame class allows simulation of a game of Minesweeper with a given dimension and number of mines.
+"""
+
+import random
+
+class MinesweeperGame:
+    def __init__(self, n, k) -> None:
+        """
+        Initialize the MinesweeperGame class object.
+
+        Parameters:
+            n (int): Dimension of the Minesweeper game grid (n x n)
+            k (int): Number of mines to be placed on the grid
+
+        Returns:
+            None
+        """
+        self.n = n
+        self.k = k
+        self.minesweeper_map = self.generate_mine_sweeper_map()
+        self.player_map = self.generate_playerMap()
+        self.score = 0
+
+    def generate_mine_sweeper_map(self):
+        """
+        Generates the Minesweeper game map with mines and clues.
+
+        Returns:
+            list: A 2D list representing the game map with mines ('X') and clues.
+
+        Test cases:
+            # Test case 1: Description
+            assert generate_mine_sweeper_map() == [[...], ...]
+            
+            # Test case 2: Description
+            assert generate_mine_sweeper_map() == [[...], ...]
+            
+            # Test case 3: Description
+            assert generate_mine_sweeper_map() == [[...], ...]
+        """
+        arr = [[0 for _ in range(self.n)] for _ in range(self.n)]
+        
+        for num in range(self.k):
+            x = random.randint(0, self.n - 1)
+            y = random.randint(0, self.n - 1)
+            arr[y][x] = 'X'
+            for i in range(-1, 2):
+                for j in range(-1, 2):
+                    if (x + i in range(self.n) and y + j in range(self.n)) and arr[y + j][x + i] != 'X':
+                        arr[y + j][x + i] += 1 if arr[y + j][x + i] != 'X' else 0
+                
+        return arr
+    
+    def generate_playerMap(self):
+        """
+        Generates the player's map for the Minesweeper game.
+
+        Returns:
+            list: A 2D list representing the player's visible grid.
+
+        Test cases:
+            # Test case 1: Description
+            assert generate_playerMap() == [['-', ...], ...]
+            
+            # Test case 2: Description
+            assert generate_playerMap() == [['-', ...], ...]
+            
+            # Test case 3: Description
+            assert generate_playerMap() == [['-', ...], ...]
+        """
+
+        arr = [['-' for _ in range(self.n)] for _ in range(self.n)]
+        return arr
+
+    def check_won(self, map):
+        """
+        Checks if the player has won the Minesweeper game.
+
+        Parameters:
+            map (list): The game map to compare against
+
+        Returns:
+            bool: True if the game is won, False otherwise.
+
+        Test cases:
+            # Test case 1: Description
+            assert check_won(game_map) == before_input
+            
+            # Test case 2: Description
+            assert check_won(game_map) == before_input
+            
+            # Test case 3: Description
+            assert check_won(game_map) == before_input
+        """
+        for i in range(self.n):
+            for j in range(self.n):
+                if map[i][j] == '-' and self.minesweeper_map[i][j] != 'X':
+                    return False
+        return True
+    
+    def sweep(self, x, y):
+        """
+        Executes a sweeping action in the Minesweeper game based on player input.
+
+        Parameters:
+            x (int): Index of the row
+            y (int): Index of the column
+
+        Returns:
+            Union[bool, list]: False if the player hits a mine, True if the game is won, else the updated player map.
+
+        Test cases:
+            # Test case 1: Description
+            assert sweep(0, 0) == flagged_map
+            
+            # Test case 2: Description
+            assert sweep(0, 0) == flagged_map
+            
+            # Test case 3: Description
+            assert sweep(0, 0) == flagged_map
+        """
+        if self.minesweeper_map[x][y] == 'X':
+            return False
+        else:
+            self.player_map[x][y] = self.minesweeper_map[x][y]
+            self.score += 1
+            if self.check_won(self.player_map):
+                return True
+            return self.player_map
+```

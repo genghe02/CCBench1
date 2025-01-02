@@ -1,0 +1,129 @@
+"""
+This class provides methods to calculate various statistical properties of a dataset such as correlation coefficient, skewness, kurtosis, and probability density function.
+"""
+
+import math
+
+class DataStatistics4:
+
+    @staticmethod
+    def correlation_coefficient(data1, data2):
+        """
+        Calculates the correlation coefficient between two datasets.
+
+        Parameters:
+            data1 (list): First dataset as a list of numbers.
+            data2 (list): Second dataset as a list of numbers. Must be the same length as data1.
+        
+        Returns:
+            float: The correlation coefficient. Ranges from -1 to 1, where 1 means perfect positive correlation, -1 means perfect negative correlation, and 0 means no correlation.
+        
+        Test cases:
+            # Test case 1: Perfect positive correlation
+            assert correlation_coefficient([1, 2, 3], [1, 2, 3]) == 1.0
+            
+            # Test case 2: Perfect negative correlation
+            assert correlation_coefficient([1, 2, 3], [3, 2, 1]) == -1.0
+            
+            # Test case 3: No correlation
+            assert correlation_coefficient([1, 2, 3], [2, 2, 2]) == 0.0
+        """
+        n = len(data1)
+        mean1 = sum(data1) / n
+        mean2 = sum(data2) / n
+
+        numerator = sum((data1[i] - mean1) * (data2[i] - mean2) for i in range(n))
+        denominator = math.sqrt(sum((data1[i] - mean1) ** 2 for i in range(n))) * math.sqrt(sum((data2[i] - mean2) ** 2 for i in range(n)))
+
+        return numerator / denominator if denominator != 0 else 0
+    
+    @staticmethod
+    def skewness(data):
+        """
+        Calculates the skewness of a dataset.
+
+        Parameters:
+            data (list): The dataset as a list of numbers.
+            
+        Returns:
+            float: The skewness of the dataset. Positive skewness indicates that data is skewed to the right, negative skewness indicates that data is skewed to the left, and zero skewness indicates symmetry.
+            
+        Test cases:
+            # Test case 1: Positive skewness
+            assert skewness([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) > 0
+            
+            # Test case 2: Negative skewness
+            assert skewness([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]) < 0
+            
+            # Test case 3: Zero skewness
+            assert skewness([1, 2, 3, 2, 1]) == 0
+        """
+        n = len(data)
+        mean = sum(data) / n
+        variance = sum((x - mean) ** 2 for x in data) / n
+        std_deviation = math.sqrt(variance)
+
+        skewness = sum((x - mean) ** 3 for x in data) * n / ((n - 1) * (n - 2) * std_deviation ** 3) if std_deviation != 0 else 0
+
+        return skewness
+    
+    @staticmethod
+    def kurtosis(data):
+        """
+        Calculates the kurtosis of a dataset.
+
+        Parameters:
+            data (list): The dataset as a list of numbers.
+            
+        Returns:
+            float: The kurtosis of the dataset. Positive kurtosis indicates a heavy-tailed distribution, negative kurtosis indicates a light-tailed distribution, and zero kurtosis indicates a normal distribution.
+            
+        Test cases:
+            # Test case 1: Positive kurtosis
+            assert kurtosis([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10]) > 0
+            
+            # Test case 2: Negative kurtosis
+            assert kurtosis([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) < 0
+            
+            # Test case 3: Zero kurtosis (approximately)
+            assert abs(kurtosis([1, 2, 3, 4, 5, 5, 4, 3, 2, 1])) < 0.01
+        """
+        n = len(data)
+        mean = sum(data) / n
+        std_dev = math.sqrt(sum((x - mean) ** 2 for x in data) / n)
+
+        if std_dev == 0:
+            return math.nan
+
+        centered_data = [(x - mean) for x in data]
+        fourth_moment = sum(x ** 4 for x in centered_data) / n
+
+        kurtosis_value = (fourth_moment / std_dev ** 4) - 3
+
+        return kurtosis_value
+    
+    @staticmethod
+    def pdf(data, mu, sigma):
+        """
+        Calculates the probability density function (pdf) of a dataset for a given mean and standard deviation.
+
+        Parameters:
+            data (list): The dataset as a list of numbers.
+            mu (float): The mean of the distribution.
+            sigma (float): The standard deviation of the distribution.
+            
+        Returns:
+            list: The pdf values corresponding to each data point in the dataset.
+            
+        Test cases:
+            # Test case 1: Normal distribution
+            assert pdf([1, 2, 3, 4, 5], 3, 1)
+            
+            # Test case 2: Wide distribution
+            assert pdf([1, 2, 3, 4, 5], 3, 2)
+            
+            # Test case 3: Narrow distribution
+            assert pdf([1, 2, 3, 4, 5], 3, 0.5)
+        """
+        pdf_values = [1 / (sigma * math.sqrt(2 * math.pi)) * math.exp(-0.5 * ((x - mu) / sigma) ** 2) for x in data]
+        return pdf_values

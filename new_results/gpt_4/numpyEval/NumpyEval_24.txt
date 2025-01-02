@@ -1,0 +1,1 @@
+# Add each element of array 'a' with twice of each element of array 'b' and store it in 'c'

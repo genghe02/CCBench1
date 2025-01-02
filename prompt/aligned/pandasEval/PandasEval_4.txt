@@ -1,0 +1,3 @@
+# Convert a list_of_lists, with the format [header, [row1], [row2], ...], to a DataFrame.
+# The header should be in the format [column1, column2, ...], and each row in the format [value1, value2, ...].
+# Return the resulting DataFrame.

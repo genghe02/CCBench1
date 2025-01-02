@@ -1,0 +1,4 @@
+# Extract words from a string that have exactly n consonants
+>>> select_words("hello there, how are you", 2) # ['hello', 'there', 'are']
+>>> select_words("python programming is fun", 3) # ['programming']
+>>> select_words("apple orange banana", 4) # []

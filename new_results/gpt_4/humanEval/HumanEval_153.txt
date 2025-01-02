@@ -1,0 +1,15 @@
+def Strongest_Extension(class_name, extensions):
+    # This function returns the strongest extension, the one with the most capital letters, for the given class name.
+    >>> Strongest_Extension("TestClass", ["txt", "PDF", "doc"]) # returns "TestClass.PDF"
+    >>> Strongest_Extension("MyClass", ["jpg", "PNG", "gif"]) # returns "MyClass.PNG"
+    >>> Strongest_Extension("AnotherClass", ["mp4", "AVI", "mkv"]) # returns "AnotherClass.AVI"
+    strong = extensions[0]
+    my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+    for s in extensions:
+        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+        if val > my_val:
+            strong = s
+            my_val = val
+
+    ans = class_name + "." + strong
+    return ans

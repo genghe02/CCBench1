@@ -1,0 +1,5 @@
+import pandas as pd
+
+df = pd.DataFrame({'line_date': [1, 2, 3], 'line_num': [1, 0, 6], 'line_text': list('abc')})
+# Filter the dataframe to include rows where line_num is not equal to 0
+n_df = df[df.line_num != 0]

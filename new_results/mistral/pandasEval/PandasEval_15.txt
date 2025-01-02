@@ -1,0 +1,2 @@
+ # Check if there are any NaN values in the dataframe
+return df.isna().sum().any()</s>

@@ -1,0 +1,28 @@
+ def maximum(arr, k):
+ # Find the top k elements in a sorted array.
+ if k == 0:
+ # Base case: when k is 0, return an empty list.
+ return []
+ arr.sort()
+ # Sort the array in ascending order.
+ ans = arr[-k:]
+ # Return the last k elements as the answer.
+ return ans
+
+ # Test cases:
+ >>> maximum([1, 2, 3, 4, 5], 2)
+ [4, 5]
+ >>> maximum([1, 2, 3, 4, 5], 3)
+ [5]
+ >>> maximum([1, 2, 3, 4, 5], 4)
+ [5]
+ >>> maximum([1, 2, 3, 4, 5], 5)
+ [5]
+ >>> maximum([1, 2, 3, 4, 5], 6)
+ [5]
+ >>> maximum([], 2)
+ []
+ >>> maximum([1], 1)
+ [1]
+ >>> maximum([1], 2)
+ [1]

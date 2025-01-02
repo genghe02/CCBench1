@@ -1,0 +1,14 @@
+def string_sequence(n: int) -> str:
+    # Generate a string sequence of numbers from 0 to n separated by spaces.
+    # This function takes an integer n as input and returns a string consisting of numbers from 0 to n separated by spaces.
+    
+    # Test Case 1: n = 5
+    # Expected Output: '0 1 2 3 4 5'
+    
+    # Test Case 2: n = 0
+    # Expected Output: '0'
+    
+    # Test Case 3: n = 10
+    # Expected Output: '0 1 2 3 4 5 6 7 8 9 10'
+    
+    return ' '.join([str(x) for x in range(n + 1)])

@@ -1,0 +1,120 @@
+ class ArgumentParser:
+    def __init__(self):
+        """
+        Initialize an ArgumentParser object.
+        """
+        self._parse_command_line_arguments()
+
+    def _parse_command_line_arguments(self):
+        """
+        Parse command line arguments and store them in the instance variables.
+        """
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    def parse_arguments(self, command_string):
+        """
+        Parse command line arguments from a given string and validate them.
+
+        :param command_string: str, a string containing command line arguments
+        :return: tuple, a tuple of two elements. The first element is a bool indicating success or failure. The second element is either a set of missing arguments or None.
+        """
+        args = self._parse_command_line_args_to_list(command_string)
+        parsed_args, missing_args = self._parse_args(args)
+
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    def _parse_command_line_args_to_list(self, command_string):
+        """
+        Parse command line arguments from a given string and return them as a list.
+
+        :param command_string: str, a string containing command line arguments
+        :return: list, a list of arguments
+        """
+        args = command_string.split()[1:]
+        return args
+
+    def _parse_args(self, args):
+        """
+        Parse each argument and store it in the instance variables.
+
+        :param args: list, a list of arguments
+        :return: tuple, a tuple of two elements. The first element is a dictionary containing parsed arguments. The second element is a set of missing arguments.
+        """
+        parsed_args = {}
+        missing_args = self.required - set(parsed_args.keys())
+
+        for arg in args:
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    parsed_args[key_value[0]] = self._convert_type(key_value[0], key_value[1])
+                else:
+                    parsed_args[key_value[0]] = True
+            elif arg.startswith('-'):
+                key = arg[1:]
+                if i + 1 < len(args) and not args[i + 1].startswith('-'):
+                    parsed_args[key] = self._convert_type(key, args[i + 1])
+                else:
+                    parsed_args[key] = True
+
+        return parsed_args, missing_args
+
+    def get_argument(self, key):
+        """
+        Get the value of a given argument.
+
+        :param key: str, the name of the argument
+        :return: Any, the value of the argument
+        """
+        return self.arguments.get(key)
+
+    def add_argument(self, arg, required=False, arg_type=str):
+        """
+        Add an argument to the parser with a given name and type.
+
+        :param arg: str, the name of the argument
+        :param required: bool, a flag indicating whether the argument is required or not
+        :param arg_type: type, the type of the argument
+        """
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    def _convert_type(self, arg, value):
+        """
+        Convert a given value to the type of a given argument.
+
+        :param arg: str, the name of the argument
+        :param value: Any, the value to be converted
+        :return: Any, the converted value
+        """
+        try:
+            return self.types[arg](value)
+        except (ValueError, KeyError):
+            return value
+
+<test cases>
+>>> parser = ArgumentParser()
+>>> parser.add_argument('--port', type=int)
+>>> parser.add_argument('--host', required=True)
+>>> parser.parse_arguments('--port 8000 --host localhost')
+(True, None)
+>>> parser.parse_arguments('--port 8000')
+(False, {'--host'})
+>>> parser.parse_arguments('--port 8000 --host localhost --port 8080')
+(False, {'--port'})
+>>> parser.parse_arguments('--port 8000 --host localhost --port 8080 --port 8088')
+(False, {'--port'})
+>>> parser.get_argument('--port')
+8000
+>>> parser.get_argument('--host')
+'localhost'
+>>> parser.get_argument('--non_existent')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: '--non_existent'

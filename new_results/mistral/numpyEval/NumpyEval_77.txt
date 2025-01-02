@@ -1,0 +1,2 @@
+ # Shift all elements in the array starting from the second element to the left
+z[1:] = z[:-1]</s>

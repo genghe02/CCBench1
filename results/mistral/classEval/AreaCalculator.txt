@@ -1,0 +1,63 @@
+ <description for whole class>
+# A class for calculating the areas of different geometric shapes such as circle, sphere, cylinder, sector, and annulus.
+
+class AreaCalculator:
+
+    def __init__(self, radius):
+        # Initialize the class with a given radius for calculating the areas of circular shapes.
+        <description for whole function>
+        # Initialize the instance variable 'radius' with the provided value.
+        self.radius = radius
+
+    def calculate_circle_area(self):
+        # Calculate the area of a circle with the given radius.
+        <description for whole function>
+        # No parameters for this function.
+        <description for return statement>
+        # Return the calculated area of the circle.
+        return math.pi * self.radius ** 2
+
+    def calculate_sphere_area(self):
+        # Calculate the surface area of a sphere with the given radius.
+        <description for whole function>
+        # No parameters for this function.
+        <description for return statement>
+        # Return the calculated surface area of the sphere.
+        return 4 * math.pi * self.radius ** 2
+
+    def calculate_cylinder_area(self, height):
+        # Calculate the total surface area of a cylinder with the given height and radius.
+        <description for whole function>
+        # Parameter 'height': the height of the cylinder.
+        <description for return statement>
+        # Return the calculated total surface area of the cylinder.
+        return 2 * math.pi * self.radius * (self.radius + height)
+
+    def calculate_sector_area(self, angle):
+        # Calculate the area of a sector of a circle with the given angle and radius.
+        <description for whole function>
+        # Parameter 'angle': the angle in degrees of the sector.
+        <description for return statement>
+        # Return the calculated area of the sector.
+        return self.radius ** 2 * angle / 2
+
+    def calculate_annulus_area(self, inner_radius, outer_radius):
+        # Calculate the area of the annulus (the region between two concentric circles) with the given inner and outer radii.
+        <description for whole function>
+        # Parameters 'inner_radius' and 'outer_radius': the inner and outer radii of the annulus, respectively.
+        <description for return statement>
+        # Return the calculated area of the annulus.
+        return math.pi * (outer_radius ** 2 - inner_radius ** 2)
+
+    <some test cases for the class>
+    >>> calc = AreaCalculator(5)
+    >>> calc.calculate_circle_area()
+    78.53981633974483
+    >>> calc.calculate_sphere_area()
+    125.66370614359175
+    >>> calc.calculate_cylinder_area(10)
+    101.10559017318365
+    >>> calc.calculate_sector_area(60)
+    78.53981633974483
+    >>> calc.calculate_annulus_area(3, 6)
+    28.274333882308138

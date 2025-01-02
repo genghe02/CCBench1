@@ -1,0 +1,7 @@
+import pandas as pd
+df = pd.DataFrame({'col': ["apple",
+                           "pear",
+                           "strawberry"]})
+targets = ['apple', 'banana']
+# Filter rows from the dataframe where 'col' values are in the 'targets' list
+result = df.loc[df['col'].isin(targets)]

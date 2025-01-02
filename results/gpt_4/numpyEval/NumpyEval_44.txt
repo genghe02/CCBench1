@@ -1,0 +1,1 @@
+# Multiply each row of array 'a' by each corresponding element in array 'b'. Achieved by reshaping 'b' using np.newaxis to align the dimensions for element-wise multiplication.

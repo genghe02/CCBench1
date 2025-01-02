@@ -1,0 +1,17 @@
+ # Find the index of the maximum element along the given axis using NumPy's argmax function.
+
+import numpy as np
+
+def get_index_max_element(arr, axis_value):
+    """
+    Find the index of the maximum element along a given axis in a NumPy array.
+
+    :param arr: The NumPy array.
+    :param axis_value: The axis along which to find the maximum element (default is 0, meaning along the flattened array).
+    :return: The index of the maximum element.
+    """
+
+    # Requirements for the code:
+    # Use NumPy's argmax function to find the index of the maximum element along the specified axis.
+
+    return np.argmax(arr, axis=axis_value)

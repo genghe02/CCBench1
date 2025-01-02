@@ -1,0 +1,22 @@
+```python
+from typing import List
+
+def factorize(n: int) -> List[int]:
+    # Return the prime factors of a given integer n
+    >>> factorize(10) # returns [2, 5]
+    >>> factorize(28) # returns [2, 2, 7]
+    >>> factorize(17) # returns [17]
+    import math
+    fact = []
+    i = 2
+    while i <= int(math.sqrt(n) + 1):
+        if n % i == 0:
+            fact.append(i)
+            n //= i
+        else:
+            i += 1
+
+    if n > 1:
+        fact.append(n)
+    return fact
+```

@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.arange(0,10)
+# Convert array elements to string and join with spaces
+a_string = " ".join(str(i) for i in a)

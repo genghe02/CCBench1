@@ -1,0 +1,86 @@
+```python
+"""
+This class simulates an automatic guitar player that interprets and plays chords and tunes from a given text input.
+"""
+
+class AutomaticGuitarSimulator:
+    def __init__(self, text) -> None:
+        """
+        Initializes the AutomaticGuitarSimulator with the provided text.
+
+        Parameters:
+            text (str): The input text containing chords and tunes to be played.
+        """
+        self.play_text = text
+
+    def interpret(self, display=False):
+        """
+        Interprets the input text to extract chords and tunes, and optionally displays the playing process.
+
+        Parameters:
+            display (bool): If True, displays the playing process for each chord and tune. Default is False.
+
+        Returns:
+            list: A list of dictionaries, each containing a chord and its corresponding tune.
+
+        Test cases:
+            # Test case 1: Normal input with display
+            simulator = AutomaticGuitarSimulator("C4 D5 E6")
+            expected_output = [{'Chord': 'C', 'Tune': '4'}, {'Chord': 'D', 'Tune': '5'}, {'Chord': 'E', 'Tune': '6'}]
+            assert simulator.interpret(display=True) == expected_output
+
+            # Test case 2: Empty input
+            simulator = AutomaticGuitarSimulator("")
+            expected_output = None
+            assert simulator.interpret() == expected_output
+
+            # Test case 3: Input with no tunes
+            simulator = AutomaticGuitarSimulator("C D E")
+            expected_output = [{'Chord': 'C', 'Tune': ''}, {'Chord': 'D', 'Tune': ''}, {'Chord': 'E', 'Tune': ''}]
+            assert simulator.interpret() == expected_output
+        """
+        if len(self.play_text) == 0:
+            return
+        else:
+            play_list = []
+            play_segs = self.play_text.split(" ")
+            for play_seg in play_segs:
+                pos = 0
+                for ele in play_seg:
+                    if ele.isalpha():
+                        pos += 1
+                        continue
+                    break
+                play_chord = play_seg[0:pos]
+                play_value = play_seg[pos:]
+                play_list.append({'Chord': play_chord, 'Tune': play_value})
+                if display:
+                    self.display(play_chord, play_value)
+            return play_list
+
+    def display(self, key, value):
+        """
+        Displays the playing process for a given chord and tune.
+
+        Parameters:
+            key (str): The chord to be played.
+            value (str): The tune to be played.
+
+        Returns:
+            str: A string describing the playing process.
+
+        Test cases:
+            # Test case 1: Normal input
+            simulator = AutomaticGuitarSimulator("C4")
+            assert simulator.display('C', '4') == "Normal Guitar Playing -- Chord: C, Play Tune: 4"
+
+            # Test case 2: Empty tune
+            simulator = AutomaticGuitarSimulator("C")
+            assert simulator.display('C', '') == "Normal Guitar Playing -- Chord: C, Play Tune: "
+
+            # Test case 3: Empty chord
+            simulator = AutomaticGuitarSimulator("4")
+            assert simulator.display('', '4') == "Normal Guitar Playing -- Chord: , Play Tune: 4"
+        """
+        return "Normal Guitar Playing -- Chord: %s, Play Tune: %s" % (key, value)
+```

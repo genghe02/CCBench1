@@ -1,0 +1,2 @@
+# Use a numpy vectorized version of the get function to map dictionary values to array elements
+out = np.vectorize(my_dict.get)(a)

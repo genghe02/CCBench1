@@ -1,0 +1,6 @@
+import pandas as pd
+
+df = pd.DataFrame({'A': [1, 2, 3],'B': [100, 300, 500],'C': list('abc')})
+
+# Drop columns 'A' and 'C' from the dataframe and assign the result to new_df
+new_df = df.drop(['A', 'C'], axis=1)

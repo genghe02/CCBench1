@@ -1,0 +1,84 @@
+"""
+This class provides methods to calculate basic statistical measures such as mean, median, and mode on a given dataset.
+"""
+
+from collections import Counter
+
+
+class DataStatistics:
+
+    def mean(self, data):
+        """
+        Method to calculate the arithmetic mean of the given list of numbers.
+
+        Parameters:
+            data (list): List of numbers to calculate the mean from.
+        
+        Returns:
+            float: The mean of the given list of numbers, rounded to 2 decimal places.
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert mean([1,2,3,4,5]) == 3.0
+            
+            # Test case 2: List with repeated numbers
+            assert mean([1,1,1,1,1]) == 1.0
+            
+            # Test case 3: List with negative numbers
+            assert mean([-1,-2,-3,-4,-5]) == -3.0
+        """
+        return round(sum(data) / len(data), 2)
+
+    def median(self, data):
+        """
+        Method to calculate the median of the given list of numbers.
+
+        Parameters:
+            data (list): List of numbers to calculate the median from.
+        
+        Returns:
+            float: The median of the given list of numbers. If the list has an even number of elements, the median is the average of the two middle numbers, rounded to 2 decimal places.
+            
+        Test cases:
+            # Test case 1: List with odd number of elements
+            assert median([1,2,3,4,5]) == 3.0
+            
+            # Test case 2: List with even number of elements
+            assert median([1,2,3,4,5,6]) == 3.5
+            
+            # Test case 3: List with negative numbers
+            assert median([-1,-2,-3,-4,-5]) == -3.0
+        """
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 0:
+            middle = n // 2
+            return round((sorted_data[middle - 1] + sorted_data[middle]) / 2, 2)
+        else:
+            middle = n // 2
+            return sorted_data[middle]
+
+    def mode(self, data):
+        """
+        Method to calculate the mode of the given list of numbers.
+
+        Parameters:
+            data (list): List of numbers to calculate the mode from.
+        
+        Returns:
+            list: The mode of the given list of numbers as a list. If there are multiple modes, all are returned in the list.
+            
+        Test cases:
+            # Test case 1: List with one mode
+            assert mode([1,2,2,3,4,5]) == [2]
+            
+            # Test case 2: List with multiple modes
+            assert mode([1,2,2,3,3,4,5]) == [2, 3]
+            
+            # Test case 3: List with no repeating numbers
+            assert mode([1,2,3,4,5]) == [1,2,3,4,5] # All numbers are the mode
+        """
+        counter = Counter(data)
+        mode_count = max(counter.values())
+        mode = [x for x, count in counter.items() if count == mode_count]
+        return mode

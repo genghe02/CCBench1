@@ -1,0 +1,144 @@
+```python
+"""
+This class provides utilities for paginating through a dataset with support for searching and retrieving page information.
+"""
+
+class PageUtil:
+    def __init__(self, data, page_size):
+        """
+        Initializes the PageUtil with the provided data and page size.
+
+        Parameters:
+            data (list): The list of data items to paginate.
+            page_size (int): The number of items to include on each page.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Regular data and page size
+            page_util = PageUtil([1, 2, 3, 4, 5], 2)
+            assert page_util.total_pages == 3
+
+            # Test case 2: Empty data
+            page_util = PageUtil([], 2)
+            assert page_util.total_pages == 0
+
+            # Test case 3: Large page size
+            page_util = PageUtil([1, 2, 3], 10)
+            assert page_util.total_pages == 1
+        """
+        self.data = data
+        self.page_size = page_size
+        self.total_items = len(data)
+        self.total_pages = (self.total_items + page_size - 1) // page_size
+
+    def get_page(self, page_number):
+        """
+        Retrieves a specific page of data based on the page number.
+
+        Parameters:
+            page_number (int): The page number to retrieve (1-based index).
+
+        Returns:
+            list: A list of items for the specified page, or an empty list if the page number is out of range.
+
+        Test cases:
+            # Test case 1: Valid page number
+            page_util = PageUtil([1, 2, 3, 4, 5], 2)
+            assert page_util.get_page(1) == [1, 2]
+
+            # Test case 2: Out of range (too high)
+            assert page_util.get_page(4) == []
+
+            # Test case 3: Out of range (too low)
+            assert page_util.get_page(0) == []
+        """
+        if page_number < 1 or page_number > self.total_pages:
+            return []
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = start_index + self.page_size
+        return self.data[start_index:end_index]
+
+    def get_page_info(self, page_number):
+        """
+        Provides detailed information about a specific page.
+
+        Parameters:
+            page_number (int): The page number to retrieve information for (1-based index).
+
+        Returns:
+            dict: A dictionary containing page information including the current page, items per page, total pages, 
+                  total items, and the items in the current page. If the page number is out of range, returns an 
+                  empty dictionary.
+
+        Test cases:
+            # Test case 1: Valid page number
+            page_util = PageUtil([1, 2, 3, 4, 5], 2)
+            page_info = page_util.get_page_info(1)
+            assert page_info["current_page"] == 1
+            assert page_info["data"] == [1, 2]
+
+            # Test case 2: Out of range (too high)
+            assert page_util.get_page_info(4) == {}
+
+            # Test case 3: Out of range (too low)
+            assert page_util.get_page_info(0) == {}
+        """
+        if page_number < 1 or page_number > self.total_pages:
+            return {}
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = min(start_index + self.page_size, self.total_items)
+        page_data = self.data[start_index:end_index]
+
+        page_info = {
+            "current_page": page_number,
+            "per_page": self.page_size,
+            "total_pages": self.total_pages,
+            "total_items": self.total_items,
+            "has_previous": page_number > 1,
+            "has_next": page_number < self.total_pages,
+            "data": page_data
+        }
+        return page_info
+
+    def search(self, keyword):
+        """
+        Searches for items in the data that contain the specified keyword.
+
+        Parameters:
+            keyword (str): The keyword to search for within the data items.
+
+        Returns:
+            dict: A dictionary containing the search keyword, total results found, total pages of results, and the 
+                  matched results.
+
+        Test cases:
+            # Test case 1: Keyword found
+            page_util = PageUtil(['apple', 'banana', 'cherry'], 2)
+            search_info = page_util.search('a')
+            assert search_info["total_results"] == 2
+            
+            # Test case 2: Keyword not found
+            search_info = page_util.search('z')
+            assert search_info["total_results"] == 0
+
+            # Test case 3: Empty data
+            page_util_empty = PageUtil([], 2)
+            search_info_empty = page_util_empty.search('apple')
+            assert search_info_empty["total_results"] == 0
+        """
+        results = [item for item in self.data if keyword in str(item)]
+        num_results = len(results)
+        num_pages = (num_results + self.page_size - 1) // self.page_size
+
+        search_info = {
+            "keyword": keyword,
+            "total_results": num_results,
+            "total_pages": num_pages,
+            "results": results
+        }
+        return search_info
+```

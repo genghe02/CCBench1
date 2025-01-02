@@ -1,0 +1,19 @@
+```python
+def remove_vowels(text):
+    # Remove all vowels (both uppercase and lowercase) from the given text.
+    # param text: str, the input text from which vowels need to be removed.
+    # return: str, the text with all vowels removed.
+    return "".join([s for s in text if s.lower() not in ["a", "e", "i", "o", "u"]])
+
+# Test cases for the function
+# >>> remove_vowels("hello world")
+# 'hll wrld'
+# >>> remove_vowels("Python Programming")
+# 'Pythn Prgrmmng'
+# >>> remove_vowels("AEIOUaeiou")
+# ''
+# >>> remove_vowels("")
+# ''
+# >>> remove_vowels("bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ")
+# 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ'
+```

@@ -1,0 +1,1 @@
+# Crop the input array 'arr' with the specified top, bottom, left, and right indices to extract a subarray.

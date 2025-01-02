@@ -1,0 +1,74 @@
+```python
+class PageUtil:
+    # This is a class for managing paginated data and performing operations on it.
+    
+    def __init__(self, data, page_size):
+        # Initialize a PageUtil instance with given data and page size.
+        # param data: list, the dataset to paginate
+        # param page_size: int, the number of items per page
+        self.data = data
+        self.page_size = page_size
+        self.total_items = len(data)
+        self.total_pages = (self.total_items + page_size - 1) // page_size
+
+    def get_page(self, page_number):
+        # Retrieve a specific page of data based on the page number.
+        # param page_number: int, the page number to retrieve
+        # return: list, the items on the specified page or an empty list if the page number is invalid
+        # Test cases: 
+        # >>> paginator = PageUtil(range(0, 100), 10)
+        # >>> paginator.get_page(1)  # Should return first 10 items
+        # >>> paginator.get_page(10)  # Should return last 10 items
+        # >>> paginator.get_page(11)  # Should return []
+        if page_number < 1 or page_number > self.total_pages:
+            return []
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = start_index + self.page_size
+        return self.data[start_index:end_index]
+
+    def get_page_info(self, page_number):
+        # Get detailed information about a specific page.
+        # param page_number: int, the page number for which to retrieve information
+        # return: dict, contains pagination info such as current page, total pages, and data or an empty dict if invalid
+        # Test cases:
+        # >>> paginator.get_page_info(1)  # Info for first page
+        # >>> paginator.get_page_info(5)  # Should provide info for the fifth page
+        # >>> paginator.get_page_info(11)  # Should return {}
+        if page_number < 1 or page_number > self.total_pages:
+            return {}
+
+        start_index = (page_number - 1) * self.page_size
+        end_index = min(start_index + self.page_size, self.total_items)
+        page_data = self.data[start_index:end_index]
+
+        page_info = {
+            "current_page": page_number,
+            "per_page": self.page_size,
+            "total_pages": self.total_pages,
+            "total_items": self.total_items,
+            "has_previous": page_number > 1,
+            "has_next": page_number < self.total_pages,
+            "data": page_data
+        }
+        return page_info
+
+    def search(self, keyword):
+        # Search for items in the data that contain the given keyword.
+        # param keyword: str, the keyword to search for in the dataset
+        # return: dict, contains search results including total results and pages
+        # Test cases:
+        # >>> paginator.search('3')  # Should return results containing '3'
+        # >>> paginator.search('x')  # Should return no results
+        results = [item for item in self.data if keyword in str(item)]
+        num_results = len(results)
+        num_pages = (num_results + self.page_size - 1) // self.page_size
+
+        search_info = {
+            "keyword": keyword,
+            "total_results": num_results,
+            "total_pages": num_pages,
+            "results": results
+        }
+        return search_info
+```

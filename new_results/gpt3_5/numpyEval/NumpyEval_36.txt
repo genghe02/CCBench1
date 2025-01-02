@@ -1,0 +1,4 @@
+import numpy as np
+
+# Select elements from the original array at positions 1 and 4
+result_arr = arr[[1, 4]]

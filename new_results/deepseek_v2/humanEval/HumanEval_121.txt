@@ -1,0 +1,10 @@
+```python
+def solution(lst):
+    # Return the sum of elements at even indices that are odd numbers
+    
+
+    >>> solution([1, 2, 3, 4, 5]) # returns 1 + 3 + 5 = 9
+    >>> solution([2, 4, 6, 8, 10]) # returns 0 (no odd numbers at even indices)
+    >>> solution([1, 3, 5, 7, 9]) # returns 1 + 5 + 9 = 15
+    return sum([x for idx, x in enumerate(lst) if idx%2==0 and x%2==1])
+```

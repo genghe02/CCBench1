@@ -1,0 +1,1 @@
+# Concatenate two input arrays and return the result as a single array

@@ -1,0 +1,81 @@
+ <description for whole class>
+# Class for managing a classroom with courses and their schedules
+
+class Classroom:
+    def __init__(self, id):
+        # Initialize a new classroom instance with the given id
+        <description for whole function>
+        self.id = id
+        self.courses = []
+
+    def add_course(self, course):
+        # Add a new course to the classroom's list of courses
+        <description for whole function>
+        <description for all parameters>
+        # param course: dict, a dictionary containing the course details, e.g., {'start_time': '14:30', 'end_time': '16:00'}
+
+        if course not in self.courses:
+            self.courses.append(course)
+
+    def remove_course(self, course):
+        # Remove an existing course from the classroom's list of courses
+        <description for whole function>
+        <description for all parameters>
+        # param course: dict, a dictionary containing the course details, e.g., {'start_time': '14:30', 'end_time': '16:00'}
+
+        if course in self.courses:
+            self.courses.remove(course)
+
+    def is_free_at(self, check_time):
+        # Check if the classroom is free at the given time
+        <description for whole function>
+        <description for all parameters>
+        # param check_time: str, a string representing the time to check, e.g., '14:30'
+
+        check_time = datetime.strptime(check_time, '%H:%M')
+
+        for course in self.courses:
+            start_time = datetime.strptime(course['start_time'], '%H:%M')
+            end_time = datetime.strptime(course['end_time'], '%H:%M')
+            if start_time <= check_time <= end_time:
+                return False
+        return True
+
+    def check_course_conflict(self, new_course):
+        # Check if adding a new course would cause a conflict with existing courses
+        <description for whole function>
+        <description for all parameters>
+        # param new_course: dict, a dictionary containing the new course details, e.g., {'start_time': '15:00', 'end_time': '16:30'}
+
+        new_start_time = datetime.strptime(new_course['start_time'], '%H:%M')
+        new_end_time = datetime.strptime(new_course['end_time'], '%H:%M')
+
+        flag = True
+        for course in self.courses:
+            start_time = datetime.strptime(course['start_time'], '%H:%M')
+            end_time = datetime.strptime(course['end_time'], '%H:%M')
+            if start_time <= new_start_time and end_time >= new_start_time:
+                flag = False
+            if start_time <= new_end_time and end_time >= new_end_time:
+                flag = False
+        return flag
+
+<some test cases for the class>
+# Test cases for the Classroom class
+
+test_classroom = Classroom(1)
+test_course1 = {'start_time': '10:00', 'end_time': '11:00'}
+test_course2 = {'start_time': '12:00', 'end_time': '13:00'}
+test_course3 = {'start_time': '14:00', 'end_time': '15:00'}
+test_course4 = {'start_time': '15:00', 'end_time': '16:00'}
+
+test_classroom.add_course(test_course1)
+test_classroom.add_course(test_course2)
+test_classroom.add_course(test_course3)
+
+assert test_classroom.is_free_at('11:30') is True
+assert test_classroom.is_free_at('13:30') is False
+assert test_classroom.check_course_conflict(test_course4) is False
+
+test_classroom.remove_course(test_course1)
+assert test_classroom.check_course_conflict(test_course4) is True

@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def select_rows_from_column(df, col_name, values):
+    # Select rows from the dataframe where the specified column matches given values
+    return df[df[col_name].isin(values)]
+```

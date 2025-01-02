@@ -1,0 +1,230 @@
+ """
+This class, AccessGatewayFilter, is responsible for filtering requests based on certain conditions and performing authentication and logging actions.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initializes an instance of the AccessGatewayFilter class with an empty portfolio and a given cash balance.
+
+        Parameters:
+            cash_balance (float): Initial cash balance for the stock portfolio
+        """
+        self.portfolio = []
+        self.cash_balance = cash_balance
+
+    def add_stock(self, stock):
+        """
+        Adds a stock to the portfolio if it doesn't already exist or if the desired quantity can be added to an existing stock.
+
+        Parameters:
+            stock (dict): Contains stock name and quantity details
+
+        Returns:
+            bool: True if the stock was added successfully, False otherwise
+
+        Test cases:
+            # Test case 1: Add existing stock
+            input = {"name": "AAPL", "quantity": 5}
+            stock_exists = {"name": "AAPL", "quantity": 10}
+            assert add_stock(input) == False
+            
+            # Test case 2: Add new stock
+            input = {"name": "MSFT", "quantity": 2}
+            expected_output = True
+            assert add_stock(input) == expected_output
+            
+            # Test case 3: Add existing stock with available balance
+            input = {"name": "AAPL", "quantity": 2}
+            expected_output = True
+            assert add_stock(input) == expected_output
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name']:
+                pf['quantity'] += stock['quantity']
+                return True
+
+        self.portfolio.append(stock)
+
+    def remove_stock(self, stock):
+        """
+        Removes the stock from the portfolio if it exists and has the specified quantity.
+
+        Parameters:
+            stock (dict): Contains stock name and desired quantity
+
+        Returns:
+            bool: True if the stock was removed successfully, False otherwise
+
+        Test cases:
+            # Test case 1: Remove stock without sufficient quantity
+            input = {"name": "AAPL", "quantity": 10}
+            existing_stock = {"name": "AAPL", "quantity": 5}
+            assert remove_stock(input) == False
+            
+            # Test case 2: Remove existing stock with sufficient quantity
+            input = {"name": "AAPL", "quantity": 5}
+            self.add_stock(input)
+            expected_output = True
+            assert remove_stock(input) == expected_output
+            
+            # Test case 3: Remove entire stock holding
+            input = {"name": "AAPL", "quantity": 10}
+            expected_output = True
+            self.add_stock(input)
+            assert remove_stock(input) == expected_output
+        """
+        for pf in self.portfolio:
+            if pf['name'] == stock['name'] and pf['quantity'] >= stock['quantity']:
+                pf['quantity'] -= stock['quantity']
+                if pf['quantity'] == 0:
+                    self.portfolio.remove(pf)
+                return True
+        return False
+
+    def buy_stock(self, stock):
+        """
+        Buys the specified stock if the cash balance is sufficient.
+
+        Parameters:
+            stock (dict): Contains stock name, desired quantity, and price per share
+
+        Returns:
+            bool: True if the stock was bought successfully, False otherwise
+
+        Test cases:
+            # Test case 1: Insufficient cash balance
+            input = {"name": "AAPL", "quantity": 5, "price": 100}
+            expected_output = False
+            assert buy_stock(input) == expected_output
+            
+            # Test case 2: Sufficient cash balance
+            input = {"name": "AAPL", "quantity": 5, "price": 50}
+            expected_output = True
+            cash_before = self.cash_balance
+            assert buy_stock(input) == expected_output
+            cash_after = self.cash_balance
+            assert cash_before - stock["price"] * stock["quantity"] == cash_after
+            
+            # Test case 3: Buy stock that already exists
+            input = {"name": "AAPL", "quantity": 5, "price": 50}
+            existing_stock = {"name": "AAPL", "quantity": 5}
+            assert self.add_stock(existing_stock) == True
+            assert self.cash_balance == self.cash_balance - stock["price"] * stock["quantity"]
+            assert buy_stock(input) == False
+        """
+        if stock['price'] * stock['quantity'] > self.cash_balance:
+            return False
+        else:
+            self.add_stock(stock)
+            self.cash_balance -= stock['price'] * stock['quantity']
+            return True
+
+    def sell_stock(self, stock):
+        """
+        Sells the specified stock if it exists and has the specified quantity.
+
+        Parameters:
+            stock (dict): Contains stock name and desired quantity
+
+        Returns:
+            bool: True if the stock was sold successfully, False otherwise
+
+        Test cases:
+            # Test case 1: Insufficient stock holding
+            input = {"name": "AAPL", "quantity": 10}
+            expected_output = False
+            assert sell_stock(input) == expected_output
+            
+            # Test case 2: Sufficient stock holding
+            input = {"name": "AAPL", "quantity": 5}
+            self.add_stock(input)
+            expected_output = True
+            cash_before = self.cash_balance
+            assert sell_stock(input) == expected_output
+            cash_after = self.cash_balance
+            assert cash_before + stock["price"] * stock["quantity"] == cash_after
+            
+            # Test case 3: Remove entire stock holding
+            input = {"name": "AAPL", "quantity": 10}
+            expected_output = True
+            self.add_stock(input)
+            assert sell_stock(input) == expected_output
+        """
+        if self.remove_stock(stock) == False:
+            return False
+        self.cash_balance += stock['price'] * stock['quantity']
+        return True
+
+    def calculate_portfolio_value(self):
+        """
+        Calculates the current value of the portfolio by summing the values of all stocks and the cash balance.
+
+        Returns:
+            float: The current portfolio value
+
+        Test cases:
+            # Test case 1: Empty portfolio
+            expected_output = 0
+            assert calculate_portfolio_value() == expected_output
+            
+            # Test case 2: Portfolio with stocks
+            input = {"name": "AAPL", "quantity": 5, "price": 100}
+            self.add_stock(input)
+            expected_output = 100 * 5 + self.cash_balance
+            assert calculate_portfolio_value() == expected_output
+            
+            # Test case 3: Portfolio with multiple stocks
+            input1 = {"name": "AAPL", "quantity": 5, "price": 100}
+            input2 = {"name": "GOOG", "quantity": 3, "price": 50}
+            self.add_stock(input1)
+            self.add_stock(input2)
+            expected_output = 100 * 5 + 50 * 3 + self.cash_balance
+            assert calculate_portfolio_value() == expected_output
+        """
+        total_value = self.cash_balance
+        for stock in self.portfolio:
+            total_value += stock['price'] * stock['quantity']
+        return total_value
+
+    def get_portfolio_summary(self):
+        """
+        Generates a summary of the current portfolio, including a list of stocks and the total portfolio value.
+
+        Returns:
+            tuple: A tuple containing the total portfolio value and the list of stock summaries
+
+        Test cases:
+            # Test case 1: Empty portfolio
+            expected_output = (0, [])
+            assert get_portfolio_summary() == expected_output
+            
+            # Test case 2: Portfolio with a single stock
+            input = {"name": "AAPL", "quantity": 5, "price": 100}
+            self.add_stock(input)
+            expected_output = (100 * 5 + self.cash_balance, [{"name": "AAPL", "value": 500}])
+            summary, portfolio_value = get_portfolio_summary()
+            assert summary == expected_output[1]
+            assert portfolio_value == expected_output[0]
+            
+            # Test case 3: Portfolio with multiple stocks
+            input1 = {"name": "AAPL", "quantity": 5, "price": 100}
+            input2 = {"name": "GOOG", "quantity": 3, "price": 50}
+            self.add_stock(input1)
+            self.add_stock(input2)
+            expected_output = (100 * 5 + 50 * 3 + self.cash_balance, [{"name": "AAPL", "value": 500}, {"name": "GOOG", "value": 150}])
+            summary, portfolio_value = get_portfolio_summary()
+            assert summary == expected_output[1]
+            assert portfolio_value == expected_output[0]
+        """
+        summary = []
+        for stock in self.portfolio:
+            value = self.get_stock_value(stock)
+            summary.append({"name": stock["name"], "value": value})
+        portfolio_value = self.calculate_portfolio_value()
+        return portfolio_value, summary</s>

@@ -1,0 +1,2 @@
+ # Apply dictionary function to each element of array using vectorized operation
+out = np.vectorize(my_dict.get)(a)</s>

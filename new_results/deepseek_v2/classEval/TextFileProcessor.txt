@@ -1,0 +1,139 @@
+```python
+"""
+This class provides functionality to process text files, including reading, writing, and processing file content.
+It supports reading files as plain text or JSON and allows for basic text processing operations.
+"""
+
+import json
+
+
+class TextFileProcessor:
+    def __init__(self, file_path):
+        """
+        Initializes the TextFileProcessor with the path to the file to be processed.
+
+        Parameters:
+            file_path (str): The path to the file to be processed.
+        """
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        """
+        Reads the file content and parses it as JSON.
+
+        Returns:
+            dict: The parsed JSON content of the file.
+
+        Test cases:
+            # Test case 1: Valid JSON file
+            processor = TextFileProcessor('valid.json')
+            assert processor.read_file_as_json() == {'key': 'value'}
+
+            # Test case 2: Invalid JSON file
+            processor = TextFileProcessor('invalid.json')
+            try:
+                processor.read_file_as_json()
+            except json.JSONDecodeError:
+                pass  # Expected behavior
+
+            # Test case 3: Non-existent file
+            processor = TextFileProcessor('nonexistent.json')
+            try:
+                processor.read_file_as_json()
+            except FileNotFoundError:
+                pass  # Expected behavior
+        """
+        with open(self.file_path, 'r') as file:
+            data = json.load(file)
+        return data
+
+    def read_file(self):
+        """
+        Reads the file content as plain text.
+
+        Returns:
+            str: The content of the file as a string.
+
+        Test cases:
+            # Test case 1: File with text content
+            processor = TextFileProcessor('text.txt')
+            assert processor.read_file() == 'Hello, World!'
+
+            # Test case 2: Empty file
+            processor = TextFileProcessor('empty.txt')
+            assert processor.read_file() == ''
+
+            # Test case 3: Non-existent file
+            processor = TextFileProcessor('nonexistent.txt')
+            try:
+                processor.read_file()
+            except FileNotFoundError:
+                pass  # Expected behavior
+        """
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write_file(self, content):
+        """
+        Writes the provided content to the file.
+
+        Parameters:
+            content (str): The content to write to the file.
+
+        Test cases:
+            # Test case 1: Write text to file
+            processor = TextFileProcessor('output.txt')
+            processor.write_file('Hello, World!')
+            with open('output.txt', 'r') as file:
+                assert file.read() == 'Hello, World!'
+
+            # Test case 2: Write empty content
+            processor = TextFileProcessor('output.txt')
+            processor.write_file('')
+            with open('output.txt', 'r') as file:
+                assert file.read() == ''
+
+            # Test case 3: Write to a read-only file
+            processor = TextFileProcessor('readonly.txt')
+            try:
+                processor.write_file('Hello')
+            except PermissionError:
+                pass  # Expected behavior
+        """
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+    def process_file(self):
+        """
+        Processes the file content by removing non-alphabetic characters and saving the result.
+
+        Returns:
+            str: The processed content of the file.
+
+        Test cases:
+            # Test case 1: File with mixed characters
+            processor = TextFileProcessor('mixed.txt')
+            processor.write_file('Hello, 123 World!')
+            assert processor.process_file() == 'HelloWorld'
+            with open('mixed.txt', 'r') as file:
+                assert file.read() == 'HelloWorld'
+
+            # Test case 2: File with only alphabetic characters
+            processor = TextFileProcessor('alpha.txt')
+            processor.write_file('HelloWorld')
+            assert processor.process_file() == 'HelloWorld'
+            with open('alpha.txt', 'r') as file:
+                assert file.read() == 'HelloWorld'
+
+            # Test case 3: Empty file
+            processor = TextFileProcessor('empty.txt')
+            processor.write_file('')
+            assert processor.process_file() == ''
+            with open('empty.txt', 'r') as file:
+                assert file.read() == ''
+        """
+        content = self.read_file()
+        content = ''.join([char for char in content if char.isalpha()])
+        self.write_file(content)
+        return content
+```

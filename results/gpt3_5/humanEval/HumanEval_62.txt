@@ -1,0 +1,9 @@
+def derivative(xs: list):
+    # Calculate the derivative of a polynomial represented by a list of coefficients.
+    # The derivative of a polynomial is obtained by multiplying each coefficient by its corresponding exponent and removing the constant term.
+    # Test Cases:
+    # >>> derivative([2, 3, 4])
+    # [3, 8]
+    # >>> derivative([1, 2, 3, 4])
+    # [2, 6, 12]
+    return [(i * x) for i, x in enumerate(xs)][1:]

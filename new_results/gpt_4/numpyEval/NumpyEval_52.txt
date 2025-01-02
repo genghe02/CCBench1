@@ -1,0 +1,6 @@
+import numpy as np
+
+# Sorting the 2D numpy array based on the second column and then the first column
+a = np.array([(3, 2), (6, 2), (3, 6), (3, 4), (5, 3)])
+ind = np.lexsort((a[:, 0], a[:, 1]))
+a = a[ind]

@@ -1,0 +1,31 @@
+Task: Replace ONLY the content within <> symbols in Python code. There are two types of replacements:
+1. <Requirements for the code> -> One line comment starting with #
+2. <some test cases for the function> -> Test cases in >>> format
+
+Input:
+def truncate_number(number: float) -> float:
+   <Requirements for the code>
+   <some test cases for the function>
+   return number % 1.0
+
+❌ Wrong Output:
+# This function truncates a float number
+# Returns only the decimal part
+def truncate_number(number: float) -> float:
+   >>> truncate_number(3.5)
+   return number % 1.0
+
+✅ Correct Output:
+
+def truncate_number(number: float) -> float:
+   # Return the decimal part of a float number by using modulo 1.0
+   >>> truncate_number(3.5) # returns 0.5
+   >>> truncate_number(-3.5) # returns 0.5
+   >>> truncate_number(0.0) # returns 0.0
+   return number % 1.0
+
+Rules:
+- Replace ONLY text inside <>
+- Keep all other code exactly as is
+- Requirements: ONE line starting with #
+- Test cases: Multiple >>> format lines

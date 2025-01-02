@@ -1,0 +1,3 @@
+# Compute value counts for a dataframe and reset the index with column names 'unique_values' and 'counts' 
+def get_value_counts(df):
+    return df.value_counts().rename_axis('unique_values').reset_index(name='counts')

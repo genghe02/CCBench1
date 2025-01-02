@@ -1,0 +1,6 @@
+import pandas as pd
+
+def convert_column_to_date(df):
+    # Convert the 'Date' column to datetime format
+    df["Date"] = pd.to_datetime(df.Date)
+    return df

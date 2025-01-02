@@ -1,0 +1,158 @@
+ """
+This class is used to handle and extract various components from a given URL.
+"""
+
+class URLHandler:
+
+    def __init__(self, url):
+        """
+        Initialize a new URLHandler instance with the given URL.
+
+        Parameters:
+            url (str): The URL to extract components from
+        """
+        self.url = url
+
+    def get_scheme(self):
+        """
+        Return the URL scheme (protocol).
+
+        Returns:
+            str: The URL scheme, or None if none is found
+
+        Test cases:
+            # Test case 1: HTTP scheme
+            url_handler = URLHandler("http://example.com")
+            assert url_handler.get_scheme() == "http"
+
+            # Test case 2: HTTPS scheme
+            url_handler = URLHandler("https://example.com")
+            assert url_handler.get_scheme() == "https"
+
+            # Test case 3: No scheme
+            url_handler = URLHandler("example.com")
+            assert url_handler.get_scheme() is None
+        """
+
+        scheme_end = self.url.find("://")
+        if scheme_end != -1:
+            return self.url[:scheme_end]
+        return None
+
+    def get_host(self):
+        """
+        Return the URL hostname or IP address.
+
+        Returns:
+            str: The URL host, or None if none is found
+
+        Test cases:
+            # Test case 1: Hostname
+            url_handler = URLHandler("http://example.com")
+            assert url_handler.get_host() == "example.com"
+
+            # Test case 2: IPv4 address
+            url_handler = URLHandler("http://192.168.1.1")
+            assert url_handler.get_host() == "192.168.1.1"
+
+            # Test case 3: No host
+            url_handler = URLHandler("http://")
+            assert url_handler.get_host() is None
+        """
+
+        scheme_end = self.url.find("://")
+        if scheme_end != -1:
+            url_without_scheme = self.url[scheme_end + 3:]
+            host_end = url_without_scheme.find("/")
+            if host_end != -1:
+                return url_without_scheme[:host_end]
+            return url_without_scheme
+        return None
+
+    def get_path(self):
+        """
+        Return the URL path.
+
+        Returns:
+            str: The URL path, or None if none is found
+
+        Test cases:
+            # Test case 1: Simple path
+            url_handler = URLHandler("http://example.com/path")
+            assert url_handler.get_path() == "/path"
+
+            # Test case 2: Empty path
+            url_handler = URLHandler("http://example.com")
+            assert url_handler.get_path() is None
+
+            # Test case 3: Path with query parameters
+            url_handler = URLHandler("http://example.com/path?param=value")
+            assert url_handler.get_path() == "/path"
+        """
+
+        scheme_end = self.url.find("://")
+        if scheme_end != -1:
+            url_without_scheme = self.url[scheme_end + 3:]
+            host_end = url_without_scheme.find("/")
+            if host_end != -1:
+                return url_without_scheme[host_end:]
+            return url_without_scheme
+        return None
+
+    def get_query_params(self):
+        """
+        Return any query parameters as a dictionary.
+
+        Returns:
+            dict: Query parameters or None if none are found
+
+        Test cases:
+            # Test case 1: Simple query parameters
+            url_handler = URLHandler("http://example.com/path?param1=value1&param2=value2")
+            assert url_handler.get_query_params() == {"param1": "value1", "param2": "value2"}
+
+            # Test case 2: Empty query string
+            url_handler = URLHandler("http://example.com/path")
+            assert url_handler.get_query_params() is None
+
+            # Test case 3: No query parameters in URL
+            url_handler = URLHandler("http://example.com/path")
+            assert url_handler.get_query_params() is None
+        """
+
+        query_start = self.url.find("?")
+        fragment_start = self.url.find("#")
+        if query_start != -1:
+            query_string = self.url[query_start + 1:fragment_start]
+            params = {}
+            if len(query_string) > 0:
+                param_pairs = query_string.split("&")
+                for pair in param_pairs:
+                    key_value = pair.split("=")
+                    if len(key_value) == 2:
+                        key, value = key_value
+                        params[key] = value
+            return params
+        return None
+
+    def get_fragment(self):
+        """
+        Return the URL fragment (anchor).
+
+        Returns:
+            str: The URL fragment or None if none is found
+
+        Test cases:
+            # Test case 1: Fragment present
+            url_handler = URLHandler("http://example.com/path#fragment")
+            assert url_handler.get_fragment() == "fragment"
+
+            # Test case 2: No fragment
+            url_handler = URLHandler("http://example.com/path")
+            assert url_handler.get_fragment() is None
+        """
+
+        fragment_start = self.url.find("#")
+        if fragment_start != -1:
+            return self.url[fragment_start + 1:]
+        return None</s>

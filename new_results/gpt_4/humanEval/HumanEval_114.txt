@@ -1,0 +1,16 @@
+def minSubArraySum(nums):
+    # This function returns the minimum sum of a subarray in the given list of numbers
+    >>> minSubArraySum([1,2,3,-7,2]) # returns -7
+    >>> minSubArraySum([2,-3,1,2,-4]) # returns -3
+    >>> minSubArraySum([3,-1,4,-2,5,-5,6,-2]) # returns -5
+    max_sum = 0
+    s = 0
+    for num in nums:
+        s += -num
+        if (s < 0):
+            s = 0
+        max_sum = max(s, max_sum)
+    if max_sum == 0:
+        max_sum = max(-i for i in nums)
+    min_sum = -max_sum
+    return min_sum

@@ -1,0 +1,9 @@
+# Find and return the word with the maximum number of unique characters
+
+>>> find_max(["hello", "world", "hi"]) # returns "world"
+>>> find_max(["python", "java", "ruby"]) # returns "python"
+>>> find_max(["cat", "dog", "elephant"]) # returns "elephant"
+
+def find_max(words):
+    # Find and return the word with the maximum number of unique characters
+    return sorted(words, key = lambda x: (-len(set(x)), x))[0]

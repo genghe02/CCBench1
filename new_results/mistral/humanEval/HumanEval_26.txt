@@ -1,0 +1,19 @@
+ # Ensure input list is iterable and consists of integers only
+ # Use a Counter from collections module to count the occurrences of numbers
+ # Return a list of numbers that appear only once
+ >>> numbers = [1, 2, 2, 3, 3, 4, 4, 5]
+ >>> remove_duplicates(numbers) # returns [1, 3, 4, 5]
+ >>> remove_duplicates([0]) # returns [0]
+ >>> remove_duplicates([]) # returns []
+
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    # Ensure input list is iterable and consists of integers only
+    if not isinstance(numbers, list) or not all(isinstance(num, int) for num in numbers):
+        raise TypeError("Input must be a list of integers")
+
+    # Use a Counter from collections module to count the occurrences of numbers
+    import collections
+    c = collections.Counter(numbers)
+
+    # Return a list of numbers that appear only once
+    return [n for n in numbers if c[n] <= 1]</s>

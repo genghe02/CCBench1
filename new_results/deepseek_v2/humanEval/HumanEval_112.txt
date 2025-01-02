@@ -1,0 +1,9 @@
+```python
+def reverse_delete(s,c):
+    # Remove characters in c from s and check if the resulting string is a palindrome
+    >>> reverse_delete("abcde", "ae") # returns ('bcd', False)
+    >>> reverse_delete("racecar", "rc") # returns ('aea', True)
+    >>> reverse_delete("hello", "l") # returns ('heo', False)
+    s = ''.join([char for char in s if char not in c])
+    return (s,s[::-1] == s)
+```

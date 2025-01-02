@@ -1,0 +1,8 @@
+# Find the greatest common divisor between two integers
+>>> greatest_common_divisor(12, 8) # returns 4
+>>> greatest_common_divisor(64, 24) # returns 8
+>>> greatest_common_divisor(17, 5) # returns 1
+def greatest_common_divisor(a: int, b: int) -> int:
+    while b:
+        a, b = b, a % b
+    return a

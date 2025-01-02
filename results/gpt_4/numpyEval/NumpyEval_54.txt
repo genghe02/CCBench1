@@ -1,0 +1,1 @@
+# Reshape the numpy array 'a' into a 2D array with one column, then slice the array from the fifth element to the end to create a new array 'b'.

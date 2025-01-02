@@ -1,0 +1,95 @@
+ """
+This class provides methods for interpolating 1D and 2D data using linear interpolation.
+"""
+
+import numpy as np
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method documentation.
+        """
+        pass
+
+    @staticmethod
+    def interpolate_1d(x, y, x_interp):
+        """
+        Interpolate 1D data given x, y data points and interpolation points.
+
+        Parameters:
+            x (ndarray): x data points
+            y (ndarray): y data points
+            x_interp (ndarray): interpolation points
+
+        Returns:
+            ndarray: Interpolated y values
+
+        Test cases:
+            # Test case 1: Interpolation of a single point
+            x = np.array([0])
+            y = np.array([1])
+            x_interp = np.array([0])
+            expected_output = np.array([1])
+            
+            # Test case 2: Interpolation of multiple points
+            x = np.array([0, 1, 2])
+            y = np.array([0, 1, 4])
+            x_interp = np.array([1.5, 2.5])
+            expected_output = np.array([1.25, 2.75])
+            
+            # Test case 3: Interpolation of a point outside the range
+            x = np.array([0, 1, 2])
+            y = np.array([0, 1, 4])
+            x_interp = np.array([3])
+            expected_output = np.array([np.nan])
+        """
+        y_interp = []
+        for xi in x_interp:
+            for i in range(len(x) - 1):
+                if x[i] <= xi <= x[i+1]:
+                    yi = y[i] + (y[i+1] - y[i]) * (xi - x[i]) / (x[i+1] - x[i])
+                    y_interp.append(yi)
+                    break
+        return np.array(y_interp)
+
+    @staticmethod
+    def interpolate_2d(x, y, z, x_interp, y_interp):
+        """
+        Interpolate 2D data given x, y, z data points and interpolation points.
+
+        Parameters:
+            x (ndarray): x data points
+            y (ndarray): y data points
+            z (ndarray): z data points
+            x_interp (ndarray): interpolation points in x
+            y_interp (ndarray): interpolation points in y
+
+        Returns:
+            ndarray: Interpolated z values
+
+        Test cases:
+            # Test case 1: Interpolation of a single 2D point
+            x = np.array([[0]])
+            y = np.array([[1]])
+            z = np.array([[1]])
+            x_interp = np.array([[0.5]])
+            y_interp = np.array([[0.5]])
+            expected_output = np.array([[1.0]])
+            
+            # Test case 2: Interpolation of multiple 2D points
+            x = np.array([[0, 1, 2], [3, 4, 5]])
+            y = np.array([[0, 1, 2], [3, 4, 5]])
+            z = np.array([[0, 1, 4], [10, 11, 12]])
+            x_interp = np.array([[1.5, 2.5], [3.5, 4.5]])
+            y_interp = np.array([[1.0, 2.0], [3.0, 4.0]])
+            expected_output = np.array([[1.75, 2.25], [9.75, 10.5]])
+            
+            # Test case 3: Interpolation of a point outside the range
+            x = np.array([[0, 1, 2], [3, 4, 5]])
+            y = np.array([[0, 1, 2], [3, 4, 5]])
+            z = np.array([[0, 1, 4], [10, 11, 12]])
+            x_interp = np.array([[6, 7]])
+            y_interp = np.array([[3, 4]])
+            expected_output = np.array([[np.nan, np.nan]])</s>

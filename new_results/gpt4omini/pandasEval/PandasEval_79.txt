@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+import numpy as np
+
+def display_rows_with_gt_1_nan(df):
+    # Filter rows where any column has NaN values
+    return df[df.isna().any(axis=1)]
+```

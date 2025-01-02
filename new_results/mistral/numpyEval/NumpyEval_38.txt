@@ -1,0 +1,2 @@
+ # Concatenate arrays horizontally along axis 0
+concatenated_arr = np.concatenate(L, axis=0)</s>

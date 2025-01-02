@@ -1,0 +1,2 @@
+ # Slice array based on given indices
+return arr[top:bottom, left:right]</s>

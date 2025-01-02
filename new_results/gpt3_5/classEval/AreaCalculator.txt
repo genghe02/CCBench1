@@ -1,0 +1,129 @@
+"""
+This class implements an Area Calculator that calculates area for various geometric shapes.
+"""
+
+import math
+
+
+class AreaCalculator:
+
+    def __init__(self, radius):
+        """
+        Initialize the AreaCalculator with the radius of the shape.
+
+        Parameters:
+            radius (float): The radius of the shape
+        """
+
+        self.radius = radius
+
+    def calculate_circle_area(self):
+        """
+        Calculate the area of a circle.
+
+        Returns:
+            float: The area of the circle
+        
+        Test cases:
+            # Test case 1: Circle with radius 5
+            assert calculate_circle_area() == math.pi * 25
+            
+            # Test case 2: Circle with radius 0
+            assert calculate_circle_area() == 0.0
+            
+            # Test case 3: Circle with radius 10
+            assert calculate_circle_area() == math.pi * 100
+        """
+
+        return math.pi * self.radius ** 2
+
+    def calculate_sphere_area(self):
+        """
+        Calculate the surface area of a sphere.
+
+        Returns:
+            float: The surface area of the sphere
+        
+        Test cases:
+            # Test case 1: Sphere with radius 5
+            assert calculate_sphere_area() == 4 * math.pi * 25
+            
+            # Test case 2: Sphere with radius 0
+            assert calculate_sphere_area() == 0.0
+            
+            # Test case 3: Sphere with radius 10
+            assert calculate_sphere_area() == 4 * math.pi * 100
+        """
+
+        return 4 * math.pi * self.radius ** 2
+
+    def calculate_cylinder_area(self, height):
+        """
+        Calculate the lateral area of a cylinder.
+
+        Parameters:
+            height (float): The height of the cylinder
+        
+        Returns:
+            float: The lateral area of the cylinder
+        
+        Test cases:
+            # Test case 1: Cylinder with radius 5 and height 10
+            assert calculate_cylinder_area(10) == 2 * math.pi * 5 * 15
+            
+            # Test case 2: Cylinder with radius 0 and height 5
+            assert calculate_cylinder_area(5) == 0.0
+            
+            # Test case 3: Cylinder with radius 10 and height 0
+            assert calculate_cylinder_area(0) == 0.0
+        """
+
+        return 2 * math.pi * self.radius * (self.radius + height)
+
+    def calculate_sector_area(self, angle):
+        """
+        Calculate the area of a sector of a circle.
+
+        Parameters:
+            angle (float): The central angle of the sector in radians
+        
+        Returns:
+            float: The area of the sector
+        
+        Test cases:
+            # Test case 1: Sector with radius 5 and angle 1
+            assert calculate_sector_area(1) == 12.5
+            
+            # Test case 2: Sector with radius 0 and angle 2
+            assert calculate_sector_area(2) == 0.0
+            
+            # Test case 3: Sector with radius 10 and angle pi
+            assert calculate_sector_area(math.pi) == 50.0
+        """
+
+        return self.radius ** 2 * angle / 2
+
+    def calculate_annulus_area(self, inner_radius, outer_radius):
+        """
+        Calculate the area of an annulus (ring).
+
+        Parameters:
+            inner_radius (float): The inner radius of the annulus
+            outer_radius (float): The outer radius of the annulus
+        
+        Returns:
+            float: The area of the annulus
+        
+        Test cases:
+            # Test case 1: Annulus with inner radius 2, outer radius 5
+            assert calculate_annulus_area(2, 5) == 3 * math.pi
+            
+            # Test case 2: Annulus with inner radius 3.5, outer radius 6.5
+            assert calculate_annulus_area(3.5, 6.5) == 9 * math.pi
+            
+            # Test case 3: Annulus with same inner and outer radius (circle)
+            assert calculate_annulus_area(4, 4) == 0.0
+        """
+
+        return math.pi * (outer_radius ** 2 - inner_radius ** 2)
+"""

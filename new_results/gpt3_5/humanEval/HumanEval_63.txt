@@ -1,0 +1,11 @@
+# This function calculates the nth Fibonacci number using the sum of three previous numbers
+>>> fibfib(0) # returns 0
+>>> fibfib(1) # returns 0
+>>> fibfib(2) # returns 1
+>>> fibfib(3) # returns 1
+>>> fibfib(4) # returns 2
+>>> fibfib(5) # returns 4
+>>> fibfib(6) # returns 7
+>>> fibfib(7) # returns 13
+>>> fibfib(8) # returns 24
+>>> fibfib(9) # returns 44

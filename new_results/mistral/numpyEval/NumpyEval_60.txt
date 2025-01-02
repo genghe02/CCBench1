@@ -1,0 +1,2 @@
+ # Find the index of the minimum value along the rows of x
+out = np.argmin(x, axis=0)</s>

@@ -1,0 +1,1 @@
+# Select a random sample of 50 rows from each group in the DataFrame based on the 'section' column using the groupby and sample functions.

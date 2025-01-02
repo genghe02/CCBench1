@@ -1,0 +1,12 @@
+ # Initialize a 5x5 NumPy array with all elements set to -1.
+
+import numpy as np
+
+<Requirements for the code>
+out = np.full((5, 5), -1.)
+<Requirements for the code>
+# Set specific elements to 0 efficiently using NumPy broadcasting.
+out[1:3, 2:4] = 0.
+# Alternatively, set specific elements to a given value using NumPy indexing.
+out[3, 3] = 0.
+out[4, 4] = 0.

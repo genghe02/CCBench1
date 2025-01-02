@@ -1,0 +1,98 @@
+```python
+"""
+This class represents a request for a person's details such as name, sex and phone number. It provides functionality to validate the details of the person.
+"""
+
+class PersonRequest:
+    def __init__(self, name: str, sex: str, phoneNumber: str):
+        """
+        Initialize the PersonRequest object.
+
+        Parameters:
+            name (str): The name of the person
+            sex (str): The sex of the person. It can be "Man", "Woman", or "UGM"
+            phoneNumber (str): The phone number of the person
+        
+        Returns:
+            None
+        """
+        self.name = self._validate_name(name)
+        self.sex = self._validate_sex(sex)
+        self.phoneNumber = self._validate_phoneNumber(phoneNumber)
+
+    def _validate_name(self, name: str) -> str:
+        """
+        Validate the name. If it is empty or exceeds 33 characters, return None.
+
+        Parameters:
+            name (str): The name to validate
+            
+        Returns:
+            str: The validated name or None if invalid
+            
+        Test cases:
+            # Test case 1: Normal name
+            assert _validate_name('John Doe') == 'John Doe'
+            
+            # Test case 2: Empty name
+            assert _validate_name('') == None
+            
+            # Test case 3: Long name
+            assert _validate_name('a'*34) == None
+        """
+        if not name:
+            return None
+        if len(name) > 33:
+            return None
+        return name
+
+    def _validate_sex(self, sex: str) -> str:
+        """
+        Validate the sex. If it is not "Man", "Woman", or "UGM", return None.
+
+        Parameters:
+            sex (str): The sex to validate
+            
+        Returns:
+            str: The validated sex or None if invalid
+            
+        Test cases:
+            # Test case 1: Normal sex
+            assert _validate_sex('Man') == 'Man'
+            
+            # Test case 2: Invalid sex
+            assert _validate_sex('Alien') == None
+            
+            # Test case 3: UGM sex
+            assert _validate_sex('UGM') == 'UGM'
+        """
+        if sex not in ["Man", "Woman", "UGM"]:
+            return None
+        return sex
+
+    def _validate_phoneNumber(self, phoneNumber: str) -> str:
+        """
+        Validate the phone number. If it is not 11 digits or contains non-digit characters, return None.
+
+        Parameters:
+            phoneNumber (str): The phone number to validate
+            
+        Returns:
+            str: The validated phone number or None if invalid
+            
+        Test cases:
+            # Test case 1: Normal phone number
+            assert _validate_phoneNumber('12345678901') == '12345678901'
+            
+            # Test case 2: Short phone number
+            assert _validate_phoneNumber('123') == None
+            
+            # Test case 3: Phone number with letters
+            assert _validate_phoneNumber('1234567890a') == None
+        """
+        if not phoneNumber:
+            return None
+        if len(phoneNumber) != 11 or not phoneNumber.isdigit():
+            return None
+        return phoneNumber
+```

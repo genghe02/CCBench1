@@ -1,0 +1,4 @@
+import numpy as np
+x = np.array([[0, 1], [3, 2]])
+# Find the indices of the minimum values along an axis in a Numpy array
+out = np.argmin(x, axis=0)

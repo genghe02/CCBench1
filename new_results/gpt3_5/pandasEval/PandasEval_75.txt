@@ -1,0 +1,2 @@
+# Create a new dataframe containing rows where 'x2' column values are NaN
+nan_df = df[df['x2'].isnull()]

@@ -1,0 +1,19 @@
+ # This function returns the prime factors of an integer
+ # Returns a list of prime factors
+def factorize(n: int) -> List[int]:
+    >>> factorize(4) # returns [2, 2]
+    >>> factorize(10) # returns [2, 2, 5]
+    >>> factorize(17) # returns [17]
+    import math
+    fact = []
+    i = 2
+    while i <= int(math.sqrt(n) + 1):
+        if n % i == 0:
+            fact.append(i)
+            n //= i
+        else:
+            i += 1
+
+    if n > 1:
+        fact.append(n)
+    return fact</s>

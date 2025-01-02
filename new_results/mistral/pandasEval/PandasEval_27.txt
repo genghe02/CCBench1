@@ -1,0 +1,2 @@
+ # Keep only rows where line_num is not equal to 0
+n_df = df[df.line_num != 0]</s>

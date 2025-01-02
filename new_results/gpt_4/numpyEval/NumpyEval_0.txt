@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.array([1, 1, 1, 1, 1, 2, 2, 2, 3, 4, 3, 4, 3, 4, 3, 4, 5, 5, 5])
+# Find the indices where the value changes in the array
+result = np.where(a[1:] != a[:-1])[0]

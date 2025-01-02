@@ -1,0 +1,2 @@
+ # Find the index of the minimum element in the 2x2 array A using its flattened index
+out = np.unravel_index(A.argmin(), A.shape)</s>

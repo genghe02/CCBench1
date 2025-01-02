@@ -1,0 +1,1 @@
+import pandas as pd\n\ndf1 = pd.DataFrame({'staff':[1,4], 'company':[100,301]})\ndf2 = pd.DataFrame({'person':[1,2], 'company':[100,300]})\n# Merge two dataframes on the 'company' column\nmerged_df = pd.merge(df1, df2, on='company')

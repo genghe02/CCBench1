@@ -1,0 +1,17 @@
+def specialFilter(nums):
+    # This function accepts a list of numbers and calculates how many of those numbers have the property that they are greater than 10, and both their first and last digits are odd.
+    # Test cases:
+    # >>> specialFilter([1, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29])
+    # >>> specialFilter([10, 20, 30, 40, 50])
+    # >>> specialFilter([11, 21, 31, 41, 51, 61, 71, 81, 91, 101])
+    
+    count = 0
+    for num in nums:
+        if num > 10:
+            odd_digits = (1, 3, 5, 7, 9)
+            number_as_string = str(num)
+            if int(number_as_string[0]) in odd_digits and int(number_as_string[-1]) in odd_digits:
+                count += 1
+        
+    return count 
+    # Returns the total number of numbers in the list that meet the conditions.

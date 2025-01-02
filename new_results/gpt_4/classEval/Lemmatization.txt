@@ -1,0 +1,106 @@
+"""
+This class is used for lemmatizing sentences. It also provides functionality to remove punctuations from sentences and get the part-of-speech (POS) tags of the words in the sentence.
+"""
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+import string
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+
+class Lemmatization:
+    def __init__(self):
+        """
+        Initializes the lemmatizer instance that will be used for lemmatizing words.
+        """
+        self.lemmatizer = WordNetLemmatizer()
+
+    def lemmatize_sentence(self, sentence):
+        """
+        Lemmatizes all the words in the given sentence.
+
+        Parameters:
+            sentence (str): The sentence whose words are to be lemmatized.
+        
+        Returns:
+            list: The list of lemmatized words.
+        
+        Test cases:
+            # Test case 1: Normal sentence
+            assert lemmatize_sentence('I am running') == ['I', 'be', 'run']
+            
+            # Test case 2: Sentence with punctuation
+            assert lemmatize_sentence('I am running!') == ['I', 'be', 'run']
+            
+            # Test case 3: Empty string
+            assert lemmatize_sentence('') == []
+        """
+        lemmatized_words = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for word, tag in tagged_words:
+            if tag.startswith('V'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='v')
+            elif tag.startswith('J'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='a')
+            elif tag.startswith('R'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='r')
+            else:
+                lemmatized_word = self.lemmatizer.lemmatize(word)
+            lemmatized_words.append(lemmatized_word)
+        return lemmatized_words
+
+    def get_pos_tag(self, sentence):
+        """
+        Returns the POS tag of each word in the sentence.
+
+        Parameters:
+            sentence (str): The sentence whose words' POS tags are to be returned.
+        
+        Returns:
+            list: The list of POS tags of the words in the sentence.
+        
+        Test cases:
+            # Test case 1: Normal sentence
+            assert get_pos_tag('I am running') == ['PRP', 'VBP', 'VBG']
+            
+            # Test case 2: Sentence with punctuation
+            assert get_pos_tag('I am running!') == ['PRP', 'VBP', 'VBG']
+            
+            # Test case 3: Empty string
+            assert get_pos_tag('') == []
+        """
+        pos_tags = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for tagged_word in tagged_words:
+            pos_tags.append(tagged_word[1])
+        return pos_tags
+
+    def remove_punctuation(self, sentence):
+        """
+        Removes all punctuation from the sentence.
+
+        Parameters:
+            sentence (str): The sentence from which punctuation is to be removed.
+        
+        Returns:
+            str: The sentence without punctuation.
+        
+        Test cases:
+            # Test case 1: Sentence with punctuation
+            assert remove_punctuation('Hello, world!') == 'Hello world'
+            
+            # Test case 2: Sentence without punctuation
+            assert remove_punctuation('Hello world') == 'Hello world'
+            
+            # Test case 3: Empty string
+            assert remove_punctuation('') == ''
+        """
+        return sentence.translate(str.maketrans('', '', string.punctuation))

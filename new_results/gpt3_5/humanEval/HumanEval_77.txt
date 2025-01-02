@@ -1,0 +1,23 @@
+Input:
+def iscube(a):
+    <Check if a is a perfect cube or not>
+    <Test the function with some numbers>
+    a = abs(a)
+    return int(round(a ** (1. / 3))) ** 3 == a
+
+❌ Wrong Output:
+# This function checks if a number is a perfect cube
+def iscube(a):
+    >>> iscube(27)
+    a = abs(a)
+    return int(round(a ** (1. / 3))) ** 3 == a
+
+Correct Output:
+
+def iscube(a):
+    # Check if a is a perfect cube or not
+    >>> iscube(27) # returns True
+    >>> iscube(64) # returns False
+    >>> iscube(729) # returns True
+    a = abs(a)
+    return int(round(a ** (1. / 3))) ** 3 == a

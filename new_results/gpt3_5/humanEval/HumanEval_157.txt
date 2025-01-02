@@ -1,0 +1,9 @@
+# Determine if the given side lengths form a right angle triangle
+>>> right_angle_triangle(3, 4, 5) # True
+>>> right_angle_triangle(5, 12, 13) # True
+>>> right_angle_triangle(1, 1, 1) # False
+>>> right_angle_triangle(3, 6, 9) # False
+def right_angle_triangle(a, b, c):
+    <Requirements for the code>
+    <some test cases for the function>
+    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b

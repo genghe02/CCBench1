@@ -1,0 +1,107 @@
+"""
+The class CSVProcessor provides methods to read, write and process data from CSV files.
+"""
+
+import csv
+
+
+class CSVProcessor:
+
+    def __init__(self):
+        """
+        Initialization method of the CSVProcessor class.
+        """
+        pass
+
+    def read_csv(self, file_name):
+        """
+        Read data from a CSV file.
+
+        Parameters:
+            file_name (str): The path of the CSV file to read from
+
+        Returns:
+            tuple: A tuple containing the title row as a list and the rest of the data as a list of lists
+
+        Test cases:
+            # Test case 1: Reading a basic CSV file
+            title, data = read_csv('test.csv')
+            # Expected output: title = ['Name', 'Age', 'Occupation'], data = [['John', '30', 'Engineer'], ['Jane', '25', 'Doctor']]
+
+            # Test case 2: Reading a non-existent file
+            title, data = read_csv('non_existent.csv')
+            # Expected output: FileNotFoundError
+
+            # Test case 3: Reading an empty CSV file
+            title, data = read_csv('empty.csv')
+            # Expected output: title = [], data = []
+        """
+        data = []
+        with open(file_name, 'r') as file:
+            reader = csv.reader(file)
+            title = next(reader)
+            for row in reader:
+                data.append(row)
+        return title, data
+
+    def write_csv(self, data, file_name):
+        """
+        Write data to a CSV file.
+
+        Parameters:
+            data (list): A list of lists containing the data to write to the CSV
+            file_name (str): The path of the CSV file to write to
+
+        Returns:
+            int: 1 if the write operation was successful, 0 otherwise
+
+        Test cases:
+            # Test case 1: Writing to a new CSV file
+            result = write_csv([['Name', 'Age', 'Occupation'], ['John', '30', 'Engineer'], ['Jane', '25', 'Doctor']], 'new.csv')
+            # Expected output: 1
+
+            # Test case 2: Writing to an existing file
+            result = write_csv([['Name', 'Age', 'Occupation'], ['John', '30', 'Engineer'], ['Jane', '25', 'Doctor']], 'existing.csv')
+            # Expected output: 1
+
+            # Test case 3: Writing to a non-writable file
+            result = write_csv([['Name', 'Age', 'Occupation'], ['John', '30', 'Engineer'], ['Jane', '25', 'Doctor']], '/root/non_writable.csv')
+            # Expected output: 0
+        """
+        try:
+            with open(file_name, 'w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(data)
+            return 1
+        except:
+            return 0
+
+    def process_csv_data(self, N, save_file_name):
+        """
+        Process the Nth column of a CSV file by converting all the data to uppercase and saving it to a new CSV file.
+
+        Parameters:
+            N (int): The index of the column to process
+            save_file_name (str): The path of the CSV file to process
+
+        Returns:
+            int: 1 if the processing and write operations were successful, 0 otherwise
+
+        Test cases:
+            # Test case 1: Processing a valid CSV file
+            result = process_csv_data(1, 'test.csv')
+            # Expected output: 1
+
+            # Test case 2: Processing a non-existent file
+            result = process_csv_data(1, 'non_existent.csv')
+            # Expected output: 0
+
+            # Test case 3: Processing a file with fewer columns than N
+            result = process_csv_data(5, 'test.csv')
+            # Expected output: 0
+        """
+        title, data = self.read_csv(save_file_name)
+        column_data = [row[N] for row in data]
+        column_data = [row.upper() for row in column_data]
+        new_data = [title, column_data]
+        return self.write_csv(new_data, save_file_name.split('.')[0] + '_process.csv')

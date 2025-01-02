@@ -1,0 +1,74 @@
+class JobMarketplace:
+    # This class represents a job marketplace where job listings and resumes can be managed.
+
+    def __init__(self):
+        self.job_listings = []
+        self.resumes = []
+        
+    def post_job(self, job_title, company, requirements):
+        # Posts a job listing with the given job title, company, and requirements.
+        # param job_title: str, the title of the job
+        # param company: str, the company offering the job
+        # param requirements: list, the requirements for the job
+        # return: None
+        # Test Case: post_job("Software Developer", "ABC Inc.", ['Python', 'Java'])
+        job = {"job_title": job_title, "company": company, "requirements": requirements}
+        self.job_listings.append(job)
+
+    def remove_job(self, job):
+        # Removes a job listing from the job marketplace.
+        # param job: dict, the job listing to be removed
+        # return: None
+        # Test Case: remove_job({"job_title": "Software Developer", "company": "ABC Inc.", "requirements": ['Python', 'Java']})
+        self.job_listings.remove(job)
+
+    def submit_resume(self, name, skills, experience):
+        # Submits a resume with the given name, skills, and experience.
+        # param name: str, the name of the applicant
+        # param skills: list, the skills of the applicant
+        # param experience: int, the years of experience of the applicant
+        # return: None
+        # Test Case: submit_resume("John Doe", ['Python', 'Java'], 3)
+        resume = {"name": name, "skills": skills, "experience": experience}
+        self.resumes.append(resume)
+
+    def withdraw_resume(self, resume):
+        # Withdraws a previously submitted resume from the job marketplace.
+        # param resume: dict, the resume to be withdrawn
+        # return: None
+        # Test Case: withdraw_resume({"name": "John Doe", "skills": ['Python', 'Java'], "experience": 3})
+        self.resumes.remove(resume)
+
+    def search_jobs(self, criteria):
+        # Searches for jobs in the marketplace based on the given criteria.
+        # param criteria: str, the search criteria for job titles or requirements
+        # return: list, a list of job listings that match the criteria
+        # Test Case: search_jobs("Software")
+        matching_jobs = []
+        for job_listing in self.job_listings:
+            if criteria.lower() in job_listing["job_title"].lower() or criteria.lower() in [r.lower() for r in job_listing["requirements"]]:
+                matching_jobs.append(job_listing)
+        return matching_jobs
+
+    def get_job_applicants(self, job):
+        # Retrieves applicants who match the requirements of a specific job listing.
+        # param job: dict, the job listing to match applicants against
+        # return: list, a list of resumes of applicants who match the job requirements
+        # Test Case: get_job_applicants({"job_title": "Software Developer", "company": "ABC Inc.", "requirements": ['Python', 'Java']})
+        applicants = []
+        for resume in self.resumes:
+            if self.matches_requirements(resume, job["requirements"]):
+                applicants.append(resume)
+        return applicants
+
+    @staticmethod
+    def matches_requirements(resume, requirements):
+        # Checks if a resume's skills match the job requirements.
+        # param resume: dict, the resume to check
+        # param requirements: list, the requirements to match against
+        # return: bool, True if the resume matches the requirements, False otherwise
+        # Test Case: matches_requirements({"name": "John Doe", "skills": ['Python', 'Java'], "experience": 3}, ['Python', 'Java'])
+        for skill in resume["skills"]:
+            if skill not in requirements:
+                return False
+        return True

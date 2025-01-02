@@ -1,0 +1,2 @@
+ # Create a DataFrame from a list of lists, with the first list as column names
+return pd.DataFrame(list_of_lists[1:], columns=list_of_lists[0])</s>

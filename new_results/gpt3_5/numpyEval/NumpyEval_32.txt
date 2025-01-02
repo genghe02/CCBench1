@@ -1,0 +1,2 @@
+# Calculate the number of rows in the broadcasted matrix
+nrows = ((a.size-L)//S)+1

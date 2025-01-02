@@ -1,0 +1,2 @@
+ # Assign the same value to all elements in the second column of matrix 'a'
+a[:, 1] = x</s>

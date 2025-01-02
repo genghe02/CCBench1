@@ -1,0 +1,10 @@
+def fruit_distribution(s,n):
+    # This function takes a string of space-separated numbers and an integer n, subtracts the sum of the numbers from n and returns the result
+    >>> fruit_distribution("2 3 4", 10) # returns 1
+    >>> fruit_distribution("1 1 1 1 1", 5) # returns 0
+    >>> fruit_distribution("10 20 30", 100) # returns 40
+    lis = list()
+    for i in s.split(' '):
+        if i.isdigit():
+            lis.append(int(i))
+    return n - sum(lis)

@@ -1,0 +1,2 @@
+# Creating a new 5x5 matrix initialized with -1.0 values
+out = np.full((5, 5), -1.)

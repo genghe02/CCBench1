@@ -1,0 +1,20 @@
+ def file_name_check(file_name):
+    # The function checks if a given file name is valid by checking if it has a valid extension and follows certain naming rules
+    >>> file_name_check('example.txt') # returns 'Yes'
+    >>> file_name_check('example123.txt') # returns 'Yes'
+    >>> file_name_check('example.py') # returns 'Yes'
+    >>> file_name_check('example12345.exe') # returns 'No'
+    suf = ['txt', 'exe', 'dll']
+    lst = file_name.split(sep='.')
+    if len(lst) != 2:
+        return 'No'
+    if not lst[1] in suf:
+        return 'No'
+    if len(lst[0]) == 0:
+        return 'No'
+    if not lst[0][0].isalpha():
+        return 'No'
+    t = len([x for x in lst[0] if x.isdigit()])
+    if t > 3:
+        return 'No'
+    return 'Yes'</s>

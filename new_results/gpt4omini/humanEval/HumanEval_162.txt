@@ -1,0 +1,17 @@
+Here��s the updated code with the appropriate replacements:
+
+```python
+def string_to_md5(text):
+    # Return the MD5 hash of the input string
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    >>> string_to_md5('Python') == '5d41402abc4b2a76b9719d911017c592'
+    >>> string_to_md5('') == None
+    >>> string_to_md5(None) == None
+    """
+    import hashlib
+    return hashlib.md5(text.encode('ascii')).hexdigest() if text else None
+``` 
+
+In the updates:
+- The content inside `<Requirements for the code>` was replaced with a one-line comment summarizing the function's purpose.
+- I added a few more test cases in the required `>>>` format under `<some test cases for the function>`.

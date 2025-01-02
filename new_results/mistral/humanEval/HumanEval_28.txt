@@ -1,0 +1,6 @@
+ # This function concatenates a list of strings
+ # Returns a single string as result
+>>> concatenate(["Hello", "World"]) # returns 'HelloWorld'
+>>> concatenate(["", "Apple"]) # returns 'Apple'
+>>> concatenate(["Hi", " there"]) # returns 'Hi there'
+return ''.join(strings)</s>

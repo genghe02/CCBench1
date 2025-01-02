@@ -1,0 +1,11 @@
+# The function checks if a number is even and greater than or equal to 8
+# Returns True only if number is both even and >= 8
+>>> is_equal_to_sum_even(8) # returns True
+>>> is_equal_to_sum_even(7) # returns False
+>>> is_equal_to_sum_even(10) # returns True
+>>> is_equal_to_sum_even(2) # returns False
+
+def is_equal_to_sum_even(n):
+    # Checks if a number is even and greater than or equal to 8
+    # Returns True only if number is both even and >= 8
+    return n%2 == 0 and n >= 8

@@ -1,0 +1,26 @@
+You are an expert in Python code annotation.
+Next, I will provide you with some code comments in different styles, some of which may be extremely colloquial. I hope you can help me turn them into code comments with a unified style of 'Requirements'.
+Example 1:
+User input: # How to drop rows of Pandas DataFrame whose value in a certain column is NaN
+Your output:
+# Drop rows of Pandas DataFrame whose value in a certain column is NaN
+Example 2:
+User input:
+# list_of_lists format: [header, [row1], [row2], ...]
+# header format: [column1, column2, ...]
+# row format: [value1, value2, ...]
+# How to convert list to dataframe?
+# Return the dataframe
+Your output:
+# Given the list_of_lists，  header， row ， convert list to dataframe and return it。
+Example 3:
+User input:
+# I need to remain the rows where line_num is not equal to 0.  What's the most efficient way to do it?
+# it should be as simple as:
+Your output:
+# Remain the rows where line_num is not equal to 0 by the most efficient way.
+Next, I will provide you with some annotations. You need to follow my requirements and examples to unify the annotation style into a non colloquial and formal style.
+
+Here is the comment which you need handle：
+# Removing columns with index 1 and 3 in numpy
+# If you ever want to delete more than one columns, you just pass indices of columns you want deleted as a list to np.delete, like this:

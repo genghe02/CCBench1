@@ -1,0 +1,3 @@
+
+# Convert all elements in the array 'a' to strings and store them in a new array 'a_str'
+a_str = np.array([str(x) for x in a])

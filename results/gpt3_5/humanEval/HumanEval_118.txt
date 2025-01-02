@@ -1,0 +1,22 @@
+def get_closest_vowel(word):
+    # Function to find the closest vowel to a consonant in a given word.
+
+    # Test cases for the function
+    # Test Case 1: Short word, returns empty string
+    assert get_closest_vowel("a") == ""
+    # Test Case 2: Word with vowels but no valid consonant, returns empty string
+    assert get_closest_vowel("aeiou") == ""
+    # Test Case 3: Word with consonant surrounded by vowels, returns the closest vowel
+    assert get_closest_vowel("hello") == "e"
+    # Test Case 4: Word with consonant at the beginning, returns the closest vowel
+    assert get_closest_vowel("world") == "o"
+
+    if len(word) < 3:
+        return ""
+
+    vowels = {"a", "e", "i", "o", "u", "A", "E", 'O', 'U', 'I'}
+    for i in range(len(word)-2, 0, -1):
+        if word[i] in vowels:
+            if (word[i+1] not in vowels) and (word[i-1] not in vowels):
+                return word[i]
+    return ""

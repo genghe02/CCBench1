@@ -1,0 +1,2 @@
+ # Extract specified indices from NumPy array and assign the result to a new array
+result_arr = arr[[1, 4]]</s>

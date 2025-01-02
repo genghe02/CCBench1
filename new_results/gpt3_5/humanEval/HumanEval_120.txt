@@ -1,0 +1,14 @@
+# Find the maximum k elements from a list
+>>> maximum([4, 2, 8, 3, 9, 1], 3) # returns [4, 8, 9]
+>>> maximum([4, 2, 8, 3, 9, 1], 2) # returns [8, 9]
+>>> maximum([4, 2, 8, 3, 9, 1], 0) # returns []
+def maximum(arr, k):
+    # Find the maximum k elements from a list
+    >>> maximum([4, 2, 8, 3, 9, 1], 3) # returns [4, 8, 9]
+    >>> maximum([4, 2, 8, 3, 9, 1], 2) # returns [8, 9]
+    >>> maximum([4, 2, 8, 3, 9, 1], 0) # returns []
+    if k == 0:
+        return []
+    arr.sort()
+    ans = arr[-k:]
+    return ans

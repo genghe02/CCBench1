@@ -1,0 +1,193 @@
+```python
+"""
+The class CamelCaseMap provides a dictionary-like interface that converts keys to camel case format when accessing or modifying the stored data.
+"""
+
+class CamelCaseMap:
+    def __init__(self):
+        """
+        Initializes a new instance of the CamelCaseMap class, setting up an internal dictionary to store the mapped data.
+
+        This constructor does not take any parameters and initializes the internal data structure.
+        """
+        self._data = {}
+
+    def __getitem__(self, key):
+        """
+        Retrieves the value associated with the given key after converting the key to camel case.
+
+        Parameters:
+            key (str): The key to look up in the map, which will be converted to camel case.
+
+        Returns:
+            Any: The value associated with the camel case version of the key.
+
+        Test cases:
+            # Test case 1: Normal usage
+            cmap = CamelCaseMap()
+            cmap['example_key'] = 'value'
+            assert cmap['example_key'] == 'value'
+            
+            # Test case 2: Edge case with key in camel case
+            assert cmap['exampleKey'] == 'value'
+            
+            # Test case 3: Key not found
+            try:
+                value = cmap['non_existent_key']
+            except KeyError:
+                assert True
+        """
+        return self._data[self._convert_key(key)]
+
+    def __setitem__(self, key, value):
+        """
+        Sets the value for the given key after converting the key to camel case.
+
+        Parameters:
+            key (str): The key to store, which will be converted to camel case.
+            value (Any): The value to associate with the converted key.
+
+        Test cases:
+            # Test case 1: Normal usage
+            cmap = CamelCaseMap()
+            cmap['example_key'] = 'value'
+            assert cmap['example_key'] == 'value'
+            
+            # Test case 2: Overwriting an existing key
+            cmap['example_key'] = 'new_value'
+            assert cmap['example_key'] == 'new_value'
+            
+            # Test case 3: Using camel case key
+            cmap['exampleKey'] = 'another_value'
+            assert cmap['exampleKey'] == 'another_value'
+        """
+        self._data[self._convert_key(key)] = value
+
+    def __delitem__(self, key):
+        """
+        Deletes the value associated with the given key after converting the key to camel case.
+
+        Parameters:
+            key (str): The key to remove from the map, which will be converted to camel case.
+
+        Test cases:
+            # Test case 1: Normal usage
+            cmap = CamelCaseMap()
+            cmap['example_key'] = 'value'
+            del cmap['example_key']
+            try:
+                value = cmap['example_key']
+            except KeyError:
+                assert True
+            
+            # Test case 2: Deleting a camel case key
+            cmap['exampleKey'] = 'value'
+            del cmap['exampleKey']
+            try:
+                value = cmap['exampleKey']
+            except KeyError:
+                assert True
+            
+            # Test case 3: Key not found
+            try:
+                del cmap['non_existent_key']
+                assert True
+            except KeyError:
+                assert False
+        """
+        del self._data[self._convert_key(key)]
+
+    def __iter__(self):
+        """
+        Returns an iterator over the keys of the CamelCaseMap, with keys in camel case format.
+
+        Returns:
+            Iterator: An iterator over the keys in the map.
+
+        Test cases:
+            # Test case 1: Iterating over keys
+            cmap = CamelCaseMap()
+            cmap['example_key'] = 'value'
+            keys = list(iter(cmap))
+            assert 'exampleKey' in keys
+            
+            # Test case 2: Empty map iteration
+            cmap = CamelCaseMap()
+            keys = list(iter(cmap))
+            assert len(keys) == 0
+            
+            # Test case 3: Multiple keys
+            cmap['first_key'] = '1'
+            cmap['second_key'] = '2'
+            keys = list(iter(cmap))
+            assert set(keys) == {'firstKey', 'secondKey'}
+        """
+        return iter(self._data)
+
+    def __len__(self):
+        """
+        Returns the number of items in the CamelCaseMap.
+
+        Returns:
+            int: The number of items (key-value pairs) in the map.
+
+        Test cases:
+            # Test case 1: Length of empty map
+            cmap = CamelCaseMap()
+            assert len(cmap) == 0
+            
+            # Test case 2: Length after adding items
+            cmap['example_key'] = 'value'
+            assert len(cmap) == 1
+            
+            # Test case 3: Length after removing items
+            del cmap['example_key']
+            assert len(cmap) == 0
+        """
+        return len(self._data)
+
+    def _convert_key(self, key):
+        """
+        Converts the provided key to camel case if it is a string.
+
+        Parameters:
+            key (Any): The key to be converted.
+
+        Returns:
+            Any: The converted key in camel case if it is a string; otherwise returns the key unchanged.
+
+        Test cases:
+            # Test case 1: Standard key conversion
+            assert self._convert_key('example_key') == 'exampleKey'
+            
+            # Test case 2: Already in camel case
+            assert self._convert_key('exampleKey') == 'exampleKey'
+            
+            # Test case 3: Non-string key
+            assert self._convert_key(100) == 100
+        """
+        if isinstance(key, str):
+            return self._to_camel_case(key)
+        return key
+
+    @staticmethod
+    def _to_camel_case(key):
+        """
+        Converts a snake_case string to camelCase.
+
+        Parameters:
+            key (str): The string in snake_case format to convert.
+
+        Returns:
+            str: The converted string in camelCase format.
+
+        Test cases:
+            # Test case 1: Basic conversion
+            assert self._to_camel_case('example_key') == 'exampleKey'
+            
+            # Test case 2: Multiple underscores
+            assert self._to_camel_case('this_is_a_test') == 'thisIsATest'
+            
+            # Test case 3: Leading and trailing underscores
+            assert self._to_camel_case('_leading_and_trailing_') == 'LeadingAndTrailing'
+```

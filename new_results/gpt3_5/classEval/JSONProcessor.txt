@@ -1,0 +1,99 @@
+"""
+This class implements functionalities to read, write, and process JSON files.
+
+The class provides methods to read JSON data from a file, write JSON data to a file, and process JSON data by removing specific keys.
+"""
+
+import json
+import os
+
+
+class JSONProcessor:
+    def read_json(self, file_path):
+        """
+        Method to read JSON data from a file.
+
+        Parameters:
+            file_path (str): Path to the JSON file
+
+        Returns:
+            dict: JSON data read from the file or error codes (-1 if read error, 0 if file not found)
+
+        Test cases:
+            # Test case 1: Normal read
+            assert read_json('data.json') == {'key': 'value'}
+            
+            # Test case 2: File not found
+            assert read_json('missing.json') == 0
+            
+            # Test case 3: Read error
+            assert read_json('corrupted.json') == -1
+        """
+        if not os.path.exists(file_path):
+            return 0
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            return data
+        except:
+            return -1
+
+    def write_json(self, data, file_path):
+        """
+        Method to write JSON data to a file.
+
+        Parameters:
+            data (dict): JSON data to write
+            file_path (str): Path to the output JSON file
+
+        Returns:
+            int: Status code indicating success (1) or error (-1)
+
+        Test cases:
+            # Test case 1: Normal write
+            assert write_json({'key': 'value'}, 'output.json') == 1
+            
+            # Test case 2: Write error
+            assert write_json({'key': 'value'}, 'path/to/nonwritable.json') == -1
+            
+            # Test case 3: Invalid data format
+            assert write_json('not_a_dict', 'output.json') == -1
+        """
+        try:
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return 1
+        except:
+            return -1
+
+    def process_json(self, file_path, remove_key):
+        """
+        Method to process JSON data by removing a specified key.
+
+        Parameters:
+            file_path (str): Path to the JSON file to process
+            remove_key (str): Key to be removed from the JSON data
+
+        Returns:
+            int: Status code indicating success (1), no key found (0), or error (-1)
+
+        Test cases:
+            # Test case 1: Key removal successful
+            assert process_json('data.json', 'key_to_remove') == 1
+            
+            # Test case 2: Key not found
+            assert process_json('data.json', 'non_existing_key') == 0
+            
+            # Test case 3: Process error
+            assert process_json('invalid_data.json', 'key_to_remove') == -1
+        """
+        data = self.read_json(file_path)  # Read the JSON data from the file
+        if data == 0 or data == -1:
+            return data
+        if remove_key in data:
+            del data[remove_key]
+            self.write_json(data, file_path)
+            return 1
+        else:
+            return 0
+"""

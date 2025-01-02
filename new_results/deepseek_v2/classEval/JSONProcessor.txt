@@ -1,0 +1,112 @@
+```python
+"""
+This class provides functionality to read, write, and process JSON files. It includes methods to handle JSON data, such as reading from a file, writing to a file, and modifying JSON data by removing specific keys.
+"""
+
+import json
+import os
+
+
+class JSONProcessor:
+    def read_json(self, file_path):
+        """
+        Reads JSON data from a specified file.
+
+        Parameters:
+            file_path (str): The path to the JSON file to be read.
+
+        Returns:
+            dict or int: Returns the JSON data as a dictionary if successful. 
+                        Returns 0 if the file does not exist.
+                        Returns -1 if an error occurs during reading.
+
+        Test cases:
+            # Test case 1: Successful read
+            input = 'existing_file.json'
+            expected_output = {'key': 'value'}
+
+            # Test case 2: File does not exist
+            input = 'non_existent_file.json'
+            expected_output = 0
+
+            # Test case 3: Error during reading
+            input = 'corrupted_file.json'
+            expected_output = -1
+        """
+        if not os.path.exists(file_path):
+            return 0
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            return data
+        except:
+            return -1
+
+    def write_json(self, data, file_path):
+        """
+        Writes JSON data to a specified file.
+
+        Parameters:
+            data (dict): The JSON data to be written.
+            file_path (str): The path to the file where the JSON data will be written.
+
+        Returns:
+            int: Returns 1 if the write operation is successful.
+                 Returns -1 if an error occurs during writing.
+
+        Test cases:
+            # Test case 1: Successful write
+            input_data = {'key': 'value'}
+            input_file_path = 'output_file.json'
+            expected_output = 1
+
+            # Test case 2: Error during writing
+            input_data = {'key': 'value'}
+            input_file_path = '/invalid_path/output_file.json'
+            expected_output = -1
+        """
+        try:
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return 1
+        except:
+            return -1
+
+    def process_json(self, file_path, remove_key):
+        """
+        Processes a JSON file by removing a specified key from the JSON data.
+
+        Parameters:
+            file_path (str): The path to the JSON file to be processed.
+            remove_key (str): The key to be removed from the JSON data.
+
+        Returns:
+            int: Returns 1 if the key is successfully removed and the file is updated.
+                 Returns 0 if the file does not exist, cannot be read, or the key does not exist.
+
+        Test cases:
+            # Test case 1: Successful key removal
+            input_file_path = 'existing_file.json'
+            input_remove_key = 'key_to_remove'
+            expected_output = 1
+
+            # Test case 2: Key does not exist
+            input_file_path = 'existing_file.json'
+            input_remove_key = 'non_existent_key'
+            expected_output = 0
+
+            # Test case 3: File does not exist
+            input_file_path = 'non_existent_file.json'
+            input_remove_key = 'key_to_remove'
+            expected_output = 0
+        """
+        data = self.read_json(file_path)
+        if data == 0 or data == -1:
+            return 0
+        if remove_key in data:
+            del data[remove_key]
+            self.write_json(data, file_path)
+            return 1
+        else:
+            return 0
+```

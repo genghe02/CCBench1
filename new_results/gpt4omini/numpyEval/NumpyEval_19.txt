@@ -1,0 +1,1 @@
+import numpy as np\n\n# Importing the numpy library for numerical operations\nout = np.full((5, 5), -1.)

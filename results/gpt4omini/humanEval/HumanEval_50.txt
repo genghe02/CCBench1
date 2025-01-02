@@ -1,0 +1,9 @@
+```python
+def encode_shift(s: str):
+    # This function encodes a given string by shifting each character 5 positions forward in the alphabet.
+    return "".join([chr(((ord(ch) + 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+def decode_shift(s: str):
+    # This function decodes a given string by shifting each character 5 positions backward in the alphabet.
+    return "".join([chr(((ord(ch) - 5 - ord("a")) % 26) + ord("a")) for ch in s])
+```

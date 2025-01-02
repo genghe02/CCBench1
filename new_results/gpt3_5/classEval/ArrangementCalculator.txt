@@ -1,0 +1,149 @@
+"""
+This class provides methods for calculating various arrangements and permutations.
+
+The class `ArrangementCalculator` performs different arrangement calculations on a given dataset.
+"""
+
+import itertools
+
+
+class ArrangementCalculator:
+    def __init__(self, datas):
+        """
+        Initialize the ArrangementCalculator object with data.
+
+        Parameters:
+            datas (list): A list of elements for arrangement calculations
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n, m=None):
+        """
+        Calculates the number of arrangements without repetition.
+
+        Parameters:
+            n (int): Total number of elements.
+            m (int, optional): Number of elements to arrange. If not provided, all elements (n) are arranged.
+
+        Returns:
+            int: Number of possible arrangements.
+
+        Test cases:
+            # Test case 1: Normal case with all elements arranged
+            assert count(3) == 6
+            
+            # Test case 2: Normal case with limited elements arranged
+            assert count(5, 2) == 20
+            
+            # Test case 3: Edge case where n is small
+            assert count(2, 2) == 2
+        """
+        if m is None or n == m:
+            return ArrangementCalculator.factorial(n)
+        else:
+            return ArrangementCalculator.factorial(n) // ArrangementCalculator.factorial(n - m)
+
+    @staticmethod
+    def count_all(n):
+        """
+        Calculates the total number of possible arrangements for all possible cases.
+
+        Parameters:
+            n (int): Total number of elements.
+
+        Returns:
+            int: Total number of possible arrangements for all cases.
+
+        Test cases:
+            # Test case 1: Normal case with multiple elements
+            assert count_all(3) == 24
+            
+            # Test case 2: Edge case with a small number of elements
+            assert count_all(2) == 4
+            
+            # Test case 3: Edge case with a single element
+            assert count_all(1) == 1
+        """
+        total = 0
+        for i in range(1, n + 1):
+            total += ArrangementCalculator.count(n, i)
+        return total
+
+    def select(self, m=None):
+        """
+        Generates arrangements of elements.
+
+        Parameters:
+            m (int, optional): Number of elements to select. If not provided, all elements are selected.
+
+        Returns:
+            list: List of arrangements based on the selection criteria.
+
+        Test cases:
+            # Test case 1: Normal case with some elements selected
+            ac = ArrangementCalculator(['A', 'B', 'C'])
+            assert ac.select(2) == [['A', 'B'], ['A', 'C'], ['B', 'A'], ['B', 'C'], ['C', 'A'], ['C', 'B']]
+            
+            # Test case 2: Edge case with one element selected
+            assert ac.select(1) == [['A'], ['B'], ['C']]
+            
+            # Test case 3: Edge case selecting all elements
+            assert ac.select() == ac.select_all()
+        """
+        if m is None:
+            m = len(self.datas)
+        result = []
+        for permutation in itertools.permutations(self.datas, m):
+            result.append(list(permutation))
+        return result
+
+    def select_all(self):
+        """
+        Generates all possible arrangements of elements.
+
+        Returns:
+            list: List of all possible arrangements of elements.
+
+        Test cases:
+            # Test case 1: Normal case with multiple elements
+            ac = ArrangementCalculator(['X', 'Y', 'Z'])
+            assert ac.select_all() == ac.select()
+
+            # Test case 2: Edge case with a small number of elements
+            assert len(ac.select_all()) == 6
+
+            # Test case 3: Edge case with no elements
+            ac_empty = ArrangementCalculator([])
+            assert len(ac_empty.select_all()) == 1
+        """
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    @staticmethod
+    def factorial(n):
+        """
+        Calculates the factorial of a number.
+
+        Parameters:
+            n (int): Number for factorial calculation.
+
+        Returns:
+            int: Factorial of the input number.
+
+        Test cases:
+            # Test case 1: Normal case
+            assert factorial(5) == 120
+            
+            # Test case 2: Edge case with zero
+            assert factorial(0) == 1
+            
+            # Test case 3: Edge case with negative number
+            assert factorial(-1) == 1
+        """
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result

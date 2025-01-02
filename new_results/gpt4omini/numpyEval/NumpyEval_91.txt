@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.arange(12).reshape(3,4)
+# Delete the specified columns from the array
+out = np.delete(a, [1, 3], axis=1)
+```

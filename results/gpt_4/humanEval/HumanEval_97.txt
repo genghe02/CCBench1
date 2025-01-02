@@ -1,0 +1,11 @@
+def multiply(a, b):
+    # This function calculates the multiplication of the last digit of two numbers. 
+    # It takes two parameters a and b, applies modulus operation to get the last digit of each number, and then multiplies them.
+    # Test cases:
+    # >>> multiply(123, 456)    # returns 18
+    # >>> multiply(-123, 456)   # returns 18
+    # >>> multiply(123, -456)   # returns 18
+    # >>> multiply(-123, -456)  # returns 18
+    # >>> multiply(0, 456)      # returns 0
+    # >>> multiply(123, 0)      # returns 0
+    return abs(a % 10) * abs(b % 10)

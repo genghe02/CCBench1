@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef drop_consecutive_duplicates(series):\n    # Remove consecutive duplicate values from a pandas Series\n    return series.loc[series.shift(-1) != series]

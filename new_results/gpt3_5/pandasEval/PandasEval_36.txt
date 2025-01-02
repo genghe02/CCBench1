@@ -1,0 +1,2 @@
+# Convert dataframe to a string format without including the row index
+df_string = df.to_string(index=False)

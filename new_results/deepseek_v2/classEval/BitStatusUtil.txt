@@ -1,0 +1,126 @@
+```python
+"""
+This class provides utility methods for managing and manipulating bit-based status flags.
+It includes methods to add, check, and remove status flags, as well as a validation method to ensure the flags are valid.
+"""
+
+class BitStatusUtil:
+    @staticmethod
+    def add(states, stat):
+        """
+        Adds a status flag to the current set of states.
+
+        Parameters:
+            states (int): The current bitwise status flags.
+            stat (int): The status flag to add.
+
+        Returns:
+            int: The updated bitwise status flags with the new flag added.
+
+        Test cases:
+            # Test case 1: Add a flag to an empty state
+            assert BitStatusUtil.add(0, 2) == 2
+
+            # Test case 2: Add a flag to a non-empty state
+            assert BitStatusUtil.add(2, 4) == 6
+
+            # Test case 3: Add an invalid flag (error case)
+            try:
+                BitStatusUtil.add(2, 3)
+            except ValueError as e:
+                assert str(e) == "3 not even"
+        """
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    def has(states, stat):
+        """
+        Checks if a specific status flag is set in the current states.
+
+        Parameters:
+            states (int): The current bitwise status flags.
+            stat (int): The status flag to check.
+
+        Returns:
+            bool: True if the flag is set, False otherwise.
+
+        Test cases:
+            # Test case 1: Check for a flag that is set
+            assert BitStatusUtil.has(6, 2) == True
+
+            # Test case 2: Check for a flag that is not set
+            assert BitStatusUtil.has(6, 4) == True
+
+            # Test case 3: Check for an invalid flag (error case)
+            try:
+                BitStatusUtil.has(6, 3)
+            except ValueError as e:
+                assert str(e) == "3 not even"
+        """
+        BitStatusUtil.check([states, stat])
+        return (states & stat) == stat
+
+    @staticmethod
+    def remove(states, stat):
+        """
+        Removes a status flag from the current set of states if it is set.
+
+        Parameters:
+            states (int): The current bitwise status flags.
+            stat (int): The status flag to remove.
+
+        Returns:
+            int: The updated bitwise status flags with the flag removed.
+
+        Test cases:
+            # Test case 1: Remove a flag that is set
+            assert BitStatusUtil.remove(6, 2) == 4
+
+            # Test case 2: Remove a flag that is not set
+            assert BitStatusUtil.remove(6, 8) == 6
+
+            # Test case 3: Remove an invalid flag (error case)
+            try:
+                BitStatusUtil.remove(6, 3)
+            except ValueError as e:
+                assert str(e) == "3 not even"
+        """
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    def check(args):
+        """
+        Validates that all provided status flags are valid (non-negative and even).
+
+        Parameters:
+            args (list of int): A list of status flags to validate.
+
+        Raises:
+            ValueError: If any flag is negative or not even.
+
+        Test cases:
+            # Test case 1: Valid flags
+            BitStatusUtil.check([2, 4, 6])
+
+            # Test case 2: Invalid flag (negative)
+            try:
+                BitStatusUtil.check([2, -1])
+            except ValueError as e:
+                assert str(e) == "-1 must be greater than or equal to 0"
+
+            # Test case 3: Invalid flag (not even)
+            try:
+                BitStatusUtil.check([2, 3])
+            except ValueError as e:
+                assert str(e) == "3 not even"
+        """
+        for arg in args:
+            if arg < 0:
+                raise ValueError(f"{arg} must be greater than or equal to 0")
+            if arg % 2 != 0:
+                raise ValueError(f"{arg} not even")
+```

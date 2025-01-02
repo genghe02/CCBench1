@@ -1,0 +1,1 @@
+# Perform a groupby on a Pandas DataFrame, excluding certain columns, by grouping on `Country` and `Item_Code`, and compute the sum of the rows in the columns ['Y1961', 'Y1962', 'Y1963'].

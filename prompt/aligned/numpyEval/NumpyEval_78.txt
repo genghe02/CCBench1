@@ -1,0 +1,1 @@
+# Translate every element of a numpy array according to a given key using np.vectorize on the .get method of dictionaries.

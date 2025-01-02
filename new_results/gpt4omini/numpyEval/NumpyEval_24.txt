@@ -1,0 +1,8 @@
+```python
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5])
+# Perform broadcasting to add arrays with different shapes
+c = a[:, None] + b*2
+```

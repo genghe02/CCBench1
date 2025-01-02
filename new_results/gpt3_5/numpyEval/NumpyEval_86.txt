@@ -1,0 +1,2 @@
+# Reshape a 3x1 array into a 1D array
+out = x.reshape(3,)

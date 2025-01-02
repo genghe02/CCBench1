@@ -1,0 +1,1 @@
+# This function divides multiple columns (in this case 'B' and 'C') by the first column ('A') of a given dataframe. The division operation is performed along the rows (axis=0). The dataframe is then updated with the calculated values and returned.

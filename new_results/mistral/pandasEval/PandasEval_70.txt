@@ -1,0 +1,2 @@
+ # Drop the index column from the dataframe in place
+df.drop(df.index, axis=1, inplace=True)</s>

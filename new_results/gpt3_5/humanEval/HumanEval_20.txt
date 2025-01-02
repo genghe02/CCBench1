@@ -1,0 +1,21 @@
+# This function finds the two closest elements in a list of floats
+# Returns a tuple of the two closest elements
+def find_closest_elements(numbers: List[float]) -> Tuple[float, float]:
+    >>> find_closest_elements([1.5, 2.5, 3.5, 4.5, 5.5]) # returns (4.5, 5.5)
+    >>> find_closest_elements([-1.5, 0.5, 1.5, 3.5, 5.5]) # returns (-1.5, 0.5)
+    closest_pair = None
+    distance = None
+
+    for idx, elem in enumerate(numbers):
+        for idx2, elem2 in enumerate(numbers):
+            if idx != idx2:
+                if distance is None:
+                    distance = abs(elem - elem2)
+                    closest_pair = tuple(sorted([elem, elem2]))
+                else:
+                    new_distance = abs(elem - elem2)
+                    if new_distance < distance:
+                        distance = new_distance
+                        closest_pair = tuple(sorted([elem, elem2]))
+
+    return closest_pair

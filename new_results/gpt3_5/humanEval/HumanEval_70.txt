@@ -1,0 +1,17 @@
+# Sort the input list in a strange manner by alternating between minimum and maximum values
+
+>>> strange_sort_list([3, 1, 4, 1, 5, 9, 2, 6])
+# returns [1, 9, 1, 6, 2, 5, 3, 4]
+>>> strange_sort_list([11, 7, 2, 4, 9, 1])
+# returns [1, 11, 2, 9, 4, 7] 
+
+def strange_sort_list(lst):
+    # Sort the input list in a strange manner by alternating between minimum and maximum values
+    >>> strange_sort_list([3, 1, 4, 1, 5, 9, 2, 6]) # returns [1, 9, 1, 6, 2, 5, 3, 4]
+    >>> strange_sort_list([11, 7, 2, 4, 9, 1]) # returns [1, 11, 2, 9, 4, 7] 
+    res, switch = [], True
+    while lst:
+        res.append(min(lst) if switch else max(lst))
+        lst.remove(res[-1])
+        switch = not switch
+    return res

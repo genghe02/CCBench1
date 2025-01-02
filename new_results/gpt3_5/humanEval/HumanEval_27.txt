@@ -1,0 +1,6 @@
+# This function flips the case of characters in a string
+>>> flip_case("Hello World!") # returns "hELLO wORLD!"
+>>> flip_case("123abc") # returns "123ABC"
+>>> flip_case("MiXeDcAsE") # returns "mIxEdCaSe"
+def flip_case(string: str) -> str:
+    return string.swapcase()

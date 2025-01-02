@@ -1,0 +1,2 @@
+ # Replace diagonal elements of the DataFrame's numpy array representation with zeros
+np.fill_diagonal(df.values, 0)</s>

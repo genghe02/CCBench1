@@ -1,0 +1,1 @@
+# Group the dataframe by the 'section' column and then take a random sample of 50 rows from each group.

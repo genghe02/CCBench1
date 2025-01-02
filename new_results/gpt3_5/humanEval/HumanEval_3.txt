@@ -1,0 +1,22 @@
+def truncate_number(number: float) -> float:
+   # Return the decimal part of a float number by using modulo 1.0
+   >>> truncate_number(3.5) # returns 0.5
+   >>> truncate_number(-3.5) # returns 0.5
+   >>> truncate_number(0.0) # returns 0.0
+   return number % 1.0
+
+from typing import List
+
+
+def below_zero(operations: List[int]) -> bool:
+    # Check if the cumulative sum of operations ever goes negative
+    >>> below_zero([1, -2, 3, -4, 5]) # returns True
+    >>> below_zero([1, 2, 3, 4, 5]) # returns False
+    balance = 0
+
+    for op in operations:
+        balance += op
+        if balance < 0:
+            return True
+
+    return False

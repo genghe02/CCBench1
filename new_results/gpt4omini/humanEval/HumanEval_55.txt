@@ -1,0 +1,16 @@
+```python
+def fib(n: int):
+    # Return the n-th Fibonacci number using recursion
+    >>> fib(0) # returns 0
+    >>> fib(1) # returns 1
+    >>> fib(2) # returns 1
+    >>> fib(3) # returns 2
+    >>> fib(4) # returns 3
+    >>> fib(5) # returns 5
+    >>> fib(10) # returns 55
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+```

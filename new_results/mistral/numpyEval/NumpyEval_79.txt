@@ -1,0 +1,2 @@
+ # Concatenate two character arrays using the 'add' function from numpy.core.defchararray
+result = np.core.defchararray.add(a1, a2)</s>

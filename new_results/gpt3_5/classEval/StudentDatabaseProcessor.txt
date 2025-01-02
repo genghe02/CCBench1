@@ -1,0 +1,159 @@
+"""
+The class provides functionality to process and manage a student database.
+
+This class initializes a Student Database Processor with the specified database name.
+"""
+
+import sqlite3
+
+
+class StudentDatabaseProcessor:
+
+    def __init__(self, database_name):
+        """
+        Initializes the StudentDatabaseProcessor with the given database name.
+
+        Parameters:
+            database_name (str): The name of the database to be used
+        """
+        self.database_name = database_name
+
+    def create_student_table(self):
+        """
+        Creates a 'students' table in the database if it does not already exist.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Creation of student table
+            create_student_table()
+            assert table_exists('students') == True
+            
+            # Test case 2: Table already exists
+            create_student_table()
+            assert table_exists('students') == True
+            
+            # Test case 3: Multiple calls with different names
+            create_student_table()
+            assert table_exists('other_table') == False
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        create_table_query = """
+        CREATE TABLE IF NOT EXISTS students (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            age INTEGER,
+            gender TEXT,
+            grade INTEGER
+        )
+        """
+        cursor.execute(create_table_query)
+
+        conn.commit()
+        conn.close()
+
+    def insert_student(self, student_data):
+        """
+        Inserts a new student entry into the 'students' table.
+
+        Parameters:
+            student_data (dict): Dictionary containing student information (name, age, gender, grade)
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Insert new student
+            insert_student({'name': 'Alice', 'age': 20, 'gender': 'Female', 'grade': 90})
+            assert search_student_by_name('Alice') == [1, 'Alice', 20, 'Female', 90]
+            
+            # Test case 2: Missing data
+            insert_student({'name': 'Bob', 'age': 25})
+            assert search_student_by_name('Bob') == []
+            
+            # Test case 3: Insert same student twice
+            insert_student({'name': 'Alice', 'age': 20, 'gender': 'Female', 'grade': 90})
+            insert_student({'name': 'Alice', 'age': 22, 'gender': 'Female', 'grade': 95})
+            assert len(search_student_by_name('Alice')) == 1
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        insert_query = """
+        INSERT INTO students (name, age, gender, grade)
+        VALUES (?, ?, ?, ?)
+        """
+        cursor.execute(insert_query,
+                       (student_data['name'], student_data['age'], student_data['gender'], student_data['grade']))
+
+        conn.commit()
+        conn.close()
+
+    def search_student_by_name(self, name):
+        """
+        Searches for a student in the 'students' table by their name.
+
+        Parameters:
+            name (str): The name of the student to search for
+
+        Returns:
+            list: A list of tuples containing the details of the student if found, otherwise an empty list
+
+        Test cases:
+            # Test case 1: Search existing student
+            search_student_by_name('Alice')
+            assert search_student_by_name('Alice') == [1, 'Alice', 20, 'Female', 90]
+            
+            # Test case 2: Search non-existing student
+            search_student_by_name('Lucas')
+            assert search_student_by_name('Lucas') == []
+            
+            # Test case 3: Search special character name
+            search_student_by_name('John-Doe')
+            assert search_student_by_name('John-Doe') == []
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        select_query = "SELECT * FROM students WHERE name = ?"
+        cursor.execute(select_query, (name,))
+        result = cursor.fetchall()
+
+        conn.close()
+
+        return result
+
+    def delete_student_by_name(self, name):
+        """
+        Deletes a student entry from the 'students' table based on their name.
+
+        Parameters:
+            name (str): The name of the student to be deleted
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Delete existing student
+            delete_student_by_name('Alice')
+            assert search_student_by_name('Alice') == []
+            
+            # Test case 2: Delete non-existing student
+            delete_student_by_name('Lucas')
+            assert search_student_by_name('Lucas') == []
+            
+            # Test case 3: Delete empty name
+            delete_student_by_name('')
+            assert search_student_by_name('') == []
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        delete_query = "DELETE FROM students WHERE name = ?"
+        cursor.execute(delete_query, (name,))
+
+        conn.commit()
+        conn.close()

@@ -1,0 +1,94 @@
+```python
+"""
+This class provides methods to process Natural Language Processing (NLP) data by constructing a list of stop words and removing them from the input text.
+"""
+
+class NLPDataProcessor:
+
+    def construct_stop_word_list(self):
+        """
+        Constructs a list of stop words that are commonly used in English but carry little semantic meaning.
+
+        Returns:
+            list: A list of English stop words.
+        
+        Test cases:
+            # Test case 1: Verify the output of the method
+            assert construct_stop_word_list() == ['a', 'an', 'the']
+        """
+        stop_word_list = ['a', 'an', 'the']
+        return stop_word_list
+
+    def remove_stop_words(self, string_list, stop_word_list):
+        """
+        Removes stop words from a list of strings.
+
+        Parameters:
+            string_list (list): Input list of strings from which stop words need to be removed.
+            stop_word_list (list): List of stop words to remove from the strings.
+
+        Returns:
+            list: A list of strings with stop words removed.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            string_list = ['the cat', 'an apple', 'a dog']
+            stop_word_list = ['a', 'an', 'the']
+            expected_output = [['cat'], ['apple'], ['dog']]
+            assert remove_stop_words(string_list, stop_word_list) == expected_output
+
+            # Test case 2: Edge case with no stop words
+            string_list = ['cat', 'apple', 'dog']
+            stop_word_list = ['a', 'an', 'the']
+            expected_output = [['cat'], ['apple'], ['dog']]
+            assert remove_stop_words(string_list, stop_word_list) == expected_output
+
+            # Test case 3: Error case with non-string input
+            string_list = [123, 'an apple', 'a dog']
+            stop_word_list = ['a', 'an', 'the']
+            try:
+                remove_stop_words(string_list, stop_word_list)
+            except TypeError:
+                print("Caught expected TypeError")
+        """
+        answer = []
+        for string in string_list:
+            string_split = string.split()
+            for word in string_split:
+                if word in stop_word_list:
+                    string_split.remove(word)
+            answer.append(string_split)
+        return answer
+
+    def process(self, string_list):
+        """
+        Processes a list of strings by removing stop words from each string.
+
+        Parameters:
+            string_list (list): Input list of strings to be processed.
+
+        Returns:
+            list: A processed list of strings with stop words removed.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            string_list = ['the cat', 'an apple', 'a dog']
+            expected_output = [['cat'], ['apple'], ['dog']]
+            assert process(string_list) == expected_output
+
+            # Test case 2: Edge case with no stop words
+            string_list = ['cat', 'apple', 'dog']
+            expected_output = [['cat'], ['apple'], ['dog']]
+            assert process(string_list) == expected_output
+
+            # Test case 3: Error case with non-string input
+            string_list = [123, 'an apple', 'a dog']
+            try:
+                process(string_list)
+            except TypeError:
+                print("Caught expected TypeError")
+        """
+        stop_word_list = self.construct_stop_word_list()
+        words_list = self.remove_stop_words(string_list, stop_word_list)
+        return words_list
+```

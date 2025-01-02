@@ -1,0 +1,16 @@
+def max_element(l: list):
+    # This function takes a list as input and finds the maximum element in the list. 
+    # It assumes that the list is non-empty and contains only numeric elements.
+    # Test cases: 
+    # >>> max_element([1, 2, 3, 4, 5])
+    # 5
+    # >>> max_element([-1, -2, -3, -4, -5])
+    # -1
+    # >>> max_element([0, 0, 0, 0, 0])
+    # 0
+    m = l[0]
+    for e in l:
+        if e > m:
+            m = e
+    # Returns the maximum element in the list.
+    return m

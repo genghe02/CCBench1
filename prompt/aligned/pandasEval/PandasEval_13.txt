@@ -1,0 +1,1 @@
+Create an empty DataFrame in Pandas with only column names and return it.

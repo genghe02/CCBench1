@@ -1,0 +1,2 @@
+ # Remove first n rows from dataframe and return the modified dataframe
+return df.iloc[n:]</s>

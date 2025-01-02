@@ -1,0 +1,2 @@
+ # Subset array 'a' where both the first and second columns equal 0 and 1 respectively
+b = a[np.where((a[:,0] == 0) & (a[:,1] == 1))]</s>

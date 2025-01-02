@@ -1,0 +1,5 @@
+```python
+def find_max(words):
+    # Return the word with the most unique characters, sorted lexicographically in case of a tie
+    return sorted(words, key = lambda x: (-len(set(x)), x))[0]
+```

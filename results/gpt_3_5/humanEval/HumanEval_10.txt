@@ -1,0 +1,23 @@
+def is_palindrome(string: str) -> bool:
+    # Check if the input string is a palindrome by comparing it with its reversed version.
+    return string == string[::-1]
+
+def make_palindrome(string: str) -> str:
+    # Generate a palindrome by adding a suffix to the input string.
+    # Some test cases for the function:
+    # Test case 1: empty string
+    # make_palindrome('') -> ''
+    # Test case 2: already a palindrome
+    # make_palindrome('level') -> 'level'
+    # Test case 3: non-palindrome string
+    # make_palindrome('hello') -> 'helloolleh'
+    
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]

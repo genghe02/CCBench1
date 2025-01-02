@@ -1,0 +1,70 @@
+class Hotel:
+    # This class represents a hotel with available and booked rooms management.
+
+    def __init__(self, name, rooms):
+        # Initialize the Hotel object with a name and available rooms.
+        # name: str, the name of the hotel
+        # rooms: dict, the available rooms in the hotel
+        self.name = name
+        self.available_rooms = rooms
+        # available_rooms = {room_type1: room_number1, room_type2: room_number2, ...}
+        # available_rooms = {'single': 5, 'double': 3}
+        self.booked_rooms = {}
+        # booked_rooms = {room_type1: {name1: room_number1, name2: room_number2, ...}, room_type2: {...}, ...}
+        # booked_rooms = {'single': {'name1': 2, 'name2':1}, 'double': {}}
+
+    def book_room(self, room_type, room_number, name):
+        # Book a room of a specific type for a guest if available.
+        # room_type: str, the type of room being booked
+        # room_number: int, the number of rooms to book
+        # name: str, the name of the guest booking the room
+        # return: str or bool, "Success!" if room is booked, number of available rooms if not enough, False if room type not available
+        # Booking a room and updating available and booked rooms accordingly.
+        if room_type not in self.available_rooms.keys():
+            return False
+
+        if room_number <= self.available_rooms[room_type]:
+            if room_type not in self.booked_rooms.keys():
+                self.booked_rooms[room_type] = {}
+            self.booked_rooms[room_type][name] = room_number
+            self.available_rooms[room_type] -= room_number
+            return "Success!"
+        elif self.available_rooms[room_type] != 0:
+            return self.available_rooms[room_type]
+        else:
+            return False
+
+    def check_in(self, room_type, room_number, name):
+        # Check-in a guest to a booked room if available.
+        # room_type: str, the type of room to check-in
+        # room_number: int, the number of rooms to check-in
+        # name: str, the name of the guest checking-in
+        # return: bool, True if check-in successful, False otherwise
+        # Checking-in a guest to a booked room and updating booked rooms information.
+        if room_type not in self.booked_rooms.keys():
+            return False
+        if name in self.booked_rooms[room_type]:
+            if room_number > self.booked_rooms[room_type][name]:
+                return False
+            elif room_number == self.booked_rooms[room_type][name]:
+                self.booked_rooms[room_type].pop(name)
+            else:
+                self.booked_rooms[room_type][name] -= room_number
+
+    def check_out(self, room_type, room_number):
+        # Check-out a guest from a booked room and update available room count.
+        # room_type: str, the type of room to check-out
+        # room_number: int, the number of rooms to check-out
+        # Check-out a guest and update the available room count.
+
+        if room_type in self.available_rooms:
+            self.available_rooms[room_type] += room_number
+        else:
+            self.available_rooms[room_type] = room_number
+
+    def get_available_rooms(self, room_type):
+        # Get the number of available rooms of a specific type.
+        # room_type: str, the type of room to get availability for
+        # return: int, number of available rooms for the specified room type
+        # Retrieve the count of available rooms for a specific type.
+        return self.available_rooms[room_type]

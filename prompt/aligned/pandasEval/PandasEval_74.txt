@@ -1,0 +1,1 @@
+# Count the number of occurrences of a value in a series and return the count.

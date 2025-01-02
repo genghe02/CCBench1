@@ -1,0 +1,16 @@
+ # This function returns the list with fewer total length of strings if they are equal in length, otherwise it returns the larger list
+
+>>> total_match(["apple", "banana"], ["apple", "banana", "orange"]) # returns ["apple", "banana"]
+>>> total_match(["hello", "world"], ["hello", "world"]) # returns ["hello", "world"]
+>>> total_match(["cat", "dog"], ["cat", "dog", "mouse"]) # returns ["cat", "dog"]
+>>> total_match(["python", "programming"], ["python", "programming", "language"]) # returns ["python", "programming"]
+>>> total_match([1, 2, 3], [1, 2, 3, 4]) # returns [1, 2, 3]
+>>> total_match([], []) # returns []
+>>> total_match([], ["apple"]) # returns ["apple"]
+>>> total_match(["apple"], []) # returns []
+>>> total_match(["python", "is", "awesome"], ["awesome", "python"]) # returns ["python", "is", "awesome"]
+>>> total_match(["python", "is", "awesome"], ["awesome", "python", "and", "powerful"]) # returns ["python", "is", "awesome"]
+>>> total_match(["python", "is", "awesome"], ["awesome", "python", "and", "powerful", "language"]) # returns ["python", "is", "awesome"]
+>>> total_match(["python", "is", "awesome"], ["python", "is", "awesome", "and", "powerful"]) # returns ["python", "is", "awesome"]
+
+return (lst1 if len(sum(map(len, lst1), [])) <= len(sum(map(len, lst2), [])) else lst2)</s>

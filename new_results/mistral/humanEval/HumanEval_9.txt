@@ -1,0 +1,24 @@
+ # Keep the initial comment and add a requirement to have a list of length greater than 0
+ # Use a list instead of None as the initial value for running_max
+def rolling_max(numbers: List[int]) -> List[int]:
+    # Requirement: The input list must have a length greater than 0
+    >>> numbers = [1, 2, 3, 4]
+    running_max = [] if not numbers else [numbers[0]]
+    result = []
+
+    for n in numbers:
+        if not running_max:
+            running_max.append(n)
+        else:
+            running_max.append(max(running_max[-1], n))
+
+        result.append(running_max[-1])
+
+    return result
+
+    # Test cases:
+    >>> rolling_max([]) # returns an empty list
+    >>> rolling_max([1]) # returns [1]
+    >>> rolling_max([1,2,3]) # returns [1, 2, 3]
+    >>> rolling_max([1,2,3,4]) # returns [1, 2, 3, 4]
+    >>> rolling_max([5, 4, 3, 2, 1]) # returns [5, 5, 5, 5, 5]</s>

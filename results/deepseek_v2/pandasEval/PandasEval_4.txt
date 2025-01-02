@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def get_data_frame_from_list(list_of_lists):
+    # Convert a list of lists into a pandas DataFrame, where the first list in the input is used as the column names.
+    return pd.DataFrame(list_of_lists[1:], columns=list_of_lists[0])
+```

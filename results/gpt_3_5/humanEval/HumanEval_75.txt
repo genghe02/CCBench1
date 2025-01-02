@@ -1,0 +1,21 @@
+def is_multiply_prime(a):
+    # Check if the input number 'a' can be formed by multiplying three prime numbers from 2 to 100.
+    # The function first defines a helper function is_prime(n) to determine if a number is prime.
+    # Then, it iterates over all combinations of three prime numbers from 2 to 100 and checks if their product equals 'a'.
+    # Return True if 'a' can be formed by multiplying three prime numbers, otherwise return False.
+
+    # Test case 1: 'a' is a prime number
+    # If 'a' is a prime number, it can be formed by multiplying itself with 1 and 1.
+    assert is_multiply_prime(7) == True
+
+    # Test case 2: 'a' is not a prime number
+    # If 'a' is not a prime number, check if it can be formed by multiplying three prime numbers.
+    assert is_multiply_prime(24) == False
+
+    # Test case 3: 'a' is a product of three prime numbers
+    # If 'a' is a product of three prime numbers, return True.
+    assert is_multiply_prime(30) == True
+
+    # Test case 4: 'a' is not a product of three prime numbers
+    # If 'a' cannot be formed by multiplying three prime numbers, return False.
+    assert is_multiply_prime(47) == False

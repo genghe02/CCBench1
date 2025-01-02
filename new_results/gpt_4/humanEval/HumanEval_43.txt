@@ -1,0 +1,10 @@
+def pairs_sum_to_zero(l):
+    # Checks if any pair of numbers in the given list sums to zero
+    >>> pairs_sum_to_zero([1, 2, 3, -1])  # returns True
+    >>> pairs_sum_to_zero([1, 2, 3, 4])  # returns False
+    >>> pairs_sum_to_zero([])  # returns False
+    for i, l1 in enumerate(l):
+        for j in range(i + 1, len(l)):
+            if l1 + l[j] == 0:
+                return True
+    return False

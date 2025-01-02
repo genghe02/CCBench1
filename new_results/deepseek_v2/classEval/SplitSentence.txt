@@ -1,0 +1,104 @@
+```python
+"""
+This class provides functionality to split a string into sentences, count words in a sentence, and process a text file to find the sentence with the maximum number of words.
+"""
+
+import re
+
+
+class SplitSentence:
+
+    def split_sentences(self, sentences_string):
+        """
+        Splits a given string into individual sentences based on punctuation marks.
+
+        Parameters:
+            sentences_string (str): The input string containing multiple sentences.
+
+        Returns:
+            list: A list of sentences extracted from the input string.
+
+        Test cases:
+            # Test case 1: Normal usage with multiple sentences
+            input = "Hello world! How are you? I am fine."
+            expected_output = ['Hello world!', 'How are you?', 'I am fine.']
+            assert split_sentences(input) == expected_output
+
+            # Test case 2: Edge case with no punctuation
+            input = "Hello world How are you I am fine"
+            expected_output = ['Hello world How are you I am fine']
+            assert split_sentences(input) == expected_output
+
+            # Test case 3: Error case with empty string
+            input = ""
+            expected_output = []
+            assert split_sentences(input) == expected_output
+        """
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    def count_words(self, sentence):
+        """
+        Counts the number of words in a given sentence.
+
+        Parameters:
+            sentence (str): The input sentence to count words from.
+
+        Returns:
+            int: The number of words in the sentence.
+
+        Test cases:
+            # Test case 1: Normal usage with a simple sentence
+            input = "Hello world"
+            expected_output = 2
+            assert count_words(input) == expected_output
+
+            # Test case 2: Edge case with punctuation
+            input = "Hello, world!"
+            expected_output = 2
+            assert count_words(input) == expected_output
+
+            # Test case 3: Error case with empty sentence
+            input = ""
+            expected_output = 0
+            assert count_words(input) == expected_output
+        """
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        return len(words)
+
+    def process_text_file(self, sentences_string):
+        """
+        Processes a text string to find the sentence with the maximum number of words.
+
+        Parameters:
+            sentences_string (str): The input string containing multiple sentences.
+
+        Returns:
+            int: The maximum number of words found in any sentence.
+
+        Test cases:
+            # Test case 1: Normal usage with multiple sentences
+            input = "Hello world! How are you? I am fine."
+            expected_output = 4
+            assert process_text_file(input) == expected_output
+
+            # Test case 2: Edge case with one sentence
+            input = "Hello world"
+            expected_output = 2
+            assert process_text_file(input) == expected_output
+
+            # Test case 3: Error case with empty string
+            input = ""
+            expected_output = 0
+            assert process_text_file(input) == expected_output
+        """
+        sentences = self.split_sentences(sentences_string)
+        max_count = 0
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        return max_count
+```

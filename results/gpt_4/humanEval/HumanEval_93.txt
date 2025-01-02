@@ -1,0 +1,14 @@
+def encode(message):
+    # This function works to encode a given message. It swaps the cases of all characters in the message, 
+    # and for vowels, it replaces them with the next two letters according to ASCII value. 
+    # For example, 'a' will be replaced with 'c', 'A' with 'C', 'e' with 'g', and so on.
+    
+    # Test cases for the function:
+    # >>> encode('Hello World')
+    # 'gILLU dRKNV'
+    # >>> encode('Python is fun')
+    # 'pStGKn IS dWP'
+    vowels = "aeiouAEIOU"
+    vowels_replace = dict([(i, chr(ord(i) + 2)) for i in vowels])  # Create a dictionary to map vowels to their replacements.
+    message = message.swapcase()  # Swap the case for all characters in the message.
+    return ''.join([vowels_replace[i] if i in vowels else i for i in message])  # Replace vowels according to the mapping and join all characters together to form the encoded message.

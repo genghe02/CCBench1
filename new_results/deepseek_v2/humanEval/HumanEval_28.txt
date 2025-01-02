@@ -1,0 +1,10 @@
+```python
+from typing import List
+
+def concatenate(strings: List[str]) -> str:
+    # Concatenate a list of strings into a single string using the join method
+    >>> concatenate(['hello', 'world']) # returns 'helloworld'
+    >>> concatenate(['a', 'b', 'c']) # returns 'abc'
+    >>> concatenate([]) # returns ''
+    return ''.join(strings)
+```

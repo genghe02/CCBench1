@@ -1,0 +1,3 @@
+# Concatenate two dataframes vertically and return the resulting dataframe
+def concat_df(df1, df2): 
+    return pd.concat([df1, df2])

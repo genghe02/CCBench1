@@ -1,0 +1,53 @@
+Task: ONLY replace content within <> symbols with appropriate code annotation. Do NOT add any other annotations or comments.
+
+Rules:
+1. ONLY modify text inside <> symbols
+2. DO NOT add any additional comments or annotations
+3. Each <> should be replaced with exactly ONE line of annotation
+4. Annotation must start with # and be placed exactly where the <> was
+5. MUST preserve ALL code before and after the <>
+6. DO NOT omit or modify ANY existing code
+
+Bad Example1 (DO NOT DO THIS):
+Input:
+import pandas as pd
+
+<Requirements for the code>
+def delete_column(df, column_name):
+    return df.drop(column_name, axis=1)
+
+❌ Wrong Output (adds extra annotations):
+import pandas as pd
+
+# Function to delete a specified column from a dataframe
+def delete_column(df, column_name):
+    # Drop the specified column from the dataframe
+    return df.drop(column_name, axis=1)
+
+✅ Correct Output:
+import pandas as pd
+
+# Delete specified column from dataframe and return the modified dataframe
+def delete_column(df, column_name):
+    return df.drop(column_name, axis=1)
+
+Bad Example2 (DO NOT DO THIS):
+Input:
+import numpy as np
+a = np.arange(9)
+a = a.reshape((3, 3))
+b = np.zeros((5, 5))
+<Requirements for the code>
+b[1:4, 1:4] = a
+
+❌ Wrong Output (omits code):
+# Fill the center 3x3 area of a 5x5 zero matrix with values from a 3x3 matrix
+b[1:4, 1:4] = a
+
+✅ Correct Output:
+import numpy as np
+a = np.arange(9)
+a = a.reshape((3, 3))
+b = np.zeros((5, 5))
+# Fill the center 3x3 area of a 5x5 zero matrix with values from a 3x3 matrix
+b[1:4, 1:4] = a

@@ -1,0 +1,15 @@
+ def longest(strings: List[str]) -> Optional[str]:
+    # Find the longest string in a given list and return it
+    # If the list is empty, return None
+    >>> longest(["hello", "world", ""]) # returns "hello"
+    # or "world" since they have the same length
+    >>> longest(["python", "is", "awesome"]) # returns "python"
+    >>> longest([]) # returns None
+
+    if not strings:
+        return None
+
+    maxlen = max(len(x) for x in strings)
+    for s in strings:
+        if len(s) == maxlen:
+            return s</s>

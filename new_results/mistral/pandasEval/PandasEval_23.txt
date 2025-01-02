@@ -1,0 +1,2 @@
+ # Find list of column names with at least one NaN value
+return df.columns[df.isna().any()].tolist()</s>

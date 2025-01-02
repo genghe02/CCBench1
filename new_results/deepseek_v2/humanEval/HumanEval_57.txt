@@ -1,0 +1,10 @@
+```python
+def monotonic(l: list):
+    # Check if the list is either entirely non-increasing or non-decreasing
+    >>> monotonic([1, 2, 3, 4]) # returns True
+    >>> monotonic([4, 3, 2, 1]) # returns True
+    >>> monotonic([1, 3, 2, 4]) # returns False
+    if l == sorted(l) or l == sorted(l, reverse=True):
+        return True
+    return False
+```

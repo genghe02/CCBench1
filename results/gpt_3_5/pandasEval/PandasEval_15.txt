@@ -1,0 +1,1 @@
+# Check if any value in the DataFrame is NaN by using the isnull() method followed by values.any() method.

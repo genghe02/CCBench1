@@ -1,0 +1,2 @@
+ # Stack the lists of arrays along the last axis
+M = np.stack(L, axis=-1)</s>

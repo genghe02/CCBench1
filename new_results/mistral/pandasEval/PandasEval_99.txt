@@ -1,0 +1,2 @@
+ # Select rows in DataFrame where at least one element is not numeric
+return df[~df.applymap(np.isreal).all(1)]</s>

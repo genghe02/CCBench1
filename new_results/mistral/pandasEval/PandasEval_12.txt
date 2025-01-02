@@ -1,0 +1,2 @@
+ # Return the number of rows in the dataframe
+return len(df.index)</s>

@@ -1,0 +1,19 @@
+```python
+def sum_squares(lst):
+    # This function sums squares of all numbers in the list rounded up 
+    # to the nearest integer. To perform the calculation, it uses math.ceil() 
+    # function to round up the numbers and then squares them.
+    # Example test cases:
+    # >>> sum_squares([1.1, 2.2, 3.3])
+    # >>> 15
+    # >>> sum_squares([-1.7, 2.5, 3.2])
+    # >>> 15
+    import math
+    squared = 0
+    for i in lst:
+        # For each element in the list, round it up to the nearest integer 
+        # and then square it
+        squared += math.ceil(i)**2
+    # Return the sum of the squared numbers
+    return squared
+```

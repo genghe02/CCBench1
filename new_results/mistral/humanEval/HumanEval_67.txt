@@ -1,0 +1,6 @@
+ # Given list 's' contains space-separated strings, convert strings to integers if they are numbers, and return the difference between 'n' and their sum
+ >>> fruit_distribution("1 2 3 4 5 1 3 2 5 10", 15) # returns 1
+ >>> fruit_distribution("10 20 30 40 50", 100) # returns 45
+ >>> fruit_distribution("apple banana orange", 3) # returns error, as it contains non-digit strings
+ >>> fruit_distribution("1 2 3", 6) # returns 0
+ return n - sum(map(int, filter(str.isdigit, s.split())))</s>

@@ -1,0 +1,22 @@
+ def count\_upper(s):
+ # This function counts the number of uppercase vowels (A, E, I, O, U) in the given string.
+
+ # Requirements for the code
+ s = str(s) # Ensure the input is a string
+
+ result = 0
+ for i in range(0, len(s), 2):
+ if s[i] in "AEIOU":
+ result += 1
+
+ return result
+
+ # Some test cases for the function
+ >>> count_upper("HelloWorld")
+ 1
+ >>> count_upper("PythonIsGreat")
+ 4
+ >>> count_upper("12345")
+ 0
+ >>> count_upper("aBcDeFg")
+ 0

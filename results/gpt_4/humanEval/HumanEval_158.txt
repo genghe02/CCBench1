@@ -1,0 +1,5 @@
+```python
+def find_max(words):
+    # This function finds the longest word in a list of words, prioritizing uniqueness of characters.
+    return sorted(words, key=lambda x: (-len(set(x)), x))[0]
+```

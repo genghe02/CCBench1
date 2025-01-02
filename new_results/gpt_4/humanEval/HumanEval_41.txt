@@ -1,0 +1,6 @@
+def car_race_collision(n: int):
+    # Calculate the possible number of collisions in a car race with n participants
+    >>> car_race_collision(5) # returns 25
+    >>> car_race_collision(0) # returns 0
+    >>> car_race_collision(10) # returns 100
+    return n**2

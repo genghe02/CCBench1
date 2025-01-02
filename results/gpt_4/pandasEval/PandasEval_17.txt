@@ -1,0 +1,3 @@
+# This function removes duplicates from a DataFrame based on the values in a specified column. It keeps the last occurrence of the duplicate rows.
+
+return df.drop_duplicates(subset=col1, keep="last")

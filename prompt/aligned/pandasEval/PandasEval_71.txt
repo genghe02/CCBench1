@@ -1,0 +1,3 @@
+# Split a dataframe with 100,000 entries into 100 sections of 1,000 entries each. 
+# Take a random sample of size 50 from one of the sections. 
+# Add a "section" column to the dataframe, then perform a groupby and sample(n=50).

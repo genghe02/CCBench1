@@ -1,0 +1,4 @@
+# Add a new column to a Pandas DataFrame with the specified column name and data values
+def add_column_to_dataframe(df, column_name, column_data):
+    df[column_name] = column_data
+    return df

@@ -1,0 +1,5 @@
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'A': [1, 4, 7, np.nan], 'B': [np.nan, 2, 5, np.nan], 'C': [np.nan, np.nan, 3, 6]})
+# Sort each column in the dataframe, push NaNs to the end and then drop rows where all values are NaN
+new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how = 'all')

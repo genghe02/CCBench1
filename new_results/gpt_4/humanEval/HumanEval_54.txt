@@ -1,0 +1,6 @@
+def same_chars(s0: str, s1: str):
+    # This function checks if two strings have the same characters, regardless of their order
+    >>> same_chars('abc', 'cba') # returns True
+    >>> same_chars('abca', 'cba') # returns True
+    >>> same_chars('abc', 'cbad') # returns False
+    return set(s0) == set(s1)

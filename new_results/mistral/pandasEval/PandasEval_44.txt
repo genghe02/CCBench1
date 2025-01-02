@@ -1,0 +1,3 @@
+ # Delete specified column from dataframe and return the modified dataframe
+def delete_column(df, column_name):
+    return df.drop(column_name, axis=1)</s>

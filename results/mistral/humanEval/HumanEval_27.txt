@@ -1,0 +1,12 @@
+ def flip_case(string: str) -> str:
+    # This function takes a string as an argument and returns the string with each character's case flipped.
+    # For example, if the input is 'HelloWorld', the output will be 'hELLOrD'.
+
+    # Test cases:
+    # Test case 1: Empty string
+    # Test case 2: All uppercase
+    # Test case 3: All lowercase
+    # Test case 4: Mixed case
+    # Test case 5: Special characters
+
+    return string.swapcase()

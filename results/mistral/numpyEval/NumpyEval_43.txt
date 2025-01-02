@@ -1,0 +1,9 @@
+ # Concatenate arrays 'a' and 'b' using numpy's np.concatenate function.
+
+import numpy as np
+
+a = np.array([1, 3, 4])
+b = np.array([5, 2, 1])
+
+# Concatenate arrays 'a' and 'b' using numpy's np.concatenate function.
+c = np.concatenate([a, b])

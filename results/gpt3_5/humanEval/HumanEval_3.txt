@@ -1,0 +1,25 @@
+from typing import List
+
+
+def below_zero(operations: List[int]) -> bool:
+    # Check if the cumulative sum of operations ever goes below zero.
+    # This function iterates through each operation, adding it to the balance, 
+    # and checks if the balance goes below zero at any point.
+    
+    # Test cases:
+    # Case 1: Empty list
+    # below_zero([]) -> False
+    # Case 2: All positive operations
+    # below_zero([1, 2, 3]) -> False
+    # Case 3: Negative operation
+    # below_zero([-1]) -> True
+    # Case 4: Operations leading to negative balance
+    # below_zero([3, -5, 2, 1, -4]) -> True
+    balance = 0
+
+    for op in operations:
+        balance += op
+        if balance < 0:
+            return True
+
+    return False

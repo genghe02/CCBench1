@@ -1,0 +1,1 @@
+# Calculate the division of each element in the input array 't' by its preceding element.

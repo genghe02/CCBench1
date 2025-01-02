@@ -1,0 +1,1 @@
+# Shift the 'gdp' column in the Pandas DataFrame up by one and return the DataFrame with the changed 'gdp' column.

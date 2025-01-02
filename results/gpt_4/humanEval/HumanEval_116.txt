@@ -1,0 +1,8 @@
+def sort_array(arr):
+    # The function sorts an array of integers in ascending order, first by its decimal value, then by the count of '1' in its binary representation.
+    # Test cases:
+    # >>> sort_array([2, 3, 4, 5])
+    # [4, 2, 3, 5] # because binary of 4 is 100, 2 is 10, 3 is 11 and 5 is 101.
+    # >>> sort_array([4, 1, 2, 6])
+    # [1, 2, 4, 6] # because binary of 1 is 1, 2 is 10, 4 is 100 and 6 is 110.
+    return sorted(sorted(arr), key=lambda x: bin(x)[2:].count('1'))

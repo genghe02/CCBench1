@@ -1,0 +1,30 @@
+ # Check if given number 'a' is a product of three prime numbers
+ # Returns True if it is, False otherwise
+ <some test cases for the function>
+ >>> is_multiply_prime(2*2*2*3*5) # returns True
+ >>> is_multiply_prime(1) # returns False
+ >>> is_multiply_prime(10) # returns False
+ >>> is_multiply_prime(12*12*12) # returns True
+
+def is_multiply_prime(a):
+    # Check if given number 'a' is a product of three prime numbers
+    # Returns True if it is, False otherwise
+    #......
+    >>> is_multiply_prime(2*2*2*3*5) # returns True
+    >>> is_multiply_prime(1) # returns False
+    >>> is_multiply_prime(10) # returns False
+    >>> is_multiply_prime(12*12*12) # returns True
+    def is_prime(n):
+        for j in range(2,n):
+            if n%j == 0:
+                return False
+        return True
+
+    for i in range(2,101):
+        if not is_prime(i): continue
+        for j in range(2,101):
+            if not is_prime(j): continue
+            for k in range(2,101):
+                if not is_prime(k): continue
+                if i*j*k == a: return True
+    return False</s>

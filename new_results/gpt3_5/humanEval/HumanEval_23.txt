@@ -1,0 +1,6 @@
+# This function calculates the length of a string
+>>> strlen("hello") # returns 5
+>>> strlen("") # returns 0
+>>> strlen("python is awesome") # returns 18
+def strlen(string: str) -> int:
+    return len(string)

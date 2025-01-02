@@ -1,0 +1,2 @@
+ # Function to remove duplicates based on specific column(s) and keep the last occurrences
+return df.drop_duplicates(subset=[col1, col2], keep="last")</s>

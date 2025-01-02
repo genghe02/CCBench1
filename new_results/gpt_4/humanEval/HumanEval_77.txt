@@ -1,0 +1,8 @@
+def iscube(a):
+    # This function checks if a number is a perfect cube
+    >>> iscube(27) # returns True
+    >>> iscube(28) # returns False
+    >>> iscube(-27) # returns True
+    >>> iscube(0) # returns True
+    a = abs(a)
+    return int(round(a ** (1. / 3))) ** 3 == a

@@ -1,0 +1,10 @@
+def circular_shift(x, shift):
+    # This function performs a circular shift to the right on a string representation of a number.
+    >>> circular_shift(12345, 2) # returns '45123'
+    >>> circular_shift(12345, 5) # returns '12345'
+    >>> circular_shift(12345, 6) # returns '51234'
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]

@@ -1,0 +1,24 @@
+```python
+def reverse_delete(s, c):
+    # Remove characters from the string 's' that are present in string 'c' 
+    # and check if the resulting string is a palindrome.
+    
+    # :param s: str, the input string from which characters are to be removed.
+    # :param c: str, the characters to be removed from the input string 's'.
+    
+    # :return: tuple, contains the modified string after removal of characters 
+    # and a boolean indicating whether the modified string is a palindrome.
+    
+    # Test cases for the function:
+    # >>> reverse_delete("racecar", "b") 
+    # ('racecar', True) 
+    # >>> reverse_delete("hello", "l") 
+    # ('heo', False)
+    # >>> reverse_delete("abba", "a") 
+    # ('bb', True)
+    # >>> reverse_delete("abcdef", "xyz") 
+    # ('abcdef', False)
+    
+    s = ''.join([char for char in s if char not in c])
+    return (s, s[::-1] == s)
+```

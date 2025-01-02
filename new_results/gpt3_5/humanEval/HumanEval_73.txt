@@ -1,0 +1,15 @@
+# This function calculates the number of elements that needs to change to make the array symmetric
+>>> smallest_change([1, 2, 3, 4, 5]) # returns 2
+>>> smallest_change([1, 2, 3, 2, 1]) # returns 0
+>>> smallest_change([1, 2, 3, 2, 3]) # returns 1
+
+def smallest_change(arr):
+    # Calculate the number of elements that need to change to make the array symmetric
+    >>> smallest_change([1, 2, 3, 4, 5]) # returns 2
+    >>> smallest_change([1, 2, 3, 2, 1]) # returns 0
+    >>> smallest_change([1, 2, 3, 2, 3]) # returns 1
+    ans = 0
+    for i in range(len(arr) // 2):
+        if arr[i] != arr[len(arr) - i - 1]:
+            ans += 1
+    return ans

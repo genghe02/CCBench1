@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+list_of_arrays = map(lambda x: x*np.ones(2), range(5))
+# Stack a list of arrays into a single array
+myarray = np.stack(list_of_arrays)
+```

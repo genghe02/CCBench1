@@ -1,0 +1,4 @@
+ # Add zeros to the left of string values in the specified column to length 15
+def add_zeros_to_string(df, col_name):
+    df[col_name] = df[col_name].apply(lambda x: '{0:0>15}'.format(x))
+    return df</s>

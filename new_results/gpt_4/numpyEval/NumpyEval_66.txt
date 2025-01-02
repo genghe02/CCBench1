@@ -1,0 +1,2 @@
+# Transpose and flatten a nested numpy array
+d = np.array([a, b, c]).T.flatten()

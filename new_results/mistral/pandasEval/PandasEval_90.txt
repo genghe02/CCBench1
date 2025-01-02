@@ -1,0 +1,10 @@
+ import pandas as pd
+
+# Drop the specified rows in the dataframe if zero comes in the specified column and the index is odd
+def drop2rows_zero(df):
+    # Rows with column2 = 0 and on odd index
+    idx = df[(df['column2'] == 0) & (df.index % 2 == 1)].index
+    # The rows above them
+    idx = idx.append(idx-1)
+    # Drop the rows from dataframe and return the modified dataframe
+    return df.drop(idx)</s>

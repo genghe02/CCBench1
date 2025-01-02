@@ -1,0 +1,3 @@
+# Check if DataFrame contains any NaN values and return a boolean value
+def if_any_value_is_nan(df):
+    return df.isnull().values.any()

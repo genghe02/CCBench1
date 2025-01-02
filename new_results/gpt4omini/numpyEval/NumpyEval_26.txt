@@ -1,0 +1,1 @@
+import numpy as np\n\n# List of arrays.\nL = [np.random.randn(5,4,2,5,1,2) for i in range(10)]\n# Stack the list of arrays along a new axis\nM = np.stack(L, axis=-1)

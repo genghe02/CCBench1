@@ -1,0 +1,4 @@
+# Set real part of complex numbers with absolute value < tolerance to 0
+a.real[np.abs(a.real) < tol] = 0
+# Set imaginary part of complex numbers with absolute value < tolerance to 0
+a.imag[np.abs(a.imag) < tol] = 0

@@ -1,0 +1,17 @@
+```python
+def Strongest_Extension(class_name, extensions):
+    # Identify the strongest extension based on the number of uppercase letters compared to lowercase letters
+    >>> Strongest_Extension("ClassName", ["HTML", "css", "JavaScript"]) # returns "ClassName.HTML"
+    >>> Strongest_Extension("Widget", ["jpeg", "PNG", "gif"]) # returns "Widget.PNG"
+    >>> Strongest_Extension("Example", ["python", "Java", "CSharp"]) # returns "Example.Java"
+    strong = extensions[0]
+    my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+    for s in extensions:
+        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+        if val > my_val:
+            strong = s
+            my_val = val
+
+    ans = class_name + "." + strong
+    return ans
+```

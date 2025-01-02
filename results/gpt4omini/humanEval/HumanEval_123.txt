@@ -1,0 +1,30 @@
+```python
+def get_odd_collatz(n):
+    # This function generates the odd numbers in the Collatz sequence starting from a given number n.
+    # If n is even, it initializes an empty list to store odd numbers; if odd, it starts the list with n.
+    # The function continues to apply the Collatz rules until n becomes 1, adding odd results to the list.
+    # It returns the sorted list of odd numbers found in the sequence.
+    #
+    # :param n: int, the starting number for generating the Collatz sequence.
+    # :return: list, a sorted list of odd numbers encountered in the Collatz sequence starting from n.
+    #
+    # Test cases:
+    # >>> get_odd_collatz(6)  # Should return [1]
+    # >>> get_odd_collatz(7)  # Should return [7, 5, 3, 1]
+    # >>> get_odd_collatz(1)  # Should return [1]
+    # >>> get_odd_collatz(8)  # Should return [1]
+    if n % 2 == 0:
+        odd_collatz = [] 
+    else:
+        odd_collatz = [n]
+    while n > 1:
+        if n % 2 == 0:
+            n = n / 2
+        else:
+            n = n * 3 + 1
+            
+        if n % 2 == 1:
+            odd_collatz.append(int(n))
+
+    return sorted(odd_collatz)
+```

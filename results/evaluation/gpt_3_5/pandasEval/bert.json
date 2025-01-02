@@ -1,0 +1,1214 @@
+[
+  {
+    "id": 0,
+    "filename": "PandasEval_0.txt",
+    "dataset_comment": "Drop rows of Pandas DataFrame where the value in a specified column is NaN",
+    "generated_comment": "Remove rows from a DataFrame where the specified column contains NaN values using pandas dropna() method.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6989940404891968,
+      "R": 0.763163149356842,
+      "F1": 0.7296704649925232
+    }
+  },
+  {
+    "id": 1,
+    "filename": "PandasEval_1.txt",
+    "dataset_comment": "Replace fields that are entirely space or empty with NaN using regex and return the result.",
+    "generated_comment": "Replace all blank values in a DataFrame with NaN using pandas and numpy.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6673007607460022,
+      "R": 0.628149688243866,
+      "F1": 0.6471336483955383
+    }
+  },
+  {
+    "id": 2,
+    "filename": "PandasEval_2.txt",
+    "dataset_comment": "Change the column labels of a pandas DataFrame from ['A', 'B', 'C'] to ['a', 'b', 'c'].",
+    "generated_comment": "Change the column names of a pandas DataFrame to ['a', 'b', 'c'].",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.9350990056991577,
+      "R": 0.9132920503616333,
+      "F1": 0.9240669012069702
+    }
+  },
+  {
+    "id": 3,
+    "filename": "PandasEval_3.txt",
+    "dataset_comment": "Add leading zeros to strings in the col_name column of a Pandas DataFrame, ensuring a maximum string length of 15 characters, and return the DataFrame.",
+    "generated_comment": "Add zeros to the beginning of each string in the specified column of the DataFrame to make the total length of each string 15 characters using pandas apply function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7176598310470581,
+      "R": 0.7163369655609131,
+      "F1": 0.7169977426528931
+    }
+  },
+  {
+    "id": 4,
+    "filename": "PandasEval_4.txt",
+    "dataset_comment": "Convert a list_of_lists, with the format [header, [row1], [row2], ...], to a DataFrame. The header should be in the format [column1, column2, ...], and each row in the format [value1, value2, ...]. Return the resulting DataFrame.",
+    "generated_comment": "Create a pandas DataFrame from a list of lists where the first list contains column names and the rest of the lists contain data entries.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6081764101982117,
+      "R": 0.4578970670700073,
+      "F1": 0.5224446654319763
+    }
+  },
+  {
+    "id": 5,
+    "filename": "PandasEval_5.txt",
+    "dataset_comment": "Convert all column headers in the pandas DataFrame to lowercase. Return the modified DataFrame.",
+    "generated_comment": "Make all columns in the DataFrame lowercase by applying the str.lower function to each column name.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6356766819953918,
+      "R": 0.6830561757087708,
+      "F1": 0.6585152745246887
+    }
+  },
+  {
+    "id": 6,
+    "filename": "PandasEval_6.txt",
+    "dataset_comment": "Change the dtype of multiple columns in the dataframe. The dataframe contains columns with different dtypes: some columns are float64, while others are int64. Convert all columns with dtype float64 to float32.",
+    "generated_comment": "Select columns with data type float64 in a pandas DataFrame and convert them to data type np.float32.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6830638647079468,
+      "R": 0.6274429559707642,
+      "F1": 0.6540730595588684
+    }
+  },
+  {
+    "id": 7,
+    "filename": "PandasEval_7.txt",
+    "dataset_comment": "Convert the 'date' column to datetime type.Skip rows with strings that cannot be converted to datetime by using errors='coerce'.",
+    "generated_comment": "Convert the 'date' column in the DataFrame to datetime format using pd.to_datetime() with error handling set to 'coerce'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7157006859779358,
+      "R": 0.7534043788909912,
+      "F1": 0.734068751335144
+    }
+  },
+  {
+    "id": 8,
+    "filename": "PandasEval_8.txt",
+    "dataset_comment": "Filter the DataFrame to include only rows where the second column has the specific value 'Jimmy'.",
+    "generated_comment": "Filter the DataFrame to only include rows where the value in the second column ('col2') is 'Jimmy'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.8166766166687012,
+      "R": 0.8910849094390869,
+      "F1": 0.8522597551345825
+    }
+  },
+  {
+    "id": 9,
+    "filename": "PandasEval_9.txt",
+    "dataset_comment": "Extract the first and last rows of a DataFrame in Pandas and return the resulting DataFrame",
+    "generated_comment": "Extract the first and last rows of a DataFrame using iloc and return them.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.8248015642166138,
+      "R": 0.817529022693634,
+      "F1": 0.8211491703987122
+    }
+  },
+  {
+    "id": 10,
+    "filename": "PandasEval_10.txt",
+    "dataset_comment": "Extract the first and last rows of a DataFrame in Pandas and return the resulting DataFrame",
+    "generated_comment": "Group the DataFrame by 'Mt' and then filter each group to only include the row with the maximum value in the 'num' column.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.4868137240409851,
+      "R": 0.58580482006073,
+      "F1": 0.5317413806915283
+    }
+  },
+  {
+    "id": 11,
+    "filename": "PandasEval_11.txt",
+    "dataset_comment": "Select rows from a DataFrame df where the column value named col_name is in the iterable values and return these rows.",
+    "generated_comment": "Select rows from a DataFrame based on the values in a specific column.Parameters:df (pd.DataFrame): The input DataFrame.col_name (str): The name of the column to filter on.values (list): A list of values to filter the DataFrame on.Returns:pd.DataFrame: The filtered DataFrame containing rows where the specified column matches the values provided.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5755382180213928,
+      "R": 0.6937774419784546,
+      "F1": 0.6291506886482239
+    }
+  },
+  {
+    "id": 12,
+    "filename": "PandasEval_12.txt",
+    "dataset_comment": "Return the number of rows in the DataFrame df",
+    "generated_comment": "Calculate the number of rows in a pandas DataFrame by returning the length of the index of the DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7051252126693726,
+      "R": 0.7692816853523254,
+      "F1": 0.7358075976371765
+    }
+  },
+  {
+    "id": 13,
+    "filename": "PandasEval_13.txt",
+    "dataset_comment": "Create an empty DataFrame in Pandas with only column names and return it.",
+    "generated_comment": "Create an empty pandas DataFrame with the specified column names.The input parameter 'col_names' is a list of column names for the DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6407423615455627,
+      "R": 0.7275505661964417,
+      "F1": 0.6813927888870239
+    }
+  },
+  {
+    "id": 14,
+    "filename": "PandasEval_14.txt",
+    "dataset_comment": "Calculate the difference between rows within each group using pandas, where row ordering is important. Use pandas.groupby() to group the data and apply a custom function to compute the difference between rows. Use the .iat method for selecting values by position. Return the resulting DataFrame.",
+    "generated_comment": "Group the DataFrame by 'Group' column and calculate the differences between specific rows within each group for 'Value' and 'ID' columns. Return a DataFrame with the calculated differences and 'Group' column included.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.623729407787323,
+      "R": 0.6089463233947754,
+      "F1": 0.6162492036819458
+    }
+  },
+  {
+    "id": 15,
+    "filename": "PandasEval_15.txt",
+    "dataset_comment": "Check if any value is NaN in a Pandas DataFrame and return the result.",
+    "generated_comment": "Check if any value in the DataFrame is NaN by using the isnull() method followed by values.any() method.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6460373401641846,
+      "R": 0.7514910697937012,
+      "F1": 0.6947855949401855
+    }
+  },
+  {
+    "id": 16,
+    "filename": "PandasEval_16.txt",
+    "dataset_comment": "Add a new column named 'column_name' with specified data to the existing DataFrame.",
+    "generated_comment": "Add a new column to a pandas DataFrame with the specified column name and data.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7821028232574463,
+      "R": 0.747086763381958,
+      "F1": 0.7641938924789429
+    }
+  },
+  {
+    "id": 17,
+    "filename": "PandasEval_17.txt",
+    "dataset_comment": "Drop duplicate rows in the DataFrame based on column `col1`, keeping the row with the last value in column `col2`, and return the final DataFrame.",
+    "generated_comment": "Remove duplicates from a DataFrame based on the values in two columns specified by col1 and col2 using pandas drop_duplicates() function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6301687359809875,
+      "R": 0.628844141960144,
+      "F1": 0.6295056939125061
+    }
+  },
+  {
+    "id": 18,
+    "filename": "PandasEval_18.txt",
+    "dataset_comment": "Retrieve the value at the nth row of a given column name in a Pandas DataFrame and return it.",
+    "generated_comment": "Access the value at the nth row for a specific column in a pandas DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.8955284953117371,
+      "R": 0.8199769854545593,
+      "F1": 0.8560891151428223
+    }
+  },
+  {
+    "id": 19,
+    "filename": "PandasEval_19.txt",
+    "dataset_comment": "Create a new DataFrame that is identical to df_original, but with no rows, and return the new DataFrame.",
+    "generated_comment": "Create a new DataFrame with the same column structure as the original DataFrame without any rows.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7790402770042419,
+      "R": 0.6833139657974243,
+      "F1": 0.7280439734458923
+    }
+  },
+  {
+    "id": 20,
+    "filename": "PandasEval_20.txt",
+    "dataset_comment": "Count the number of missing/NaN values in each column of the DataFrame and return a series.",
+    "generated_comment": "Calculate the number of missing values in each column of the DataFrame using pandas isnull() method and sum() method.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6917177438735962,
+      "R": 0.7836338877677917,
+      "F1": 0.7348126173019409
+    }
+  },
+  {
+    "id": 21,
+    "filename": "PandasEval_21.txt",
+    "dataset_comment": "Create a new dataframe by filtering values that exceed the mean value of the column from the original dataframe. Use indexing or the `where` function to compare values and add NaNs where necessary. Implement a custom function to remove NaNs, also ensure that NaNs are removed from the first rows by utilizing the `dropna` method.",
+    "generated_comment": "Filter out values in the DataFrame that are greater than the mean of each column, then apply a lambda function to drop any NaN values and return a new DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7271283268928528,
+      "R": 0.6132920980453491,
+      "F1": 0.6653763651847839
+    }
+  },
+  {
+    "id": 22,
+    "filename": "PandasEval_22.txt",
+    "dataset_comment": "Normalize the dataframe using pandas by subtracting the mean and dividing by the standard deviation on df.iloc[:, 0, -1] along axis zero, and return the normalized dataframe.",
+    "generated_comment": "Normalize the input DataFrame by applying a function that subtracts the column mean and divides by the column standard deviation to all columns except the last one.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6808702349662781,
+      "R": 0.6280962824821472,
+      "F1": 0.6534193754196167
+    }
+  },
+  {
+    "id": 23,
+    "filename": "PandasEval_23.txt",
+    "dataset_comment": "Determine which columns contain NaN values and return a list of the column names that contain NaNs.",
+    "generated_comment": "Identify and return the list of column names in the DataFrame where there are missing values by utilizing pandas functionality to check for NaN values and extracting the relevant column names as a list.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6068370938301086,
+      "R": 0.7266671061515808,
+      "F1": 0.6613680720329285
+    }
+  },
+  {
+    "id": 24,
+    "filename": "PandasEval_24.txt",
+    "dataset_comment": "Round a single column `A` and return the dataframe.",
+    "generated_comment": "Round the values in column 'A' of the input DataFrame to the nearest integer.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6619565486907959,
+      "R": 0.6872246265411377,
+      "F1": 0.6743539571762085
+    }
+  },
+  {
+    "id": 25,
+    "filename": "PandasEval_25.txt",
+    "dataset_comment": "Group values of Pandas DataFrame by `id` and select the latest entry by `date` after sorting values in ascending order by `date`.",
+    "generated_comment": "Sort the DataFrame by date in ascending order and then group by 'id' and keep the last row for each group.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6976041793823242,
+      "R": 0.6818638443946838,
+      "F1": 0.6896442174911499
+    }
+  },
+  {
+    "id": 26,
+    "filename": "PandasEval_26.txt",
+    "dataset_comment": "Shift the 'gdp' column in the Pandas DataFrame up by one and return the DataFrame with the changed 'gdp' column.",
+    "generated_comment": "Shift the 'gdp' column values in the DataFrame up by one position by using the shift() function from pandas.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7255284786224365,
+      "R": 0.74615079164505,
+      "F1": 0.7356951832771301
+    }
+  },
+  {
+    "id": 27,
+    "filename": "PandasEval_27.txt",
+    "dataset_comment": "Remain the rows where line_num is not equal to 0 using the most efficient method.",
+    "generated_comment": "Filter the DataFrame 'df' to exclude rows where the column 'line_num' is equal to 0.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6604689359664917,
+      "R": 0.7184090614318848,
+      "F1": 0.6882216930389404
+    }
+  },
+  {
+    "id": 28,
+    "filename": "PandasEval_28.txt",
+    "dataset_comment": "In the code, several variables may either contain a pandas DataFrame or be empty.  Check if a certain DataFrame has been created.",
+    "generated_comment": "Check if a DataFrame exists by verifying if it is not None.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6257147192955017,
+      "R": 0.5652890801429749,
+      "F1": 0.5939690470695496
+    }
+  },
+  {
+    "id": 29,
+    "filename": "PandasEval_29.txt",
+    "dataset_comment": "Move each value from a column to the first empty row in a Pandas DataFrame. Use sorted to align non-NULL data at the top, and use dropna to remove all rows that contain only NaN.",
+    "generated_comment": "Apply a lambda function to sort each column in the DataFrame based on whether the values are null or not, and then drop rows where all values are null.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6677869558334351,
+      "R": 0.6487225890159607,
+      "F1": 0.6581167578697205
+    }
+  },
+  {
+    "id": 30,
+    "filename": "PandasEval_30.txt",
+    "dataset_comment": "After assigning a list or array-like value to the columns, the column is considered as type object. Assign the emails to the first row and the 'Email' column.",
+    "generated_comment": "I want to create a dataframe with one of the column as a list or array.Convert the 'Email' column to object type to store a list or array.Assign the list of emails to the 'Email' column for the first row in the dataframe.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6492189168930054,
+      "R": 0.6953677535057068,
+      "F1": 0.6715013980865479
+    }
+  },
+  {
+    "id": 31,
+    "filename": "PandasEval_31.txt",
+    "dataset_comment": "Drop consecutive duplicates and return the result.",
+    "generated_comment": "Filter out consecutive duplicate values in a pandas Series by comparing each element with its neighbor using shift() function and returning only the elements that are not equal to their next neighbor.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5092129111289978,
+      "R": 0.6952824592590332,
+      "F1": 0.5878756642341614
+    }
+  },
+  {
+    "id": 32,
+    "filename": "PandasEval_32.txt",
+    "dataset_comment": "Create a Series from the list [56, 24, 421, 90].",
+    "generated_comment": "Create a pandas Series with the values [56, 24, 421, 90] to work with.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7229089736938477,
+      "R": 0.8246581554412842,
+      "F1": 0.7704386711120605
+    }
+  },
+  {
+    "id": 33,
+    "filename": "PandasEval_33.txt",
+    "dataset_comment": "Retrieve the last N rows of a pandas DataFrame.",
+    "generated_comment": "Return the last 'n' rows of a DataFrame using the tail method in pandas.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7165598273277283,
+      "R": 0.8845958113670349,
+      "F1": 0.7917604446411133
+    }
+  },
+  {
+    "id": 34,
+    "filename": "PandasEval_34.txt",
+    "dataset_comment": "Append the dictionary to the DataFrame and return the DataFrame.",
+    "generated_comment": "Append a dictionary to a pandas DataFrame efficiently by using the append method with the ignore_index parameter set to True.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5799714922904968,
+      "R": 0.7046776413917542,
+      "F1": 0.6362717151641846
+    }
+  },
+  {
+    "id": 35,
+    "filename": "PandasEval_35.txt",
+    "dataset_comment": "Remove columns based on duplicate column names and return the duplicated dataframe.",
+    "generated_comment": "Remove duplicates in a pandas DataFrame based on column names by keeping only the first occurrence of each column.Input: df (pandas DataFrame) - the DataFrame to remove duplicates from based on column names.Output: df (pandas DataFrame) - the DataFrame after removing duplicates based on column names.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5401292443275452,
+      "R": 0.6970887184143066,
+      "F1": 0.6086527109146118
+    }
+  },
+  {
+    "id": 36,
+    "filename": "PandasEval_36.txt",
+    "dataset_comment": "Obtain a pandas DataFrame without the index and print the entire DataFrame without displaying the index.",
+    "generated_comment": "Convert the DataFrame to a string representation without including the index.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6730659604072571,
+      "R": 0.6951356530189514,
+      "F1": 0.6839228272438049
+    }
+  },
+  {
+    "id": 37,
+    "filename": "PandasEval_37.txt",
+    "dataset_comment": "Clip the values of `col_1` between -2 and 2 where `col_0` is equal to 'a' using the `clip` function in Pandas.",
+    "generated_comment": "Modify the 'col_1' values in the DataFrame where 'col_0' is 'a' to be within the range of -2 and 2 using the clip method in pandas.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.773282527923584,
+      "R": 0.8071625828742981,
+      "F1": 0.789859414100647
+    }
+  },
+  {
+    "id": 38,
+    "filename": "PandasEval_38.txt",
+    "dataset_comment": "Change the column labels of df and return the renamed dataframe.",
+    "generated_comment": "Rename the columns of a DataFrame by mapping the original column names to the new column names and utilizing the rename() function provided by pandas.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5762571096420288,
+      "R": 0.6851327419281006,
+      "F1": 0.6259961724281311
+    }
+  },
+  {
+    "id": 39,
+    "filename": "PandasEval_39.txt",
+    "dataset_comment": "Change all columns' types of the DataFrame to numeric and return the new DataFrame.",
+    "generated_comment": "Convert all columns in a pandas DataFrame to numeric type using pd.to_numeric.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.65651935338974,
+      "R": 0.6942272186279297,
+      "F1": 0.674846887588501
+    }
+  },
+  {
+    "id": 40,
+    "filename": "PandasEval_40.txt",
+    "dataset_comment": "Return the average/mean of the column.",
+    "generated_comment": "Calculate the mean value of a specific column in a pandas DataFrame.Input:df: pandas DataFrame containing the datacol_name: name of the column for which the mean needs to be calculatedOutput:Mean value of the specified column.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.4845198392868042,
+      "R": 0.6810861229896545,
+      "F1": 0.5662286281585693
+    }
+  },
+  {
+    "id": 41,
+    "filename": "PandasEval_41.txt",
+    "dataset_comment": "Determine whether a Pandas Column contains a particular value and return the result.",
+    "generated_comment": "Check if a particular value is contained within a pandas Series by using the unique() function and the 'in' operator.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.606063961982727,
+      "R": 0.7227610349655151,
+      "F1": 0.6592883467674255
+    }
+  },
+  {
+    "id": 42,
+    "filename": "PandasEval_42.txt",
+    "dataset_comment": "Delete the first n rows of a DataFrame. Input:   df: DataFrame   n: int Return:   DataFrame after deleting the first n rows.",
+    "generated_comment": "Remove the first n rows from a pandas DataFrame and return the updated DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7211333513259888,
+      "R": 0.661799967288971,
+      "F1": 0.690193772315979
+    }
+  },
+  {
+    "id": 43,
+    "filename": "PandasEval_43.txt",
+    "dataset_comment": "Specify a new column named `mean_along_rows` that contains the mean of each row by computing the mean along the rows using axis=1. Finally, return the dataframe with the new column.",
+    "generated_comment": "Compute the mean along the rows of the input DataFrame.Add a new column 'mean' to the DataFrame that contains the mean value of each row.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7380337715148926,
+      "R": 0.6767858266830444,
+      "F1": 0.7060840725898743
+    }
+  },
+  {
+    "id": 44,
+    "filename": "PandasEval_44.txt",
+    "dataset_comment": "Delete a column from a Pandas DataFrame and return the changed DataFrame.",
+    "generated_comment": "Remove a specified column from a pandas DataFrame.Args:df (pd.DataFrame): The pandas DataFrame from which the column will be removed.column_name (str): The name of the column to be deleted.Returns:pd.DataFrame: The DataFrame with the specified column removed.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5837695598602295,
+      "R": 0.7630151510238647,
+      "F1": 0.6614643335342407
+    }
+  },
+  {
+    "id": 45,
+    "filename": "PandasEval_45.txt",
+    "dataset_comment": "Find the intersection between two series by first creating two sets, one for each series, and then obtaining the intersection of the two sets.",
+    "generated_comment": "Convert the pandas Series s1 and s2 into sets for efficient intersection operationFind the intersection of the two sets s1 and s2 and store the result in intersection_result",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5337931513786316,
+      "R": 0.6285480856895447,
+      "F1": 0.5773083567619324
+    }
+  },
+  {
+    "id": 46,
+    "filename": "PandasEval_46.txt",
+    "dataset_comment": "Get the values of column `A` when column `B` equals 3.",
+    "generated_comment": "Retrieve values from column 'A' in the DataFrame 'df' where the values in column 'B' are equal to 3.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6988400220870972,
+      "R": 0.8035751581192017,
+      "F1": 0.7475569844245911
+    }
+  },
+  {
+    "id": 47,
+    "filename": "PandasEval_47.txt",
+    "dataset_comment": "Make all column headers in the Pandas DataFrame lowercase.",
+    "generated_comment": "Convert all column headers in the input dataframe to lowercase.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.8481152057647705,
+      "R": 0.8080726265907288,
+      "F1": 0.8276098966598511
+    }
+  },
+  {
+    "id": 48,
+    "filename": "PandasEval_48.txt",
+    "dataset_comment": "Check if any word from `targets` is present in the sentence.",
+    "generated_comment": "Filter the DataFrame to select rows where the 'col' column values are present in the 'targets' list.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5945553183555603,
+      "R": 0.6466837525367737,
+      "F1": 0.6195248961448669
+    }
+  },
+  {
+    "id": 49,
+    "filename": "PandasEval_49.txt",
+    "dataset_comment": "Find all unique values in a Pandas DataFrame, irrespective of rows or columns.  Use xx.values.ravel to get the flattened array of the DataFrame. Retrieve unique values using numpy.unique.",
+    "generated_comment": "Get unique values from a Pandas DataFrame by flattening the DataFrame values into a 1D array and utilizing numpy's unique function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.706243634223938,
+      "R": 0.6816965341567993,
+      "F1": 0.6937530636787415
+    }
+  },
+  {
+    "id": 50,
+    "filename": "PandasEval_50.txt",
+    "dataset_comment": "Add a new column C that is the sum of the values in columns A and B.",
+    "generated_comment": "Add a new column 'C' to the DataFrame 'df' which is the sum of columns 'A' and 'B'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6725042462348938,
+      "R": 0.8379140496253967,
+      "F1": 0.7461519241333008
+    }
+  },
+  {
+    "id": 51,
+    "filename": "PandasEval_51.txt",
+    "dataset_comment": "Add a new column named 'Fruit Total' that sums the values of the other columns, ignoring the NaN values.",
+    "generated_comment": "Calculate the total sum of each row in the DataFrame 'df' by applying the sum function on each row using the apply method with axis=1.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5449050664901733,
+      "R": 0.557549774646759,
+      "F1": 0.5511548519134521
+    }
+  },
+  {
+    "id": 52,
+    "filename": "PandasEval_52.txt",
+    "dataset_comment": "Combine two dataframes while ignoring the index and return the concatenated dataframe.",
+    "generated_comment": "Combine two pandas DataFrames by appending df2 to df1 while ignoring the index of df2.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6650163531303406,
+      "R": 0.7676125764846802,
+      "F1": 0.7126408219337463
+    }
+  },
+  {
+    "id": 53,
+    "filename": "PandasEval_53.txt",
+    "dataset_comment": "Retrieve the number of columns in a Pandas DataFrame and return it.",
+    "generated_comment": "Count the number of columns in a pandas DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.9300085306167603,
+      "R": 0.8273307681083679,
+      "F1": 0.8756700754165649
+    }
+  },
+  {
+    "id": 54,
+    "filename": "PandasEval_54.txt",
+    "dataset_comment": "Extract the last year (YY) from a fiscal date string in the format of YYYY-YY.  For example, the last year of '1999-00' would be 2000.  Implement logic to handle cases where it is the end of the century by adding to the first two digits.  The column_name refers to the column in the DataFrame that contains the date strings.  Return the numerical Series object of the last year.",
+    "generated_comment": "Extract the last year from the given DataFrame column by splitting the strings based on '-' and converting the first element to numeric type, then adding 1 to obtain the final result.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6242194175720215,
+      "R": 0.5429662466049194,
+      "F1": 0.580764651298523
+    }
+  },
+  {
+    "id": 55,
+    "filename": "PandasEval_55.txt",
+    "dataset_comment": "Count consecutive positive values in a Python/Pandas array representing equity return data;  for example, if a positive day is represented as 1 and a negative day as 0,  a list y=[0,0,1,1,1,0,0,1,0,1,1] should return z=[0,0,1,2,3,0,0,1,0,1,2].  Return the result.",
+    "generated_comment": "Count consecutive positive values in a pandas Series 'y' by grouping consecutive positive values together and assigning them a count based on their group. Return the modified Series with consecutive counts for positive values.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5716860890388489,
+      "R": 0.4381844401359558,
+      "F1": 0.49611103534698486
+    }
+  },
+  {
+    "id": 56,
+    "filename": "PandasEval_56.txt",
+    "dataset_comment": "Get the first largest value in column a using nlargest and iloc to implement this.",
+    "generated_comment": "Get the largest value from column 'a' in the DataFrame using nlargest() function and return the last element using iloc[-1].",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6873887181282043,
+      "R": 0.7878174781799316,
+      "F1": 0.7341846823692322
+    }
+  },
+  {
+    "id": 57,
+    "filename": "PandasEval_57.txt",
+    "dataset_comment": "Sort columns in a Pandas DataFrame based on column name, with axis set to one.",
+    "generated_comment": "Sort the columns of a pandas DataFrame based on column names in ascending order.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.8289057612419128,
+      "R": 0.7684390544891357,
+      "F1": 0.7975279092788696
+    }
+  },
+  {
+    "id": 58,
+    "filename": "PandasEval_58.txt",
+    "dataset_comment": "Remove all the numbers from the Name column at the series/dataframe level.",
+    "generated_comment": "Remove all digits from the 'Name' column in the DataFrame using the str.replace() method.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6395151615142822,
+      "R": 0.7483497262001038,
+      "F1": 0.6896651387214661
+    }
+  },
+  {
+    "id": 59,
+    "filename": "PandasEval_59.txt",
+    "dataset_comment": "Delete all columns from the DataFrame that contain only NaN values and return the result.",
+    "generated_comment": "Delete all columns in the DataFrame where all values are NaN by utilizing the dropna method with the 'all' parameter set to True and specifying axis=1 for columns.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5833931565284729,
+      "R": 0.7733287811279297,
+      "F1": 0.6650658845901489
+    }
+  },
+  {
+    "id": 60,
+    "filename": "PandasEval_60.txt",
+    "dataset_comment": "Convert Column `Date` to Date Format using pandas function and return the converted dataframe.",
+    "generated_comment": "Convert a specific column in a pandas DataFrame to datetime format using pd.to_datetime() function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6794695854187012,
+      "R": 0.7224071025848389,
+      "F1": 0.7002807855606079
+    }
+  },
+  {
+    "id": 61,
+    "filename": "PandasEval_61.txt",
+    "dataset_comment": "Insert a row into a dataframe at a specified position without ignoring the index, and sort and reset the index with drop=True. Return the new dataframe.",
+    "generated_comment": "Insert a row at an arbitrary position in a pandas DataFrame by appending the row to the DataFrame and then sorting the index to maintain the order.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6997684836387634,
+      "R": 0.6687769889831543,
+      "F1": 0.6839218139648438
+    }
+  },
+  {
+    "id": 62,
+    "filename": "PandasEval_62.txt",
+    "dataset_comment": "For each row in the DataFrame, insert row['MSRA'] as the key and row['THU'] as the value into a rows_dict. The method iterrows() yields both the index and row (as a Series).",
+    "generated_comment": "Create a dictionary where the keys are values from the 'MSRA' column and the values are corresponding values from the 'THU' column by iterating over each row in the DataFrame 'df' and assigning the values accordingly.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6338116526603699,
+      "R": 0.6192241311073303,
+      "F1": 0.6264329552650452
+    }
+  },
+  {
+    "id": 63,
+    "filename": "PandasEval_63.txt",
+    "dataset_comment": "Merge two DataFrames by index and set left and right indices to True.",
+    "generated_comment": "Merge two DataFrames 'df1' and 'df2' on their indices using pandas merge function with the left and right indices.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6069917678833008,
+      "R": 0.741592288017273,
+      "F1": 0.6675748825073242
+    }
+  },
+  {
+    "id": 64,
+    "filename": "PandasEval_64.txt",
+    "dataset_comment": "Select only float64 columns from a Pandas DataFrame using an elegant and shorthand method.",
+    "generated_comment": "Select columns in the DataFrame 'df' that have data type float64 and create a new DataFrame 'new_df' containing only those columns.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5753196477890015,
+      "R": 0.6216472387313843,
+      "F1": 0.5975869297981262
+    }
+  },
+  {
+    "id": 65,
+    "filename": "PandasEval_65.txt",
+    "dataset_comment": "Merge two DataFrames with different column names but the same number of rows.  Given two DataFrames in Pandas, df1 and df2, where df1 has columns 'a' and 'b', and df2 has a column 'c', merge them to create a new DataFrame with columns 'a', 'b', and 'c'.  Two methods can be used to achieve this, both resulting in the same output. Use the merge function with additional arguments to utilize the indexes,  specifically setting left_index and right_index to True.",
+    "generated_comment": "Merge two pandas DataFrames df1 and df2 using the indexes of both DataFrames as the join keys. Return a new DataFrame that combines the columns of both input DataFrames based on the common index values.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7053402066230774,
+      "R": 0.5673955082893372,
+      "F1": 0.6288923025131226
+    }
+  },
+  {
+    "id": 66,
+    "filename": "PandasEval_66.txt",
+    "dataset_comment": "Given a pandas series representing frequencies of a value, convert those frequencies into percentages and return the percentage of each gender.",
+    "generated_comment": "Calculate the percentage of each gender in the given pandas series by using the value_counts method with normalize parameter set to True.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6204624176025391,
+      "R": 0.6376817226409912,
+      "F1": 0.6289542317390442
+    }
+  },
+  {
+    "id": 67,
+    "filename": "PandasEval_67.txt",
+    "dataset_comment": "Resort the index of the DataFrame in place.",
+    "generated_comment": "add the row at top in df",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.4905950725078583,
+      "R": 0.5249318480491638,
+      "F1": 0.5071830153465271
+    }
+  },
+  {
+    "id": 68,
+    "filename": "PandasEval_68.txt",
+    "dataset_comment": "Drop all rows containing NaN values and return the modified dataframe.",
+    "generated_comment": "Remove all rows containing NaN values in a pandas DataFrame by utilizing the dropna() function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6497067213058472,
+      "R": 0.7463093996047974,
+      "F1": 0.6946656703948975
+    }
+  },
+  {
+    "id": 69,
+    "filename": "PandasEval_69.txt",
+    "dataset_comment": "Fill specific columns of a Pandas DataFrame with 0 in place using the fillna() function and return the changed DataFrame.",
+    "generated_comment": "Fill None values in the specified columns of a pandas DataFrame with zero.Test Cases:",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7379265427589417,
+      "R": 0.6414140462875366,
+      "F1": 0.6862937808036804
+    }
+  },
+  {
+    "id": 70,
+    "filename": "PandasEval_70.txt",
+    "dataset_comment": "Drop all data in a Pandas DataFrame using df.index to remove all rows.",
+    "generated_comment": "Initialize a dictionary containing web statistics data for different daysCreate a DataFrame using the web_stats dictionaryDrop all rows from the DataFrame to clear the data",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5608818531036377,
+      "R": 0.6350502967834473,
+      "F1": 0.5956661701202393
+    }
+  },
+  {
+    "id": 71,
+    "filename": "PandasEval_71.txt",
+    "dataset_comment": "Split a dataframe with 100,000 entries into 100 sections of 1,000 entries each.  Take a random sample of size 50 from one of the sections.  Add a \"section\" column to the dataframe, then perform a groupby and sample(n=50).",
+    "generated_comment": "Select a random sample of 50 rows from each group in the DataFrame based on the 'section' column using the groupby and sample functions.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7238544225692749,
+      "R": 0.6359797716140747,
+      "F1": 0.6770777702331543
+    }
+  },
+  {
+    "id": 72,
+    "filename": "PandasEval_72.txt",
+    "dataset_comment": "Normalize the columns of the Pandas DataFrame so that each value is between 0 and 1, given that each column has a different value range.",
+    "generated_comment": "Normalize the dataframe by applying a lambda function to each column, calculating the normalized value for each element based on the column's minimum and maximum values.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6478739380836487,
+      "R": 0.6524093151092529,
+      "F1": 0.6501337885856628
+    }
+  },
+  {
+    "id": 73,
+    "filename": "PandasEval_73.txt",
+    "dataset_comment": "Get the counts of unique values of the DataFrame using count_values,  convert the output to a Pandas DataFrame,  rename the axis to 'unique_values',  and reset the index to return the final DataFrame.",
+    "generated_comment": "Calculate the value counts for each unique value in a pandas DataFrame and reset the index to have two columns: one for unique values and one for their corresponding counts.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6513469219207764,
+      "R": 0.6645833253860474,
+      "F1": 0.6578985452651978
+    }
+  },
+  {
+    "id": 74,
+    "filename": "PandasEval_74.txt",
+    "dataset_comment": "Count the number of occurrences of a value in a series and return the count.",
+    "generated_comment": "Count the occurrences of a specific value in a pandas Series by utilizing the value_counts() method and indexing the result with the desired value.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6395730972290039,
+      "R": 0.7919580340385437,
+      "F1": 0.7076548933982849
+    }
+  },
+  {
+    "id": 75,
+    "filename": "PandasEval_75.txt",
+    "dataset_comment": "Select rows where the value in column x2 is NaN.",
+    "generated_comment": "Filter the DataFrame to select rows where the 'x2' column contains missing values (NaN) using the isnull() function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6064236164093018,
+      "R": 0.767436683177948,
+      "F1": 0.6774949431419373
+    }
+  },
+  {
+    "id": 76,
+    "filename": "PandasEval_76.txt",
+    "dataset_comment": "Append the source series to the target series while ignoring the index or resetting the index.",
+    "generated_comment": "Merge two pandas Series, 'source_series' and 'target_series', into a single Series 'merged_series' while ignoring the index of the source_series.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5417999625205994,
+      "R": 0.6797550916671753,
+      "F1": 0.6029876470565796
+    }
+  },
+  {
+    "id": 77,
+    "filename": "PandasEval_77.txt",
+    "dataset_comment": "Find and return the rows in the DataFrame where col_a is greater than col_b.",
+    "generated_comment": "Filter rows in a pandas DataFrame where the value in column 'col_a' is greater than the value in column 'col_b'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7043195962905884,
+      "R": 0.805860698223114,
+      "F1": 0.7516764998435974
+    }
+  },
+  {
+    "id": 78,
+    "filename": "PandasEval_78.txt",
+    "dataset_comment": "Check whether a column or row exists in a DataFrame before referencing it.  Output the second row of data in the `mycol` column if it exists; otherwise, output NaN.",
+    "generated_comment": "Access the value in the 'mycol' column of the DataFrame at index 1, if it does not exist return np.nan.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7003368139266968,
+      "R": 0.6593551635742188,
+      "F1": 0.6792283654212952
+    }
+  },
+  {
+    "id": 79,
+    "filename": "PandasEval_79.txt",
+    "dataset_comment": "Return the dataframe excluding rows that contain one or more NaN values.",
+    "generated_comment": "Return rows in a DataFrame with more than one NaN value by checking if any row has at least one NaN value using the isna() method and filtering using the any() method along axis=1.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5552364587783813,
+      "R": 0.7092143297195435,
+      "F1": 0.6228501200675964
+    }
+  },
+  {
+    "id": 80,
+    "filename": "PandasEval_80.txt",
+    "dataset_comment": "Calculate the ceiling of a Pandas Series and return the result.",
+    "generated_comment": "Calculate the ceiling of each element in the input pandas Series 's' using numpy's np.ceil() function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5887126922607422,
+      "R": 0.7317560911178589,
+      "F1": 0.6524866223335266
+    }
+  },
+  {
+    "id": 81,
+    "filename": "PandasEval_81.txt",
+    "dataset_comment": "Perform a groupby on a Pandas DataFrame, excluding certain columns, by grouping on `Country` and `Item_Code`, and compute the sum of the rows in the columns ['Y1961', 'Y1962', 'Y1963'].",
+    "generated_comment": "Group the DataFrame by 'Country' and 'Item_Code', then calculate the sum of 'Y1961', 'Y1962', 'Y1963' columns for each group.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.8391221761703491,
+      "R": 0.7540486454963684,
+      "F1": 0.7943139672279358
+    }
+  },
+  {
+    "id": 82,
+    "filename": "PandasEval_82.txt",
+    "dataset_comment": "Parameters:  df: The dataframe to append to.  list_to_append: The list to append.  column_name_list: The column names of the list to append. Returns: The dataframe with the list appended.",
+    "generated_comment": "Create a function that appends a list of values as a new row in a DataFrame with specified column names.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5611953735351562,
+      "R": 0.529996931552887,
+      "F1": 0.5451501607894897
+    }
+  },
+  {
+    "id": 83,
+    "filename": "PandasEval_83.txt",
+    "dataset_comment": "Map True/False values to 1/0 in a Pandas DataFrame and return the DataFrame with the column converted to int.",
+    "generated_comment": "Convert a boolean column in a pandas DataFrame to an integer type by using the astype(int) function.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6592045426368713,
+      "R": 0.6359825730323792,
+      "F1": 0.6473853588104248
+    }
+  },
+  {
+    "id": 84,
+    "filename": "PandasEval_84.txt",
+    "dataset_comment": "Convert Pandas DataFrame to a list of dictionaries using df.to_dict() and return the result.",
+    "generated_comment": "Convert a pandas DataFrame to a list of dictionaries using the 'records' orientation.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7711830139160156,
+      "R": 0.68869948387146,
+      "F1": 0.7276110649108887
+    }
+  },
+  {
+    "id": 85,
+    "filename": "PandasEval_85.txt",
+    "dataset_comment": "Set the value of the entire column `B` in a Pandas DataFrame and return the modified DataFrame.",
+    "generated_comment": "Set a specified value to an entire column in a pandas DataFrame by utilizing the assign method to create a new column 'B' with the provided value.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6911023855209351,
+      "R": 0.7858790755271912,
+      "F1": 0.7354498505592346
+    }
+  },
+  {
+    "id": 86,
+    "filename": "PandasEval_86.txt",
+    "dataset_comment": "Delete multiple columns (A and C) in a single operation.",
+    "generated_comment": "Drop columns 'A' and 'C' from the DataFrame 'df' and return a new DataFrame 'new_df'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.47094327211380005,
+      "R": 0.597968578338623,
+      "F1": 0.5269083380699158
+    }
+  },
+  {
+    "id": 87,
+    "filename": "PandasEval_87.txt",
+    "dataset_comment": "Given that all the dataframes have the same columns, concatenate them and return the concatenated dataframe.",
+    "generated_comment": "Concatenate two pandas DataFrames df1 and df2 along axis 0 to combine them row-wise.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5834498405456543,
+      "R": 0.6359885931015015,
+      "F1": 0.608587384223938
+    }
+  },
+  {
+    "id": 88,
+    "filename": "PandasEval_88.txt",
+    "dataset_comment": "Get the last N rows of a Pandas DataFrame.",
+    "generated_comment": "Extract the last N rows from a pandas DataFrame.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.9358948469161987,
+      "R": 0.9358948469161987,
+      "F1": 0.935894787311554
+    }
+  },
+  {
+    "id": 89,
+    "filename": "PandasEval_89.txt",
+    "dataset_comment": "Return the row index values of the dataframe as a list.",
+    "generated_comment": "Return the row index values of a DataFrame as a list.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.965492308139801,
+      "R": 0.965492308139801,
+      "F1": 0.965492308139801
+    }
+  },
+  {
+    "id": 90,
+    "filename": "PandasEval_90.txt",
+    "dataset_comment": "Create a new DataFrame with the specified rows removed.",
+    "generated_comment": "i want to drop 2 rows in the dataframe if zero comes in the columnif 0 comes on odd index drop previous row as well as current row using pandasAssuming your dataframe is indexed starting from 0Rows with column2 = 0 and on odd indexThe rows above themDrop rows based on the calculated index",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.4261695444583893,
+      "R": 0.5373004078865051,
+      "F1": 0.4753257930278778
+    }
+  },
+  {
+    "id": 91,
+    "filename": "PandasEval_91.txt",
+    "dataset_comment": "Convert a table represented as a list of lists into a pandas DataFrame with columns ['one', 'two'] and convert the 'two' column to float type in the best way.",
+    "generated_comment": "Create a DataFrame from a list of lists 'a' where the first element of each sublist represents column 'one' and the second element represents column 'two'.Convert the values in column 'two' to float data type.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6861627697944641,
+      "R": 0.6909539103507996,
+      "F1": 0.6885499954223633
+    }
+  },
+  {
+    "id": 92,
+    "filename": "PandasEval_92.txt",
+    "dataset_comment": "Slice the DataFrame to take the first n rows and return the result.",
+    "generated_comment": "Return the first n rows of the input DataFrame using the head() function provided by pandas.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6302213668823242,
+      "R": 0.7137092351913452,
+      "F1": 0.6693720817565918
+    }
+  },
+  {
+    "id": 93,
+    "filename": "PandasEval_93.txt",
+    "dataset_comment": "Transform timestamp to a pydatetime object and return the pydatetime object.",
+    "generated_comment": "Transform a pandas timestamp object to a Python datetime object using the to_pydatetime() method.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6882991790771484,
+      "R": 0.7833863496780396,
+      "F1": 0.7327709197998047
+    }
+  },
+  {
+    "id": 94,
+    "filename": "PandasEval_94.txt",
+    "dataset_comment": "Select the given columns and return the new DataFrame.",
+    "generated_comment": "Select multiple columns from a pandas DataFrame based on the provided list of column names.Test cases for the function:Test Case 1:Input: df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]})columns = ['A', 'C']Expected Output: pd.DataFrame({'A': [1, 2, 3], 'C': [7, 8, 9]})Test Case 2:Input: df = pd.DataFrame({'X': [10, 20, 30], 'Y': [40, 50, 60], 'Z': [70, 80, 90]})columns = ['Y']Expected Output: pd.DataFrame({'Y': [40, 50, 60]})",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.31408652663230896,
+      "R": 0.5975489616394043,
+      "F1": 0.4117480516433716
+    }
+  },
+  {
+    "id": 95,
+    "filename": "PandasEval_95.txt",
+    "dataset_comment": "Divide all columns ['B', 'C'] in a DataFrame by the first column 'A' and return the result.",
+    "generated_comment": "Divide each element in columns 'B' and 'C' by the corresponding element in column 'A' in the DataFrame 'df' to normalize the values.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.730426549911499,
+      "R": 0.7590442299842834,
+      "F1": 0.7444605231285095
+    }
+  },
+  {
+    "id": 96,
+    "filename": "PandasEval_96.txt",
+    "dataset_comment": "Merge the two dataframes on the column 'company'.",
+    "generated_comment": "Merge two DataFrames based on the 'company' column to create a new DataFrame containing columns from both input DataFrames.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6567360162734985,
+      "R": 0.7834177613258362,
+      "F1": 0.714505136013031
+    }
+  },
+  {
+    "id": 97,
+    "filename": "PandasEval_97.txt",
+    "dataset_comment": "Rename the only column header and return the changed dataframe.",
+    "generated_comment": "Rename a column in a pandas DataFrame from 'old_name' to 'new_name'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.518315851688385,
+      "R": 0.6211857199668884,
+      "F1": 0.5651074051856995
+    }
+  },
+  {
+    "id": 98,
+    "filename": "PandasEval_98.txt",
+    "dataset_comment": "Get a list of the column headers from a Pandas DataFrame provided by user input, regardless of the number of columns or their names, and return the list of column headers.",
+    "generated_comment": "Extract a list of column names from a pandas DataFrame and return it as a Python list.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.7870775461196899,
+      "R": 0.6905584335327148,
+      "F1": 0.7356656193733215
+    }
+  },
+  {
+    "id": 99,
+    "filename": "PandasEval_99.txt",
+    "dataset_comment": "Find non-numeric rows in a Pandas DataFrame and return the rows that contain non-numeric values. To obtain the subDataFrame of rows with non-numeric values, use the negation (~) of the condition to identify rows with at least one non-numeric entry.",
+    "generated_comment": "Filter out rows in a pandas DataFrame that contain non-numeric values by applying np.isreal to each element of the DataFrame and returning rows where all elements are not real numbers.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.6905826330184937,
+      "R": 0.6935058236122131,
+      "F1": 0.6920410990715027
+    }
+  },
+  {
+    "id": 100,
+    "filename": "PandasEval_100.txt",
+    "dataset_comment": "Use the concat function, as np.repeat does not work practically on a DataFrame.",
+    "generated_comment": "This is my DataFrame that should be repeated for 5 times:Repeat the DataFrame x for 5 times using pd.concat() to create 'repeated_x'.",
+    "indicator_name": "bert",
+    "score": {
+      "P": 0.5111187696456909,
+      "R": 0.5860913991928101,
+      "F1": 0.5460436344146729
+    }
+  }
+]

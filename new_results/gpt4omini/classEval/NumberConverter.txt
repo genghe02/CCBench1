@@ -1,0 +1,200 @@
+```python
+"""
+This class provides methods for converting numbers between different numeral systems:
+decimal, binary, octal, and hexadecimal.
+"""
+
+class NumberConverter:
+    
+    @staticmethod
+    def decimal_to_binary(decimal_num):
+        """
+        Convert a decimal number to its binary representation.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert.
+
+        Returns:
+            str: The binary representation of the decimal number.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = 10
+            expected_output = '1010'
+            
+            # Test case 2: Edge case (0)
+            input = 0
+            expected_output = '0'
+            
+            # Test case 3: Negative number (raise ValueError)
+            try:
+                input = -5
+                NumberConverter.decimal_to_binary(input)
+            except ValueError as e:
+                expected_output = 'ValueError'
+        """
+        if decimal_num < 0:
+            raise ValueError("Input must be a non-negative integer.")
+        binary_num = bin(decimal_num)[2:]
+        return binary_num
+
+    @staticmethod
+    def binary_to_decimal(binary_num):
+        """
+        Convert a binary number (as a string) to its decimal representation.
+
+        Parameters:
+            binary_num (str): The binary number to convert.
+
+        Returns:
+            int: The decimal representation of the binary number.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = '1010'
+            expected_output = 10
+            
+            # Test case 2: Edge case (empty string)
+            input = ''
+            expected_output = 0
+            
+            # Test case 3: Invalid binary string (raise ValueError)
+            try:
+                input = '102'
+                NumberConverter.binary_to_decimal(input)
+            except ValueError as e:
+                expected_output = 'ValueError'
+        """
+        if not all(c in '01' for c in binary_num):
+            raise ValueError("Input must be a binary string.")
+        decimal_num = int(binary_num, 2)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_octal(decimal_num):
+        """
+        Convert a decimal number to its octal representation.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert.
+
+        Returns:
+            str: The octal representation of the decimal number.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = 10
+            expected_output = '12'
+            
+            # Test case 2: Edge case (0)
+            input = 0
+            expected_output = '0'
+            
+            # Test case 3: Negative number (raise ValueError)
+            try:
+                input = -5
+                NumberConverter.decimal_to_octal(input)
+            except ValueError as e:
+                expected_output = 'ValueError'
+        """
+        if decimal_num < 0:
+            raise ValueError("Input must be a non-negative integer.")
+        octal_num = oct(decimal_num)[2:]
+        return octal_num
+
+    @staticmethod
+    def octal_to_decimal(octal_num):
+        """
+        Convert an octal number (as a string) to its decimal representation.
+
+        Parameters:
+            octal_num (str): The octal number to convert.
+
+        Returns:
+            int: The decimal representation of the octal number.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = '12'
+            expected_output = 10
+            
+            # Test case 2: Edge case (empty string)
+            input = ''
+            expected_output = 0
+            
+            # Test case 3: Invalid octal string (raise ValueError)
+            try:
+                input = '8'
+                NumberConverter.octal_to_decimal(input)
+            except ValueError as e:
+                expected_output = 'ValueError'
+        """
+        if not all(c in '01234567' for c in octal_num):
+            raise ValueError("Input must be an octal string.")
+        decimal_num = int(octal_num, 8)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_hex(decimal_num):
+        """
+        Convert a decimal number to its hexadecimal representation.
+
+        Parameters:
+            decimal_num (int): The decimal number to convert.
+
+        Returns:
+            str: The hexadecimal representation of the decimal number.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = 255
+            expected_output = 'ff'
+            
+            # Test case 2: Edge case (0)
+            input = 0
+            expected_output = '0'
+            
+            # Test case 3: Negative number (raise ValueError)
+            try:
+                input = -10
+                NumberConverter.decimal_to_hex(input)
+            except ValueError as e:
+                expected_output = 'ValueError'
+        """
+        if decimal_num < 0:
+            raise ValueError("Input must be a non-negative integer.")
+        hex_num = hex(decimal_num)[2:].lower()
+        return hex_num
+
+    @staticmethod
+    def hex_to_decimal(hex_num):
+        """
+        Convert a hexadecimal number (as a string) to its decimal representation.
+
+        Parameters:
+            hex_num (str): The hexadecimal number to convert.
+
+        Returns:
+            int: The decimal representation of the hexadecimal number.
+
+        Test cases:
+            # Test case 1: Normal usage
+            input = 'ff'
+            expected_output = 255
+            
+            # Test case 2: Edge case (empty string)
+            input = ''
+            expected_output = 0
+            
+            # Test case 3: Invalid hexadecimal string (raise ValueError)
+            try:
+                input = 'gh'
+                NumberConverter.hex_to_decimal(input)
+            except ValueError as e:
+                expected_output = 'ValueError'
+        """
+        if not all(c in '0123456789abcdefABCDEF' for c in hex_num):
+            raise ValueError("Input must be a hexadecimal string.")
+        decimal_num = int(hex_num, 16)
+        return decimal_num
+```

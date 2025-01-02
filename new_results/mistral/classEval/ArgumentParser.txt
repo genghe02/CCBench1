@@ -1,0 +1,187 @@
+ """
+This class is used to parse command-line arguments and validate their types.
+"""
+
+import argparse
+
+class ArgumentParser:
+
+    def __init__(self):
+        """
+        Initialization method.
+        """
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    def parse_arguments(self, command_string):
+        """
+        Parses command-line arguments and validates their types.
+
+        Parameters:
+            command_string (str): Command-line arguments as a single string
+
+        Returns:
+            tuple: A tuple containing a Boolean value (True if successful, False if failed) and None (if successful) or a set of missing arguments (if failed)
+
+        Test cases:
+            # Test case 1: Parsing simple arguments
+            parser = ArgumentParser()
+            args, errors = parser.parse_arguments('--arg1 value1 --arg2')
+            assert args is not None
+            assert errors is None
+            
+            # Test case 2: Missing required arguments
+            parser = ArgumentParser()
+            parser.add_argument('arg1', required=True)
+            args, errors = parser.parse_arguments('arg2')
+            assert args is None
+            assert errors == {'arg1'}
+            
+            # Test case 3: Incorrect argument type
+            parser = ArgumentParser()
+            parser.add_argument('arg1', required=False, arg_type=int)
+            args, errors = parser.parse_arguments('--arg1 text')
+            assert args is None
+            assert errors == {'arg1'}
+        """
+        args = command_string.split()[1:]
+        for i in range(len(args)):
+            arg = args[i]
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    self._handle_keyword_argument(key_value)
+                elif len(key_value) == 1:
+                    self._handle_positional_argument(arg)
+            elif arg.startswith('-'):
+                self._handle_positional_argument(arg)
+            else:
+                raise ValueError(f"Invalid argument '{arg}'")
+        missing_args = self.required - set(self.arguments.keys())
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    def get_argument(self, key):
+        """
+        Retrieves the value of an argument.
+
+        Parameters:
+            key (str): The name of the argument
+
+        Returns:
+            Any: The value of the argument
+
+        Test cases:
+            # Test case 1: Getting a simple argument value
+            parser = ArgumentParser()
+            parser.add_argument('arg1')
+            parser.parse_arguments('--arg1 value1')
+            value = parser.get_argument('arg1')
+            assert value == 'value1'
+            
+            # Test case 2: Getting a keyword argument value
+            parser = ArgumentParser()
+            parser.add_argument('--arg1')
+            parser.parse_arguments('--arg1 value1')
+            value = parser.get_argument('arg1')
+            assert value == 'value1'
+        """
+        return self.arguments.get(key)
+
+    def add_argument(self, arg, required=False, arg_type=str):
+        """
+        Adds an argument to the parser, with an optional type and required flag.
+
+        Parameters:
+            arg (str): The name of the argument
+            required (bool, optional): Whether the argument is required
+            arg_type (type, optional): The type of the argument (defaults to str)
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Adding a simple argument
+            parser = ArgumentParser()
+            parser.add_argument('arg1')
+            
+            # Test case 2: Adding a required argument
+            parser = ArgumentParser()
+            parser.add_argument('arg1', required=True)
+            
+            # Test case 3: Adding an argument with a custom type
+            parser = ArgumentParser()
+            parser.add_argument('arg1', arg_type=int)
+        """
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    def _handle_keyword_argument(self, key_value):
+        """
+        Handles keyword arguments.
+
+        Parameters:
+            key_value (list): A list containing the argument key and an optional value
+
+        Returns:
+            None
+        """
+        key = key_value[0]
+        if key not in self.types:
+            self.types[key] = self.types.get(key, str)
+            self.required.discard(key) if key_value[1] is None else None
+
+        if key_value[1] is not None:
+            self.arguments[key] = self._convert_type(key, key_value[1])
+
+    def _handle_positional_argument(self, arg):
+        """
+        Handles positional arguments.
+
+        Parameters:
+            arg (str): The name of the argument
+
+        Returns:
+            None
+        """
+        self.types.setdefault(arg, str)
+        self.required.discard(arg)
+
+    def _convert_type(self, arg, value):
+        """
+        Converts the value of an argument to its specified type.
+
+        Parameters:
+            arg (str): The name of the argument
+            value (Any): The value of the argument
+
+        Returns:
+            Any: The converted value
+
+        Raises:
+            ValueError: If the argument type is not valid or the value cannot be converted to the specified type
+
+        Test cases:
+            # Test case 1: Converting a string to an integer
+            parser = ArgumentParser()
+            parser.add_argument('arg1', arg_type=int)
+            parser.parse_arguments('--arg1 123')
+            value = parser._convert_type('arg1', '123')
+            assert value == 123
+            
+            # Test case 2: Converting a string to a float
+            parser = ArgumentParser()
+            parser.add_argument('arg1', arg_type=float)
+            parser.parse_arguments('--arg1 123.4')
+            value = parser._convert_type('arg1', '123.4')
+            assert value == 123.4
+            
+            # Test case 3: Raising a ValueError when converting a string to an invalid type
+            parser = ArgumentParser()
+            parser.add_argument('arg1', arg_type=bool)
+            with pytest.raises(ValueError):
+                parser._convert_type('arg1', 'string_value')</s>

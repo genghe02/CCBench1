@@ -1,0 +1,6 @@
+import numpy as np
+
+dists = np.array([[5,1,2], [2,8,1], [1,6,3], [5,2,2], [5,1,2], [3,1,2]])
+r, dr = 2, 3
+# Filter the 'dists' array to include only elements that fall within the range [r, r+dr]
+out = dists[np.where(np.logical_and(dists >= r, dists <= r+dr))]

@@ -1,0 +1,26 @@
+Input:
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    <Requirements for the code>
+    <some test cases for the function>
+    import collections
+    c = collections.Counter(numbers)
+    return [n for n in numbers if c[n] <= 1]
+
+❌ Wrong Output:
+# This function removes duplicate elements from a list
+# Returns a list with unique elements
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    >>> remove_duplicates([1, 2, 3, 3, 4, 4, 5])
+    import collections
+    c = collections.Counter(numbers)
+    return [n for n in numbers if c[n] <= 1]
+
+Output:
+
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    # Remove duplicates from a list by keeping only elements that occur once
+    >>> remove_duplicates([1, 2, 3, 3, 4, 4, 5]) # returns [1, 2, 5]
+    >>> remove_duplicates([1, 1, 1, 2, 2, 3, 3]) # returns []
+    import collections
+    c = collections.Counter(numbers)
+    return [n for n in numbers if c[n] <= 1]

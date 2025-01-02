@@ -1,0 +1,13 @@
+ def cycpattern_check(a, b):
+    # Check if a string has the same substring as a shifted version of string b
+    >>> a = "abcd"
+    >>> b = "cd"
+    >>> cycpattern_check(a, b) # returns True
+
+    l = len(b)
+    pat = b + b
+    for i in range(len(a) - l + 1):
+        for j in range(l + 1):
+            if a[i:i+l] == pat[j:j+l]:
+                return True
+    return False</s>

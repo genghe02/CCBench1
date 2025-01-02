@@ -1,0 +1,21 @@
+ # Check if all elements in the list are unique or not, and the list is sorted in ascending order
+ # Return True if both conditions are met, False otherwise
+
+ >>> is_sorted([1, 2, 2, 3, 3]) # returns False
+ >>> is_sorted([1, 2, 2, 3]) # returns False
+ >>> is_sorted([1, 2, 3]) # returns True
+ >>> is_sorted([1, 1, 2, 3]) # returns False
+ >>> is_sorted([-1, 0, 1]) # returns True
+
+ def is_sorted(lst):
+     # Check if all elements in the list are unique or not, and the list is sorted in ascending order
+     # Return True if both conditions are met, False otherwise
+
+     >>> is_sorted([1, 2, 2, 3, 3]) # returns False
+     >>> is_sorted([1, 2, 2, 3]) # returns False
+     >>> is_sorted([1, 2, 3]) # returns True
+     >>> is_sorted([1, 1, 2, 3]) # returns False
+     >>> is_sorted([-1, 0, 1]) # returns True
+
+     import collections
+     return all(collections.Counter(lst)["" + str(i) for i in lst].values()) <= 1 and all(lst[i - 1] <= lst[i] for i in range(1, len(lst)))</s>

@@ -1,0 +1,9 @@
+```python
+def largest_divisor(n: int) -> int:
+    # Find the largest divisor of a given number 'n' by iterating from 'n-1' to 1 in reverse order and returning the first number that divides 'n' completely.
+    # Test for n = 12, expected output is 6
+    # Test for n = 20, expected output is 10
+    for i in reversed(range(n)):
+        if n % i == 0:
+            return i
+```

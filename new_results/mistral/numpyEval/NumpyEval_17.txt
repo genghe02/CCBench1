@@ -1,0 +1,2 @@
+ # Concatenate horizontally the given list of arrays to create a single array
+out = np.hstack(a)</s>

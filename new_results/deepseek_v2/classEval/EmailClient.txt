@@ -1,0 +1,188 @@
+```python
+"""
+This class represents an EmailClient that manages sending, receiving, and organizing emails. 
+It includes functionality to handle email storage, check capacity, and manage the inbox.
+"""
+
+from datetime import datetime
+
+class EmailClient:
+    def __init__(self, addr, capacity) -> None:
+        """
+        Initializes the EmailClient with an email address and a storage capacity.
+
+        Parameters:
+            addr (str): The email address of the client.
+            capacity (int): The maximum storage capacity in bytes for the inbox.
+        """
+        self.addr = addr
+        self.capacity = capacity
+        self.inbox = []
+    
+    def send_to(self, recv, content, size):
+        """
+        Sends an email to a recipient if their inbox has enough space.
+
+        Parameters:
+            recv (EmailClient): The recipient's EmailClient instance.
+            content (str): The content of the email.
+            size (int): The size of the email in bytes.
+
+        Returns:
+            bool: True if the email was successfully sent, False otherwise.
+
+        Test cases:
+            # Test case 1: Successful email send
+            sender = EmailClient('sender@example.com', 1000)
+            receiver = EmailClient('receiver@example.com', 1000)
+            assert sender.send_to(receiver, 'Hello', 500) == True
+
+            # Test case 2: Email send fails due to full inbox
+            sender = EmailClient('sender@example.com', 1000)
+            receiver = EmailClient('receiver@example.com', 1000)
+            receiver.inbox.append({'size': 1000, 'state': 'unread'})
+            assert sender.send_to(receiver, 'Hello', 500) == False
+
+            # Test case 3: Email send after clearing inbox
+            sender = EmailClient('sender@example.com', 1000)
+            receiver = EmailClient('receiver@example.com', 1000)
+            receiver.inbox.append({'size': 1000, 'state': 'unread'})
+            sender.clear_inbox(500)
+            assert sender.send_to(receiver, 'Hello', 500) == True
+        """
+        if not recv.is_full_with_one_more_email(size):
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            email = {
+                "sender": self.addr,
+                "receiver": recv.addr,
+                "content": content,
+                "size": size,
+                "time": timestamp,
+                "state": "unread"
+            }
+            recv.inbox.append(email)
+            return True
+        else:
+            self.clear_inbox(size)
+            return False
+    
+    def fetch(self):
+        """
+        Fetches the next unread email from the inbox.
+
+        Returns:
+            dict or None: The next unread email as a dictionary, or None if no unread emails are available.
+
+        Test cases:
+            # Test case 1: Fetch unread email
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'state': 'unread', 'content': 'Hello'})
+            assert client.fetch() is not None
+
+            # Test case 2: No unread emails
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'state': 'read', 'content': 'Hello'})
+            assert client.fetch() is None
+
+            # Test case 3: Empty inbox
+            client = EmailClient('user@example.com', 1000)
+            assert client.fetch() is None
+        """
+        if len(self.inbox) == 0:
+            return None
+        for i in range(len(self.inbox)):
+            if self.inbox[i]['state'] == "unread":
+                self.inbox[i]['state'] = "read"
+                return self.inbox[i]
+        return None
+
+    def is_full_with_one_more_email(self, size):
+        """
+        Checks if the inbox will be full if another email of the given size is added.
+
+        Parameters:
+            size (int): The size of the email to be added in bytes.
+
+        Returns:
+            bool: True if the inbox will be full, False otherwise.
+
+        Test cases:
+            # Test case 1: Inbox has enough space
+            client = EmailClient('user@example.com', 1000)
+            assert client.is_full_with_one_more_email(500) == False
+
+            # Test case 2: Inbox will be full
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'size': 600, 'state': 'unread'})
+            assert client.is_full_with_one_more_email(500) == True
+
+            # Test case 3: Exact capacity
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'size': 500, 'state': 'unread'})
+            assert client.is_full_with_one_more_email(500) == False
+        """
+        occupied_size = self.get_occupied_size()
+        return True if occupied_size + size > self.capacity else False
+        
+    def get_occupied_size(self):
+        """
+        Calculates the total size of all emails in the inbox.
+
+        Returns:
+            int: The total size of the inbox in bytes.
+
+        Test cases:
+            # Test case 1: Empty inbox
+            client = EmailClient('user@example.com', 1000)
+            assert client.get_occupied_size() == 0
+
+            # Test case 2: Inbox with one email
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'size': 500, 'state': 'unread'})
+            assert client.get_occupied_size() == 500
+
+            # Test case 3: Inbox with multiple emails
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'size': 300, 'state': 'unread'})
+            client.inbox.append({'size': 200, 'state': 'unread'})
+            assert client.get_occupied_size() == 500
+        """
+        occupied_size = 0
+        for email in self.inbox:
+            occupied_size += email["size"]
+        return occupied_size
+
+    def clear_inbox(self, size):
+        """
+        Clears the inbox to free up space by deleting the oldest emails.
+
+        Parameters:
+            size (int): The amount of space to free up in bytes.
+
+        Test cases:
+            # Test case 1: Clear inbox with enough emails
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'size': 300, 'state': 'unread'})
+            client.inbox.append({'size': 200, 'state': 'unread'})
+            client.clear_inbox(400)
+            assert len(client.inbox) == 1
+
+            # Test case 2: Clear inbox with insufficient emails
+            client = EmailClient('user@example.com', 1000)
+            client.inbox.append({'size': 300, 'state': 'unread'})
+            client.clear_inbox(400)
+            assert len(client.inbox) == 0
+
+            # Test case 3: Clear empty inbox
+            client = EmailClient('user@example.com', 1000)
+            client.clear_inbox(400)
+            assert len(client.inbox) == 0
+        """
+        if len(self.addr) == 0:
+            return
+        freed_space = 0
+        while freed_space < size and self.inbox:
+            email = self.inbox[0]
+            freed_space += email['size']
+            del self.inbox[0]
+```

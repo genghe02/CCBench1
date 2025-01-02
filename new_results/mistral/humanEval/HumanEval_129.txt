@@ -1,0 +1,28 @@
+ def minPath(grid, k):
+   # Requirement: The grid and k are given as input
+   # Use a 2D list to keep track of the minimum number of steps to reach each cell
+   # Initialize an answer list to store the answer
+
+   <some test cases for the function>
+   >>> minPath([[0, 1, 1], [1, 0, 1], [1, 1, 0]], 3)
+   >>> minPath([[1, 1, 1], [1, 1, 1], [1, 1, 1]], 2)
+   # Use BFS or DFS to find the shortest path for the given grid and k
+   n = len(grid)
+   val = [[n * n] * n for _ in range(n)]
+   for i in range(n):
+       for j in range(n):
+           if grid[i][j] == 0:
+               if i != 0:
+                   val[i][j] = min(val[i][j], val[i - 1][j] + 1)
+               if j != 0:
+                   val[i][j] = min(val[i][j], val[i][j - 1] + 1)
+               if i < n - 1:
+                   val[i][j] = min(val[i][j], val[i + 1][j] + 1)
+               if j < n - 1:
+                   val[i][j] = min(val[i][j], val[i][j + 1] + 1)
+
+   ans = []
+   for _ in range(k):
+       i, j = divmod(_, 2)
+       ans.append(val[i + int(not i)][j + int(not j)])
+   return ans</s>

@@ -1,0 +1,2 @@
+ # Calculate the ratio of each element to the previous element in a list
+return np.diff(t)/np.nantoises(np.append(t, 1))[:-1]</s>

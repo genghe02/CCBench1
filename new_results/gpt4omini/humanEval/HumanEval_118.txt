@@ -1,0 +1,18 @@
+```python
+def get_closest_vowel(word):
+    # Return the closest vowel in a word that is surrounded by consonants
+    >>> get_closest_vowel("cat") # returns 'a'
+    >>> get_closest_vowel("exit") # returns 'i'
+    >>> get_closest_vowel("hello") # returns 'o'
+    >>> get_closest_vowel("a") # returns ''
+    >>> get_closest_vowel("abc") # returns 'a'
+    if len(word) < 3:
+        return ""
+
+    vowels = {"a", "e", "i", "o", "u", "A", "E", 'O', 'U', 'I'}
+    for i in range(len(word)-2, 0, -1):
+        if word[i] in vowels:
+            if (word[i+1] not in vowels) and (word[i-1] not in vowels):
+                return word[i]
+    return ""
+```

@@ -1,0 +1,8 @@
+```python
+import numpy as np
+
+a = np.array([[2,3,2],[5,6,1]])
+b = np.array([3,5])
+# Perform element-wise multiplication of a with the column vector b
+c = a * b[:, np.newaxis]
+```

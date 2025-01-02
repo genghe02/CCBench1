@@ -1,0 +1,5 @@
+import pandas as pd
+def creating_df_with_same_as_other(df_original):
+    # Create an empty copy of the original dataframe with the same structure
+    df_copy = df_original.iloc[:0,:].copy()
+    return df_copy

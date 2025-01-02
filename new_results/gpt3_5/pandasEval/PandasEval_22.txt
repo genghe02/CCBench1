@@ -1,0 +1,4 @@
+# Standardize all columns in the dataframe except the last one by calculating the z-score formula and applying it using lambda function on each column's values
+def normalize(df):
+    df.iloc[:,0:-1] = df.iloc[:,0:-1].apply(lambda x: (x-x.mean())/ x.std(), axis=0)
+    return df

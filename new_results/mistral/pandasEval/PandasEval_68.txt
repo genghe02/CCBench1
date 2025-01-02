@@ -1,0 +1,2 @@
+ # Return dataframe with all rows containing no NaN values
+return df.dropna()</s>

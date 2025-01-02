@@ -1,0 +1,10 @@
+```python
+def string_to_md5(text):
+    # Convert a string to its MD5 hash in hexadecimal format; returns None if the input is empty
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    >>> string_to_md5('') == None
+    >>> string_to_md5('Python') == '23eeeb4347bdd26bfc6b7ee9a3b755dd'
+    """
+    import hashlib
+    return hashlib.md5(text.encode('ascii')).hexdigest() if text else None
+```

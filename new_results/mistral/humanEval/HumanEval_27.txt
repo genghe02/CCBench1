@@ -1,0 +1,6 @@
+ def flip_case(string: str) -> str:
+   # Change all lowercase letters in string to uppercase and vice versa
+   >>> flip_case("hello") # returns HELLO
+   >>> flip_case("PyThOn") # returns pYTHON
+   >>> flip_case("A1b2c3") # returns A1B2C3
+   return string.swapcase()</s>

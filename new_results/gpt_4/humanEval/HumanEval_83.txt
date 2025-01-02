@@ -1,0 +1,7 @@
+def starts_one_ends(n):
+    # This function checks if the number starts and ends with 1, if so it returns 1, otherwise it returns 18 times 10 to the power of n minus 2
+    >>> starts_one_ends(1) # returns 1
+    >>> starts_one_ends(2) # returns 18
+    >>> starts_one_ends(3) # returns 180
+    if n == 1: return 1
+    return 18 * (10 ** (n - 2))

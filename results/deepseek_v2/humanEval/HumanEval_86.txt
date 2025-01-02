@@ -1,0 +1,12 @@
+```python
+def anti_shuffle(s):
+    # This function takes a string `s`, splits it into words, sorts the characters in each word, and then joins the sorted words back into a single string.
+    # Example test cases for the function:
+    # >>> anti_shuffle("hello world")
+    # 'ehllo dlorw'
+    # >>> anti_shuffle("python programming")
+    # 'hnopty gmorammmiprg'
+    # >>> anti_shuffle("a quick brown fox")
+    # 'a ckiuq nworb fox'
+    return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])
+```

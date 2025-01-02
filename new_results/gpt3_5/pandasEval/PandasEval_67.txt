@@ -1,0 +1,1 @@
+df.sort_index(inplace=True) # Sort the dataframe index in ascending order

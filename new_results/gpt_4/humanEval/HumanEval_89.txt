@@ -1,0 +1,13 @@
+def encrypt(s):
+    # This function shifts each alphabet character in input string 's' 4 positions to the right in the alphabet
+    >>> encrypt('abc') # returns 'efg'
+    >>> encrypt('xyz') # returns 'bcd'
+    >>> encrypt('hello world') # returns 'lipps asvph'
+    d = 'abcdefghijklmnopqrstuvwxyz'
+    out = ''
+    for c in s:
+        if c in d:
+            out += d[(d.index(c)+2*2) % 26]
+        else:
+            out += c
+    return out

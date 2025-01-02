@@ -1,0 +1,8 @@
+```python
+import numpy as np
+
+data = np.array([1,2,3,4,5,6,7,8,9])
+# Specify the indices of the elements to be deleted
+index = [2, 3, 6]
+result = np.delete(data, index)
+```

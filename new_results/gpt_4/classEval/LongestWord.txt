@@ -1,0 +1,64 @@
+"""
+This class provides functionality to maintain a list of words and find the longest word from the list 
+in a given sentence.
+"""
+
+import re
+import string
+
+
+class LongestWord:
+
+    def __init__(self):
+        """
+        Initialization method documentation. Initializes an empty list of words.
+        """
+        self.word_list = []
+
+    def add_word(self, word):
+        """
+        Adds a word to the list of words.
+
+        Parameters:
+            word (str): The word to be added to the list.
+        """
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        """
+        Finds the longest word in the sentence that is present in the list of words.
+
+        Parameters:
+            sentence (str): The sentence in which to find the longest word.
+        
+        Returns:
+            str: The longest word in the sentence that is present in the list of words. 
+            If no words from the list are present, returns an empty string.
+        
+        Test cases:
+            # Test case 1: Normal case
+            word_list = LongestWord()
+            word_list.add_word('apple')
+            word_list.add_word('banana')
+            assert word_list.find_longest_word('I like apple and banana') == 'banana'
+            
+            # Test case 2: No words from list in sentence
+            word_list = LongestWord()
+            word_list.add_word('apple')
+            assert word_list.find_longest_word('I like oranges') == ''
+            
+            # Test case 3: Sentence with punctuation
+            word_list = LongestWord()
+            word_list.add_word('apple')
+            word_list.add_word('banana')
+            assert word_list.find_longest_word('I like apple, banana, and oranges.') == 'banana'
+        """
+
+        longest_word = ""
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        sentence = re.split(' ', sentence)
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        return longest_word

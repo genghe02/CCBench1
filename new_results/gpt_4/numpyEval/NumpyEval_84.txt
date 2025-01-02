@@ -1,0 +1,3 @@
+# Set the real and imaginary parts of elements in array 'a' to 0 if they are less than the tolerance level
+a.real[np.abs(a.real) < tol] = 0
+a.imag[np.abs(a.imag) < tol] = 0

@@ -1,0 +1,7 @@
+# Extract all coordinates of value x from a 2D list and return them sorted by row and column
+
+>>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 5)
+>>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 1)
+>>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 9)
+>>> get_row([[1, 1, 1], [1, 1, 1], [1, 1, 1]], 1)
+>>> get_row([[9, 3, 4], [5, 9, 3], [7, 8, 9]], 9)

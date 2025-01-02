@@ -1,0 +1,24 @@
+```python
+import pandas as pd
+
+def set_value_to_entire_col(df: pd.DataFrame, value) -> pd.DataFrame:
+    """Assign a specified value to an entire column 'B' in the given DataFrame.
+    If the column 'B' already exists, its values will be updated to the new value.
+    If it doesn't exist, a new column 'B' will be created with the specified value for all rows.
+    
+    >>> df = pd.DataFrame({'A': [1, 2, 3]})
+    >>> set_value_to_entire_col(df, 5)
+       A  B
+    0  1  5
+    1  2  5
+    2  3  5
+    >>> df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    >>> set_value_to_entire_col(df, 10)
+       A   B
+    0  1  10
+    1  2  10
+    2  3  10
+    """
+    df = df.assign(B=value)
+    return df
+```

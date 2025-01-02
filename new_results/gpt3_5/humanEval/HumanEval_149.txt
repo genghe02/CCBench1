@@ -1,0 +1,4 @@
+# This function sorts a list and filters out elements with even length, then returns the sorted filtered list based on length
+>>> sorted_list_sum(["apple", "banana", "kiwi", "grape"]) # returns ["banana", "grape"]
+>>> sorted_list_sum(["dog", "cat", "elephant", "lion", "tiger"]) # returns ["elephant", "tiger"]
+>>> sorted_list_sum([]) # returns []

@@ -1,0 +1,15 @@
+```python
+def choose_num(x, y):
+    # Return the largest even number between x and y, or -1 if no such number exists
+    >>> choose_num(12, 15) # returns 14
+    >>> choose_num(13, 12) # returns -1
+    >>> choose_num(2, 2) # returns -1
+    >>> choose_num(1, 10) # returns 10
+    if x > y:
+        return -1
+    if y % 2 == 0:
+        return y
+    if x == y:
+        return -1
+    return y - 1
+```

@@ -1,0 +1,2 @@
+# Fill the `result` array with 1s using fancy indexing based on the array `data`
+result[np.arange(data.size), data] = 1

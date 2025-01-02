@@ -1,0 +1,2 @@
+# Change column names of the dataframe to 'a', 'b', and 'c'
+data.columns = ['a', 'b', 'c']

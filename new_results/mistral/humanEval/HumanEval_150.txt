@@ -1,0 +1,14 @@
+ def x\_or\_y(n, x, y):
+    # Determine whether to return 'x' or 'y' based on the input 'n'
+
+    >>> x\_or\_y(1, 10, 20) # returns 20
+    >>> x\_or\_y(3, 10, 20) # returns 10
+    >>> x\_or\_y(7, 10, 20) # returns 10
+    if n == 1:
+        return y
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x</s>

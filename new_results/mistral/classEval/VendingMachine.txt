@@ -1,0 +1,143 @@
+ """
+This class represents a simple Access Gateway Filter that handles request filtering, authentication, and logging. It processes incoming requests by checking if they match any allowed prefixes, verifying the user authentication token and level, and setting the current user info and log.
+"""
+
+import logging
+import datetime
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method documentation.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Filters a given request based on allowed prefixes and user authentication.
+
+        Parameters:
+            request (dict): An incoming HTTP request as a Python dictionary.
+
+        Returns:
+            bool: True if the request is allowed, False otherwise.
+
+        Test cases:
+            # Test case 1: Allowed request
+            input = {'path': '/api/users', 'method': 'GET'}
+            expected_output = True
+
+            # Test case 2: Denied request (wrong prefix)
+            input = {'path': '/wrong/prefix', 'method': 'POST'}
+            expected_output = False
+
+            # Test case 3: Denied request (unauthenticated)
+            input = {'path': '/api/users', 'method': 'POST'}
+            expected_output = False
+        """
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Fetches the user authentication details from the given request.
+
+        Parameters:
+            request (dict): An incoming HTTP request as a Python dictionary.
+
+        Returns:
+            dict: A user object containing user-specific data, such as username and authentication level.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            input = {'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}}
+            expected_output = {'user': {'username': 'admin', 'level': 5}}
+
+            # Test case 2: Invalid JWT token
+            input = {'headers': {'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.aGVsbG8sIHdvcmxkIHlvdSBuZWVkIHVwIHlvdXI6CiAgICAjbGllbnQiOiIjYXJjaGFpbnQtcmF0b3JsLWV4cCI6MTYxNjIzOTAyMCwiYXVkIjoibmFtZSI7'}}
+            expected_output = False
+        """
+        auth_header = request.get('headers').get('Authorization')
+        if not auth_header:
+            return False
+
+        parts = auth_header.split(' ')
+        if parts[0] != 'Bearer':
+            return False
+
+        token = parts[1]
+        decoded_token = jwt.decode(token, SECRET_KEY, algorithms=['RS256'])
+        return decoded_token
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Sets the current user information and logs the event.
+
+        Parameters:
+            user (dict): User object containing user-specific data, such as username and authentication level.
+
+        Test cases:
+            # Test case 1: Successful set_current_user_info_and_log
+            user = {'username': 'admin', 'level': 5}
+            self.set_current_user_info_and_log(user)
+
+            # Test case 2: Empty user object
+            user = {}
+            self.set_current_user_info_and_log(user)
+        """
+        self.current_user = user
+        logging.info(f"Current user: {user}")
+
+    def log(self, log_message):
+        """
+        Logs an error message with the current timestamp.
+
+        Parameters:
+            log_message (str): The error message to log.
+
+        Test cases:
+            # Test case 1: Log error message
+            self.log('Access Denied')
+        """
+        log_entry = f"{datetime.datetime.now()} - {log_message}"
+        logging.error(log_entry)</s>

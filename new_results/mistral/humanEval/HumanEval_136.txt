@@ -1,0 +1,9 @@
+ # Given list, find and return the smallest negative number and the largest positive number
+
+def largest_smallest_integers(lst):
+    smallest = None
+    largest = None
+    <some test cases for the function>
+    smallest = next((x for x in lst if x < 0), None)
+    largest = next((x for x in lst if x > 0), None)
+    return smallest, largest</s>

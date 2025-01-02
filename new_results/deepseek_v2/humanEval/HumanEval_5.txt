@@ -1,0 +1,21 @@
+```python
+from typing import List
+
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    # Insert a delimeter between each element of the input list and return the new list
+    >>> intersperse([1, 2, 3], 0) # returns [1, 0, 2, 0, 3]
+    >>> intersperse([], 5) # returns []
+    >>> intersperse([7], 3) # returns [7]
+    if not numbers:
+        return []
+
+    result = []
+
+    for n in numbers[:-1]:
+        result.append(n)
+        result.append(delimeter)
+
+    result.append(numbers[-1])
+
+    return result
+```

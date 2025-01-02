@@ -1,0 +1,1 @@
+# Create a pandas Series object with the provided list of integers.

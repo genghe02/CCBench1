@@ -1,0 +1,72 @@
+```python
+import random
+
+
+class TwentyFourPointGame:
+    # This class represents a 24-point game where the goal is to use four randomly generated numbers to form an expression that evaluates to 24.
+    def __init__(self) -> None:
+        self.nums = []
+
+    def _generate_cards(self):
+        # Generate four random numbers between 1 and 9 and store them in the instance variable self.nums.
+        for i in range(4):
+            self.nums.append(random.randint(1, 9))
+        assert len(self.nums) == 4
+
+    def get_my_cards(self):
+        # Return the current set of four numbers that the player needs to use to form an expression that evaluates to 24.
+        # return: list, a list of four integers between 1 and 9.
+        # >>> game = TwentyFourPointGame()
+        # >>> game.get_my_cards()
+        # [3, 5, 7, 9]
+        self.nums = []
+        self._generate_cards()
+        return self.nums
+
+    def answer(self, expression):
+        # Validate and evaluate the given expression to check if it uses the correct numbers and evaluates to 24.
+        # param expression: str, the mathematical expression to be evaluated.
+        # return: bool, True if the expression is valid and evaluates to 24, False otherwise.
+        # >>> game = TwentyFourPointGame()
+        # >>> game.nums = [3, 5, 7, 9]
+        # >>> game.answer('3*5+7+9')
+        # True
+        # >>> game.answer('3*5+7+8')
+        # False
+        if expression == 'pass':
+            return self.get_my_cards()
+        statistic = {}
+        for c in expression:
+            if c.isdigit() and int(c) in self.nums:
+                statistic[c] = statistic.get(c, 0) + 1
+
+        nums_used = statistic.copy()
+
+        for num in self.nums:
+            if nums_used.get(str(num), -100) != -100 and nums_used[str(num)] > 0:
+                nums_used[str(num)] -= 1
+            else:
+                return False
+
+        if all(count == 0 for count in nums_used.values()) == True:
+            return self.evaluate_expression(expression)
+        else:
+            return False
+
+    def evaluate_expression(self, expression):
+        # Evaluate the given mathematical expression to check if it results in 24.
+        # param expression: str, the mathematical expression to be evaluated.
+        # return: bool, True if the expression evaluates to 24, False otherwise.
+        # >>> game = TwentyFourPointGame()
+        # >>> game.evaluate_expression('3*5+7+9')
+        # True
+        # >>> game.evaluate_expression('3*5+7+8')
+        # False
+        try:
+            if eval(expression) == 24:
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
+```

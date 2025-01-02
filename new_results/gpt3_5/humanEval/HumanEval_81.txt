@@ -1,0 +1,2 @@
+# Calculate the letter grade based on GPA values
+>>> numerical_letter_grade([4.0, 3.7, 3.5, 2.0, 0.0]) # returns ['A+', 'A', 'A-', 'C+', 'D-']

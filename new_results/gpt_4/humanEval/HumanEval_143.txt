@@ -1,0 +1,17 @@
+def words_in_sentence(sentence):
+    # This function filters out words in a sentence that have a length which is a prime number
+
+    >>> words_in_sentence("Hello I am an AI") # returns "Hello AI"
+    >>> words_in_sentence("Prime numbers are interesting") # returns "Prime numbers are"
+    >>> words_in_sentence("Testing this Python function") # returns "Testing Python function"
+    new_lst = []
+    for word in sentence.split():
+        flg = 0
+        if len(word) == 1:
+            flg = 1
+        for i in range(2, len(word)):
+            if len(word)%i == 0:
+                flg = 1
+        if flg == 0 or len(word) == 2:
+            new_lst.append(word)
+    return " ".join(new_lst)

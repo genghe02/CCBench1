@@ -1,0 +1,4 @@
+import numpy as np
+
+# Create a 5x5 matrix filled with -1
+out = np.full((5, 5), -1.)

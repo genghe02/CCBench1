@@ -1,0 +1,40 @@
+```python
+import re
+
+# This class is designed for sentence-related operations, including splitting sentences, counting words and processing text files.
+class SplitSentence:
+    
+    # This function is used to split a string into sentences using regular expressions.
+    # param sentences_string: str, the text string that needs to be split into sentences.
+    # return: list, a list of sentences.
+    # test case: >>> splitter = SplitSentence() 
+    #            >>> splitter.split_sentences('Hello World! How are you?')
+    def split_sentences(self, sentences_string):
+        sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', sentences_string)
+        return sentences
+
+    # This function is used to count the number of words in a sentence.
+    # param sentence: str, the sentence for which the number of words is to be counted.
+    # return: int, the number of words in the sentence.
+    # test case: >>> splitter = SplitSentence()
+    #            >>> splitter.count_words('Hello World!')
+    def count_words(self, sentence):
+        sentence = re.sub(r'[^a-zA-Z\s]', '', sentence)
+        words = sentence.split()
+        return len(words)
+
+    # This function processes a text string and finds the sentence with the maximum number of words.
+    # param sentences_string: str, the text string to be processed.
+    # return: int, the maximum word count among all the sentences.
+    # test case: >>> splitter = SplitSentence()
+    #            >>> splitter.process_text_file('Hello World! How are you?')
+    def process_text_file(self, sentences_string):
+        sentences = self.split_sentences(sentences_string)
+        max_count = 0
+        for sentence in sentences:
+            count = self.count_words(sentence)
+            if count > max_count:
+                max_count = count
+
+        return max_count
+```

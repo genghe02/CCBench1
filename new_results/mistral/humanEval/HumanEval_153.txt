@@ -1,0 +1,18 @@
+ # Function returns the class name concatenated with the strongest extension among given extensions
+ # Each extension's uppercase letters count is subtracted from lowercase letters count to find its strength
+def Strongest_Extension(class_name, extensions):
+    # Keep track of the extension with the maximum difference between number of uppercase and lowercase letters
+    strong = extensions[0]
+    my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+    
+    >>> Strongest_Extension("MyClass", ["ExtensionA", "ExtensionB", "ExtensionC"]) # "MyClass.ExtensionC"
+    >>> Strongest_Extension("MyClass", ["Extension1", "Extension2", "Extension3"]) # "MyClass.Extension3"
+    
+    for s in extensions:
+        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+        if val > my_val:
+            strong = s
+            my_val = val
+
+    ans = class_name + "." + strong
+    return ans</s>

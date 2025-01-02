@@ -1,0 +1,2 @@
+# Concatenate arrays a and b into a single array c
+c = np.concatenate([a, b])

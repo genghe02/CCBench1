@@ -1,0 +1,3 @@
+# Function to crop a 2D array
+def crop(arr, top, bottom, left, right):
+    return arr[top:bottom, left:right]

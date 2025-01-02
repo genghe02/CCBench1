@@ -1,0 +1,6 @@
+def decimal_to_binary(decimal):
+    # This function converts a decimal number into binary representation and returns it as a string with 'db' at both ends
+    >>> decimal_to_binary(2) # returns "db10db"
+    >>> decimal_to_binary(0) # returns "db0db"
+    >>> decimal_to_binary(10) # returns "db1010db"
+    return "db" + bin(decimal)[2:] + "db"

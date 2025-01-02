@@ -1,0 +1,2 @@
+ # Extract the first and last row from the dataframe
+return df.iloc[[0, -1]]</s>

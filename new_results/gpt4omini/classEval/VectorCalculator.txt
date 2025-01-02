@@ -1,0 +1,166 @@
+```python
+"""
+This class provides utility methods for vector operations, including similarity measurements and inverse document frequency calculations.
+"""
+
+import numpy as np
+from gensim import matutils
+from numpy import dot, array
+
+class VectorUtil:
+    @staticmethod
+    def similarity(vector_1, vector_2):
+        """
+        Calculate the cosine similarity between two vectors.
+
+        Parameters:
+            vector_1 (array-like): The first vector for similarity measurement.
+            vector_2 (array-like): The second vector for similarity measurement.
+
+        Returns:
+            float: Cosine similarity value between the two vectors, ranging from -1 (opposite) to 1 (exactly the same).
+
+        Test cases:
+            # Test case 1: Positive similarity
+            vector_a = [1, 2, 3]
+            vector_b = [1, 2, 3]
+            expected_output = 1.0
+            assert VectorUtil.similarity(vector_a, vector_b) == expected_output
+
+            # Test case 2: No similarity
+            vector_c = [0, 0, 0]
+            vector_d = [1, 1, 1]
+            expected_output = 0.0
+            assert VectorUtil.similarity(vector_c, vector_d) == expected_output
+
+            # Test case 3: Negative similarity
+            vector_e = [1, 1, 1]
+            vector_f = [-1, -1, -1]
+            expected_output = -1.0
+            assert VectorUtil.similarity(vector_e, vector_f) == expected_output
+        """
+        return dot(matutils.unitvec(vector_1), matutils.unitvec(vector_2))
+
+    @staticmethod
+    def cosine_similarities(vector_1, vectors_all):
+        """
+        Calculate the cosine similarities between a single vector and an array of vectors.
+
+        Parameters:
+            vector_1 (array-like): The vector for which to compute similarities.
+            vectors_all (array-like): A collection of vectors to compare against.
+
+        Returns:
+            array: An array of cosine similarity values between vector_1 and each vector in vectors_all.
+
+        Test cases:
+            # Test case 1: Multiple comparisons
+            vector_a = [1, 0, 0]
+            vectors_b = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+            expected_output = [1.0, 0.0, 0.0]
+            assert np.allclose(VectorUtil.cosine_similarities(vector_a, vectors_b), expected_output)
+
+            # Test case 2: All vectors pointing in the same direction
+            vector_c = [1, 1, 1]
+            vectors_d = [[1, 1, 1], [0, 0, 0], [2, 2, 2]]
+            expected_output = [1.0, 0.0, 1.0]
+            assert np.allclose(VectorUtil.cosine_similarities(vector_c, vectors_d), expected_output)
+
+            # Test case 3: Zero vector scenario
+            vector_e = [0, 0, 0]
+            vectors_f = [[1, 1, 1]]
+            expected_output = [0.0]
+            assert np.allclose(VectorUtil.cosine_similarities(vector_e, vectors_f), expected_output)
+        """
+        norm = np.linalg.norm(vector_1)
+        all_norms = np.linalg.norm(vectors_all, axis=1)
+        dot_products = dot(vectors_all, vector_1)
+        similarities = dot_products / (norm * all_norms)
+        return similarities
+
+    @staticmethod
+    def n_similarity(vector_list_1, vector_list_2):
+        """
+        Calculate the normalized similarity between two lists of vectors.
+
+        Parameters:
+            vector_list_1 (list of array-like): The first list of vectors.
+            vector_list_2 (list of array-like): The second list of vectors.
+
+        Returns:
+            float: Similarity score between the average vectors of the two lists.
+
+        Raises:
+            ZeroDivisionError: If at least one of the input lists is empty.
+
+        Test cases:
+            # Test case 1: Normal lists
+            vectors_a = [[1, 0], [0, 1]]
+            vectors_b = [[1, 1], [2, 2]]
+            expected_output = 0.7071067811865475  # Cosine similarity of mean vectors
+            assert np.isclose(VectorUtil.n_similarity(vectors_a, vectors_b), expected_output)
+
+            # Test case 2: One empty vector list
+            with pytest.raises(ZeroDivisionError):
+                VectorUtil.n_similarity([], [[1, 1]])
+
+            # Test case 3: Both empty vector lists
+            with pytest.raises(ZeroDivisionError):
+                VectorUtil.n_similarity([], [])
+        """
+        if not (len(vector_list_1) and len(vector_list_2)):
+            raise ZeroDivisionError('At least one of the passed list is empty.')
+
+        return dot(matutils.unitvec(array(vector_list_1).mean(axis=0)),
+                   matutils.unitvec(array(vector_list_2).mean(axis=0)))
+
+    @staticmethod
+    def compute_idf_weight_dict(total_num, number_dict):
+        """
+        Compute the inverse document frequency (IDF) weights for a given dictionary of term frequencies.
+
+        Parameters:
+            total_num (int): Total number of documents.
+            number_dict (dict): A dictionary mapping terms to their frequency counts.
+
+        Returns:
+            dict: A dictionary mapping terms to their IDF weight.
+
+        Test cases:
+            # Test case 1: Normal scenario
+            total_documents = 5
+            term_frequencies = {'term1': 1, 'term2': 2}
+            expected_output = {'term1': 0.22314355131420976, 'term2': 0.15611923673829033}
+            assert VectorUtil.compute_idf_weight_dict(total_documents, term_frequencies) == expected_output
+
+            # Test case 2: Empty frequency dictionary
+            expected_output = {}
+            assert VectorUtil.compute_idf_weight_dict(1, {}) == expected_output
+
+            # Test case 3: Smoothing with zero frequency
+            total_documents = 3
+            term_frequencies = {'term3': 0}
+            expected_output = {'term3': 1.0986122886681098}
+            assert VectorUtil.compute_idf_weight_dict(total_documents, term_frequencies) == expected_output
+        """
+        index_2_key_map = {}
+
+        index = 0
+
+        count_list = []
+        for key, count in number_dict.items():
+            index_2_key_map[index] = key
+            count_list.append(count)
+            index = index + 1
+
+        a = np.array(count_list)
+        # Smooth in case of divide by zero error
+        a = np.log((total_num + 1) / (a + 1))
+        result = {}
+
+        for index, w in enumerate(a):
+            key = index_2_key_map[index]
+            result[key] = w
+
+        return result
+```

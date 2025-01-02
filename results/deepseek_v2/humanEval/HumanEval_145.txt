@@ -1,0 +1,21 @@
+```python
+def order_by_points(nums):
+    # Sort a list of numbers based on the sum of their digits, with negative numbers treated as positive for digit sum calculation.
+
+    # Example test cases for the function:
+    # >>> order_by_points([34, 20, 32, 43, 44])
+    # [20, 32, 34, 43, 44]
+    # >>> order_by_points([-100, -1, 10, 1])
+    # [-1, 1, 10, -100]
+    # >>> order_by_points([0, 100, -100, 101])
+    # [0, 100, -100, 101]
+
+    def digits_sum(n):
+        # Calculate the sum of digits of a number, treating negative numbers as positive for digit sum calculation.
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return sorted(nums, key=digits_sum)
+```

@@ -1,0 +1,35 @@
+ def common(l1: list, l2: list):
+    # Check if inputs are lists and have lengths greater than zero
+    # Raise TypeError or ValueError if they don't
+    >>> common([], []) # TypeError: 'list' object is not callable
+    # check if inputs are lists and have lengths greater than zero
+    # Raise TypeError or ValueError if they don't
+    >>> common([], [1]) # TypeError: 'list' object has no len()
+    # check if inputs are lists and have lengths greater than zero
+    # Raise TypeError or ValueError if they don't
+    ret = set()
+    for e1 in l1:
+        for e2 in l2:
+            if e1 == e2:
+                ret.add(e1)
+    return sorted(list(ret))
+
+    # or simply
+
+    # Check requirements at the beginning
+    # if not isinstance(l1, list) or not l1 or not isinstance(l2, list) or not l2:
+    #     raise TypeError("Both inputs must be non-empty lists")
+
+    # Your code here
+    ret = set()
+    for e1 in l1:
+        for e2 in l2:
+            if e1 == e2:
+                ret.add(e1)
+    return sorted(list(ret))
+
+    # And the test cases can be kept as they are
+    >>> common([1, 2, 3], [3, 2, 1]) # [1, 2, 3]
+    >>> common([1, 2], [3, 2]) # []
+    >>> common([1], [1]) # [1]
+    >>> common([], []) # TypeError: 'list' object is not callable</s>

@@ -1,0 +1,14 @@
+# The special factorial of an integer is the product of factorials from 1 to n
+
+    >>> special_factorial(4)
+    288
+    >>> special_factorial(1)
+    1
+    >>> special_factorial(0)
+    1
+    >>> special_factorial(5)
+    34560
+    >>> special_factorial(2)
+    2
+    >>> special_factorial(3)
+    12

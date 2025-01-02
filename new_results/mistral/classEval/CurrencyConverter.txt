@@ -1,0 +1,134 @@
+ """
+This class, named CurrencyConverter, is designed to convert amounts between different currencies using their exchange rates.
+"""
+
+class CurrencyConverter:
+    def __init__(self):
+        """
+        Initializes the CurrencyConverter object with default exchange rates.
+        """
+        self.rates = {
+            'USD': 1.0,
+            'EUR': 0.85,
+            'GBP': 0.72,
+            'JPY': 110.15,
+            'CAD': 1.23,
+            'AUD': 1.34,
+            'CNY': 6.40,
+        }
+
+    def convert(self, amount, from_currency, to_currency):
+        """
+        Converts an amount from one currency to another based on the exchange rates.
+
+        Parameters:
+            amount (float): The amount to be converted.
+            from_currency (str): The currency of the amount.
+            to_currency (str): The currency to convert the amount to.
+        
+        Returns:
+            float: The converted amount.
+        
+        Test cases:
+            # Test case 1: Convert USD to EUR
+            converter = CurrencyConverter()
+            amount = 100.0
+            from_currency = 'USD'
+            to_currency = 'EUR'
+            expected_output = 85.0
+            assert converter.convert(amount, from_currency, to_currency) == expected_output
+
+            # Test case 2: Convert EUR to USD
+            amount = 100.0
+            from_currency = 'EUR'
+            to_currency = 'USD'
+            expected_output = 117.65
+            assert converter.convert(amount, from_currency, to_currency) == expected_output
+
+            # Test case 3: Convert invalid currencies
+            amount = 100.0
+            from_currency = 'XXX'
+            to_currency = 'CNY'
+            assert converter.convert(amount, from_currency, to_currency) is False
+        """
+
+        if from_currency == to_currency:
+            return amount
+
+        if from_currency not in self.rates or to_currency not in self.rates:
+            return False
+
+        from_rate = self.rates[from_currency]
+        to_rate = self.rates[to_currency]
+
+        converted_amount = (amount / from_rate) * to_rate
+        return converted_amount
+
+    def get_supported_currencies(self):
+        """
+        Returns a list of all supported currencies.
+
+        Returns:
+            list: A list of supported currencies.
+        
+        Test cases:
+            # Test case 1: Get supported currencies
+            converter = CurrencyConverter()
+            expected_output = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CNY']
+            assert converter.get_supported_currencies() == expected_output
+        """
+
+        return list(self.rates.keys())
+
+    def add_currency_rate(self, currency, rate):
+        """
+        Adds a new currency and its exchange rate to the converter.
+
+        Parameters:
+            currency (str): The name of the currency to add.
+            rate (float): The exchange rate of the currency.
+        
+        Returns:
+            bool: Returns True if the currency was added successfully, False otherwise.
+        
+        Test cases:
+            # Test case 1: Add a new currency and rate
+            converter = CurrencyConverter()
+            currency = 'CHF'
+            rate = 0.93
+            assert converter.add_currency_rate(currency, rate) is True
+
+            # Test case 2: Add a currency that already exists
+            converter = CurrencyConverter()
+            currency = 'USD'
+            rate = 1.10
+            assert converter.add_currency_rate(currency, rate) is False
+        """
+
+        if currency in self.rates:
+            return False
+        self.rates[currency] = rate
+
+    def update_currency_rate(self, currency, new_rate):
+        """
+        Updates the exchange rate of a given currency.
+
+        Parameters:
+            currency (str): The name of the currency to update.
+            new_rate (float): The new exchange rate.
+        
+        Returns:
+            bool: Returns True if the currency rate was updated successfully, False otherwise.
+        
+        Test cases:
+            # Test case 1: Update an existing currency rate
+            converter = CurrencyConverter()
+            currency = 'USD'
+            new_rate = 1.20
+            assert converter.update_currency_rate(currency, new_rate) is True
+
+            # Test case 2: Update a non-existent currency rate
+            converter = CurrencyConverter()
+            currency = 'XXX'
+            new_rate = 1.40
+            assert converter.update_currency_rate(currency, new_rate) is False</s>

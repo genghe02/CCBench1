@@ -1,0 +1,2 @@
+# Set real part of complex numbers in 'a' to 0 if the absolute value is less than 'tol'.
+# Set imaginary part of complex numbers in 'a' to 0 if the absolute value is less than 'tol'.

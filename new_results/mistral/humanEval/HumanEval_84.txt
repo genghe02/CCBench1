@@ -1,0 +1,15 @@
+ # This function converts the sum of digits of an integer to its binary representation
+# and returns the binary representation starting from the second index (i.e., omitting the '0b' prefix)
+
+def solve(N):
+    # Sum of digits of an integer
+    sum_of_digits = sum(int(digit) for digit in str(N))
+    
+    # Test cases
+    >>> solve(1) # returns '1'
+    >>> solve(5) # returns '101'
+    >>> solve(13) # returns '1101'
+    >>> solve(20) # returns '10100'
+    >>> solve(255) # returns '11111111'
+    
+    return bin(sum_of_digits)[2:]</s>

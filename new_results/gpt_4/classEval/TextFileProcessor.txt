@@ -1,0 +1,121 @@
+"""
+This class provides functionalities to read, write and process text files.
+"""
+
+import json
+
+
+class TextFileProcessor:
+    def __init__(self, file_path):
+        """
+        Initialization method for the TextFileProcessor class.
+
+        Parameters:
+            file_path (str): The path to the text file that needs to be processed.
+        """
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        """
+        Reads the content of the file in JSON format.
+
+        Returns:
+            dict: The content of the file as a JSON object.
+
+        Test cases:
+            # Test case 1: Valid JSON file
+            processor = TextFileProcessor('valid.json')
+            assert processor.read_file_as_json() == {'key': 'value'}
+
+            # Test case 2: Invalid JSON file
+            processor = TextFileProcessor('invalid.json')
+            with pytest.raises(json.decoder.JSONDecodeError):
+                processor.read_file_as_json()
+
+            # Test case 3: Non-existing file
+            processor = TextFileProcessor('nonexistent.json')
+            with pytest.raises(FileNotFoundError):
+                processor.read_file_as_json()
+        """
+        with open(self.file_path, 'r') as file:
+            data = json.load(file)
+
+        return data
+
+    def read_file(self):
+        """
+        Reads the content of the file as a string.
+
+        Returns:
+            str: The content of the file as a string.
+
+        Test cases:
+            # Test case 1: Existing file
+            processor = TextFileProcessor('existing.txt')
+            assert processor.read_file() == 'file content'
+
+            # Test case 2: Empty file
+            processor = TextFileProcessor('empty.txt')
+            assert processor.read_file() == ''
+
+            # Test case 3: Non-existing file
+            processor = TextFileProcessor('nonexistent.txt')
+            with pytest.raises(FileNotFoundError):
+                processor.read_file()
+        """
+        with open(self.file_path, 'r') as file:
+            return file.read()
+
+    def write_file(self, content):
+        """
+        Writes the given content to the file.
+
+        Parameters:
+            content (str): The content that needs to be written to the file.
+
+        Test cases:
+            # Test case 1: Valid content
+            processor = TextFileProcessor('test.txt')
+            processor.write_file('hello world')
+            assert processor.read_file() == 'hello world'
+
+            # Test case 2: Empty content
+            processor = TextFileProcessor('test.txt')
+            processor.write_file('')
+            assert processor.read_file() == ''
+
+            # Test case 3: Non-string content
+            processor = TextFileProcessor('test.txt')
+            with pytest.raises(TypeError):
+                processor.write_file(123)
+        """
+        with open(self.file_path, 'w') as file:
+            file.write(content)
+
+    def process_file(self):
+        """
+        Processes the file by removing all non-alphabetic characters and writes the result back to the file.
+
+        Returns:
+            str: The processed content of the file.
+
+        Test cases:
+            # Test case 1: Valid content
+            processor = TextFileProcessor('test.txt')
+            processor.write_file('hello world!123')
+            assert processor.process_file() == 'helloworld'
+
+            # Test case 2: Empty content
+            processor = TextFileProcessor('test.txt')
+            processor.write_file('')
+            assert processor.process_file() == ''
+
+            # Test case 3: Non-alphabetic content
+            processor = TextFileProcessor('test.txt')
+            processor.write_file('123456')
+            assert processor.process_file() == ''
+        """
+        content = self.read_file()
+        content = ''.join([char for char in content if char.isalpha()])
+        self.write_file(content)
+        return content

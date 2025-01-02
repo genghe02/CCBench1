@@ -1,0 +1,6 @@
+import pandas as pd
+
+def set_value_to_entire_col(df, value):
+    # Assign a specified value to all rows in column 'B' of the dataframe
+    df = df.assign(B=value)
+    return df

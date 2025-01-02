@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+import numpy as np
+
+def drop_rows_col_nan(df, col_name):
+    # Remove rows from dataframe where specified column has NaN values
+    return df.dropna(subset=[col_name])
+```

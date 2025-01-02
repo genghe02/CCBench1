@@ -1,0 +1,11 @@
+# This function finds three numbers in the list that sum up to zero
+>>> triples_sum_to_zero([1, 2, 3, 4]) # returns False
+>>> triples_sum_to_zero([1, -2, 1, 0]) # returns True
+>>> triples_sum_to_zero([0, 0, 0]) # returns True
+def triples_sum_to_zero(l: list):
+    for i in range(len(l)):
+        for j in range(i + 1, len(l)):
+            for k in range(j + 1, len(l)):
+                if l[i] + l[j] + l[k] == 0:
+                    return True
+    return False

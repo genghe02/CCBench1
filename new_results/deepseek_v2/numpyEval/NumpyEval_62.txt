@@ -1,0 +1,5 @@
+import numpy as np
+
+myarray = np.array([("Hello",2.5,3),("World",3.6,2)])
+# Convert a structured array to a record array with specified column names
+newrecarray = np.core.records.fromarrays(myarray.T, names='col1, col2, col3')

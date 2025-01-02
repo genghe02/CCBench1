@@ -1,0 +1,27 @@
+```python
+def correct_bracketing(brackets: str):
+    # This function checks if the provided string of brackets is correctly balanced.
+    # A string of brackets is considered balanced if every opening bracket '<'
+    # has a corresponding closing bracket '>' and they are correctly nested.
+
+    # :param brackets: str, the string containing brackets to be checked
+    # :return: bool, True if the brackets are correctly balanced, False otherwise
+
+    # Test cases for the function:
+    # >>> correct_bracketing("<<>>")  # Expected: True
+    # >>> correct_bracketing("<><>")  # Expected: True
+    # >>> correct_bracketing("<<>")    # Expected: False
+    # >>> correct_bracketing("<><")    # Expected: False
+    # >>> correct_bracketing(">>>")    # Expected: False
+    # >>> correct_bracketing("")        # Expected: True, edge case for an empty string
+
+    depth = 0
+    for b in brackets:
+        if b == "<":
+            depth += 1
+        else:
+            depth -= 1
+        if depth < 0:
+            return False
+    return depth == 0
+```

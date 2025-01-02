@@ -1,0 +1,74 @@
+ <description for whole class>
+"""
+Class for processing Excel files using Openpyxl library.
+"""
+
+class ExcelProcessor:
+    def __init__(self):
+        """
+        Initializes an instance of ExcelProcessor class with no initializations.
+        """
+        pass
+
+    def read_excel(self, file_name):
+        """
+        Reads data from an Excel file and returns it as a list of rows.
+
+        :param file_name: str, the name of the Excel file to be read.
+        :return: list, a list of rows read from the Excel file.
+        """
+        # Read data from an Excel file using Openpyxl library and return it as a list of rows.
+        data = []
+        try:
+            workbook = openpyxl.load_workbook(file_name)
+            sheet = workbook.active
+            for row in sheet.iter_rows(values_only=True):
+                data.append(row)
+            workbook.close()
+            return data
+        except:
+            return None
+
+    def write_excel(self, data, file_name):
+        """
+        Writes data to an Excel file.
+
+        :param data: list, the data to be written to the Excel file.
+        :param file_name: str, the name of the Excel file to be written.
+        :return: int, 1 if the data is written successfully, 0 otherwise.
+        """
+        # Write data to an Excel file using Openpyxl library and return 1 if successful, 0 otherwise.
+        try:
+            workbook = openpyxl.Workbook()
+            sheet = workbook.active
+            for row in data:
+                sheet.append(row)
+            workbook.save(file_name)
+            workbook.close()
+            return 1
+        except:
+            return 0
+
+    def process_excel_data(self, N, save_file_name):
+        """
+        Processes Excel data by reading data from a file, modifying it based on a condition, and writing it back to a new file.
+
+        :param N: int, the index of the column to be processed.
+        :param save_file_name: str, the name of the Excel file to be processed.
+        :return: tuple, a tuple containing a boolean value indicating the success of the operation and the name of the new file.
+        """
+        # Process Excel data by reading data from a file, modifying it based on a condition, and writing it back to a new file.
+        data = self.read_excel(save_file_name)
+        if data is None or N >= len(data[0]):
+            return 0, None
+        new_data = []
+        for row in data:
+            new_row = list(row[:])
+            if not str(row[N]).isdigit():
+                new_row.append(str(row[N]).upper())
+            else:
+                new_row.append(row[N])
+            new_data.append(new_row)
+        new_file_name = save_file_name.split('.')[0] + '_process.xlsx'
+        success, _ = self.write_excel(new_data, new_file_name)
+        return success, new_file_name

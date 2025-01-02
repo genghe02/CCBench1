@@ -1,0 +1,8 @@
+import numpy as np
+import pandas as pd
+df = pd.DataFrame(
+    {"x": np.arange(1_000 * 100), "section": np.repeat(np.arange(100), 1_000)}
+)
+
+# Randomly sample 50 items from each section group in the dataframe
+sample =  df.groupby("section").sample(n=50)

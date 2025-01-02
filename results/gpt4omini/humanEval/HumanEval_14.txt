@@ -1,0 +1,20 @@
+```python
+from typing import List
+
+def all_prefixes(string: str) -> List[str]:
+    # Generate a list of all prefixes of the given string, where each prefix is formed by taking the substring from the start of the string up to the current index.
+    # Examples of test cases for the function:
+    # >>> all_prefixes("abc")
+    # ['a', 'ab', 'abc']
+    # >>> all_prefixes("")
+    # []
+    # >>> all_prefixes("a")
+    # ['a']
+    # >>> all_prefixes("testing")
+    # ['t', 'te', 'tes', 'test', 'testi', 'testin', 'testing']
+    result = []
+
+    for i in range(len(string)):
+        result.append(string[:i+1])
+    return result
+```

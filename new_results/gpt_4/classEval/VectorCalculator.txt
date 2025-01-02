@@ -1,0 +1,153 @@
+"""
+The class VectorUtil provides static methods for dealing with vector operations frequently used in machine learning and data science. 
+These include computing similarity between vectors, cosine similarities, normalized similarity for lists of vectors, and inverse document frequency (IDF) weights for a dictionary.
+"""
+
+import numpy as np
+from gensim import matutils
+from numpy import dot, array
+
+
+class VectorUtil:
+    @staticmethod
+    def similarity(vector_1, vector_2):
+        """
+        Compute the cosine similarity between two vectors.
+
+        Parameters:
+            vector_1 (array-like): The first vector
+            vector_2 (array-like): The second vector
+
+        Returns:
+            float: The cosine similarity between vector_1 and vector_2
+
+        Test cases:
+            # Test case 1: Normal case
+            assert VectorUtil.similarity([1, 0], [1, 0]) == 1.0
+
+            # Test case 2: Orthogonal vectors
+            assert VectorUtil.similarity([1, 0], [0, 1]) == 0.0
+
+            # Test case 3: Error handling with incompatible vectors
+            try:
+                VectorUtil.similarity([1, 0], [1, 0, 0])
+                assert False
+            except ValueError:
+                assert True
+        """
+        return dot(matutils.unitvec(vector_1), matutils.unitvec(vector_2))
+
+    @staticmethod
+    def cosine_similarities(vector_1, vectors_all):
+        """
+        Compute the cosine similarities between a vector and a list of vectors.
+
+        Parameters:
+            vector_1 (array-like): The vector to compare
+            vectors_all (array-like): A list of vectors to compare with vector_1
+
+        Returns:
+            array: An array of cosine similarity scores
+
+        Test cases:
+            # Test case 1: Normal case
+            assert np.array_equal(VectorUtil.cosine_similarities([1, 0], [[1, 0], [0, 1]]), [1.0, 0.0])
+
+            # Test case 2: Edge case with empty vectors_all
+            assert np.array_equal(VectorUtil.cosine_similarities([1, 0], []), [])
+
+            # Test case 3: Error handling with incompatible vectors
+            try:
+                VectorUtil.cosine_similarities([1, 0], [[1, 0, 0], [0, 1]])
+                assert False
+            except ValueError:
+                assert True
+        """
+        norm = np.linalg.norm(vector_1)
+        all_norms = np.linalg.norm(vectors_all, axis=1)
+        dot_products = dot(vectors_all, vector_1)
+        similarities = dot_products / (norm * all_norms)
+        return similarities
+
+    @staticmethod
+    def n_similarity(vector_list_1, vector_list_2):
+        """
+        Compute the normalized similarity between the mean vectors of two lists of vectors.
+
+        Parameters:
+            vector_list_1 (list of array-like): The first list of vectors
+            vector_list_2 (list of array-like): The second list of vectors
+
+        Returns:
+            float: The normalized similarity between the mean vectors
+
+        Test cases:
+            # Test case 1: Normal case
+            assert VectorUtil.n_similarity([[1, 0], [0, 1]], [[1, 0], [0, 1]]) == 0.0
+
+            # Test case 2: Edge case with empty lists
+            try:
+                VectorUtil.n_similarity([], [[1, 0], [0, 1]])
+                assert False
+            except ZeroDivisionError:
+                assert True
+
+            # Test case 3: Error handling with incompatible vectors
+            try:
+                VectorUtil.n_similarity([[1, 0]], [[1, 0, 0]])
+                assert False
+            except ValueError:
+                assert True
+        """
+        if not (len(vector_list_1) and len(vector_list_2)):
+            raise ZeroDivisionError('At least one of the passed list is empty.')
+
+        return dot(matutils.unitvec(array(vector_list_1).mean(axis=0)),
+                   matutils.unitvec(array(vector_list_2).mean(axis=0)))
+
+    @staticmethod
+    def compute_idf_weight_dict(total_num, number_dict):
+        """
+        Compute the inverse document frequency (IDF) weights for a dictionary of counts.
+
+        Parameters:
+            total_num (int): The total number of documents
+            number_dict (dict): A dictionary where keys are terms and values are counts of each term
+
+        Returns:
+            dict: A dictionary where keys are terms and values are IDF weights
+
+        Test cases:
+            # Test case 1: Normal case
+            assert VectorUtil.compute_idf_weight_dict(4, {'apple': 2, 'banana': 1}) == {'apple': 0.4054651081081644, 'banana': 0.6931471805599453}
+
+            # Test case 2: Edge case with empty dictionary
+            assert VectorUtil.compute_idf_weight_dict(4, {}) == {}
+
+            # Test case 3: Error handling with total_num <= 0
+            try:
+                VectorUtil.compute_idf_weight_dict(0, {'apple': 2, 'banana': 1})
+                assert False
+            except ZeroDivisionError:
+                assert True
+        """
+        index_2_key_map = {}
+
+        index = 0
+
+        count_list = []
+        for key, count in number_dict.items():
+            index_2_key_map[index] = key
+            count_list.append(count)
+            index = index + 1
+
+        a = np.array(count_list)
+        # smooth, in case the divide by zero error
+        a = np.log((total_num + 1) / (a + 1))
+        result = {}
+
+        for index, w in enumerate(a):
+            key = index_2_key_map[index]
+            result[key] = w
+
+        return result

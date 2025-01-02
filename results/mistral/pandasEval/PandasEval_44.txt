@@ -1,0 +1,1 @@
+ # Remove the specified column name from the DataFrame using pandas drop method along the axis of columns.

@@ -1,0 +1,2 @@
+ # Find the most frequent number in the array
+return np.bincount(arr).argmax()</s>

@@ -1,0 +1,1 @@
+# Filter the rows in the numpy array 'a' where the first column is 0 and the second column is 1.

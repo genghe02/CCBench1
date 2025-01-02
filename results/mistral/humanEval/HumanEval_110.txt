@@ -1,0 +1,34 @@
+ def exchange(lst1, lst2):
+    # This function compares the number of odd elements in the first list with the number of even elements in the second list.
+    # It returns "YES" if the number of even elements is greater than or equal to the number of odd elements, and "NO" otherwise.
+
+    odd = 0
+    even = 0
+    # Iterate through each element in the first list and count the number of odd elements.
+    for i in lst1:
+        if i % 2 == 1:
+            odd += 1
+    # Iterate through each element in the second list and count the number of even elements.
+    for i in lst2:
+        if i % 2 == 0:
+            even += 1
+    # Compare the counts and return the result.
+    if even >= odd:
+        return "YES"
+    return "NO"
+
+    <some test cases for the function>
+    >>> exchange([1, 2, 3, 4], [2, 4, 6, 8])
+    # Test case 1: Both lists have an equal number of odd and even elements.
+    >>> exchange([1, 2, 3, 4], [2, 4, 6, 8])
+    'YES'
+
+    >>> exchange([1, 2, 3, 4], [2, 4, 6, 8, 10])
+    # Test case 2: The second list has one more even element than the first list.
+    >>> exchange([1, 2, 3, 4], [2, 4, 6, 8, 10])
+    'YES'
+
+    >>> exchange([1, 2, 3, 4], [2, 4, 6, 8, 1, 1])
+    # Test case 3: The first list has one more odd element than the second list.
+    >>> exchange([1, 2, 3, 4], [2, 4, 6, 8, 1, 1])
+    'NO'

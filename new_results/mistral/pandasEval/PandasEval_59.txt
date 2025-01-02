@@ -1,0 +1,7 @@
+ ✅ Correct Output:
+import pandas as pd
+import numpy as np
+
+# Drop all columns containing only NaN values
+def delete_all_nan_columns(df):
+ return df.dropna(how='all', axis=1)</s>

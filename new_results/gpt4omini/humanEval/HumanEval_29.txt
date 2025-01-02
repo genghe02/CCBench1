@@ -1,0 +1,10 @@
+```python
+from typing import List
+
+def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+    # Return a list of strings that start with the given prefix
+    >>> filter_by_prefix(["apple", "banana", "apricot", "cherry"], "ap") # returns ["apple", "apricot"]
+    >>> filter_by_prefix(["dog", "deer", "cat", "dolphin"], "d") # returns ["dog", "deer", "dolphin"]
+    >>> filter_by_prefix(["one", "two", "three"], "four") # returns []
+    return [x for x in strings if x.startswith(prefix)]
+```

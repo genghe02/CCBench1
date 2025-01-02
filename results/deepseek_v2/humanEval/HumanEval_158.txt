@@ -1,0 +1,7 @@
+```python
+def find_max(words):
+    # Find the word with the maximum number of unique characters, and in case of a tie, return the lexicographically smallest word.
+    # The function sorts the words first by the negative count of unique characters (to get the maximum first) and then lexicographically.
+    # It then returns the first word from the sorted list.
+    return sorted(words, key = lambda x: (-len(set(x)), x))[0]
+```

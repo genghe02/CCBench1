@@ -1,0 +1,4 @@
+# This function takes a pandas DataFrame and a column name as input, and returns the mean value of the specified column.
+
+Please make sure that what you should do is just replace the '<>'. Don't say anything else!
+Note that your code annotation style should be consistent with the one in the sample, this is very important.

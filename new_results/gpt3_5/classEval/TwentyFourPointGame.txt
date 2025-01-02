@@ -1,0 +1,142 @@
+"""
+This class represents a 24-point card game where players need to evaluate mathematical expressions to reach the target number 24.
+
+The game involves generating 4 random numbers between 1 and 9 and players have to use these numbers to form a mathematical expression that is equal to 24.
+"""
+
+import random
+
+
+class TwentyFourPointGame:
+    def __init__(self) -> None:
+        """
+        Initialization method for the TwentyFourPointGame class.
+        Initializes an empty list to hold 4 randomly generated numbers.
+        """
+        self.nums = []
+
+    def _generate_cards(self):
+        """
+        Generate 4 random numbers between 1 and 9 as cards to be used in the game.
+        
+        Parameters:
+            None
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Check number of generated cards
+            _generate_cards()
+            assert len(self.nums) == 4
+            
+            # Test case 2: Check card values for correctness
+            _generate_cards()
+            for num in self.nums:
+                assert num >= 1 and num <= 9
+                
+            # Test case 3: Check type of generated cards
+            _generate_cards()
+            for num in self.nums:
+                assert isinstance(num, int)
+        """
+        for i in range(4):
+            self.nums.append(random.randint(1, 9))
+        assert len(self.nums) == 4
+
+    def get_my_cards(self):
+        """
+        Get the cards generated for the player to use in the game.
+        
+        Parameters:
+            None
+        
+        Returns:
+            list: A list containing 4 randomly generated numbers as cards.
+        
+        Test cases:
+            # Test case 1: Check card generation
+            assert len(get_my_cards()) == 4
+            
+            # Test case 2: Check card reuse prevention
+            cards1 = get_my_cards()
+            cards2 = get_my_cards()
+            assert cards1 != cards2
+            
+            # Test case 3: Check type of cards returned
+            assert all(isinstance(card, int) for card in get_my_cards())
+        """
+        self.nums = []
+        self._generate_cards()
+        return self.nums
+
+    def answer(self, expression):
+        """
+        Check if the mathematical expression provided by the player evaluates to 24 using the generated cards.
+        
+        Parameters:
+            expression (str): The mathematical expression to evaluate
+        
+        Returns:
+            bool: True if the expression evaluates to 24, False otherwise
+        
+        Test cases:
+            # Test case 1: Correct expression evaluation
+            assert answer('2*3*4+1') == True
+            
+            # Test case 2: Incorrect expression evaluation
+            assert answer('5+5+5+5') == False
+            
+            # Test case 3: Handling pass expression
+            get_cards = get_my_cards()
+            assert answer('pass') == get_cards
+        """
+        if expression == 'pass':
+            return self.get_my_cards()
+        
+        statistic = {}
+        for c in expression:
+            if c.isdigit() and int(c) in self.nums:
+                statistic[c] = statistic.get(c, 0) + 1
+
+        nums_used = statistic.copy()
+
+        for num in self.nums:
+            if nums_used.get(str(num), -100) != -100 and nums_used[str(num)] > 0:
+                nums_used[str(num)] -= 1
+            else:
+                return False
+
+        if all(count == 0 for count in nums_used.values()) == True:
+            return self.evaluate_expression(expression)
+        else:
+            return False
+
+    def evaluate_expression(self, expression):
+        """
+        Evaluate the mathematical expression provided by the player.
+        
+        Parameters:
+            expression (str): The mathematical expression to evaluate
+        
+        Returns:
+            bool: True if the expression evaluates to 24, False otherwise
+        
+        Test cases:
+            # Test case 1: Valid expression evaluates to 24
+            assert evaluate_expression('6*4') == True
+            
+            # Test case 2: Invalid expression does not evaluate to 24
+            assert evaluate_expression('7+8') == False
+            
+            # Test case 3: Handling invalid expression format
+            assert evaluate_expression('7/2') == False
+        """
+        try:
+            if eval(expression) == 24:
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
+```

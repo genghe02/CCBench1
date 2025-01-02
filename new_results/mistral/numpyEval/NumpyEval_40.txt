@@ -1,0 +1,9 @@
+ # Define function to interweave two arrays
+def interweaving_two_arrays(a, b):
+    # Allocate an empty array of size equal to the sum of sizes of 'a' and 'b'
+    c = np.empty((len(a) + len(b),), dtype=a.dtype)
+    # Assign 'a' values to every second element of the resulting array 'c'
+    c[0::2] = a
+    # Assign 'b' values to every first element that is not already assigned in 'c'
+    c[1::2] = b
+    return c</s>

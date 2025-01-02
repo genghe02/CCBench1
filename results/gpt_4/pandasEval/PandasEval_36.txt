@@ -1,0 +1,1 @@
+# Convert the pandas DataFrame 'df' to a string representation without including the index in the output.

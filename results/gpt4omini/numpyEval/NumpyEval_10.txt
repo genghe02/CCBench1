@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.arange(2*3*2).reshape((2,3,2))
+# Count the number of elements in the array 'a' that are greater than 2 and less than 8.
+count_value = ((2 < a) & (a < 8)).sum()
+```

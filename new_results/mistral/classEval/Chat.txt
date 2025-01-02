@@ -1,0 +1,165 @@
+ ```python
+"""
+This class represents a simple chat room where users can add, remove themselves, and send messages to each other.
+"""
+
+from datetime import datetime
+
+class Chat:
+    def __init__(self):
+        """
+        Initializes an empty Chat object.
+        
+        Parameters:
+            None
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Create an empty chat room
+            chat = Chat()
+            assert len(chat.users) == 0
+        
+            # Test case 2: Add a user
+            chat = Chat()
+            assert chat.add_user('User1')
+            assert len(chat.users) == 1
+        """
+        self.users = {}
+
+    def add_user(self, username):
+        """
+        Adds a new user to the chat room.
+
+        Parameters:
+            username (str): The username of the user to add.
+
+        Returns:
+            bool: True if the user was added successfully, False if the user already exists.
+
+        Test cases:
+            # Test case 1: Add an existing user
+            chat = Chat()
+            assert chat.add_user('User1') == False
+            
+            # Test case 2: Add a new user
+            chat = Chat()
+            assert chat.add_user('User1') == True
+            
+            # Test case 3: Try to add an existing user again
+            chat = Chat()
+            chat.add_user('User1')
+            assert chat.add_user('User1') == False
+        """
+        if username in self.users:
+            return False
+        else:
+            self.users[username] = []
+            return True
+
+    def remove_user(self, username):
+        """
+        Removes a user from the chat room.
+
+        Parameters:
+            username (str): The username of the user to remove.
+
+        Returns:
+            bool: True if the user was removed successfully, False if the user does not exist.
+
+        Test cases:
+            # Test case 1: Remove a non-existent user
+            chat = Chat()
+            assert chat.remove_user('User1') == False
+            
+            # Test case 2: Remove an existing user
+            chat = Chat()
+            assert chat.add_user('User1')
+            assert chat.remove_user('User1') == True
+            
+            # Test case 3: Try to remove a non-existent user again
+            chat = Chat()
+            assert chat.remove_user('User1') == False
+        """
+        if username in self.users:
+            del self.users[username]
+            return True
+        else:
+            return False
+
+    def send_message(self, sender, receiver, message):
+        """
+        Sends a message from one user to another.
+
+        Parameters:
+            sender (str): The username of the sender.
+            receiver (str): The username of the receiver.
+            message (str): The message to be sent.
+
+        Returns:
+            bool: True if the message was sent successfully, False if either the sender or receiver does not exist.
+
+        Test cases:
+            # Test case 1: Send a message to an existing user
+            chat = Chat()
+            assert chat.add_user('User1')
+            assert chat.send_message('User1', 'User2', 'Hello') == True
+            assert len(chat.users['User1']) == 1
+            assert len(chat.users['User2']) == 1
+            
+            # Test case 2: Send a message to a non-existent user
+            chat = Chat()
+            assert chat.send_message('User1', 'User3', 'Hello') == False
+            
+            # Test case 3: Send a message to an existing user, but with a non-existent receiver
+            chat = Chat()
+            assert chat.add_user('User1')
+            assert chat.add_user('User3')
+            assert chat.send_message('User1', 'User3', 'Hello') == False
+        """
+        if sender not in self.users or receiver not in self.users:
+            return False
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        message_info = {
+            'sender': sender,
+            'receiver': receiver,
+            'message': message,
+            'timestamp': timestamp
+        }
+        self.users[sender].append(message_info)
+        self.users[receiver].append(message_info)
+        return True
+
+    def get_messages(self, username):
+        """
+        Retrieves all messages sent to or from the specified user.
+
+        Parameters:
+            username (str): The username of the user.
+
+        Returns:
+            list: A list of messages. Each message is a dictionary containing 'sender', 'receiver', 'message', and 'timestamp'.
+
+        Test cases:
+            # Test case 1: Get messages from an empty chat room
+            chat = Chat()
+            assert chat.get_messages('User1') == []
+            
+            # Test case 2: Get messages from a user with no messages
+            chat = Chat()
+            assert chat.add_user('User1')
+            assert chat.get_messages('User1') == []
+            
+            # Test case 3: Get messages from a user with sent and received messages
+            chat = Chat()
+            assert chat.add_user('User1')
+            assert chat.send_message('User1', 'User2', 'Hello')
+            assert len(chat.get_messages('User1')) == 1
+            assert len(chat.get_messages('User2')) == 1
+        """
+        if username not in self.users:
+            return []
+        return self.users[username]
+```</s>

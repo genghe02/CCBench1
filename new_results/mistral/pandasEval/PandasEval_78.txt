@@ -1,0 +1,2 @@
+ # Get the value of the 'mycol' column at index 1, or return nan if the index is out of bounds
+value = df.mycol.get(1, np.nan)</s>

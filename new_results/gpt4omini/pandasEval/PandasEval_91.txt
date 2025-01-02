@@ -1,0 +1,1 @@
+import pandas as pd\n\na = [['a', '1.2'], ['b', '70'], ['x', '5']]\n# Create a DataFrame from a list of lists with specified column names\ndf = pd.DataFrame(a, columns=['one', 'two'])\ndf['two'] = df['two'].astype(float)

@@ -1,0 +1,82 @@
+ <description for whole class>
+# This is a class for creating and managing the properties of an RPG character, including name, health points (hp), attack power, defense, level, experience points (exp), and methods for attacking, healing, gaining experience, and checking if the character is alive.
+
+class RPGCharacter:
+    def __init__(self, name, hp, attack_power, defense, level=1):
+        # Initialize the character's attributes with given parameters
+        <description for whole function>
+        # Initialize instance variables with given parameters
+        self.name = name
+        self.hp = hp
+        self.attack_power = attack_power
+        self.defense = defense
+        self.level = level
+        self.exp = 0
+
+    def attack(self, other_character):
+        # Calculate and apply damage to another character
+        <description for whole function>
+        <description for all parameters>
+        # Parameters: other_character: An instance of RPGCharacter to attack
+        damage = max(self.attack_power - other_character.defense, 1)
+        other_character.hp -= damage
+
+    def heal(self):
+        # Heal the character's health points
+        <description for whole function>
+        <description for return statement>
+        # Returns: The updated health points of the character
+        self.hp += 10
+        if self.hp > 100:
+            self.hp = 100
+        return self.hp
+
+    def gain_exp(self, amount):
+        # Add experience points to the character
+        <description for whole function>
+        <description for all parameters>
+        # Parameters: amount: The amount of experience points to gain
+        while amount!= 0:
+            if self.exp + amount >= self.level * 100:
+                amount -= (self.level * 100 - self.exp)
+                self.level_up()
+            else:
+                self.exp += amount
+                amount = 0
+
+    def level_up(self):
+        # Increase the character's level and update attributes
+        <description for whole function>
+        <description for return statement>
+        # Returns: The updated level, health points, attack power, and defense of the character
+        if self.level < 100:
+            self.level += 1
+            self.exp = 0
+            self.hp += 20
+            self.attack_power += 5
+            self.defense += 5
+        return self.level, self.hp, self.attack_power, self.defense
+
+    def is_alive(self):
+        # Check if the character is still alive
+        <description for whole function>
+        <description for return statement>
+        # Returns: A boolean value indicating if the character is alive or not
+        return self.hp > 0
+
+<some test cases for the class>
+# Test cases for the RPGCharacter class
+character1 = RPGCharacter("Alice", 50, 10, 5)
+character2 = RPGCharacter("Bob", 100, 20, 15)
+character1.attack(character2)
+print(character1.name, "attacked", character2.name, "and dealt", character1.attack_power - character2.defense, "damage.")
+print(character2.name, "now has", character2.hp, "health points.")
+character1.heal()
+print(character1.name, "healed for 10 health points and now has", character1.hp, "health points.")
+character1.gain_exp(20)
+print(character1.name, "gained 20 experience points and now has a level of", character1.level, "and", character1.hp, "health points.")
+character1.gain_exp(100)
+print(character1.name, "leveled up and now has a level of", character1.level, ",", character1.hp, "health points,", character1.attack_power, "attack power, and", character1.defense, "defense.")
+print(character1.is_alive()) # True
+character1.hp -= 1
+print(character1.is_alive()) # False

@@ -1,0 +1,236 @@
+"""
+This class provides functionality to calculate mathematical expressions with the support of various operators.
+
+The class includes methods to transform the given mathematical expression, prepare the expression for calculations, calculate the result, and check if a character is an operator.
+"""
+
+import re
+from collections import deque
+from decimal import Decimal
+
+class ExpressionCalculator:
+    def __init__(self):
+        """
+        Initialize the ExpressionCalculator object with default settings.
+        """
+        self.postfix_stack = deque()
+        self.operat_priority = [0, 3, 2, 1, -1, 1, 0, 2]
+
+    def calculate(self, expression):
+        """
+        Calculate the mathematical expression provided as input and return the result.
+
+        Parameters:
+            expression (str): The mathematical expression to be calculated
+        
+        Returns:
+            float: The result of the mathematical expression
+        
+        Test cases:
+            # Test case 1: Basic addition
+            assert calculate("2+3") == 5.0
+            
+            # Test case 2: Complex expression
+            assert calculate("2+3*5-7") == 10.0
+            
+            # Test case 3: Expression with negative number
+            assert calculate("-5*2") == -10.0
+        """
+
+        self.prepare(self.transform(expression))
+
+        result_stack = deque()
+        self.postfix_stack.reverse()
+
+        while self.postfix_stack:
+            current_op = self.postfix_stack.pop()
+            if not self.is_operator(current_op):
+                current_op = current_op.replace("~", "-")
+                result_stack.append(current_op)
+            else:
+                second_value = result_stack.pop()
+                first_value = result_stack.pop()
+
+                first_value = first_value.replace("~", "-")
+                second_value = second_value.replace("~", "-")
+
+                temp_result = self._calculate(first_value, second_value, current_op)
+                result_stack.append(str(temp_result))
+
+        return float(eval("*".join(result_stack)))
+
+    def prepare(self, expression):
+        """
+        Prepare the mathematical expression for postfix evaluation.
+
+        Parameters:
+            expression (str): The transformed expression without spaces
+        
+        Test cases:
+            # Test case 1: Basic expression with parenthesis
+            assert ExpressionCalculator.prepare("3*(2+7)") == 3, 2, + ,7, *
+            
+            # Test case 2: Expression with nested parenthesis
+            assert ExpressionCalculator.prepare("(2+3*4)*(5−(7+3))") == 2,3,4,*,+ ,5,7,3,+,−,*
+            
+            # Test case 3: Expression with negative numbers
+            assert ExpressionCalculator.prepare("10*-2") == 10, ~ ,2,*
+        """
+        op_stack = deque([','])
+        arr = list(expression)
+        current_index = 0
+        count = 0
+
+        for i, current_op in enumerate(arr):
+            if self.is_operator(current_op):
+                if count > 0:
+                    self.postfix_stack.append("".join(arr[current_index: current_index + count]))
+                peek_op = op_stack[-1]
+                if current_op == ')':
+                    while op_stack[-1] != '(':
+                        self.postfix_stack.append(str(op_stack.pop()))
+                    op_stack.pop()
+                else:
+                    while current_op != '(' and peek_op != ',' and self.compare(current_op, peek_op):
+                        self.postfix_stack.append(str(op_stack.pop()))
+                        peek_op = op_stack[-1]
+                    op_stack.append(current_op)
+
+                count = 0
+                current_index = i + 1
+            else:
+                count += 1
+
+        if count > 1 or (count == 1 and not self.is_operator(arr[current_index])):
+            self.postfix_stack.append("".join(arr[current_index: current_index + count]))
+
+        while op_stack[-1] != ',':
+            self.postfix_stack.append(str(op_stack.pop()))
+
+    @staticmethod
+    def is_operator(c):
+        """
+        Check if the character provided is an operator.
+
+        Parameters:
+            c (str): The character to be checked
+        
+        Returns:
+            bool: True if the character is an operator, False otherwise
+        
+        Test cases:
+            # Test case 1: Operator '+'
+            assert is_operator('+') == True
+            
+            # Test case 2: Character '9'
+            assert is_operator('9') == False
+            
+            # Test case 3: Operator '('
+            assert is_operator('(') == True
+        """
+
+        return c in {'+', '-', '*', '/', '(', ')', '%'}
+
+    def compare(self, cur, peek):
+        """
+        Compare the priority of two operators for proper ordering.
+
+        Parameters:
+            cur (str): The current operator being evaluated
+            peek (str): The operator that is next in the stack
+        
+        Returns:
+            bool: True if the current operator has higher or equal priority, False otherwise
+        
+        Test cases:
+            # Test case 1: Higher priority
+            assert compare('+-', '/*') == True
+            
+            # Test case 2: Lower priority
+            assert compare('/%', '+-') == False
+            
+            # Test case 3: Equal priority
+            assert compare('**', '%+') == True
+        """
+        if cur == '%':
+            cur = '/'
+        if peek == '%':
+            peek = '/'
+        return self.operat_priority[ord(peek) - 40] >= self.operat_priority[ord(cur) - 40]
+
+    @staticmethod
+    def _calculate(first_value, second_value, current_op):
+        """
+        Calculate the arithmetic operation of two values with the provided operator.
+
+        Parameters:
+            first_value (str): The first operand for the operation
+            second_value (str): The second operand for the operation
+            current_op (str): The operator symbol representing the operation
+        
+        Returns:
+            Decimal: The result of the operation between two values
+        
+        Test cases:
+            # Test case 1: Addition
+            assert _calculate("5", "2", "+") == 7
+            
+            # Test case 2: Multiplication
+            assert _calculate("6", "3", "*") == 18
+            
+            # Test case 3: Division
+            assert _calculate("-10", "2", "/") == -5
+        """
+        if current_op == '+':
+            return Decimal(first_value) + Decimal(second_value)
+        elif current_op == '-':
+            return Decimal(first_value) - Decimal(second_value)
+        elif current_op == '*':
+            return Decimal(first_value) * Decimal(second_value)
+        elif current_op == '/':
+            return Decimal(first_value) / Decimal(second_value)
+        elif current_op == '%':
+            return Decimal(first_value) % Decimal(second_value)
+        else:
+            raise ValueError("Unexpected operator: {}".format(current_op))
+
+    @staticmethod
+    def transform(expression):
+        """
+        Transform the input mathematical expression for appropriate calculations.
+
+        Parameters:
+            expression (str): The original mathematical expression
+        
+        Returns:
+            str: The transformed expression ready for further processing
+        
+        Test cases:
+            # Test case 1: Basic math expression
+            assert transform("1+2*3-4") == "1+2*3-4"
+            
+            # Test case 2: Negation handling
+            assert transform("45 * -2") == "45 * -2"
+            
+            # Test case 3: Special character handling
+            assert transform("@$1.5^2#") == "1.5^2"
+        """
+        expression = re.sub(r"\s+", "", expression)
+        expression = re.sub(r"=$", "", expression)
+        arr = list(expression)
+
+        for i, c in enumerate(arr):
+            if c == '-':
+                if i == 0:
+                    arr[i] = '~'
+                else:
+                    prev_c = arr[i - 1]
+                    if prev_c in {'+', '-', '*', '/', '(', 'E', 'e'}:
+                        arr[i] = '~'
+
+        if arr[0] == '~' and (len(arr) > 1 and arr[1] == '('):
+            arr[0] = '-'
+            return "0" + "".join(arr)
+        else:
+            return "".join(arr)
+```

@@ -1,0 +1,158 @@
+ ```python
+"""
+This class represents a Hotel with available rooms and handles room booking, check-in, and check-out.
+"""
+
+import copy
+
+class Hotel:
+    def __init__(self, name, rooms):
+        """
+        Initialize a new hotel instance with a given name and rooms.
+
+        Parameters:
+            name (str): The name of the hotel
+            rooms (dict): A dictionary representing the number of rooms available for each room type
+        """
+        self.name = name
+        self.rooms = rooms
+        self.booked_rooms = {}
+
+    def book_room(self, room_type, room_number, name):
+        """
+        Book a room of the given room type and number for the given guest.
+
+        Parameters:
+            room_type (str): The type of room to book (single, double, etc.)
+            room_number (int): The number of rooms to book
+            name (str): The name of the guest booking the room
+
+        Returns:
+            str: A success message upon booking
+
+        Test cases:
+            # Test case 1: Book one room
+            assert hotel.book_room('single', 1, 'Alice') == 'Success!'
+            
+            # Test case 2: Insufficient rooms available for booking
+            with pytest.raises(AssertionError):
+                hotel.book_room('single', 2, 'Bob')
+            
+            # Test case 3: Book more rooms than available for room type
+            with pytest.raises(AssertionError):
+                hotel.book_room('single', 3, 'Charlie')
+        """
+        if room_type not in self.rooms.keys():
+            return "Error: Room type not available"
+
+        available_rooms = self.rooms[room_type]
+        if room_number > available_rooms:
+            return "Error: Not enough rooms available"
+
+        self.booked_rooms.setdefault(room_type, {})
+        self.booked_rooms[room_type][name] = room_number
+        self.rooms[room_type] -= room_number
+
+        return "Success!"
+
+    def check_in(self, room_type, room_number, name):
+        """
+        Check in a guest to a room of the given room type and number.
+
+        Parameters:
+            room_type (str): The type of room where the guest will check in
+            room_number (int): The number of the room where the guest will check in
+            name (str): The name of the guest checking in
+
+        Returns:
+            None: The method only performs an action, no return value
+
+        Test cases:
+            # Test case 1: Check in a guest to an available room
+            hotel.check_in('single', 1, 'Alice')
+
+            # Test case 2: Room already booked for the guest
+            with pytest.raises(KeyError):
+                hotel.check_in('single', 1, 'Alice')
+
+            # Test case 3: Room type not available
+            with pytest.raises(KeyError):
+                hotel.check_in('suite', 1, 'Bob')
+        """
+        if room_type not in self.booked_rooms.keys():
+            return
+
+        if name not in self.booked_rooms[room_type]:
+            return
+
+        if room_number != self.booked_rooms[room_type][name]:
+            return
+
+        self.booked_rooms[room_type].pop(name)
+
+    def check_out(self, room_type, room_number):
+        """
+        Check out of a room of the given room type and number.
+
+        Parameters:
+            room_type (str): The type of room to check out
+            room_number (int): The number of the room to check out
+
+        Returns:
+            None: The method only performs an action, no return value
+
+        Test cases:
+            # Test case 1: Check out of an occupied room
+            hotel.check_out('single', 1)
+
+            # Test case 2: Room not occupied
+            with pytest.raises(KeyError):
+                hotel.check_out('single', 1)
+        """
+        if room_type in self.booked_rooms.keys():
+            room_data = self.booked_rooms[room_type]
+            for guest, num_rooms in room_data.items():
+                if num_rooms > room_number:
+                    continue
+                self.booked_rooms[room_type][guest] -= room_number
+                self.rooms[room_type] += room_number
+
+    def get_available_rooms(self, room_type):
+        """
+        Get the number of available rooms of the given room type.
+
+        Parameters:
+            room_type (str): The type of room
+
+        Returns:
+            int: The number of available rooms
+
+        Test cases:
+            # Test case 1: Get available rooms for single room type
+            assert hotel.get_available_rooms('single') == 3
+
+            # Test case 2: Get available rooms for non-existent room type
+            with pytest.raises(KeyError):
+                hotel.get_available_rooms('suite')
+        """
+        if room_type in self.rooms.keys():
+            return self.rooms[room_type]
+        else:
+            return 0
+
+    def print_booked_rooms(self):
+        """
+        Print out the information of all booked rooms.
+
+        Returns:
+            None: The method only performs an action, no return value
+
+        Test case:
+            # Test case 1: Print booked rooms
+            print(hotel.print_booked_rooms())
+        """
+        for room_type, guest_rooms in self.booked_rooms.items():
+            print(f"{room_type}:")
+            for guest, num_rooms in guest_rooms.items():
+                print(f"\t{guest}: {num_rooms}")
+```</s>

@@ -1,0 +1,2 @@
+ # Standard deviation along axis=0 for input array arr
+arr_sd = np.std(arr, axis=0)</s>

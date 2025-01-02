@@ -1,0 +1,120 @@
+ """
+This class handles the processing of text files, providing methods for reading and writing the files in various formats.
+"""
+
+import json
+
+
+class TextFileProcessor:
+    def __init__(self, file_path):
+        """
+        Initializes the TextFileProcessor with a given file path.
+
+        Parameters:
+            file_path (str): The file path of the text file to process
+        """
+        self.file_path = file_path
+
+    def read_file_as_json(self):
+        """
+        Reads the contents of the file and returns it as a JSON object.
+
+        Returns:
+            dict: The contents of the file in JSON format
+
+        Test cases:
+            # Test case 1: Read an existing JSON file
+            processor = TextFileProcessor('test_file.json')
+            actual = processor.read_file_as_json()
+            expected = {'key1': 'value1', 'key2': 'value2'}
+            assert actual == expected
+
+            # Test case 2: Read an empty file
+            processor = TextFileProcessor('empty_file.json')
+            actual = processor.read_file_as_json()
+            assert actual is None
+
+            # Test case 3: Read a non-existent file
+            processor = TextFileProcessor('nonexistent_file.json')
+            with pytest.raises(FileNotFoundError):
+                processor.read_file_as_json()
+        """
+
+    def read_file(self):
+        """
+        Reads the contents of the file and returns it as a string.
+
+        Returns:
+            str: The contents of the file
+
+        Test cases:
+            # Test case 1: Read an existing text file
+            processor = TextFileProcessor('test_file.txt')
+            actual = processor.read_file()
+            expected = "This is a test text file."
+            assert actual == expected
+
+            # Test case 2: Read an empty file
+            processor = TextFileProcessor('empty_file.txt')
+            actual = processor.read_file()
+            assert actual == ""
+
+            # Test case 3: Read a non-existent file
+            processor = TextFileProcessor('nonexistent_file.txt')
+            with pytest.raises(FileNotFoundError):
+                processor.read_file()
+        """
+
+    def write_file(self, content):
+        """
+        Writes the given content to the file.
+
+        Parameters:
+            content (str): The content to write to the file
+
+        Test cases:
+            # Test case 1: Write to an existing file and verify the content
+            processor = TextFileProcessor('test_file.txt')
+            processor.write_file("New content.")
+            actual = processor.read_file()
+            expected = "New content."
+            assert actual == expected
+
+            # Test case 2: Write to a non-existent file and verify creation
+            processor = TextFileProcessor('new_file.txt')
+            processor.write_file("New content.")
+            with open('new_file.txt') as file:
+                actual = file.read()
+            expected = "New content."
+            assert actual == expected
+
+            # Test case 3: Write to an existing file and verify the appended content
+            processor = TextFileProcessor('test_file.txt')
+            processor.write_file("Appended content.")
+            actual = processor.read_file()
+            expected = "This is a test text file.\nAppended content."
+            assert actual == expected
+        """
+
+    def process_file(self):
+        """
+        Processes the file by reading it, converting it to lowercase alphabets, and then writing it back.
+
+        Test cases:
+            # Test case 1: Process a text file and verify the processed content
+            processor = TextFileProcessor('test_file.txt')
+            processor.process_file()
+            actual = processor.read_file()
+            expected = "this is a test text file."
+            assert actual == expected
+
+            # Test case 2: Process an empty text file
+            processor = TextFileProcessor('empty_file.txt')
+            processor.process_file()
+            actual = processor.read_file()
+            assert actual == ""
+
+            # Test case 3: Process a non-existent text file
+            processor = TextFileProcessor('nonexistent_file.txt')
+            with pytest.raises(FileNotFoundError):
+                processor.process_file()</s>

@@ -1,0 +1,51 @@
+from PIL import Image, ImageEnhance, ImageChops
+
+class ImageProcessor:
+    # This is a class for processing images using the PIL library.
+
+    def __init__(self):
+        # Initialize the ImageProcessor object with a None image.
+
+        self.image = None
+
+    def load_image(self, image_path):
+        # Load an image from the given image_path.
+        # param image_path: str, the path to the image file.
+        # Load an image from the given image_path for further processing.
+
+        self.image = Image.open(image_path)
+
+    def save_image(self, save_path):
+        # Save the processed image to the specified save_path.
+        # param save_path: str, the path to save the processed image.
+        # Save the processed image to the specified save_path if there is an image loaded.
+        # If no image is loaded, nothing will be saved.
+
+        if self.image:
+            self.image.save(save_path)
+
+    def resize_image(self, width, height):
+        # Resize the loaded image to the specified width and height.
+        # param width: int, the desired width of the image.
+        # param height: int, the desired height of the image.
+        # Resize the loaded image to the specified width and height if there is an image loaded.
+
+        if self.image:
+            self.image = self.image.resize((width, height))
+
+    def rotate_image(self, degrees):
+        # Rotate the loaded image by the specified degrees.
+        # param degrees: int, the degrees to rotate the image by.
+        # Rotate the loaded image by the specified degrees if there is an image loaded.
+
+        if self.image:
+            self.image = self.image.rotate(degrees)
+
+    def adjust_brightness(self, factor):
+        # Adjust the brightness of the loaded image by the specified factor.
+        # param factor: float, the factor to adjust the brightness by.
+        # Adjust the brightness of the loaded image by the specified factor if there is an image loaded.
+
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)

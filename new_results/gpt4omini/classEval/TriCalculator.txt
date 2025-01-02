@@ -1,0 +1,168 @@
+```python
+"""
+This class provides methods to calculate trigonometric functions using Taylor series expansion.
+"""
+
+from math import pi, fabs
+
+class TriCalculator:
+
+    def __init__(self):
+        """
+        Initialization method for the TriCalculator class.
+        """
+        pass
+
+    def cos(self, x):
+        """
+        Calculate the cosine of angle x (in degrees) using Taylor series approximation.
+
+        Parameters:
+            x (float): The angle in degrees for which to calculate the cosine.
+
+        Returns:
+            float: The cosine of angle x rounded to 10 decimal places.
+
+        Test cases:
+            # Test case 1: Cosine of 0 degrees
+            input = 0
+            expected_output = 1.0
+
+            # Test case 2: Cosine of 90 degrees
+            input = 90
+            expected_output = 0.0
+
+            # Test case 3: Cosine of 180 degrees
+            input = 180
+            expected_output = -1.0
+        """
+        return round(self.taylor(x, 50), 10)
+
+    def factorial(self, a):
+        """
+        Calculate the factorial of a given number.
+
+        Parameters:
+            a (int): The number for which to calculate the factorial.
+
+        Returns:
+            int: The factorial of the number a.
+
+        Test cases:
+            # Test case 1: Factorial of 5
+            input = 5
+            expected_output = 120
+
+            # Test case 2: Factorial of 0
+            input = 0
+            expected_output = 1
+
+            # Test case 3: Factorial of 1
+            input = 1
+            expected_output = 1
+        """
+        b = 1
+        while a != 1 and a != 0:
+            b *= a
+            a -= 1
+        return b
+
+    def taylor(self, x, n):
+        """
+        Calculate the Taylor series expansion for cosine based on the angle x (in degrees).
+
+        Parameters:
+            x (float): The angle in degrees to calculate the series expansion.
+            n (int): The number of terms to include in the Taylor series.
+
+        Returns:
+            float: The result of the Taylor series expansion for cosine.
+
+        Test cases:
+            # Test case 1: Taylor series result for 0 degrees
+            input = (0, 10)
+            expected_output = 1.0
+
+            # Test case 2: Taylor series result for 60 degrees
+            input = (60, 10)
+            expected_output = 0.5
+
+            # Test case 3: Taylor series result for 90 degrees
+            input = (90, 10)
+            expected_output = 0.0
+        """
+        a = 1
+        x = x / 180 * pi
+        count = 1
+        for k in range(1, n):
+            if count % 2 != 0:
+                a -= (x ** (2 * k)) / self.factorial(2 * k)
+            else:
+                a += (x ** (2 * k)) / self.factorial(2 * k)
+            count += 1
+        return a
+
+    def sin(self, x):
+        """
+        Calculate the sine of angle x (in degrees) using series expansion.
+
+        Parameters:
+            x (float): The angle in degrees for which to calculate the sine.
+
+        Returns:
+            float: The sine of angle x rounded to 10 decimal places.
+
+        Test cases:
+            # Test case 1: Sine of 0 degrees
+            input = 0
+            expected_output = 0.0
+
+            # Test case 2: Sine of 30 degrees
+            input = 30
+            expected_output = 0.5
+
+            # Test case 3: Sine of 90 degrees
+            input = 90
+            expected_output = 1.0
+        """
+        x = x / 180 * pi
+        g = 0
+        t = x
+        n = 1
+
+        while fabs(t) >= 1e-15:
+            g += t
+            n += 1
+            t = -t * x * x / (2 * n - 1) / (2 * n - 2)
+        return round(g, 10)
+
+    def tan(self, x):
+        """
+        Calculate the tangent of angle x (in degrees).
+
+        Parameters:
+            x (float): The angle in degrees for which to calculate the tangent.
+
+        Returns:
+            float or bool: The tangent of angle x rounded to 10 decimal places,
+            or False if cosine of x is zero (undefined tangent).
+
+        Test cases:
+            # Test case 1: Tangent of 45 degrees
+            input = 45
+            expected_output = 1.0
+
+            # Test case 2: Tangent of 0 degrees
+            input = 0
+            expected_output = 0.0
+
+            # Test case 3: Tangent of 90 degrees (undefined)
+            input = 90
+            expected_output = False
+        """
+        if self.cos(x) != 0:
+            result = self.sin(x) / self.cos(x)
+            return round(result, 10)
+        else:
+            return False
+```

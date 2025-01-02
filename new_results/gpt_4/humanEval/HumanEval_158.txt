@@ -1,0 +1,6 @@
+def find_max(words):
+    # This function returns the word with the maximum number of unique characters. If there are multiple, it returns the lexicographically smallest one.
+    >>> find_max(["apple", "banana", "cherry"]) # returns "banana"
+    >>> find_max(["zebra", "lion", "tiger"]) # returns "tiger"
+    >>> find_max(["ant", "bee", "cat"]) # returns "cat"
+    return sorted(words, key = lambda x: (-len(set(x)), x))[0]

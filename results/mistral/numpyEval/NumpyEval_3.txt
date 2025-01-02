@@ -1,0 +1,7 @@
+ # Convert each element in the input NumPy array to float data type using NumPy's astype method.
+
+import numpy as np
+
+def convert_string_in_array_to_float(arr):
+    <Convert each element in the NumPy array to float>
+    return arr.astype(np.float)

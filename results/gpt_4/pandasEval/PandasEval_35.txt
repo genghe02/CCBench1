@@ -1,0 +1,1 @@
+# This function helps in removing the duplicate column names in a DataFrame. It uses Panda's DataFrame.duplicated() method to identify duplicate column names and then filters out the unique ones using negation operator.

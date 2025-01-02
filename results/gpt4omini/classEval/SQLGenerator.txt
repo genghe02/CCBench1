@@ -1,0 +1,80 @@
+```python
+# This class is responsible for generating SQL queries for different database operations.
+class SQLGenerator:
+    def __init__(self, table_name):
+        # Initialize with the name of the table to perform SQL operations on.
+        # param table_name: str, the name of the database table.
+        self.table_name = table_name
+
+    def select(self, fields=None, condition=None):
+        # Generate a SQL SELECT query based on the specified fields and condition.
+        # param fields: list, the fields to select from the table. If None, selects all fields.
+        # param condition: str, the condition for the WHERE clause of the SQL query. If None, no condition is applied.
+        # return: str, the generated SQL SELECT statement.
+        # >>> sql_gen = SQLGenerator('users')
+        # >>> sql_gen.select(['id', 'name'], 'age > 18')
+        # 'SELECT id, name FROM users WHERE age > 18;'
+        if fields is None:
+            fields = "*"
+        else:
+            fields = ", ".join(fields)
+        sql = f"SELECT {fields} FROM {self.table_name}"
+        if condition is not None:
+            sql += f" WHERE {condition}"
+        return sql + ";"
+
+    def insert(self, data):
+        # Generate a SQL INSERT query to insert data into the table.
+        # param data: dict, a dictionary where keys are the column names and values are the values to insert.
+        # return: str, the generated SQL INSERT statement.
+        # >>> sql_gen = SQLGenerator('users')
+        # >>> sql_gen.insert({'name': 'Alice', 'age': 30})
+        # 'INSERT INTO users (name, age) VALUES ('Alice', '30');'
+        fields = ", ".join(data.keys())
+        values = ", ".join([f"\'{value}\'" for value in data.values()])
+        sql = f"INSERT INTO {self.table_name} ({fields}) VALUES ({values})"
+        return sql + ";"
+
+    def update(self, data, condition):
+        # Generate a SQL UPDATE query to update existing records in the table based on a condition.
+        # param data: dict, a dictionary where keys are the column names to update and values are the new values.
+        # param condition: str, the condition for the WHERE clause specifying which records to update.
+        # return: str, the generated SQL UPDATE statement.
+        # >>> sql_gen = SQLGenerator('users')
+        # >>> sql_gen.update({'age': 31}, 'name = \'Alice\'')
+        # 'UPDATE users SET age = '31' WHERE name = 'Alice';'
+        set_clause = ", ".join([f"{field} = \'{value}\'" for field, value in data.items()])
+        sql = f"UPDATE {self.table_name} SET {set_clause} WHERE {condition}"
+        return sql + ";"
+
+    def delete(self, condition):
+        # Generate a SQL DELETE query to remove records from the table based on a condition.
+        # param condition: str, the condition for the WHERE clause specifying which records to delete.
+        # return: str, the generated SQL DELETE statement.
+        # >>> sql_gen = SQLGenerator('users')
+        # >>> sql_gen.delete('name = \'Alice\'')
+        # 'DELETE FROM users WHERE name = 'Alice';'
+        sql = f"DELETE FROM {self.table_name} WHERE {condition}"
+        return sql + ";"
+
+    def select_female_under_age(self, age):
+        # Generate a SQL SELECT query to find female users under a specific age.
+        # param age: int, the age limit for selecting female users.
+        # return: str, the generated SQL SELECT statement with the specified condition.
+        # >>> sql_gen = SQLGenerator('users')
+        # >>> sql_gen.select_female_under_age(30)
+        # 'SELECT * FROM users WHERE age < 30 AND gender = 'female';'
+        condition = f"age < {age} AND gender = \'female\'"
+        return self.select(condition=condition)
+
+    def select_by_age_range(self, min_age, max_age):
+        # Generate a SQL SELECT query to find users within a specific age range.
+        # param min_age: int, the minimum age for the selection.
+        # param max_age: int, the maximum age for the selection.
+        # return: str, the generated SQL SELECT statement with the specified condition.
+        # >>> sql_gen = SQLGenerator('users')
+        # >>> sql_gen.select_by_age_range(20, 30)
+        # 'SELECT * FROM users WHERE age BETWEEN 20 AND 30;'
+        condition = f"age BETWEEN {min_age} AND {max_age}"
+        return self.select(condition=condition)
+```

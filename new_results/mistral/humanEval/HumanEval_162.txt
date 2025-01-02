@@ -1,0 +1,9 @@
+ # Import hashlib library before returning the hexdigest
+def string_to_md5(text):
+    import hashlib
+    <Requirements for the code>
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    >>> string_to_md5('') is None
+    >>> string_to_md5('') # doctest: +ELLIPSIS
+    '...'
+    return hashlib.md5(text.encode('ascii')).hexdigest() if text else None</s>

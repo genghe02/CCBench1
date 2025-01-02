@@ -1,0 +1,10 @@
+ def generate_integers(a, b):
+   # Generate a list of even integers in the range between a and b
+
+   >>> generate_integers(1, 5) # returns [2, 4]
+   >>> generate_integers(6, 10) # returns [6, 8]
+   >>> generate_integers(1, 10) # returns [2, 4, 6, 8]
+   lower = max(2, min(a, b))
+   upper = min(8, max(a, b))
+
+   return [i for i in range(lower, upper+1) if i % 2 == 0]</s>

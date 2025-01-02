@@ -1,0 +1,144 @@
+ <description for whole class>
+"""
+This is a class for validating and creating PersonRequest objects with name, sex, and phone number attributes.
+"""
+
+class PersonRequest:
+    def __init__(self, name: str, sex: str, phoneNumber: str):
+        # Initialize instance variables with validated values
+        self.name = self._validate_name(name)
+        self.sex = self._validate_sex(sex)
+        self.phoneNumber = self._validate_phoneNumber(phoneNumber)
+
+    def _validate_name(self, name: str) -> str:
+        """
+        Validate and return a name string.
+
+        :param name: str, the name to validate
+        :return: str, the validated name or None if the name is empty or longer than 33 characters
+        """
+        if not name:
+            return None
+        if len(name) > 33:
+            return None
+        return name
+
+    def _validate_sex(self, sex: str) -> str:
+        """
+        Validate and return a sex string.
+
+        :param sex: str, the sex to validate
+        :return: str, the validated sex or None if the sex is not "Man", "Woman", or "UGM"
+        """
+        if sex not in ["Man", "Woman", "UGM"]:
+            return None
+        return sex
+
+    def _validate_phoneNumber(self, phoneNumber: str) -> str:
+        """
+        Validate and return a phone number string.
+
+        :param phoneNumber: str, the phone number to validate
+        :return: str, the validated phone number or None if the phone number is empty or not a valid 11-digit number
+        """
+        if not phoneNumber:
+            return None
+        if len(phoneNumber)!= 11 or not phoneNumber.isdigit():
+            return None
+        return phoneNumber
+
+<description for whole function>
+"""
+Initialize a new PersonRequest object with the given name, sex, and phone number.
+"""
+
+def __init__(self, name: str, sex: str, phoneNumber: str):
+    self.name = self._validate_name(name)
+    self.sex = self._validate_sex(sex)
+    self.phoneNumber = self._validate_phoneNumber(phoneNumber)
+
+<description for all parameters>
+"""
+:param name: str, the name to set for the new PersonRequest object
+:param sex: str, the sex to set for the new PersonRequest object
+:param phoneNumber: str, the phone number to set for the new PersonRequest object
+"""
+
+<description for all functions>
+"""
+_validate_name validates a name string and returns it if it's valid, or None if it's empty or longer than 33 characters.
+"""
+
+def _validate_name(self, name: str) -> str:
+    """
+    Validate and return a name string.
+
+    :param name: str, the name to validate
+    :return: str, the validated name or None if the name is empty or longer than 33 characters
+    """
+    if not name:
+        return None
+    if len(name) > 33:
+        return None
+    return name
+
+"""
+_validate_sex validates a sex string and returns it if it's valid, or None if it's not "Man", "Woman", or "UGM".
+"""
+
+def _validate_sex(self, sex: str) -> str:
+    """
+    Validate and return a sex string.
+
+    :param sex: str, the sex to validate
+    :return: str, the validated sex or None if the sex is not "Man", "Woman", or "UGM"
+    """
+    if sex not in ["Man", "Woman", "UGM"]:
+        return None
+    return sex
+
+"""
+_validate_phoneNumber validates a phone number string and returns it if it's valid, or None if it's empty or not a valid 11-digit number.
+"""
+
+def _validate_phoneNumber(self, phoneNumber: str) -> str:
+    """
+    Validate and return a phone number string.
+
+    :param phoneNumber: str, the phone number to validate
+    :return: str, the validated phone number or None if the phone number is empty or not a valid 11-digit number
+    """
+    if not phoneNumber:
+        return None
+    if len(phoneNumber)!= 11 or not phoneNumber.isdigit():
+        return None
+    return phoneNumber
+
+<description for test cases>
+# Test cases for the PersonRequest class
+
+# Test case 1: Valid name, sex, and phone number
+person_request = PersonRequest("John Doe", "Man", "1234567890")
+assert person_request.name == "John Doe"
+assert person_request.sex == "Man"
+assert person_request.phoneNumber == "1234567890"
+
+# Test case 2: Empty name
+with pytest.raises(ValueError):
+    PersonRequest("", "Man", "1234567890")
+
+# Test case 3: Name longer than 33 characters
+with pytest.raises(ValueError):
+    PersonRequest("John Doe John Doe John Doe", "Man", "1234567890")
+
+# Test case 4: Invalid sex
+with pytest.raises(ValueError):
+    PersonRequest("John Doe", "Invalid", "1234567890")
+
+# Test case 5: Empty phone number
+with pytest.raises(ValueError):
+    PersonRequest("John Doe", "Man", "")
+
+# Test case 6: Phone number not a valid 11-digit number
+with pytest.raises(ValueError):
+    PersonRequest("John Doe", "Man", "123456789")

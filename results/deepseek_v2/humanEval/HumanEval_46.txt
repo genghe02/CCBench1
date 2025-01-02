@@ -1,0 +1,43 @@
+```python
+def fib4(n: int):
+    # Calculate the nth term in a modified Fibonacci sequence where each term is the sum of the four preceding terms.
+    # param n: int, the position in the sequence for which the term is to be calculated
+    # return: int, the nth term in the modified Fibonacci sequence
+
+    # Initialize the first four terms of the sequence
+    results = [0, 0, 2, 0]
+    
+    # If n is less than 4, return the corresponding term from the initial list
+    if n < 4:
+        return results[n]
+
+    # Calculate the terms from the 5th term onwards
+    for _ in range(4, n + 1):
+        # Append the sum of the last four terms to the results list
+        results.append(results[-1] + results[-2] + results[-3] + results[-4])
+        # Remove the first element to keep the list size constant
+        results.pop(0)
+
+    # Return the last calculated term
+    return results[-1]
+
+# Test cases for the fib4 function
+# >>> fib4(0)
+# 0
+# >>> fib4(1)
+# 0
+# >>> fib4(2)
+# 2
+# >>> fib4(3)
+# 0
+# >>> fib4(4)
+# 2
+# >>> fib4(5)
+# 4
+# >>> fib4(6)
+# 8
+# >>> fib4(7)
+# 14
+# >>> fib4(8)
+# 28
+```

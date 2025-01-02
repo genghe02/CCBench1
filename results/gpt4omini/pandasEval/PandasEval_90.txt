@@ -1,0 +1,33 @@
+```python
+import pandas as pd
+
+def drop2rows_zero(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Drop two rows from the DataFrame when the value in 'column2' is zero and the index of the row is odd.
+    If a row is found that meets these conditions, also drop the previous row (the one immediately before the current row).
+    
+    Requirements:
+    - Input: A pandas DataFrame containing at least a column named 'column2'.
+    - Process: Identify rows where 'column2' has a value of zero and the row index is odd. Drop both the identified rows 
+      and the preceding rows from the DataFrame.
+    - Output: A modified DataFrame with the specified rows removed.
+    
+    Test cases:
+    >>> df = pd.DataFrame({'column2': [1, 0, 3, 0, 5]})
+    >>> drop2rows_zero(df)
+    Empty DataFrame
+    Columns: [column2]
+    Index: []
+    
+    >>> df = pd.DataFrame({'column2': [1, 2, 3, 4, 0]})
+    >>> drop2rows_zero(df)
+    DataFrame with 5 rows, but includes all original rows since no odd index rows have 'column2' == 0.
+    """
+    # Identifying the indices where 'column2' is zero and the index is odd
+    idx = df[(df['column2'] == 0) & (df.index % 2 == 1)].index
+    # Appending the previous row's index to the list of indices to drop
+    idx = idx.append(idx - 1)
+    
+    result = df.drop(idx)
+    return result
+```

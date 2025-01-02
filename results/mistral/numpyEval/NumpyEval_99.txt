@@ -1,0 +1,1 @@
+ # Find the sum of all elements in the NumPy array obtained by converting the DataFrame using to_numpy().

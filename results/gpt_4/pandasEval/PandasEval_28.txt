@@ -1,0 +1,9 @@
+# The function is_df_exist checks if the passed DataFrame is None or it exists. If the DataFrame is None, the function returns False indicating that DataFrame does not exist. If the DataFrame is not None (i.e., it exists), the function returns True. 
+
+import pandas as pd
+
+def is_df_exist(df):
+    if df is None:
+        return False
+    else:
+        return True

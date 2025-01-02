@@ -1,0 +1,6 @@
+ ✅ Correct Output:
+import pandas as pd
+
+def sorting_columns_based_on_column_name(df):
+    # Sort dataframe columns by their names and reorder accordingly
+    return df.reindex(sorted(df.columns), axis=1)</s>

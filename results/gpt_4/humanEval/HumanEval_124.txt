@@ -1,0 +1,28 @@
+def valid_date(date):
+    # This function takes a string input and verifies whether the string is a valid date format 'M-D-Y'.
+    # The function checks for the correct number of days in each month, including leap years for February. 
+    # It returns True if the date is valid, otherwise returns False. 
+
+    # Test Cases:
+    # >>> valid_date('2-29-2020') -> True
+    # >>> valid_date('2-30-2020') -> False
+    # >>> valid_date('02-29-2021') -> False
+    # >>> valid_date('04-30-2021') -> True
+    # >>> valid_date('04-31-2021') -> False
+    # >>> valid_date('random string') -> False
+    try:
+        date = date.strip() # Stripping any leading or trailing spaces from the input
+        month, day, year = date.split('-') # Splitting the date string into month, day, and year
+        month, day, year = int(month), int(day), int(year) # Converting the string values of month, day, and year into integers
+        if month < 1 or month > 12: # Checking if the month is within valid range (1-12)
+            return False
+        if month in [1,3,5,7,8,10,12] and (day < 1 or day > 31): # Checking if the day is within valid range for months with 31 days
+            return False
+        if month in [4,6,9,11] and (day < 1 or day > 30): # Checking if the day is within valid range for months with 30 days
+            return False
+        if month == 2 and (day < 1 or day > 29): # Checking if the day is within valid range for February (assuming all years are leap years)
+            return False
+    except: # If any error occurs during the process (like ValueError on int conversion), return False
+        return False
+
+    return True # If all checks pass, return True

@@ -1,0 +1,5 @@
+import pandas as pd
+
+def change_col_names_of_df(df, origin_names, new_names):
+    # Rename specified columns in dataframe using provided origin and new names
+    return df.rename(columns={origin_names:new_names})

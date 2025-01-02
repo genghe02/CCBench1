@@ -1,0 +1,164 @@
+"""
+This class is used to convert a given number into its equivalent description in English words.
+"""
+
+class NumberWordFormatter:
+    def __init__(self):
+        """
+        Initialization method for the NumberWordFormatter class.
+        This sets up the lists of number names used in formatting.
+        """
+        self.NUMBER = ["", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
+        self.NUMBER_TEEN = ["TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN",
+                            "EIGHTEEN",
+                            "NINETEEN"]
+        self.NUMBER_TEN = ["TEN", "TWENTY", "THIRTY", "FORTY", "FIFTY", "SIXTY", "SEVENTY", "EIGHTY", "NINETY"]
+        self.NUMBER_MORE = ["", "THOUSAND", "MILLION", "BILLION"]
+        self.NUMBER_SUFFIX = ["k", "w", "", "m", "", "", "b", "", "", "t", "", "", "p", "", "", "e"]
+
+    def format(self, x):
+        """
+        Format a given number into English words.
+
+        Parameters:
+            x (int): The number to be formatted.
+        
+        Returns:
+            str: The formatted string, or an empty string if the input is None.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert format(1234) == 'ONE THOUSAND TWO HUNDRED AND THIRTY FOUR ONLY'
+            
+            # Test case 2: Edge case handling with zero
+            assert format(0) == 'ZERO ONLY'
+            
+            # Test case 3: Error case handling with None
+            assert format(None) == ''
+        """
+        if x is not None:
+            return self.format_string(str(x))
+        else:
+            return ""
+
+    def format_string(self, x):
+        """
+        Format a given string into English words.
+        
+        Parameters:
+            x (str): The string to be formatted.
+        
+        Returns:
+            str: The formatted string.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert format_string('1234') == 'ONE THOUSAND TWO HUNDRED AND THIRTY FOUR ONLY'
+            
+            # Test case 2: Edge case handling with zero
+            assert format_string('0') == 'ZERO ONLY'
+            
+            # Test case 3: Error case handling with empty string
+            assert format_string('') == 'ZERO ONLY'
+        """
+        lstr, rstr = (x.split('.') + [''])[:2]
+        lstrrev = lstr[::-1]
+        a = [''] * 5
+
+        if len(lstrrev) % 3 == 1:
+            lstrrev += "00"
+        elif len(lstrrev) % 3 == 2:
+            lstrrev += "0"
+
+        lm = ""
+        for i in range(len(lstrrev) // 3):
+            a[i] = lstrrev[3 * i:3 * i + 3][::-1]
+            if a[i] != "000":
+                lm = self.trans_three(a[i]) + " " + self.parse_more(i) + " " + lm
+            else:
+                lm += self.trans_three(a[i])
+
+        xs = f"AND CENTS {self.trans_two(rstr)} " if rstr else ""
+        if not lm.strip():
+            return "ZERO ONLY"
+        else:
+            return f"{lm.strip()} {xs}ONLY"
+
+    def trans_two(self, s):
+        """
+        Transform a two-digit string into its English words equivalent.
+        
+        Parameters:
+            s (str): The two-digit string to transform.
+        
+        Returns:
+            str: The transformed string.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert trans_two('12') == 'TWELVE'
+            
+            # Test case 2: Edge case handling with zero
+            assert trans_two('0') == ''
+            
+            # Test case 3: Error case handling with non-numeric string
+            assert trans_two('ab') == 'ZERO ONLY'
+        """
+        s = s.zfill(2)
+        if s[0] == "0":
+            return self.NUMBER[int(s[-1])]
+        elif s[0] == "1":
+            return self.NUMBER_TEEN[int(s) - 10]
+        elif s[1] == "0":
+            return self.NUMBER_TEN[int(s[0]) - 1]
+        else:
+            return self.NUMBER_TEN[int(s[0]) - 1] + " " + self.NUMBER[int(s[-1])]
+
+    def trans_three(self, s):
+        """
+        Transform a three-digit string into its English words equivalent.
+        
+        Parameters:
+            s (str): The three-digit string to transform.
+        
+        Returns:
+            str: The transformed string.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert trans_three('123') == 'ONE HUNDRED AND TWENTY THREE'
+            
+            # Test case 2: Edge case handling with zero
+            assert trans_three('000') == ''
+            
+            # Test case 3: Error case handling with non-numeric string
+            assert trans_three('abc') == 'ZERO ONLY'
+        """
+        if s[0] == "0":
+            return self.trans_two(s[1:])
+        elif s[1:] == "00":
+            return f"{self.NUMBER[int(s[0])]} HUNDRED"
+        else:
+            return f"{self.NUMBER[int(s[0])]} HUNDRED AND {self.trans_two(s[1:])}"
+
+    def parse_more(self, i):
+        """
+        Parse a digit into its corresponding English words equivalent.
+        
+        Parameters:
+            i (int): The digit to parse.
+        
+        Returns:
+            str: The parsed string.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert parse_more(3) == 'BILLION'
+            
+            # Test case 2: Edge case handling with zero
+            assert parse_more(0) == ''
+            
+            # Test case 3: Error case handling with negative number
+            assert parse_more(-1) == 'ZERO ONLY'
+        """
+        return self.NUMBER_MORE[i]

@@ -1,0 +1,130 @@
+"""
+The class XMLProcessor is used for reading, processing and writing XML files.
+It also supports searching for elements by name within the XML file.
+"""
+
+import xml.etree.ElementTree as ET
+
+
+class XMLProcessor:
+    def __init__(self, file_name):
+        """
+        Initializes XMLProcessor with the name of the XML file to be processed.
+
+        Parameters:
+            file_name (str): The name of the XML file.
+        """
+        self.file_name = file_name
+        self.root = None
+
+    def read_xml(self):
+        """
+        Reads the XML file and stores its root element for further processing.
+
+        Returns:
+            ElementTree.Element: The root element of the XML file.
+            Returns None if an error occurs during parsing.
+
+        Test cases:
+            # Test case 1: Normal case with valid XML file
+            xml_processor = XMLProcessor('valid.xml')
+            assert xml_processor.read_xml() is not None
+            
+            # Test case 2: File not found
+            xml_processor = XMLProcessor('non_existent.xml')
+            assert xml_processor.read_xml() is None
+            
+            # Test case 3: Invalid XML file
+            xml_processor = XMLProcessor('invalid.xml')
+            assert xml_processor.read_xml() is None
+        """
+        try:
+            tree = ET.parse(self.file_name)
+            self.root = tree.getroot()
+            return self.root
+        except:
+            return None
+
+    def write_xml(self, file_name):
+        """
+        Writes the current state of the XML data to a file.
+
+        Parameters:
+            file_name (str): The name of the file to write to.
+
+        Returns:
+            bool: True if writing is successful, False otherwise.
+
+        Test cases:
+            # Test case 1: Normal case with valid file name
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert xml_processor.write_xml('output.xml') == True
+            
+            # Test case 2: Invalid file name
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert xml_processor.write_xml(':/invalid_file.txt') == False
+        """
+        try:
+            tree = ET.ElementTree(self.root)
+            tree.write(file_name)
+            return True
+        except:
+            return False
+
+    def process_xml_data(self, file_name):
+        """
+        Processes the XML data by converting all text within 'item' elements to uppercase.
+        Writes the processed data to a file.
+
+        Parameters:
+            file_name (str): The name of the file to write to.
+
+        Returns:
+            bool: True if processing and writing is successful, False otherwise.
+
+        Test cases:
+            # Test case 1: Normal case with valid file name
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert xml_processor.process_xml_data('output.xml') == True
+            
+            # Test case 2: Invalid file name
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert xml_processor.process_xml_data(':/invalid_file.txt') == False
+        """
+        for element in self.root.iter('item'):
+            text = element.text
+            element.text = text.upper()
+        return self.write_xml(file_name)
+
+    def find_element(self, element_name):
+        """
+        Finds all elements with the given name in the XML data.
+
+        Parameters:
+            element_name (str): The name of the elements to find.
+
+        Returns:
+            list of ElementTree.Element: A list containing all found elements.
+
+        Test cases:
+            # Test case 1: Element exists
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert len(xml_processor.find_element('item')) > 0
+            
+            # Test case 2: Element does not exist
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert len(xml_processor.find_element('non_existent')) == 0
+
+            # Test case 3: Empty string as element name
+            xml_processor = XMLProcessor('valid.xml')
+            xml_processor.read_xml()
+            assert len(xml_processor.find_element('')) == 0
+        """
+        elements = self.root.findall(element_name)
+        return elements

@@ -1,0 +1,8 @@
+def greatest_common_divisor(a: int, b: int) -> int:
+    # Calculates the greatest common divisor between two numbers using the Euclidean algorithm
+    >>> greatest_common_divisor(48, 18) # returns 6
+    >>> greatest_common_divisor(7, 1) # returns 1
+    >>> greatest_common_divisor(1024, 768) # returns 256
+    while b:
+        a, b = b, a % b
+    return a

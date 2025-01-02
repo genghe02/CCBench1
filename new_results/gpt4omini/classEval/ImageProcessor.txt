@@ -1,0 +1,181 @@
+```python
+"""
+This class provides methods for loading, saving, resizing, rotating, and adjusting the brightness of images using the PIL library.
+"""
+
+from PIL import Image, ImageEnhance, ImageChops
+
+
+class ImageProcessor:
+    def __init__(self):
+        """
+        Initializes the ImageProcessor class with an empty image attribute.
+        """
+        self.image = None
+
+    def load_image(self, image_path):
+        """
+        Loads an image from the specified file path and assigns it to the instance's image attribute.
+        
+        Parameters:
+            image_path (str): The path to the image file to be loaded.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Load a valid image
+            input_path = 'test_image.jpg'
+            processor = ImageProcessor()
+            processor.load_image(input_path)
+            assert processor.image is not None  # The image should be loaded
+            
+            # Test case 2: Attempt to load a non-existent image
+            input_path = 'non_existent.jpg'
+            processor = ImageProcessor()
+            try:
+                processor.load_image(input_path)
+            except FileNotFoundError:
+                assert True  # FileNotFoundError should be raised
+            
+            # Test case 3: Load an image with an invalid format
+            input_path = 'invalid_format.txt'
+            processor = ImageProcessor()
+            try:
+                processor.load_image(input_path)
+            except OSError:
+                assert True  # OSError should be raised
+        """
+        self.image = Image.open(image_path)
+
+    def save_image(self, save_path):
+        """
+        Saves the current image to the specified file path.
+        
+        Parameters:
+            save_path (str): The path where the image will be saved.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Save an existing image
+            output_path = 'output_image.jpg'
+            processor = ImageProcessor()
+            processor.load_image('test_image.jpg')
+            processor.save_image(output_path)
+            assert os.path.exists(output_path)  # Check if the file has been created
+            
+            # Test case 2: Attempt to save when no image is loaded
+            output_path = 'no_image_output.jpg'
+            processor = ImageProcessor()
+            processor.save_image(output_path)  # Should not raise an error
+            
+            # Test case 3: Attempt to save to an invalid file path
+            output_path = '/invalid_path/output.jpg'
+            processor = ImageProcessor()
+            processor.load_image('test_image.jpg')
+            try:
+                processor.save_image(output_path)
+            except IOError:
+                assert True  # IOError should be raised
+        """
+        if self.image:
+            self.image.save(save_path)
+
+    def resize_image(self, width, height):
+        """
+        Resizes the current image to the specified width and height.
+        
+        Parameters:
+            width (int): The new width of the image.
+            height (int): The new height of the image.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Resize to a smaller size
+            processor = ImageProcessor()
+            processor.load_image('test_image.jpg')
+            processor.resize_image(100, 100)
+            assert processor.image.size == (100, 100)
+            
+            # Test case 2: Resize to a larger size
+            processor.resize_image(800, 800)
+            assert processor.image.size == (800, 800)
+            
+            # Test case 3: Resize without loading an image
+            processor = ImageProcessor()
+            try:
+                processor.resize_image(200, 200)
+            except ValueError:
+                assert True  # ValueError should be raised
+        """
+        if self.image:
+            self.image = self.image.resize((width, height))
+
+    def rotate_image(self, degrees):
+        """
+        Rotates the current image by the specified number of degrees.
+        
+        Parameters:
+            degrees (int): The angle to rotate the image.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Rotate by 90 degrees
+            processor = ImageProcessor()
+            processor.load_image('test_image.jpg')
+            processor.rotate_image(90)
+            # Verify that the image size or some properties have changed
+            
+            # Test case 2: Rotate by 0 degrees (should stay the same)
+            original_size = processor.image.size
+            processor.rotate_image(0)
+            assert processor.image.size == original_size
+            
+            # Test case 3: Rotate without loading an image
+            processor = ImageProcessor()
+            try:
+                processor.rotate_image(45)
+            except ValueError:
+                assert True  # ValueError should be raised
+        """
+        if self.image:
+            self.image = self.image.rotate(degrees)
+
+    def adjust_brightness(self, factor):
+        """
+        Adjusts the brightness of the current image by a specified factor.
+        
+        Parameters:
+            factor (float): The factor by which to adjust the brightness (1.0 means no change).
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Adjust brightness to a higher factor
+            processor = ImageProcessor()
+            processor.load_image('test_image.jpg')
+            processor.adjust_brightness(2.0)  # Increase brightness
+            # Check if the image has changed
+            
+            # Test case 2: Adjust brightness to a lower factor
+            processor.adjust_brightness(0.5)  # Decrease brightness
+            # Check if the image has changed
+            
+            # Test case 3: Adjust brightness without loading an image
+            processor = ImageProcessor()
+            try:
+                processor.adjust_brightness(1.5)
+            except ValueError:
+                assert True  # ValueError should be raised
+        """
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)
+```

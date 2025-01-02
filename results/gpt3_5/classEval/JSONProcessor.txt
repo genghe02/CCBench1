@@ -1,0 +1,55 @@
+import json
+import os
+
+
+class JSONProcessor:
+    # Class for handling JSON files, providing read, write, and process functions.
+
+    def read_json(self, file_path):
+        # Read JSON data from the specified file path.
+        # param file_path: str, the path of the JSON file to read.
+        # return: dict, the JSON data read from the file or 0 if file doesn't exist, -1 if an error occurs.
+        # Test cases: >>> processor = JSONProcessor()
+        #             >>> processor.read_json('example.json')
+
+        if not os.path.exists(file_path):
+            return 0
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            return data
+        except:
+            return -1
+
+    def write_json(self, data, file_path):
+        # Write JSON data to the specified file path.
+        # param data: dict, the JSON data to write.
+        # param file_path: str, the path of the file to write JSON data to.
+        # return: int, 1 if write operation is successful, -1 if an error occurs.
+        # Test cases: >>> processor = JSONProcessor()
+        #             >>> processor.write_json({'key': 'value'}, 'output.json')
+
+        try:
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return 1
+        except:
+            return -1
+
+    def process_json(self, file_path, remove_key):
+        # Process JSON data by removing a specified key.
+        # param file_path: str, the path of the JSON file to process.
+        # param remove_key: str, the key to remove from the JSON data.
+        # return: int, 1 if key removal is successful, 0 if file or data error, -1 if an error occurs.
+        # Test cases: >>> processor = JSONProcessor()
+        #             >>> processor.process_json('data.json', 'key_to_remove')
+
+        data = self.read_json(file_path)
+        if data == 0 or data == -1:
+            return 0
+        if remove_key in data:
+            del data[remove_key]
+            self.write_json(data, file_path)
+            return 1
+        else:
+            return 0

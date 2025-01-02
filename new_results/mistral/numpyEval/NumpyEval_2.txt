@@ -1,0 +1,2 @@
+ # Calculate cumulative histogram
+hist = hist.cumsum()</s>

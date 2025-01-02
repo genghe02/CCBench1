@@ -1,0 +1,214 @@
+"""
+This class implements a Thermostat with functionalities to set and control target temperature and mode.
+
+The Thermostat class provides methods to interact with a virtual thermostat, setting the target temperature and mode, simulating operation, and checking for conflicts in temperature settings.
+"""
+
+import time
+
+class Thermostat:
+    def __init__(self, current_temperature, target_temperature, mode):
+        """
+        Initializes the thermostat with current temperature, target temperature, and mode.
+
+        Parameters:
+            current_temperature (int): The current temperature reading.
+            target_temperature (int): The desired temperature to reach.
+            mode (str): The operating mode of the thermostat ('heat' or 'cool').
+        """
+        self.current_temperature = current_temperature
+        self.target_temperature = target_temperature
+        self.mode = mode
+
+    def get_target_temperature(self):
+        """
+        Retrieve the target temperature set on the thermostat.
+
+        Returns:
+            int: The target temperature value.
+        
+        Test cases:
+            # Test case 1: Get target temperature
+            assert get_target_temperature() == 25
+            
+            # Test case 2: Get target temperature for negative value
+            assert get_target_temperature() == -20
+            
+            # Test case 3: Get target temperature for floating point value
+            assert get_target_temperature() == 23.5
+        """
+        return self.target_temperature
+
+    def set_target_temperature(self, temperature):
+        """
+        Set the target temperature on the thermostat.
+
+        Parameters:
+            temperature (int): The new target temperature to be set.
+        
+        Test cases:
+            # Test case 1: Set target temperature
+            set_target_temperature(22)
+            assert get_target_temperature() == 22
+            
+            # Test case 2: Set target temperature to negative value
+            set_target_temperature(-18)
+            assert get_target_temperature() == -18
+            
+            # Test case 3: Set target temperature to floating point value
+            set_target_temperature(27.5)
+            assert get_target_temperature() == 27.5
+        """
+        self.target_temperature = temperature
+
+    def get_mode(self):
+        """
+        Retrieve the operational mode of the thermostat.
+
+        Returns:
+            str: The current mode of the thermostat ('heat' or 'cool').
+        
+        Test cases:
+            # Test case 1: Get current mode
+            assert get_mode() == 'heat'
+            
+            # Test case 2: Get current mode after switching
+            set_mode('cool')
+            assert get_mode() == 'cool'
+            
+            # Test case 3: Get mode for invalid input
+            assert get_mode() == None
+        """
+        return self.mode
+
+    def set_mode(self, mode):
+        """
+        Set the operation mode of the thermostat.
+
+        Parameters:
+            mode (str): The new mode to be set, either 'heat' or 'cool'.
+
+        Returns:
+            bool: True if mode is set successfully, False if an invalid mode is provided.
+        
+        Test cases:
+            # Test case 1: Set mode to 'heat'
+            assert set_mode('heat') == True
+            
+            # Test case 2: Attempt to set unknown mode
+            assert set_mode('auto') == False
+            
+            # Test case 3: Set mode to 'cool'
+            assert set_mode('cool') == True
+        """
+        if mode in ['heat', 'cool']:
+            self.mode = mode
+            return True
+        else:
+            return False
+
+    def auto_set_mode(self):
+        """
+        Automatically determine and set the mode based on the current temperature and target temperature.
+
+        Test cases:
+            # Test case 1: Lowering the temperature
+            set_target_temperature(20)
+            current_temperature = 25
+            auto_set_mode()
+            assert get_mode() == 'cool'
+            
+            # Test case 2: Raising the temperature
+            set_target_temperature(28)
+            current_temperature = 25
+            auto_set_mode()
+            assert get_mode() == 'heat'
+            
+            # Test case 3: Temperature already at target
+            set_target_temperature(25)
+            current_temperature = 25
+            auto_set_mode()
+            assert get_mode() == 'heat'
+        """
+        if self.current_temperature < self.target_temperature:
+            self.mode = 'heat'
+        else:
+            self.mode = 'cool'
+
+    def auto_check_conflict(self):
+        """
+        Check for conflicts between the current temperature, target temperature, and operating mode.
+
+        Returns:
+            bool: True if there is a conflict, False if the settings are appropriate.
+        
+        Test cases:
+            # Test case 1: Conflict in cooling mode
+            set_target_temperature(20)
+            current_temperature = 24
+            set_mode('cool')
+            assert auto_check_conflict() == True
+            
+            # Test case 2: No conflict in heating mode
+            set_target_temperature(24)
+            current_temperature = 20
+            set_mode('heat')
+            assert auto_check_conflict() == False
+            
+            # Test case 3: Resolve conflict automatically
+            set_target_temperature(22)
+            current_temperature = 24
+            set_mode('cool')
+            assert auto_check_conflict() == False
+        """
+        if self.current_temperature > self.target_temperature:
+            if self.mode == 'cool':
+                return True
+            else:
+                self.auto_set_mode()
+                return False
+        else:
+            if self.mode == 'heat':
+                return True
+            else:
+                self.auto_set_mode()
+                return False
+
+    def simulate_operation(self):
+        """
+        Simulate the operation of the thermostat to reach the target temperature.
+
+        Returns:
+            int: The time taken in minutes to reach the target temperature.
+        
+        Test cases:
+            # Test case 1: Heating operation
+            set_target_temperature(30)
+            set_mode('heat')
+            current_temperature = 20
+            assert simulate_operation() == 10  # Assuming 1 degree Celsius increase in 1 minute.
+            
+            # Test case 2: Cooling operation
+            set_target_temperature(15)
+            set_mode('cool')
+            current_temperature = 25
+            assert simulate_operation() == 10  # Assuming 1 degree Celsius decrease in 1 minute.
+            
+            # Test case 3: No operation needed
+            set_target_temperature(25)
+            set_mode('heat')
+            current_temperature = 25
+            assert simulate_operation() == 0
+        """
+        self.auto_set_mode()
+        use_time = 0
+        if self.mode == 'heat':
+            while self.current_temperature < self.target_temperature:
+                self.current_temperature += 1
+                use_time += 1
+        else:  # in cooling mode
+            while self.current_temperature > self.target_temperature:
+                self.current_temperature -= 1
+                use_time += 1
+        return use_time
+```

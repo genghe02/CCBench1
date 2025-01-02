@@ -1,0 +1,159 @@
+```python
+"""
+This class provides static methods for converting numbers between different numeral systems, including binary, decimal, octal, and hexadecimal.
+"""
+
+class NumberConverter:
+    @staticmethod
+    def decimal_to_binary(decimal_num):
+        """
+        Converts a decimal number to its binary representation.
+        
+        Parameters:
+            decimal_num (int): The decimal number to be converted
+            
+        Returns:
+            str: The binary representation of the decimal number as a string
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert NumberConverter.decimal_to_binary(10) == '1010'
+            
+            # Test case 2: Edge case with zero
+            assert NumberConverter.decimal_to_binary(0) == '0'
+            
+            # Test case 3: Error case with negative number
+            assert NumberConverter.decimal_to_binary(-5) == '-101'
+        """
+        binary_num = bin(decimal_num)[2:]
+        return binary_num
+
+    @staticmethod
+    def binary_to_decimal(binary_num):
+        """
+        Converts a binary number to its decimal representation.
+        
+        Parameters:
+            binary_num (str): The binary number to be converted
+            
+        Returns:
+            int: The decimal representation of the binary number
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert NumberConverter.binary_to_decimal('1010') == 10
+            
+            # Test case 2: Edge case with zero
+            assert NumberConverter.binary_to_decimal('0') == 0
+            
+            # Test case 3: Error case with invalid binary input
+            try:
+                NumberConverter.binary_to_decimal('102')
+            except ValueError:
+                pass
+        """
+        decimal_num = int(binary_num, 2)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_octal(decimal_num):
+        """
+        Converts a decimal number to its octal representation.
+        
+        Parameters:
+            decimal_num (int): The decimal number to be converted
+            
+        Returns:
+            str: The octal representation of the decimal number as a string
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert NumberConverter.decimal_to_octal(10) == '12'
+            
+            # Test case 2: Edge case with zero
+            assert NumberConverter.decimal_to_octal(0) == '0'
+            
+            # Test case 3: Error case with negative number
+            assert NumberConverter.decimal_to_octal(-5) == '-5'
+        """
+        octal_num = oct(decimal_num)[2:]
+        return octal_num
+
+    @staticmethod
+    def octal_to_decimal(octal_num):
+        """
+        Converts an octal number to its decimal representation.
+        
+        Parameters:
+            octal_num (str): The octal number to be converted
+            
+        Returns:
+            int: The decimal representation of the octal number
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert NumberConverter.octal_to_decimal('12') == 10
+            
+            # Test case 2: Edge case with zero
+            assert NumberConverter.octal_to_decimal('0') == 0
+            
+            # Test case 3: Error case with invalid octal input
+            try:
+                NumberConverter.octal_to_decimal('89')
+            except ValueError:
+                pass
+        """
+        decimal_num = int(octal_num, 8)
+        return decimal_num
+
+    @staticmethod
+    def decimal_to_hex(decimal_num):
+        """
+        Converts a decimal number to its hexadecimal representation.
+        
+        Parameters:
+            decimal_num (int): The decimal number to be converted
+            
+        Returns:
+            str: The hexadecimal representation of the decimal number as a string
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert NumberConverter.decimal_to_hex(255) == 'ff'
+            
+            # Test case 2: Edge case with zero
+            assert NumberConverter.decimal_to_hex(0) == '0'
+            
+            # Test case 3: Error case with negative number
+            assert NumberConverter.decimal_to_hex(-255) == '-ff'
+        """
+        hex_num = hex(decimal_num)[2:]
+        return hex_num
+
+    @staticmethod
+    def hex_to_decimal(hex_num):
+        """
+        Converts a hexadecimal number to its decimal representation.
+        
+        Parameters:
+            hex_num (str): The hexadecimal number to be converted
+            
+        Returns:
+            int: The decimal representation of the hexadecimal number
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert NumberConverter.hex_to_decimal('ff') == 255
+            
+            # Test case 2: Edge case with zero
+            assert NumberConverter.hex_to_decimal('0') == 0
+            
+            # Test case 3: Error case with invalid hexadecimal input
+            try:
+                NumberConverter.hex_to_decimal('gh')
+            except ValueError:
+                pass
+        """
+        decimal_num = int(hex_num, 16)
+        return decimal_num
+```

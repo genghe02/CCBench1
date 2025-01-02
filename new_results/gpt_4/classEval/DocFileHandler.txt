@@ -1,0 +1,165 @@
+"""
+This class handles reading and writing operations for Microsoft Word Document files.
+"""
+
+from docx import Document
+from docx.shared import Pt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+
+
+class DocFileHandler:
+    def __init__(self, file_path):
+        """
+        Initializes the DocFileHandler with the given file path.
+        
+        Parameters:
+            file_path (str): The path to the .docx file to be processed
+        """
+        self.file_path = file_path
+
+    def read_text(self):
+        """
+        Reads the text content of the document.
+            
+        Returns:
+            str: The text content of the document
+        
+        Test cases:
+            # Test case 1: Normal usage
+            handler = DocFileHandler('test.docx')
+            print(handler.read_text())
+            
+            # Test case 2: File does not exist
+            handler = DocFileHandler('nonexistent.docx')
+            print(handler.read_text())  # Raises FileNotFoundError
+            
+            # Test case 3: File is not a .docx file
+            handler = DocFileHandler('test.txt')
+            print(handler.read_text())  # Raises UnidentifiedImageError
+        """
+        doc = Document(self.file_path)
+        text = []
+        for paragraph in doc.paragraphs:
+            text.append(paragraph.text)
+        return "\n".join(text)
+
+    def write_text(self, content, font_size=12, alignment='left'):
+        """
+        Writes the specified text to the document with the specified font size and alignment.
+        
+        Parameters:
+            content (str): The text to write to the document
+            font_size (int, optional): The font size of the text
+            alignment (str, optional): The alignment of the text ('left', 'center', or 'right')
+            
+        Returns:
+            bool: True if the write operation was successful, False otherwise
+            
+        Test cases:
+            # Test case 1: Normal usage
+            handler = DocFileHandler('test.docx')
+            handler.write_text('Hello, world!', font_size=14, alignment='center')
+            
+            # Test case 2: Invalid alignment
+            handler = DocFileHandler('test.docx')
+            handler.write_text('Hello, world!', font_size=14, alignment='diagonal')  # Defaults to 'left'
+            
+            # Test case 3: File is read-only
+            handler = DocFileHandler('readonly.docx')
+            handler.write_text('Hello, world!', font_size=14, alignment='center')  # Returns False
+        """
+        try:
+            doc = Document()
+            paragraph = doc.add_paragraph()
+            run = paragraph.add_run(content)
+            font = run.font
+            font.size = Pt(font_size)
+            alignment_value = self._get_alignment_value(alignment)
+            paragraph.alignment = alignment_value
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_heading(self, heading, level=1):
+        """
+        Adds a heading to the document.
+        
+        Parameters:
+            heading (str): The text of the heading
+            level (int, optional): The level of the heading (1-9)
+            
+        Returns:
+            bool: True if the operation was successful, False otherwise
+            
+        Test cases:
+            # Test case 1: Normal usage
+            handler = DocFileHandler('test.docx')
+            handler.add_heading('Chapter 1', level=1)
+            
+            # Test case 2: Invalid level
+            handler = DocFileHandler('test.docx')
+            handler.add_heading('Chapter 1', level=10)  # Raises ValueError
+            
+            # Test case 3: File is read-only
+            handler = DocFileHandler('readonly.docx')
+            handler.add_heading('Chapter 1', level=1)  # Returns False
+        """
+        try:
+            doc = Document(self.file_path)
+            doc.add_heading(heading, level)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_table(self, data):
+        """
+        Adds a table to the document.
+        
+        Parameters:
+            data (list of list): The table data, where each sublist represents a row
+            
+        Returns:
+            bool: True if the operation was successful, False otherwise
+            
+        Test cases:
+            # Test case 1: Normal usage
+            handler = DocFileHandler('test.docx')
+            handler.add_table([['Name', 'Age'], ['Alice', '23'], ['Bob', '25']])
+            
+            # Test case 2: Empty data
+            handler = DocFileHandler('test.docx')
+            handler.add_table([])  # Returns False
+            
+            # Test case 3: File is read-only
+            handler = DocFileHandler('readonly.docx')
+            handler.add_table([['Name', 'Age'], ['Alice', '23'], ['Bob', '25']])  # Returns False
+        """
+        try:
+            doc = Document(self.file_path)
+            table = doc.add_table(rows=len(data), cols=len(data[0]))
+            for i, row in enumerate(data):
+                for j, cell_value in enumerate(row):
+                    table.cell(i, j).text = str(cell_value)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def _get_alignment_value(self, alignment):
+        """
+        Converts the specified alignment string to a WD_PARAGRAPH_ALIGNMENT value.
+        
+        Parameters:
+            alignment (str): The alignment string ('left', 'center', 'right')
+            
+        Returns:
+            WD_PARAGRAPH_ALIGNMENT: The corresponding alignment value
+        """
+        alignment_options = {
+            'left': WD_PARAGRAPH_ALIGNMENT.LEFT,
+            'center': WD_PARAGRAPH_ALIGNMENT.CENTER,
+            'right': WD_PARAGRAPH_ALIGNMENT.RIGHT
+        }
+        return alignment_options.get(alignment.lower(), WD_PARAGRAPH_ALIGNMENT.LEFT)

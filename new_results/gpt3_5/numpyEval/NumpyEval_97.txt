@@ -1,0 +1,12 @@
+import numpy as np
+
+a = np.array([
+     [1,2],
+     [3,4],
+     [5,6],
+     [7,8]])
+
+b = np.array([1,2,3,4])
+
+# Perform element-wise multiplication of a 2D array by a 1D array with broadcasting
+out = a * b[:, np.newaxis]

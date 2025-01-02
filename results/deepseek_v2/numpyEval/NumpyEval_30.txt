@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.zeros(4,dtype="float64")
+# Convert the array 'a' from float64 to float32 data type.
+b = a.astype("float32")
+```

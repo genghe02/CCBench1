@@ -1,0 +1,184 @@
+ """
+This class represents an Order management system for a restaurant or food delivery service.
+"""
+
+import logging
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initializes the AccessGatewayFilter object.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Filters the given request based on certain conditions such as URI prefixes and JWT user authentication.
+
+        Parameters:
+            request (dict): A Python dictionary containing information about the incoming request.
+
+        Returns:
+            bool: Returns True if the request is authorized, False otherwise.
+
+        Test cases:
+            # Test case 1: Authorized request
+            request = {'path': '/api/users', 'method': 'GET'}
+            assert filter(request) is True
+
+            # Test case 2: Unauthorized request due to unsupported URI prefix
+            request = {'path': '/unsupported', 'method': 'GET'}
+            assert filter(request) is False
+
+            # Test case 3: Unauthorized request due to lack of valid JWT
+            request = {'path': '/api/users', 'method': 'GET', 'headers': {'Authorization': 'Bearer invalid_token'}}
+            assert filter(request) is False
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check.
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+# Order class documentation
+"""
+Class Order:
+
+This class represents an order management system for a restaurant or food delivery service.
+The Order object maintains a list of available dishes, a list of selected dishes, and sales information.
+"""
+
+class Order:
+
+    def __init__(self):
+        """
+        Initializes the Order object.
+        """
+        self.menu = []
+        self.selected_dishes = []
+        self.sales = {}
+
+    def add_dish(self, dish):
+        """
+        Adds a dish with the given name, price, and initial count to the available menu.
+
+        Parameters:
+            dish (dict): A Python dictionary containing the name, price, and count of the dish.
+
+        Returns:
+            bool: Returns True if the dish was added to the menu successfully, False otherwise.
+
+        Test cases:
+            # Test case 1: Adding a new dish
+            new_dish = {'dish': 'New Dish', 'price': 10.99, 'count': 5}
+            assert add_dish(new_dish) is True
+
+            # Test case 2: Trying to add a dish that already exists with smaller count
+            existing_dish = {'dish': 'Existing Dish', 'price': 5.99, 'count': 3}
+            assert add_dish(existing_dish) is False
+
+            # Test case 3: Adding a dish with the same name but different price or count
+            modified_dish = {'dish': 'Modified Dish', 'price': 7.99, 'count': 6}
+            assert add_dish(modified_dish) is True
+        """
+        for menu_dish in self.menu:
+            if dish["dish"] == menu_dish["dish"]:
+                if menu_dish["count"] < dish["count"]:
+                    return False
+                else:
+                    menu_dish["count"] -= dish["count"]
+                    break
+        self.menu.append(dish)
+        return True
+
+    def calculate_total(self):
+        """
+        Calculates the total cost of all selected dishes.
+
+        Returns:
+            float: The total cost of all selected dishes.
+
+        Test cases:
+            # Test case 1: Empty order
+            assert calculate_total() == 0.0
+
+            # Test case 2: Simple order
+            selected_dishes = [{'dish': 'Pizza', 'price': 9.99, 'count': 1}, {'dish': 'Pasta', 'price': 8.99, 'count': 2}]
+            self.selected_dishes = selected_dishes
+            self.sales = {dish['dish']: 1 for dish in selected_dishes}
+            assert calculate_total() == 28.96
+
+            # Test case 3: Order with discounts
+            sales = {
+                'Pizza': 1,
+                'Pasta': 2,
+                'Burger': 1,
+            }
+            self.sales = sales
+            selected_dishes = [{'dish': 'Pizza', 'price': 11.99, 'count': 2}, {'dish': 'Pasta', 'price': 9.99, 'count': 3}, {'dish': 'Burger', 'price': 12.99, 'count': 1}]
+            self.selected_dishes = selected_dishes
+            assert calculate_total() == 43.92
+        """
+        total = 0
+        for dish in self.selected_dishes:
+            total += dish["price"] * dish["count"] * self.sales[dish["dish"]]
+        return total
+
+    def checkout(self):
+        """
+        Finalizes the order and clears the currently selected dishes from the Order object.
+
+        Returns:
+            float: The total cost of the ordered dishes.
+
+        Test cases:
+            # Test case 1: Empty order
+            assert checkout() is False
+
+            # Test case 2: Simple order
+            total = calculate_total()
+            assert checkout() == total
+
+            # Test case 3: Discounted order
+            total = calculate_total()
+            assert checkout() == total
+            self.selected_dishes = []
+            assert len(self.selected_dishes) == 0</s>

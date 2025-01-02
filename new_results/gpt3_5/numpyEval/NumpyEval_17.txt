@@ -1,0 +1,2 @@
+# Stack arrays in sequence horizontally
+out = np.hstack(a)

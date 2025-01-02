@@ -1,0 +1,12 @@
+```python
+def eat(number, need, remaining):
+    # Calculate the new number and remaining resources after eating, ensuring remaining does not go below 0
+    
+    >>> eat(5, 3, 10) # returns [8, 7]
+    >>> eat(5, 12, 10) # returns [15, 0]
+    >>> eat(0, 0, 0) # returns [0, 0]
+    if(need <= remaining):
+        return [ number + need , remaining-need ]
+    else:
+        return [ number + remaining , 0]
+```

@@ -1,0 +1,6 @@
+def concatenate(strings: List[str]) -> str:
+    # Concatenates a list of strings into a single string
+    >>> concatenate(["Hello", " ", "World"]) # returns "Hello World"
+    >>> concatenate(["Python", " ", "code"]) # returns "Python code"
+    >>> concatenate([]) # returns ""
+    return ''.join(strings)

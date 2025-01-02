@@ -1,0 +1,1 @@
+# Calculate the ceiling of each element in the input pandas Series 's' using numpy's np.ceil() function.

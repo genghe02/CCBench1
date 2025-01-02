@@ -1,0 +1,1 @@
+# Assign an array of ones to the second column of a numpy array 'a'.

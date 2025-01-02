@@ -1,0 +1,11 @@
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'Apples': [2, 1, np.nan],
+              'Bananas': [3, 3, 7],
+              'Grapes': [np.nan, 2, 3],})
+
+# Calculate the total amount of fruit for each row
+df['Fruit Total'] = df.apply(lambda x: sum(x.values), axis=1)
+```

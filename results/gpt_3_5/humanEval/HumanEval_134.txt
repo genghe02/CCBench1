@@ -1,0 +1,13 @@
+def check_if_last_char_is_a_letter(txt):
+    # This function checks if the last character of a given text is a letter.
+    # It splits the text by space and considers the last element.
+    # It then checks if the last character is a single letter (lowercase or uppercase) by comparing its ASCII value.
+    # Returns True if the last character is a letter, False otherwise.
+
+    test_case_1 = check_if_last_char_is_a_letter("Hello World")
+    test_case_2 = check_if_last_char_is_a_letter("Python is amazing")
+    test_case_3 = check_if_last_char_is_a_letter("12345")
+    test_case_4 = check_if_last_char_is_a_letter("Hello World!")
+
+    check = txt.split(' ')[-1]
+    return True if len(check) == 1 and (97 <= ord(check.lower()) <= 122) else False

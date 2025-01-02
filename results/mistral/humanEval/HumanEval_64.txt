@@ -1,0 +1,23 @@
+ FIX = """
+# This function counts the number of vowels in a given string.
+def vowels_count(s):
+    # Initialize the set of vowels and calculate the number of vowels in the string.
+    vowels = "aeiouAEIOU"
+    n_vowels = sum(c in vowels for c in s)
+    
+    # Check if the last character is a vowel 'y' or 'Y' and add it to the count if true.
+    if s[-1] in "aeiouAEIOU":
+        n_vowels += 1
+    
+    # Test cases
+    >>> vowels_count("hello")
+    3
+    >>> vowels_count("Python")
+    3
+    >>> vowels_count("aeiou")
+    5
+    >>> vowels_count("12345")
+    0
+    >>> vowels_count("Python is awesome")
+    7
+    """

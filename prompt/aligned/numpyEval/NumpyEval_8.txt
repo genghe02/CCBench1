@@ -1,0 +1,1 @@
+# Remove all rows in a numpy.ndarray that contain non-numeric values and return the final result.

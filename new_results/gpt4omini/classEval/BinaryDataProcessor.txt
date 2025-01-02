@@ -1,0 +1,190 @@
+```python
+"""
+This class processes binary strings, allowing for cleaning of non-binary characters, 
+calculating binary information (counts and percentages of '0's and '1's), and converting 
+binary data to ASCII and UTF-8 formats.
+"""
+
+class BinaryDataProcessor:
+    def __init__(self, binary_string):
+        """
+        Initializes the BinaryDataProcessor with a binary string and cleans 
+        non-binary characters from it.
+
+        Parameters:
+            binary_string (str): The binary string to be processed, which may contain 
+                                 non-binary characters.
+
+        Returns:
+            None: This method does not return a value; it initializes the instance 
+            variable with a cleaned binary string.
+        
+        Test cases:
+            # Test case 1: Valid binary string
+            processor = BinaryDataProcessor('11001010')
+            assert processor.binary_string == '11001010'
+            
+            # Test case 2: Binary string with non-binary characters
+            processor = BinaryDataProcessor('11001X0A2')
+            assert processor.binary_string == '110010'
+            
+            # Test case 3: String with no binary characters
+            processor = BinaryDataProcessor('ABCD')
+            assert processor.binary_string == ''
+        """
+        self.binary_string = binary_string
+        self.clean_non_binary_chars()
+
+    def clean_non_binary_chars(self):
+        """
+        Cleans the binary string by removing any characters that are not '0' or '1'.
+
+        Parameters:
+            None: This method does not take any parameters.
+
+        Returns:
+            None: This method does not return a value; it modifies the 
+            instance variable `binary_string`.
+
+        Test cases:
+            # Test case 1: Clean a string with binary and non-binary characters
+            self.binary_string = '11001X0A2'
+            self.clean_non_binary_chars()
+            assert self.binary_string == '110010'
+
+            # Test case 2: Clean a string that is binary only
+            self.binary_string = '101010'
+            self.clean_non_binary_chars()
+            assert self.binary_string == '101010'
+
+            # Test case 3: Clean a string with no binary characters
+            self.binary_string = 'XYZ'
+            self.clean_non_binary_chars()
+            assert self.binary_string == ''
+        """
+        self.binary_string = ''.join(filter(lambda x: x in '01', self.binary_string))
+
+    def calculate_binary_info(self):
+        """
+        Calculates the count and percentage of '0's and '1's in the binary string, 
+        as well as the total bit length.
+
+        Parameters:
+            None: This method does not take any parameters.
+
+        Returns:
+            dict: A dictionary containing the counts and percentages of '0's and '1's 
+            and the total bit length. The dictionary has the following structure:
+                  {
+                      'Zeroes': (percentage of '0's),
+                      'Ones': (percentage of '1's),
+                      'Bit length': (total length of the binary string)
+                  }
+
+        Test cases:
+            # Test case 1: Regular binary string
+            processor = BinaryDataProcessor('11001010')
+            assert processor.calculate_binary_info() == {
+                'Zeroes': 0.375, 
+                'Ones': 0.625, 
+                'Bit length': 8
+            }
+
+            # Test case 2: All ones
+            processor = BinaryDataProcessor('11111111')
+            assert processor.calculate_binary_info() == {
+                'Zeroes': 0.0, 
+                'Ones': 1.0, 
+                'Bit length': 8
+            }
+
+            # Test case 3: All zeros
+            processor = BinaryDataProcessor('00000000')
+            assert processor.calculate_binary_info() == {
+                'Zeroes': 1.0, 
+                'Ones': 0.0, 
+                'Bit length': 8
+            }
+        """
+        zeroes_count = self.binary_string.count('0')
+        ones_count = self.binary_string.count('1')
+        total_length = len(self.binary_string)
+
+        if total_length == 0:
+            return {'Zeroes': 0.0, 'Ones': 0.0, 'Bit length': 0}
+
+        zeroes_percentage = (zeroes_count / total_length)
+        ones_percentage = (ones_count / total_length)
+
+        return {
+            'Zeroes': zeroes_percentage,
+            'Ones': ones_percentage,
+            'Bit length': total_length
+        }
+
+    def convert_to_ascii(self):
+        """
+        Converts the binary string into ASCII characters by interpreting every 8 bits 
+        as a single byte.
+
+        Parameters:
+            None: This method does not take any parameters.
+
+        Returns:
+            str: The ASCII string representation of the binary input. 
+            If the binary string is not divisible by 8, only complete bytes are converted.
+
+        Test cases:
+            # Test case 1: Standard conversion
+            processor = BinaryDataProcessor('0100100001100101011011000110110001101111')  # 'Hello'
+            assert processor.convert_to_ascii() == 'Hello'
+
+            # Test case 2: Incomplete byte (truncated)
+            processor = BinaryDataProcessor('01001000')  # 'H'
+            assert processor.convert_to_ascii() == 'H'
+
+            # Test case 3: Non-binary string (should be cleaned first)
+            processor = BinaryDataProcessor('01001000abc')
+            assert processor.convert_to_ascii() == 'H'
+        """
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i + 8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('ascii')
+
+    def convert_to_utf8(self):
+        """
+        Converts the binary string into UTF-8 characters by interpreting every 8 bits 
+        as a single byte.
+
+        Parameters:
+            None: This method does not take any parameters.
+
+        Returns:
+            str: The UTF-8 string representation of the binary input. 
+            If the binary string is not divisible by 8, only complete bytes are converted.
+
+        Test cases:
+            # Test case 1: Standard conversion
+            processor = BinaryDataProcessor('1101000011011000110110001101111011011110110110001101100')  # 'Hello'
+            assert processor.convert_to_utf8() == 'Hello'
+
+            # Test case 2: Incomplete byte (truncated)
+            processor = BinaryDataProcessor('11010000')  # 'H'
+            assert processor.convert_to_utf8() == 'H'
+            
+            # Test case 3: Non-binary string (should be cleaned first)
+            processor = BinaryDataProcessor('11010000abc')
+            assert processor.convert_to_utf8() == 'H'
+        """
+        byte_array = bytearray()
+        for i in range(0, len(self.binary_string), 8):
+            byte = self.binary_string[i:i + 8]
+            decimal = int(byte, 2)
+            byte_array.append(decimal)
+
+        return byte_array.decode('utf-8')
+```

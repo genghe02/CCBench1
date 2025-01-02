@@ -1,0 +1,2 @@
+ # Split the numpy array 'x' into 3 sub-arrays
+result = np.array_split(x, 3)</s>

@@ -1,0 +1,34 @@
+```python
+import pandas as pd
+
+def f(x):
+    a = x['Value'].iat[2] - x['Value'].iat[1]
+    b = x['Value'].iat[3] - x['Value'].iat[0]
+    c = x['ID'].iat[2] + ' - ' + x['ID'].iat[1]
+    d = x['ID'].iat[3] + ' - ' + x['ID'].iat[0]
+    return pd.DataFrame({'Value': [a,b], 'ID':[c,d]})
+
+def calculate_row_diff_groupwise(df):
+    """ 
+    For a given DataFrame, calculate the pairwise difference of 'Value' columns and combine the corresponding 'ID' 
+    columns for each group in the 'Group' column. The function expects each group to have at least four entries.
+    
+    It returns a new DataFrame with the calculated differences and combined IDs for each group.
+    
+    The function requires that each group contains at least four rows; the subsequent calculations rely on specific indices.
+    
+    >>> data = {
+            'Group': ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B'],
+            'Value': [10, 20, 30, 40, 5, 15, 25, 35],
+            'ID': ['id1', 'id2', 'id3', 'id4', 'id5', 'id6', 'id7', 'id8']
+        }
+    >>> df = pd.DataFrame(data)
+    >>> calculate_row_diff_groupwise(df)
+      Group  Value             ID
+    0     A     10   id3 - id2
+    1     A     30   id4 - id1
+    2     B     10   id7 - id6
+    3     B     30   id8 - id5
+    """
+    return df.groupby('Group').apply(f).reset_index(level=1, drop=True).reset_index()
+```

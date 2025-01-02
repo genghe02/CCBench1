@@ -1,0 +1,72 @@
+"""
+This class implements a Sieve of Eratosthenes algorithm to generate prime numbers up to a given limit.
+"""
+
+class ChandrasekharSieve:
+    def __init__(self, n):
+        """
+        Initialize the ChandrasekharSieve object with a given limit.
+
+        Parameters:
+            n (int): The upper limit to generate prime numbers up to
+        """
+        self.n = n
+        self.primes = self.generate_primes()
+
+    def generate_primes(self):
+        """
+        Generate prime numbers up to the provided limit using the Sieve of Eratosthenes algorithm.
+
+        Returns:
+            list: A list of all prime numbers up to the specified limit, or an empty list if limit is less than 2
+
+        Test cases:
+            # Test case 1: Generate primes up to 10
+            assert generate_primes(10) == [2, 3, 5, 7]
+
+            # Test case 2: Generate primes up to 20
+            assert generate_primes(20) == [2, 3, 5, 7, 11, 13, 17, 19]
+
+            # Test case 3: Edge case with limit less than 2
+            assert generate_primes(1) == []
+        """
+        if self.n < 2:
+            return []
+
+        sieve = [True] * (self.n + 1)
+        sieve[0] = sieve[1] = False
+
+        p = 2
+        while p * p <= self.n:
+            if sieve[p]:
+                for i in range(p * p, self.n + 1, p):
+                    sieve[i] = False
+            p += 1
+
+        primes = []
+        for i in range(2, self.n + 1):
+            if sieve[i]:
+                primes.append(i)
+
+        return primes
+
+    def get_primes(self):
+        """
+        Retrieve the generated list of prime numbers.
+
+        Returns:
+            list: A list of prime numbers up to the limit specified during initialization.
+
+        Test cases:
+            # Test case 1: Get generated primes
+            obj = ChandrasekharSieve(20)
+            assert obj.get_primes() == [2, 3, 5, 7, 11, 13, 17, 19]
+
+            # Test case 2: Get primes after re-initialization
+            obj = ChandrasekharSieve(30)
+            assert obj.get_primes() == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+            # Test case 3: Edge case with primes up to 2
+            obj = ChandrasekharSieve(2)
+            assert obj.get_primes() == [2]
+        """

@@ -1,0 +1,5 @@
+import numpy as np
+master = np.array([1,2,3,4,5])
+search = np.array([4,2,2,3])
+# Find indices where elements from 'search' can be inserted into 'master' while maintaining order
+out = np.searchsorted(master, search)

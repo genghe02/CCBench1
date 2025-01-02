@@ -1,0 +1,113 @@
+"""
+This class defines a simple server with white-listed addresses and send/receive functionalities.
+"""
+
+class Server:
+
+    def __init__(self):
+        """
+        Initialize the Server object with white list, send and receive structures.
+        """
+        self.white_list = []
+        self.send_struct = {}
+        self.receive_struct = {}
+
+    def add_white_list(self, addr):
+        """
+        Add an address to the white list.
+
+        Parameters:
+            addr (str): The address to be added to the white list
+        
+        Returns:
+            list or False: The updated white list if address added successfully, False otherwise
+        
+        Test cases:
+            # Test case 1: Add a new address
+            assert add_white_list('192.168.0.1') == ['192.168.0.1']
+            
+            # Test case 2: Add an existing address
+            assert add_white_list('192.168.0.1') == False
+            
+            # Test case 3: Add a different address
+            assert add_white_list('192.168.0.2') == ['192.168.0.1', '192.168.0.2']
+
+    def del_white_list(self, addr):
+        """
+        Delete an address from the white list.
+
+        Parameters:
+            addr (str): The address to be removed from the white list
+        
+        Returns:
+            list or False: The updated white list if address removed successfully, False otherwise
+        
+        Test cases:
+            # Test case 1: Remove an existing address
+            assert del_white_list('192.168.0.1') == []
+            
+            # Test case 2: Remove a non-existing address
+            assert del_white_list('192.168.0.1') == False
+            
+            # Test case 3: Remove from an empty list
+            assert del_white_list('192.168.0.2') == False
+
+    def recv(self, info):
+        """
+        Receive content for a white-listed address.
+
+        Parameters:
+            info (dict): A dictionary containing address and content keys
+        
+        Returns:
+            str or False: The content received if address is white-listed, False otherwise
+        
+        Test cases:
+            # Test case 1: Receive from white-listed address
+            content = recv({'addr': '192.168.0.1', 'content': 'Hello World'})
+            assert content == 'Hello World'
+            
+            # Test case 2: Invalid input info structure
+            assert recv('invalid input') == -1
+            
+            # Test case 3: Receive from non-white-listed address
+            content = recv({'addr': '192.168.0.2', 'content': 'Greetings'})
+            assert content == False
+
+    def send(self, info):
+        """
+        Send content to an address.
+
+        Parameters:
+            info (dict): A dictionary containing address and content keys
+        
+        Returns:
+            str: A message indicating if the info structure is correct
+        
+        Test cases:
+            # Test case 1: Send to valid address
+            assert send({'addr': '192.168.0.1', 'content': 'Data packet sent'}) == 'info structure is correct'
+            
+            # Test case 2: Invalid input info structure
+            assert send('invalid input') == 'info structure is not correct'
+
+    def show(self, type):
+        """
+        Display the send or receive structure based on type.
+
+        Parameters:
+            type (str): The type of structure to display
+        
+        Returns:
+            dict or bool: The send or receive structure if valid type, False otherwise
+        
+        Test cases:
+            # Test case 1: Show send structure
+            assert show('send') == {'addr': '192.168.0.1', 'content': 'Data packet sent'}
+            
+            # Test case 2: Show receive structure
+            assert show('receive') == {'addr': '192.168.0.1', 'content': 'Greetings'}
+            
+            # Test case 3: Invalid type
+            assert show('invalid') == False
+"""

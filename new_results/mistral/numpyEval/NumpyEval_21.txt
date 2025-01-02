@@ -1,0 +1,2 @@
+ # Join the elements of array a with a space using list comprehension and str.join
+a_string = " ".join(str(i) for i in a)</s>

@@ -1,0 +1,1 @@
+# Check if numpy array is empty by comparing its size to zero.

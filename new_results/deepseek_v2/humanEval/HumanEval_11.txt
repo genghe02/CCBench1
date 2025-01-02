@@ -1,0 +1,17 @@
+```python
+from typing import List
+
+
+def string_xor(a: str, b: str) -> str:
+    # Perform a bitwise XOR operation on two binary strings of equal length
+    >>> string_xor('1010', '1100') # returns '0110'
+    >>> string_xor('1111', '1111') # returns '0000'
+    >>> string_xor('0101', '1010') # returns '1111'
+    def xor(i, j):
+        if i == j:
+            return '0'
+        else:
+            return '1'
+
+    return ''.join(xor(x, y) for x, y in zip(a, b))
+```

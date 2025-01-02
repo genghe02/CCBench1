@@ -1,0 +1,3 @@
+a = np.zeros((2,5))
+# Get the shape of array a
+a_shape = a.shape

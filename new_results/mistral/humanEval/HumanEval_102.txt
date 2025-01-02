@@ -1,0 +1,10 @@
+ # This function returns the smaller number with certain conditions
+ # Returns -1 if x is greater than y, y is even, or x is equal to y
+ >>> choose_num(2, 3) # returns 2
+ >>> choose_num(3, 2) # returns 2
+ >>> choose_num(3, 4) # returns 4
+ >>> choose_num(3, 3) # returns -1
+ >>> choose_num(-1, 0) # returns 0
+ >>> choose_num(3, 2.5) # returns 2
+
+return x if x < y else (y if y % 2 == 0 else x) if x == y else y - 1</s>

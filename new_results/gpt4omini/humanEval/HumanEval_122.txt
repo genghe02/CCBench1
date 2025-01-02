@@ -1,0 +1,9 @@
+```python
+def add_elements(arr, k):
+    # Return the sum of the first k elements with at most 2 digits
+    >>> add_elements([1, 23, 456, 78], 3) # returns 1
+    >>> add_elements([12, 345, 6, 78], 4) # returns 66
+    >>> add_elements([], 1) # returns 0
+    >>> add_elements([1, 2, 3], 2) # returns 3
+    return sum(elem for elem in arr[:k] if len(str(elem)) <= 2)
+```

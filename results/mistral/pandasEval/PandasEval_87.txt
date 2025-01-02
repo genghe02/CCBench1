@@ -1,0 +1,2 @@
+ # Merge two dataframes horizontally using pd.concat() function.
+# This function takes two dataframes as arguments and returns a new dataframe that is the concatenation of the two input dataframes along a particular axis (default is axis=0 for horizontal concatenation).

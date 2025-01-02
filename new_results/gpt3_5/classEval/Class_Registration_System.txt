@@ -1,0 +1,149 @@
+"""
+This class handles student registrations for classes based on majors and tracks the most popular class in each major.
+"""
+
+class ClassRegistrationSystem:
+
+    def __init__(self):
+        """
+        Initialize the Class Registration System.
+        
+        Initializes empty lists and dictionaries to store student and registration information.
+        """
+        self.students = []
+        self.students_registration_classes = {}
+
+    def register_student(self, student):
+        """
+        Register a student.
+
+        Parameters:
+            student (dict): Student information with name, major, etc.
+
+        Returns:
+            int: 0 if the student is already registered, 1 if successfully registered
+        
+        Test cases:
+            # Test case 1: Register new student
+            student_info = {"name": "Alice", "major": "Computer Science"}
+            assert register_student(student_info) == 1
+            
+            # Test case 2: Register existing student
+            student_info = {"name": "Bob", "major": "Physics"}
+            assert register_student(student_info) == 0
+            
+            # Test case 3: Register student with missing major
+            student_info = {"name": "Charlie"}
+            assert register_student(student_info) == 1
+
+        if student in self.students:
+            return 0
+        else:
+            self.students.append(student)
+            return 1
+
+    def register_class(self, student_name, class_name):
+        """
+        Register a class for a student.
+
+        Parameters:
+            student_name (str): Name of the student
+            class_name (str): Name of the class to register
+        
+        Returns:
+            list: List of classes registered by the student
+        
+        Test cases:
+            # Test case 1: Register class for existing student
+            assert register_class("Alice", "Math") == ["Math"]
+            
+            # Test case 2: Register class for new student
+            assert register_class("Bob", "Physics") == ["Physics"]
+            
+            # Test case 3: Register another class for existing student
+            assert register_class("Alice", "Physics") == ["Math", "Physics"]
+
+        if student_name in self.students_registration_classes:
+            self.students_registration_classes[student_name].append(class_name)
+        else:
+            self.students_registration_classes[student_name] = [class_name]
+        return self.students_registration_classes[student_name]
+
+    def get_students_by_major(self, major):
+        """
+        Get a list of students by their major.
+
+        Parameters:
+            major (str): Major to filter students with
+        
+        Returns:
+            list: List of names of students with the specified major
+        
+        Test cases:
+            # Test case 1: Students in Computer Science
+            assert get_students_by_major("Computer Science") == ["Alice"]
+            
+            # Test case 2: Students in Physics
+            assert get_students_by_major("Physics") == ["Bob"]
+            
+            # Test case 3: Students in Mathematics
+            assert get_students_by_major("Mathematics") == []
+
+        student_list = []
+        for student in self.students:
+            if student["major"] == major:
+                student_list.append(student["name"])
+        return student_list
+
+    def get_all_major(self):
+        """
+        Get a list of all majors represented by students.
+
+        Returns:
+            list: List of unique majors across all students
+        
+        Test cases:
+            # Test case 1: List of majors
+            assert get_all_major() == ["Computer Science", "Physics"]
+            
+            # Test case 2: List of majors with duplicates
+            assert get_all_major() == ["Computer Science", "Physics", "Physics"]
+            
+            # Test case 3: Empty list of majors
+            assert get_all_major() == []
+
+        major_list = []
+        for student in self.students:
+            if student["major"] not in major_list:
+                major_list.append(student["major"])
+        return major_list
+
+    def get_most_popular_class_in_major(self, major):
+        """
+        Get the most popular class in a major based on student registrations.
+
+        Parameters:
+            major (str): Major to find the most popular class for
+        
+        Returns:
+            str: Name of the most popular class in the major
+        
+        Test cases:
+            # Test case 1: Most popular class in Computer Science
+            assert get_most_popular_class_in_major("Computer Science") == "Math"
+            
+            # Test case 2: Most popular class in Physics
+            assert get_most_popular_class_in_major("Physics") == "Physics"
+            
+            # Test case 3: Most popular class in a non-existent major
+            assert get_most_popular_class_in_major("Mathematics") == None
+
+        class_list = []
+        for student in self.students:
+            if student["major"] == major:
+                class_list += self.students_registration_classes[student["name"]]
+        if not class_list:
+            return None
+        most_popular_class = max(set(class_list), key=class_list.count)
+        return most_popular_class
+"""

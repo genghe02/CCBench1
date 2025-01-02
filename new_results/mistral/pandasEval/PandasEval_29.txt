@@ -1,0 +1,2 @@
+ # Create a new DataFrame with each column sorted and NaN values removed
+new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how='all')</s>

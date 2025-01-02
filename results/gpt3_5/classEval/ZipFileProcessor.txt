@@ -1,0 +1,66 @@
+import zipfile
+
+
+class ZipFileProcessor:
+    # This class provides methods for processing zip files.
+
+    def __init__(self, file_name):
+        # Initialize the ZipFileProcessor with the given file_name.
+        self.file_name = file_name
+
+    def read_zip_file(self):
+        # Read and return the contents of the zip file.
+        # return: ZipFile object if successful, None otherwise.
+        # Test cases:
+        # >>> zip_processor = ZipFileProcessor('example.zip')
+        # >>> zip_file = zip_processor.read_zip_file()
+        try:
+            zip_file = zipfile.ZipFile(self.file_name, 'r')
+            return zip_file
+        except:
+            return None
+
+    def extract_all(self, output_path):
+        # Extract all files in the zip to the specified output_path.
+        # param output_path: str, the path to extract the files to.
+        # return: bool, True if successful, False otherwise.
+        # Test cases:
+        # >>> zip_processor = ZipFileProcessor('example.zip')
+        # >>> result = zip_processor.extract_all('output_folder')
+        try:
+            with zipfile.ZipFile(self.file_name, 'r') as zip_file:
+                zip_file.extractall(output_path)
+            return True
+        except:
+            return False
+
+    def extract_file(self, file_name, output_path):
+        # Extract a specific file from the zip to the specified output_path.
+        # param file_name: str, the name of the file to extract.
+        # param output_path: str, the path to extract the file to.
+        # return: bool, True if successful, False otherwise.
+        # Test cases:
+        # >>> zip_processor = ZipFileProcessor('example.zip')
+        # >>> result = zip_processor.extract_file('file.txt', 'output_folder')
+        try:
+            with zipfile.ZipFile(self.file_name, 'r') as zip_file:
+                zip_file.extract(file_name, output_path)
+            return True
+        except:
+            return False
+
+    def create_zip_file(self, files, output_file_name):
+        # Create a new zip file with the specified files.
+        # param files: list, list of files to include in the zip.
+        # param output_file_name: str, the name of the output zip file.
+        # return: bool, True if successful, False otherwise.
+        # Test cases:
+        # >>> zip_processor = ZipFileProcessor('example.zip')
+        # >>> result = zip_processor.create_zip_file(['file1.txt', 'file2.txt'], 'output.zip')
+        try:
+            with zipfile.ZipFile(output_file_name, 'w') as zip_file:
+                for file in files:
+                    zip_file.write(file)
+            return True
+        except:
+            return False

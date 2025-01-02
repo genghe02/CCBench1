@@ -1,0 +1,19 @@
+```python
+def exchange(lst1, lst2):
+    # Count the number of odd integers in lst1 and even integers in lst2
+    >>> exchange([1, 2, 3], [4, 5, 6]) # returns "NO"
+    >>> exchange([1, 3, 5], [2, 4, 6]) # returns "YES"
+    >>> exchange([], [2, 4, 6]) # returns "YES"
+    >>> exchange([1, 2, 3], []) # returns "NO"
+    odd = 0
+    even = 0
+    for i in lst1:
+        if i % 2 == 1:
+            odd += 1
+    for i in lst2:
+        if i % 2 == 0:
+            even += 1
+    if even >= odd:
+        return "YES"
+    return "NO"
+```

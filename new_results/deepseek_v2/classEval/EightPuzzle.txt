@@ -1,0 +1,147 @@
+```python
+"""
+This class represents an 8-puzzle game solver. It provides methods to manipulate the puzzle state, find possible moves, and solve the puzzle using a breadth-first search approach.
+"""
+
+class EightPuzzle:
+    def __init__(self, initial_state):
+        """
+        Initializes the 8-puzzle solver with the given initial state.
+
+        Parameters:
+            initial_state (list of list of int): The initial state of the puzzle, represented as a 3x3 grid.
+        """
+        self.initial_state = initial_state
+        self.goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+
+    def find_blank(self, state):
+        """
+        Finds the position of the blank tile (represented by 0) in the puzzle state.
+
+        Parameters:
+            state (list of list of int): The current state of the puzzle.
+
+        Returns:
+            tuple: The (row, column) indices of the blank tile.
+
+        Test cases:
+            # Test case 1: Blank tile in the middle
+            assert find_blank([[1, 2, 3], [4, 0, 6], [7, 8, 5]]) == (1, 1)
+
+            # Test case 2: Blank tile in the top-left corner
+            assert find_blank([[0, 2, 3], [4, 5, 6], [7, 8, 1]]) == (0, 0)
+
+            # Test case 3: Blank tile in the bottom-right corner
+            assert find_blank([[1, 2, 3], [4, 5, 6], [7, 8, 0]]) == (2, 2)
+        """
+        for i in range(3):
+            for j in range(3):
+                if state[i][j] == 0:
+                    return i, j
+
+    def move(self, state, direction):
+        """
+        Moves the blank tile in the specified direction.
+
+        Parameters:
+            state (list of list of int): The current state of the puzzle.
+            direction (str): The direction to move the blank tile ('up', 'down', 'left', 'right').
+
+        Returns:
+            list of list of int: The new state of the puzzle after the move.
+
+        Test cases:
+            # Test case 1: Move blank tile up
+            assert move([[1, 2, 3], [4, 0, 6], [7, 8, 5]], 'up') == [[1, 0, 3], [4, 2, 6], [7, 8, 5]]
+
+            # Test case 2: Move blank tile left
+            assert move([[1, 2, 3], [4, 0, 6], [7, 8, 5]], 'left') == [[1, 2, 3], [0, 4, 6], [7, 8, 5]]
+
+            # Test case 3: Move blank tile right (invalid move)
+            assert move([[1, 2, 3], [4, 0, 6], [7, 8, 5]], 'right') == [[1, 2, 3], [4, 6, 0], [7, 8, 5]]
+        """
+        i, j = self.find_blank(state)
+        new_state = [row[:] for row in state]
+
+        if direction == 'up':
+            new_state[i][j], new_state[i - 1][j] = new_state[i - 1][j], new_state[i][j]
+        elif direction == 'down':
+            new_state[i][j], new_state[i + 1][j] = new_state[i + 1][j], new_state[i][j]
+        elif direction == 'left':
+            new_state[i][j], new_state[i][j - 1] = new_state[i][j - 1], new_state[i][j]
+        elif direction == 'right':
+            new_state[i][j], new_state[i][j + 1] = new_state[i][j + 1], new_state[i][j]
+
+        return new_state
+
+    def get_possible_moves(self, state):
+        """
+        Determines the possible moves for the blank tile in the current state.
+
+        Parameters:
+            state (list of list of int): The current state of the puzzle.
+
+        Returns:
+            list of str: A list of possible moves ('up', 'down', 'left', 'right').
+
+        Test cases:
+            # Test case 1: Blank tile in the middle
+            assert get_possible_moves([[1, 2, 3], [4, 0, 6], [7, 8, 5]]) == ['up', 'down', 'left', 'right']
+
+            # Test case 2: Blank tile in the top-left corner
+            assert get_possible_moves([[0, 2, 3], [4, 5, 6], [7, 8, 1]]) == ['down', 'right']
+
+            # Test case 3: Blank tile in the bottom-right corner
+            assert get_possible_moves([[1, 2, 3], [4, 5, 6], [7, 8, 0]]) == ['up', 'left']
+        """
+        moves = []
+        i, j = self.find_blank(state)
+
+        if i > 0:
+            moves.append('up')
+        if i < 2:
+            moves.append('down')
+        if j > 0:
+            moves.append('left')
+        if j < 2:
+            moves.append('right')
+
+        return moves
+
+    def solve(self):
+        """
+        Solves the 8-puzzle using a breadth-first search approach.
+
+        Returns:
+            list of str: A sequence of moves to solve the puzzle, or None if no solution is found.
+
+        Test cases:
+            # Test case 1: Solvable puzzle
+            puzzle = EightPuzzle([[1, 2, 3], [4, 5, 6], [7, 0, 8]])
+            assert puzzle.solve() == ['right']
+
+            # Test case 2: Already solved puzzle
+            puzzle = EightPuzzle([[1, 2, 3], [4, 5, 6], [7, 8, 0]])
+            assert puzzle.solve() == []
+
+            # Test case 3: Unsolvable puzzle
+            puzzle = EightPuzzle([[1, 2, 3], [4, 5, 6], [8, 7, 0]])
+            assert puzzle.solve() is None
+        """
+        open_list = [(self.initial_state, [])]
+        closed_list = []
+
+        while open_list:
+            current_state, path = open_list.pop(0)
+            closed_list.append(current_state)
+
+            if current_state == self.goal_state:
+                return path
+
+            for move in self.get_possible_moves(current_state):
+                new_state = self.move(current_state, move)
+                if new_state not in closed_list:
+                    open_list.append((new_state, path + [move]))
+
+        return None
+```

@@ -1,0 +1,2 @@
+ # Broadcasting operation to add a column-wise repeated a to 2 times b
+c = a[:, None] + b * 2</s>

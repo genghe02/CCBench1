@@ -1,0 +1,25 @@
+```python
+def multiply(a, b):
+    # Multiply the absolute values of the last digits of two numbers.
+    # param a: int, the first number
+    # param b: int, the second number
+    # return: int, the product of the absolute values of the last digits of a and b
+    
+    # >>> multiply(123, 456)
+    # 18
+    # >>> multiply(-123, 456)
+    # 18
+    # >>> multiply(123, -456)
+    # 18
+    # >>> multiply(-123, -456)
+    # 18
+    # >>> multiply(120, 450)
+    # 0
+    # >>> multiply(123, 0)
+    # 0
+    # >>> multiply(0, 456)
+    # 0
+    # >>> multiply(0, 0)
+    # 0
+    return abs(a % 10) * abs(b % 10)
+```

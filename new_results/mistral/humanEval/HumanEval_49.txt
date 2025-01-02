@@ -1,0 +1,8 @@
+ # This function calculates 'n' modulo 'p' using the modular exponentiation method
+ # O(log p) time complexity
+<some test cases for the function>
+>>> modp(7, 13) # returns 9
+>>> modp(10, 3) # returns 1
+>>> modp(21, 7) # returns 5
+>>> modp(17, 11) # returns 6
+return ret</s>

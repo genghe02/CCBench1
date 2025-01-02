@@ -1,0 +1,21 @@
+```python
+import pandas as pd
+
+def change_all_cols_type(df):
+    """ Convert all columns in the DataFrame to numeric types. This function will attempt to convert all values 
+    in the DataFrame to integers or floats. If any value cannot be converted, it will result in NaN. 
+    It is useful for ensuring that all data is in a numeric format for analysis or calculations.
+    
+    >>> change_all_cols_type(pd.DataFrame({'A': ['1', '2', '3'], 'B': ['4.0', '5.5', '6.1']}))
+       A    B
+    0  1  4.0
+    1  2  5.5
+    2  3  6.1
+    >>> change_all_cols_type(pd.DataFrame({'C': ['7', 'invalid', '9']}))
+       C
+    0  7
+    1 NaN
+    2  9
+    """
+    return df.apply(pd.to_numeric)
+```

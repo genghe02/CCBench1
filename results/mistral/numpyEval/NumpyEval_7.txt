@@ -1,0 +1,4 @@
+# Transpose the array 'a' and then flip each sub-array along the last axis to create array 'b'.
+# This allows us to compare each element with its neighbor in the same sub-array using np.where(condition).
+
+result = np.where(np.logical_not(np.all(a == b, axis=-1)))[0]

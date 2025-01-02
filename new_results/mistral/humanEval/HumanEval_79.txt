@@ -1,0 +1,7 @@
+ def decimal_to_binary(decimal):
+   # Accepts an integer decimal number and returns its binary representation
+   # with 'db' prefix and suffix added for debugging purpose
+    >>> decimal_to_binary(0) # returns 'db0b'
+    >>> decimal_to_binary(1) # returns 'db01b'
+    >>> decimal_to_binary(5) # returns 'db101b'
+    return "db" + bin(decimal)[2:] + "db"</s>

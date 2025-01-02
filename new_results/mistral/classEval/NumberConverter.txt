@@ -1,0 +1,144 @@
+ """
+This class provides static methods for converting decimal numbers to binary, octal, and hexadecimal formats, and vice versa.
+"""
+
+@staticmethod
+def decimal_to_binary(decimal_num):
+"""
+Convert a decimal number to its binary representation.
+
+Parameters:
+decimal_num (int): The decimal number to convert
+
+Returns:
+str: The binary representation of the decimal number
+
+Test cases:
+# Test case 1: Decimal number to binary
+assert decimal_to_binary(10) == '1010'
+
+# Test case 2: Zero decimal number to binary
+assert decimal_to_binary(0) == '0'
+
+# Test case 3: Negative decimal number to binary
+assert binary_to_decimal(bin(-5)) == -5
+"""
+binary_num = bin(decimal_num)[2:]
+return binary_num
+
+@staticmethod
+def binary_to_decimal(binary_num):
+"""
+Convert a binary number to its decimal representation.
+
+Parameters:
+binary_num (str): The binary number to convert
+
+Returns:
+int: The decimal representation of the binary number
+
+Test cases:
+# Test case 1: Binary number to decimal
+assert binary_to_decimal('1101') == 13
+
+# Test case 2: Empty binary string to decimal
+assert binary_to_decimal('') == 0
+
+# Test case 3: Negative binary number to decimal
+assert decimal_to_binary(-5) == '1111111111111101'
+"""
+decimal_num = int(binary_num, 2)
+return decimal_num
+
+@staticmethod
+def decimal_to_octal(decimal_num):
+"""
+Convert a decimal number to its octal representation.
+
+Parameters:
+decimal_num (int): The decimal number to convert
+
+Returns:
+str: The octal representation of the decimal number
+
+Test cases:
+# Test case 1: Decimal number to octal
+assert decimal_to_octal(17) == '21'
+
+# Test case 2: Zero decimal number to octal
+assert decimal_to_octal(0) == '0'
+
+# Test case 3: Negative decimal number to octal
+assert octal_to_decimal('377') == -1
+"""
+octal_num = oct(decimal_num)[2:]
+return octal_num
+
+@staticmethod
+def octal_to_decimal(octal_num):
+"""
+Convert an octal number to its decimal representation.
+
+Parameters:
+octal_num (str): The octal number to convert
+
+Returns:
+int: The decimal representation of the octal number
+
+Test cases:
+# Test case 1: Octal number to decimal
+assert octal_to_decimal('21') == 17
+
+# Test case 2: Empty octal string to decimal
+assert octal_to_decimal('') == 0
+
+# Test case 3: Negative octal number to decimal
+assert decimal_to_octal(-15) == '377'
+"""
+decimal_num = int(octal_num, 8)
+return decimal_num
+
+@staticmethod
+def decimal_to_hex(decimal_num):
+"""
+Convert a decimal number to its hexadecimal representation.
+
+Parameters:
+decimal_num (int): The decimal number to convert
+
+Returns:
+str: The hexadecimal representation of the decimal number
+
+Test cases:
+# Test case 1: Decimal number to hexadecimal
+assert decimal_to_hex(255) == 'FF'
+
+# Test case 2: Zero decimal number to hexadecimal
+assert decimal_to_hex(0) == '0'
+
+# Test case 3: Negative decimal number to hexadecimal
+assert hex_to_decimal('FFF') == -1
+"""
+hex_num = hex(decimal_num)[2:]
+return hex_num
+
+@staticmethod
+def hex_to_decimal(hex_num):
+"""
+Convert a hexadecimal number to its decimal representation.
+
+Parameters:
+hex_num (str): The hexadecimal number to convert
+
+Returns:
+int: The decimal representation of the hexadecimal number
+
+Test cases:
+# Test case 1: Hexadecimal number to decimal
+assert hex_to_decimal('FF') == 255
+
+# Test case 2: Empty hexadecimal string to decimal
+assert hex_to_decimal('') == 0
+
+# Test case 3: Negative hexadecimal number to decimal
+assert decimal_to_hex(-1) == 'FFFFFFFFFFFEDCBBFCBAAD9B9'</s>

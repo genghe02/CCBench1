@@ -1,0 +1,5 @@
+import numpy as np
+
+def get_index_max_element(arr, axis_value):
+    # Return the index of the maximum element along the specified axis in the given array
+    return np.argmax(arr, axis=axis_value)

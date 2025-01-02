@@ -1,0 +1,9 @@
+```python
+def starts_one_ends(n):
+    # Calculate the number of n-digit numbers that start or end with 1
+    if n == 1: return 1
+    return 18 * (10 ** (n - 2))
+    >>> starts_one_ends(1) # returns 1
+    >>> starts_one_ends(2) # returns 18
+    >>> starts_one_ends(3) # returns 180
+```

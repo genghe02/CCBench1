@@ -1,0 +1,9 @@
+ # Convert each number in the list to its corresponding index in the value_map and sort based on that
+ # Test cases: multiple lines starting with '>>>'
+
+def sort_numbers(numbers: str) -> str:
+    <Requirements for the code>
+    >>> sort_numbers("one two three four") # returns "one two three four"
+    >>> sort_numbers("nine eight seven six five four three two one zero") # returns "zero one two three four five six seven eight nine"
+    >>> sort_numbers("three three one two two") # returns "one two two three three"
+    return ' '.join(sorted([x for x in numbers.split(' ') if x], key=lambda x: value_map[x]))</s>

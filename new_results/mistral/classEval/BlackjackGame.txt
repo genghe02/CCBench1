@@ -1,0 +1,132 @@
+ """
+This class defines a Blackjack game with methods to create a deck, deal cards, calculate hand values, and determine the winner.
+"""
+
+import random
+
+class BlackjackGame:
+    def __init__(self):
+        """
+        Initializes a new Blackjack game with an empty deck and empty player and dealer hands.
+        """
+        self.deck = self.create_deck()
+        self.player_hand = []
+        self.dealer_hand = []
+
+    def create_deck(self):
+        """
+        Creates a standard 52-card deck of cards.
+
+        Returns:
+            list: A shuffled list of card strings, each consisting of a rank and a suit.
+
+        Test cases:
+            # Test case 1: Check if the length of the created deck is 52
+            assert len(create_deck()) == 52
+            
+            # Test case 2: Check if the created deck contains all 13 ranks and 4 suits
+            unique_ranks = set()
+            unique_suits = set()
+            for card in create_deck():
+                unique_ranks.add(card[:-1])
+                unique_suits.add(card[-1])
+            assert len(unique_ranks) == 13
+            assert len(unique_suits) == 4
+        """
+        deck = []
+        suits = ['S', 'C', 'D', 'H']
+        ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        for suit in suits:
+            for rank in ranks:
+                deck.append(rank + suit)
+        random.shuffle(deck)
+        return deck
+
+    def deal_card(self, hand):
+        """
+        Deals one card from the deck to the given hand.
+
+        Parameters:
+            hand (list): The hand to deal a card to.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Deal a card from the deck to the player hand
+            blackjack_game = BlackjackGame()
+            deal_card(blackjack_game.player_hand)
+            
+            # Test case 2: Deal a card from the deck to the dealer hand
+            blackjack_game = BlackjackGame()
+            deal_card(blackjack_game.dealer_hand)
+            
+            # Test case 3: Check if the length of the hand is now one greater than before
+            input_hand = []
+            deal_card(input_hand)
+            assert len(input_hand) == 1
+        """
+        card = self.deck.pop()
+        hand.append(card)
+
+    def calculate_hand_value(self, hand):
+        """
+        Calculates the value of the given hand based on the ranks of its cards.
+
+        Parameters:
+            hand (list): The hand whose value needs to be calculated.
+
+        Returns:
+            int: The total value of the hand.
+
+        Test cases:
+            # Test case 1: Calculate the value of a hand with no aces
+            hand = ['3S', 'KS', 'QD', '5C']
+            assert calculate_hand_value(hand) == 18
+            
+            # Test case 2: Calculate the value of a hand with one ace
+            hand = ['AS', 'KS', 'QD', '5C']
+            assert calculate_hand_value(hand) == 19
+            
+            # Test case 3: Calculate the value of a hand with multiple aces
+            hand = ['AS', 'AS', 'KS', 'QD']
+            assert calculate_hand_value(hand) == 16
+        """
+        value = 0
+        num_aces = 0
+        for card in hand:
+            rank = card[:-1]
+            if rank.isdigit():
+                value += int(rank)
+            elif rank in ['J', 'Q', 'K']:
+                value += 10
+            elif rank == 'A':
+                value += 11
+                num_aces += 1
+        while value > 21 and num_aces > 0:
+            value -= 10
+            num_aces -= 1
+        return value
+
+    def check_winner(self):
+        """
+        Determines the winner of the Blackjack game based on the values of the player and dealer hands.
+
+        Returns:
+            str: A string indicating the winner (player, dealer, or tie).
+
+        Test cases:
+            # Test case 1: Check if the player wins when the player has a higher value than the dealer
+            player_hand = ['AS', 'KS']
+            dealer_hand = ['8S', '7D']
+            assert check_winner() == 'Player wins'
+            
+            # Test case 2: Check if the dealer wins when the dealer has a higher value than the player
+            player_hand = ['8S', '7D']
+            dealer_hand = ['AS', 'KS']
+            assert check_winner() == 'Dealer wins'
+            
+            # Test case 3: Check if there is a tie when both the player and dealer have the same value
+            player_hand = ['AS', 'KS']
+            dealer_hand = ['AS', 'KS']
+            assert check_winner() == 'Tie'</s>

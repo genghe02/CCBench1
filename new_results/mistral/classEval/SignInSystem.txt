@@ -1,0 +1,120 @@
+ """
+This class represents a simple SignInSystem for managing user sign-ins and sign-ups.
+"""
+
+class SignInSystem:
+    def __init__(self):
+        """
+        Initialization method for creating a new SignInSystem instance.
+        """
+        self.users = {}
+
+    def add_user(self, username):
+        """
+        Method to add a new user to the SignInSystem.
+
+        Parameters:
+            username (str): The username to add.
+
+        Returns:
+            bool: True if the username was successfully added, False if not.
+
+        Test cases:
+            # Test case 1: Adding an existing username
+            assert add_user('test_user') == False
+            
+            # Test case 2: Adding a new username
+            assert add_user('new_user') == True
+            
+            # Test case 3: Adding an empty username
+            assert add_user('') == False
+        """
+        if username in self.users:
+            return False
+        else:
+            self.users[username] = False
+            return True
+
+    def sign_in(self, username):
+        """
+        Method to sign in a user, marking them as signed in.
+
+        Parameters:
+            username (str): The username of the user to sign in.
+
+        Returns:
+            bool: True if the sign-in was successful, False if the user was not found.
+
+        Test cases:
+            # Test case 1: Signing in an existing user
+            assert sign_in('test_user') == True
+            assert self.users['test_user'] == True
+            
+            # Test case 2: Signing in a non-existent user
+            assert sign_in('new_user') == False
+        """
+        if username not in self.users:
+            return False
+        else:
+            self.users[username] = True
+            return True
+
+    def check_sign_in(self, username):
+        """
+        Method to check if a user is signed in.
+
+        Parameters:
+            username (str): The username of the user to check.
+
+        Returns:
+            bool: True if the user is signed in, False if they are not.
+
+        Test cases:
+            # Test case 1: Checking sign-in status for a signed-in user
+            assert check_sign_in('test_user') == True
+            assert self.users['test_user'] == True
+            
+            # Test case 2: Checking sign-in status for an unsigned user
+            assert check_sign_in('new_user') == False
+        """
+        if username not in self.users:
+            return False
+        else:
+            return self.users[username]
+
+    def all_signed_in(self):
+        """
+        Method to check if all users are signed in.
+
+        Returns:
+            bool: True if all users are signed in, False if any are not.
+
+        Test cases:
+            # Test case 1: All users signed in
+            self.users = {'user1': True, 'user2': True}
+            assert all_signed_in() == True
+            
+            # Test case 2: One user unsigned
+            self.users = {'user1': True, 'user2': False}
+            assert all_signed_in() == False
+        """
+        return all(self.users.values())
+
+    def all_not_signed_in(self):
+        """
+        Method to return a list of all users that are not signed in.
+
+        Returns:
+            list: A list of usernames for users that are not signed in.
+
+        Test cases:
+            # Test case 1: No users signed out
+            assert all_not_signed_in() == []
+            
+            # Test case 2: One user signed out
+            self.users = {'user1': True, 'user2': False}
+            assert all_not_signed_in() == ['user2']
+            
+            # Test case 3: Multiple users signed out
+            self.users = {'user1': True, 'user2': False, 'user3': False}
+            assert all_not_signed_in() == ['user2', 'user3']</s>

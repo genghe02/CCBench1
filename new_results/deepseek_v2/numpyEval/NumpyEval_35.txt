@@ -1,0 +1,4 @@
+import numpy as np
+
+# Create a 3x3 numpy array with specified values
+array = np.array([[8, 7, 2], [5, 6, 1], [8, 2, 6]])

@@ -1,0 +1,2 @@
+ # Check if size of the NumPy array is equal to zero
+return arr.size == 0</s>

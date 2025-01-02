@@ -1,0 +1,173 @@
+'''
+This class, CamelCaseMap, is designed to map keys in CamelCase format to values in a dictionary-like data structure.
+
+The class provides methods to get, set, delete, iterate over, and get the length of the data while converting keys to CamelCase for uniform access.
+'''
+
+class CamelCaseMap:
+    def __init__(self):
+        """
+        Initialize the CamelCase map data structure.
+        """
+        self._data = {}
+
+    def __getitem__(self, key):
+        """
+        Retrieve the value associated with the key.
+
+        Parameters:
+            key: Key to retrieve the associated value.
+
+        Returns:
+            object: Value stored at the CamelCase version of the input key.
+
+        Test cases:
+            # Normal case
+            assert CamelCaseMap()['first_key'] == ...
+            
+            # Edge case
+            assert CamelCaseMap()['mixed_CaMeLCase'] == ...
+            
+            # Error case
+            try:
+                CamelCaseMap()['unknown_key']
+            except KeyError:
+                pass
+        """
+        return self._data[self._convert_key(key)]
+
+    def __setitem__(self, key, value):
+        """
+        Set the value associated with the key.
+
+        Parameters:
+            key: Key to set the associated value.
+            value: Value to associate with the given key.
+
+        Test cases:
+            # Normal case
+            CamelCaseMap()['test_key'] = 'value'
+            assert CamelCaseMap()['test_Key'] == 'value'
+            
+            # Edge case
+            CamelCaseMap()['AnoTheR_tESt_key'] = 45
+            assert CamelCaseMap()['another_Test_Key'] == 45
+            
+            # Error case
+            try:
+                CamelCaseMap()[123] = 'Invalid key'
+            except TypeError:
+                pass
+        """
+        self._data[self._convert_key(key)] = value
+
+    def __delitem__(self, key):
+        """
+        Delete the key and its associated value from the map.
+
+        Parameters:
+            key: Key to delete along with its associated value.
+
+        Test cases:
+            # Normal case
+            CamelCaseMap()['delete_this_key'] = 'value'
+            del CamelCaseMap()['delete_THIS_Key']
+            try:
+                CamelCaseMap()['delete_THIS_Key']
+            except KeyError:
+                pass
+            
+            # Edge case
+            CamelCaseMap()['del_key'] = [...]
+            del CamelCaseMap()['dEl_kEy']
+            assert CamelCaseMap()['del_Key'] == [...]
+            
+            # Error case
+            try:
+                del CamelCaseMap()[789]
+            except TypeError:
+                pass
+        """
+        del self._data[self._convert_key(key)]
+
+    def __iter__(self):
+        """
+        Get an iterator to iterate over the keys in the map.
+
+        Returns:
+            iter: Iterator object over the CamelCase keys.
+
+        Test cases:
+            # Normal case
+            assert len(list(CamelCaseMap())) == len(CamelCaseMap())
+
+            # Edge case
+            assert len(list(CamelCaseMap())) == 0
+        """
+        return iter(self._data)
+
+    def __len__(self):
+        """
+        Get the length of the CamelCase map.
+
+        Returns:
+            int: The number of key-value pairs in the map.
+
+        Test cases:
+            # Normal case
+            CamelCaseMap()[1] = 'One'
+            CamelCaseMap()[2] = 'Two'
+            assert len(CamelCaseMap()) == 2
+            
+            # Edge case
+            assert len(CamelCaseMap()) == 0
+        """
+        return len(self._data)
+
+    def _convert_key(self, key):
+        """
+        Convert the input key to CamelCase for storage and retrieval.
+
+        Parameters:
+            key: Key to be converted to CamelCase.
+
+        Returns:
+            str: The CamelCase version of the input key.
+
+        Test cases:
+            # Normal case
+            assert CamelCaseMap()._convert_key('mixed_case_key') == 'mixedCaseKey'
+            
+            # Edge case
+            assert CamelCaseMap()._convert_key('duplicate_DUPLICATE_case') == 'duplicateDuplicateCase'
+            
+            # Error case
+            assert CamelCaseMap()._convert_key(123) == 123
+        """
+        if isinstance(key, str):
+            return self._to_camel_case(key)
+        return key
+
+    @staticmethod
+    def _to_camel_case(key):
+        """
+        Convert the input key from snake_case to CamelCase.
+
+        Parameters:
+            key: Key in snake_case to be converted.
+
+        Returns:
+            str: The CamelCase version of the input key.
+
+        Test cases:
+            # Normal case
+            assert CamelCaseMap._to_camel_case('convert_this_key') == 'convertThisKey'
+            
+            # Edge case
+            assert CamelCaseMap._to_camel_case('a_b_c_DE_F') == 'aBCDEF'
+            
+            # Error case
+            assert CamelCaseMap._to_camel_case(456) == 456
+        """
+        parts = key.split('_')
+        return parts[0] + ''.join(part.title() for part in parts[1:])

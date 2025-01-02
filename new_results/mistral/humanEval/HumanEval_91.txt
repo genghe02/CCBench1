@@ -1,0 +1,8 @@
+ # Check if the string S contains at least two consecutive "I " words at the beginning of a sentence
+# Returns an integer representing the number of such occurrences
+def is_bored(S):
+    >>> is_bored("I am bored. I don't want to do anything.") # returns 2
+    >>> is_bored("I am not bored.") # returns 0
+    import re
+    sentences = re.split(r'[.?!]\s*', S)
+    return sum(sentence[0:2] == 'I ' for sentence in sentences)</s>

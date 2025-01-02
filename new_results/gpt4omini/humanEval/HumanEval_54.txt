@@ -1,0 +1,10 @@
+```python
+def same_chars(s0: str, s1: str):
+    # Check if two strings have the same characters regardless of order
+    >>> same_chars("abc", "cab") # returns True
+    >>> same_chars("abc", "abcd") # returns False
+    >>> same_chars("abc", "abc") # returns True
+    >>> same_chars("", "") # returns True
+    >>> same_chars("a", "A") # returns False
+    return set(s0) == set(s1)
+```

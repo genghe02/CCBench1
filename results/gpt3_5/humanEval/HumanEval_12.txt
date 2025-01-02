@@ -1,0 +1,19 @@
+from typing import List, Optional
+
+def longest(strings: List[str]) -> Optional[str]:
+    # Find the longest string in the given list of strings and return it. If the list is empty, return None.
+    # Test cases:
+    # Test case 1: Empty list
+    # longest([]) -> None
+    # Test case 2: List with one string
+    # longest(["hello"]) -> "hello"
+    # Test case 3: List with multiple strings, one of them is the longest
+    # longest(["world", "hello", "python", "programming"]) -> "programming"
+    
+    if not strings:
+        return None
+
+    maxlen = max(len(x) for x in strings)
+    for s in strings:
+        if len(s) == maxlen:
+            return s

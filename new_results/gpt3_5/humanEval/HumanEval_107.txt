@@ -1,0 +1,4 @@
+# Check for even and odd palindromes up to n
+>>> even_odd_palindrome(10)
+>>> even_odd_palindrome(15)
+>>> even_odd_palindrome(5)

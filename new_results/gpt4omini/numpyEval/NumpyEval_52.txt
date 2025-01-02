@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+# I have a 2D numpy array of shape (N,2) which is holding N points.
+a = np.array([(3, 2), (6, 2), (3, 6), (3, 4), (5, 3)])
+# Sort the array based on the first column, then the second column
+ind = np.lexsort((a[:, 0], a[:, 1]))
+a = a[ind]
+```

@@ -1,0 +1,1 @@
+# Generate a sequence of integers to count consecutive positive values in a series object.

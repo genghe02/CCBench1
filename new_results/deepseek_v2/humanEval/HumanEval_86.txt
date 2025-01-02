@@ -1,0 +1,8 @@
+```python
+def anti_shuffle(s):
+    # Sort the characters of each word in the string while keeping the word order intact
+    >>> anti_shuffle("hello world") # returns "ehllo dlorw"
+    >>> anti_shuffle("Python is fun") # returns "Phnoty is fn"
+    >>> anti_shuffle("Keep the order") # returns "Keept ehort dero"
+    return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])
+```

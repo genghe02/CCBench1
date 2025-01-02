@@ -1,0 +1,23 @@
+[
+  "A class for calculating various areas related to geometric shapes.",
+  "Initialize the AreaCalculator with a given radius.",
+  "param radius: float, the radius of the circle or sphere.",
+  "Calculate the area of a circle given its radius.",
+  "return: float, the area of the circle.",
+  ">>> calc = AreaCalculator(5)\n>>> calc.calculate_circle_area()\n78.53981633974483",
+  "Calculate the surface area of a sphere given its radius.",
+  "return: float, the surface area of the sphere.",
+  ">>> calc = AreaCalculator(5)\n=>>> calc.calculate_sphere_area()\n=314.1592653589793",
+  "Calculate the surface area of a cylinder given its radius and height.",
+  "param height: float, the height of the cylinder.",
+  "return: float, the surface area of the cylinder.",
+  ">>> calc = AreaCalculator(5)\n>>> calc.calculate_cylinder_area(10)\n471.23889803846896",
+  "Calculate the area of a sector of a circle given its radius and angle.",
+  "param angle: float, the angle of the sector in radians.",
+  "return: float, the area of the sector.",
+  ">>> calc = AreaCalculator(5)\n>>> calc.calculate_sector_area(math.pi / 2)\n19.634954084936208",
+  "Calculate the area of an annulus (a ring-shaped object) given its inner and outer radii.",
+  "param inner_radius: float, the inner radius of the annulus.\nparam outer_radius: float, the outer radius of the annulus.",
+  "return: float, the area of the annulus.",
+  ">>> calc = AreaCalculator(5)\n>>> calc.calculate_annulus_area(3, 7)\n125.66370614359172"
+]

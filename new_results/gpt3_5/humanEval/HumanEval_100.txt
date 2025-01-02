@@ -1,0 +1,7 @@
+# This function creates a list of size n with elements n + 2*i for i in range(n)
+>>> make_a_pile(5) # returns [5, 7, 9, 11, 13]
+>>> make_a_pile(3) # returns [3, 5, 7]
+>>> make_a_pile(0) # returns []  
+def make_a_pile(n):
+    # This function creates a list of size n with elements n + 2*i for i in range(n)
+    return [n + 2*i for i in range(n)]

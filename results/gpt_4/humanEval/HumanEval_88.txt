@@ -1,0 +1,16 @@
+def sort_array(array):
+    # This function sorts an array in ascending order. If the sum of the first and last elements of the array is even, the array is sorted in descending order. If the array is empty, it returns an empty array.
+    
+    # Test cases:
+    # For an empty array, it should return an empty array
+    # >>> sort_array([])
+    # Output: []
+
+    # For an array with odd sum of first and last element (e.g. [1, 2, 3]), it should return the array sorted in ascending order
+    # >>> sort_array([1, 2, 3])
+    # Output: [1, 2, 3]
+    
+    # For an array with even sum of first and last element (e.g. [1, 2, 3, 4]), it should return the array sorted in descending order
+    # >>> sort_array([1, 2, 3, 4])
+    # Output: [4, 3, 2, 1]
+    return [] if len(array) == 0 else sorted(array, reverse= (array[0]+array[-1]) % 2 == 0)

@@ -1,0 +1,7 @@
+# Create three numpy arrays with different shapes
+a = np.ones((3,2))
+b = np.zeros((2,2))
+c = np.ones((4,2))
+L = [a,b,c]
+# Concatenate the arrays along the first axis to form a single array
+concated_arr = np.concatenate(L, axis=0)

@@ -1,0 +1,1 @@
+# Filter the DataFrame to select rows where the 'x2' column contains missing values (NaN) using the isnull() function.

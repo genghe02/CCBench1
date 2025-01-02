@@ -1,0 +1,78 @@
+```python
+import sqlite3
+import pandas as pd
+
+# This class handles various database operations using SQLite, including creating tables, 
+# inserting data, searching for records, and deleting records.
+class DatabaseProcessor:
+
+    def __init__(self, database_name):
+        # Initializes the DatabaseProcessor with the given database name.
+        self.database_name = database_name
+
+    def create_table(self, table_name, key1, key2):
+        # Creates a new table in the database with the provided table name and keys.
+        # param table_name: str, the name of the table to create
+        # param key1: str, the first key/column name
+        # param key2: str, the second key/column name
+        # Test case: db_processor.create_table('users', 'name', 'age')
+
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        create_table_query = f"CREATE TABLE IF NOT EXISTS {table_name} (id INTEGER PRIMARY KEY, {key1} TEXT, {key2} INTEGER)"
+        cursor.execute(create_table_query)
+
+        conn.commit()
+        conn.close()
+
+    def insert_into_database(self, table_name, data):
+        # Inserts data into the specified table in the database.
+        # param table_name: str, the name of the table to insert data into
+        # param data: list of dicts, the list of records to insert
+        # Test case: db_processor.insert_into_database('users', [{'name': 'Alice', 'age': 30}, {'name': 'Bob', 'age': 25}])
+
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        for item in data:
+            insert_query = f"INSERT INTO {table_name} (name, age) VALUES (?, ?)"
+            cursor.execute(insert_query, (item['name'], item['age']))
+
+        conn.commit()
+        conn.close()
+
+    def search_database(self, table_name, name):
+        # Searches for records in the database based on the name provided.
+        # param table_name: str, the name of the table to search in
+        # param name: str, the name to search for
+        # return: list or None, returns a list of records that match the name or None if no records found
+        # Test case: db_processor.search_database('users', 'Alice')
+
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        select_query = f"SELECT * FROM {table_name} WHERE name = ?"
+        cursor.execute(select_query, (name,))
+        result = cursor.fetchall()
+
+        if result:
+            return result
+        else:
+            return None
+
+    def delete_from_database(self, table_name, name):
+        # Deletes records from the database based on the name provided.
+        # param table_name: str, the name of the table to delete from
+        # param name: str, the name of the record to delete
+        # Test case: db_processor.delete_from_database('users', 'Alice')
+
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        delete_query = f"DELETE FROM {table_name} WHERE name = ?"
+        cursor.execute(delete_query, (name,))
+
+        conn.commit()
+        conn.close()
+```

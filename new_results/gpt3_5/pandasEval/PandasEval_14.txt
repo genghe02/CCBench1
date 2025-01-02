@@ -1,0 +1,5 @@
+import pandas as pd
+
+# Calculate the difference between specific rows grouped by 'Group' column in the dataframe
+def calculate_row_diff_groupwise(df):
+    return df.groupby('Group').apply(f).reset_index(level=1, drop=True).reset_index()

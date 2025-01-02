@@ -1,0 +1,2 @@
+ # Convert DataFrame to list of dictionaries (each dictionary represents a row)
+return df.to_dict(orient='records')</s>

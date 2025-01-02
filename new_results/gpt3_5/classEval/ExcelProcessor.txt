@@ -1,0 +1,133 @@
+"""
+This class implements an Excel Processor that reads from and writes to Excel files.
+
+The class provides methods to read data from an Excel file, write data to an Excel file, and process Excel data by performing specific operations on the data based on given parameters.
+"""
+
+import openpyxl
+
+
+class ExcelProcessor:
+    def __init__(self):
+        """
+        Initialization method for ExcelProcessor class.
+        """
+        pass
+
+    def read_excel(self, file_name):
+        """
+        Read data from an Excel file.
+
+        Parameters:
+            file_name (str): The name of the Excel file to read data from
+        
+        Returns:
+            list: A list of rows, where each row is represented as a tuple of cell values
+        
+        Test cases:
+            # Test case 1: Normal read
+            input_file = 'data.xlsx'
+            expected_output = [('Name', 'Age'), ('Alice', 25), ('Bob', 30)]
+            
+            # Test case 2: Empty file
+            input_file = 'empty.xlsx'
+            expected_output = []
+            
+            # Test case 3: Non-existent file
+            input_file = 'non_existent.xlsx'
+            expected_output = None
+        """
+
+        data = []
+        try:
+            workbook = openpyxl.load_workbook(file_name)
+            sheet = workbook.active
+            for row in sheet.iter_rows(values_only=True):
+                data.append(row)
+            workbook.close()
+            return data
+        except:
+            return None
+
+    def write_excel(self, data, file_name):
+        """
+        Write data to an Excel file.
+
+        Parameters:
+            data (list): A list of rows, where each row is a list of cell values
+            file_name (str): The name of the Excel file to write data to
+        
+        Returns:
+            int: 1 if writing was successful, 0 otherwise
+        
+        Test cases:
+            # Test case 1: Normal write
+            input_data = [('Name', 'Age'), ('Alice', 25), ('Bob', 30)]
+            input_file = 'output.xlsx'
+            expected_output = 1
+            
+            # Test case 2: Empty data
+            input_data = []
+            input_file = 'empty_output.xlsx'
+            expected_output = 0
+            
+            # Test case 3: Non-existent directory
+            input_data = [('Name', 'Age'), ('Alice', 25)]
+            input_file = 'non_existent_dir/output.xlsx'
+            expected_output = 0
+        """
+
+        try:
+            workbook = openpyxl.Workbook()
+            sheet = workbook.active
+            for row in data:
+                sheet.append(row)
+            workbook.save(file_name)
+            workbook.close()
+            return 1
+        except:
+            return 0
+
+    def process_excel_data(self, N, save_file_name):
+        """
+        Process Excel data by transforming values based on a specific column and save the processed data to a new file.
+
+        Parameters:
+            N (int): The index of the column to process
+            save_file_name (str): The name of the Excel file to read data from and save processed data
+        
+        Returns:
+            tuple: A tuple containing the success status (1 if successful, 0 otherwise) and the name of the new file
+        
+        Test cases:
+            # Test case 1: Successful processing
+            N = 2
+            save_file_name = 'data_to_process.xlsx'
+            expected_output = (1, 'data_to_process_process.xlsx')
+            
+            # Test case 2: Invalid column index
+            N = 5
+            save_file_name = 'data_to_process.xlsx'
+            expected_output = (0, 'data_to_process.xlsx')
+            
+            # Test case 3: Empty data
+            N = 1
+            save_file_name = 'empty_data.xlsx'
+            expected_output = (0, 'empty_data.xlsx')
+        """
+
+        data = self.read_excel(save_file_name)
+        if data is None or N >= len(data[0]):
+            return 0
+        new_data = []
+        for row in data:
+            new_row = list(row[:])
+            if not str(row[N]).isdigit():
+                new_row.append(str(row[N]).upper())
+            else:
+                new_row.append(row[N])
+            new_data.append(new_row)
+        new_file_name = save_file_name.split('.')[0] + '_process.xlsx'
+        success = self.write_excel(new_data, new_file_name)
+        return success, new_file_name
+```

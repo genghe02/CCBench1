@@ -1,0 +1,34 @@
+```python
+def minPath(grid, k):
+    # Find the minimum path in a grid by selecting values based on adjacent cells and return a list of length k
+    >>> minPath([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3) # returns [1, 2, 1]
+    >>> minPath([[1, 0, 0], [0, 1, 0], [0, 0, 1]], 4) # returns [1, 0, 1, 0]
+    >>> minPath([[1, 1, 1], [1, 1, 1], [1, 1, 1]], 2) # returns [1, 1]
+    n = len(grid)
+    val = n * n + 1
+    for i in range(n):
+        for j in range(n):
+            if grid[i][j] == 1:
+                temp = []
+                if i != 0:
+                    temp.append(grid[i - 1][j])
+
+                if j != 0:
+                    temp.append(grid[i][j - 1])
+
+                if i != n - 1:
+                    temp.append(grid[i + 1][j])
+
+                if j != n - 1:
+                    temp.append(grid[i][j + 1])
+
+                val = min(temp)
+
+    ans = []
+    for i in range(k):
+        if i % 2 == 0:
+            ans.append(1)
+        else:
+            ans.append(val)
+    return ans
+```

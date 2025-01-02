@@ -1,0 +1,16 @@
+```python
+def x_or_y(n, x, y):
+    # Return x if n is prime; otherwise return y
+    >>> x_or_y(1, 'a', 'b') # returns 'b'
+    >>> x_or_y(4, 'a', 'b') # returns 'b'
+    >>> x_or_y(5, 'a', 'b') # returns 'a'
+    >>> x_or_y(7, 'a', 'b') # returns 'a'
+    if n == 1:
+        return y
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x
+```

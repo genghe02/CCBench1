@@ -1,0 +1,2 @@
+# Add a new row to an empty numpy array given two input arrays and return the new array.  
+# Example: Input: np.array([1,2,3]) and np.array([4,5,6]) -> Output: np.array([[1,2,3],[4,5,6]])  

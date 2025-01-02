@@ -1,0 +1,169 @@
+ """
+This class represents an Access Gateway Filter that handles request filtering, authentication, and logging.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialize an instance of AccessGatewayFilter.
+        """
+
+    def filter(self, request):
+        """
+        Filter a request based on its URI and authentication.
+
+        Parameters:
+            request (dict): A dictionary containing request information.
+
+        Returns:
+            bool: True if the request is authenticated and allowed, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid request
+            request = {'method': 'GET', 'path': '/api/users'}
+            assert filter(request) == True
+
+            # Test case 2: Authentication failed
+            request = {'method': 'GET', 'path': '/api/users', 'headers': {'Authorization': 'Bearer invalid_token'}}
+            assert filter(request) == False
+
+            # Test case 3: URI not allowed
+            request = {'method': 'GET', 'path': '/unallowed_path'}
+            assert filter(request) == False
+        """
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Parse a JSON Web Token (JWT) from the request headers and return the user data.
+
+        Parameters:
+            request (dict): A dictionary containing request information.
+
+        Returns:
+            dict: The decoded JWT as a dictionary.
+
+        Test cases:
+            # Test case 1: Valid JWT
+            request = {'headers': {'Authorization': 'Bearer valid_token'}}
+            assert get_jwt_user(request) == {'user': {'level': 3, 'name': 'Alice'}}
+
+            # Test case 2: Invalid JWT format
+            request = {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'}}
+            assert get_jwt_user(request) is None
+
+            # Test case 3: Missing JWT
+            request = {'headers': {}}
+            assert get_jwt_user(request) is None
+        """
+        authorization_header = request.get('headers').get('Authorization')
+        if not authorization_header:
+            return None
+
+        token_type, token = authorization_header.split(' ')
+        if token_type != 'Bearer':
+            return None
+
+        decoded_token = self.decode_jwt(token)
+        return decoded_token
+
+    def decode_jwt(self, token):
+        """
+        Decode a JSON Web Token (JWT) and return its content as a dictionary.
+
+        Parameters:
+            token (str): The JWT token as a string.
+
+        Returns:
+            dict: The decoded JWT as a dictionary.
+
+        Test cases:
+            # Test case 1: Valid JWT
+            token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+            assert decode_jwt(token) == {'header': {'alg': 'RS256', 'typ': 'JWT'}, 'payload': {'sub': '1234567890', 'name': 'John Doe'}}
+
+            # Test case 2: Invalid signature
+            token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.signature_is_wrong'
+            assert decode_jwt(token) is None
+
+            # Test case 3: Expired JWT
+            token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+            assert decode_jwt(token) == {'header': {'alg': 'RS256', 'typ': 'JWT'}, 'payload': {'sub': '1234567890', 'name': 'John Doe'}, 'signature': 'SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}
+            current_time = datetime.datetime.utcnow().timestamp()
+            payload = decode_jwt(token)['payload']
+            expiration_time = payload['exp']
+            assert expiration_time < current_time
+            assert decode_jwt(token) is None
+        """
+        # Implement decoding logic here using suitable library or custom method
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Set the current user information and log the access event.
+
+        Parameters:
+            user (dict): The user data decoded from the JWT.
+
+        Test cases:
+            # Test case 1: Valid user data
+            user = {'user': {'level': 3, 'name': 'Alice'}}
+            access_gateway_filter = AccessGatewayFilter()
+            access_gateway_filter.set_current_user_info_and_log(user)
+
+            # Test case 2: User data with no level
+            user = {'user': {'name': 'Alice'}}
+            access_gateway_filter = AccessGatewayFilter()
+            assert access_gateway_filter.filter(request={'method': 'GET', 'path': '/api/users', 'headers': {'Authorization': 'Bearer valid_token'}}) == False
+
+            # Test case 3: User data with level below the required threshold
+            user = {'user': {'level': 1, 'name': 'Alice'}}
+            access_gateway_filter = AccessGatewayFilter()
+            assert access_gateway_filter.filter(request={'method': 'GET', 'path': '/api/users', 'headers': {'Authorization': 'Bearer valid_token'}}) == False
+        """
+        self.current_user = user
+        logging.info(f'User {user["user"]["name"]} accessed URI {self.current_request_uri}')
+        self.current_request_uri = request['path']</s>

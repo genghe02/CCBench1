@@ -1,0 +1,6 @@
+def solve(N):
+    # This function converts the sum of digits in N to binary form
+    >>> solve(10) # returns '101'
+    >>> solve(100) # returns '1010'
+    >>> solve(111) # returns '1111'
+    return bin(sum(int(i) for i in str(N)))[2:]

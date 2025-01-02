@@ -1,0 +1,6 @@
+ def is_equal_to_sum_even(n):
+   # The number should be greater than or equal to 8 and even
+   >>> is_equal_to_sum_even(10) # returns True
+   >>> is_equal_to_sum_even(7) # returns False
+   >>> is_equal_to_sum_even(12) # returns True
+   return n % 2 == 0 and n >= 8</s>

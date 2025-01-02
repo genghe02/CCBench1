@@ -1,0 +1,4 @@
+ # Extract the year part from a column name and add 1 to get the next year
+def extract_the_last_year(df, column_name):
+    final_result = pd.to_numeric(df[column_name].str.split('-').str[0]) + 1
+    return final_result</s>

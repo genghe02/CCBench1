@@ -1,0 +1,1 @@
+# Remove columns 'A' and 'C' from the DataFrame df and create a new DataFrame new_df with the remaining columns.

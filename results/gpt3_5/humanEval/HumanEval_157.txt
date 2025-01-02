@@ -1,0 +1,10 @@
+def right_angle_triangle(a, b, c):
+    # Check if the given three sides of a triangle form a right-angled triangle using the Pythagorean theorem.
+    # a, b, c: integers, the lengths of the sides of the triangle
+    # return: bool, True if the triangle is a right-angled triangle, False otherwise
+    # Test Cases:
+    # right_angle_triangle(3, 4, 5) -> True (3^2 + 4^2 = 5^2)
+    # right_angle_triangle(5, 12, 13) -> True (5^2 + 12^2 = 13^2)
+    # right_angle_triangle(7, 8, 10) -> True (7^2 + 8^2 = 10^2)
+    # right_angle_triangle(3, 4, 6) -> False (Not a right-angled triangle) 
+    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b

@@ -1,0 +1,27 @@
+```python
+def Strongest_Extension(class_name, extensions):
+    # This function finds the strongest extension from a list of extensions based on the number of uppercase and lowercase alphabetical characters.
+    # The strongest extension is defined as the one with the highest difference between uppercase and lowercase letters.
+    # param class_name: str, the name of the class to which the strongest extension belongs
+    # param extensions: list of str, the list of extensions to evaluate
+    # return: str, the full name of the class with the strongest extension
+    # Test Case 1: Class with multiple strong extensions
+    # >>> Strongest_Extension('MyClass', ['abc', 'ABCdef', 'AbC', 'aBcD'])  # Should return 'MyClass.ABCdef'
+    # Test Case 2: Class with equal number of uppercase and lowercase
+    # >>> Strongest_Extension('Main', ['abc', 'xyz'])  # Should return 'Main.abc' (since there are no uppercase letters)
+    # Test Case 3: Class with a single extension
+    # >>> Strongest_Extension('SingleClass', ['xyz'])  # Should return 'SingleClass.xyz'
+    # Test Case 4: Class with no upper case letters
+    # >>> Strongest_Extension('AnotherClass', ['hello', 'world'])  # Should return 'AnotherClass.hello'
+    
+    strong = extensions[0]
+    my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+    for s in extensions:
+        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+        if val > my_val:
+            strong = s
+            my_val = val
+
+    ans = class_name + "." + strong
+    return ans
+```

@@ -1,0 +1,99 @@
+ """
+This class represents an IP address instance.
+
+The class initializes an IP address object from a given IP address string and provides methods to check its validity, get its octets and represent it in binary format.
+"""
+
+import re
+
+
+class IPAddress:
+    def __init__(self, ip_address):
+        """
+        Initialization method.
+        
+        Parameters:
+            ip_address (str): The IP address in string format
+        
+        Raises:
+            ValueError: If the IP address string is not valid
+        """
+        self.ip_address = ip_address
+
+    def is_valid(self):
+        """
+        Method to check if the given IP address is valid.
+        
+        Returns:
+            bool: True if the IP address is valid, False otherwise
+        """
+        regex = re.compile(r'^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$')
+        match = regex.match(self.ip_address)
+        if match:
+            ip_octets = self.ip_address.split('.')
+            for octet in ip_octets:
+                if not self.is_octet_valid(octet):
+                    return False
+            return True
+        raise ValueError("Invalid IP address")
+
+    def is_octet_valid(self, octet):
+        """
+        Helper method to check if an octet value is valid.
+        
+        Parameters:
+            octet (str): An octet value as a string
+        
+        Returns:
+            bool: True if the octet is valid, False otherwise
+        """
+        return octet.isdigit() and 0 <= int(octet) <= 255
+
+    def get_octets(self):
+        """
+        Method to get the IP address octets.
+        
+        Returns:
+            list: A list of the IP address octets
+        """
+        self.is_valid()
+        return self.ip_address.split('.')
+
+    def get_binary(self):
+        """
+        Method to represent the given IP address in binary format.
+        
+        Returns:
+            str: The given IP address in binary format
+        """
+        self.is_valid()
+        binary_octets = []
+        for octet in self.get_octets():
+            binary_octets.append(format(int(octet), '08b'))
+        return '.'.join(binary_octets)
+
+    def __str__(self):
+        """
+        Default representation method.
+        
+        Returns:
+            str: The given IP address in string format
+        """
+        return self.ip_address
+
+
+# Test cases
+ip_address = IPAddress("192.168.1.1")
+assert ip_address.is_valid() == True
+assert ip_address.get_binary() == '11000010.11101100.01110101.01110100'
+assert ip_address.get_octets() == ['192', '168', '1', '1']
+
+ip_address = IPAddress("123.45.67.890")
+assert ip_address.is_valid() == False
+assert ip_address.get_binary() == ''
+assert ip_address.get_octets() == []
+
+ip_address = IPAddress("256.1.1.1")
+assert ip_address.is_valid() == False
+assert ip_address.get_binary() == ''
+assert ip_address.get_octets() == []</s>

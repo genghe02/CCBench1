@@ -1,0 +1,71 @@
+ class URLHandler:
+    # This class is designed to handle and extract various components from a given URL string.
+    def __init__(self, url):
+        # Initialize the URL object with the given URL string.
+        self.url = url
+
+    def get_scheme(self):
+        # Extract and return the scheme part of the URL (e.g., "http" or "https").
+        scheme_end = self.url.find("://")
+        if scheme_end!= -1:
+            return self.url[:scheme_end]
+        return None
+
+    def get_host(self):
+        # Extract and return the host part of the URL (e.g., "example.com").
+        scheme_end = self.url.find("://")
+        if scheme_end!= -1:
+            url_without_scheme = self.url[scheme_end + 3:]
+            host_end = url_without_scheme.find("/")
+            if host_end!= -1:
+                return url_without_scheme[:host_end]
+            return url_without_scheme
+        return None
+
+    def get_path(self):
+        # Extract and return the path part of the URL (e.g., "/path/to/file").
+        scheme_end = self.url.find("://")
+        if scheme_end!= -1:
+            url_without_scheme = self.url[scheme_end + 3:]
+            host_end = url_without_scheme.find("/")
+            if host_end!= -1:
+                return url_without_scheme[host_end:]
+            return url_without_scheme
+        return None
+
+    def get_query_params(self):
+        # Extract and return the query parameters as a dictionary.
+        query_start = self.url.find("?")
+        fragment_start = self.url.find("#")
+        if query_start!= -1:
+            query_string = self.url[query_start + 1:fragment_start]
+            params = {}
+            if len(query_string) > 0:
+                param_pairs = query_string.split("&")
+                for pair in param_pairs:
+                    key_value = pair.split("=")
+                    if len(key_value) == 2:
+                        key, value = key_value
+                        params[key] = value
+            return params
+        return None
+
+    def get_fragment(self):
+        # Extract and return the fragment part of the URL (e.g., "#fragment").
+        fragment_start = self.url.find("#")
+        if fragment_start!= -1:
+            return self.url[fragment_start + 1:]
+        return None
+
+    # Test cases:
+    # >>> url_handler = URLHandler("http://example.com/path/to/file?name=value#fragment")
+    # >>> url_handler.get_scheme()
+    # 'http'
+    # >>> url_handler.get_host()
+    # 'example.com'
+    # >>> url_handler.get_path()
+    # '/path/to/file'
+    # >>> url_handler.get_query_params()
+    # {'name': 'value'}
+    # >>> url_handler.get_fragment()
+    # 'fragment'

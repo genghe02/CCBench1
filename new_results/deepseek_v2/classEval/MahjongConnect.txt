@@ -1,0 +1,228 @@
+```python
+"""
+This class implements a Mahjong Connect game, which involves matching pairs of icons on a game board.
+The class provides methods to create the game board, validate moves, check for valid paths between icons,
+remove matched icons, and determine if the game is over.
+"""
+
+import random
+
+
+class MahjongConnect:
+    def __init__(self, BOARD_SIZE, ICONS):
+        """
+        Initializes the Mahjong Connect game with a specified board size and set of icons.
+
+        Parameters:
+            BOARD_SIZE (tuple): A tuple (rows, cols) representing the dimensions of the game board.
+            ICONS (list): A list of strings representing the icons to be used on the board.
+
+        Test cases:
+            # Test case 1: Initialize with a 5x5 board and 4 icons
+            game = MahjongConnect((5, 5), ['A', 'B', 'C', 'D'])
+            assert game.BOARD_SIZE == (5, 5)
+            assert game.ICONS == ['A', 'B', 'C', 'D']
+
+            # Test case 2: Initialize with a 3x3 board and 2 icons
+            game = MahjongConnect((3, 3), ['X', 'Y'])
+            assert game.BOARD_SIZE == (3, 3)
+            assert game.ICONS == ['X', 'Y']
+
+            # Test case 3: Initialize with a 1x1 board and 1 icon
+            game = MahjongConnect((1, 1), ['Z'])
+            assert game.BOARD_SIZE == (1, 1)
+            assert game.ICONS == ['Z']
+        """
+        self.BOARD_SIZE = BOARD_SIZE
+        self.ICONS = ICONS
+        self.board = self.create_board()
+
+    def create_board(self):
+        """
+        Creates a game board filled with randomly chosen icons.
+
+        Returns:
+            list: A 2D list representing the game board with randomly placed icons.
+
+        Test cases:
+            # Test case 1: Create a 2x2 board with 2 icons
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            board = game.create_board()
+            assert len(board) == 2
+            assert all(len(row) == 2 for row in board)
+
+            # Test case 2: Create a 3x3 board with 3 icons
+            game = MahjongConnect((3, 3), ['X', 'Y', 'Z'])
+            board = game.create_board()
+            assert len(board) == 3
+            assert all(len(row) == 3 for row in board)
+
+            # Test case 3: Create a 1x1 board with 1 icon
+            game = MahjongConnect((1, 1), ['Z'])
+            board = game.create_board()
+            assert len(board) == 1
+            assert len(board[0]) == 1
+        """
+        board = [[random.choice(self.ICONS) for _ in range(self.BOARD_SIZE[1])] for _ in range(self.BOARD_SIZE[0])]
+        return board
+
+    def is_valid_move(self, pos1, pos2):
+        """
+        Validates if a move between two positions is valid.
+
+        Parameters:
+            pos1 (tuple): A tuple (x1, y1) representing the first position.
+            pos2 (tuple): A tuple (x2, y2) representing the second position.
+
+        Returns:
+            bool: True if the move is valid, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid move with matching icons
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            assert game.is_valid_move((0, 0), (1, 0)) == True
+
+            # Test case 2: Invalid move with non-matching icons
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            assert game.is_valid_move((0, 0), (0, 1)) == False
+
+            # Test case 3: Invalid move with positions out of bounds
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            assert game.is_valid_move((0, 0), (2, 2)) == False
+        """
+        x1, y1 = pos1
+        x2, y2 = pos2
+
+        # Check if positions are within the game board range
+        if not (0 <= x1 < self.BOARD_SIZE[0] and 0 <= y1 < self.BOARD_SIZE[1] and 0 <= x2 < self.BOARD_SIZE[
+            0] and 0 <= y2 <
+                self.BOARD_SIZE[1]):
+            return False
+
+        # Check if the two positions are the same
+        if pos1 == pos2:
+            return False
+
+        # Check if the two positions have the same icon
+        if self.board[x1][y1] != self.board[x2][y2]:
+            return False
+
+        # Check if there is a valid path between the two positions
+        if not self.has_path(pos1, pos2):
+            return False
+
+        return True
+
+    def has_path(self, pos1, pos2):
+        """
+        Checks if there is a valid path between two positions on the board.
+
+        Parameters:
+            pos1 (tuple): A tuple (x1, y1) representing the first position.
+            pos2 (tuple): A tuple (x2, y2) representing the second position.
+
+        Returns:
+            bool: True if a valid path exists, False otherwise.
+
+        Test cases:
+            # Test case 1: Path exists between adjacent positions
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            assert game.has_path((0, 0), (1, 0)) == True
+
+            # Test case 2: No path exists between positions
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['B', 'A']]
+            assert game.has_path((0, 0), (1, 1)) == False
+
+            # Test case 3: Path exists through multiple steps
+            game = MahjongConnect((3, 3), ['A', 'B'])
+            game.board = [['A', 'A', 'B'], ['A', 'B', 'B'], ['B', 'A', 'A']]
+            assert game.has_path((0, 0), (2, 2)) == True
+        """
+        visited = set()
+        stack = [pos1]
+
+        while stack:
+            current_pos = stack.pop()
+            if current_pos == pos2:
+                return True
+
+            if current_pos in visited:
+                continue
+
+            visited.add(current_pos)
+            x, y = current_pos
+
+            # Check adjacent positions (up, down, left, right)
+            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                new_x, new_y = x + dx, y + dy
+                if 0 <= new_x < self.BOARD_SIZE[0] and 0 <= new_y < self.BOARD_SIZE[1]:
+                    if (new_x, new_y) not in visited and self.board[new_x][new_y] == self.board[x][y]:
+                        stack.append((new_x, new_y))
+
+        return False
+
+    def remove_icons(self, pos1, pos2):
+        """
+        Removes the icons at the specified positions from the board.
+
+        Parameters:
+            pos1 (tuple): A tuple (x1, y1) representing the first position.
+            pos2 (tuple): A tuple (x2, y2) representing the second position.
+
+        Test cases:
+            # Test case 1: Remove icons at valid positions
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            game.remove_icons((0, 0), (1, 0))
+            assert game.board == [[' ', 'B'], [' ', 'B']]
+
+            # Test case 2: Remove icons at the same position (invalid)
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            game.remove_icons((0, 0), (0, 0))
+            assert game.board == [['A', 'B'], ['A', 'B']]
+
+            # Test case 3: Remove icons at out-of-bounds positions (invalid)
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            game.remove_icons((0, 0), (2, 2))
+            assert game.board == [['A', 'B'], ['A', 'B']]
+        """
+        x1, y1 = pos1
+        x2, y2 = pos2
+        self.board[x1][y1] = ' '
+        self.board[x2][y2] = ' '
+
+    def is_game_over(self):
+        """
+        Checks if the game is over by verifying if all icons have been removed from the board.
+
+        Returns:
+            bool: True if the game is over, False otherwise.
+
+        Test cases:
+            # Test case 1: Game is not over
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [['A', 'B'], ['A', 'B']]
+            assert game.is_game_over() == False
+
+            # Test case 2: Game is over
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [[' ', ' '], [' ', ' ']]
+            assert game.is_game_over() == True
+
+            # Test case 3: Game is partially over
+            game = MahjongConnect((2, 2), ['A', 'B'])
+            game.board = [[' ', 'B'], [' ', ' ']]
+            assert game.is_game_over() == False
+        """
+        for row in self.board:
+            if any(icon != ' ' for icon in row):
+                return False
+        return True
+```

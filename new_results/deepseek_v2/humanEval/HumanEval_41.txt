@@ -1,0 +1,8 @@
+```python
+def car_race_collision(n: int):
+    # Calculate the number of collisions in a car race with n cars on each side
+    >>> car_race_collision(2) # returns 4
+    >>> car_race_collision(3) # returns 9
+    >>> car_race_collision(0) # returns 0
+    return n**2
+```

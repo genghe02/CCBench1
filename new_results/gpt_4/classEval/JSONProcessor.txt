@@ -1,0 +1,96 @@
+```python
+"""
+This class provides utility functions for reading, writing, and processing JSON files.
+"""
+
+import json
+import os
+
+class JSONProcessor:
+
+    def read_json(self, file_path):
+        """
+        Reads a JSON file from a given path.
+
+        Parameters:
+            file_path (str): The path of the file to be read.
+
+        Returns:
+            dict: The content of the JSON file as a dictionary if successful.
+            int: 0 if the file does not exist, and -1 if an error occurred during reading.
+        
+        Test cases:
+            # Test case 1: Successful reading
+            assert read_json('path/to/valid/file.json') != 0 and != -1
+            
+            # Test case 2: File does not exist
+            assert read_json('path/to/nonexistent/file.json') == 0
+            
+            # Test case 3: Error during reading (e.g., file is not a valid JSON)
+            assert read_json('path/to/invalid/file.json') == -1
+        """
+        if not os.path.exists(file_path):
+            return 0
+        try:
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            return data
+        except:
+            return -1
+
+    def write_json(self, data, file_path):
+        """
+        Writes a dictionary to a file as JSON.
+
+        Parameters:
+            data (dict): The dictionary to be written to the file.
+            file_path (str): The path of the file to be written to.
+
+        Returns:
+            int: 1 if successful, and -1 if an error occurred during writing.
+        
+        Test cases:
+            # Test case 1: Successful writing
+            assert write_json({'key': 'value'}, 'path/to/valid/file.json') == 1
+            
+            # Test case 2: Error during writing (e.g., insufficient permissions)
+            assert write_json({'key': 'value'}, 'path/to/unwriteable/file.json') == -1
+        """
+        try:
+            with open(file_path, 'w') as file:
+                json.dump(data, file)
+            return 1
+        except:
+            return -1
+
+    def process_json(self, file_path, remove_key):
+        """
+        Removes a key from a JSON file.
+
+        Parameters:
+            file_path (str): The path of the JSON file to be processed.
+            remove_key (str): The key to be removed.
+
+        Returns:
+            int: 1 if successful, 0 if the file does not exist, the file could not be read, or the key does not exist.
+        
+        Test cases:
+            # Test case 1: Successful key removal
+            assert process_json('path/to/valid/file.json', 'key_to_remove') == 1
+            
+            # Test case 2: File does not exist
+            assert process_json('path/to/nonexistent/file.json', 'key_to_remove') == 0
+            
+            # Test case 3: Key does not exist
+            assert process_json('path/to/valid/file.json', 'nonexistent_key') == 0
+        """
+        data = self.read_json(file_path)
+        if data == 0 or data == -1:
+            return 0
+        if remove_key in data:
+            del data[remove_key]
+            self.write_json(data, file_path)
+            return 1
+        else:
+            return 0
+```

@@ -1,0 +1,113 @@
+ ```python
+"""
+This class is responsible for handling and managing cookies in an application.
+"""
+
+import json
+
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        """
+        Initialization method.
+
+        Parameters:
+            cookies_file (str): The file path to save and load cookies from
+        """
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, response):
+        """
+        Extracts cookies from an HTTP response and saves them.
+
+        Parameters:
+            response (dict): An HTTP response object
+        
+        Test cases:
+            # Test case 1: Normal usage
+            response = {'status': 200, 'cookies': {'key1': 'value1', 'key2': 'value2'}}
+            util = CookiesUtil('cookies.json')
+            util.get_cookies(response)
+            assert util.cookies == {'key1': 'value1', 'key2': 'value2'}
+
+            # Test case 2: Empty response
+            response = {'status': 200, 'cookies': {}}
+            util = CookiesUtil('cookies.json')
+            util.get_cookies(response)
+            assert util.cookies is None
+
+            # Test case 3: Missing cookies field
+            response = {'status': 200}
+            util = CookiesUtil('cookies.json')
+            util.get_cookies(response)
+            assert util.cookies is None
+        """
+        self.cookies = response['cookies']
+        self._save_cookies()
+
+    def load_cookies(self):
+        """
+        Loads cookies from the specified file.
+
+        Returns:
+            dict: Cookies data or an empty dictionary if the file doesn't exist
+        
+        Test cases:
+            # Test case 1: Cookies file exists
+            util = CookiesUtil('cookies.json')
+            cookies = util.load_cookies()
+            assert cookies == {'key1': 'value1', 'key2': 'value2'}
+
+            # Test case 2: Cookies file does not exist
+            util = CookiesUtil('cookies.json')
+            cookies = util.load_cookies()
+            assert cookies == {}
+        
+    def _save_cookies(self):
+        """
+        Saves cookies to the specified file.
+
+        Returns:
+            bool: Indicates if the operation was successful
+        
+        Test cases:
+            # Test case 1: Save cookies successfully
+            util = CookiesUtil('cookies.json')
+            util.cookies = {'key1': 'value1', 'key2': 'value2'}
+            assert util._save_cookies() == True
+
+            # Test case 2: Unable to save cookies
+            util = CookiesUtil('cookies.json')
+            util.cookies = None
+            assert util._save_cookies() == False
+        """
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        """
+        Sets cookies in an HTTP request.
+
+        Parameters:
+            request (dict): An HTTP request object
+        
+        Test cases:
+            # Test case 1: Normal usage
+            request = {'method': 'GET', 'path': '/', 'cookies': {'key1': 'value1', 'key2': 'value2'}}
+            util = CookiesUtil('cookies.json')
+            util.set_cookies(request)
+            assert request['cookies'] == 'key1=value1; key2=value2'
+
+            # Test case 2: Empty request
+            request = {'method': 'GET', 'path': '/'}
+            util = CookiesUtil('cookies.json')
+            util.set_cookies(request)
+            assert request['cookies'] is None
+        
+        """
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```</s>

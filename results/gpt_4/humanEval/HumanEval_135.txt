@@ -1,0 +1,22 @@
+```python
+def can_arrange(arr):
+    # This function checks the incoming array to see if it's in ascending order.
+    # It returns the index where the array is not in order, or -1 if the array is already sorted.
+    # This function can be used to identify the point of disorder in a sequence.
+
+    # Test cases for the function:
+    # >>> can_arrange([1, 2, 3, 4, 5]) 
+    # should return -1 as the array is already sorted in ascending order.
+    # >>> can_arrange([1, 3, 2, 4, 5]) 
+    # should return 2 as the array is not in order at index 2.
+    # >>> can_arrange([5, 1, 2, 3, 4]) 
+    # should return 0 as the array is not in order at index 0.
+    
+    ind=-1
+    i=1
+    while i<len(arr):
+      if arr[i]<arr[i-1]:
+        ind=i
+      i+=1
+    return ind
+```

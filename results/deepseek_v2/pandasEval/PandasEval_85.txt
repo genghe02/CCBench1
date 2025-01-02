@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+
+def set_value_to_entire_col(df, value):
+    # Assign the specified value to an entire column named 'B' in the DataFrame.
+    df = df.assign(B=value)
+    return df
+```

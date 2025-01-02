@@ -1,0 +1,21 @@
+Input:
+def concatenate(strings: List[str]) -> str:
+   <This function concatenates a list of strings into a single string>
+   <Input list of strings to concatenate>
+   return ''.join(strings)
+
+❌ Wrong Output:
+# This function concatenates a list of strings into a single string
+# Input list of strings to concatenate
+def concatenate(strings: List[str]) -> str:
+   >>> concatenate(['hello', 'world'])
+   return ''.join(strings)
+
+Correct Output:
+
+def concatenate(strings: List[str]) -> str:
+   # This function concatenates a list of strings into a single string
+   >>> concatenate(['hello', 'world']) # returns 'helloworld'
+   >>> concatenate(['one', 'two', 'three']) # returns 'onetwothree'
+   >>> concatenate(['Python', 'is', 'fun']) # returns 'Pythonisfun'
+   return ''.join(strings)

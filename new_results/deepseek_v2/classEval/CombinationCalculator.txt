@@ -1,0 +1,165 @@
+```python
+"""
+This class provides functionality to calculate combinations and select subsets from a given list of data.
+It includes methods to count combinations, count all possible subsets, and generate specific or all subsets.
+"""
+
+import math
+from typing import List
+
+class CombinationCalculator:
+    
+    def __init__(self, datas: List[str]):
+        """
+        Initializes the CombinationCalculator with a list of data.
+
+        Parameters:
+            datas (List[str]): A list of strings from which combinations will be generated.
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n: int, m: int) -> int:
+        """
+        Calculates the number of combinations of n items taken m at a time.
+
+        Parameters:
+            n (int): The total number of items.
+            m (int): The number of items to choose.
+
+        Returns:
+            int: The number of combinations.
+
+        Test cases:
+            # Test case 1: Basic combination
+            assert CombinationCalculator.count(5, 2) == 10
+            
+            # Test case 2: Edge case where m is 0
+            assert CombinationCalculator.count(5, 0) == 1
+            
+            # Test case 3: Edge case where n equals m
+            assert CombinationCalculator.count(5, 5) == 1
+        """
+        if m == 0 or n == m:
+            return 1
+        return math.factorial(n) // (math.factorial(n - m) * math.factorial(m))
+
+    @staticmethod
+    def count_all(n: int) -> int:
+        """
+        Calculates the total number of possible subsets from n items.
+
+        Parameters:
+            n (int): The total number of items.
+
+        Returns:
+            int: The total number of subsets, or False if n is out of range.
+
+        Test cases:
+            # Test case 1: Basic case
+            assert CombinationCalculator.count_all(3) == 7
+            
+            # Test case 2: Edge case where n is 0
+            assert CombinationCalculator.count_all(0) == 0
+            
+            # Test case 3: Edge case where n is 63
+            assert CombinationCalculator.count_all(63) == float("inf")
+        """
+        if n < 0 or n > 63:
+            return False
+        return (1 << n) - 1 if n != 63 else float("inf")
+
+    def select(self, m: int) -> List[List[str]]:
+        """
+        Generates all combinations of the data of size m.
+
+        Parameters:
+            m (int): The size of each combination.
+
+        Returns:
+            List[List[str]]: A list of all combinations of size m.
+
+        Test cases:
+            # Test case 1: Basic selection
+            calc = CombinationCalculator(['a', 'b', 'c'])
+            assert calc.select(2) == [['a', 'b'], ['a', 'c'], ['b', 'c']]
+            
+            # Test case 2: Edge case where m is 1
+            calc = CombinationCalculator(['a', 'b', 'c'])
+            assert calc.select(1) == [['a'], ['b'], ['c']]
+            
+            # Test case 3: Edge case where m equals the length of data
+            calc = CombinationCalculator(['a', 'b', 'c'])
+            assert calc.select(3) == [['a', 'b', 'c']]
+        """
+        result = []
+        self._select(0, [None] * m, 0, result)
+        return result
+
+    def select_all(self) -> List[List[str]]:
+        """
+        Generates all possible subsets of the data.
+
+        Returns:
+            List[List[str]]: A list of all possible subsets.
+
+        Test cases:
+            # Test case 1: Basic selection
+            calc = CombinationCalculator(['a', 'b'])
+            assert calc.select_all() == [['a'], ['b'], ['a', 'b']]
+            
+            # Test case 2: Single element data
+            calc = CombinationCalculator(['a'])
+            assert calc.select_all() == [['a']]
+            
+            # Test case 3: Empty data
+            calc = CombinationCalculator([])
+            assert calc.select_all() == []
+        """
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    def _select(self, dataIndex: int, resultList: List[str], resultIndex: int, result: List[List[str]]):
+        """
+        Helper method to recursively generate combinations.
+
+        Parameters:
+            dataIndex (int): The current index in the data list.
+            resultList (List[str]): The current combination being built.
+            resultIndex (int): The current index in the result list.
+            result (List[List[str]]): The list to store all combinations.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Basic recursion
+            calc = CombinationCalculator(['a', 'b', 'c'])
+            result = []
+            calc._select(0, [None] * 2, 0, result)
+            assert result == [['a', 'b'], ['a', 'c'], ['b', 'c']]
+            
+            # Test case 2: Edge case where resultIndex equals resultLen
+            calc = CombinationCalculator(['a', 'b', 'c'])
+            result = []
+            calc._select(0, [None] * 3, 3, result)
+            assert result == [['a', 'b', 'c']]
+            
+            # Test case 3: Edge case where dataIndex is out of range
+            calc = CombinationCalculator(['a', 'b', 'c'])
+            result = []
+            calc._select(3, [None] * 2, 0, result)
+            assert result == []
+        """
+        resultLen = len(resultList)
+        resultCount = resultIndex + 1
+        if resultCount > resultLen:
+            result.append(resultList.copy())
+            return
+
+        for i in range(dataIndex, len(self.datas) + resultCount - resultLen):
+            resultList[resultIndex] = self.datas[i]
+            self._select(i + 1, resultList, resultIndex + 1, result)
+```

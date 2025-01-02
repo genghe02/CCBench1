@@ -1,0 +1,30 @@
+```python
+def fix_spaces(text):
+    # This function modifies a string by handling spaces. If there are more than two consecutive spaces, 
+    # they are replaced by a hyphen. If there is one or two spaces, they are replaced with underscores. 
+    # The resulting string has modified spacing characters while maintaining the other characters.
+    
+    new_text = ""
+    i = 0
+    start, end = 0, 0
+    
+    while i < len(text):
+        if text[i] == " ":
+            end += 1
+        else:
+            if end - start > 2:
+                new_text += "-" + text[i]
+            elif end - start > 0:
+                new_text += "_" * (end - start) + text[i]
+            else:
+                new_text += text[i]
+            start, end = i + 1, i + 1
+        i += 1
+    
+    if end - start > 2:
+        new_text += "-"
+    elif end - start > 0:
+        new_text += "_"
+    
+    return new_text  # Returns the modified text string with spaces handled according to specified rules.
+```

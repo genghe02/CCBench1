@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.arange(1, 10)
+a = a.reshape(len(a), 1)
+# Select the elements from the 5th position onwards in the reshaped array 'a' and assign them to 'b'
+b = a[4:]

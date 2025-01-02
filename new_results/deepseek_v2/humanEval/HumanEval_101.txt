@@ -1,0 +1,21 @@
+```python
+def words_string(s):
+    # Split a string into words, replacing commas with spaces
+    
+    >>> words_string("hello,world") # returns ['hello', 'world']
+    >>> words_string("one,two,three") # returns ['one', 'two', 'three']
+    >>> words_string("a,,b,c") # returns ['a', '', 'b', 'c']
+    if not s:
+        return []
+
+    s_list = []
+
+    for letter in s:
+        if letter == ',':
+            s_list.append(' ')
+        else:
+            s_list.append(letter)
+
+    s_list = "".join(s_list)
+    return s_list.split()
+```

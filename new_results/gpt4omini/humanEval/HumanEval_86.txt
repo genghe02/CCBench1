@@ -1,0 +1,8 @@
+```python
+def anti_shuffle(s):
+    # Sorts the letters of each word in the input string
+    >>> anti_shuffle("hello world") # returns "ehllo dlorw"
+    >>> anti_shuffle("abc def ghi") # returns "abc def ghi"
+    >>> anti_shuffle("python code") # returns "hnopty cdeo"
+    return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])
+```

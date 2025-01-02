@@ -1,0 +1,25 @@
+```python
+def circular_shift(x, shift):
+    # Perform a circular shift on the string representation of the input x by the specified shift amount.
+    # If the shift amount is greater than the length of the string, reverse the string instead.
+    # Otherwise, perform the circular shift by concatenating the end part and the start part of the string.
+    # param x: int or str, the input value to be shifted
+    # param shift: int, the number of positions to shift the string
+    # return: str, the resulting string after the shift or reversal
+    
+    # Test cases for the function
+    # >>> circular_shift(12345, 2)
+    # '45123'
+    # >>> circular_shift(12345, 6)
+    # '54321'
+    # >>> circular_shift('abcde', 3)
+    # 'cdeab'
+    # >>> circular_shift('abcde', 10)
+    # 'edcba'
+    
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]
+```

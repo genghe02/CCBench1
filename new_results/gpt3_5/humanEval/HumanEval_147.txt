@@ -1,0 +1,4 @@
+# The function finds the maximum number of triples from a list that sum up to a multiple of 3
+>>> get_max_triples(4) # returns 1
+>>> get_max_triples(5) # returns 4
+>>> get_max_triples(6) # returns 10

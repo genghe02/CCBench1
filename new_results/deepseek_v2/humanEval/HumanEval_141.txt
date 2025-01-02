@@ -1,0 +1,23 @@
+```python
+def file_name_check(file_name):
+    # Check if the file name is valid based on specific rules
+    >>> file_name_check('example.txt') # returns 'Yes'
+    >>> file_name_check('1example.exe') # returns 'No'
+    >>> file_name_check('example_long_name.dll') # returns 'No'
+    >>> file_name_check('example.') # returns 'No'
+    >>> file_name_check('.txt') # returns 'No'
+    suf = ['txt', 'exe', 'dll']
+    lst = file_name.split(sep='.')
+    if len(lst) != 2:
+        return 'No'
+    if not lst[1] in suf:
+        return 'No'
+    if len(lst[0]) == 0:
+        return 'No'
+    if not lst[0][0].isalpha():
+        return 'No'
+    t = len([x for x in lst[0] if x.isdigit()])
+    if t > 3:
+        return 'No'
+    return 'Yes'
+```

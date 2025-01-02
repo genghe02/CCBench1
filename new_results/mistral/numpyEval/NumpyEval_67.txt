@@ -1,0 +1,2 @@
+ # Return indices of zeros in the input array
+return np.where(arr == 0)[0]</s>

@@ -1,0 +1,10 @@
+```python
+from typing import List
+
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    # Filter strings that contain the given substring
+    >>> filter_by_substring(["apple", "banana", "cherry"], "a") # returns ['apple', 'banana']
+    >>> filter_by_substring(["dog", "cat", "mouse"], "o") # returns ['dog', 'mouse']
+    >>> filter_by_substring(["hello", "world"], "z") # returns []
+    return [x for x in strings if substring in x]
+```

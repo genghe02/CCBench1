@@ -1,0 +1,2 @@
+# Calculate the result by subtracting the minimum value along each column from the array 'a'
+result = a - a.min(axis=0)

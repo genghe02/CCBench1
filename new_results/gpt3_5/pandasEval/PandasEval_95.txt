@@ -1,0 +1,4 @@
+# Divide values in columns B and C of DataFrame by values in column A. Returns modified DataFrame
+def divide_multiple_cols_by_first_col(df):
+    df[['B','C']] = df[['B','C']].div(df.A, axis=0)
+    return df

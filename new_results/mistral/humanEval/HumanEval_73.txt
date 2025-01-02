@@ -1,0 +1,12 @@
+ def smallest_change(arr):
+    # The given list arr should be sorted in non-descending order before processing
+
+    # Test cases:
+    >>> smallest_change([1, 1, 1, 1, 1]) # returns 0
+    >>> smallest_change([1, 2, 3, 4]) # returns 1
+    >>> smallest_change([1, 2, 2, 3]) # returns 1
+    ans = 0
+    for i in range(len(arr) // 2):
+        if arr[i] != arr[len(arr) - i - 1]:
+            ans += 1
+    return ans</s>

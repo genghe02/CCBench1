@@ -1,0 +1,203 @@
+ """
+This class represents a game of Push Box. The objective is to move a box to reach a target location on the map.
+"""
+
+import copy
+
+class PushBoxGame:
+
+    def __init__(self, map):
+        """
+        Initialize the game instance with the provided map.
+
+        Parameters:
+            map (list): A two-dimensional list representing the game map
+
+        Test cases:
+            # Test case 1: Valid map
+            assert initialize_game(["O", "G", "X", "X", "X", "X", "O", "G"], 8) is None
+            
+            # Test case 2: Invalid map size
+            with pytest.raises(ValueError):
+                initialize_game(["O", "G", "X", "X", "X", "X", "O", "G"], 7)
+            
+            # Test case 3: Map contains non-supported character
+            with pytest.raises(ValueError):
+                initialize_game(["O", "G", "X", "X", "X", "X", "O", "G", "!"], 8)
+        """
+
+        self.map = map
+        self.player_row = 0
+        self.player_col = 0
+        self.targets = []
+        self.boxes = []
+        self.target_count = 0
+        self.is_game_over = False
+
+        self.init_game()
+
+    def init_game(self):
+        """
+        Initialize game components (targets, boxes, player position) based on the map.
+
+        Test cases:
+            # Test case 1: Simple initialization
+            assert len(self.targets) == 3
+            assert len(self.boxes) == 3
+            assert self.player_row == 0
+            assert self.player_col == 0
+            
+            # Test case 2: No boxes or targets
+            map_no_boxes_no_targets = ["O"] * 8 * 8
+            initialize_game(map_no_boxes_no_targets, 8)
+            assert len(self.targets) == 0
+            assert len(self.boxes) == 0
+            
+            # Test case 3: Only targets
+            map_only_targets = ["G"] * 8 * 8
+            initialize_game(map_only_targets, 8)
+            assert len(self.targets) == 64
+            assert len(self.boxes) == 0
+        """
+
+        for row in range(len(self.map)):
+            for col in range(len(self.map[row])):
+                if self.map[row][col] == "O":
+                    self.player_row = row
+                    self.player_col = col
+                elif self.map[row][col] == "G":
+                    self.targets.append((row, col))
+                    self.target_count += 1
+                elif self.map[row][col] == "X":
+                    self.boxes.append((row, col))
+
+    def check_win(self):
+        """
+        Check if the player has moved all the boxes to their target locations.
+
+        Returns:
+            bool: True if the game is won, False otherwise
+
+        Test cases:
+            # Test case 1: Winning condition met
+            map_with_boxes_to_targets = [
+                ["O", "G", "X", "X", "X", "X", "O", "G"],
+                ["#", "X", "#", "#", "#", "#", "G", "G"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["O", "G", "X", "X", "X", "X", "O", "G"],
+            ]
+            game = initialize_game(map_with_boxes_to_targets, 8)
+            assert game.move("d") == True
+            assert game.move("s") == True
+            assert game.move("a") == True
+            assert game.move("w") == True
+            assert game.move("w") == True
+            assert game.move("w") == True
+            assert game.move("s") == True
+            assert game.move("d") == True
+            assert game.is_game_over == True
+            
+            # Test case 2: Losing condition not met
+            map_with_boxes_not_to_targets = [
+                ["O", "G", "X", "X", "X", "X", "O", "G"],
+                ["#", "X", "#", "#", "#", "#", "G", "G"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["O", "G", "X", "X", "X", "X", "O", "G"],
+            ]
+            game = initialize_game(map_with_boxes_not_to_targets, 8)
+            assert game.is_game_over == False
+        """
+
+        box_on_target_count = 0
+        for box in self.boxes:
+            if box in self.targets:
+                box_on_target_count += 1
+        if box_on_target_count == self.target_count:
+            self.is_game_over = True
+        return self.is_game_over
+
+    def move(self, direction):
+        """
+        Move the player and box (if available) in the specified direction.
+
+        Parameters:
+            direction (str): A valid movement direction ("w": up, "s": down, "a": left, "d": right)
+
+        Returns:
+            bool: True if the move resulted in a win, False otherwise
+
+        Test cases:
+            # Test case 1: Valid move
+            map_valid_move = [
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "O", "#", "#", "#", "#", "#", "#"],
+                ["#", "X", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["O", "G", "X", "X", "X", "X", "O", "G"],
+            ]
+            game = initialize_game(map_valid_move, 8)
+            assert game.move("w") == False
+            assert game.move("s") == True
+            assert game.move("s") == True
+            assert game.move("d") == True
+            assert game.move("d") == True
+            assert game.move("d") == True
+            assert game.move("w") == True
+            assert game.move("w") == True
+            assert game.move("w") == True
+            assert game.is_game_over == True
+            
+            # Test case 2: Invalid move (border)
+            map_invalid_move = [
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "O", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["#", "#", "#", "#", "#", "#", "#", "#"],
+                ["O", "G", "X", "X", "X", "X", "O", "G"],
+            ]
+            game = initialize_game(map_invalid_move, 8)
+            assert game.move("e") == False
+            assert game.move("w") == False
+            assert game.move("a") == False
+            assert game.move("s") == False
+            assert game.move("d") == False
+            assert game.move("n") == False
+        """
+
+        new_player_row = self.player_row
+        new_player_col = self.player_col
+
+        if direction == "w":
+            new_player_row -= 1
+        elif direction == "s":
+            new_player_row += 1
+        elif direction == "a":
+            new_player_col -= 1
+        elif direction == "d":
+            new_player_col += 1
+
+        if self.map[new_player_row][new_player_col] != "#":
+            if (new_player_row, new_player_col) in self.boxes:
+                new_box_row = new_player_row + (new_player_row - self.player_row)
+                new_box_col = new_player_col + (new_player_col - self.player_col)
+
+                if self.map[new_box_row][new_box_col] != "#":
+                    self.boxes.remove((new_player_row, new_player_col))
+                    self.boxes.append((new_box_row, new_box_col))
+                    self.player_row = new_player_row
+                    self.player_col = new_player_col
+            else:
+                self.player_row = new_player_row
+                self.player_col = new_player_col
+
+        return self.check_win()</s>

@@ -1,0 +1,2 @@
+ # Perform XOR operation on three input values x, y, and z
+return (x ^ y ^ z)</s>

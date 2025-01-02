@@ -1,0 +1,131 @@
+```python
+"""
+This class is responsible for constructing SQL queries for various database operations.
+"""
+
+class SQLQueryBuilder:
+
+    @staticmethod
+    def select(table, columns='*', where=None):
+        """
+        Builds a SELECT SQL query string.
+
+        Parameters:
+            table (str): The name of the table from which to select data.
+            columns (str or list): The columns to select (defaults to '*'). If a list is provided, it will be joined into a comma-separated string.
+            where (dict, optional): A dictionary representing the WHERE clause conditions.
+
+        Returns:
+            str: The constructed SELECT SQL query string.
+
+        Test cases:
+            # Test case 1: Select all columns from a table
+            input = ('users',)
+            expected_output = "SELECT * FROM users"
+
+            # Test case 2: Select specific columns from a table
+            input = ('users', ['id', 'name'])
+            expected_output = "SELECT id, name FROM users"
+
+            # Test case 3: Select with a WHERE condition
+            input = ('users', ['id', 'name'], {'active': 1})
+            expected_output = "SELECT id, name FROM users WHERE active='1'"
+        """
+        if columns != '*':
+            columns = ', '.join(columns)
+        query = f"SELECT {columns} FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def insert(table, data):
+        """
+        Builds an INSERT SQL query string.
+
+        Parameters:
+            table (str): The name of the table into which data will be inserted.
+            data (dict): A dictionary containing the column-value pairs for the new record.
+
+        Returns:
+            str: The constructed INSERT SQL query string.
+
+        Test cases:
+            # Test case 1: Insert a single record into a table
+            input = ('users', {'name': 'John', 'active': 1})
+            expected_output = "INSERT INTO users (name, active) VALUES ('John', '1')"
+
+            # Test case 2: Insert a record with various data types
+            input = ('products', {'name': 'Laptop', 'price': 799.99})
+            expected_output = "INSERT INTO products (name, price) VALUES ('Laptop', '799.99')"
+
+            # Test case 3: Insert a record with missing values (assumes column defaults or null)
+            input = ('orders', {'user_id': 2})
+            expected_output = "INSERT INTO orders (user_id) VALUES ('2')"
+        """
+        keys = ', '.join(data.keys())
+        values = ', '.join(f"'{v}'" for v in data.values())
+        return f"INSERT INTO {table} ({keys}) VALUES ({values})"
+
+    @staticmethod
+    def delete(table, where=None):
+        """
+        Builds a DELETE SQL query string.
+
+        Parameters:
+            table (str): The name of the table from which data will be deleted.
+            where (dict, optional): A dictionary representing the WHERE clause conditions.
+
+        Returns:
+            str: The constructed DELETE SQL query string.
+
+        Test cases:
+            # Test case 1: Delete all records from a table
+            input = ('users',)
+            expected_output = "DELETE FROM users"
+
+            # Test case 2: Delete with a WHERE condition
+            input = ('users', {'id': 1})
+            expected_output = "DELETE FROM users WHERE id='1'"
+
+            # Test case 3: Delete with multiple conditions
+            input = ('users', {'active': 0, 'age': 18})
+            expected_output = "DELETE FROM users WHERE active='0' AND age='18'"
+        """
+        query = f"DELETE FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def update(table, data, where=None):
+        """
+        Builds an UPDATE SQL query string.
+
+        Parameters:
+            table (str): The name of the table to update.
+            data (dict): A dictionary containing the column-value pairs to be updated.
+            where (dict, optional): A dictionary representing the WHERE clause conditions.
+
+        Returns:
+            str: The constructed UPDATE SQL query string.
+
+        Test cases:
+            # Test case 1: Update a record in a table
+            input = ('users', {'name': 'John'}, {'id': 1})
+            expected_output = "UPDATE users SET name='John' WHERE id='1'"
+
+            # Test case 2: Update with multiple columns
+            input = ('users', {'name': 'John', 'active': 1}, {'id': 1})
+            expected_output = "UPDATE users SET name='John', active='1' WHERE id='1'"
+
+            # Test case 3: Update with no conditions
+            input = ('users', {'active': 1})
+            expected_output = "UPDATE users SET active='1'"
+        """
+        update_str = ', '.join(f"{k}='{v}'" for k, v in data.items())
+        query = f"UPDATE {table} SET {update_str}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+```

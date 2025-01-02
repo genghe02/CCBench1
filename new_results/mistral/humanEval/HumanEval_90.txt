@@ -1,0 +1,7 @@
+ def next_smallest(lst):
+    # Find and return the next smallest number in the list after the first occurrence
+    >>> next_smallest([3, 2, 5, 1, 3]) # returns 2
+    >>> next_smallest([1, 1, 1]) # returns None
+    >>> next_smallest([-3, -5, -1, -3]) # returns -5
+    lst = sorted(set(lst))
+    return None if len(lst) < 2 else lst[1]</s>

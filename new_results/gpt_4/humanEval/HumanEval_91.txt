@@ -1,0 +1,9 @@
+def is_bored(S):
+    # This function counts the number of sentences starting with 'I ' in a string.
+   
+    >>> is_bored('I am bored. I am tired. You are funny.') # returns 2
+    >>> is_bored('I am happy. You are sad.') # returns 1
+    >>> is_bored('You are happy. I am sad.') # returns 1
+    import re
+    sentences = re.split(r'[.?!]\s*', S)
+    return sum(sentence[0:2] == 'I ' for sentence in sentences)

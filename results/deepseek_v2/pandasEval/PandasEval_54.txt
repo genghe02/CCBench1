@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+
+def extract_the_last_year(df, column_name):
+    # Extract the last year from a date column in the format 'YYYY-MM-DD' by splitting the string, converting the first part to numeric, and adding 1.
+    final_result = pd.to_numeric(df[column_name].str.split('-').str[0]) + 1
+    return final_result
+```

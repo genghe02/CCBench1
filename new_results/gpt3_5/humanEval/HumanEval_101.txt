@@ -1,0 +1,20 @@
+# This function converts a string with words separated by commas into a list of words
+>>> words_string("hello,world") # returns ['hello', 'world']
+>>> words_string("coding,is,fun") # returns ['coding', 'is', 'fun']
+>>> words_string("") # returns [] 
+
+def words_string(s):
+    
+    if not s:
+        return []
+
+    s_list = []
+
+    for letter in s:
+        if letter == ',':
+            s_list.append(' ')
+        else:
+            s_list.append(letter)
+
+    s_list = "".join(s_list)
+    return s_list.split()

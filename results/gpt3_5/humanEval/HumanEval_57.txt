@@ -1,0 +1,14 @@
+def monotonic(l: list):
+    # Check if the list is monotonically increasing or decreasing.
+    # Test cases:
+    # >>> monotonic([1, 2, 3, 4, 5])
+    # True
+    # >>> monotonic([5, 4, 3, 2, 1])
+    # True
+    # >>> monotonic([1, 2, 2, 3, 4])
+    # True
+    # >>> monotonic([1, 3, 2, 4, 5])
+    # False
+    if l == sorted(l) or l == sorted(l, reverse=True):
+        return True
+    return False

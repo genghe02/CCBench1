@@ -1,0 +1,11 @@
+ # Check if the given NumPy array contains only zeros.
+
+import numpy as np
+
+def test_arr_contain_only_zeros(arr):
+<Requirements for the code>
+return not np.any(arr)
+
+# The function returns True if the given NumPy array contains only zeros, False otherwise.
+# It utilizes NumPy's any() function to check if there is any non-zero element in the array.
+# If the result is False, then all elements in the array are zeros, and the function returns True.

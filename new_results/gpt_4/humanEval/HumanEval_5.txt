@@ -1,0 +1,17 @@
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    # This function intersperses a given delimiter between the numbers in a list
+    >>> intersperse([1, 2, 3], 0) # returns [1, 0, 2, 0, 3]
+    >>> intersperse([], 0) # returns []
+    >>> intersperse([1], 0) # returns [1]
+    if not numbers:
+        return []
+
+    result = []
+
+    for n in numbers[:-1]:
+        result.append(n)
+        result.append(delimeter)
+
+    result.append(numbers[-1])
+
+    return result

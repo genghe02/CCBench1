@@ -1,0 +1,2 @@
+# Add a new column 'C' to the dataframe that stores the sum of columns 'A' and 'B'
+df['C'] = df.A + df.B

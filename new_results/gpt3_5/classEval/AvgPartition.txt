@@ -1,0 +1,78 @@
+"""
+This class implements a partitioned access gateway filter for managing request filtering, authentication, and logging tasks.
+"""
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method for the AccessGatewayFilter class.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Filters incoming requests based on URI and user level.
+
+        Parameters:
+            request (dict): A dictionary representing the incoming request with 'path' and 'method' keys.
+
+        Returns:
+            bool: True if the request passes the filtering criteria, False otherwise.
+
+        Test cases:
+            # Test case 1: Normal API access
+            input = {'path': '/api/data', 'method': 'GET'}
+            assert filter(input) == True
+
+            # Test case 2: Access to login page
+            input = {'path': '/login', 'method': 'GET'}
+            assert filter(input) == True
+
+            # Test case 3: Restricted user access
+            input = {'path': '/admin', 'method': 'POST'}
+            assert filter(input) == False
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check.
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+        
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+"""

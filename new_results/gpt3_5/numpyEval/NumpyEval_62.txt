@@ -1,0 +1,2 @@
+# Create a structured array from transposed array to save as record array
+newrecarray = np.core.records.fromarrays(myarray.T, names='col1, col2, col3')

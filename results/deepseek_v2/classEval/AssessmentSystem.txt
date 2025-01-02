@@ -1,0 +1,96 @@
+```python
+# This class manages student records, including adding students, adding course scores, calculating GPAs, and retrieving various statistics.
+class AssessmentSystem:
+    def __init__(self):
+        # Initialize the student records system with an empty dictionary to store student information.
+        self.students = {}
+
+    def add_student(self, name, grade, major):
+        # Add a new student to the system with their name, grade, major, and an empty dictionary for courses.
+        # param name: str, the name of the student
+        # param grade: str, the grade of the student (e.g., "Freshman", "Sophomore")
+        # param major: str, the major of the student
+        # return: None
+        # >>> system = AssessmentSystem()
+        # >>> system.add_student("Alice", "Junior", "Computer Science")
+        self.students[name] = {'name': name, 'grade': grade, 'major': major, 'courses': {}}
+
+    def add_course_score(self, name, course, score):
+        # Add a course score for a specific student.
+        # param name: str, the name of the student
+        # param course: str, the name of the course
+        # param score: int, the score of the student in the course
+        # return: None
+        # >>> system = AssessmentSystem()
+        # >>> system.add_student("Alice", "Junior", "Computer Science")
+        # >>> system.add_course_score("Alice", "Math", 85)
+        if name in self.students:
+            self.students[name]['courses'][course] = score
+
+    def get_gpa(self, name):
+        # Calculate the GPA for a specific student based on their course scores.
+        # param name: str, the name of the student
+        # return: float, the GPA of the student, or None if the student has no courses
+        # >>> system = AssessmentSystem()
+        # >>> system.add_student("Alice", "Junior", "Computer Science")
+        # >>> system.add_course_score("Alice", "Math", 85)
+        # >>> system.add_course_score("Alice", "Science", 90)
+        # >>> system.get_gpa("Alice")
+        if name in self.students and self.students[name]['courses']:
+            return sum(self.students[name]['courses'].values()) / len(self.students[name]['courses'])
+        else:
+            return None
+
+    def get_all_students_with_fail_course(self):
+        # Retrieve a list of students who have failed at least one course (score < 60).
+        # return: list, a list of student names who have failed at least one course
+        # >>> system = AssessmentSystem()
+        # >>> system.add_student("Alice", "Junior", "Computer Science")
+        # >>> system.add_course_score("Alice", "Math", 55)
+        # >>> system.get_all_students_with_fail_course()
+        students = []
+        for name, student in self.students.items():
+            for course, score in student['courses'].items():
+                if score < 60:
+                    students.append(name)
+                    break
+        return students
+
+    def get_course_average(self, course):
+        # Calculate the average score for a specific course across all students.
+        # param course: str, the name of the course
+        # return: float, the average score for the course, or None if no scores are available
+        # >>> system = AssessmentSystem()
+        # >>> system.add_student("Alice", "Junior", "Computer Science")
+        # >>> system.add_course_score("Alice", "Math", 85)
+        # >>> system.add_student("Bob", "Senior", "Physics")
+        # >>> system.add_course_score("Bob", "Math", 90)
+        # >>> system.get_course_average("Math")
+        total = 0
+        count = 0
+        for student in self.students.values():
+            if course in student['courses']:
+                score = student['courses'][course]
+                if score is not None:
+                    total += score
+                    count += 1
+        return total / count if count > 0 else None
+
+    def get_top_student(self):
+        # Retrieve the name of the student with the highest GPA.
+        # return: str, the name of the student with the highest GPA, or None if no students are available
+        # >>> system = AssessmentSystem()
+        # >>> system.add_student("Alice", "Junior", "Computer Science")
+        # >>> system.add_course_score("Alice", "Math", 85)
+        # >>> system.add_student("Bob", "Senior", "Physics")
+        # >>> system.add_course_score("Bob", "Math", 90)
+        # >>> system.get_top_student()
+        top_student = None
+        top_gpa = 0
+        for name, student in self.students.items():
+            gpa = self.get_gpa(name)
+            if gpa is not None and gpa > top_gpa:
+                top_gpa = gpa
+                top_student = name
+        return top_student
+```

@@ -1,0 +1,1 @@
+Select rows from a DataFrame df where the column value named col_name is in the iterable values and return these rows.

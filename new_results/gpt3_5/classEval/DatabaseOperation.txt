@@ -1,0 +1,144 @@
+"""
+This class defines a Database Processor that handles creating tables, inserting data, searching, and deleting from a SQLite database.
+"""
+
+import sqlite3
+import pandas as pd
+
+
+class DatabaseProcessor:
+
+    def __init__(self, database_name):
+        """
+        Initialize the Database Processor with the given database name.
+
+        Parameters:
+            database_name (str): The name of the SQLite database file.
+        """
+        self.database_name = database_name
+
+    def create_table(self, table_name, key1, key2):
+        """
+        Create a new table in the database with the specified table name and columns.
+
+        Parameters:
+            table_name (str): The name of the table to be created.
+            key1 (str): The first column name in the table.
+            key2 (str): The second column name in the table.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Create a new table
+            assert create_table('users', 'name', 'age') == None
+
+            # Test case 2: Try to create an existing table
+            assert create_table('users', 'name', 'age') == None
+
+            # Test case 3: Create a table with a different structure
+            assert create_table('employees', 'employee_id', 'salary') == None
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        create_table_query = f"CREATE TABLE IF NOT EXISTS {table_name} (id INTEGER PRIMARY KEY, {key1} TEXT, {key2} INTEGER)"
+        cursor.execute(create_table_query)
+
+        conn.commit()
+        conn.close()
+
+    def insert_into_database(self, table_name, data):
+        """
+        Insert data into the specified table in the database.
+
+        Parameters:
+            table_name (str): The name of the table to insert data into.
+            data (list): A list of dictionaries containing data to be inserted into the table.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Insert data into the 'users' table
+            assert insert_into_database('users', [{'name': 'Alice', 'age': 30}, {'name': 'Bob', 'age': 25}]) == None
+
+            # Test case 2: Insert data into an empty table
+            assert insert_into_database('employees', [{'name': 'John', 'age': 35}]) == None
+
+            # Test case 3: Trying to insert data with missing keys
+            assert insert_into_database('users', [{'name': 'Charlie'}]) == None
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        for item in data:
+            insert_query = f"INSERT INTO {table_name} (name, age) VALUES (?, ?)"
+            cursor.execute(insert_query, (item['name'], item['age']))
+
+        conn.commit()
+        conn.close()
+
+    def search_database(self, table_name, name):
+        """
+        Search for data in the specified table based on the given name.
+
+        Parameters:
+            table_name (str): The name of the table to search in.
+            name (str): The name to search for in the specified table.
+
+        Returns:
+            result (list): A list of tuples containing the search results or None if no results are found.
+
+        Test cases:
+            # Test case 1: Search for an existing name in 'users' table
+            assert search_database('users', 'Alice') == [('Alice', 30)]
+
+            # Test case 2: Search for a non-existing name in 'users' table
+            assert search_database('users', 'Eve') == None
+
+            # Test case 3: Search with an empty name
+            assert search_database('employees', '') == None
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        select_query = f"SELECT * FROM {table_name} WHERE name = ?"
+        cursor.execute(select_query, (name,))
+        result = cursor.fetchall()
+
+        if result:
+            return result
+        else:
+            return None
+
+    def delete_from_database(self, table_name, name):
+        """
+        Delete data from the specified table based on the given name.
+
+        Parameters:
+            table_name (str): The name of the table to delete data from.
+            name (str): The name to delete from the specified table.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Delete an existing name from 'users' table
+            assert delete_from_database('users', 'Alice') == None
+
+            # Test case 2: Try to delete a non-existing name from 'users' table
+            assert delete_from_database('users', 'Eve') == None
+
+            # Test case 3: Delete with an empty name
+            assert delete_from_database('employees', '') == None
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        delete_query = f"DELETE FROM {table_name} WHERE name = ?"
+        cursor.execute(delete_query, (name,))
+
+        conn.commit()
+        conn.close()
+```

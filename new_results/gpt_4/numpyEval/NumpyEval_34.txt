@@ -1,0 +1,7 @@
+import numpy as np
+
+y = np.array([2,1,5,2])          # y axis
+# filter out values larger than 2
+m = np.ma.masked_where(y>2, y)   
+# Compress the masked array and return the data as an ndarray
+out = m.compressed()

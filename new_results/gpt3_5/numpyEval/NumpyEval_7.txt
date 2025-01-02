@@ -1,0 +1,2 @@
+# Reverse the elements along the last axis of the array 'a'
+b = a[:, :, ::-1]

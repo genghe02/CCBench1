@@ -1,0 +1,15 @@
+```python
+def unique_digits(x):
+    # Return a sorted list of numbers in x where all digits are odd
+    >>> unique_digits([135, 246, 357, 468, 579])
+    [135, 357, 579]
+    >>> unique_digits([123, 456, 789, 101])
+    [123, 789, 101]
+    >>> unique_digits([22, 44, 66, 88])
+    []
+    odd_digit_elements = []
+    for i in x:
+        if all (int(c) % 2 == 1 for c in str(i)):
+            odd_digit_elements.append(i)
+    return sorted(odd_digit_elements)
+```

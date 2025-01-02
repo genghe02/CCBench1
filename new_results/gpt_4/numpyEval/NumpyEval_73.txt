@@ -1,0 +1,7 @@
+import numpy as np
+
+def find_nearest(array, value):
+    array = np.asarray(array)
+    # Finding the index of the element in the array closest to the given value
+    idx = (np.abs(array - value)).argmin()
+    return array[idx]

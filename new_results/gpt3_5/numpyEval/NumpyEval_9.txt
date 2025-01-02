@@ -1,0 +1,2 @@
+# Fill the diagonal elements of a dataframe with zeros
+np.fill_diagonal(df.values, 0)

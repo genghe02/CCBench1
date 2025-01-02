@@ -1,0 +1,2 @@
+# Calculate the standard deviation of elements along axis 0
+arr_sd = np.std(arr, axis=0)

@@ -1,0 +1,153 @@
+```python
+"""
+This class provides methods to calculate arrangements (permutations) of a given set of data and to count the total possible arrangements based on a selection size.
+"""
+
+import itertools
+
+class ArrangementCalculator:
+    def __init__(self, datas):
+        """
+        Initializes the ArrangementCalculator with a given set of data.
+
+        Parameters:
+            datas (list): The list of data elements to calculate arrangements from.
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n, m=None):
+        """
+        Calculates the number of arrangements of n items taken m at a time.
+
+        Parameters:
+            n (int): The total number of items.
+            m (int, optional): The number of items to arrange. If None, defaults to n.
+
+        Returns:
+            int: The number of arrangements of n items taken m at a time.
+
+        Test cases:
+            # Test case 1: Calculate arrangements of 5 items taken 3 at a time
+            assert ArrangementCalculator.count(5, 3) == 60
+
+            # Test case 2: Calculate arrangements of 5 items taken all (5)
+            assert ArrangementCalculator.count(5) == 120
+
+            # Test case 3: Error case with negative values
+            try:
+                ArrangementCalculator.count(-5, 3)
+            except ValueError:
+                assert True
+        """
+        if m is None or n == m:
+            return ArrangementCalculator.factorial(n)
+        else:
+            return ArrangementCalculator.factorial(n) // ArrangementCalculator.factorial(n - m)
+
+    @staticmethod
+    def count_all(n):
+        """
+        Counts all possible arrangements of n items.
+
+        Parameters:
+            n (int): The total number of items to arrange.
+
+        Returns:
+            int: The total number of arrangements for all possible combinations.
+
+        Test cases:
+            # Test case 1: Count all arrangements for 3 items
+            assert ArrangementCalculator.count_all(3) == 6
+
+            # Test case 2: Count all arrangements for 0 items
+            assert ArrangementCalculator.count_all(0) == 0
+
+            # Test case 3: Count all arrangements for 1 item
+            assert ArrangementCalculator.count_all(1) == 1
+        """
+        total = 0
+        for i in range(1, n + 1):
+            total += ArrangementCalculator.count(n, i)
+        return total
+
+    def select(self, m=None):
+        """
+        Selects all permutations of the data with the specified selection size.
+
+        Parameters:
+            m (int, optional): The number of items to select. If None, selects all items.
+
+        Returns:
+            list: A list of all permutations of the selected items.
+
+        Test cases:
+            # Test case 1: Select permutations of all items
+            assert len(ArrangementCalculator([]).select()) == 0
+            
+            # Test case 2: Select permutations of 2 items from the set ['a', 'b']
+            assert ArrangementCalculator(['a', 'b']).select(2) == [['a', 'b'], ['b', 'a']]
+
+            # Test case 3: Edge case with m greater than the data size
+            assert ArrangementCalculator(['a']).select(2) == []
+        """
+        if m is None:
+            m = len(self.datas)
+        result = []
+        for permutation in itertools.permutations(self.datas, m):
+            result.append(list(permutation))
+        return result
+
+    def select_all(self):
+        """
+        Selects all permutations of all possible sizes from the data.
+
+        Returns:
+            list: A list of all permutations of all sizes.
+
+        Test cases:
+            # Test case 1: Select all permutations of an empty list
+            assert ArrangementCalculator([]).select_all() == []
+            
+            # Test case 2: Select all permutations of ['a', 'b']
+            assert sorted(ArrangementCalculator(['a', 'b']).select_all()) == sorted([['a'], ['b'], ['a', 'b'], ['b', 'a']])
+
+            # Test case 3: Select all permutations of a list with one element
+            assert ArrangementCalculator(['a']).select_all() == [['a']]
+        """
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    @staticmethod
+    def factorial(n):
+        """
+        Calculates the factorial of a non-negative integer n.
+
+        Parameters:
+            n (int): The number to calculate the factorial of.
+
+        Returns:
+            int: The factorial of the input number.
+
+        Test cases:
+            # Test case 1: Factorial of 5
+            assert ArrangementCalculator.factorial(5) == 120
+            
+            # Test case 2: Factorial of 0
+            assert ArrangementCalculator.factorial(0) == 1
+
+            # Test case 3: Factorial of a negative number should raise an exception
+            try:
+                ArrangementCalculator.factorial(-1)
+            except ValueError:
+                assert True
+        """
+        if n < 0:
+            raise ValueError("Negative value error: factorial is not defined for negative values")
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+```

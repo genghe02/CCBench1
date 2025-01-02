@@ -1,0 +1,128 @@
+"""
+The WeatherSystem class provides functionality to query weather information for a given city, 
+including temperature (with conversion between Celsius and Fahrenheit) and weather conditions.
+"""
+
+class WeatherSystem:
+    def __init__(self, city) -> None:
+        """
+        Initializes a new instance of the WeatherSystem class.
+        
+        Parameters:
+            city (str): The city for which to query weather information.
+        """
+        self.temperature = None
+        self.weather = None
+        self.city = city
+        self.weather_list = {}
+    
+    def query(self, weather_list, tmp_units = 'celsius'):
+        """
+        Queries the weather information for the given city.
+        
+        Parameters:
+            weather_list (dict): A dictionary containing weather information for various cities.
+            tmp_units (str): The units in which to return the temperature ('celsius' or 'fahrenheit'). Default is 'celsius'.
+            
+        Returns:
+            tuple: A tuple containing the temperature and weather conditions for the given city. 
+            If the city is not found in the weather list, returns False.
+            
+        Test cases:
+            # Test case 1: Querying weather information for a city that exists in the weather list, with default temperature units
+            assert query({'Tokyo': {'temperature': 16, 'temperature units': 'celsius', 'weather': 'sunny'}}, 'Tokyo') == (16, 'sunny')
+            
+            # Test case 2: Querying weather information for a city that exists in the weather list, with temperature units conversion
+            assert query({'Tokyo': {'temperature': 60.8, 'temperature units': 'fahrenheit', 'weather': 'sunny'}}, 'Tokyo', 'celsius') == (16, 'sunny')
+            
+            # Test case 3: Querying weather information for a city that does not exist in the weather list
+            assert query({'Tokyo': {'temperature': 16, 'temperature units': 'celsius', 'weather': 'sunny'}}, 'Paris') == False
+        """
+        self.weather_list = weather_list
+        if self.city not in weather_list:
+            return False
+        else:
+            self.temperature = self.weather_list[self.city]['temperature']
+            self.weather = self.weather_list[self.city]['weather']
+        if self.weather_list[self.city]['temperature units'] != tmp_units:
+            if tmp_units == 'celsius':
+                return self.fahrenheit_to_celsius(), self.weather
+            elif tmp_units == 'fahrenheit':
+                return self.celsius_to_fahrenheit(), self.weather
+        else:
+            return self.temperature, self.weather
+    
+    def set_city(self, city):
+        """
+        Sets the city for which to query weather information.
+        
+        Parameters:
+            city (str): The city for which to query weather information.
+            
+        Test cases:
+            # Test case 1: Setting a new city
+            ws = WeatherSystem('Tokyo')
+            ws.set_city('Paris')
+            assert ws.city == 'Paris'
+            
+            # Test case 2: Setting the same city
+            ws = WeatherSystem('Tokyo')
+            ws.set_city('Tokyo')
+            assert ws.city == 'Tokyo'
+            
+            # Test case 3: Setting an empty city
+            ws = WeatherSystem('Tokyo')
+            ws.set_city('')
+            assert ws.city == ''
+        """
+        self.city = city
+
+    def celsius_to_fahrenheit(self):
+        """
+        Converts the temperature from Celsius to Fahrenheit.
+        
+        Returns:
+            float: The temperature in Fahrenheit.
+            
+        Test cases:
+            # Test case 1: Conversion of a positive temperature
+            ws = WeatherSystem('Tokyo')
+            ws.temperature = 30
+            assert ws.celsius_to_fahrenheit() == 86
+            
+            # Test case 2: Conversion of a negative temperature
+            ws = WeatherSystem('Tokyo')
+            ws.temperature = -10
+            assert ws.celsius_to_fahrenheit() == 14
+            
+            # Test case 3: Conversion of zero
+            ws = WeatherSystem('Tokyo')
+            ws.temperature = 0
+            assert ws.celsius_to_fahrenheit() == 32
+        """
+        return (self.temperature * 9/5) + 32
+
+    def fahrenheit_to_celsius(self):
+        """
+        Converts the temperature from Fahrenheit to Celsius.
+        
+        Returns:
+            float: The temperature in Celsius.
+            
+        Test cases:
+            # Test case 1: Conversion of a positive temperature
+            ws = WeatherSystem('Tokyo')
+            ws.temperature = 86
+            assert ws.fahrenheit_to_celsius() == 30
+            
+            # Test case 2: Conversion of a negative temperature
+            ws = WeatherSystem('Tokyo')
+            ws.temperature = 14
+            assert ws.fahrenheit_to_celsius() == -10
+            
+            # Test case 3: Conversion of a freezing temperature
+            ws = WeatherSystem('Tokyo')
+            ws.temperature = 32
+            assert ws.fahrenheit_to_celsius() == 0
+        """
+        return (self.temperature - 32) * 5/9

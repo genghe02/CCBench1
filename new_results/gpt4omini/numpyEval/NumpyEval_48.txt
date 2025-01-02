@@ -1,0 +1,1 @@
+import numpy as np\n\ndef count_true_number(arr):\n    # Count the number of True values in the array\n    return arr.sum()

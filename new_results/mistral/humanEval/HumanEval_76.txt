@@ -1,0 +1,17 @@
+ def is_simple_power(x, n):
+   # Check if x is a power of n
+   >>> is_simple_power(2, 2) # True
+   >>> is_simple_power(16, 2) # True
+   >>> is_simple_power(3, 2) # False
+   # Requirements for the code
+   return (n >= 1 and pow(x, 1 / n).is_integer()) if x > 0 else False
+
+   # Test cases for the function
+   >>> is_simple_power(4, 2) # True
+   >>> is_simple_power(16, 4) # True
+   >>> is_simple_power(125, 5) # True
+   >>> is_simple_power(13, 2) # False
+   >>> is_simple_power(-1, 2) # False
+   >>> is_simple_power(2, 0) # False
+   >>> is_simple_power(1, 1) # True
+   >>> is_simple_power(0, 1) # False</s>

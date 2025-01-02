@@ -1,0 +1,10 @@
+ def change_base(x: int, base: int):
+   # Convert an integer to its base representation
+   >>> change_base(17, 16) # expected output: '1111'
+   >>> change_base(5, 3) # expected output: '111'
+   >>> change_base(21, 5) # expected output: '2'
+   ret = ""
+   while x > 0:
+       ret = str(x % base) + ret
+       x //= base
+   return ret</s>

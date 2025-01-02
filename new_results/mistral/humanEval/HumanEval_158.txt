@@ -1,0 +1,6 @@
+ def find_max(words):
+   # Find the word with the maximum number of unique letters
+   >>> find_max(['apple', 'banana', 'grape']) # returns 'apple'
+   >>> find_max(['cat', 'dog', 'mouse']) # returns 'cat'
+   >>> find_max(['pear', 'pear', 'pear']) # returns 'pear' (since there are multiple 'pear's, it still returns the first one due to the sorting)
+   return sorted(words, key = lambda x: (-len(set(x)), x))[0]</s>

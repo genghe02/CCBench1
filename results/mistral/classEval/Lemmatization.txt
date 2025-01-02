@@ -1,0 +1,73 @@
+ <description for whole class>
+"""
+A class for performing text preprocessing tasks, specifically lemmatization, using NLTK library.
+"""
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+import string
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+class Lemmatization:
+ <description for whole function>
+ """
+ __init__ method initializes the WordNetLemmatizer instance for lemmatizing words.
+ """
+ def __init__(self):
+ self.lemmatizer = WordNetLemmatizer()
+
+ <description for whole function>
+ """
+ lemmatize_sentence method takes a sentence as input, performs lemmatization on each word in the sentence, and returns a list of lemmatized words.
+
+ :param sentence: str, the input sentence to be lemmatized
+ :return: list, a list of lemmatized words
+ """
+ def lemmatize_sentence(self, sentence):
+ lemmatized_words = []
+ sentence = self.remove_punctuation(sentence)
+ words = word_tokenize(sentence)
+ tagged_words = pos_tag(words)
+ for word, tag in tagged_words:
+ if tag.startswith('V'):
+ lemmatized_word = self.lemmatizer.lemmatize(word, pos='v')
+ elif tag.startswith('J'):
+ lemmatized_word = self.lemmatizer.lemmatize(word, pos='a')
+ elif tag.startswith('R'):
+ lemmatized_word = self.lemmatizer.lemmatize(word, pos='r')
+ else:
+ lemmatized_word = self.lemmatizer.lemmatize(word)
+ lemmatized_words.append(lemmatized_word)
+ return lemmatized_words
+
+ <description for whole function>
+ """
+ get_pos_tag method takes a sentence as input, performs part-of-speech tagging on each word in the sentence, and returns a list of part-of-speech tags.
+
+ :param sentence: str, the input sentence to be tagged
+ :return: list, a list of part-of-speech tags
+ """
+ def get_pos_tag(self, sentence):
+ pos_tags = []
+ sentence = self.remove_punctuation(sentence)
+ words = word_tokenize(sentence)
+ tagged_words = pos_tag(words)
+ for tagged_word in tagged_words:
+ pos_tags.append(tagged_word[1])
+ return pos_tags
+
+ <description for whole function>
+ """
+ remove_punctuation method takes a sentence as input and returns a new sentence with all punctuation marks removed.
+
+ :param sentence: str, the input sentence with punctuation marks
+ :return: str, a new sentence without punctuation marks
+ """
+ def remove_punctuation(self, sentence):
+ """
+ Returns a new sentence with all punctuation marks removed using string.maketrans() method.
+ """
+ return sentence.translate(str.maketrans('', '', string.punctuation))

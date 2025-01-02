@@ -1,0 +1,2 @@
+ # Get the index i in the last dimension of array arr
+return arr[..., i]</s>

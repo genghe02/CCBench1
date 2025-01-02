@@ -1,0 +1,7 @@
+import numpy as np
+
+a = np.arange(8)[:,None].repeat(8,axis=1)
+# Reshape the array into a 4-dimensional array with shape (2,4,2,4)
+b = a.reshape(2,4,2,4)
+# Transpose the array to rearrange the dimensions
+c = b.transpose(0,2,1,3)

@@ -1,0 +1,141 @@
+```python
+"""
+This class implements a game where the player is given four random numbers and must form an expression using these numbers that evaluates to 24. The class handles card generation, expression validation, and evaluation.
+"""
+
+import random
+
+
+class TwentyFourPointGame:
+    def __init__(self) -> None:
+        """
+        Initializes the TwentyFourPointGame class by setting up an empty list to store the generated numbers.
+        """
+        self.nums = []
+
+    def _generate_cards(self):
+        """
+        Generates four random numbers between 1 and 9 and stores them in the `nums` list.
+        
+        Test cases:
+            # Test case 1: Check if four numbers are generated
+            game = TwentyFourPointGame()
+            game._generate_cards()
+            assert len(game.nums) == 4
+            
+            # Test case 2: Check if numbers are within the range 1-9
+            game = TwentyFourPointGame()
+            game._generate_cards()
+            assert all(1 <= num <= 9 for num in game.nums)
+        """
+        for i in range(4):
+            self.nums.append(random.randint(1, 9))
+        assert len(self.nums) == 4
+
+    def get_my_cards(self):
+        """
+        Generates and returns a list of four random numbers between 1 and 9.
+        
+        Returns:
+            list: A list of four integers representing the generated numbers.
+        
+        Test cases:
+            # Test case 1: Check if four numbers are returned
+            game = TwentyFourPointGame()
+            cards = game.get_my_cards()
+            assert len(cards) == 4
+            
+            # Test case 2: Check if numbers are within the range 1-9
+            game = TwentyFourPointGame()
+            cards = game.get_my_cards()
+            assert all(1 <= num <= 9 for num in cards)
+            
+            # Test case 3: Check if numbers are different each time
+            game1 = TwentyFourPointGame()
+            cards1 = game1.get_my_cards()
+            game2 = TwentyFourPointGame()
+            cards2 = game2.get_my_cards()
+            assert cards1 != cards2
+        """
+        self.nums = []
+        self._generate_cards()
+        return self.nums
+
+    def answer(self, expression):
+        """
+        Validates the given expression to ensure it uses the generated numbers correctly and evaluates to 24.
+        
+        Parameters:
+            expression (str): The mathematical expression provided by the player.
+        
+        Returns:
+            bool or list: Returns True if the expression evaluates to 24 using the generated numbers, False otherwise. If the expression is 'pass', returns a new set of numbers.
+        
+        Test cases:
+            # Test case 1: Valid expression
+            game = TwentyFourPointGame()
+            game.nums = [3, 3, 3, 3]
+            assert game.answer('3*3+3*3') == True
+            
+            # Test case 2: Invalid expression
+            game = TwentyFourPointGame()
+            game.nums = [1, 2, 3, 4]
+            assert game.answer('1+2+3+4') == False
+            
+            # Test case 3: Pass expression
+            game = TwentyFourPointGame()
+            game.nums = [1, 2, 3, 4]
+            new_cards = game.answer('pass')
+            assert len(new_cards) == 4
+        """
+        if expression == 'pass':
+            return self.get_my_cards()
+        statistic = {}
+        for c in expression:
+            if c.isdigit() and int(c) in self.nums:
+                statistic[c] = statistic.get(c, 0) + 1
+
+        nums_used = statistic.copy()
+
+        for num in self.nums:
+            if nums_used.get(str(num), -100) != -100 and nums_used[str(num)] > 0:
+                nums_used[str(num)] -= 1
+            else:
+                return False
+
+        if all(count == 0 for count in nums_used.values()) == True:
+            return self.evaluate_expression(expression)
+        else:
+            return False
+
+    def evaluate_expression(self, expression):
+        """
+        Evaluates the given mathematical expression to check if it equals 24.
+        
+        Parameters:
+            expression (str): The mathematical expression to evaluate.
+        
+        Returns:
+            bool: True if the expression evaluates to 24, False otherwise.
+        
+        Test cases:
+            # Test case 1: Correct evaluation
+            game = TwentyFourPointGame()
+            assert game.evaluate_expression('3*8') == True
+            
+            # Test case 2: Incorrect evaluation
+            game = TwentyFourPointGame()
+            assert game.evaluate_expression('3+3+3+3') == False
+            
+            # Test case 3: Invalid expression
+            game = TwentyFourPointGame()
+            assert game.evaluate_expression('3/0') == False
+        """
+        try:
+            if eval(expression) == 24:
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
+```

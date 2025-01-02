@@ -1,0 +1,23 @@
+ def specialFilter(nums):
+    """
+    This function filters the list of numbers and returns the count of numbers that have an odd digit as their first and last digit.
+
+    :param nums: list, a list of numbers to be filtered
+    :return: int, the count of numbers that have an odd digit as their first and last digit
+
+    <some test cases for the function>
+    >>> specialFilter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+    3
+    >>> specialFilter([11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25])
+    7
+    """
+
+    count = 0
+    for num in nums:
+        if num > 10:
+            odd_digits = (1, 3, 5, 7, 9)
+            number_as_string = str(num)
+            if int(number_as_string[0]) in odd_digits and int(number_as_string[-1]) in odd_digits:
+                count += 1
+    
+    return count

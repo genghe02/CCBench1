@@ -1,0 +1,181 @@
+"""
+This class provides utility functions for handling and manipulating date and time.
+"""
+
+import datetime
+
+class TimeUtils:
+
+    def __init__(self):
+        """
+        Initialize the TimeUtils class with the current date and time.
+        """
+        self.datetime = datetime.datetime.now()
+
+    def get_current_time(self):
+        """
+        Get the current time in "HH:MM:SS" format.
+        
+        Returns:
+            str: Current time in "HH:MM:SS" format.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.get_current_time()) # Outputs current time in "HH:MM:SS" format
+        
+            # Note: Since this method outputs the current system time, specific return values can not be determined for test cases.
+        """
+        format = "%H:%M:%S"
+        return self.datetime.strftime(format)
+
+    def get_current_date(self):
+        """
+        Get the current date in "YYYY-MM-DD" format.
+        
+        Returns:
+            str: Current date in "YYYY-MM-DD" format.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.get_current_date()) # Outputs current date in "YYYY-MM-DD" format
+        
+            # Note: Since this method outputs the current system date, specific return values can not be determined for test cases.
+        """
+        format = "%Y-%m-%d"
+        return self.datetime.strftime(format)
+
+    def add_seconds(self, seconds):
+        """
+        Add seconds to the current time and return the resulting time in "HH:MM:SS" format.
+        
+        Parameters:
+            seconds (int): Number of seconds to add to the current time.
+        
+        Returns:
+            str: Resulting time after adding the seconds, in "HH:MM:SS" format.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.add_seconds(3600)) # Outputs time one hour from now in "HH:MM:SS" format
+        
+            # Test case 2: Adding zero seconds
+            print(time_utils.add_seconds(0)) # Outputs current time in "HH:MM:SS" format
+        
+            # Test case 3: Adding negative seconds
+            print(time_utils.add_seconds(-3600)) # Outputs time one hour earlier in "HH:MM:SS" format
+        """
+        new_datetime = self.datetime + datetime.timedelta(seconds=seconds)
+        format = "%H:%M:%S"
+        return new_datetime.strftime(format)
+
+    def string_to_datetime(self, string):
+        """
+        Convert a string in "YYYY-MM-DD HH:MM:SS" format to a datetime object.
+        
+        Parameters:
+            string (str): String representation of the date and time in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Returns:
+            datetime.datetime: Corresponding datetime object.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.string_to_datetime("2022-01-01 12:00:00")) # Outputs datetime.datetime(2022, 1, 1, 12, 0)
+        
+            # Test case 2: Invalid string format
+            # This should raise a ValueError
+            print(time_utils.string_to_datetime("01-01-2022 12:00:00"))
+        
+            # Test case 3: Non-string input
+            # This should raise a TypeError
+            print(time_utils.string_to_datetime(20220101))
+        """
+        return datetime.datetime.strptime(string, "%Y-%m-%d %H:%M:%S")
+
+    def datetime_to_string(self, datetime):
+        """
+        Convert a datetime object to a string in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Parameters:
+            datetime (datetime.datetime): The datetime object to convert.
+        
+        Returns:
+            str: String representation of the datetime object in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.datetime_to_string(datetime.datetime(2022, 1, 1, 12, 0))) # Outputs "2022-01-01 12:00:00"
+        
+            # Test case 2: Invalid input type
+            # This should raise a AttributeError
+            print(time_utils.datetime_to_string("2022-01-01 12:00:00"))
+        
+            # Test case 3: None input
+            # This should raise a AttributeError
+            print(time_utils.datetime_to_string(None))
+        """
+        return datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+    def get_minutes(self, string_time1, string_time2):
+        """
+        Calculate the number of minutes between two times represented as strings in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Parameters:
+            string_time1 (str): First time string in "YYYY-MM-DD HH:MM:SS" format.
+            string_time2 (str): Second time string in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Returns:
+            int: Number of minutes between string_time1 and string_time2, rounded to the nearest integer.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.get_minutes("2022-01-01 12:00:00", "2022-01-01 13:00:00")) # Outputs 60
+        
+            # Test case 2: Zero minutes difference
+            print(time_utils.get_minutes("2022-01-01 12:00:00", "2022-01-01 12:00:00")) # Outputs 0
+        
+            # Test case 3: Negative minutes difference
+            # This should still return a positive number, as the absolute difference is taken
+            print(time_utils.get_minutes("2022-01-01 13:00:00", "2022-01-01 12:00:00")) # Outputs 60
+        """
+        time1 = self.string_to_datetime(string_time1)
+        time2 = self.string_to_datetime(string_time2)
+        return round((time2 - time1).seconds / 60)
+
+    def get_format_time(self, year, month, day, hour, minute, second):
+        """
+        Get a string representation of a specific date and time in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Parameters:
+            year (int): The year.
+            month (int): The month.
+            day (int): The day.
+            hour (int): The hour.
+            minute (int): The minute.
+            second (int): The second.
+        
+        Returns:
+            str: String representation of the specified date and time in "YYYY-MM-DD HH:MM:SS" format.
+        
+        Test cases:
+            # Test case 1: Normal usage
+            time_utils = TimeUtils()
+            print(time_utils.get_format_time(2022, 1, 1, 12, 0, 0)) # Outputs "2022-01-01 12:00:00"
+        
+            # Test case 2: Invalid month
+            # This should raise a ValueError
+            print(time_utils.get_format_time(2022, 13, 1, 12, 0, 0))
+        
+            # Test case 3: Invalid day
+            # This should raise a ValueError
+            print(time_utils.get_format_time(2022, 1, 32, 12, 0, 0))
+        """
+        format = "%Y-%m-%d %H:%M:%S"
+        time_item = datetime.datetime(year, month, day, hour, minute, second)
+        return time_item.strftime(format)

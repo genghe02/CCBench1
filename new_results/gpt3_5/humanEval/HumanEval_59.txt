@@ -1,0 +1,6 @@
+# This function finds the largest prime factor of a given integer
+>>> largest_prime_factor(10) # returns 5
+>>> largest_prime_factor(15) # returns 5
+>>> largest_prime_factor(21) # returns 7
+>>> largest_prime_factor(29) # returns 29
+>>> largest_prime_factor(100) # returns 5

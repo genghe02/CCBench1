@@ -1,0 +1,18 @@
+```python
+def minSubArraySum(nums):
+    # Find the minimum sum of any contiguous subarray in the given list of integers
+    >>> minSubArraySum([1, -2, 3, 10, -4, 7, 2, -5]) # returns -6
+    >>> minSubArraySum([-1, -2, -3, -4]) # returns -10
+    >>> minSubArraySum([1, 2, 3, 4]) # returns 1
+    max_sum = 0
+    s = 0
+    for num in nums:
+        s += -num
+        if (s < 0):
+            s = 0
+        max_sum = max(s, max_sum)
+    if max_sum == 0:
+        max_sum = max(-i for i in nums)
+    min_sum = -max_sum
+    return min_sum
+```

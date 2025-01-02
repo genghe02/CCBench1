@@ -1,0 +1,8 @@
+```python
+def right_angle_triangle(a, b, c):
+    # Check if the given sides form a right-angled triangle using the Pythagorean theorem
+    >>> right_angle_triangle(3, 4, 5) # returns True
+    >>> right_angle_triangle(5, 12, 13) # returns True
+    >>> right_angle_triangle(1, 2, 3) # returns False
+    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b
+```

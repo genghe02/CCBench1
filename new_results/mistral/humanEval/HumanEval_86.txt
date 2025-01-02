@@ -1,0 +1,5 @@
+ def anti_shuffle(s):
+    # The function takes a string as input, splits it by space, sorts each sublist of characters in reverse order, and then joins them back with a space
+    >>> anti_shuffle("hello world") # returns "dlrow olleh"
+    >>> anti_shuffle("my name is Ali") # returns "si hci naem ym"
+    return ' '.join([''.join(sorted(list(i), reverse=True)) for i in s.split(' ')])</s>

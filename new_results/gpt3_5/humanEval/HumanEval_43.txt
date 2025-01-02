@@ -1,0 +1,14 @@
+# The function checks if there exist two elements in the list that sum up to zero
+>>> pairs_sum_to_zero([1, 2, 3, -3, -2, 4]) # returns True
+>>> pairs_sum_to_zero([1, 2, 3, 4, 5]) # returns False
+>>> pairs_sum_to_zero([0, 1, -1]) # returns True
+def pairs_sum_to_zero(l):
+    # Check if there exist two elements in the list that sum up to zero
+    >>> pairs_sum_to_zero([1, 2, 3, -3, -2, 4]) # returns True
+    >>> pairs_sum_to_zero([1, 2, 3, 4, 5]) # returns False
+    >>> pairs_sum_to_zero([0, 1, -1]) # returns True
+    for i, l1 in enumerate(l):
+        for j in range(i + 1, len(l)):
+            if l1 + l[j] == 0:
+                return True
+    return False

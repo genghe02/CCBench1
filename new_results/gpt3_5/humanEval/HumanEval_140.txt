@@ -1,0 +1,3 @@
+# This function fixes spaces in a text by replacing them with underscores or hyphens based on length of consecutive spaces
+>>> fix_spaces("hello    world") # returns "hello___world"
+>>> fix_spaces("  this  is  a  test  ") # returns "_this__is__a__test_"

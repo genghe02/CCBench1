@@ -1,0 +1,2 @@
+ # Slice the array with step size -1 along the last axis (channels for 3D arrays, or columns for 2D arrays)
+b = a[:, :, ::-1]</s>

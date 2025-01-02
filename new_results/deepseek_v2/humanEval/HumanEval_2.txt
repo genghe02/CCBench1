@@ -1,0 +1,8 @@
+```python
+def truncate_number(number: float) -> float:
+    # Return the fractional part of the input float number
+    >>> truncate_number(3.5) # returns 0.5
+    >>> truncate_number(-3.5) # returns 0.5
+    >>> truncate_number(0.0) # returns 0.0
+    return number % 1.0
+```

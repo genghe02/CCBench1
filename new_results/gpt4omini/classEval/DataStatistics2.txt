@@ -1,0 +1,149 @@
+```python
+"""
+This class provides various statistical analysis methods for a given dataset.
+"""
+
+import numpy as np
+
+class DataStatistics2:
+    def __init__(self, data):
+        """
+        Initializes the DataStatistics2 class with a dataset.
+
+        Parameters:
+            data (list or np.ndarray): The dataset to perform statistical analysis on.
+        """
+        self.data = np.array(data)
+
+    def get_sum(self):
+        """
+        Calculates the sum of the dataset.
+
+        Returns:
+            float: The sum of the elements in the dataset.
+
+        Test cases:
+            # Test case 1: Sum of positive integers
+            input = [1, 2, 3]
+            expected_output = 6
+
+            # Test case 2: Sum of negative integers
+            input = [-1, -2, -3]
+            expected_output = -6
+
+            # Test case 3: Sum of an empty array
+            input = []
+            expected_output = 0
+        """
+        return np.sum(self.data)
+
+    def get_min(self):
+        """
+        Finds the minimum value in the dataset.
+
+        Returns:
+            float: The minimum value of the dataset.
+
+        Test cases:
+            # Test case 1: Minimum of positive integers
+            input = [1, 2, 3]
+            expected_output = 1
+
+            # Test case 2: Minimum of mixed values
+            input = [3, 0, -2, 5]
+            expected_output = -2
+
+            # Test case 3: Minimum of a single value
+            input = [5]
+            expected_output = 5
+        """
+        return np.min(self.data)
+
+    def get_max(self):
+        """
+        Finds the maximum value in the dataset.
+
+        Returns:
+            float: The maximum value of the dataset.
+
+        Test cases:
+            # Test case 1: Maximum of positive integers
+            input = [1, 2, 3]
+            expected_output = 3
+
+            # Test case 2: Maximum of mixed values
+            input = [3, 0, -5, 10]
+            expected_output = 10
+
+            # Test case 3: Maximum of a single value
+            input = [-1]
+            expected_output = -1
+        """
+        return np.max(self.data)
+
+    def get_variance(self):
+        """
+        Calculates the variance of the dataset.
+
+        Returns:
+            float: The variance of the dataset rounded to two decimal places.
+
+        Test cases:
+            # Test case 1: Variance of a small dataset
+            input = [1, 2, 3]
+            expected_output = 0.67
+
+            # Test case 2: Variance of a dataset with identical values
+            input = [2, 2, 2]
+            expected_output = 0.00
+
+            # Test case 3: Variance of an empty dataset
+            input = []
+            expected_output = nan
+        """
+        return round(np.var(self.data), 2)
+
+    def get_std_deviation(self):
+        """
+        Calculates the standard deviation of the dataset.
+
+        Returns:
+            float: The standard deviation of the dataset rounded to two decimal places.
+
+        Test cases:
+            # Test case 1: Standard deviation of a small dataset
+            input = [1, 2, 3]
+            expected_output = 0.82
+
+            # Test case 2: Standard deviation of a dataset with identical values
+            input = [2, 2, 2]
+            expected_output = 0.00
+
+            # Test case 3: Standard deviation of an empty dataset
+            input = []
+            expected_output = nan
+        """
+        return round(np.std(self.data), 2)
+
+    def get_correlation(self):
+        """
+        Calculates the correlation matrix of the dataset.
+
+        Returns:
+            np.ndarray: The correlation coefficients between the dataset columns.
+
+        Test cases:
+            # Test case 1: Correlation of two perfectly correlated variables
+            input = [[1, 2], [2, 4], [3, 6]]
+            expected_output = [[1.0, 1.0], [1.0, 1.0]]
+
+            # Test case 2: Correlation of variables with no correlation
+            input = [[1, 0], [0, 1]]
+            expected_output = [[1.0, 0.0], [0.0, 1.0]]
+
+            # Test case 3: Correlation of a single variable
+            input = [[2], [4], [6]]
+            expected_output = [[1.0]]
+        """
+        return np.corrcoef(self.data, rowvar=False)
+```

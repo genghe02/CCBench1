@@ -1,0 +1,4 @@
+# This function implements 1D convolution through broadcasting, using numpy. It takes in an array 'a' and two integers 'L' and 'S'.
+# 'L' specifies the length of the window for the convolution, and 'S' is the stride length or step size.
+# The function calculates the number of rows for the output matrix, using the size of the input array 'a', the window length 'L', and the stride length 'S'.
+# It then returns a 2D array where each row is a window of length 'L' from the input array 'a', stepped along by 'S'.

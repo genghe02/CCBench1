@@ -1,0 +1,188 @@
+ Here is the completed documentation for the `MahjongConnect` class:
+
+```python
+"""
+This class represents a Mahjong game board and handles moves, validations, and game over conditions.
+"""
+
+import random
+
+class MahjongConnect:
+    def __init__(self, BOARD_SIZE=(4, 4), ICONS=[' ', '☀', '☁', '♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♑']):
+        """
+        Initialize MahjongConnect instance with given board size and icons.
+
+        Parameters:
+            BOARD_SIZE (tuple): The size of the Mahjong board (height, width)
+            ICONS (list): The list of available icons for the board
+        """
+
+        self.BOARD_SIZE = BOARD_SIZE
+        self.ICONS = ICONS
+        self.board = self.create_board()
+
+    def create_board(self):
+        """
+        Create a new Mahjong board filled with random icons.
+
+        Returns:
+            list: A 2D list representing the Mahjong game board
+        """
+
+        board = [[random.choice(self.ICONS) for _ in range(self.BOARD_SIZE[1])] for _ in range(self.BOARD_SIZE[0])]
+        return board
+
+    def is_valid_move(self, pos1, pos2):
+        """
+        Check if a move from position pos1 to pos2 is valid.
+
+        Parameters:
+            pos1 (tuple): A tuple representing the position of the first tile (x, y)
+            pos2 (tuple): A tuple representing the position of the second tile (x, y)
+
+        Returns:
+            bool: True if the move is valid, False otherwise
+
+        Test cases:
+            # Test case 1: Valid move
+            assert is_valid_move((0, 0), (1, 1)) == True
+
+            # Test case 2: Invalid move on the same position
+            assert is_valid_move((0, 0), (0, 0)) == False
+
+            # Test case 3: Invalid move to different icon
+            assert is_valid_move((0, 0), (1, 1)) == False
+        """
+
+        x1, y1 = pos1
+        x2, y2 = pos2
+
+        # Check if positions are within the game board range
+        if not (0 <= x1 < self.BOARD_SIZE[0] and 0 <= y1 < self.BOARD_SIZE[1] and 0 <= x2 < self.BOARD_SIZE[0] and 0 <= y2 < self.BOARD_SIZE[1]):
+            return False
+
+        # Check if the two positions are the same
+        if pos1 == pos2:
+            return False
+
+        # Check if the two positions have the same icon
+        if self.board[x1][y1] != self.board[x2][y2]:
+            return False
+
+        # Check if there is a valid path between the two positions
+        if not self.has_path(pos1, pos2):
+            return False
+
+        return True
+
+    def has_path(self, pos1, pos2):
+        """
+        Check if there is a valid path between two positions.
+
+        Parameters:
+            pos1 (tuple): A tuple representing the position of the first tile (x, y)
+            pos2 (tuple): A tuple representing the position of the second tile (x, y)
+
+        Returns:
+            bool: True if there is a valid path, False otherwise
+
+        Test cases:
+            # Test case 1: Valid path (diagonal)
+            assert has_path((0, 0), (1, 1)) == True
+
+            # Test case 2: Valid path (horizontal)
+            assert has_path((0, 0), (0, 1)) == True
+
+            # Test case 3: Valid path (vertical)
+            assert has_path((0, 0), (1, 0)) == True
+
+            # Test case 4: Non-valid path
+            assert has_path((0, 0), (1, 2)) == False
+        """
+
+        visited = set()
+        stack = [pos1]
+
+        while stack:
+            current_pos = stack.pop()
+            if current_pos == pos2:
+                return True
+
+            if current_pos in visited:
+                continue
+
+            visited.add(current_pos)
+            x, y = current_pos
+
+            # Check adjacent positions (up, down, left, right)
+            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                new_x, new_y = x + dx, y + dy
+                if 0 <= new_x < self.BOARD_SIZE[0] and 0 <= new_y < self.BOARD_SIZE[1]:
+                    if (new_x, new_y) not in visited and self.board[new_x][new_y] == self.board[x][y]:
+                        stack.append((new_x, new_y))
+
+        return False
+
+    def remove_icons(self, pos1, pos2):
+        """
+        Remove the icons at the given positions.
+
+        Parameters:
+            pos1 (tuple): A tuple representing the position of the first icon (x, y)
+            pos2 (tuple): A tuple representing the position of the second icon (x, y)
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Successful removal
+            board = MahjongConnect((4, 4))
+            pos1, pos2 = (0, 0), (1, 1)
+            board.is_valid_move(pos1, pos2)
+            board.remove_icons(pos1, pos2)
+            assert board.board[0][0] == ' ' and board.board[1][1] == ' '
+
+            # Test case 2: Invalid move
+            board = MahjongConnect((4, 4))
+            pos1, pos2 = (0, 0), (1, 2)
+            board.remove_icons(pos1, pos2)
+            assert board.board[0][0] != ' ' and board.board[1][1] != ' '
+        """
+
+        x1, y1 = pos1
+        x2, y2 = pos2
+        self.board[x1][y1] = ' '
+        self.board[x2][y2] = ' '
+
+    def is_game_over(self):
+        """
+        Check if the game is over based on the current board state.
+
+        Returns:
+            bool: True if the game is over, False otherwise
+
+        Test cases:
+            # Test case 1: Game not over
+            board = MahjongConnect((4, 4))
+            for _ in range(self.BOARD_SIZE[0] * self.BOARD_SIZE[1] // 2):
+                pos1, pos2 = random.sample(
+                    [(x, y) for x in range(self.BOARD_SIZE[0]) for y in range(self.BOARD_SIZE[1])], 2)
+                self.remove_icons(pos1, pos2)
+            assert not self.is_game_over()
+
+            # Test case 2: Game over
+            board = MahjongConnect((4, 4))
+            for _ in range(self.BOARD_SIZE[0] * self.BOARD_SIZE[1]):
+                pos1, pos2 = random.sample(
+                    [(x, y) for x in range(self.BOARD_SIZE[0]) for y in range(self.BOARD_SIZE[1])], 2)
+                self.remove_icons(pos1, pos2)
+                if self.is_valid_move(pos1, pos2):
+                    self.remove_icons(pos1, pos2)
+            assert self.is_game_over()
+        """
+
+        for row in self.board:
+            if any(icon != ' ' for icon in row):
+                return False
+        return True
+```</s>

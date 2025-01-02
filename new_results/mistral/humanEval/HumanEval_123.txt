@@ -1,0 +1,22 @@
+ # This function returns the sequence of odd numbers obtained by applying Collatz sequence to the given number 'n'
+>>> get_odd_collatz(1) # returns [1]
+>>> get_odd_collatz(2) # returns [1]
+>>> get_odd_collatz(3) # returns [3, 1]
+>>> get_odd_collatz(4) # returns [1, 3, 1]
+>>> get_odd_collatz(5) # returns [5, 16, 8, 4, 2, 1]
+>>> get_odd_collatz(6) # returns [1, 5, 16, 8, 4, 2, 1]
+>>> get_odd_collatz(0) # raises an error, as the function only works for positive integers
+
+return # This function returns the sequence of odd numbers obtained by applying Collatz sequence to the given number 'n'
+<-----HERE----># Return the sequence of odd numbers obtained by applying Collatz sequence to the given number 'n'
+
+# This function returns the sequence of odd numbers obtained by applying Collatz sequence to the given number 'n'
+# The sequence is obtained by iterating through the Collatz sequence and appending each odd number to a list, until the first odd number is 1
+>>> get_odd_collatz(1) # returns [1]
+>>> get_odd_collatz(2) # returns [1]
+>>> get_odd_collatz(3) # returns [3, 1]
+>>> get_odd_collatz(4) # returns [1, 3, 1]
+>>> get_odd_collatz(5) # returns [5, 16, 8, 4, 2, 1]
+>>> get_odd_collatz(6) # returns [1, 5, 16, 8, 4, 2, 1]
+>>> get_odd_collatz(0) # raises an error, as the function only works for positive integers
+return sorted(odd_collatz)</s>

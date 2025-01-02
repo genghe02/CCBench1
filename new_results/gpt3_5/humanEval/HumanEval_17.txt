@@ -1,0 +1,28 @@
+Input:
+def parse_music(music_string: str) -> List[int]:
+    <Convert music notes to a list of integers based on a note mapping provided>
+    <Example test cases for the function>
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    return [note_map[x] for x in music_string.split(' ') if x]
+
+❌ Wrong Output:
+def parse_music(music_string: str) -> List[int]:
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    return [note_map[x] for x in music_string.split(' ') if x]
+
+test_cases = [
+    >>> parse_music('o o| o| .| o') # [4, 2, 2, 1, 4]
+    >>> parse_music('o o o| o| o| .|') # [4, 4, 2, 2, 2, 1]
+    >>> parse_music('o .|') # [4, 1]
+]
+
+✅ Correct Output:
+
+def parse_music(music_string: str) -> List[int]:
+    # Convert music notes to a list of integers based on a note mapping provided
+    # Examples:
+    # >>> parse_music('o o| o| .| o') # [4, 2, 2, 1, 4]
+    # >>> parse_music('o o o| o| o| .|') # [4, 4, 2, 2, 2, 1]
+    # >>> parse_music('o .|') # [4, 1]
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    return [note_map[x] for x in music_string.split(' ') if x]

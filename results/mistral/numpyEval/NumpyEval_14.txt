@@ -1,0 +1,17 @@
+ # Check if the given NumPy array is empty by comparing its size with zero.
+
+import numpy as np
+
+def numpy_is_empty(arr):
+    """
+    Check if the given NumPy array is empty.
+
+    Parameters:
+    arr (numpy.ndarray): The NumPy array to be checked for emptiness.
+
+    Returns:
+    bool: Returns True if the array is empty, False otherwise.
+    """
+
+    # Check if the given NumPy array is empty by comparing its size with zero.
+    return arr.size == 0

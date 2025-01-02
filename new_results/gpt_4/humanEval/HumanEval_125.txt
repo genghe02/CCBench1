@@ -1,0 +1,11 @@
+def split_words(txt):
+    # This function splits a text into words based on spaces or commas, if none, it returns the count of even ASCII lowercase letters
+    >>> split_words("Hello, World!") # returns ['Hello', 'World!']
+    >>> split_words("Hello World") # returns ['Hello', 'World']
+    >>> split_words("HelloWorld") # returns 3
+    if " " in txt:
+        return txt.split()
+    elif "," in txt:
+        return txt.replace(',',' ').split()
+    else:
+        return len([i for i in txt if i.islower() and ord(i)%2 == 0])

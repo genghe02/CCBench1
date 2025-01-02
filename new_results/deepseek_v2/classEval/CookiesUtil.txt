@@ -1,0 +1,146 @@
+```python
+"""
+This class provides utility methods for managing cookies, including loading, saving, and setting cookies in HTTP requests.
+"""
+
+import json
+
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        """
+        Initializes the CookiesUtil class with a file path for storing cookies.
+
+        Parameters:
+            cookies_file (str): The file path where cookies will be stored and loaded from.
+        """
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, response):
+        """
+        Extracts cookies from an HTTP response and saves them to the specified file.
+
+        Parameters:
+            response (dict): The HTTP response containing the cookies.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Normal usage
+            response = {'cookies': {'session_id': '12345', 'user': 'john_doe'}}
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.get_cookies(response)
+            assert cookies_util.cookies == {'session_id': '12345', 'user': 'john_doe'}
+
+            # Test case 2: Empty cookies
+            response = {'cookies': {}}
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.get_cookies(response)
+            assert cookies_util.cookies == {}
+
+            # Test case 3: Missing 'cookies' key in response
+            response = {}
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.get_cookies(response)
+            assert cookies_util.cookies is None
+        """
+        self.cookies = response['cookies']
+        self._save_cookies()
+
+    def load_cookies(self):
+        """
+        Loads cookies from the specified file.
+
+        Returns:
+            dict: A dictionary containing the loaded cookies. Returns an empty dictionary if the file does not exist.
+
+        Test cases:
+            # Test case 1: Normal usage
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.cookies = {'session_id': '12345', 'user': 'john_doe'}
+            cookies_util._save_cookies()
+            assert cookies_util.load_cookies() == {'session_id': '12345', 'user': 'john_doe'}
+
+            # Test case 2: File does not exist
+            cookies_util = CookiesUtil('nonexistent.json')
+            assert cookies_util.load_cookies() == {}
+
+            # Test case 3: Corrupted file
+            with open('corrupted.json', 'w') as file:
+                file.write('invalid json')
+            cookies_util = CookiesUtil('corrupted.json')
+            assert cookies_util.load_cookies() == {}
+        """
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+
+    def _save_cookies(self):
+        """
+        Saves the current cookies to the specified file.
+
+        Returns:
+            bool: True if the cookies were successfully saved, False otherwise.
+
+        Test cases:
+            # Test case 1: Normal usage
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.cookies = {'session_id': '12345', 'user': 'john_doe'}
+            assert cookies_util._save_cookies() == True
+
+            # Test case 2: Invalid file path
+            cookies_util = CookiesUtil('/invalid/path/cookies.json')
+            cookies_util.cookies = {'session_id': '12345', 'user': 'john_doe'}
+            assert cookies_util._save_cookies() == False
+
+            # Test case 3: No cookies to save
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.cookies = None
+            assert cookies_util._save_cookies() == False
+        """
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        """
+        Sets the cookies in an HTTP request.
+
+        Parameters:
+            request (dict): The HTTP request to which the cookies will be added.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Normal usage
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.cookies = {'session_id': '12345', 'user': 'john_doe'}
+            request = {}
+            cookies_util.set_cookies(request)
+            assert request['cookies'] == 'session_id=12345; user=john_doe'
+
+            # Test case 2: No cookies to set
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.cookies = None
+            request = {}
+            cookies_util.set_cookies(request)
+            assert 'cookies' not in request
+
+            # Test case 3: Empty cookies
+            cookies_util = CookiesUtil('cookies.json')
+            cookies_util.cookies = {}
+            request = {}
+            cookies_util.set_cookies(request)
+            assert request['cookies'] == ''
+        """
+        if self.cookies:
+            request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```

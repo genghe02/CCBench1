@@ -1,0 +1,10 @@
+ # Function 'string_xor' performs bitwise XOR operation on two strings
+# of equal length and returns the result as a string
+<some test cases for the function>
+>>> string_xor('10101010', '11110101') # returns '01011011'
+>>> string_xor('hello', 'world') # returns 'hldr'
+>>> string_xor('', '') # returns ''
+>>> string_xor('abcdef', '123456') # raises an error as strings must be of equal length
+return ''.join(xor(x, y) for x, y in zip(a, b))
+
+Note: The test cases provided above are just examples and you can add more test cases based on your requirements.</s>

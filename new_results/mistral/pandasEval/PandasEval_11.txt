@@ -1,0 +1,3 @@
+ # Select rows from dataframe based on specified column values
+def select_rows_from_column(df, col_name, values):
+    return df[df[col_name].isin(values)]</s>

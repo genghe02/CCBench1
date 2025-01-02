@@ -1,0 +1,5 @@
+import pandas as pd
+
+def find_col_a_gt_col_b_rows(df, col_a, col_b):
+    # Return rows where values in column A are greater than values in column B
+    return df[df[col_a] > df[col_b]]

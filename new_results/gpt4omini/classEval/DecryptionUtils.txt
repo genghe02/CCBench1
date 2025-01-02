@@ -1,0 +1,150 @@
+```python
+"""
+This class provides utility methods for decrypting various types of ciphertext, 
+implementing Caesar, Vigenère, and Rail Fence cipher algorithms.
+"""
+
+class DecryptionUtils:
+    def __init__(self, key):
+        """
+        Initializes the DecryptionUtils with a provided key for Vigenère decryption.
+
+        Parameters:
+            key (str): The key used for the Vigenère cipher decryption.
+        """
+        self.key = key
+
+    def caesar_decipher(self, ciphertext, shift):
+        """
+        Decrypts the given ciphertext using the Caesar cipher method.
+
+        Parameters:
+            ciphertext (str): The text to be decrypted.
+            shift (int): The number of positions each character in the cipher text should be shifted.
+
+        Returns:
+            str: The decrypted plaintext.
+
+        Test cases:
+            # Test case 1: Normal Usage
+            input = "Khoor"
+            shift = 3
+            expected_output = "Hello"
+            
+            # Test case 2: Edge Case (No change)
+            input = "Hello"
+            shift = 0
+            expected_output = "Hello"
+
+            # Test case 3: Handling non-alphabetic characters
+            input = "Khoor, #2023!"
+            shift = 3
+            expected_output = "Hello, #2023!"
+        """
+        plaintext = ""
+        for char in ciphertext:
+            if char.isalpha():
+                if char.isupper():
+                    ascii_offset = 65
+                else:
+                    ascii_offset = 97
+                shifted_char = chr((ord(char) - ascii_offset - shift) % 26 + ascii_offset)
+                plaintext += shifted_char
+            else:
+                plaintext += char
+        return plaintext
+
+    def vigenere_decipher(self, ciphertext):
+        """
+        Decrypts the given ciphertext using the Vigenère cipher method.
+
+        Parameters:
+            ciphertext (str): The text to be decrypted.
+
+        Returns:
+            str: The decrypted plaintext.
+
+        Test cases:
+            # Test case 1: Normal Usage
+            input = "Lxfopv ef rnhr"
+            expected_output = "Attack at dawn"
+
+            # Test case 2: Edge Case (Empty string)
+            input = ""
+            expected_output = ""
+
+            # Test case 3: Handling uppercase and non-alphabetic characters
+            input = "LXFOP VE TRANS"
+            expected_output = "ATTACK AT DAWN"
+        """
+        decrypted_text = ""
+        key_index = 0
+        for char in ciphertext:
+            if char.isalpha():
+                shift = ord(self.key[key_index % len(self.key)].lower()) - ord('a')
+                decrypted_char = chr((ord(char.lower()) - ord('a') - shift) % 26 + ord('a'))
+                decrypted_text += decrypted_char.upper() if char.isupper() else decrypted_char
+                key_index += 1
+            else:
+                decrypted_text += char
+        return decrypted_text
+
+    def rail_fence_decipher(self, encrypted_text, rails):
+        """
+        Decrypts the given encrypted_text using the Rail Fence cipher method.
+
+        Parameters:
+            encrypted_text (str): The text to be decrypted.
+            rails (int): The number of rails used in the Rail Fence cipher.
+
+        Returns:
+            str: The decrypted plaintext.
+
+        Test cases:
+            # Test case 1: Normal Usage
+            input = "Hoo!el,Wrdlo"
+            rails = 3
+            expected_output = "Hello, World!"
+
+            # Test case 2: Edge Case (Single rail)
+            input = "Hello"
+            rails = 1
+            expected_output = "Hello"
+
+            # Test case 3: Handling all characters
+            input = "Ha,d!e:tlse"
+            rails = 4
+            expected_output = "Handle: tlse"
+        """
+        fence = [['\n' for _ in range(len(encrypted_text))] for _ in range(rails)]
+        direction = -1
+        row, col = 0, 0
+
+        for _ in range(len(encrypted_text)):
+            if row == 0 or row == rails - 1:
+                direction = -direction
+
+            fence[row][col] = ''
+            col += 1
+            row += direction
+
+        index = 0
+        for i in range(rails):
+            for j in range(len(encrypted_text)):
+                if fence[i][j] == '':
+                    fence[i][j] = encrypted_text[index]
+                    index += 1
+
+        plain_text = ''
+        direction = -1
+        row, col = 0, 0
+        for _ in range(len(encrypted_text)):
+            if row == 0 or row == rails - 1:
+                direction = -direction
+
+            plain_text += fence[row][col]
+            col += 1
+            row += direction
+
+        return plain_text
+```

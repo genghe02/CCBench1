@@ -1,0 +1,8 @@
+ # Number should be a positive integer
+ # Calculate the sum of digits in base 10 from the second digit to the last
+def starts_one_ends(n):
+    >>> starts_one_ends(1)  # 1
+    >>> starts_one_ends(2)  # 19
+    >>> starts_one_ends(3)  # 62
+    if n == 1: return 1
+    return 18 * (10 ** (n - 2))</s>

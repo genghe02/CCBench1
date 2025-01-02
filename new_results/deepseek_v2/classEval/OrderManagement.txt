@@ -1,0 +1,115 @@
+```python
+"""
+This class represents an order management system for a restaurant. It allows adding dishes to an order, calculating the total cost, and checking out the order.
+"""
+
+class Order:
+
+    def __init__(self):
+        """
+        Initializes an Order object with an empty menu, selected dishes, and sales dictionary.
+        """
+        self.menu = []
+        # menu = [{"dish": dish name, "price": price, "count": count}, ...]
+        self.selected_dishes = []
+        # selected_dish = {"dish": dish name, "count": count, price: price}
+        self.sales = {}
+        # sales = {"dish": discount percentage}
+
+    def add_dish(self, dish):
+        """
+        Adds a dish to the selected dishes list if it is available in the menu.
+
+        Parameters:
+            dish (dict): A dictionary containing the dish details with keys "dish", "count", and "price".
+        
+        Returns:
+            bool: True if the dish is successfully added, False if the dish is not available or the count exceeds the available quantity.
+        
+        Test cases:
+            # Test case 1: Adding an available dish
+            order = Order()
+            order.menu = [{"dish": "Pizza", "price": 10, "count": 5}]
+            assert order.add_dish({"dish": "Pizza", "count": 2, "price": 10}) == True
+            
+            # Test case 2: Adding a dish with insufficient count
+            order = Order()
+            order.menu = [{"dish": "Pizza", "price": 10, "count": 1}]
+            assert order.add_dish({"dish": "Pizza", "count": 2, "price": 10}) == False
+            
+            # Test case 3: Adding a dish not in the menu
+            order = Order()
+            order.menu = [{"dish": "Pizza", "price": 10, "count": 5}]
+            assert order.add_dish({"dish": "Burger", "count": 1, "price": 8}) == False
+        """
+        for menu_dish in self.menu:
+            if dish["dish"] == menu_dish["dish"]:
+                if menu_dish["count"] < dish["count"]:
+                    return False
+                else:
+                    menu_dish["count"] -= dish["count"]
+                    break
+        self.selected_dishes.append(dish)
+        return True
+
+    def calculate_total(self):
+        """
+        Calculates the total cost of the selected dishes, applying any applicable discounts.
+
+        Returns:
+            float: The total cost of the selected dishes after applying discounts.
+        
+        Test cases:
+            # Test case 1: Calculating total with no discounts
+            order = Order()
+            order.selected_dishes = [{"dish": "Pizza", "count": 2, "price": 10}]
+            order.sales = {"Pizza": 1.0}
+            assert order.calculate_total() == 20.0
+            
+            # Test case 2: Calculating total with discounts
+            order = Order()
+            order.selected_dishes = [{"dish": "Pizza", "count": 2, "price": 10}]
+            order.sales = {"Pizza": 0.8}
+            assert order.calculate_total() == 16.0
+            
+            # Test case 3: Calculating total with multiple dishes
+            order = Order()
+            order.selected_dishes = [{"dish": "Pizza", "count": 2, "price": 10}, {"dish": "Burger", "count": 1, "price": 8}]
+            order.sales = {"Pizza": 0.8, "Burger": 1.0}
+            assert order.calculate_total() == 24.0
+        """
+        total = 0
+        for dish in self.selected_dishes:
+            total += dish["price"] * dish["count"] * self.sales[dish["dish"]]
+        return total
+
+    def checkout(self):
+        """
+        Finalizes the order by calculating the total cost and clearing the selected dishes list.
+
+        Returns:
+            float: The total cost of the order if there are selected dishes, False otherwise.
+        
+        Test cases:
+            # Test case 1: Checking out with selected dishes
+            order = Order()
+            order.selected_dishes = [{"dish": "Pizza", "count": 2, "price": 10}]
+            order.sales = {"Pizza": 1.0}
+            assert order.checkout() == 20.0
+            
+            # Test case 2: Checking out with no selected dishes
+            order = Order()
+            assert order.checkout() == False
+            
+            # Test case 3: Checking out with multiple dishes
+            order = Order()
+            order.selected_dishes = [{"dish": "Pizza", "count": 2, "price": 10}, {"dish": "Burger", "count": 1, "price": 8}]
+            order.sales = {"Pizza": 0.8, "Burger": 1.0}
+            assert order.checkout() == 24.0
+        """
+        if len(self.selected_dishes) == 0:
+            return False
+        total = self.calculate_total()
+        self.selected_dishes = []
+        return total
+```

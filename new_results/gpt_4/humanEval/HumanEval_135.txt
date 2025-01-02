@@ -1,0 +1,13 @@
+def can_arrange(arr):
+    # Check if the array can be arranged in ascending order, return the index of element that breaks the order
+
+    >>> can_arrange([1,2,3,5,4]) # returns 4
+    >>> can_arrange([1,2,3,4,5]) # returns -1
+    >>> can_arrange([5,4,3,2,1]) # returns 1
+    ind=-1
+    i=1
+    while i<len(arr):
+      if arr[i]<arr[i-1]:
+        ind=i
+      i+=1
+    return ind

@@ -1,0 +1,13 @@
+import numpy as np
+from numpy import newaxis
+
+a = np.array([
+     [1,2],
+     [3,4],
+     [5,6],
+     [7,8]])
+
+b = np.array([1,2,3,4])
+
+# Multiply each row of matrix 'a' by corresponding element in vector 'b'
+out = a * b[:, newaxis]

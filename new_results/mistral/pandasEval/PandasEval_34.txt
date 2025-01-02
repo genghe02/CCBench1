@@ -1,0 +1,7 @@
+ ✅ Correct Output:
+import pandas as pd
+
+def append_dict_to_df(df, dictionary):
+    # Append a new row to the dataframe using the provided dictionary
+    df = df.append(pd.DataFrame.from_records([dictionary], ignore_index=True))
+    return df</s>

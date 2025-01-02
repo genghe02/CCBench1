@@ -1,0 +1,144 @@
+"""
+This class provides methods to manipulate images using the Python Imaging Library (PIL).
+"""
+
+from PIL import Image, ImageEnhance, ImageChops
+
+
+class ImageProcessor:
+    def __init__(self):
+        """
+        Initialization method for the ImageProcessor class. Initializes the 'image' attribute to None.
+        """
+        self.image = None
+
+    def load_image(self, image_path):
+        """
+        Opens an image file from the given path and sets it to the 'image' attribute.
+
+        Parameters:
+            image_path (str): The path to the image file to load
+
+        Test cases:
+            # Test case 1: Load an existing image
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            assert processor.image is not None
+            
+            # Test case 2: Load a non-existing image (should raise an IOError)
+            processor = ImageProcessor()
+            with pytest.raises(IOError):
+                processor.load_image('non_existing_path.jpg')
+            
+            # Test case 3: Load with an invalid type (should raise a TypeError)
+            processor = ImageProcessor()
+            with pytest.raises(TypeError):
+                processor.load_image(123)
+        """
+        self.image = Image.open(image_path)
+
+    def save_image(self, save_path):
+        """
+        Saves the image currently loaded in the 'image' attribute to the given path.
+
+        Parameters:
+            save_path (str): The path where to save the image
+
+        Test cases:
+            # Test case 1: Save an image loaded in the ImageProcessor
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            processor.save_image('path_to_save_image.jpg')
+            
+            # Test case 2: Save an image without loading it first (should not save anything)
+            processor = ImageProcessor()
+            processor.save_image('path_to_save_image.jpg')
+            
+            # Test case 3: Save with an invalid type (should raise a TypeError)
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            with pytest.raises(TypeError):
+                processor.save_image(123)
+        """
+        if self.image:
+            self.image.save(save_path)
+
+    def resize_image(self, width, height):
+        """
+        Resizes the image currently loaded in the 'image' attribute to the given dimensions.
+
+        Parameters:
+            width (int): The width to resize the image to
+            height (int): The height to resize the image to
+
+        Test cases:
+            # Test case 1: Resize an image loaded in the ImageProcessor
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            processor.resize_image(100, 100)
+            
+            # Test case 2: Resize an image without loading it first (should not resize anything)
+            processor = ImageProcessor()
+            processor.resize_image(100, 100)
+            
+            # Test case 3: Resize with invalid dimensions (should raise a ValueError)
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            with pytest.raises(ValueError):
+                processor.resize_image(-1, 100)
+        """
+        if self.image:
+            self.image = self.image.resize((width, height))
+
+    def rotate_image(self, degrees):
+        """
+        Rotates the image currently loaded in the 'image' attribute by the given degrees.
+
+        Parameters:
+            degrees (float): The degrees to rotate the image by
+
+        Test cases:
+            # Test case 1: Rotate an image loaded in the ImageProcessor
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            processor.rotate_image(90)
+            
+            # Test case 2: Rotate an image without loading it first (should not rotate anything)
+            processor = ImageProcessor()
+            processor.rotate_image(90)
+            
+            # Test case 3: Rotate with invalid degrees (should raise a ValueError)
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            with pytest.raises(ValueError):
+                processor.rotate_image('90')
+        """
+        if self.image:
+            self.image = self.image.rotate(degrees)
+
+    def adjust_brightness(self, factor):
+        """
+        Adjusts the brightness of the image currently loaded in the 'image' attribute by the given factor.
+
+        Parameters:
+            factor (float): The factor to adjust the brightness by. 1.0 gives the original image.
+
+        Test cases:
+            # Test case 1: Adjust the brightness of an image loaded in the ImageProcessor
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            processor.adjust_brightness(0.5)
+            
+            # Test case 2: Adjust the brightness of an image without loading it first (should not adjust anything)
+            processor = ImageProcessor()
+            processor.adjust_brightness(0.5)
+            
+            # Test case 3: Adjust with invalid factor (should raise a ValueError)
+            processor = ImageProcessor()
+            processor.load_image('path_to_image.jpg')
+            with pytest.raises(ValueError):
+                processor.adjust_brightness('0.5')
+        """
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)

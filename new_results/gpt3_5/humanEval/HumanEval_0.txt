@@ -1,0 +1,13 @@
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    # Check if there are elements in the list that are closer than the threshold
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.5) # returns True
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.1) # returns False
+    >>> has_close_elements([-1.0, 0.0, 1.0], 0.3) # returns True
+    for idx, elem in enumerate(numbers):
+        for idx2, elem2 in enumerate(numbers):
+            if idx != idx2:
+                distance = abs(elem - elem2)
+                if distance < threshold:
+                    return True
+
+    return False

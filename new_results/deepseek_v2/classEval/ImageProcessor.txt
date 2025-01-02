@@ -1,0 +1,168 @@
+```python
+"""
+This class provides functionality for processing images, including loading, saving, resizing, rotating, and adjusting brightness.
+"""
+
+from PIL import Image, ImageEnhance, ImageChops
+
+
+class ImageProcessor:
+    def __init__(self):
+        """
+        Initializes the ImageProcessor class with no image loaded.
+        """
+        self.image = None
+
+    def load_image(self, image_path):
+        """
+        Loads an image from the specified file path.
+
+        Parameters:
+            image_path (str): The path to the image file to be loaded.
+
+        Test cases:
+            # Test case 1: Load a valid image
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            assert processor.image is not None
+
+            # Test case 2: Load a non-existent image
+            processor = ImageProcessor()
+            try:
+                processor.load_image('nonexistent_image.jpg')
+            except FileNotFoundError:
+                assert True
+
+            # Test case 3: Load an invalid image file
+            processor = ImageProcessor()
+            try:
+                processor.load_image('invalid_file.txt')
+            except Exception:
+                assert True
+        """
+        self.image = Image.open(image_path)
+
+    def save_image(self, save_path):
+        """
+        Saves the currently loaded image to the specified file path.
+
+        Parameters:
+            save_path (str): The path where the image will be saved.
+
+        Test cases:
+            # Test case 1: Save a loaded image
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            processor.save_image('saved_image.jpg')
+            assert True
+
+            # Test case 2: Save without loading an image
+            processor = ImageProcessor()
+            processor.save_image('saved_image.jpg')
+            assert True  # No error, but no image saved
+
+            # Test case 3: Save to an invalid path
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            try:
+                processor.save_image('/invalid/path/saved_image.jpg')
+            except Exception:
+                assert True
+        """
+        if self.image:
+            self.image.save(save_path)
+
+    def resize_image(self, width, height):
+        """
+        Resizes the currently loaded image to the specified width and height.
+
+        Parameters:
+            width (int): The new width of the image.
+            height (int): The new height of the image.
+
+        Test cases:
+            # Test case 1: Resize a loaded image
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            processor.resize_image(100, 100)
+            assert processor.image.size == (100, 100)
+
+            # Test case 2: Resize without loading an image
+            processor = ImageProcessor()
+            processor.resize_image(100, 100)
+            assert processor.image is None
+
+            # Test case 3: Resize with invalid dimensions
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            try:
+                processor.resize_image(-100, -100)
+            except Exception:
+                assert True
+        """
+        if self.image:
+            self.image = self.image.resize((width, height))
+
+    def rotate_image(self, degrees):
+        """
+        Rotates the currently loaded image by the specified degrees.
+
+        Parameters:
+            degrees (float): The number of degrees to rotate the image.
+
+        Test cases:
+            # Test case 1: Rotate a loaded image
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            processor.rotate_image(90)
+            assert processor.image is not None
+
+            # Test case 2: Rotate without loading an image
+            processor = ImageProcessor()
+            processor.rotate_image(90)
+            assert processor.image is None
+
+            # Test case 3: Rotate with invalid degrees
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            try:
+                processor.rotate_image('invalid_degrees')
+            except Exception:
+                assert True
+        """
+        if self.image:
+            self.image = self.image.rotate(degrees)
+
+    def adjust_brightness(self, factor):
+        """
+        Adjusts the brightness of the currently loaded image by the specified factor.
+
+        Parameters:
+            factor (float): The factor by which to adjust the brightness. 
+                           Values greater than 1 increase brightness, 
+                           values less than 1 decrease brightness.
+
+        Test cases:
+            # Test case 1: Adjust brightness of a loaded image
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            processor.adjust_brightness(1.5)
+            assert processor.image is not None
+
+            # Test case 2: Adjust brightness without loading an image
+            processor = ImageProcessor()
+            processor.adjust_brightness(1.5)
+            assert processor.image is None
+
+            # Test case 3: Adjust brightness with invalid factor
+            processor = ImageProcessor()
+            processor.load_image('valid_image.jpg')
+            try:
+                processor.adjust_brightness('invalid_factor')
+            except Exception:
+                assert True
+        """
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)
+```

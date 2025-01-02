@@ -1,0 +1,5 @@
+ # Check if the given sides form a right angle triangle
+ # a^2 = b^2 + c^2 or b^2 = a^2 + c^2 or c^2 = a^2 + b^2
+>>> right_angle_triangle(3, 4, 5) # returns True
+>>> right_angle_triangle(5, 12, 13) # returns True
+>>> right_angle_triangle(6, 8, 10) # returns False</s>

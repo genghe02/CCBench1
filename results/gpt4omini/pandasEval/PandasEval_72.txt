@@ -1,0 +1,20 @@
+```python
+import pandas as pd
+
+df = pd.DataFrame({'A': [1000, 765, 800], 'B': [10, 5, 7]})
+""" Normalize the values in a DataFrame using min-max scaling, where each element
+    is transformed to a range between 0 and 1. 
+    This is useful for preparing data for machine learning algorithms that require normalized input.
+    
+    The lambda function applies the normalization formula to each column:
+    (value - min) / (max - min)
+
+    Test Cases:
+    >>> normalized_df = df.apply(lambda x: (x - x.min()) / (x.max() - x.min()))
+    >>> normalized_df['A'].tolist()
+    [1.0, 0.0, 0.3389887640449438]
+    >>> normalized_df['B'].tolist()
+    [1.0, 0.0, 0.5]
+"""
+normalized_df = df.apply(lambda x: (x - x.min()) / (x.max() - x.min()))
+```

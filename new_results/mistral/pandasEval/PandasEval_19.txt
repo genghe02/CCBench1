@@ -1,0 +1,14 @@
+ # Create a new dataframe that is a copy of the first row of the original dataframe
+df_copy = df_original.iloc[:1,:].copy()
+# Alternatively, you can create an empty dataframe and then assign the first row of the original dataframe to it
+# df_copy = pd.DataFrame()
+# df_copy = df_original.iloc[:1,:]
+
+# or using the following code snippet provided in the input, but with the correct annotation
+# Importing numpy for the example but not used in this function
+import numpy as np
+
+# Create a new dataframe that is a copy of the first row of the original dataframe
+def creating_df_with_same_as_other(df_original):
+    df_copy = df_original.iloc[:1,:].copy()
+    return df_copy</s>

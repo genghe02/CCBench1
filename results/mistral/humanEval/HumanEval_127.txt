@@ -1,0 +1,24 @@
+ def intersection(interval1, interval2):
+ # Find the intersection of two given intervals by checking if they overlap
+ # Input: Two tuples representing the start and end of each interval
+ # Output: A string indicating whether the intervals intersect or not
+
+ interval1, interval2 = sorted((interval1, interval2)) # Ensure interval1[0] <= interval2[0]
+
+ l = interval1[0]
+ r = interval1[1]
+
+ # Check if intervals overlap
+ if r >= interval2[0]:
+ return "YES"
+
+ # If intervals don't overlap, return NO
+ return "NO"
+
+ # Some test cases for the function
+ >>> intersection((1, 2), (2, 3))
+ "NO"
+ >>> intersection((-1, 1), (0, 4))
+ "NO"
+ >>> intersection((-3, -1), (-5, 5))
+ "YES"

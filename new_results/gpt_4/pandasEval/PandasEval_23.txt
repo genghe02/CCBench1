@@ -1,0 +1,6 @@
+import pandas as pd
+import numpy as np
+
+def find_columns_name_lists(df):
+    # Return a list of column names which have NaN values in a dataframe
+    return df.columns[df.isna().any()].tolist()

@@ -1,0 +1,6 @@
+ ✅ Correct Output:
+import pandas as pd
+
+def change\_all\_cols\_type(df):
+# Apply pd.to\_numeric function to all columns of the dataframe
+return df.apply(pd.to\_numeric)</s>

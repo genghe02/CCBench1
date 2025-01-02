@@ -1,0 +1,111 @@
+```python
+"""
+This class is a utility to manage cookies from HTTP responses. It allows loading, saving, and setting cookies.
+"""
+
+import json
+
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        """
+        Initializes the CookiesUtil class with a specified file for storing cookies.
+
+        Parameters:
+            cookies_file (str): A string representing the path to the file where the cookies will be stored.
+        """
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, reponse):
+        """
+        Extracts cookies from the response and saves them to a file. 
+
+        Parameters:
+            response (dict): A dictionary containing the HTTP response, including a 'cookies' field.
+        
+        Test cases:
+            # Test case 1: Successful extraction and saving of cookies
+            response = {'cookies': {...}}
+            # No assertion, as this is a void method. The success of this method can be confirmed by checking the cookies file.
+
+            # Test case 2: Response with no cookies
+            response = {}
+            # No assertion, as this is a void method. Nothing should be saved to the cookies file.
+            
+            # Test case 3: Response is None
+            response = None
+            # No assertion, as this is a void method. Nothing should be saved to the cookies file.
+        """
+        self.cookies = reponse['cookies']
+        self._save_cookies()
+
+    def load_cookies(self):
+        """
+        Loads the cookies from the specified file.
+
+        Returns:
+            dict: A dictionary containing the loaded cookies.
+
+        Test cases:
+            # Test case 1: Successfully loading cookies from a file
+            # No input, as this method does not accept parameters. The success of this method can be confirmed by checking the returned dictionary.
+
+            # Test case 2: Loading cookies from a non-existent file
+            # No input, as this method does not accept parameters. The method should return an empty dictionary.
+
+            # Test case 3: Loading cookies from a file with invalid format
+            # No input, as this method does not accept parameters. The method should return an empty dictionary.
+        """
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+
+    def _save_cookies(self):
+        """
+        Saves the cookies to the specified file.
+
+        Returns:
+            bool: True if the cookies were successfully saved, False otherwise.
+
+        Test cases:
+            # Test case 1: Successfully saving cookies to a file
+            # No input, as this method does not accept parameters. The success of this method can be confirmed by checking the cookies file.
+
+            # Test case 2: Saving cookies to a non-existent file
+            # No input, as this method does not accept parameters. The method should return False.
+
+            # Test case 3: Saving cookies when there are no cookies
+            # No input, as this method does not accept parameters. The method should return False.
+        """
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        """
+        Appends the loaded cookies to the request.
+
+        Parameters:
+            request (dict): A dictionary representing the HTTP request.
+
+        Test cases:
+            # Test case 1: Successfully setting cookies on a request
+            request = {}
+            # No assertion, as this is a void method. The success of this method can be confirmed by checking the 'cookies' field in the request.
+
+            # Test case 2: Setting cookies on a request that already has cookies
+            request = {'cookies': 'old_cookie=old_value'}
+            # No assertion, as this is a void method. The success of this method can be confirmed by checking the 'cookies' field in the request.
+
+            # Test case 3: Setting cookies on a None request
+            request = None
+            # No assertion, as this is a void method. The method should do nothing.
+        """
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```

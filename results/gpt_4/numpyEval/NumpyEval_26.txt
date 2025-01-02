@@ -1,0 +1,1 @@
+# Stack a sequence of arrays along a new axis, -1 implies the last axis. This is done to combine the list of arrays 'L' into a single numpy array 'M'.

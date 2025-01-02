@@ -1,0 +1,114 @@
+"""
+The class provides utilities for reading, writing, and processing Excel data using the openpyxl library.
+"""
+
+import openpyxl
+
+class ExcelProcessor:
+    def __init__(self):
+        """
+        Initializes the ExcelProcessor instance.
+        """
+        pass
+
+    def read_excel(self, file_name):
+        """
+        Reads an Excel file and returns the data.
+
+        Parameters:
+            file_name (str): The name of the Excel file to read.
+        
+        Returns:
+            list: A list of tuples containing the data from each row in the Excel file. 
+                  Returns None if there was an error reading the file.
+        
+        Test cases:
+            # Test case 1: File exists and can be read successfully
+            assert read_excel('test.xlsx') != None
+            
+            # Test case 2: File does not exist
+            assert read_excel('non_existent_file.xlsx') == None
+            
+            # Test case 3: File is not an Excel file
+            assert read_excel('test.txt') == None
+        """
+        data = []
+        try:
+            workbook = openpyxl.load_workbook(file_name)
+            sheet = workbook.active
+            for row in sheet.iter_rows(values_only=True):
+                data.append(row)
+            workbook.close()
+            return data
+        except:
+            return None
+
+    def write_excel(self, data, file_name):
+        """
+        Writes data to an Excel file.
+        
+        Parameters:
+            data (list): A list of tuples containing the data to write to the Excel file.
+            file_name (str): The name of the Excel file to write to.
+            
+        Returns:
+            int: 1 if the data was written successfully, 0 otherwise.
+            
+        Test cases:
+            # Test case 1: Data is written successfully
+            assert write_excel([(1, 2, 3)], 'test.xlsx') == 1
+            
+            # Test case 2: Data is empty
+            assert write_excel([], 'test.xlsx') == 0
+            
+            # Test case 3: File name is not a string
+            assert write_excel([(1, 2, 3)], 123) == 0
+        """
+        try:
+            workbook = openpyxl.Workbook()
+            sheet = workbook.active
+            for row in data:
+                sheet.append(row)
+            workbook.save(file_name)
+            workbook.close()
+            return 1
+        except:
+            return 0
+
+    def process_excel_data(self, N, save_file_name):
+        """
+        Processes an Excel file by appending a new column to each row.
+        
+        Parameters:
+            N (int): The column to process. If the value in this column is a digit, it is copied as is. 
+                     If it is not a digit, it is converted to uppercase.
+            save_file_name (str): The name of the Excel file to save the processed data to.
+            
+        Returns:
+            tuple: A tuple containing a status code (1 for success, 0 for failure) and the name of the 
+                   new Excel file. If the operation fails, the file name is None.
+            
+        Test cases:
+            # Test case 1: File exists, can be read and written successfully
+            assert process_excel_data(2, 'test.xlsx') == (1, 'test_process.xlsx')
+            
+            # Test case 2: File does not exist
+            assert process_excel_data(2, 'non_existent_file.xlsx') == (0, None)
+            
+            # Test case 3: N is greater than the number of columns in the file
+            assert process_excel_data(5, 'test.xlsx') == (0, None)
+        """
+        data = self.read_excel(save_file_name)
+        if data is None or N >= len(data[0]):
+            return 0, None
+        new_data = []
+        for row in data:
+            new_row = list(row[:])
+            if not str(row[N]).isdigit():
+                new_row.append(str(row[N]).upper())
+            else:
+                new_row.append(row[N])
+            new_data.append(new_row)
+        new_file_name = save_file_name.split('.')[0] + '_process.xlsx'
+        success = self.write_excel(new_data, new_file_name)
+        return success, new_file_name

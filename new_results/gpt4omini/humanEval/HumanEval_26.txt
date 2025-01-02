@@ -1,0 +1,12 @@
+```python
+from typing import List
+
+def remove_duplicates(numbers: List[int]) -> List[int]:
+    # Remove duplicates from a list of integers
+    >>> remove_duplicates([1, 2, 3, 1, 2, 4]) # returns [3, 4]
+    >>> remove_duplicates([1, 1, 1, 1]) # returns []
+    >>> remove_duplicates([]) # returns []
+    import collections
+    c = collections.Counter(numbers)
+    return [n for n in numbers if c[n] <= 1]
+```

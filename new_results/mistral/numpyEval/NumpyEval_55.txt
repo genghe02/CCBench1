@@ -1,0 +1,2 @@
+ # Replace negative numbers with zeros in the given NumPy array
+result = np.where(a < 0, 0, a)</s>

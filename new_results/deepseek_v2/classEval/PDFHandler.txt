@@ -1,0 +1,96 @@
+```python
+"""
+This class provides functionality to handle PDF files, including merging multiple PDFs into one and extracting text from them.
+"""
+
+import PyPDF2
+
+
+class PDFHandler:
+    def __init__(self, filepaths):
+        """
+        Initializes the PDFHandler with a list of file paths to PDFs.
+
+        Parameters:
+            filepaths (list of str): List of file paths to the PDFs to be handled.
+        """
+        self.filepaths = filepaths
+        self.readers = [PyPDF2.PdfReader(fp) for fp in filepaths]
+
+    def merge_pdfs(self, output_filepath):
+        """
+        Merges all the PDFs into a single PDF and saves it to the specified output file path.
+
+        Parameters:
+            output_filepath (str): The file path where the merged PDF will be saved.
+
+        Returns:
+            str: A message indicating the location where the merged PDF was saved.
+
+        Test cases:
+            # Test case 1: Normal usage
+            handler = PDFHandler(['file1.pdf', 'file2.pdf'])
+            assert handler.merge_pdfs('merged.pdf') == "Merged PDFs saved at merged.pdf"
+
+            # Test case 2: Edge case with empty PDFs
+            handler = PDFHandler(['empty1.pdf', 'empty2.pdf'])
+            assert handler.merge_pdfs('empty_merged.pdf') == "Merged PDFs saved at empty_merged.pdf"
+
+            # Test case 3: Error case with invalid file paths
+            handler = PDFHandler(['nonexistent1.pdf', 'nonexistent2.pdf'])
+            try:
+                handler.merge_pdfs('invalid_merged.pdf')
+            except FileNotFoundError:
+                assert True
+        """
+        pdf_writer = PyPDF2.PdfWriter()
+
+        for reader in self.readers:
+            for page_num in range(len(reader.pages)):
+                page = reader.pages[page_num]
+                pdf_writer.add_page(page)
+
+        with open(output_filepath, 'wb') as out:
+            pdf_writer.write(out)
+        return f"Merged PDFs saved at {output_filepath}"
+
+    def extract_text_from_pdfs(self):
+        """
+        Extracts text from all pages of all the PDFs.
+
+        Returns:
+            list of str: A list containing the extracted text from each page of the PDFs.
+
+        Test cases:
+            # Test case 1: Normal usage
+            handler = PDFHandler(['file1.pdf', 'file2.pdf'])
+            texts = handler.extract_text_from_pdfs()
+            assert isinstance(texts, list)
+            assert all(isinstance(text, str) for text in texts)
+
+            # Test case 2: Edge case with empty PDFs
+            handler = PDFHandler(['empty1.pdf', 'empty2.pdf'])
+            texts = handler.extract_text_from_pdfs()
+            assert texts == []
+
+            # Test case 3: Error case with invalid file paths
+            handler = PDFHandler(['nonexistent1.pdf', 'nonexistent2.pdf'])
+            try:
+                texts = handler.extract_text_from_pdfs()
+            except FileNotFoundError:
+                assert True
+        """
+        pdf_texts = []
+        for reader in self.readers:
+            for page_num in range(len(reader.pages)):
+                page = reader.pages[page_num]
+                pdf_texts.append(page.extract_text())
+        return pdf_texts
+```
+
+### Explanation:
+1. **Class Documentation**: The class `PDFHandler` is documented with a brief description of its purpose.
+2. **Method Documentation**: Each method (`__init__`, `merge_pdfs`, `extract_text_from_pdfs`) is documented with a description, parameters, return values, and test cases.
+3. **Parameters and Return Values**: Each parameter and return value is described with its type and purpose.
+4. **Test Cases**: Each method includes three test cases covering normal usage, edge cases, and error handling.
+5. **Formatting**: The documentation follows the standard Python docstring format with clear sectioning and consistent formatting.

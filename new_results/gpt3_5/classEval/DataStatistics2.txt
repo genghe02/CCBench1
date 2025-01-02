@@ -1,0 +1,105 @@
+"""
+This class provides statistics calculations for a given set of data.
+
+The class DataStatistics2 takes a NumPy array of data as input and calculates various statistics such as sum, min, max, variance, standard deviation, and correlation.
+"""
+
+import numpy as np
+
+class DataStatistics2:
+    def __init__(self, data):
+        """
+        Initialize the DataStatistics2 object with the given data.
+
+        Parameters:
+            data (np.array): NumPy array of data elements
+        """
+        self.data = np.array(data)
+
+    def get_sum(self):
+        """
+        Calculate the sum of all elements in the data array.
+
+        Returns:
+            float: Sum of all elements in the data array
+        """
+        return np.sum(self.data)
+
+    def get_min(self):
+        """
+        Find the minimum value in the data array.
+
+        Returns:
+            float: Minimum value in the data array
+        """
+        return np.min(self.data)
+
+    def get_max(self):
+        """
+        Find the maximum value in the data array.
+
+        Returns:
+            float: Maximum value in the data array
+        """
+        return np.max(self.data)
+
+    def get_variance(self):
+        """
+        Calculate the variance of the data array.
+
+        Returns:
+            float: Variance of the data array, rounded to 2 decimal places
+        """
+        return round(np.var(self.data), 2)
+
+    def get_std_deviation(self):
+        """
+        Calculate the standard deviation of the data array.
+
+        Returns:
+            float: Standard deviation of the data array, rounded to 2 decimal places
+        """
+        return round(np.std(self.data), 2)
+
+    def get_correlation(self):
+        """
+        Calculate the correlation matrix of the data array.
+
+        Returns:
+            np.array: Correlation matrix of the data array
+        """
+        return np.corrcoef(self.data, rowvar=False)
+
+# Test cases
+
+# Test case 1: Sum of positive integers
+data = [1, 2, 3, 4, 5]
+ds = DataStatistics2(data)
+assert ds.get_sum() == 15
+
+# Test case 2: Minimum of negative numbers
+data = [-5, -3, -8, -2, -7]
+ds = DataStatistics2(data)
+assert ds.get_min() == -8
+
+# Test case 3: Empty dataset handling
+data = []
+ds = DataStatistics2(data)
+# Empty array should return NaN for min, max, variance, and standard deviation
+assert np.isnan(ds.get_min())
+assert np.isnan(ds.get_max())
+assert np.isnan(ds.get_variance())
+assert np.isnan(ds.get_std_deviation())
+
+# Test case 4: Correlation matrix for bi-variate data
+data = [[1, 2, 3], [4, 5, 6]]
+ds = DataStatistics2(data)
+correlation_matrix = ds.get_correlation()
+# Verify expected correlation values between columns
+assert correlation_matrix[0][1] == 1.0
+assert correlation_matrix[0][2] == 1.0
+assert correlation_matrix[1][2] == 1.0
+assert correlation_matrix[1][0] == 1.0
+assert correlation_matrix[2][0] == 1.0
+assert correlation_matrix[2][1] == 1.0
+```

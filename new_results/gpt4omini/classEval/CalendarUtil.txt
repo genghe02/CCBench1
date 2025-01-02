@@ -1,0 +1,218 @@
+```python
+"""
+This class provides utilities for managing calendar events, including adding, removing, and retrieving events, as well as checking availability slots for scheduling.
+"""
+
+from datetime import datetime, timedelta
+
+class CalendarUtil:
+    def __init__(self):
+        """
+        Initialization method for the CalendarUtil class.
+
+        This method initializes an empty list to store calendar events.
+        """
+        self.events = []
+
+    def add_event(self, event):
+        """
+        Adds a new event to the event list.
+
+        Parameters:
+            event (dict): A dictionary representing the event with required fields, such as 'name', 'date', 
+                          'start_time', and 'end_time'.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Successful event addition
+            calendar = CalendarUtil()
+            event = {'name': 'Meeting', 'date': datetime(2023, 11, 1), 'start_time': datetime(2023, 11, 1, 10, 0), 'end_time': datetime(2023, 11, 1, 11, 0)}
+            calendar.add_event(event)
+            assert len(calendar.events) == 1
+
+            # Test case 2: Adding another event
+            event2 = {'name': 'Lunch', 'date': datetime(2023, 11, 1), 'start_time': datetime(2023, 11, 1, 12, 0), 'end_time': datetime(2023, 11, 1, 13, 0)}
+            calendar.add_event(event2)
+            assert len(calendar.events) == 2
+
+            # Test case 3: Adding a malformed event will not raise an error but will not change state
+            malformed_event = {'start_time': 'not a date'}
+            calendar.add_event(malformed_event)
+            assert len(calendar.events) == 2
+        """
+        self.events.append(event)
+
+    def remove_event(self, event):
+        """
+        Removes an event from the event list if it exists.
+
+        Parameters:
+            event (dict): A dictionary representing the event to be removed.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Successful removal of an existing event
+            calendar = CalendarUtil()
+            event = {'name': 'Meeting', 'date': datetime(2023, 11, 1), 'start_time': datetime(2023, 11, 1, 10, 0), 'end_time': datetime(2023, 11, 1, 11, 0)}
+            calendar.add_event(event)
+            calendar.remove_event(event)
+            assert len(calendar.events) == 0
+
+            # Test case 2: Attempting to remove a non-existent event
+            non_existent_event = {'name': 'Nonexistent Event', 'date': datetime(2023, 11, 1), 'start_time': datetime(2023, 11, 1, 10, 0), 'end_time': datetime(2023, 11, 1, 11, 0)}
+            calendar.remove_event(non_existent_event)  # Should not raise an error
+            assert len(calendar.events) == 0
+
+            # Test case 3: Removing event that was never added
+            empty_calendar = CalendarUtil()
+            empty_calendar.remove_event(event)  # Should not raise an error
+            assert len(empty_calendar.events) == 0
+        """
+        if event in self.events:
+            self.events.remove(event)
+
+    def get_events(self, date):
+        """
+        Retrieves all events scheduled for a specific date.
+
+        Parameters:
+            date (datetime): The date for which to retrieve events.
+
+        Returns:
+            list: A list of events (dictionaries) scheduled for the specified date.
+
+        Test cases:
+            # Test case 1: Get events on a specific date
+            calendar = CalendarUtil()
+            event1 = {'name': 'Meeting', 'date': datetime(2023, 11, 1), 'start_time': datetime(2023, 11, 1, 10, 0), 'end_time': datetime(2023, 11, 1, 11, 0)}
+            event2 = {'name': 'Lunch', 'date': datetime(2023, 11, 1), 'start_time': datetime(2023, 11, 1, 12, 0), 'end_time': datetime(2023, 11, 1, 13, 0)}
+            calendar.add_event(event1)
+            calendar.add_event(event2)
+            assert calendar.get_events(datetime(2023, 11, 1)) == [event1, event2]
+
+            # Test case 2: No events scheduled on a date
+            assert calendar.get_events(datetime(2023, 11, 2)) == []
+
+            # Test case 3: Mixed dates
+            event3 = {'name': 'Workshop', 'date': datetime(2023, 11, 2), 'start_time': datetime(2023, 11, 2, 9, 0), 'end_time': datetime(2023, 11, 2, 10, 0)}
+            calendar.add_event(event3)
+            assert calendar.get_events(datetime(2023, 11, 2)) == [event3]
+        """
+        events_on_date = []
+        for event in self.events:
+            if event['date'].date() == date.date():
+                events_on_date.append(event)
+        return events_on_date
+
+    def is_available(self, start_time, end_time):
+        """
+        Checks if a specified time slot is available.
+
+        Parameters:
+            start_time (datetime): The start time of the slot to check.
+            end_time (datetime): The end time of the slot to check.
+        
+        Returns:
+            bool: True if the time slot is available, False if there is a conflict with existing events.
+
+        Test cases:
+            # Test case 1: Time slot is available
+            calendar = CalendarUtil()
+            event = {'start_time': datetime(2023, 11, 1, 10, 0), 'end_time': datetime(2023, 11, 1, 11, 0)}
+            calendar.add_event(event)
+            assert calendar.is_available(datetime(2023, 11, 1, 9, 0), datetime(2023, 11, 1, 10, 0))
+
+            # Test case 2: Time slot overlaps with an existing event
+            assert not calendar.is_available(datetime(2023, 11, 1, 10, 0), datetime(2023, 11, 1, 11, 30))
+
+            # Test case 3: Full conflict with existing event
+            assert not calendar.is_available(datetime(2023, 11, 1, 10, 30), datetime(2023, 11, 1, 11, 30))
+        """
+        for event in self.events:
+            if start_time < event['end_time'] and end_time > event['start_time']:
+                return False
+        return True
+
+    def get_available_slots(self, date):
+        """
+        Retrieves a list of available time slots for a given date.
+
+        Parameters:
+            date (datetime): The date for which to find available slots.
+
+        Returns:
+            list: A list of tuples representing available time slots.
+
+        Test cases:
+            # Test case 1: No events on the date, expect full day slots
+            calendar = CalendarUtil()
+            slots = calendar.get_available_slots(datetime(2023, 11, 1))
+            assert len(slots) == 24  # Assuming 1 hour slots covered throughout the day
+
+            # Test case 2: Some times booked
+            event = {'start_time': datetime(2023, 11, 1, 9, 0), 'end_time': datetime(2023, 11, 1, 10, 0)}
+            calendar.add_event(event)
+            slots_after_booking = calendar.get_available_slots(datetime(2023, 11, 1))
+            assert (datetime(2023, 11, 1, 9, 0), datetime(2023, 11, 1, 10, 0)) not in slots_after_booking
+
+            # Test case 3: Events through most of the day
+            event2 = {'start_time': datetime(2023, 11, 1, 11, 0), 'end_time': datetime(2023, 11, 1, 12, 0)}
+            calendar.add_event(event2)
+            slots_after_multiple_bookings = calendar.get_available_slots(datetime(2023, 11, 1))
+            assert len(slots_after_multiple_bookings) < 24  # Expect fewer slots
+        """
+        available_slots = []
+        start_time = datetime(date.year, date.month, date.day, 0, 0)
+        end_time = datetime(date.year, date.month, date.day, 23, 59)
+
+        while start_time < end_time:
+            slot_end_time = start_time + timedelta(minutes=60)
+            if self.is_available(start_time, slot_end_time):
+                available_slots.append((start_time, slot_end_time))
+            start_time += timedelta(minutes=60)
+
+        return available_slots
+
+    def get_upcoming_events(self, num_events):
+        """
+        Retrieves a list of upcoming events up to a specified number.
+
+        Parameters:
+            num_events (int): The maximum number of upcoming events to retrieve.
+
+        Returns:
+            list: A list of upcoming events (dictionaries).
+
+        Test cases:
+            # Test case 1: Get future events
+            calendar = CalendarUtil()
+            event1 = {'name': 'Meeting', 'start_time': datetime.now() + timedelta(days=3)}
+            event2 = {'name': 'Lunch', 'start_time': datetime.now() + timedelta(days=1)}
+            calendar.add_event(event1)
+            calendar.add_event(event2)
+            upcoming = calendar.get_upcoming_events(1)
+            assert len(upcoming) == 1  # Should return only one event
+
+            # Test case 2: No upcoming events
+            calendar2 = CalendarUtil()
+            assert calendar2.get_upcoming_events(5) == []
+
+            # Test case 3: More events than requested
+            event3 = {'name': 'Workshop', 'start_time': datetime.now() + timedelta(days=2)}
+            calendar.add_event(event3)
+            upcoming_multiple = calendar.get_upcoming_events(2)
+            assert len(upcoming_multiple) == 2  # Should return two events if there are at least two
+        """
+        now = datetime.now()
+        upcoming_events = []
+        for event in self.events:
+            if event['start_time'] >= now:
+                upcoming_events.append(event)
+            if len(upcoming_events) == num_events:
+                break
+        return upcoming_events
+```

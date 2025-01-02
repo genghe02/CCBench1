@@ -1,0 +1,2 @@
+# Update the slice using specified axis, start, and end values
+slc[axis] = slice(start, end)

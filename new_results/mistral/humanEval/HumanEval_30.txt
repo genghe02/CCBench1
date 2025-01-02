@@ -1,0 +1,7 @@
+ def get_positive(l: list):
+   # Return a new list containing only positive elements
+   # from the given input list
+   >>> get_positive([-1, 2, 3, 0, -4]) # returns [2, 3]
+   >>> get_positive([]) # returns []
+   >>> get_positive([1]) # returns [1]
+   return [e for e in l if e > 0]</s>

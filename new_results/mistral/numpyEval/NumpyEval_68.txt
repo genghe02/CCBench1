@@ -1,0 +1,2 @@
+ # Assign values to the specified indices of a zero array based on the given data
+result[np.arange(data.size), data] = 1</s>

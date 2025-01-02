@@ -1,0 +1,6 @@
+def car_race_collision(n: int):
+    # This function calculates the potential number of collisions in a car race with n cars.
+    # The calculation is based on the assumption that each car can potentially collide with every other car, which is represented by n**2.
+    # The parameter n: int, is the number of cars in the race.
+    # The return statement: returns the potential number of collisions in the car race.
+    return n**2

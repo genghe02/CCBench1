@@ -1,0 +1,19 @@
+```python
+def largest_prime_factor(n: int):
+    # Find the largest prime factor of a given integer n
+    >>> largest_prime_factor(13195) # returns 29
+    >>> largest_prime_factor(600851475143) # returns 6857
+    >>> largest_prime_factor(17) # returns 17
+    def is_prime(k):
+        if k < 2:
+            return False
+        for i in range(2, k - 1):
+            if k % i == 0:
+                return False
+        return True
+    largest = 1
+    for j in range(2, n + 1):
+        if n % j == 0 and is_prime(j):
+            largest = max(largest, j)
+    return largest
+```

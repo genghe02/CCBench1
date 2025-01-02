@@ -1,0 +1,5 @@
+import pandas as pd
+
+df = pd.DataFrame({'A': [1000, 765, 800], 'B': [10, 5, 7]})
+# Normalize each column of the dataframe using min-max normalization
+normalized_df = df.apply(lambda x: (x - x.min()) / (x.max() - x.min()))

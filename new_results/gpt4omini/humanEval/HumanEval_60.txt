@@ -1,0 +1,8 @@
+```python
+def sum_to_n(n: int):
+    # Return the sum of all integers from 0 to n
+    >>> sum_to_n(5) # returns 15
+    >>> sum_to_n(0) # returns 0
+    >>> sum_to_n(-5) # returns 0
+    return sum(range(n + 1))
+```

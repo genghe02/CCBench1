@@ -1,0 +1,2 @@
+ # Extract row from matrix 'a' based on indices in 'b'
+out = a[tuple(b)]</s>

@@ -1,0 +1,1 @@
+# Calculate the histogram of a 2D array 'arr' with 10 bins and return the histogram values in 'hist' and the bin edges in 'bin_edges'. Then, calculate the cumulative sum of the histogram values and store the result in 'hist'.

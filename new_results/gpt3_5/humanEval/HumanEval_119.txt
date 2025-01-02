@@ -1,0 +1,4 @@
+# This function checks if the parentheses in a string are balanced or not
+    >>> match_parens(['(', ')']) # returns 'Yes'
+    >>> match_parens(['[', ']']) # returns 'No'
+    >>> match_parens(['(', '[', ']', ')']) # returns 'Yes'

@@ -1,0 +1,2 @@
+ # Sum of all elements in the NumPy array obtained from the DataFrame
+sum_value = df.to_numpy().sum()</s>

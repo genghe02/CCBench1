@@ -1,0 +1,5 @@
+import pandas as pd
+
+def delete_first_n_rows(df, n):
+    # Return dataframe with first n rows removed
+    return df.iloc[n:]

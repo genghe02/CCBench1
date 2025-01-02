@@ -1,0 +1,5 @@
+ # Calculate the number of rows needed to cover the sliding window of length L with a stride of S
+nrows = ((a.size-L)//S)+1
+
+# Slice the array along the desired axis with the calculated indices
+return a[S*np.arange(nrows)[:,None] + np.arange(L)]</s>

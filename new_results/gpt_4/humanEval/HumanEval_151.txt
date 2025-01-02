@@ -1,0 +1,6 @@
+def double_the_difference(lst):
+    # This function returns the sum of the squares of positive odd integers in the list
+    >>> double_the_difference([1,2,3,4]) # returns 10
+    >>> double_the_difference([-1,-2,-3,-4]) # returns 0
+    >>> double_the_difference([0,2,-3,4]) # returns 0
+    return sum([i**2 for i in lst if i > 0 and i%2!=0 and "." not in str(i)])

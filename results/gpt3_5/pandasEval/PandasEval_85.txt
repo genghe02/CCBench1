@@ -1,0 +1,1 @@
+# Set a specified value to an entire column in a pandas DataFrame by utilizing the assign method to create a new column 'B' with the provided value.

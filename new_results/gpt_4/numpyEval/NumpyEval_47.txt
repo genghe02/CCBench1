@@ -1,0 +1,7 @@
+import numpy as np
+
+a = np.array([1,2,3,4,5,6])
+b = np.array([2,3,5])
+
+# Find the elements that are only in one, not both, of the input arrays and return them in a sorted array
+diff_arr = np.setxor1d(a, b)

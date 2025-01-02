@@ -1,0 +1,37 @@
+ # This function sorts the list by keeping even numbers together and odd numbers separately, then merges them back
+# Requires O(n) time complexity in the worst case as list slicing and sorting have this complexity
+
+def sort_even(l: list):
+    <Requirements for the code>
+    <some test cases for the function>
+    evens = l[::2]
+    odds = l[1::2]
+    evens.sort()
+    ans = []
+    for e, o in zip(evens, odds):
+        ans.extend([e, o])
+    if len(evens) > len(odds):
+        ans.append(evens[-1])
+    return ans
+
+# Test cases
+>>> sort_even([1, 2, 3, 4, 5])
+[1, 2, 3, 4, 5]
+
+>>> sort_even([4, 3, 2, 1])
+[1, 2, 3, 4]
+
+>>> sort_even([2, 2, 1, 2, 3])
+[1, 2, 2, 2, 3]
+
+>>> sort_even([1, -1, 1, -1])
+[-1, 1, -1, 1]
+
+>>> sort_even([])
+[]
+
+>>> sort_even([-1])
+[-1]
+
+>>> sort_even([0])
+[0]</s>

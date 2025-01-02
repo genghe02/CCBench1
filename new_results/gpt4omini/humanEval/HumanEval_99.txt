@@ -1,0 +1,28 @@
+```python
+def closest_integer(value):
+    # Return the closest integer value of a float, rounding .5 cases appropriately
+    >>> closest_integer(3.5) # returns 4
+    >>> closest_integer(3.4) # returns 3
+    >>> closest_integer(-3.5) # returns -3
+    >>> closest_integer(-3.6) # returns -4
+    >>> closest_integer(0.0) # returns 0
+    from math import floor, ceil
+
+    if value.count('.') == 1:
+        # remove trailing zeros
+        while (value[-1] == '0'):
+            value = value[:-1]
+
+    num = float(value)
+    if value[-2:] == '.5':
+        if num > 0:
+            res = ceil(num)
+        else:
+            res = floor(num)
+    elif len(value) > 0:
+        res = int(round(num))
+    else:
+        res = 0
+
+    return res
+```

@@ -1,0 +1,65 @@
+```python
+# Class representing a Weather System that stores temperature and weather details for a city.
+class WeatherSystem:
+    def __init__(self, city) -> None:
+        # Initialize the WeatherSystem with temperature, weather, city, and weather_list attributes.
+        self.temperature = None
+        self.weather = None
+        self.city = city
+        self.weather_list = {}
+    
+    def query(self, weather_list, tmp_units = 'celsius'):
+        # Method to query the weather details for a given city.
+        # Parameters:
+        #   weather_list: dict, a dictionary containing weather details for multiple cities.
+        #   tmp_units: str, the temperature units to convert to (default is 'celsius').
+        # Return:
+        #   tuple or float: temperature converted to the specified units, weather details.
+        # Test cases:
+        # >>> system = WeatherSystem('New York')
+        # >>> system.query({'New York': {'temperature': 25, 'weather': 'Sunny', 'temperature units': 'celsius'}})
+        self.weather_list = weather_list
+        if self.city not in weather_list:
+            return False
+        else:
+            self.temperature = self.weather_list[self.city]['temperature']
+            self.weather = self.weather_list[self.city]['weather']
+        if self.weather_list[self.city]['temperature units'] != tmp_units:
+            if tmp_units == 'celsius':
+                return self.fahrenheit_to_celsius(), self.weather
+            elif tmp_units == 'fahrenheit':
+                return self.celsius_to_fahrenheit(), self.weather
+        else:
+            return self.temperature, self.weather
+    
+    def set_city(self, city):
+        # Method to set the city for which weather details need to be queried.
+        # Parameters:
+        #   city: str, the city name to set.
+        # Return:
+        #   None
+        # Test cases:
+        # >>> system = WeatherSystem('New York')
+        # >>> system.set_city('Los Angeles')
+        self.city = city
+
+    def celsius_to_fahrenheit(self):
+        # Method to convert temperature from Celsius to Fahrenheit.
+        # Return:
+        #   float: temperature in Fahrenheit.
+        # Test cases:
+        # >>> system = WeatherSystem('New York')
+        # >>> system.temperature = 25
+        # >>> system.celsius_to_fahrenheit()
+        return (self.temperature * 9/5) + 32
+
+    def fahrenheit_to_celsius(self):
+        # Method to convert temperature from Fahrenheit to Celsius.
+        # Return:
+        #   float: temperature in Celsius.
+        # Test cases:
+        # >>> system = WeatherSystem('New York')
+        # >>> system.temperature = 77
+        # >>> system.fahrenheit_to_celsius()
+        return (self.temperature - 32) * 5/9
+```

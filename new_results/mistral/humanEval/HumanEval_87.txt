@@ -1,0 +1,10 @@
+ # This function returns the coordinates of the given element in a 2D list
+
+def get_row(lst, x):
+    <some test cases for the function>
+    >>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 5) # returns [(1, 1), (2, 1)]
+    >>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3) # returns []
+    >>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 6) # returns [(2, 2)]
+
+    coords = [(i, j) for i in range(len(lst)) for j in range(len(lst[i])) if lst[i][j] == x]
+    return sorted(sorted(coords, key=lambda x: x[1], reverse=True), key=lambda x: x[0])</s>

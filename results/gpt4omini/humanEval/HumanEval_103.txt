@@ -1,0 +1,19 @@
+```python
+def rounded_avg(n, m):
+    # Calculate the rounded average of all integers between n and m (inclusive) and return it as a binary string.
+    # If m is less than n, return -1 to indicate invalid input.
+    # param n: int, the starting integer of the range (inclusive).
+    # param m: int, the ending integer of the range (inclusive).
+    # return: str or int, the rounded average as a binary string if valid, otherwise -1.
+    # Test cases:
+    # >>> rounded_avg(1, 5)  # Expected: '0b11' (Average is 3)
+    # >>> rounded_avg(4, 4)  # Expected: '0b100' (Average is 4)
+    # >>> rounded_avg(5, 1)  # Expected: -1 (Invalid range)
+    # >>> rounded_avg(0, 0)  # Expected: '0b0' (Average is 0)
+    if m < n:
+        return -1
+    summation = 0
+    for i in range(n, m + 1):
+        summation += i
+    return bin(round(summation / (m - n + 1)))
+```

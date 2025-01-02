@@ -1,0 +1,22 @@
+def even_odd_count(num):
+    # This function takes an integer as input and returns a tuple of two integers where the first integer
+    # is the count of even digits and the second one is the count of odd digits in the input number.
+    
+    # Test cases:
+    # >>> even_odd_count(123456)
+    # (3, 3) - because there are 3 even and 3 odd digits in the number
+    # >>> even_odd_count(-123456)
+    # (3, 3) - because the function handles negative numbers by taking the absolute value first
+    # >>> even_odd_count(222)
+    # (3, 0) - because all digits are even
+    # >>> even_odd_count(111)
+    # (0, 3) - because all digits are odd
+
+    even_count = 0
+    odd_count = 0
+    for i in str(abs(num)):  # Convert the absolute value of num to string to iterate over each digit
+        if int(i)%2==0:  # Check if the digit is even
+            even_count +=1
+        else:  # If it's not even, it's odd
+            odd_count +=1
+    return (even_count, odd_count)  # Return the counts as a tuple of (even_count, odd_count)

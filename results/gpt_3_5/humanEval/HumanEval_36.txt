@@ -1,0 +1,16 @@
+```python
+def fizz_buzz(n: int):
+    # Count the occurrence of the digit '7' in the concatenation of numbers divisible by 11 or 13 up to n.
+    # Test cases:
+    # fizz_buzz(10) -> 0
+    # fizz_buzz(20) -> 2
+    ns = []
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            ns.append(i)
+    s = ''.join(list(map(str, ns)))
+    ans = 0
+    for c in s:
+        ans += (c == '7')
+    return ans
+```

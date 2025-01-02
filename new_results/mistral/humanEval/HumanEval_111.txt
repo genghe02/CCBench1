@@ -1,0 +1,12 @@
+ # Function requires a string as input and returns a dictionary with keys as unique elements in the list, and values as the count of occurrences of those elements in the list.
+
+>>> histogram("apple apple banana banana banana orange orange apple apple")
+# Test cases for the function:
+>>> histogram("")
+{}
+
+>>> histogram("apple")
+{'apple': 1}
+
+>>> histogram("apple apple banana banana banana orange orange apple apple")
+{'apple': 5, 'banana': 3, 'orange': 2}</s>

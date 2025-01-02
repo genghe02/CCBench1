@@ -1,0 +1,2 @@
+ # Find the indices in 'master' where 'search' values appear
+out = np.searchsorted(master, search)</s>

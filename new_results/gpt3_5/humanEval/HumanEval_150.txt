@@ -1,0 +1,22 @@
+# Check if the input number is divisible by any number other than 1 and itself
+
+>>> x_or_y(10, 'Prime', 'Composite') # returns 'Composite'
+>>> x_or_y(5, 'Prime', 'Composite') # returns 'Prime'
+>>> x_or_y(1, 'Prime', 'Composite') # returns 'Composite'
+>>> x_or_y(7, 'Prime', 'Composite') # returns 'Prime'
+
+def x_or_y(n, x, y):
+    # Check if the input number is divisible by any number other than 1 and itself
+
+    >>> x_or_y(10, 'Prime', 'Composite') # returns 'Composite'
+    >>> x_or_y(5, 'Prime', 'Composite') # returns 'Prime'
+    >>> x_or_y(1, 'Prime', 'Composite') # returns 'Composite'
+    >>> x_or_y(7, 'Prime', 'Composite') # returns 'Prime'
+    if n == 1:
+        return y
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x

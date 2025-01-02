@@ -1,0 +1,8 @@
+import numpy as np
+
+# Create three arrays, and concatenate them vertically into one array
+a = np.ones((3,2))
+b = np.zeros((2,2))
+c = np.ones((4,2))
+L = [a,b,c]
+concated_arr = np.concatenate(L, axis=0)

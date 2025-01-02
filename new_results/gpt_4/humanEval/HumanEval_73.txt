@@ -1,0 +1,10 @@
+def smallest_change(arr):
+    # This function counts the number of changes needed to make the array symmetric
+    >>> smallest_change([1, 2, 3, 2, 1]) # returns 0
+    >>> smallest_change([1, 2, 3, 2, 4]) # returns 1
+    >>> smallest_change([1, 2, 3, 4, 5]) # returns 2
+    ans = 0
+    for i in range(len(arr) // 2):
+        if arr[i] != arr[len(arr) - i - 1]:
+            ans += 1
+    return ans

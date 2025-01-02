@@ -1,0 +1,12 @@
+def string_xor(a: str, b: str) -> str:
+    # This function performs a bitwise XOR operation on two binary strings and returns the result as a string
+    >>> string_xor('1010', '1100') # returns '0110'
+    >>> string_xor('1111', '0000') # returns '1111'
+    >>> string_xor('1010', '1010') # returns '0000'
+    def xor(i, j):
+        if i == j:
+            return '0'
+        else:
+            return '1'
+
+    return ''.join(xor(x, y) for x, y in zip(a, b))

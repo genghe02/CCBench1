@@ -1,0 +1,113 @@
+"""
+This class provides functionality for converting between different currencies and managing exchange rates.
+"""
+
+class CurrencyConverter:
+    def __init__(self):
+        """
+        Initialize a new instance of the CurrencyConverter. Sets default exchange rates.
+        """
+        self.rates = {
+            'USD': 1.0,
+            'EUR': 0.85,
+            'GBP': 0.72,
+            'JPY': 110.15,
+            'CAD': 1.23,
+            'AUD': 1.34,
+            'CNY': 6.40,
+        }
+
+    def convert(self, amount, from_currency, to_currency):
+        """
+        Converts a given amount from one currency to another.
+
+        Parameters:
+            amount (float): The amount to be converted
+            from_currency (str): The currency to convert from
+            to_currency (str): The currency to convert to
+
+        Returns:
+            float: The converted amount in the target currency, False if conversion is not possible
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert convert(100, 'USD', 'EUR') == 85.0
+
+            # Test case 2: Conversion to the same currency
+            assert convert(100, 'USD', 'USD') == 100
+
+            # Test case 3: Conversion with unknown currency
+            assert convert(100, 'USD', 'XYZ') == False
+        """
+        if from_currency == to_currency:
+            return amount
+
+        if from_currency not in self.rates or to_currency not in self.rates:
+            return False
+
+        from_rate = self.rates[from_currency]
+        to_rate = self.rates[to_currency]
+
+        converted_amount = (amount / from_rate) * to_rate
+        return converted_amount
+
+    def get_supported_currencies(self):
+        """
+        Returns a list of supported currencies.
+
+        Returns:
+            list: A list of supported currency codes
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert get_supported_currencies() == ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CNY']
+
+            # Test case 2: After adding a new currency
+            add_currency_rate('NZD', 1.40)
+            assert get_supported_currencies() == ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CNY', 'NZD']
+        """
+        return list(self.rates.keys())
+
+    def add_currency_rate(self, currency, rate):
+        """
+        Adds a new currency and its exchange rate.
+
+        Parameters:
+            currency (str): The currency code to be added
+            rate (float): The exchange rate of the new currency
+
+        Returns:
+            bool: False if the currency already exists, None otherwise
+
+        Test cases:
+            # Test case 1: Adding a new currency
+            assert add_currency_rate('NZD', 1.40) == None
+
+            # Test case 2: Adding an existing currency
+            assert add_currency_rate('USD', 1.0) == False
+        """
+        if currency in self.rates:
+            return False
+        self.rates[currency] = rate
+
+    def update_currency_rate(self, currency, new_rate):
+        """
+        Updates the exchange rate of an existing currency.
+
+        Parameters:
+            currency (str): The currency code to be updated
+            new_rate (float): The new exchange rate
+
+        Returns:
+            bool: False if the currency does not exist, None otherwise
+
+        Test cases:
+            # Test case 1: Updating an existing currency
+            assert update_currency_rate('USD', 1.1) == None
+
+            # Test case 2: Updating a non-existing currency
+            assert update_currency_rate('XYZ', 1.0) == False
+        """
+        if currency not in self.rates:
+            return False
+        self.rates[currency] = new_rate

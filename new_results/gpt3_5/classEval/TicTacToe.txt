@@ -1,0 +1,99 @@
+"""
+This class represents a Tic Tac Toe game implementation.
+
+The class initializes the game board and allows players to make moves, check for a winner, and determine if the board is full.
+"""
+
+class TicTacToe:
+    def __init__(self, N=3):
+        """
+        Initializes the Tic Tac Toe game board with empty cells and sets the current player to 'X'.
+        
+        Parameters:
+            N (int): Size of the board, default is 3
+        
+        Returns:
+            None
+        """
+        self.board = [[' ' for _ in range(N)] for _ in range(3)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        """
+        Makes a move in the Tic Tac Toe game board for the current player.
+        
+        Parameters:
+            row (int): Row index for the move
+            col (int): Column index for the move
+        
+        Returns:
+            bool: True if the move is successful, False if the cell is already occupied
+        
+        Test cases:
+            # Test case 1: Make a valid move
+            assert make_move(1, 1) == True
+            
+            # Test case 2: Make an invalid move
+            assert make_move(0, 0) == False
+            
+            # Test case 3: Make a move in an occupied cell
+            assert make_move(1, 1) == False
+        """
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        else:
+            return False
+
+    def check_winner(self):
+        """
+        Check if there is a winner in the Tic Tac Toe game by examining rows, columns, and diagonals.
+        
+        Returns:
+            str: The winning player 'X' or 'O', or None if there is no winner
+        
+        Test cases:
+            # Test case 1: Horizontal win
+            assert check_winner() == 'X'
+            
+            # Test case 2: Vertical win
+            assert check_winner() == 'O'
+            
+            # Test case 3: Diagonal win
+            assert check_winner() == 'X'
+        """
+        for row in self.board:
+            if row[0] == row[1] == row[2] != ' ':
+                return row[0]
+        for col in range(3):
+            if self.board[0][col] == self.board[1][col] == self.board[2][col] != ' ':
+                return self.board[0][col]
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != ' ':
+            return self.board[0][0]
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != ' ':
+            return self.board[0][2]
+        return None
+
+    def is_board_full(self):
+        """
+        Check if the Tic Tac Toe game board is full.
+        
+        Returns:
+            bool: True if the board is full, False otherwise
+        
+        Test cases:
+            # Test case 1: Board is full
+            assert is_board_full() == True
+            
+            # Test case 2: Board is not full
+            assert is_board_full() == False
+            
+            # Test case 3: Board full except one cell
+            assert is_board_full() == False
+        """
+        for row in self.board:
+            if ' ' in row:
+                return False
+        return True
+```

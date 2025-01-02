@@ -1,0 +1,7 @@
+def string_to_md5(text):
+    # This function converts a string to its corresponding MD5 hash
+    >>> string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'
+    >>> string_to_md5('') == None
+    >>> string_to_md5('Python') == 'a7f5f35426b927411fc9231b56382173'
+    import hashlib
+    return hashlib.md5(text.encode('ascii')).hexdigest() if text else None

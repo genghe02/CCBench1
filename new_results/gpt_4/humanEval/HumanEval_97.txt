@@ -1,0 +1,6 @@
+def multiply(a, b):
+    # This function returns the product of the units digit of two numbers
+    >>> multiply(12, 3) # returns 6
+    >>> multiply(-15, 27) # returns 35
+    >>> multiply(0, 10) # returns 0
+    return abs(a % 10) * abs(b % 10)

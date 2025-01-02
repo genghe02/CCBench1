@@ -1,0 +1,25 @@
+Input:
+def mean_absolute_deviation(numbers: List[float]) -> float:
+   <Calculate the mean absolute deviation of a list of numbers>
+   <Calculate the mean absolute deviation for various scenarios>
+   mean = sum(numbers) / len(numbers)
+   return sum(abs(x - mean) for x in numbers) / len(numbers)
+
+❌ Wrong Output:
+# Calculate the mean absolute deviation of a list of numbers
+# Calculate the mean absolute deviation for various scenarios
+def mean_absolute_deviation(numbers: List[float]) -> float:
+   >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0, 5.0])
+   mean = sum(numbers) / len(numbers)
+   return sum(abs(x - mean) for x in numbers) / len(numbers)
+
+Correct Output:
+
+def mean_absolute_deviation(numbers: List[float]) -> float:
+   # Calculate the mean absolute deviation of a list of numbers
+   # Calculate the mean absolute deviation for various scenarios
+   >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0, 5.0]) # returns 1.2
+   >>> mean_absolute_deviation([-2.0, -1.0, 0.0, 1.0, 2.0]) # returns 0.8
+   >>> mean_absolute_deviation([0.0, 0.0, 0.0, 0.0, 0.0]) # returns 0.0
+   mean = sum(numbers) / len(numbers)
+   return sum(abs(x - mean) for x in numbers) / len(numbers)

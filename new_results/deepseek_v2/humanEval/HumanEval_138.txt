@@ -1,0 +1,8 @@
+```python
+def is_equal_to_sum_even(n):
+    # Check if a number can be expressed as the sum of exactly four even positive integers
+    >>> is_equal_to_sum_even(8) # returns True
+    >>> is_equal_to_sum_even(10) # returns True
+    >>> is_equal_to_sum_even(7) # returns False
+    return n%2 == 0 and n >= 8
+```

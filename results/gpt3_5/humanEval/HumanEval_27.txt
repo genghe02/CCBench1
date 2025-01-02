@@ -1,0 +1,8 @@
+def flip_case(string: str) -> str:
+    # Function to flip the case of each character in the input string.
+    # Test cases:
+    # >>> flip_case("Hello, World!")
+    # 'hELLO, wORLD!'
+    # >>> flip_case("123abc!@#")
+    # '123ABC!@#'
+    return string.swapcase()

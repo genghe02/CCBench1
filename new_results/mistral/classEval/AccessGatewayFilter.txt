@@ -1,0 +1,158 @@
+ """
+This class represents an Access Gateway Filter that handles request filtering, authentication, and logging.
+It determines if a request should be granted or denied based on its URI and the user's authentication and authorization levels.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialize an instance of the AccessGatewayFilter class.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        Checks if the given request should be granted or denied.
+
+        Parameters:
+            request (dict): Request details, including URI and headers.
+
+        Returns:
+            bool: True if the request should be granted, False otherwise.
+
+        Test cases:
+            # Test case 1: Request granted because of a valid URI and user.
+            input = {'path': '/api/users', 'method': 'GET', 'headers': {'Authorization': 'Bearer user1:password'}}
+            expected_output = True
+
+            # Test case 2: Request denied because of an invalid URI.
+            input = {'path': '/invalid', 'method': 'GET'}
+            expected_output = False
+
+            # Test case 3: Request denied because of an expired JWT token.
+            input = {'path': '/api/users', 'method': 'GET', 'headers': {'Authorization': 'Bearer user1:expired_password'}}
+            expected_output = False
+        """
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Parse and verify a JSON Web Token (JWT) to extract the user information.
+
+        Parameters:
+            request (dict): Request details, including headers.
+
+        Returns:
+            dict or None: User information and the JWT token, or None if the token is invalid.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            input = {'headers': {'Authorization': 'Bearer user1:password'}}
+            expected_output = {'user': {'name': 'user1', 'level': 3, 'address': '127.0.0.1'}, 'jwt': 'eyJhbGciOiJIUzI1NiIs...'}}
+
+            # Test case 2: Invalid JWT token
+            input = {'headers': {'Authorization': 'Bearer user1:invalid_password'}}
+            expected_output = None
+
+            # Test case 3: Missing JWT token
+            input = {'path': '/api/users'}
+            expected_output = None
+        """
+        token = request.get('headers', {}).get('Authorization')
+        if not token:
+            return None
+
+        token_parts = token.split(' ')
+        if len(token_parts) != 2 or token_parts[0] != 'Bearer':
+            return None
+
+        token_parts = token_parts[1].split(':')
+        jwt = token_parts[0]
+        user_str = token_parts[1]
+
+        try:
+            user = json.loads(base64.b64decode(user_str.encode()).decode())
+        except (TypeError, json.JSONDecodeError):
+            return None
+
+        user = {'name': user['sub'], 'level': user['level'], 'address': user['address']}
+        if self.is_jwt_expired(jwt):
+            return None
+
+        return {'user': user, 'jwt': jwt}
+
+    def is_jwt_expired(self, jwt):
+        """
+        Check if a JSON Web Token (JWT) has expired.
+
+        Parameters:
+            jwt (str): A JSON Web Token.
+
+        Returns:
+            bool: True if the token has expired, False otherwise.
+        """
+        token_parts = jwt.split('.')
+        header = json.loads(base64.b64decode(token_parts[0].encode()).decode())
+        payload = json.loads(base64.b64decode(token_parts[1].encode()).decode())
+
+        iat = float(payload['iat'])
+        exp = float(payload['exp'])
+
+        return datetime.datetime.now() > datetime.datetime.fromtimestamp(exp)
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Set the current user information and log the request.
+
+        Parameters:
+            user (dict): User information.
+        """
+        self.current_user = user
+        host = user['address']
+        logging.log(msg=user['name'] + host + str(datetime.datetime.now()), level=1)
+
+# Additional methods or documentation not shown here.</s>

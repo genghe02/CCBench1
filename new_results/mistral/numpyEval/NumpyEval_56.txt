@@ -1,0 +1,2 @@
+ # Select rows from 'dists' array based on condition and assign to 'out'
+out = dists[np.where(np.logical_and(dists >= r, dists <= r+dr))]</s>

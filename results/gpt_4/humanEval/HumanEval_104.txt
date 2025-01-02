@@ -1,0 +1,16 @@
+def unique_digits(x):
+    # The function unique_digits takes a list of integers x, and identifies all elements in the list that are composed entirely of odd digits.
+    # It then returns a sorted list of these odd-digit elements.
+    # some test cases for the function:
+    # >>> unique_digits([135, 246, 357, 468])
+    # Output: [135, 357]
+    # >>> unique_digits([123, 456, 789, 13579])
+    # Output: [13579]
+    odd_digit_elements = []
+    for i in x:
+        # For each integer in the list, convert it to a string to iterate over each digit.
+        # If all digits in the number are odd (i.e., the remainder when divided by 2 is 1), append the number to the odd_digit_elements list.
+        if all (int(c) % 2 == 1 for c in str(i)):
+            odd_digit_elements.append(i)
+    # Return the sorted list of odd-digit elements.
+    return sorted(odd_digit_elements)

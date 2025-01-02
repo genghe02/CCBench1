@@ -1,0 +1,6 @@
+import numpy as np
+
+# List of arrays.
+L = [np.random.randn(5,4,2,5,1,2) for i in range(10)]
+# Stack arrays in sequence depth wise (along third axis)
+M = np.stack(L, axis=-1)

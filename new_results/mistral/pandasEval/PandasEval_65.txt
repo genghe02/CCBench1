@@ -1,0 +1,2 @@
+ # Merge two dataframes using their index columns
+return pd.merge(df1, df2, left_index=True, right_index=True)</s>

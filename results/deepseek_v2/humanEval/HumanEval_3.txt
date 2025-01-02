@@ -1,0 +1,29 @@
+```python
+from typing import List
+
+
+def below_zero(operations: List[int]) -> bool:
+    # Check if the cumulative balance of operations ever goes below zero.
+    # param operations: List[int], a list of integers representing operations on a balance.
+    # return: bool, True if the balance goes below zero at any point, False otherwise.
+    
+    # >>> below_zero([10, -5, 2, -7, 3])
+    # True
+    # >>> below_zero([10, -5, 2, 3, -4])
+    # False
+    # >>> below_zero([-1, 2, -3, 4, -5])
+    # True
+    # >>> below_zero([1, 2, 3, 4, 5])
+    # False
+    # >>> below_zero([0, 0, 0, 0, 0])
+    # False
+    
+    balance = 0
+
+    for op in operations:
+        balance += op
+        if balance < 0:
+            return True
+
+    return False
+```

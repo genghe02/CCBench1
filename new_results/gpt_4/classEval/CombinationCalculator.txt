@@ -1,0 +1,147 @@
+"""
+This class provides methods to calculate combinations of elements from a given list of data. 
+It includes methods for counting the number of combinations and for generating all possible combinations.
+"""
+
+import math
+from typing import List
+
+class CombinationCalculator:
+    
+    def __init__(self, datas: List[str]):
+        """
+        Initializes the combination calculator with a set of data elements.
+        
+        Parameters:
+            datas (List[str]): The list of data elements to be used for combination calculations.
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n: int, m: int) -> int:
+        """
+        Calculates the number of combinations of m elements from a set of n elements.
+        
+        Parameters:
+            n (int): The total number of elements.
+            m (int): The number of elements to select for each combination.
+            
+        Returns:
+            int: The number of possible combinations.
+            
+        Test cases:
+            # Test case 1: Normal case
+            assert count(5, 3) == 10
+            
+            # Test case 2: Edge case where m is 0
+            assert count(5, 0) == 1
+            
+            # Test case 3: Error case where n is less than m
+            assert count(2, 3) == 0
+        """
+        if m == 0 or n == m:
+            return 1
+        return math.factorial(n) // (math.factorial(n - m) * math.factorial(m))
+
+    @staticmethod
+    def count_all(n: int) -> int:
+        """
+        Calculates the total number of combinations of any number of elements from a set of n elements.
+        
+        Parameters:
+            n (int): The total number of elements.
+            
+        Returns:
+            int: The total number of possible combinations.
+            
+        Test cases:
+            # Test case 1: Normal case
+            assert count_all(5) == 31
+            
+            # Test case 2: Edge case where n is 0
+            assert count_all(0) == 1
+            
+            # Test case 3: Error case where n is negative
+            assert count_all(-5) == False
+        """
+        if n < 0 or n > 63:
+            return False
+        return (1 << n) - 1 if n != 63 else float("inf")
+
+    def select(self, m: int) -> List[List[str]]:
+        """
+        Generates all combinations of m elements from the data set.
+        
+        Parameters:
+            m (int): The number of elements to select for each combination.
+            
+        Returns:
+            List[List[str]]: A list of all possible combinations.
+            
+        Test cases:
+            # Test case 1: Normal case
+            input = ['a', 'b', 'c']
+            m = 2
+            expected_output = [['a', 'b'], ['a', 'c'], ['b', 'c']]
+            
+            # Test case 2: Edge case where m is 0
+            input = ['a', 'b', 'c']
+            m = 0
+            expected_output = [[]]
+            
+            # Test case 3: Error case where m is greater than the number of elements
+            input = ['a', 'b', 'c']
+            m = 4
+            expected_output = []
+        """
+        result = []
+        self._select(0, [None] * m, 0, result)
+        return result
+
+    def select_all(self) -> List[List[str]]:
+        """
+        Generates all combinations of any number of elements from the data set.
+        
+        Returns:
+            List[List[str]]: A list of all possible combinations.
+            
+        Test cases:
+            # Test case 1: Normal case
+            input = ['a', 'b', 'c']
+            expected_output = [['a'], ['b'], ['c'], ['a', 'b'], ['a', 'c'], ['b', 'c'], ['a', 'b', 'c']]
+            
+            # Test case 2: Edge case where there is only one element
+            input = ['a']
+            expected_output = [['a']]
+            
+            # Test case 3: Error case where there are no elements
+            input = []
+            expected_output = []
+        """
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    def _select(self, dataIndex: int, resultList: List[str], resultIndex: int, result: List[List[str]]):
+        """
+        Internal method for generating combinations. Not meant to be used directly.
+        
+        Parameters:
+            dataIndex (int): The index at which to start selecting elements.
+            resultList (List[str]): The list of elements that have already been selected.
+            resultIndex (int): The index at which to insert the next selected element.
+            result (List[List[str]]): The list of all combinations generated so far.
+            
+        Test cases:
+            This method is not meant to be used directly, so no test cases are provided.
+        """
+        resultLen = len(resultList)
+        resultCount = resultIndex + 1
+        if resultCount > resultLen:
+            result.append(resultList.copy())
+            return
+
+        for i in range(dataIndex, len(self.datas) + resultCount - resultLen):
+            resultList[resultIndex] = self.datas[i]
+            self._select(i + 1, resultList, resultIndex + 1, result)

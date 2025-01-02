@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+import numpy as np
+
+def find_non_numeric_rows(df):
+    # Identify rows in the DataFrame that contain non-numeric values by applying np.isreal to each element and checking for rows where not all elements are real numbers.
+    return df[~df.applymap(np.isreal).all(1)]
+```

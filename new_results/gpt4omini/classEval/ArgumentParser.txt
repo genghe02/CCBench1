@@ -1,0 +1,147 @@
+```python
+"""
+This class handles command-line argument parsing, including validation and type conversion.
+"""
+
+class ArgumentParser:
+    
+    def __init__(self):
+        """
+        Initializes a new instance of ArgumentParser.
+
+        This method sets up the initial state with an empty dictionary for arguments,
+        a set for required arguments, and a dictionary for argument types.
+        """
+        self.arguments = {}
+        self.required = set()
+        self.types = {}
+
+    def parse_arguments(self, command_string):
+        """
+        Parses the command string into arguments.
+
+        Parameters:
+            command_string (str): The command line string containing arguments.
+
+        Returns:
+            tuple: A tuple where the first element is a bool indicating success
+                   or failure, and the second element is either None or a set of
+                   missing required arguments.
+
+        Test cases:
+            # Test case 1: Successful parsing with all required arguments
+            input = "--output=output.txt --verbose"
+            expected_output = (True, None)
+
+            # Test case 2: Missing required argument
+            input = "--output=output.txt"
+            expected_output = (False, {'verbose'})
+            
+            # Test case 3: Invalid argument format
+            input = "invalid_input_string"
+            expected_output = (True, None)  # Depending on implementation, if no required args, returns True
+        """
+        args = command_string.split()[1:]
+        for i in range(len(args)):
+            arg = args[i]
+            if arg.startswith('--'):
+                key_value = arg[2:].split('=')
+                if len(key_value) == 2:
+                    self.arguments[key_value[0]] = self._convert_type(key_value[0], key_value[1])
+                else:
+                    self.arguments[key_value[0]] = True
+            elif arg.startswith('-'):
+                key = arg[1:]
+                if i + 1 < len(args) and not args[i + 1].startswith('-'):
+                    self.arguments[key] = self._convert_type(key, args[i + 1])
+                else:
+                    self.arguments[key] = True
+        missing_args = self.required - set(self.arguments.keys())
+        if missing_args:
+            return False, missing_args
+
+        return True, None
+
+    def get_argument(self, key):
+        """
+        Retrieves the value of a specified argument.
+
+        Parameters:
+            key (str): The name of the argument to retrieve.
+
+        Returns:
+            any: The value associated with the argument, or None if it does not exist.
+
+        Test cases:
+            # Test case 1: Argument exists
+            input = "output"
+            expected_output = "output.txt"
+
+            # Test case 2: Argument does not exist
+            input = "non_existing"
+            expected_output = None
+            
+            # Test case 3: Get a flag argument
+            input = "verbose"
+            expected_output = True
+        """
+        return self.arguments.get(key)
+
+    def add_argument(self, arg, required=False, arg_type=str):
+        """
+        Adds an argument to the parser.
+
+        Parameters:
+            arg (str): The name of the argument to add.
+            required (bool): Indicates whether the argument is required.
+            arg_type (type): The type to which the argument value should be converted.
+
+        Returns:
+            None: The method does not return a value, it modifies the state of the parser.
+
+        Test cases:
+            # Test case 1: Adding a required argument
+            input = ("output", True, str)
+            expected_output = None  # No output, checks internal state
+
+            # Test case 2: Adding an optional argument
+            input = ("verbose", False, bool)
+            expected_output = None  # No output, checks internal state
+            
+            # Test case 3: Re-adding an argument with different type
+            input = ("count", False, int)
+            expected_output = None  # No output, checks internal state
+        """
+        if required:
+            self.required.add(arg)
+        self.types[arg] = arg_type
+
+    def _convert_type(self, arg, value):
+        """
+        Converts the argument's value to the specified type.
+
+        Parameters:
+            arg (str): The name of the argument to convert.
+            value (str): The value to convert.
+
+        Returns:
+            any: The converted value, or the original value if conversion fails.
+
+        Test cases:
+            # Test case 1: Successful conversion to int
+            input = ("count", "10")
+            expected_output = 10
+            
+            # Test case 2: Successful conversion to bool
+            input = ("verbose", "True")
+            expected_output = True
+            
+            # Test case 3: Invalid conversion (returns original)
+            input = ("count", "not_a_number")
+            expected_output = "not_a_number"
+        """
+        try:
+            return self.types[arg](value)
+        except (ValueError, KeyError):
+            return value
+```

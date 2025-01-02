@@ -1,0 +1,6 @@
+ # Sorts an array using a custom key function for binary representation of elements
+# Returns a new sorted array
+def sort_array(arr):
+    >>> sort_array([3, 5, 1, 2, 7]) # [1, 2, 3, 5, 7]
+    >>> sort_array([0, -2, 4, 0, 1]) # [0, 0, 1, 4, -2]
+    return sorted(sorted(arr), key=lambda x: bin(x)[2:].count('1'))</s>

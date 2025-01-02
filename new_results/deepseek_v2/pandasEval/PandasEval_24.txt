@@ -1,0 +1,6 @@
+import pandas as pd
+
+def round_a_single_column(df):
+    # Round the values in column 'A' to the nearest integer
+    df.A = df.A.round()
+    return df

@@ -1,0 +1,8 @@
+ # Convert a NumPy matrix to a NumPy array by using np.squeeze and np.asarray.
+# This function is designed to take a single NumPy matrix as an argument.
+# It first converts the matrix to a NumPy array using np.asarray,
+# and then removes any singleton axes using np.squeeze.
+# This is an efficient way to convert a NumPy matrix to a NumPy array.
+# For example, if matrix is a 2x2 NumPy matrix, the function will return a NumPy array of shape (4,).
+# If matrix is a scalar NumPy array, the function will return the same NumPy array.
+# This function does not handle non-NumPy matrices or arrays of other types.

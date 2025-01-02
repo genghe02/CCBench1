@@ -1,0 +1,7 @@
+ ✅ Correct Output:
+import pandas as pd
+import numpy as np
+
+# Return a NumPy array obtained by applying ceil function element-wise to a Series
+def ceil_of_series(s):
+    return np.ceil(s)</s>

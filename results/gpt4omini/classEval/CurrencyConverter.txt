@@ -1,0 +1,80 @@
+```python
+# This class handles currency conversion between different currencies based on predefined exchange rates.
+class CurrencyConverter:
+    def __init__(self):
+        # Initialize the currency converter with a dictionary of currency exchange rates relative to USD.
+        self.rates = {
+            'USD': 1.0,
+            'EUR': 0.85,
+            'GBP': 0.72,
+            'JPY': 110.15,
+            'CAD': 1.23,
+            'AUD': 1.34,
+            'CNY': 6.40,
+        }
+
+    def convert(self, amount, from_currency, to_currency):
+        # Convert an amount from one currency to another using the exchange rates defined in rates.
+        # :param amount: float, the amount of money to convert
+        # :param from_currency: str, the currency code to convert from
+        # :param to_currency: str, the currency code to convert to
+        # :return: float or bool, the converted amount if successful; False if conversion is not possible
+        # >>> converter = CurrencyConverter()
+        # >>> converter.convert(100, 'USD', 'EUR')
+        # 85.0
+        # >>> converter.convert(100, 'GBP', 'JPY')
+        # 15394.444444444445
+        # >>> converter.convert(100, 'EUR', 'AUD')
+        # 157.6470588235294
+        # >>> converter.convert(100, 'USD', 'USD')
+        # 100
+        # >>> converter.convert(100, 'USD', 'XYZ')
+        # False
+        if from_currency == to_currency:
+            return amount
+
+        if from_currency not in self.rates or to_currency not in self.rates:
+            return False
+
+        from_rate = self.rates[from_currency]
+        to_rate = self.rates[to_currency]
+
+        converted_amount = (amount / from_rate) * to_rate
+        return converted_amount
+
+    def get_supported_currencies(self):
+        # Return a list of the currency codes that are supported for conversion.
+        # :return: list, a list of strings representing the currency codes
+        # >>> converter = CurrencyConverter()
+        # >>> converter.get_supported_currencies()
+        # ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD', 'CNY']
+        return list(self.rates.keys())
+
+    def add_currency_rate(self, currency, rate):
+        # Add a new currency and its exchange rate to the converter.
+        # :param currency: str, the currency code to add
+        # :param rate: float, the exchange rate relative to USD
+        # :return: bool, True if the currency was added successfully; False if it already exists
+        # >>> converter = CurrencyConverter()
+        # >>> converter.add_currency_rate('AUD', 1.5)
+        # False
+        # >>> converter.add_currency_rate('INR', 74.0)
+        # True
+        if currency in self.rates:
+            return False
+        self.rates[currency] = rate
+
+    def update_currency_rate(self, currency, new_rate):
+        # Update the exchange rate for an existing currency in the converter.
+        # :param currency: str, the currency code to update
+        # :param new_rate: float, the new exchange rate relative to USD
+        # :return: bool, True if the rate was updated successfully; False if the currency does not exist
+        # >>> converter = CurrencyConverter()
+        # >>> converter.update_currency_rate('EUR', 0.9)
+        # True
+        # >>> converter.update_currency_rate('XYZ', 1.5)
+        # False
+        if currency not in self.rates:
+            return False
+        self.rates[currency] = new_rate
+```

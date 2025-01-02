@@ -1,0 +1,19 @@
+ # Split string to groups of length 3 and cycle elements in each group unless group has fewer than 3 elements
+def encode_cyclic(s: str):
+    # <Requirements for the code>
+    groups = [s[(3 * i):min((3 * i + 3), len(s))] for i in range((len(s) + 2) // 3)]
+    # cycle elements in each group
+    groups = [(group[1:] + group[0]) if len(group) >= 3 else group for group in groups]
+    return "".join(groups)
+
+# Decode cyclically encoded string
+def decode_cyclic(s: str):
+    # <Requirements for the code>
+    return encode_cyclic(encode_cyclic(s))
+
+# Example test cases
+>>> encode_cyclic("abcd") # abcabd
+>>> encode_cyclic("abcdefg") # aebcaefg
+>>> encode_cyclic("123") # 123
+>>> decode_cyclic("aebcaefg") # abcdefg
+>>> decode_cyclic("111") # 111</s>

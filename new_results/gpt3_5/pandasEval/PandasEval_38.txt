@@ -1,0 +1,3 @@
+# Change column names of a dataframe based on origin_names and new_names lists
+def change_col_names_of_df(df, origin_names, new_names):
+    return df.rename(columns={origin_names:new_names})

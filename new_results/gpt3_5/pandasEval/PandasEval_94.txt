@@ -1,0 +1,3 @@
+# Select specified columns from a dataframe and return the resulting dataframe 
+def select_multiple_columns(df, columns): 
+    return df[columns]

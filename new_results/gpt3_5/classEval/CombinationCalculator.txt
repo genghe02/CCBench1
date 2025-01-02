@@ -1,0 +1,154 @@
+"""
+This class implements a Combination Calculator that provides methods to calculate combinations and select subsets from a given list of data.
+
+The class handles the initialization of the calculator with the list of data and provides static methods for calculating combinations count and selecting subsets from the data list.
+"""
+
+import math
+from typing import List
+
+class CombinationCalculator:
+    
+    def __init__(self, datas: List[str]):
+        """
+        Initialize the CombinationCalculator with a given list of data.
+
+        Parameters:
+            datas (List[str]): A list of strings representing the data elements.
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n: int, m: int) -> int:
+        """
+        Calculate the number of combinations of choosing 'm' elements from 'n' elements.
+
+        Parameters:
+            n (int): Total number of elements available.
+            m (int): Number of elements to choose for the combination.
+
+        Returns:
+            int: The number of combinations.
+
+        Test cases:
+            # Test case 1: Normal combination count
+            assert count(5, 3) == 10
+
+            # Test case 2: At boundary condition
+            assert count(10, 10) == 1
+
+            # Test case 3: m = 0, n = 5
+            assert count(5, 0) == 1
+        """
+
+        if m == 0 or n == m:
+            return 1
+        return math.factorial(n) // (math.factorial(n - m) * math.factorial(m))
+
+    @staticmethod
+    def count_all(n: int) -> int:
+        """
+        Calculate the total number of combinations possible for selecting 0 to 'n' elements.
+
+        Parameters:
+            n (int): The maximum number of elements to calculate combinations for.
+
+        Returns:
+            int: The total number of combinations.
+
+        Test cases:
+            # Test case 1: Normal count
+            assert count_all(3) == 7
+
+            # Test case 2: Edge case for n = 0
+            assert count_all(0) == 0
+
+            # Test case 3: n = 63, reaches infinity
+            assert count_all(63) == float("inf")
+        """
+
+        if n < 0 or n > 63:
+            return False
+        return (1 << n) - 1 if n != 63 else float("inf")
+
+    def select(self, m: int) -> List[List[str]]:
+        """
+        Select all possible combinations of 'm' elements from the initialized data list.
+
+        Parameters:
+            m (int): Number of elements to select in each combination.
+
+        Returns:
+            List[List[str]]: List of lists representing all the possible combinations of size 'm'.
+
+        Test cases:
+            # Test case 1: Select 2 elements
+            assert select(2) == [['A', 'B'], ['A', 'C'], ['B', 'C']]
+
+            # Test case 2: Select 3 elements
+            assert select(3) == [['A', 'B', 'C']]
+
+            # Test case 3: Select 1 element
+            assert select(1) == [['A'], ['B'], ['C']]
+        """
+
+        result = []
+        self._select(0, [None] * m, 0, result)
+        return result
+
+    def select_all(self) -> List[List[str]]:
+        """
+        Select all possible combinations of elements from the initialized data list.
+
+        Returns:
+            List[List[str]]: List of lists representing all possible combinations of any size.
+
+        Test cases:
+            # Test case 1: Select all combinations
+            assert select_all() == [['A'], ['B'], ['C'], ['A', 'B'], ['A', 'C'], ['B', 'C'], ['A', 'B', 'C']]
+
+            # Test case 2: Data list with one element
+            assert select_all(['A']) == [['A']]
+
+            # Test case 3: Data list with no elements
+            assert select_all([]) == []
+        """
+
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    def _select(self, dataIndex: int, resultList: List[str], resultIndex: int, result: List[List[str]]):
+        """
+        Internal recursive method to select all combinations of elements from the data list.
+
+        Parameters:
+            dataIndex (int): Index of the current data element.
+            resultList (List[str]): List of selected elements in the current combination.
+            resultIndex (int): Index of the current list in the result.
+            result (List[List[str]]): List of lists containing all combinations.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Selecting one element
+            _select(0, [None], 0, []) == [['A'], ['B'], ['C']]
+
+            # Test case 2: Selecting two elements
+            _select(0, [None, None], 0, []) == [['A', 'B'], ['A', 'C'], ['B', 'C']]
+            
+            # Test case 3: Selecting elements with empty data
+            _select(0, [None, None], 0, []) == []
+        """
+
+        resultLen = len(resultList)
+        resultCount = resultIndex + 1
+        if resultCount > resultLen:
+            result.append(resultList.copy())
+            return
+
+        for i in range(dataIndex, len(self.datas) + resultCount - resultLen):
+            resultList[resultIndex] = self.datas[i]
+            self._select(i + 1, resultList, resultIndex + 1, result)

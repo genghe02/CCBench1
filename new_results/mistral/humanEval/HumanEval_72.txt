@@ -1,0 +1,26 @@
+ # Ensure q and w are lists
+ # Return True if the list q can be balanced on the scale with weight w
+ def will_it_fly(q, w):
+     # Ensure q and w are lists
+     >>> q = [1, 2, 3, 4, 5]
+     >>> w = 7
+     
+     if sum(q) > w:
+         return False
+
+     i, j = 0, len(q)-1
+     while i<j:
+         if q[i] != q[j]:
+             return False
+         i+=1
+         j-=1
+     return True
+
+     # Alternatively:
+     # if len(q) > (w//(len(q)/2) + 1):
+     #     return False
+
+     # while len(q) > w:
+     #     q.pop()
+
+     # return q == [q[-1]] * (w//len(q) + 1)</s>

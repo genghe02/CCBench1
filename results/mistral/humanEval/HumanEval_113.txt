@@ -1,0 +1,21 @@
+ def odd\_count(lst):
+```python
+# This function takes a list of lists as an argument and returns a list of strings,
+# each string describing the number of odd elements in each input list.
+
+<some test cases for the function>
+res = []
+for arr in lst:
+    # Calculate the sum of 1 for each odd number in the list and store the result in 'n'.
+    n = sum(int(d) % 2 == 1 for d in arr)
+    # Append a string to the'res' list, which describes the number of odd elements in the current list.
+    res.append("the number of odd elements " + str(n) + " in the list " + str(arr) + " is.")
+# Return the list of strings.
+return res
+```
+
+For example:
+```python
+odd_count([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+# Output: ['the number of odd elements 3 in the list [1, 2, 3] is.', 'the number of odd elements 3 in the list [4, 5, 6] is.', 'the number of odd elements 3 in the list [7, 8, 9] is.']
+```

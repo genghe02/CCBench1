@@ -1,0 +1,8 @@
+# This function compares two lists element-wise and returns the absolute difference
+>>> compare([1, 2, 3], [2, 2, 3]) # should return [1, 0, 0]
+>>> compare([5, 5, 5], [1, 2, 3]) # should return [4, 3, 2]
+>>> compare([0, 0, 0], [0, 0, 0]) # should return [0, 0, 0]
+
+def compare(game,guess):
+    
+    return [abs(x-y) for x,y in zip(game,guess)]

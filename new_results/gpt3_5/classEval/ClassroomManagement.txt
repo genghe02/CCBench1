@@ -1,0 +1,144 @@
+"""
+This class represents a Classroom that manages courses and schedules.
+
+The class provides functionality to add and remove courses, check course conflicts, and determine availability at a specific time.
+"""
+
+from datetime import datetime
+
+
+class Classroom:
+    def __init__(self, id):
+        """
+        Initialize the Classroom object with the given ID.
+
+        Parameters:
+            id (int): The unique identifier for the classroom.
+        """
+        self.id = id
+        self.courses = []
+
+    def add_course(self, course):
+        """
+        Add a course to the classroom's schedule.
+
+        Parameters:
+            course (dict): The course information to add.
+
+        Test cases:
+            # Test case 1: Add a new course
+            course1 = {...}
+            add_course(course1)
+            assert len(self.courses) == 1
+
+            # Test case 2: Add an existing course
+            course2 = {...}
+            add_course(course2)
+            add_course(course2)
+            assert len(self.courses) == 1
+
+            # Test case 3: Add multiple courses
+            course3 = {...}
+            add_course(course3)
+            assert len(self.courses) == 2
+        """
+        if course not in self.courses:
+            self.courses.append(course)
+
+    def remove_course(self, course):
+        """
+        Remove a course from the classroom's schedule.
+
+        Parameters:
+            course (dict): The course information to remove.
+
+        Test cases:
+            # Test case 1: Remove an existing course
+            course1 = {...}
+            add_course(course1)
+            remove_course(course1)
+            assert len(self.courses) == 0
+
+            # Test case 2: Remove a non-existing course
+            course2 = {...}
+            remove_course(course2)
+            assert len(self.courses) == 0
+
+            # Test case 3: Remove multiple courses
+            course3 = {...}
+            add_course(course3)
+            add_course(course1)
+            remove_course(course3)
+            assert len(self.courses) == 1
+        """
+        if course in self.courses:
+            self.courses.remove(course)
+
+    def is_free_at(self, check_time):
+        """
+        Check if the classroom is free at the specified time.
+
+        Parameters:
+            check_time (str): The time to check in HH:MM format.
+
+        Returns:
+            bool: True if the classroom is free, False if it's occupied.
+
+        Test cases:
+            # Test case 1: Classroom is free
+            assert is_free_at('09:00') == True
+
+            # Test case 2: Classroom is occupied
+            course1 = {'start_time': '10:00', 'end_time': '12:00'}
+            add_course(course1)
+            assert is_free_at('11:00') == False
+
+            # Test case 3: No courses scheduled
+            assert is_free_at('14:00') == True
+        """
+        check_time = datetime.strptime(check_time, '%H:%M')
+
+        for course in self.courses:
+            if datetime.strptime(course['start_time'], '%H:%M') <= check_time <= datetime.strptime(course['end_time'], '%H:%M'):
+                return False
+        return True
+
+    def check_course_conflict(self, new_course):
+        """
+        Check if adding a new course will conflict with existing courses.
+
+        Parameters:
+            new_course (dict): The course information to check for conflicts.
+
+        Returns:
+            bool: True if the new course can be added without conflicts, False otherwise.
+
+        Test cases:
+            # Test case 1: No conflicts with existing course
+            course1 = {'start_time': '09:00', 'end_time': '11:00'}
+            add_course(course1)
+            new_course1 = {'start_time': '13:00', 'end_time': '15:00'}
+            assert check_course_conflict(new_course1) == True
+
+            # Test case 2: Conflict with existing course
+            course2 = {'start_time': '10:00', 'end_time': '12:00'}
+            add_course(course2)
+            new_course2 = {'start_time': '11:30', 'end_time': '13:00'}
+            assert check_course_conflict(new_course2) == False
+
+            # Test case 3: No existing courses
+            new_course3 = {'start_time': '16:00', 'end_time': '18:00'}
+            assert check_course_conflict(new_course3) == True
+        """
+        new_start_time = datetime.strptime(new_course['start_time'], '%H:%M')
+        new_end_time = datetime.strptime(new_course['end_time'], '%H:%M')
+
+        flag = True
+        for course in self.courses:
+            start_time = datetime.strptime(course['start_time'], '%H:%M')
+            end_time = datetime.strptime(course['end_time'], '%H:%M')
+            if start_time <= new_start_time and end_time >= new_start_time:
+                flag = False
+            if start_time <= new_end_time and end_time >= new_end_time:
+                flag = False
+        return flag

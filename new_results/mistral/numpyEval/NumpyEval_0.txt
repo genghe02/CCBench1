@@ -1,0 +1,2 @@
+ # Find indices of elements in array 'a' that are different from their previous elements
+result = np.where(a[1:] != a[:-1])[0]</s>

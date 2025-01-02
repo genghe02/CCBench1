@@ -1,0 +1,51 @@
+```python
+import json
+
+# This class provides a set of utility methods for managing cookies in a web application
+class CookiesUtil:
+    def __init__(self, cookies_file):
+        # This is a constructor for the CookiesUtil class. It initializes the cookies file name and sets the initial value of cookies to None.
+        # param cookies_file: str, the name of the file where cookies are saved
+        self.cookies_file = cookies_file
+        self.cookies = None
+
+    def get_cookies(self, reponse):
+        # This method extracts cookies from the response and saves them in a file. 
+        # param response: dict, the server's response that includes cookies
+        # Test Cases for the function: 
+        # >>> cu = CookiesUtil('test_cookies.txt')
+        # >>> cu.get_cookies({'cookies': {'sessionid': '1234567890'}})
+        self.cookies = reponse['cookies']
+        self._save_cookies()
+
+    def load_cookies(self):
+        # This method loads cookies from a file and returns them as a dictionary. If the file does not exist, it returns an empty dictionary.
+        # return: dict, the cookies loaded from the file
+        # Test Cases for the function:
+        # >>> cu = CookiesUtil('test_cookies.txt')
+        # >>> cu.load_cookies()
+        try:
+            with open(self.cookies_file, 'r') as file:
+                cookies_data = json.load(file)
+                return cookies_data
+        except FileNotFoundError:
+            return {}
+
+    def _save_cookies(self):
+        # This method saves the current cookies to a file. If the file can't be opened for writing, it returns False.
+        # return: bool, True if the cookies were successfully saved, False otherwise
+        # Test Cases for the function:
+        # >>> cu = CookiesUtil('test_cookies.txt')
+        # >>> cu.get_cookies({'cookies': {'sessionid': '1234567890'}})
+        # >>> cu._save_cookies()
+        try:
+            with open(self.cookies_file, 'w') as file:
+                json.dump(self.cookies, file)
+            return True
+        except:
+            return False
+
+    def set_cookies(self, request):
+        # This method sets the cookies in the request as a string in the format "key=value; key2=value2; ..."
+        request['cookies'] = '; '.join([f'{key}={value}' for key, value in self.cookies.items()])
+```

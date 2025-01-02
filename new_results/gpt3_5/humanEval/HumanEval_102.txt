@@ -1,0 +1,19 @@
+# The function compares two numbers and returns specific values based on conditions
+>>> choose_num(5, 3) # returns 3
+>>> choose_num(2, 4) # returns 4
+>>> choose_num(5, 5) # returns -1
+>>> choose_num(8, 7) # returns 7
+
+def choose_num(x, y):
+    # Compare two numbers and return specific values based on conditions
+    >>> choose_num(5, 3) # returns 3
+    >>> choose_num(2, 4) # returns 4
+    >>> choose_num(5, 5) # returns -1
+    >>> choose_num(8, 7) # returns 7
+    if x > y:
+        return -1
+    if y % 2 == 0:
+        return y
+    if x == y:
+        return -1
+    return y - 1

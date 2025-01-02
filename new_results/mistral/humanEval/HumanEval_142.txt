@@ -1,0 +1,17 @@
+ # The function sums the squares and in certain cases the cubes of numbers in a list
+
+def sum_squares(lst):
+    <Requirements for the code>
+
+    >>> sum_squares([1, 2, 3, 4, 5]) # returns 30
+    >>> sum_squares([-1, 2, 3, 4, 5]) # returns 30
+    >>> sum_squares([1, 2, 3, 4]) # returns 21
+    result =[]
+    for i in range(len(lst)):
+        if i %3 == 0:
+            result.append(lst[i]**2)
+        elif i % 4 == 0 and i%3 != 0:
+            result.append(lst[i]**3)
+        else:
+            result.append(lst[i])
+    return sum(result)</s>

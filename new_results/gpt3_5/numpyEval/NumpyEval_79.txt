@@ -1,0 +1,2 @@
+# Concatenate two arrays element-wise and return the result as a new array
+result = np.core.defchararray.add(a1, a2)

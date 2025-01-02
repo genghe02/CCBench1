@@ -1,0 +1,62 @@
+```python
+<description for whole class>
+class Interpolation:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def interpolate_1d(x, y, x_interp):
+        <description for whole function>
+        Interpolates 1D data points given by x and y to the new x_interp values.
+        <description for all parameters>
+        :param x: list, x-coordinates of the original data
+        :param y: list, y-coordinates of the original data
+        :param x_interp: list, x-coordinates where interpolation is to be done
+        <description for return statement>
+        :return: list, interpolated y values corresponding to x_interp
+        <some test cases for the function>
+        >>> Interpolation.interpolate_1d([1, 2, 3, 4], [10, 20, 30, 40], [2.5, 3.5])
+        [25.0, 35.0]
+        y_interp = []
+        for xi in x_interp:
+            for i in range(len(x) - 1):
+                if x[i] <= xi <= x[i+1]:
+                    yi = y[i] + (y[i+1] - y[i]) * (xi - x[i]) / (x[i+1] - x[i])
+                    y_interp.append(yi)
+                    break
+        return y_interp
+    
+    @staticmethod
+    def interpolate_2d(x, y, z, x_interp, y_interp):
+        <description for whole function>
+        Interpolates 2D data points given by x, y, and z to the new x_interp, y_interp values.
+        <description for all parameters>
+        :param x: list, x-coordinates of the original data
+        :param y: list, y-coordinates of the original data
+        :param z: list of lists, z-coordinates of the original data forming a grid
+        :param x_interp: list, x-coordinates where interpolation is to be done
+        :param y_interp: list, y-coordinates where interpolation is to be done
+        <description for return statement>
+        :return: list, interpolated z values corresponding to x_interp, y_interp
+        <some test cases for the function>
+        >>> Interpolation.interpolate_2d([1, 2, 3], [10, 20, 30], [[100, 200], [300, 400], [500, 600]], [1.5, 2.5], [10.5, 20.5])
+        [150.0, 250.0]
+        z_interp = []
+        for xi, yi in zip(x_interp, y_interp):
+            for i in range(len(x) - 1):
+                if x[i] <= xi <= x[i+1]:
+                    for j in range(len(y) - 1):
+                        if y[j] <= yi <= y[j+1]:
+                            z00 = z[i][j]
+                            z01 = z[i][j+1]
+                            z10 = z[i+1][j]
+                            z11 = z[i+1][j+1]
+                            zi = (z00 * (x[i+1] - xi) * (y[j+1] - yi) +
+                                  z10 * (xi - x[i]) * (y[j+1] - yi) +
+                                  z01 * (x[i+1] - xi) * (yi - y[j]) +
+                                  z11 * (xi - x[i]) * (yi - y[j])) / ((x[i+1] - x[i]) * (y[j+1] - y[j]))
+                            z_interp.append(zi)
+                            break
+                    break
+        return z_interp
+```

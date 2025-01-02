@@ -1,0 +1,11 @@
+# Sort an array in ascending order unless the sum of first and last element is odd
+>>> sort_array([4, 7, 2, 5, 9]) # returns [9, 7, 5, 4, 2]
+>>> sort_array([1, 2, 3, 4, 5]) # returns [1, 2, 3, 4, 5]
+>>> sort_array([0, 0, 0, 0, 0]) # returns [0, 0, 0, 0, 0] 
+
+def sort_array(array):
+    # Sort array in descending order if sum of first and last element is even, otherwise in ascending order
+    >>> sort_array([4, 7, 2, 5, 9]) # returns [9, 7, 5, 4, 2]
+    >>> sort_array([1, 2, 3, 4, 5]) # returns [1, 2, 3, 4, 5]
+    >>> sort_array([0, 0, 0, 0, 0]) # returns [0, 0, 0, 0, 0]
+    return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 == 0)

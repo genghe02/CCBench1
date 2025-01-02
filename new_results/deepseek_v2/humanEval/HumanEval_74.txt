@@ -1,0 +1,19 @@
+```python
+def total_match(lst1, lst2):
+    # Return the list whose total length of all strings is smaller; if equal, return lst1
+    >>> total_match(['hi', 'admin'], ['hello', 'world']) # returns ['hi', 'admin']
+    >>> total_match(['a', 'b'], ['c', 'd', 'e']) # returns ['a', 'b']
+    >>> total_match(['long', 'list'], ['short']) # returns ['short']
+    l1 = 0
+    for st in lst1:
+        l1 += len(st)
+    
+    l2 = 0
+    for st in lst2:
+        l2 += len(st)
+    
+    if l1 <= l2:
+        return lst1
+    else:
+        return lst2
+```

@@ -1,0 +1,15 @@
+def digitSum(s):
+    # This function takes a string 's' and returns the sum of the Unicode values of its uppercase characters. 
+    # If the string is empty, it returns 0. Lowercase characters are not processed for the calculation.
+    # param s: str, the string to process
+    # return: int, the sum of the Unicode values of the uppercase characters in the string
+    
+    # some test cases for the function
+    # >>> digitSum('A') returns 65
+    # >>> digitSum('ABC') returns 198
+    # >>> digitSum('abc') returns 0
+    # >>> digitSum('') returns 0
+    # >>> digitSum('AbC') returns 132
+    
+    if s == "": return 0
+    return sum(ord(char) if char.isupper() else 0 for char in s)

@@ -1,0 +1,192 @@
+```python
+"""
+This class provides a dictionary-like structure that automatically converts keys to camelCase format.
+It allows for case-insensitive key access and manipulation, ensuring that keys are stored in a consistent format.
+"""
+
+class CamelCaseMap:
+    def __init__(self):
+        """
+        Initializes an empty CamelCaseMap instance.
+        """
+        self._data = {}
+
+    def __getitem__(self, key):
+        """
+        Retrieves the value associated with the given key after converting it to camelCase.
+
+        Parameters:
+            key (str): The key to retrieve the value for. It will be converted to camelCase.
+
+        Returns:
+            The value associated with the converted key.
+
+        Test cases:
+            # Test case 1: Normal usage
+            m = CamelCaseMap()
+            m['my_key'] = 42
+            assert m['my_key'] == 42
+
+            # Test case 2: Key with underscores
+            m['another_key'] = 100
+            assert m['anotherKey'] == 100
+
+            # Test case 3: Key not in map
+            try:
+                m['nonexistent_key']
+            except KeyError:
+                pass
+        """
+        return self._data[self._convert_key(key)]
+
+    def __setitem__(self, key, value):
+        """
+        Sets the value for the given key after converting it to camelCase.
+
+        Parameters:
+            key (str): The key to set the value for. It will be converted to camelCase.
+            value: The value to associate with the key.
+
+        Test cases:
+            # Test case 1: Normal usage
+            m = CamelCaseMap()
+            m['my_key'] = 42
+            assert m['myKey'] == 42
+
+            # Test case 2: Overwriting existing key
+            m['my_key'] = 100
+            assert m['myKey'] == 100
+
+            # Test case 3: Non-string key
+            m[123] = 'value'
+            assert m[123] == 'value'
+        """
+        self._data[self._convert_key(key)] = value
+
+    def __delitem__(self, key):
+        """
+        Deletes the key-value pair associated with the given key after converting it to camelCase.
+
+        Parameters:
+            key (str): The key to delete. It will be converted to camelCase.
+
+        Test cases:
+            # Test case 1: Normal usage
+            m = CamelCaseMap()
+            m['my_key'] = 42
+            del m['my_key']
+            assert 'myKey' not in m
+
+            # Test case 2: Deleting non-existent key
+            try:
+                del m['nonexistent_key']
+            except KeyError:
+                pass
+
+            # Test case 3: Deleting non-string key
+            m[123] = 'value'
+            del m[123]
+            assert 123 not in m
+        """
+        del self._data[self._convert_key(key)]
+
+    def __iter__(self):
+        """
+        Returns an iterator over the keys in the map.
+
+        Returns:
+            iterator: An iterator over the keys in the map.
+
+        Test cases:
+            # Test case 1: Normal usage
+            m = CamelCaseMap()
+            m['my_key'] = 42
+            m['another_key'] = 100
+            keys = list(m)
+            assert set(keys) == {'myKey', 'anotherKey'}
+
+            # Test case 2: Empty map
+            m = CamelCaseMap()
+            assert list(m) == []
+
+            # Test case 3: Non-string keys
+            m[123] = 'value'
+            m[456] = 'another_value'
+            assert set(m) == {123, 456}
+        """
+        return iter(self._data)
+
+    def __len__(self):
+        """
+        Returns the number of key-value pairs in the map.
+
+        Returns:
+            int: The number of key-value pairs in the map.
+
+        Test cases:
+            # Test case 1: Normal usage
+            m = CamelCaseMap()
+            m['my_key'] = 42
+            m['another_key'] = 100
+            assert len(m) == 2
+
+            # Test case 2: Empty map
+            m = CamelCaseMap()
+            assert len(m) == 0
+
+            # Test case 3: Non-string keys
+            m[123] = 'value'
+            m[456] = 'another_value'
+            assert len(m) == 2
+        """
+        return len(self._data)
+
+    def _convert_key(self, key):
+        """
+        Converts the given key to camelCase if it is a string.
+
+        Parameters:
+            key (str): The key to convert to camelCase.
+
+        Returns:
+            str: The key in camelCase format, or the original key if it is not a string.
+
+        Test cases:
+            # Test case 1: Normal usage
+            m = CamelCaseMap()
+            assert m._convert_key('my_key') == 'myKey'
+
+            # Test case 2: Non-string key
+            assert m._convert_key(123) == 123
+
+            # Test case 3: Already camelCase
+            assert m._convert_key('myKey') == 'myKey'
+        """
+        if isinstance(key, str):
+            return self._to_camel_case(key)
+        return key
+
+    @staticmethod
+    def _to_camel_case(key):
+        """
+        Converts a snake_case string to camelCase.
+
+        Parameters:
+            key (str): The snake_case string to convert.
+
+        Returns:
+            str: The string in camelCase format.
+
+        Test cases:
+            # Test case 1: Normal usage
+            assert CamelCaseMap._to_camel_case('my_key') == 'myKey'
+
+            # Test case 2: Multiple underscores
+            assert CamelCaseMap._to_camel_case('my_long_key') == 'myLongKey'
+
+            # Test case 3: No underscores
+            assert CamelCaseMap._to_camel_case('mykey') == 'mykey'
+        """
+        parts = key.split('_')
+        return parts[0] + ''.join(part.title() for part in parts[1:])
+```

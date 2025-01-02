@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.arange(0,10)
+# Convert the numpy array to a string with space separated values
+a_string = " ".join(str(i) for i in a)

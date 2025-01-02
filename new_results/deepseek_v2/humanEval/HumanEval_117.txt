@@ -1,0 +1,16 @@
+```python
+def select_words(s, n):
+    # Select words from the string `s` that have exactly `n` consonants
+    >>> select_words("Hello world", 3) # returns ['Hello']
+    >>> select_words("This is a test", 2) # returns ['This', 'test']
+    >>> select_words("Python programming", 4) # returns ['programming']
+    result = []
+    for word in s.split():
+        n_consonants = 0
+        for i in range(0, len(word)):
+            if word[i].lower() not in ["a","e","i","o","u"]:
+                n_consonants += 1 
+        if n_consonants == n:
+            result.append(word)
+    return result
+```

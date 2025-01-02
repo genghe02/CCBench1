@@ -1,0 +1,14 @@
+```python
+def compare_one(a, b):
+    # Compare two values and return the greater one or None if they are equal
+    >>> compare_one(3, 5) # returns 5
+    >>> compare_one(5, 3) # returns 5
+    >>> compare_one(2.5, 2.5) # returns None
+    >>> compare_one('1,0', '1.0') # returns None
+    >>> compare_one('1.5', '1.2') # returns '1.5'
+    temp_a, temp_b = a, b
+    if isinstance(temp_a, str): temp_a = temp_a.replace(',','.')
+    if isinstance(temp_b, str): temp_b = temp_b.replace(',','.')
+    if float(temp_a) == float(temp_b): return None
+    return a if float(temp_a) > float(temp_b) else b 
+```

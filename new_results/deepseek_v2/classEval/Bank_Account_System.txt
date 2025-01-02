@@ -1,0 +1,158 @@
+```python
+"""
+This class represents a simple bank account with basic operations such as deposit, withdrawal, balance viewing, and transferring funds to another account.
+"""
+
+class BankAccount:
+    def __init__(self, balance=0):
+        """
+        Initializes a BankAccount instance with an optional initial balance.
+
+        Parameters:
+            balance (int or float, optional): The initial balance of the account. Defaults to 0.
+        """
+        self.balance = balance
+
+    def deposit(self, amount):
+        """
+        Deposits a specified amount into the account.
+
+        Parameters:
+            amount (int or float): The amount to deposit. Must be non-negative.
+
+        Returns:
+            int or float: The updated balance after the deposit.
+
+        Raises:
+            ValueError: If the amount is negative.
+
+        Test cases:
+            # Test case 1: Normal deposit
+            account = BankAccount(100)
+            assert account.deposit(50) == 150
+
+            # Test case 2: Deposit with zero amount
+            account = BankAccount(100)
+            assert account.deposit(0) == 100
+
+            # Test case 3: Deposit with negative amount (error case)
+            account = BankAccount(100)
+            try:
+                account.deposit(-50)
+            except ValueError as e:
+                assert str(e) == "Invalid amount"
+        """
+        if amount < 0:
+            raise ValueError("Invalid amount")
+        self.balance += amount
+        return self.balance
+
+    def withdraw(self, amount):
+        """
+        Withdraws a specified amount from the account.
+
+        Parameters:
+            amount (int or float): The amount to withdraw. Must be non-negative and not exceed the balance.
+
+        Returns:
+            int or float: The updated balance after the withdrawal.
+
+        Raises:
+            ValueError: If the amount is negative or exceeds the balance.
+
+        Test cases:
+            # Test case 1: Normal withdrawal
+            account = BankAccount(100)
+            assert account.withdraw(50) == 50
+
+            # Test case 2: Withdrawal with zero amount
+            account = BankAccount(100)
+            assert account.withdraw(0) == 100
+
+            # Test case 3: Withdrawal with negative amount (error case)
+            account = BankAccount(100)
+            try:
+                account.withdraw(-50)
+            except ValueError as e:
+                assert str(e) == "Invalid amount"
+
+            # Test case 4: Withdrawal exceeding balance (error case)
+            account = BankAccount(100)
+            try:
+                account.withdraw(150)
+            except ValueError as e:
+                assert str(e) == "Insufficient balance."
+        """
+        if amount < 0:
+            raise ValueError("Invalid amount")
+        if amount > self.balance:
+            raise ValueError("Insufficient balance.")
+        self.balance -= amount
+        return self.balance
+
+    def view_balance(self):
+        """
+        Returns the current balance of the account.
+
+        Returns:
+            int or float: The current balance.
+
+        Test cases:
+            # Test case 1: View balance after initialization
+            account = BankAccount(100)
+            assert account.view_balance() == 100
+
+            # Test case 2: View balance after deposit
+            account = BankAccount(100)
+            account.deposit(50)
+            assert account.view_balance() == 150
+
+            # Test case 3: View balance after withdrawal
+            account = BankAccount(100)
+            account.withdraw(50)
+            assert account.view_balance() == 50
+        """
+        return self.balance
+
+    def transfer(self, other_account, amount):
+        """
+        Transfers a specified amount from this account to another account.
+
+        Parameters:
+            other_account (BankAccount): The target account to transfer funds to.
+            amount (int or float): The amount to transfer. Must be non-negative and not exceed the balance.
+
+        Test cases:
+            # Test case 1: Normal transfer
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            account1.transfer(account2, 30)
+            assert account1.view_balance() == 70
+            assert account2.view_balance() == 80
+
+            # Test case 2: Transfer with zero amount
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            account1.transfer(account2, 0)
+            assert account1.view_balance() == 100
+            assert account2.view_balance() == 50
+
+            # Test case 3: Transfer with negative amount (error case)
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            try:
+                account1.transfer(account2, -30)
+            except ValueError as e:
+                assert str(e) == "Invalid amount"
+
+            # Test case 4: Transfer exceeding balance (error case)
+            account1 = BankAccount(100)
+            account2 = BankAccount(50)
+            try:
+                account1.transfer(account2, 150)
+            except ValueError as e:
+                assert str(e) == "Insufficient balance."
+        """
+        self.withdraw(amount)
+        other_account.deposit(amount)
+```

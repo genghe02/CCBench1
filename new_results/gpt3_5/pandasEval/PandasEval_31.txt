@@ -1,0 +1,1 @@
+# Return a Series without consecutive duplicates by comparing each value to the next one in the series

@@ -1,0 +1,5 @@
+# Add a new row at any given position in the dataframe and rearrange the index values
+def insert_row_at_arbitrary_in_dataframe(df, row_to_insert):
+    df = df.append(row_to_insert, ignore_index=False)
+    df = df.sort_index().reset_index(drop=True)
+    return df

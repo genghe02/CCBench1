@@ -1,0 +1,1 @@
+# Access the elements in the numpy array 'a' using the index values from the numpy array 'b'.

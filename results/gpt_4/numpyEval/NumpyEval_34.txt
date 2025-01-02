@@ -1,0 +1,1 @@
+# Remove the mask and return the data as a ndarray.

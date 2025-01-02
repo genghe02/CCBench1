@@ -1,0 +1,16 @@
+ def words_in_sentence(sentence):
+    # Identify words in a given sentence that have only unique letter frequencies
+
+    >>> words_in_sentence("the quick brown fox jumps over the lazy dog") # returns 'the quick brown fox'
+    >>> words_in_sentence("apple eats apple") # returns 'apple'
+    >>> words_in_sentence("the dog is happy") # returns 'is'
+    new_lst = []
+    for word in sentence.split():
+        flg = 0
+        for letter in set(word):
+            if word.count(letter) > sentence.count(letter) / len(sentence.split()) :
+                flg = 1
+                break
+        if flg == 0:
+            new_lst.append(word)
+    return " ".join(new_lst)</s>

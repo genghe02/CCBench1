@@ -1,0 +1,180 @@
+```python
+"""
+This class provides an interface for handling operations on Word documents, including reading text, 
+writing text, adding headings, and adding tables.
+"""
+
+from docx import Document
+from docx.shared import Pt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+
+class DocFileHandler:
+    def __init__(self, file_path):
+        """
+        Initializes the DocFileHandler with the given file path.
+
+        Parameters:
+            file_path (str): The path to the Word document file to be handled.
+        """
+        self.file_path = file_path
+
+    def read_text(self):
+        """
+        Reads the text content from the Word document.
+
+        Returns:
+            str: The combined text of all paragraphs in the document, separated by new lines.
+
+        Test cases:
+            # Test case 1: Regular document with multiple paragraphs
+            input = 'test_document.docx'  # Assuming this file exists and has paragraphs
+            expected_output = "First paragraph text.\nSecond paragraph text."
+            
+            # Test case 2: Document with no text
+            input = 'empty_document.docx'  # Assuming this file exists with no paragraphs
+            expected_output = ""
+            
+            # Test case 3: Nonexistent document
+            input = 'nonexistent.docx'  # This file does not exist
+            expected_output = FileNotFoundError
+        """
+        doc = Document(self.file_path)
+        text = []
+        for paragraph in doc.paragraphs:
+            text.append(paragraph.text)
+        return "\n".join(text)
+
+    def write_text(self, content, font_size=12, alignment='left'):
+        """
+        Writes text content to a new Word document, with specified font size and alignment.
+
+        Parameters:
+            content (str): The text content to write to the document.
+            font_size (int, optional): The font size of the text. Default is 12.
+            alignment (str, optional): The text alignment ('left', 'center', 'right'). Default is 'left'.
+
+        Returns:
+            bool: True if text was written successfully, False if an error occurred.
+
+        Test cases:
+            # Test case 1: Normal usage with valid content
+            input = ('Hello World', 12, 'center')
+            expected_output = True
+            
+            # Test case 2: Edge case with empty content
+            input = ('', 12, 'left')
+            expected_output = True  # Writing empty string should not raise an error
+            
+            # Test case 3: Edge case with invalid alignment
+            input = ('Sample text', 12, 'invalid')
+            expected_output = True  # Should fall back to left alignment
+        """
+        try:
+            doc = Document()
+            paragraph = doc.add_paragraph()
+            run = paragraph.add_run(content)
+            font = run.font
+            font.size = Pt(font_size)
+            alignment_value = self._get_alignment_value(alignment)
+            paragraph.alignment = alignment_value
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_heading(self, heading, level=1):
+        """
+        Adds a heading to the Word document.
+
+        Parameters:
+            heading (str): The heading text to add.
+            level (int, optional): The heading level (1-5). Default is 1.
+
+        Returns:
+            bool: True if the heading was added successfully, False if an error occurred.
+
+        Test cases:
+            # Test case 1: Normal heading addition
+            input = ('Chapter 1', 1)
+            expected_output = True
+            
+            # Test case 2: Adding a heading with a level greater than 5
+            input = ('Invalid Heading', 6)
+            expected_output = True  # Should default to level 1
+            
+            # Test case 3: Nonexistent document
+            input = ('New Heading', 1)  # If file_path is invalid, we expect False
+            expected_output = False
+        """
+        try:
+            doc = Document(self.file_path)
+            doc.add_heading(heading, level)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def add_table(self, data):
+        """
+        Adds a table to the Word document.
+
+        Parameters:
+            data (list of list): A two-dimensional list containing data to populate the table.
+
+        Returns:
+            bool: True if the table was added successfully, False if an error occurred.
+
+        Test cases:
+            # Test case 1: Normal table addition
+            input = [['Header 1', 'Header 2'], ['Row 1 Col 1', 'Row 1 Col 2']]
+            expected_output = True
+            
+            # Test case 2: Empty table data
+            input = [[]]
+            expected_output = True  # Adding empty table should not raise an error
+            
+            # Test case 3: Nonexistent document
+            input = [['Invalid Header']]
+            expected_output = False  # If file_path is invalid, we expect False
+        """
+        try:
+            doc = Document(self.file_path)
+            table = doc.add_table(rows=len(data), cols=len(data[0]))
+            for i, row in enumerate(data):
+                for j, cell_value in enumerate(row):
+                    table.cell(i, j).text = str(cell_value)
+            doc.save(self.file_path)
+            return True
+        except:
+            return False
+
+    def _get_alignment_value(self, alignment):
+        """
+        Gets the alignment value for the specified alignment string.
+
+        Parameters:
+            alignment (str): The alignment string (left, center, right).
+
+        Returns:
+            WD_PARAGRAPH_ALIGNMENT: The corresponding alignment value for use in Word document.
+
+        Test cases:
+            # Test case 1: Valid alignment string 'left'
+            input = 'left'
+            expected_output = WD_PARAGRAPH_ALIGNMENT.LEFT
+            
+            # Test case 2: Valid alignment string 'center'
+            input = 'center'
+            expected_output = WD_PARAGRAPH_ALIGNMENT.CENTER
+            
+            # Test case 3: Invalid alignment string 'invalid'
+            input = 'invalid'
+            expected_output = WD_PARAGRAPH_ALIGNMENT.LEFT  # Fallback to default
+        """
+        alignment_options = {
+            'left': WD_PARAGRAPH_ALIGNMENT.LEFT,
+            'center': WD_PARAGRAPH_ALIGNMENT.CENTER,
+            'right': WD_PARAGRAPH_ALIGNMENT.RIGHT
+        }
+        return alignment_options.get(alignment.lower(), WD_PARAGRAPH_ALIGNMENT.LEFT)
+```

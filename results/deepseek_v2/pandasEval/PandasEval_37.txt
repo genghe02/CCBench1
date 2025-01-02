@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+
+data = {'col_0': ['a', 'a', 'a', 'a', 'b','b','b'], 'col_1': [-2, -7, 6, 8, -5, 2, 6]}
+df = pd.DataFrame(data)
+# Modify the 'col_1' values for rows where 'col_0' is 'a' to be within the range [-2, 2] using the clip method.
+df.loc[df['col_0']=='a','col_1'] =  df.loc[df['col_0']=='a','col_1'].clip(-2,2)
+```

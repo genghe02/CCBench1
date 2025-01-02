@@ -1,0 +1,4 @@
+import numpy as np
+
+# Create a 5x5 array filled with -1.0
+out = np.full((5, 5), -1.)

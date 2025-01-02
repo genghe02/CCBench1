@@ -1,0 +1,1 @@
+# Extract rows where the first column equals 0 and the second column equals 1 by utilizing np.where(condition).

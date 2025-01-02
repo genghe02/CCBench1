@@ -1,0 +1,15 @@
+ def circular_shift(x, shift):
+    # Check if x is a list or a string before implementing circular shift
+    # For simplicity, this example assumes x is a string
+    
+    # Test cases:
+    >>> circular_shift("abcdef", 1) # returns "bcdefa"
+    >>> circular_shift("abcdef", 4) # returns "efabcd"
+    >>> circular_shift("abcdef", 0) # returns "abcdef"
+    >>> circular_shift("abcdef", 5) # returns "fabcde"
+    
+    s = str(x)
+    if shift > len(s):
+        return s[::-1]
+    else:
+        return s[len(s) - shift:] + s[:len(s) - shift]</s>

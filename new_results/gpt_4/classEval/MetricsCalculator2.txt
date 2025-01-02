@@ -1,0 +1,150 @@
+"""
+This class provides methods to calculate the Mean Reciprocal Rank (MRR) and Mean Average Precision (MAP) metrics.
+"""
+
+import numpy as np
+
+
+class MetricsCalculator2:
+    def __init__(self):
+        """
+        Initialize the MetricsCalculator2 class.
+        """
+        pass
+
+    @staticmethod
+    def mrr(data):
+        """
+        Calculate the Mean Reciprocal Rank (MRR) of the given data.
+        
+        Parameters:
+            data (list/tuple): A list of tuples or a single tuple, where each tuple contains a binary array and total number.
+            The binary array should have 1s at the position of relevant items and 0s elsewhere. The total number is the total
+            number of relevant items.
+        
+        Returns:
+            (float, list): A tuple containing the MRR and a list of individual Reciprocal Ranks.
+        
+        Test cases:
+            # Test case 1: Single tuple with one relevant item
+            assert mrr(([0, 0, 1, 0], 1)) == (1.0, [1.0])
+            
+            # Test case 2: List of tuples with multiple relevant items
+            assert mrr([([0, 0, 1, 0], 1), ([0, 1, 0, 0], 1)]) == (0.75, [1.0, 0.5])
+            
+            # Test case 3: Input with no relevant items
+            assert mrr(([0, 0, 0, 0], 0)) == (0.0, [0.0])
+        """
+        if type(data) != list and type(data) != tuple:
+            raise Exception("The input must be a tuple([0,...,1,...],int) or a iteration of list of tuple")
+
+        if len(data) == 0:
+            return 0.0, [0.0]
+        if type(data) == tuple:
+            (sub_list, total_num) = data
+            sub_list = np.array(sub_list)
+            if total_num == 0:
+                return 0.0, [0.0]
+            else:
+                ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+                mr_np = sub_list * ranking_array
+
+                mr = 0.0
+                for team in mr_np:
+                    if team > 0:
+                        mr = team
+                        break
+                return mr, [mr]
+
+        if type(data) == list:
+            separate_result = []
+            for (sub_list, total_num) in data:
+                sub_list = np.array(sub_list)
+
+                if total_num == 0:
+                    mr = 0.0
+                else:
+                    ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+                    mr_np = sub_list * ranking_array
+
+                    mr = 0.0
+                    for team in mr_np:
+                        if team > 0:
+                            mr = team
+                            break
+
+                separate_result.append(mr)
+            return np.mean(separate_result), separate_result
+
+    @staticmethod
+    def map(data):
+        """
+        Calculate the Mean Average Precision (MAP) of the given data.
+        
+        Parameters:
+            data (list/tuple): A list of tuples or a single tuple, where each tuple contains a binary array and total number.
+            The binary array should have 1s at the position of relevant items and 0s elsewhere. The total number is the total
+            number of relevant items.
+        
+        Returns:
+            (float, list): A tuple containing the MAP and a list of individual Average Precisions.
+        
+        Test cases:
+            # Test case 1: Single tuple with one relevant item
+            assert map(([0, 0, 1, 0], 1)) == (1.0, [1.0])
+            
+            # Test case 2: List of tuples with multiple relevant items
+            assert map([([0, 0, 1, 0], 1), ([0, 1, 0, 0], 1)]) == (0.75, [1.0, 0.5])
+            
+            # Test case 3: Input with no relevant items
+            assert map(([0, 0, 0, 0], 0)) == (0.0, [0.0])
+
+        """
+        if type(data) != list and type(data) != tuple:
+            raise Exception("The input must be a tuple([0,...,1,...],int) or a iteration of list of tuple")
+
+        if len(data) == 0:
+            return 0.0, [0.0]
+        if type(data) == tuple:
+            (sub_list, total_num) = data
+            sub_list = np.array(sub_list)
+            if total_num == 0:
+                return 0.0, [0.0]
+            else:
+                ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+
+                right_ranking_list = []
+                count = 1
+                for t in sub_list:
+                    if t == 0:
+                        right_ranking_list.append(0)
+                    else:
+                        right_ranking_list.append(count)
+                        count += 1
+
+                ap = np.sum(np.array(right_ranking_list) * ranking_array) / total_num
+                return ap, [ap]
+
+        if type(data) == list:
+            separate_result = []
+            for (sub_list, total_num) in data:
+                sub_list = np.array(sub_list)
+
+                if total_num == 0:
+                    ap = 0.0
+                else:
+                    ranking_array = 1.0 / (np.array(list(range(len(sub_list)))) + 1)
+
+                    right_ranking_list = []
+                    count = 1
+                    for t in sub_list:
+                        if t == 0:
+                            right_ranking_list.append(0)
+                        else:
+                            right_ranking_list.append(count)
+                            count += 1
+
+                    ap = np.sum(np.array(right_ranking_list) * ranking_array) / total_num
+
+                separate_result.append(ap)
+            return np.mean(separate_result), separate_result

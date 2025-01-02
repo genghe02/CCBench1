@@ -1,0 +1,18 @@
+def factorize(n: int) -> List[int]:
+    # Return a list of prime factors of a given number 'n'
+    >>> factorize(10) # returns [2, 5]
+    >>> factorize(16) # returns [2, 2, 2, 2]
+    >>> factorize(100) # returns [2, 2, 5, 5]
+    import math
+    fact = []
+    i = 2
+    while i <= int(math.sqrt(n) + 1):
+        if n % i == 0:
+            fact.append(i)
+            n //= i
+        else:
+            i += 1
+
+    if n > 1:
+        fact.append(n)
+    return fact

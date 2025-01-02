@@ -1,0 +1,83 @@
+```python
+# This class is for calculating various metrics to assess the performance of a prediction model.
+class MetricsCalculator:
+    # Initialize the four categories of prediction results.
+    def __init__(self):
+        self.true_positives = 0
+        self.false_positives = 0
+        self.false_negatives = 0
+        self.true_negatives = 0
+
+    # This function updates the four categories of prediction results according to the predicted labels and true labels.
+    # param predicted_labels: list, predicted labels from the prediction model
+    # param true_labels: list, true labels for the data
+    # This function does not return anything.
+    # Test cases: 
+    # >>> calculator = MetricsCalculator()
+    # >>> calculator.update([1, 0, 1, 0], [1, 0, 0, 1])
+    def update(self, predicted_labels, true_labels):
+        for predicted, true in zip(predicted_labels, true_labels):
+            if predicted == 1 and true == 1:
+                self.true_positives += 1
+            elif predicted == 1 and true == 0:
+                self.false_positives += 1
+            elif predicted == 0 and true == 1:
+                self.false_negatives += 1
+            elif predicted == 0 and true == 0:
+                self.true_negatives += 1
+
+    # This function calculates the precision of the prediction model.
+    # param predicted_labels: list, predicted labels from the prediction model
+    # param true_labels: list, true labels for the data
+    # return: float, precision of the prediction model
+    # Test cases: 
+    # >>> calculator = MetricsCalculator()
+    # >>> calculator.precision([1, 0, 1, 0], [1, 0, 0, 1])
+    def precision(self, predicted_labels, true_labels):
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_positives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_positives)
+
+    # This function calculates the recall of the prediction model.
+    # param predicted_labels: list, predicted labels from the prediction model
+    # param true_labels: list, true labels for the data
+    # return: float, recall of the prediction model
+    # Test cases: 
+    # >>> calculator = MetricsCalculator()
+    # >>> calculator.recall([1, 0, 1, 0], [1, 0, 0, 1])
+    def recall(self, predicted_labels, true_labels):
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_negatives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_negatives)
+
+    # This function calculates the F1 score of the prediction model.
+    # param predicted_labels: list, predicted labels from the prediction model
+    # param true_labels: list, true labels for the data
+    # return: float, F1 score of the prediction model
+    # Test cases: 
+    # >>> calculator = MetricsCalculator()
+    # >>> calculator.f1_score([1, 0, 1, 0], [1, 0, 0, 1])
+    def f1_score(self, predicted_labels, true_labels):
+        self.update(predicted_labels, true_labels)
+        precision = self.precision(predicted_labels, true_labels)
+        recall = self.recall(predicted_labels, true_labels)
+        if precision + recall == 0.0:
+            return 0.0
+        return (2 * precision * recall) / (precision + recall)
+
+    # This function calculates the accuracy of the prediction model.
+    # param predicted_labels: list, predicted labels from the prediction model
+    # param true_labels: list, true labels for the data
+    # return: float, accuracy of the prediction model
+    # Test cases: 
+    # >>> calculator = MetricsCalculator()
+    # >>> calculator.accuracy([1, 0, 1, 0], [1, 0, 0, 1])
+    def accuracy(self, predicted_labels, true_labels):
+        self.update(predicted_labels, true_labels)
+        total = self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        if total == 0:
+            return 0.0
+        return (self.true_positives + self.true_negatives) / total
+```

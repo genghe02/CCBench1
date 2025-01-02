@@ -1,0 +1,114 @@
+ """
+This class provides static methods for constructing SQL queries for SELECT, INSERT, DELETE, and UPDATE operations.
+"""
+
+@staticmethod
+def select(table, columns='*', where=None):
+"""
+Creates a SELECT query based on the provided table and optional columns and conditions.
+
+Parameters:
+table (str): Name of the table to query
+columns (str, optional): List of columns to select. Defaults to selecting all columns.
+where (dict, optional): Optional dictionary containing key-value pairs for filtering query results.
+
+Returns:
+str: The constructed SQL query
+
+Test cases:
+# Test case 1: Select all records from a table
+assert SQLQueryBuilder.select('users') == "SELECT * FROM users"
+
+# Test case 2: Select specific columns from a table
+assert SQLQueryBuilder.select('users', ['id', 'name']) == "SELECT id, name FROM users"
+
+# Test case 3: Select records based on conditions
+assert SQLQueryBuilder.select('users', {'age': '>': 18}) == "SELECT * FROM users WHERE age > 18"
+"""
+
+if columns != '*':
+columns = ', '.join(columns)
+query = f"SELECT {columns} FROM {table}"
+if where:
+query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+return query
+
+@staticmethod
+def insert(table, data):
+"""
+Creates an INSERT query based on the provided table and data.
+
+Parameters:
+table (str): Name of the table to insert data into
+data (dict): Dictionary containing key-value pairs for the data to be inserted
+
+Returns:
+str: The constructed SQL query
+
+Test cases:
+# Test case 1: Insert a single record into a table
+assert SQLQueryBuilder.insert('users', {'name': 'John Doe', 'age': 25}) == "INSERT INTO users (name, age) VALUES ('John Doe', 25)"
+
+# Test case 2: Insert multiple records into a table
+data1 = {'name': 'Alice Smith', 'age': 30}
+data2 = {'name': 'Bob Johnson', 'age': 35}
+assert SQLQueryBuilder.insert('users', data1) and SQLQueryBuilder.insert('users', data2) == ""
+
+# Test case 3: Insert a record with duplicate primary key
+assert SQLQueryBuilder.insert('users', {'name': 'Alice Smith', 'id': 1}) == "ERROR: duplicate key value violates unique constraint"
+"""
+keys = ', '.join(data.keys())
+values = ', '.join(f"'{v}'" for v in data.values())
+return f"INSERT INTO {table} ({keys}) VALUES ({values})"
+
+@staticmethod
+def delete(table, where=None):
+"""
+Creates a DELETE query based on the provided table and optional conditions.
+
+Parameters:
+table (str): Name of the table to delete records from
+where (dict, optional): Optional dictionary containing key-value pairs for filtering query results
+
+Returns:
+str: The constructed SQL query
+
+Test cases:
+# Test case 1: Delete all records from a table
+assert SQLQueryBuilder.delete('users') == "DELETE FROM users"
+
+# Test case 2: Delete records based on conditions
+assert SQLQueryBuilder.delete('users', {'age': '>': 30}) == "DELETE FROM users WHERE age > 30"
+
+# Test case 3: Delete records with no conditions
+assert SQLQueryBuilder.delete('users') == "DELETE FROM users"
+"""
+query = f"DELETE FROM {table}"
+if where:
+query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+return query
+
+@staticmethod
+def update(table, data, where=None):
+"""
+Creates an UPDATE query based on the provided table, data, and optional conditions.
+
+Parameters:
+table (str): Name of the table to update
+data (dict): Dictionary containing key-value pairs for the data to be updated
+where (dict, optional): Optional dictionary containing key-value pairs for filtering query results
+
+Returns:
+str: The constructed SQL query
+
+Test cases:
+# Test case 1: Update a single record in a table
+assert SQLQueryBuilder.update('users', {'age': 31}, {'id': 1}) == "UPDATE users SET age = 31 WHERE id = 1"
+
+# Test case 2: Update multiple records in a table
+data1 = {'age': 32}
+data2 = {'age': 33}
+assert SQLQueryBuilder.update('users', data1) and SQLQueryBuilder.update('users', data2) == ""
+
+# Test case 3: Update records with no conditions
+assert SQLQueryBuilder.update('users', {'age': 40}) == "UPDATE users SET age = 40"</s>

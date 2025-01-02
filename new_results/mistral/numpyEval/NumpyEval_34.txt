@@ -1,0 +1,2 @@
+ # Extract valid values from masked array y
+out = m.compressed()</s>

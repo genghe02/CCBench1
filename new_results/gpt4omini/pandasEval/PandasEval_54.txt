@@ -1,0 +1,1 @@
+import pandas as pd\n\ndef extract_the_last_year(df, column_name):\n    # Extract the last year from the date column and increment by 1\n    final_result = pd.to_numeric(df[column_name].str.split('-').str[0]) + 1\n    return final_result

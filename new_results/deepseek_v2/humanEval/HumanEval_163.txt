@@ -1,0 +1,12 @@
+```python
+def generate_integers(a, b):
+    # Generate a list of even integers between the range [max(2, min(a, b)), min(8, max(a, b))]
+
+    >>> generate_integers(1, 10) # returns [2, 4, 6, 8]
+    >>> generate_integers(3, 5) # returns [4]
+    >>> generate_integers(8, 2) # returns [2, 4, 6, 8]
+    lower = max(2, min(a, b))
+    upper = min(8, max(a, b))
+
+    return [i for i in range(lower, upper+1) if i % 2 == 0]
+```

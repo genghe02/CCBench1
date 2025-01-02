@@ -1,0 +1,2 @@
+ # Keep only the rows where all elements are numeric
+return arr[~np.isnan(arr).any(axis=1)]</s>

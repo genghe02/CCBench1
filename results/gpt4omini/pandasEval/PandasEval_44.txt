@@ -1,0 +1,16 @@
+```python
+import pandas as pd
+
+def delete_column(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    """ This function removes a specified column from a given pandas DataFrame.
+    If the column does not exist, a KeyError will be raised.
+    
+    >>> df = pd.DataFrame({'A': [1, 2], 'B': [3, 4]})
+    >>> delete_column(df, 'B')
+       A
+    0  1
+    1  2
+    >>> delete_column(df, 'C')  # This will raise a KeyError since 'C' is not a valid column.
+    """
+    return df.drop(column_name, axis=1)
+```

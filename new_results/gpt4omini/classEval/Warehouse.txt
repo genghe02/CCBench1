@@ -1,0 +1,191 @@
+```python
+"""
+This class represents a simple inventory management system for a warehouse.
+It allows for adding products, updating quantities, creating orders, and tracking order statuses.
+"""
+
+class Warehouse:
+    def __init__(self):
+        """
+        Initializes the Warehouse class with empty inventory and orders.
+        """
+        self.inventory = {}  # Product ID: Product
+        self.orders = {}     # Order ID: Order
+
+    def add_product(self, product_id, name, quantity):
+        """
+        Adds a new product to the inventory or updates the quantity if it already exists.
+
+        Parameters:
+            product_id (str): The unique identifier for the product.
+            name (str): The name of the product.
+            quantity (int): The quantity of the product to be added.
+
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Adding a new product
+            warehouse = Warehouse()
+            warehouse.add_product('p1', 'Product 1', 10)
+            assert warehouse.inventory['p1']['quantity'] == 10
+            
+            # Test case 2: Updating the quantity of an existing product
+            warehouse.add_product('p1', 'Product 1', 5)
+            assert warehouse.inventory['p1']['quantity'] == 15
+            
+            # Test case 3: Adding another new product
+            warehouse.add_product('p2', 'Product 2', 20)
+            assert warehouse.inventory['p2']['quantity'] == 20
+        """
+        if product_id not in self.inventory:
+            self.inventory[product_id] = {'name': name, 'quantity': quantity}
+        else:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def update_product_quantity(self, product_id, quantity):
+        """
+        Updates the quantity of an existing product in the inventory.
+
+        Parameters:
+            product_id (str): The unique identifier for the product.
+            quantity (int): The quantity to be added (can be negative to reduce stock).
+
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Increase quantity
+            warehouse = Warehouse()
+            warehouse.add_product('p1', 'Product 1', 10)
+            warehouse.update_product_quantity('p1', 5)
+            assert warehouse.inventory['p1']['quantity'] == 15
+            
+            # Test case 2: Decrease quantity
+            warehouse.update_product_quantity('p1', -2)
+            assert warehouse.inventory['p1']['quantity'] == 13
+            
+            # Test case 3: Updating a non-existing product (no effect)
+            warehouse.update_product_quantity('p2', 5)
+            assert 'p2' not in warehouse.inventory
+        """
+        if product_id in self.inventory:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def get_product_quantity(self, product_id):
+        """
+        Retrieves the quantity of a specified product.
+
+        Parameters:
+            product_id (str): The unique identifier for the product.
+
+        Returns:
+            int or bool: The quantity of the product if it exists, False otherwise.
+        
+        Test cases:
+            # Test case 1: Existing product
+            warehouse = Warehouse()
+            warehouse.add_product('p1', 'Product 1', 10)
+            assert warehouse.get_product_quantity('p1') == 10
+            
+            # Test case 2: Non-existing product
+            assert warehouse.get_product_quantity('p2') == False
+            
+            # Test case 3: After updating quantity
+            warehouse.update_product_quantity('p1', 5)
+            assert warehouse.get_product_quantity('p1') == 15
+        """
+        if product_id in self.inventory:
+            return self.inventory[product_id]['quantity']
+        else:
+            return False
+
+    def create_order(self, order_id, product_id, quantity):
+        """
+        Creates a new order if the requested quantity is available.
+
+        Parameters:
+            order_id (str): The unique identifier for the order.
+            product_id (str): The unique identifier for the product being ordered.
+            quantity (int): The quantity of the product to order.
+
+        Returns:
+            bool: True if order is created successfully, False if there is insufficient stock.
+        
+        Test cases:
+            # Test case 1: Successful order creation
+            warehouse = Warehouse()
+            warehouse.add_product('p1', 'Product 1', 10)
+            assert warehouse.create_order('o1', 'p1', 5) == True
+            
+            # Test case 2: Insufficient stock
+            assert warehouse.create_order('o2', 'p1', 10) == False
+            
+            # Test case 3: Non-existing product
+            assert warehouse.create_order('o3', 'p2', 1) == False
+        """
+        if self.get_product_quantity(product_id) >= quantity:
+            self.update_product_quantity(product_id, -quantity)
+            self.orders[order_id] = {'product_id': product_id, 'quantity': quantity, 'status': 'Shipped'}
+            return True
+        else:
+            return False
+
+    def change_order_status(self, order_id, status):
+        """
+        Changes the status of an existing order.
+
+        Parameters:
+            order_id (str): The unique identifier for the order.
+            status (str): The new status to assign to the order.
+
+        Returns:
+            bool: True if the status was changed successfully, False if the order does not exist.
+        
+        Test cases:
+            # Test case 1: Valid order status change
+            warehouse = Warehouse()
+            warehouse.create_order('o1', 'p1', 5)
+            assert warehouse.change_order_status('o1', 'Delivered') == True
+            assert warehouse.orders['o1']['status'] == 'Delivered'
+            
+            # Test case 2: Invalid order id
+            assert warehouse.change_order_status('o2', 'Cancelled') == False
+            
+            # Test case 3: Changing to same status
+            assert warehouse.change_order_status('o1', 'Delivered') == True
+        """
+        if order_id in self.orders:
+            self.orders[order_id]['status'] = status
+            return True
+        else:
+            return False
+
+    def track_order(self, order_id):
+        """
+        Retrieves the status of a specified order.
+
+        Parameters:
+            order_id (str): The unique identifier for the order.
+
+        Returns:
+            str or bool: The status of the order if it exists, False otherwise.
+        
+        Test cases:
+            # Test case 1: Existing order
+            warehouse = Warehouse()
+            warehouse.create_order('o1', 'p1', 5)
+            assert warehouse.track_order('o1') == 'Shipped'
+            
+            # Test case 2: Non-existing order
+            assert warehouse.track_order('o2') == False
+            
+            # Test case 3: After order status change
+            warehouse.change_order_status('o1', 'Delivered')
+            assert warehouse.track_order('o1') == 'Delivered'
+        """
+        if order_id in self.orders:
+            return self.orders[order_id]['status']
+        else:
+            return False
+```

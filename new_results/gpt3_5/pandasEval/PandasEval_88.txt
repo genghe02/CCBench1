@@ -1,0 +1,4 @@
+import pandas as pd
+
+# Get the last N rows of the dataframe as a new dataframe
+result = df.tail(N)

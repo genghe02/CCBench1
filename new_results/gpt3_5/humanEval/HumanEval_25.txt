@@ -1,0 +1,6 @@
+# Factorize a given integer into a list of prime factors
+>>> factorize(10) # returns [2, 5]
+>>> factorize(60) # returns [2, 2, 3, 5]
+>>> factorize(17) # returns [17]
+>>> factorize(1) # returns []
+>>> factorize(0) # returns []

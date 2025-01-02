@@ -1,0 +1,13 @@
+```python
+def max_element(l: list):
+    # Return the maximum element from a list
+    >>> max_element([1, 2, 3]) # returns 3
+    >>> max_element([-1, -2, -3]) # returns -1
+    >>> max_element([1, 1, 1]) # returns 1
+    >>> max_element([4]) # returns 4
+    m = l[0]
+    for e in l:
+        if e > m:
+            m = e
+    return m
+```

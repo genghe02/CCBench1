@@ -1,0 +1,2 @@
+# Filter dataframe to include rows where values in column 2 are 'Jimmy'
+new_df = df[df.iloc[:, 1] == 'Jimmy']

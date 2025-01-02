@@ -1,0 +1,9 @@
+# This function generates a list of even integers between 2 and 8
+>>> generate_integers(3, 6) # returns [4, 6]
+>>> generate_integers(8, 2) # returns [4, 6, 8]
+>>> generate_integers(10, -3) # returns [4, 6, 8]
+def generate_integers(a, b):
+    lower = max(2, min(a, b))
+    upper = min(8, max(a, b))
+
+    return [i for i in range(lower, upper+1) if i % 2 == 0]

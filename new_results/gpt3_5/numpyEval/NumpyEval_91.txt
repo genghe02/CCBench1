@@ -1,0 +1,2 @@
+# Remove the 2nd and 4th columns from the 3x4 matrix 'a'
+out = np.delete(a, [1, 3], axis=1)

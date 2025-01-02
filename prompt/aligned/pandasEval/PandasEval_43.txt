@@ -1,0 +1,1 @@
+# Specify a new column named `mean_along_rows` that contains the mean of each row by computing the mean along the rows using axis=1. Finally, return the dataframe with the new column.

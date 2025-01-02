@@ -1,0 +1,13 @@
+```python
+def solve(N):
+    # Converts the integer N to a string, sums its digits, and returns the binary representation of that sum.
+    # The input N is expected to be a non-negative integer.
+    
+    # Example test cases:
+    # >>> solve(123) returns '111' since 1 + 2 + 3 = 6, and 6 in binary is 110.
+    # >>> solve(0) returns '0' since the sum of digits is 0.
+    # >>> solve(999) returns '1101' since 9 + 9 + 9 = 27, and 27 in binary is 11011.
+    # >>> solve(456) returns '1011' since 4 + 5 + 6 = 15, and 15 in binary is 1111.
+    
+    return bin(sum(int(i) for i in str(N)))[2:]
+```

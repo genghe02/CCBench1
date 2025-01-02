@@ -1,0 +1,15 @@
+```python
+def x_or_y(n, x, y):
+    # If n is 1 or composite, return y; if n is prime, return x
+    >>> x_or_y(1, 'x', 'y') # returns 'y'
+    >>> x_or_y(7, 'x', 'y') # returns 'x'
+    >>> x_or_y(10, 'x', 'y') # returns 'y'
+    if n == 1:
+        return y
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x
+```

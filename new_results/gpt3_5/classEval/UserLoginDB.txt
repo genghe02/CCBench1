@@ -1,0 +1,95 @@
+"""
+This class provides methods to interact with a user login SQLite database for managing user information.
+
+The class initializes a connection to the specified SQLite database file and sets up a cursor for executing queries.
+"""
+
+import sqlite3
+
+
+class UserLoginDB:
+    def __init__(self, db_name):
+        """
+        Initialize the UserLoginDB object with a connection to the SQLite database.
+
+        Parameters:
+            db_name (str): The name of the SQLite database file
+
+        This method establishes a connection to the SQLite database and creates a cursor for executing queries.
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+
+    def insert_user(self, username, password):
+        """
+        Insert a new user into the user table with the specified username and password.
+
+        Parameters:
+            username (str): The username of the new user
+            password (str): The password of the new user
+
+        Returns:
+            None
+
+        This method executes an SQL query to insert a new user with the provided username and password into the database.
+        """
+        self.cursor.execute('''
+            INSERT INTO users (username, password)
+            VALUES (?, ?)
+        ''', (username, password))
+        self.connection.commit()
+
+    def search_user_by_username(self, username):
+        """
+        Search for a user in the database based on the username.
+
+        Parameters:
+            username (str): The username of the user to search for
+
+        Returns:
+            tuple: A tuple containing the user information if found or None if not found
+
+        This method executes an SQL query to retrieve user information based on the provided username.
+        """
+        self.cursor.execute('''
+            SELECT * FROM users WHERE username = ?
+        ''', (username,))
+        user = self.cursor.fetchone()
+        return user
+
+    def delete_user_by_username(self, username):
+        """
+        Delete a user from the database based on the username.
+
+        Parameters:
+            username (str): The username of the user to delete
+
+        Returns:
+            None
+
+        This method executes an SQL query to remove the user with the specified username from the database.
+        """
+        self.cursor.execute('''
+            DELETE FROM users WHERE username = ?
+        ''', (username,))
+        self.connection.commit()
+
+    def validate_user_login(self, username, password):
+        """
+        Validate a user login by comparing the username and password.
+
+        Parameters:
+            username (str): The username of the user to validate
+            password (str): The password to verify against the user's password
+
+        Returns:
+            bool: True if the username and password match, False otherwise
+
+        This method checks if a user with the given username exists and verifies if the password matches the stored password.
+        """
+
+        user = self.search_user_by_username(username)
+        if user is not None and user[1] == password:
+            return True
+        return False
+```

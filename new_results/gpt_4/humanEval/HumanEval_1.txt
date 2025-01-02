@@ -1,0 +1,22 @@
+def separate_paren_groups(paren_string: str) -> List[str]:
+    # This function separates groups of parentheses from a string and returns them as a list of strings
+    >>> separate_paren_groups("((())())(())") # returns ['((())())', '(())']
+    >>> separate_paren_groups("(())(())") # returns ['(())', '(())']
+    >>> separate_paren_groups("()()") # returns ['()', '()']
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result

@@ -1,0 +1,5 @@
+ # Ensure input is a list and remove duplicates using set and list conversion
+ >>> unique([1, 1, 2, 2, 3, 3]) # returns [1, 2, 3]
+ >>> unique([1, "a", "b", 1]) # returns ["a", 1]
+ >>> unique([]) # returns []
+ return sorted(list(set(l)))</s>

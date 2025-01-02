@@ -1,0 +1,20 @@
+# This function finds the strongest extension in a list based on the number of uppercase and lowercase letters
+# The strongest extension is determined by the difference between the count of uppercase and lowercase letters
+
+def Strongest_Extension(class_name, extensions):
+    >>> Strongest_Extension("File", ["csv", "xlsx", "TXT"])
+    # returns "File.txt"
+    >>> Strongest_Extension("Document", ["DOCX", "pdf", "txt"])
+    # returns "Document.DOCX"
+    >>> Strongest_Extension("Image", ["JPEG", "PNG", "gif"])
+    # returns "Image.PNG"
+    strong = extensions[0]
+    my_val = len([x for x in extensions[0] if x.isalpha() and x.isupper()]) - len([x for x in extensions[0] if x.isalpha() and x.islower()])
+    for s in extensions:
+        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])
+        if val > my_val:
+            strong = s
+            my_val = val
+
+    ans = class_name + "." + strong
+    return ans

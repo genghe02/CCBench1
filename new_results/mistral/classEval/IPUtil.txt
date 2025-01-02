@@ -1,0 +1,85 @@
+ """
+This class, named IpUtil, provides utility functions for validating IPv4 and IPv6 addresses, and for getting the hostname from an IP address.
+"""
+
+import socket
+
+
+class IpUtil:
+
+    @staticmethod
+    def is_valid_ipv4(ip_address):
+        """
+        Validate an IPv4 address.
+
+        Parameters:
+            ip_address (str): The IPv4 address to validate
+
+        Returns:
+            bool: True if the address is valid, False otherwise
+
+        Test cases:
+            # Test case 1: Valid IPv4 address
+            assert is_valid_ipv4("192.168.1.1") == True
+
+            # Test case 2: Invalid IPv4 address due to incorrect number of parts
+            assert is_valid_ipv4("192.168.1") == False
+
+            # Test case 3: Invalid IPv4 address due to non-numeric character
+            assert is_valid_ipv4("192.168.1.a") == False
+        """
+
+        try:
+            socket.inet_pton(socket.AF_INET, ip_address)
+            return True
+        except socket.error:
+            return False
+
+    @staticmethod
+    def is_valid_ipv6(ip_address):
+        """
+        Validate an IPv6 address.
+
+        Parameters:
+            ip_address (str): The IPv6 address to validate
+
+        Returns:
+            bool: True if the address is valid, False otherwise
+
+        Test cases:
+            # Test case 1: Valid IPv6 address
+            assert is_valid_ipv6("2001:0db8:85a3:0000:0000:8a2e:0370:7334") == True
+
+            # Test case 2: Invalid IPv6 address due to incorrect number of parts
+            assert is_valid_ipv6("2001:0db8:85a3:0000:0000:8a2e:0370") == False
+
+            # Test case 3: Invalid IPv6 address due to non-hexadecimal character
+            assert is_valid_ipv6("2001:0db8:85a3:0000:0000:8a2e:0370:z") == False
+
+    @staticmethod
+    def get_hostname(ip_address):
+        """
+        Get the hostname associated with an IP address.
+
+        Parameters:
+            ip_address (str): The IP address to look up
+
+        Returns:
+            str: The hostname, or None if no hostname could be found
+
+        Test cases:
+            # Test case 1: IP address with a valid hostname
+            assert get_hostname("192.168.1.1") == "router"
+
+            # Test case 2: IP address with no associated hostname
+            assert get_hostname("255.255.255.255") is None
+
+            # Test case 3: IP address with a hostname containing special characters
+            assert get_hostname("10.0.0.1:80") == "example.com:http"
+        """
+
+        try:
+            hostname = socket.gethostbyaddr(ip_address)[0]
+            return hostname
+        except socket.herror:
+            return None</s>

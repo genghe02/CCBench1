@@ -1,0 +1,14 @@
+def get_closest_vowel(word):
+    # Return the closest vowel in a word that is not surrounded by other vowels
+    >>> get_closest_vowel("beautiful") # returns "u"
+    >>> get_closest_vowel("apple") # returns "e"
+    >>> get_closest_vowel("sky") # returns ""
+    if len(word) < 3:
+        return ""
+
+    vowels = {"a", "e", "i", "o", "u", "A", "E", 'O', 'U', 'I'}
+    for i in range(len(word)-2, 0, -1):
+        if word[i] in vowels:
+            if (word[i+1] not in vowels) and (word[i-1] not in vowels):
+                return word[i]
+    return ""

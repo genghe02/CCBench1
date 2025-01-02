@@ -1,0 +1,111 @@
+ """
+This class, named EncryptionUtils, is designed to provide various encryption techniques, such as Caesar Cipher, Vigenere Cipher, and Rail Fence Cipher.
+"""
+
+import string
+
+class EncryptionUtils:
+
+    def __init__(self, key):
+        """
+        Initialization method for the EncryptionUtils class.
+        
+        Parameters:
+            key (str): Encryption key to be set
+        """
+        self.key = key
+
+    def caesar_cipher(self, plaintext, shift):
+        """
+        The Caesar Cipher method encrypts a plaintext by shifting each letter by the given shift amount.
+
+        Parameters:
+            plaintext (str): The plaintext message to be encrypted
+            
+            shift (int): The shift amount for encryption, which can be positive or negative
+
+        Returns:
+            str: The encrypted text using Caesar Cipher
+        
+        Test cases:
+            # Test case 1: Encryption with positive shift
+            encryption_utils = EncryptionUtils("kitten")
+            assert encryption_utils.caesar_cipher("hello", 3) == "khoor zruog"
+            
+            # Test case 2: Encryption with negative shift
+            encryption_utils = EncryptionUtils("kitten")
+            assert encryption_utils.caesar_cipher("hello", -3) == "hallo"
+            
+            # Test case 3: Encryption with neutral shift
+            encryption_utils = EncryptionUtils("kitten")
+            assert encryption_utils.caesar_cipher("hello", 0) == "hello"
+        """
+        ciphertext = ""
+        for char in plaintext:
+            if char.isalpha():
+                if char.isupper():
+                    ascii_offset = 65
+                else:
+                    ascii_offset = 97
+                shifted_char = chr((ord(char) - ascii_offset + shift) % 26 + ascii_offset)
+                ciphertext += shifted_char
+            else:
+                ciphertext += char
+        return ciphertext
+
+    def vigenere_cipher(self, plain_text):
+        """
+        The Vigenere Cipher method encrypts a plaintext using a provided key. This implementation uses a simple XOR encryption method with a repeating key.
+
+        Parameters:
+            plain_text (str): The plaintext message to be encrypted
+
+        Returns:
+            str: The encrypted text using Vigenere Cipher
+        
+        Test cases:
+            # Test case 1: Encryption with a short key
+            encryption_utils = EncryptionUtils("ATTACKATDAWN")
+            assert encryption_utils.vigenere_cipher("HELLO") == "RBDOXZWG"
+            
+            # Test case 2: Encryption with a long key
+            encryption_utils = EncryptionUtils("LemonandLime")
+            assert encryption_utils.vigenere_cipher("MEETMEATMIDNIGHT") == "BWZXFHJKVJXFJKVJX"
+            
+            # Test case 3: Encryption with a key having no alphabets
+            encryption_utils = EncryptionUtils("12345")
+            assert encryption_utils.vigenere_cipher("PLAIN TEXT") == "PLAIN TEXT"
+        """
+        encrypted_text = ""
+        key_index = 0
+
+        for char in plain_text:
+            if char.isalpha():
+                shift = ord(self.key[key_index % len(self.key)].lower()) - ord('a')
+                encrypted_char = chr((ord(char.lower()) - ord('a') + shift) % 26 + ord('a'))
+                encrypted_text += encrypted_char.upper() if char.isupper() else encrypted_char
+                key_index += 1
+            else:
+                encrypted_text += char
+        return encrypted_text
+
+    def rail_fence_cipher(self, plain_text, rails):
+        """
+        The Rail Fence Cipher method encrypts a plaintext by writing it along the rails of a zigzag ladder.
+
+        Parameters:
+            plain_text (str): The plaintext message to be encrypted
+            
+            rails (int): The number of rails in the zigzag ladder
+
+        Returns:
+            str: The encrypted text using Rail Fence Cipher
+        
+        Test cases:
+            # Test case 1: Rail Fence Cipher with 2 rails
+            encryption_utils = EncryptionUtils("kitten")
+            assert encryption_utils.rail_fence_cipher("the quick brown fox jumps over the lazy dog", 2) == "hthe htqui ckbrown oxf jumps overy ththe lazy dogn"
+            
+            # Test case 2: Rail Fence Cipher with 3 rails
+            encryption_utils = EncryptionUtils("kitten")
+            assert encryption_utils.rail_fence_cipher("the quick brown fox jumps over the lazy dog", 3) == "tht heq  kic brow nf oxi jumps ov er tyo thhe lazy dogn"</s>

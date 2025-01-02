@@ -1,0 +1,9 @@
+ ❌ Wrong Output (adds extra annotations):
+# Change data type of numpy array 'a' to float32 for array 'b'
+b = a.astype("float32")
+
+✅ Correct Output:
+import numpy as np
+
+# Change data type of numpy array 'a' to float32 before creating new array 'b'
+b = a.astype("float32")</s>

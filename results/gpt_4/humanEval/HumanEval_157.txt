@@ -1,0 +1,11 @@
+```python
+def right_angle_triangle(a, b, c):
+    # Determine if three sides can form a right angle triangle by checking the Pythagorean theorem.
+    # Test cases:
+    # >>> right_angle_triangle(3, 4, 5)  # True, 3^2 + 4^2 = 5^2
+    # >>> right_angle_triangle(5, 12, 13)  # True, 5^2 + 12^2 = 13^2
+    # >>> right_angle_triangle(1, 1, 1)  # False, no right angle triangle can be formed
+    # >>> right_angle_triangle(6, 8, 10)  # True, 6^2 + 8^2 = 10^2
+    # >>> right_angle_triangle(0, 0, 0)  # False, sides cannot be zero
+    return a*a == b*b + c*c or b*b == a*a + c*c or c*c == a*a + b*b
+```

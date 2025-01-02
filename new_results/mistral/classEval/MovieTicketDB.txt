@@ -1,0 +1,100 @@
+ """
+This class manages a SQLite database for storing movie ticket information.
+"""
+
+import sqlite3
+
+
+class MovieTicketDB:
+    def __init__(self, db_name):
+        """
+        Initialize a new MovieTicketDB instance with the given SQLite database name.
+
+        Parameters:
+            db_name (str): The name of the SQLite database file.
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+        self.create_table()
+
+    def create_table(self):
+        """
+        Create the tickets table in the database if it doesn't already exist.
+
+        Returns:
+            None
+        """
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS tickets (
+                id INTEGER PRIMARY KEY,
+                movie_name TEXT,
+                theater_name TEXT,
+                seat_number TEXT,
+                customer_name TEXT
+            )
+        ''')
+        self.connection.commit()
+
+    def insert_ticket(self, movie_name, theater_name, seat_number, customer_name):
+        """
+        Insert a new ticket into the database.
+
+        Parameters:
+            movie_name (str): The name of the movie.
+            theater_name (str): The name of the theater.
+            seat_number (str): The number of the seat.
+            customer_name (str): The name of the customer.
+
+        Returns:
+            None
+        """
+        self.cursor.execute('''
+            INSERT INTO tickets (movie_name, theater_name, seat_number, customer_name)
+            VALUES (?, ?, ?, ?)
+        ''', (movie_name, theater_name, seat_number, customer_name))
+        self.connection.commit()
+
+    def search_tickets_by_customer(self, customer_name):
+        """
+        Return all tickets in the database for the given customer.
+
+        Parameters:
+            customer_name (str): The name of the customer.
+
+        Returns:
+            A list of tuples containing ticket information.
+        """
+        self.cursor.execute('''
+            SELECT * FROM tickets WHERE customer_name = ?
+        ''', (customer_name,))
+        tickets = self.cursor.fetchall()
+        return tickets
+
+    def delete_ticket(self, ticket_id):
+        """
+        Delete the ticket with the given ID from the database.
+
+        Parameters:
+            ticket_id (int): The ID of the ticket to delete.
+
+        Returns:
+            None
+        """
+        self.cursor.execute('''
+            DELETE FROM tickets WHERE id = ?
+        ''', (ticket_id,))
+        self.connection.commit()
+
+    # Test cases:
+    # Test case 1: Inserting a new ticket
+    db = MovieTicketDB("movies.db")
+    db.insert_ticket("The Matrix", "Cinemark", "A1", "John Doe")
+    
+    # Test case 2: Searching for tickets by customer
+    tickets = db.search_tickets_by_customer("John Doe")
+    assert tickets == [(1, "The Matrix", "Cinemark", "A1", "John Doe")]
+    
+    # Test case 3: Deleting a ticket
+    db.delete_ticket(1)
+    tickets = db.search_tickets_by_customer("John Doe")
+    assert tickets == []</s>

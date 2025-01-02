@@ -1,0 +1,7 @@
+ # Find each row where all elements are equal to the first row in that column using numpy by utilizing np.all(condition) along the specified axis.
+
+import numpy as np
+
+a = np.array([[1,1,0],[1,0,0],[1,0,0],[1,1,0]])
+<Requirements for the code>
+result = np.all(a == a[0,:], axis = 0)

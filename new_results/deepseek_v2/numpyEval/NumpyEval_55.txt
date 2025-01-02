@@ -1,0 +1,5 @@
+import numpy as np
+
+a = np.array([1, 2, 3, -4, 5])
+# Replace negative values in array with 0 and keep positive values unchanged
+result = np.where(a < 0, 0, a)

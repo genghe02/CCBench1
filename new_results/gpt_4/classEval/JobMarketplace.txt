@@ -1,0 +1,191 @@
+"""
+This class represents a job marketplace where users can post jobs, remove jobs, submit resumes, withdraw resumes, search for jobs, and get job applicants.
+"""
+
+class JobMarketplace:
+
+    def __init__(self):
+        """
+        Initializes a new instance of the JobMarketplace class with an empty job listings and resumes list.
+        """
+        self.job_listings = []
+        self.resumes = []
+
+    def post_job(self, job_title, company, requirements):
+        """
+        Adds a new job to the job listings.
+
+        Parameters:
+            job_title (str): The title of the job.
+            company (str): The company offering the job.
+            requirements (list): A list of requirements for the job.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Normal case
+            post_job('Software Engineer', 'Google', ['Python', 'Django'])
+            
+            # Test case 2: No requirements
+            post_job('Janitor', 'CleanUp Inc.', [])
+
+            # Test case 3: Invalid input (not a list for requirements)
+            try:
+                post_job('Software Engineer', 'Google', 'Python, Django')
+            except TypeError:
+                print('Caught expected error')
+        """
+        job = {"job_title": job_title, "company": company, "requirements": requirements}
+        self.job_listings.append(job)
+
+    def remove_job(self, job):
+        """
+        Removes a job from the job listings.
+
+        Parameters:
+            job (dict): The job to be removed.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Job exists
+            job = {'job_title': 'Software Engineer', 'company': 'Google', 'requirements': ['Python', 'Django']}
+            remove_job(job)
+            
+            # Test case 2: Job does not exist
+            try:
+                job = {'job_title': 'Janitor', 'company': 'CleanUp Inc.', 'requirements': []}
+                remove_job(job)
+            except ValueError:
+                print('Caught expected error')
+
+            # Test case 3: Invalid input (not a dictionary for job)
+            try:
+                job = 'Software Engineer at Google'
+                remove_job(job)
+            except TypeError:
+                print('Caught expected error')
+        """
+        self.job_listings.remove(job)
+
+    def submit_resume(self, name, skills, experience):
+        """
+        Submits a resume to the job marketplace.
+
+        Parameters:
+            name (str): The name of the applicant.
+            skills (list): A list of skills of the applicant.
+            experience (int): The years of experience of the applicant.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Normal case
+            submit_resume('John Doe', ['Python', 'Django'], 5)
+            
+            # Test case 2: No skills
+            submit_resume('Jane Doe', [], 3)
+
+            # Test case 3: Invalid input (not a list for skills)
+            try:
+                submit_resume('John Doe', 'Python, Django', 5)
+            except TypeError:
+                print('Caught expected error')
+        """
+        resume = {"name": name, "skills": skills, "experience": experience}
+        self.resumes.append(resume)
+
+    def withdraw_resume(self, resume):
+        """
+        Removes a resume from the job marketplace.
+
+        Parameters:
+            resume (dict): The resume to be removed.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Resume exists
+            resume = {'name': 'John Doe', 'skills': ['Python', 'Django'], 'experience': 5}
+            withdraw_resume(resume)
+            
+            # Test case 2: Resume does not exist
+            try:
+                resume = {'name': 'Jane Doe', 'skills': [], 'experience': 3}
+                withdraw_resume(resume)
+            except ValueError:
+                print('Caught expected error')
+
+            # Test case 3: Invalid input (not a dictionary for resume)
+            try:
+                resume = 'John Doe with Python, Django skills and 5 years of experience'
+                withdraw_resume(resume)
+            except TypeError:
+                print('Caught expected error')
+        """
+        self.resumes.remove(resume)
+
+    def search_jobs(self, criteria):
+        """
+        Searches for jobs in the job marketplace.
+
+        Parameters:
+            criteria (str): The search criteria.
+
+        Returns:
+            list: A list of jobs matching the search criteria.
+
+        Test cases:
+            # Test case 1: Matching jobs exist
+            search_jobs('Software Engineer')
+            
+            # Test case 2: No matching jobs
+            search_jobs('Janitor')
+
+            # Test case 3: Invalid input (not a string for criteria)
+            try:
+                search_jobs(['Software Engineer'])
+            except TypeError:
+                print('Caught expected error')
+        """
+        matching_jobs = []
+        for job_listing in self.job_listings:
+            if criteria.lower() in job_listing["job_title"].lower() or criteria.lower() in [r.lower() for r in job_listing["requirements"]]:
+                matching_jobs.append(job_listing)
+        return matching_jobs
+
+    def get_job_applicants(self, job):
+        """
+        Gets the applicants for a job.
+
+        Parameters:
+            job (dict): The job to get the applicants for.
+
+        Returns:
+            list: A list of applicants for the job.
+
+        Test cases:
+            # Test case 1: Applicants exist
+            job = {'job_title': 'Software Engineer', 'company': 'Google', 'requirements': ['Python', 'Django']}
+            get_job_applicants(job)
+            
+            # Test case 2: No applicants
+            job = {'job_title': 'Janitor', 'company': 'CleanUp Inc.', 'requirements': []}
+            get_job_applicants(job)
+
+            # Test case 3: Invalid input (not a dictionary for job)
+            try:
+                job = 'Software Engineer at Google'
+                get_job_applicants(job)
+            except TypeError:
+                print('Caught expected error')
+        """
+        applicants = []
+        for resume in self.resumes:
+            if self.matches_requirements(resume, job["requirements"]):
+                applicants.append(resume)
+        return applicants

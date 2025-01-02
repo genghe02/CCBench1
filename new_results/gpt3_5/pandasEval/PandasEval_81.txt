@@ -1,0 +1,2 @@
+# Group the original DataFrame by 'Country' and 'Item_Code' columns and sum the values in 'Y1961', 'Y1962', 'Y1963' columns. Create a new DataFrame with the grouped data. 
+new_df = df.groupby(['Country', 'Item_Code'])[['Y1961', 'Y1962', 'Y1963']].sum()

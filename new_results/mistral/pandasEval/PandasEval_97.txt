@@ -1,0 +1,4 @@
+ # Rename a column in a dataframe
+def rename_column(df, old_name, new_name):
+    df = df.rename(columns={old_name: new_name})
+    return df</s>

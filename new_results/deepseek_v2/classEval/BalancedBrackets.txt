@@ -1,0 +1,98 @@
+```python
+"""
+This class is designed to check if a given expression has balanced brackets. 
+It supports three types of brackets: round brackets '()', curly brackets '{}', and square brackets '[]'.
+"""
+
+class BalancedBrackets:
+    def __init__(self, expr):
+        """
+        Initializes the BalancedBrackets class with the given expression.
+
+        Parameters:
+            expr (str): The expression to be checked for balanced brackets.
+        """
+        self.stack = []
+        self.left_brackets = ["(", "{", "["]
+        self.right_brackets = [")", "}", "]"]
+        self.expr = expr
+
+    def clear_expr(self):
+        """
+        Clears the expression by removing all characters that are not brackets.
+
+        Test cases:
+            # Test case 1: Expression with mixed characters
+            bb = BalancedBrackets("a(b)c{d}e[f]")
+            bb.clear_expr()
+            assert bb.expr == "(){}[]"
+            
+            # Test case 2: Expression with only brackets
+            bb = BalancedBrackets("({[]})")
+            bb.clear_expr()
+            assert bb.expr == "({[]})"
+            
+            # Test case 3: Expression with no brackets
+            bb = BalancedBrackets("abcdef")
+            bb.clear_expr()
+            assert bb.expr == ""
+        """
+        self.expr = ''.join(c for c in self.expr if (c in self.left_brackets or c in self.right_brackets))
+
+    def check_balanced_brackets(self):
+        """
+        Checks if the expression has balanced brackets.
+
+        Returns:
+            bool: True if the brackets are balanced, False otherwise.
+
+        Test cases:
+            # Test case 1: Balanced brackets
+            bb = BalancedBrackets("({[]})")
+            assert bb.check_balanced_brackets() == True
+            
+            # Test case 2: Unbalanced brackets
+            bb = BalancedBrackets("({[})")
+            assert bb.check_balanced_brackets() == False
+            
+            # Test case 3: Empty expression
+            bb = BalancedBrackets("")
+            assert bb.check_balanced_brackets() == True
+        """
+        self.clear_expr()
+        for Brkt in self.expr:
+            if Brkt in self.left_brackets:
+                self.stack.append(Brkt)
+            else:
+                if not self.stack:
+                    return False
+                Current_Brkt = self.stack.pop()
+                if Current_Brkt == "(":
+                    if Brkt != ")":
+                        return False
+                if Current_Brkt == "{":
+                    if Brkt != "}":
+                        return False
+                if Current_Brkt == "[":
+                    if Brkt != "]":
+                        return False
+        if self.stack:
+            return False
+        return True
+```
+
+### Explanation:
+1. **Class Documentation**: The class `BalancedBrackets` is described as a utility to check if a given expression has balanced brackets. It supports three types of brackets: round, curly, and square.
+
+2. **Method Documentation**:
+   - `__init__`: Initializes the class with the expression to be checked.
+   - `clear_expr`: Clears the expression by removing all non-bracket characters. Test cases demonstrate its functionality with mixed characters, only brackets, and no brackets.
+   - `check_balanced_brackets`: Checks if the brackets in the expression are balanced. Test cases cover balanced, unbalanced, and empty expressions.
+
+3. **Parameter Descriptions**: Each method's parameters are clearly described with their types and purposes.
+
+4. **Return Value Descriptions**: The return values of the methods are described, indicating what they represent.
+
+5. **Test Cases**: Each method includes at least three test cases demonstrating normal, edge, and error cases. This ensures the functionality is well-covered and understood.
+
+This documentation adheres to Python standards and provides clear, concise, and useful information for anyone using the `BalancedBrackets` class.

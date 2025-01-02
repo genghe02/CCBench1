@@ -1,0 +1,16 @@
+ # Select specified columns from a given DataFrame using pandas.
+# Ensure that the given columns exist in the DataFrame to avoid KeyError.
+# Use list comprehension to check if all columns are present in the DataFrame.
+# If not, raise a ValueError with an error message.
+# Otherwise, return the selected columns using DataFrame indexing.
+
+try:
+    result = df[columns]
+except KeyError as e:
+    raise ValueError(f"Columns {', '.join(str(col) for col in columns)} not found in DataFrame.")
+
+# Alternatively, use pandas.isna() to check if all columns exist in the DataFrame.
+# if all(col in df.columns for col in columns):
+#     result = df[columns]
+# else:
+#     raise ValueError(f"Columns {', '.join(str(col) for col in columns)} not found in DataFrame.")

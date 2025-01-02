@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+
+def creating_df_with_same_as_other(df_original):
+    # Create a new DataFrame with the same structure (columns and data types) as the original DataFrame, but without any data rows.
+    df_copy = df_original.iloc[:0,:].copy()
+    return df_copy
+```

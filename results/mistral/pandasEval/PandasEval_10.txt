@@ -1,0 +1,1 @@
+ # Group the DataFrame by the 'Mt' column and find the row with the maximum 'num' value for each group using apply() function and lambda expression.

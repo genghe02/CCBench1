@@ -1,0 +1,3 @@
+ # Transform the column names of the DataFrame to 'a', 'b', 'c' using list assignment.
+# The DataFrame 'data' is initialized with columns named 'A', 'B', and 'C'.
+# Assign new names to the columns using list assignment on the 'data.columns' attribute.

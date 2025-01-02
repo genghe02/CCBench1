@@ -1,0 +1,36 @@
+```python
+import re
+import string
+
+# This class is for managing a collection of words and finding the longest word from a given sentence.
+class LongestWord:
+
+    def __init__(self):
+        # Initializes an empty list to store the words added to the class.
+        self.word_list = []
+
+    def add_word(self, word):
+        # Adds a word to the internal word list.
+        # :param word: str, the word to be added to the word_list
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        # Finds the longest word in the given sentence that exists in the word_list.
+        # :param sentence: str, the input sentence from which to find the longest word
+        # :return: str, the longest word found in the sentence that is in the word_list
+        # >>> lw = LongestWord()
+        # >>> lw.add_word('hello')
+        # >>> lw.add_word('world')
+        # >>> lw.find_longest_word('hello everyone in the world')
+        # 'hello'
+        # >>> lw.find_longest_word('hi there')
+        # ''
+        longest_word = ""
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        sentence = re.split(' ', sentence)
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        return longest_word
+```

@@ -1,0 +1,8 @@
+```python
+import numpy as np
+
+import itertools
+data = [[1], [1, 2]]
+# Convert the zipped data into a NumPy array, filling missing values with 0
+result = np.array(list(itertools.zip_longest(*data, fillvalue=0)))
+```

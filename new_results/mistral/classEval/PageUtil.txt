@@ -1,0 +1,178 @@
+ """
+This class, AccessGatewayFilter, is designed to handle request filtering, authentication, and logging in an Access Gateway system.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method for AccessGatewayFilter.
+        """
+        self.logger = logging.getLogger(__name__)
+
+    def filter(self, request):
+        """
+        Filters requests based on request URI and user authentication.
+
+        Parameters:
+            request (dict): The incoming request data.
+
+        Returns:
+            bool: True if the request is allowed, False otherwise.
+
+        Test cases:
+            # Test case 1: Allowed request
+            input = {"path": "/api/users", "method": "GET"}
+            output = True
+
+            # Test case 2: Disallowed request
+            input = {"path": "/admin/users", "method": "GET"}
+            output = False
+
+            # Test case 3: Request without authentication
+            input = {"path": "/users", "method": "GET"}
+            output = False
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        self.logger.info(f"Request: {request}")
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            self.logger.warning("Invalid JWT token")
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Determines if the request URI starts with one of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The request URI.
+
+        Returns:
+            bool: True if the URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: Allowed URI
+            input = "/api/users"
+            output = True
+
+            # Test case 2: Disallowed URI
+            input = "/admin/users"
+            output = False
+
+            # Test case 3: Login URI
+            input = "/login"
+            output = True
+        """
+
+        allowed_prefixes = ["/api", '/login']
+
+        for prefix in allowed_prefixes:
+            if request_uri.startswith(prefix):
+                return True
+
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Retrieves user information from the JWT token.
+
+        Parameters:
+            request (dict): The incoming request data.
+
+        Returns:
+            dict: A dictionary containing the user information.
+
+        Raises:
+            Exception: If the JWT token is missing or invalid.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            input = {"headers": {"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoibmFtZXMiLCJpYXQiOjE2NjY3MjU3ODQsImV4cCI6MTY2NjcxNDk4NCwibmFtZSI6Ik1lbnRpbWVzQGdtYWlsLmNvbSIsImlhdCI6MTY2NjcxNDk4NCwicm9sIjoxMTY2NjcxNDk4NCwidXNlcm5hbWUiOiJibG9iX2lkIiwibmFzX3NwIjoxNTAsInBydiI6Ik1vciBhbmQiLCJuYW1lIjoxMTY2NjcxNDk4NCwianRpIjoiMTI5NmI3NDkifQ.WkKv6vO4WGzD9tM6yBJxVXJkH5z0U3JZd37YZqY3GmE-DdB5KXC-jKJdTKD5K6z4X243z7ZWb7SX7gHNqYg"}, "user": {"id": 1, "level": 3}}
+            output = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoibmFtZXMiLCJpYXQiOjE2NjY3MjU3ODQsImV4cCI6MTY2NjcxNDk4NCwibmFtZSI6Ik1lbnRpbWVzQGdtYWlsLmNvbSIsImlhdCI6MTY2NjcxNDk4NCwicm9sIjoxMTY2NjcxNDk4NCwidXNlcm5hbWUiOiJibG9iX2lkIiwibmFzX3NwIjoxNTAsInBydiI6Ik1vciBhbmQiLCJuYW1lIjoxMTY2NjcxNDk4NCwianRpIjoiMTI5NmI3NDkifQ.WkKv6vO4WGzD9tM6yBJxVXJkH5z0U3JZd37YZqY3GmE-DdB5KXC-jKJdTKD5K6z4X243z7ZWb7SX7gHNqYg", "user": {"id": 1, "level": 3}}
+
+            # Test case 2: Missing JWT token
+            input = {"path": "/api/users", "method": "GET", "headers": {}}
+            raise Exception("Missing JWT token")
+
+            # Test case 3: Invalid JWT token
+            input = {"path": "/api/users", "method": "GET", "headers": {"Authorization": "Bearer invalid_token"}}
+            raise Exception("Invalid JWT token")
+        """
+
+        auth_header = request.get("headers").get("Authorization", None)
+
+        if auth_header is None:
+            raise Exception("Missing JWT token")
+
+        token_parts = auth_header.split(" ")
+
+        if len(token_parts) != 2 or token_parts[0].lower() != "bearer":
+            raise Exception("Invalid JWT token")
+
+        token = token_parts[1]
+
+        return self.parse_jwt_token(token)
+
+    def parse_jwt_token(self, token):
+        """
+        Parses and validates the JWT token.
+
+        Parameters:
+            token (str): The JWT token to be parsed.
+
+        Returns:
+            dict: A dictionary containing the user information.
+
+        Raises:
+            Exception: If the JWT token is invalid.
+
+        Test case:
+            input = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoibmFtZXMiLCJpYXQiOjE2NjY3MjU3ODQsImV4cCI6MTY2NjcxNDk4NCwibmFtZSI6Ik1lbnRpbWVzQGdtYWlsLmNvbSIsImlhdCI6MTY2NjcxNDk4NCwicm9sIjoxMTY2NjcxNDk4NCwidXNlcm5hbWUiOiJibG9iX2lkIiwibmFzX3NwIjoxNTAsInBydiI6Ik1vciBhbmQiLCJuYW1lIjoxMTY2NjcxNDk4NCwianRpIjoiMTI5NmI3NDkifQ.WkKv6vO4WGzD9tM6yBJxVXJkH5z0U3JZd37YZqY3GmE-DdB5KXC-jKJdTKD5K6z4X243z7ZWb7SX7gHNqYg"
+            output = {"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoibmFtZXMiLCJpYXQiOjE2NjY3MjU3ODQsImV4cCI6MTY2NjcxNDk4NCwibmFtZSI6Ik1lbnRpbWVzQGdtYWlsLmNvbSIsImlhdCI6MTY2NjcxNDk4NCwicm9sIjoxMTY2NjcxNDk4NCwidXNlcm5hbWUiOiJibG9iX2lkIiwibmFzX3NwIjoxNTAsInBydiI6Ik1vciBhbmQiLCJuYW1lIjoxMTY2NjcxNDk4NCwianRpIjoiMTI5NmI3NDkifQ.WkKv6vO4WGzD9tM6yBJxVXJkH5z0U3JZd37YZqY3GmE-DdB5KXC-jKJdTKD5K6z4X243z7ZWb7SX7gHNqYg", "user": {"id": 1, "level": 3}}
+        """
+
+        try:
+            import jwt
+            decoded = jwt.decode(token, "secret_key", algorithms=["RS256"])
+            return decoded
+        except jwt.ExpiredSignatureError:
+            raise Exception("Expired JWT token")
+        except jwt.InvalidTokenError:
+            raise Exception("Invalid JWT token")
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Sets the current user information and logs it.
+
+        Parameters:
+            user (dict): The user data.
+
+        Test cases:
+            # Test case 1: Valid user
+            input = {"id": 1, "level": 3}
+            self.current_user = input
+            self.logger.info(f"Current user: {input}")
+
+            # Test case 2: Invalid user
+            input = {"level": 1}
+            raise Exception("Invalid user information")
+        """
+
+        self.current_user = user
+        self.logger.info(f"Current user: {user}")</s>

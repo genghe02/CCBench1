@@ -1,0 +1,113 @@
+"""
+This class provides utility functions for manipulating bit status flags in a program.
+
+The class includes static methods for adding, checking, removing, and validating bit status flags.
+
+"""
+
+class BitStatusUtil:
+
+    @staticmethod
+    def add(states, stat):
+        """
+        Add a status flag to the existing bit status.
+
+        Parameters:
+            states (int): The current bit status flags
+            stat (int): The status flag to add to the bit status
+        
+        Returns:
+            int: The updated bit status with the added flag
+        
+        Test cases:
+            # Test case 1: Add flag 2 to states 5
+            assert add(5, 2) == 7
+            
+            # Test case 2: Add flag 8 to states 6
+            assert add(6, 8) == 14
+            
+            # Test case 3: Add flag 1 to states 0
+            assert add(0, 1) == 1
+        """
+        BitStatusUtil.check([states, stat])
+        return states | stat
+
+    @staticmethod
+    def has(states, stat):
+        """
+        Check if a given status flag exists in the bit status.
+
+        Parameters:
+            states (int): The bit status to check
+            stat (int): The status flag to check for
+        
+        Returns:
+            bool: True if the status flag is present, False otherwise
+        
+        Test cases:
+            # Test case 1: Flag 4 exists in states 5
+            assert has(5, 4) == True
+            
+            # Test case 2: Flag 8 exists in states 2
+            assert has(2, 8) == False
+            
+            # Test case 3: Flag 1 exists in states 1
+            assert has(1, 1) == True
+        """
+        BitStatusUtil.check([states, stat])
+        return (states & stat) == stat
+
+    @staticmethod
+    def remove(states, stat):
+        """
+        Remove a status flag from the bit status.
+
+        Parameters:
+            states (int): The current bit status flags
+            stat (int): The status flag to remove from the bit status
+        
+        Returns:
+            int: The updated bit status with the flag removed
+        
+        Test cases:
+            # Test case 1: Remove flag 2 from states 7
+            assert remove(7, 2) == 5
+            
+            # Test case 2: Remove flag 4 from states 4
+            assert remove(4, 4) == 0
+            
+            # Test case 3: Remove flag 1 from states 3
+            assert remove(3, 1) == 2
+        """
+        BitStatusUtil.check([states, stat])
+        if BitStatusUtil.has(states, stat):
+            return states ^ stat
+        return states
+
+    @staticmethod
+    def check(args):
+        """
+        Validate each input argument and raise errors if conditions are not met.
+
+        Parameters:
+            args (list): A list of argument values to check
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Argument less than 0
+            check([-5])  # Should raise ValueError
+            
+            # Test case 2: Argument not even
+            check([3])  # Should raise ValueError
+            
+            # Test case 3: Multiple arguments validation
+            check([5, 6, -1])  # Should raise ValueError for -1
+        """
+        for arg in args:
+            if arg < 0:
+                raise ValueError(f"{arg} must be greater than or equal to 0")
+            if arg % 2 != 0:
+                raise ValueError(f"{arg} not even")
+```

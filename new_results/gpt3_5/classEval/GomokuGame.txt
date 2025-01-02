@@ -1,0 +1,141 @@
+"""
+This class represents a Gomoku game, allowing two players to make moves on a board and determine the winner based on five in a row.
+
+"""
+
+class GomokuGame:
+    def __init__(self, board_size):
+        """
+        Initialize the Gomoku game board with a given size.
+
+        Parameters:
+            board_size (int): The size of the square game board
+        
+        """
+        self.board_size = board_size
+        self.board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        """
+        Make a move on the game board.
+
+        Parameters:
+            row (int): The row index to place the symbol
+            col (int): The column index to place the symbol
+            
+        Returns:
+            bool: True if the move is valid and made, False otherwise
+        
+        Test cases:
+            # Test case 1: Valid move
+            assert make_move(0, 0) == True
+            
+            # Test case 2: Edge case - Out of bounds
+            assert make_move(-1, 0) == False
+            
+            # Test case 3: Invalid move - Already occupied
+            make_move(0, 0)
+            assert make_move(0, 0) == False
+
+        """
+
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        return False
+
+    def check_winner(self):
+        """
+        Check if there is a winner on the game board.
+
+        Returns:
+            str or None: The winning player symbol ('X' or 'O') if there is a winner, else None
+
+        Test cases:
+            # Test case 1: Horizontal win
+            # 'X' player wins
+            board = [['X', 'X', 'X', 'X', 'X'],
+                     [' ', ' ', ' ', ' ', ' '],
+                     [' ', ' ', ' ', ' ', ' '],
+                     [' ', ' ', ' ', ' ', ' '],
+                     [' ', ' ', ' ', ' ', ' ']]
+            assert check_winner(board) == 'X'
+            
+            # Test case 2: Vertical win
+            # 'O' player wins
+            board = [['O', ' ', ' ', ' ', ' '],
+                     ['O', ' ', ' ', ' ', ' '],
+                     ['O', ' ', ' ', ' ', ' '],
+                     ['O', ' ', ' ', ' ', ' '],
+                     ['O', ' ', ' ', ' ', ' ']]
+            assert check_winner(board) == 'O'
+            
+            # Test case 3: Diagonal win
+            # 'X' player wins
+            board = [['X', 'O', ' ', ' ', ' '],
+                     ['O', 'X', 'O', ' ', ' '],
+                     [' ', 'O', 'X', 'O', ' '],
+                     [' ', ' ', 'O', 'X', 'O'],
+                     [' ', ' ', ' ', 'O', 'X']]
+            assert check_winner(board) == 'X'
+        
+        """
+
+        directions = [(0, 1), (1, 0), (1, 1), (1, -1)]
+        for row in range(self.board_size):
+            for col in range(self.board_size):
+                if self.board[row][col] != ' ':
+                    for direction in directions:
+                        if self._check_five_in_a_row(row, col, direction):
+                            return self.board[row][col]
+        return None
+
+    def _check_five_in_a_row(self, row, col, direction):
+        """
+        Check if there are five identical symbols in a row in a specific direction from a given position.
+
+        Parameters:
+            row (int): The starting row index
+            col (int): The starting column index
+            direction (tuple): A tuple representing the direction
+        
+        Returns:
+            bool: True if five symbols in a row are found in the specified direction, False otherwise
+
+        Test cases:
+            # Test case 1: Empty board
+            # No five in a row
+            assert _check_five_in_a_row(0, 0, (0, 1)) == False
+            
+            # Test case 2: Horizontal five in a row
+            board = [[' ', ' ', ' ', 'X', 'X'],
+                     [' ', ' ', ' ', 'X', 'X'],
+                     [' ', ' ', ' ', 'X', 'X'],
+                     [' ', ' ', ' ', 'X', 'X'],
+                     [' ', ' ', ' ', 'X', 'X']]
+            assert _check_five_in_a_row(0, 3, (0, 1)) == True
+
+            # Test case 3: Diagonal five in a row
+            board = [['X', 'O', ' ', ' ', ' '],
+                     ['O', 'X', 'O', ' ', ' '],
+                     [' ', 'O', 'X', 'O', ' '],
+                     [' ', ' ', 'O', 'X', 'O'],
+                     [' ', ' ', ' ', 'O', 'X']]
+            assert _check_five_in_a_row(0, 0, (1, 1)) == True
+        
+        """
+
+        dx, dy = direction
+        count = 1
+        symbol = self.board[row][col]
+        for i in range(1, 5):
+            new_row = row + dx * i
+            new_col = col + dy * i
+            if not (0 <= new_row < self.board_size and 0 <= new_col < self.board_size):
+                return False
+            if self.board[new_row][new_col] != symbol:
+                return False
+            count += 1
+        return count == 5

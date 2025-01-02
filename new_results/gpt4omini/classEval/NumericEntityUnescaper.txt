@@ -1,0 +1,94 @@
+```python
+"""
+This class handles the unescaping of numeric character entities in a given string.
+"""
+
+class NumericEntityUnescaper:
+    def __init__(self):
+        """
+        Initializes the NumericEntityUnescaper instance.
+        """
+        pass
+
+    def replace(self, string):
+        """
+        Replaces numeric character entities in the input string with their corresponding characters.
+
+        Parameters:
+            string (str): The input string containing numeric character entities to be unescaped.
+
+        Returns:
+            str: The string with numeric character entities replaced by their corresponding characters.
+
+        Test cases:
+            # Test case 1: Normal usage with decimal entities
+            input_string = "Hello &#65; World"
+            expected_output = "Hello A World"
+
+            # Test case 2: Normal usage with hex entities
+            input_string = "Hex &#x41;"
+            expected_output = "Hex A"
+
+            # Test case 3: Handling incomplete entity
+            input_string = "Incomplete &#;"
+            expected_output = "Incomplete "
+        """
+        out = []
+        pos = 0
+        length = len(string)
+
+        while pos < length - 2:
+            if string[pos] == '&' and string[pos + 1] == '#':
+                start = pos + 2
+                is_hex = False
+                first_char = string[start]
+
+                if first_char == 'x' or first_char == 'X':
+                    start += 1
+                    is_hex = True
+
+                if start == length:
+                    return ''.join(out)
+
+                end = start
+                while end < length and self.is_hex_char(string[end]):
+                    end += 1
+
+                if end < length and string[end] == ';':
+                    try:
+                        entity_value = int(string[start:end], 16 if is_hex else 10)
+                    except:
+                        return ''.join(out)
+
+                    out.append(chr(entity_value))
+                    pos = end + 1
+                    continue
+
+            out.append(string[pos])
+            pos += 1
+
+        return ''.join(out)
+
+    @staticmethod
+    def is_hex_char(char):
+        """
+        Checks whether the given character is a valid hexadecimal digit.
+
+        Parameters:
+            char (str): The character to check.
+
+        Returns:
+            bool: True if the character is a hexadecimal digit, False otherwise.
+
+        Test cases:
+            # Test case 1: Is a valid hex digit
+            assert is_hex_char('a') == True
+
+            # Test case 2: Is a valid hex digit (uppercase)
+            assert is_hex_char('F') == True
+
+            # Test case 3: Is not a valid hex digit
+            assert is_hex_char('g') == False
+        """
+        return char.isdigit() or ('a' <= char.lower() <= 'f')
+```

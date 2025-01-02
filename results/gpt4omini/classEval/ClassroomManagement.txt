@@ -1,0 +1,67 @@
+```python
+from datetime import datetime
+
+# This is a class that manages classroom scheduling, allowing the addition and removal of courses, 
+# and checking for time conflicts for scheduled courses.
+class Classroom:
+    def __init__(self, id):
+        # Initialize a Classroom instance with an ID and an empty list to hold courses.
+        self.id = id
+        self.courses = []
+
+    def add_course(self, course):
+        # Method to add a course to the classroom if it's not already scheduled.
+        # :param course: dict, details of the course to add (should include start and end time).
+        # >>> classroom = Classroom(101)
+        # >>> classroom.add_course({'name': 'Math', 'start_time': '10:00', 'end_time': '11:00'})
+        # >>> classroom.courses  # Should contain the Math course
+        if course not in self.courses:
+            self.courses.append(course)
+
+    def remove_course(self, course):
+        # Method to remove a specified course from the classroom.
+        # :param course: dict, details of the course to remove.
+        # >>> classroom = Classroom(101)
+        # >>> classroom.add_course({'name': 'Math', 'start_time': '10:00', 'end_time': '11:00'})
+        # >>> classroom.remove_course({'name': 'Math', 'start_time': '10:00', 'end_time': '11:00'})
+        # >>> classroom.courses  # Should be empty
+        if course in self.courses:
+            self.courses.remove(course)
+
+    def is_free_at(self, check_time):
+        # Check if the classroom is free at a specific time.
+        # :param check_time: str, the time to check in 'HH:MM' format.
+        # :return: bool, True if the classroom is free at check_time, False otherwise.
+        # >>> classroom = Classroom(101)
+        # >>> classroom.add_course({'name': 'Math', 'start_time': '10:00', 'end_time': '11:00'})
+        # >>> classroom.is_free_at('09:00')  # Should return True
+        # >>> classroom.is_free_at('10:30')  # Should return False
+        check_time = datetime.strptime(check_time, '%H:%M')
+
+        for course in self.courses:
+            if datetime.strptime(course['start_time'], '%H:%M') <= check_time <= datetime.strptime(course['end_time'],
+                                                                                                   '%H:%M'):
+                return False
+        return True
+
+    def check_course_conflict(self, new_course):
+        # Check if a new course conflicts with existing courses in the classroom.
+        # :param new_course: dict, details of the new course (should include start and end time).
+        # :return: bool, True if there is no conflict, False if there is a conflict.
+        # >>> classroom = Classroom(101)
+        # >>> classroom.add_course({'name': 'Math', 'start_time': '10:00', 'end_time': '11:00'})
+        # >>> classroom.check_course_conflict({'name': 'Science', 'start_time': '10:30', 'end_time': '11:30'})  # Should return False
+        # >>> classroom.check_course_conflict({'name': 'History', 'start_time': '09:00', 'end_time': '10:00'})  # Should return True
+        new_start_time = datetime.strptime(new_course['start_time'], '%H:%M')
+        new_end_time = datetime.strptime(new_course['end_time'], '%H:%M')
+
+        flag = True
+        for course in self.courses:
+            start_time = datetime.strptime(course['start_time'], '%H:%M')
+            end_time = datetime.strptime(course['end_time'], '%H:%M')
+            if start_time <= new_start_time and end_time >= new_start_time:
+                flag = False
+            if start_time <= new_end_time and end_time >= new_end_time:
+                flag = False
+        return flag
+```

@@ -1,0 +1,34 @@
+'''python
+import pandas as pd
+
+def select_rows_from_column(df: pd.DataFrame, col_name: str, values: list) -> pd.DataFrame:
+    """ 
+    Select rows from a given DataFrame where the specified column matches any of the values provided.
+    This function is useful for filtering data based on specific criteria.
+    
+    Parameters:
+    df (pd.DataFrame): The DataFrame to filter.
+    col_name (str): The name of the column to check for matching values.
+    values (list): A list of values to match against the column.
+
+    Returns:
+    pd.DataFrame: A new DataFrame consisting of rows where the column matches any of the specified values.
+    
+    Examples:
+    >>> data = {'A': [1, 2, 3, 4], 'B': ['a', 'b', 'c', 'd']}
+    >>> df = pd.DataFrame(data)
+    >>> select_rows_from_column(df, 'A', [1, 2])
+       A  B
+    0  1  a
+    1  2  b
+    >>> select_rows_from_column(df, 'B', ['c', 'd'])
+       A  B
+    2  3  c
+    3  4  d
+    >>> select_rows_from_column(df, 'A', [5])  # No matches
+    Empty DataFrame
+    Columns: [A, B]
+    Index: []
+    """
+    return df[df[col_name].isin(values)]
+''''''

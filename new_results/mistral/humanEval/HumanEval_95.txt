@@ -1,0 +1,12 @@
+ def check_dict_case(dict):
+   # Check if all keys in the dictionary are either all upper or all lowercase
+    <Requirements for the code>
+    >>> check_dict_case({"key1": 1, "Key2": 2, "KEY3": 3}) # returns False
+    >>> check_dict_case({"key1": 1, "key2": 2, "KEY3": 3}) # returns True
+    >>> check_dict_case({1: "a", 2: "b", 3: "c"}) # returns False
+    if len(dict.keys()) == 0:
+        return False
+    else:
+        state = "start"
+        for key in dict.keys():
+            #... (rest of the code remains the same)</s>

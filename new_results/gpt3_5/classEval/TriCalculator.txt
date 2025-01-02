@@ -1,0 +1,154 @@
+"""
+This class implements a calculator for trigonometric functions using Taylor series approximations.
+
+The functions available are cosine, sine, and tangent, employing the Taylor series expansion for calculation.
+"""
+
+from math import pi, fabs
+
+
+class TriCalculator:
+
+    def __init__(self):
+        """
+        Initialization method.
+        """
+        pass
+
+    def cos(self, x):
+        """
+        Calculate the cosine of an angle using Taylor series approximation.
+        
+        Parameters:
+            x (float): Numeric angle in degrees
+            
+        Returns:
+            float: Cosine value of the provided angle
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert cos(45) == 0.7071067812
+            
+            # Test case 2: Edge case - 0 value
+            assert cos(0) == 1.0
+            
+            # Test case 3: Error case - Large angle
+            assert cos(1000) == 'ERROR'
+        """
+        return round(self.taylor(x, 50), 10)
+
+    def factorial(self, a):
+        """
+        Calculate the factorial of a number.
+        
+        Parameters:
+            a (int): Integer number to calculate factorial for
+            
+        Returns:
+            int: Factorial value of the input number
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert factorial(3) == 6
+            
+            # Test case 2: Edge case - Factorial of 0
+            assert factorial(0) == 1
+            
+            # Test case 3: Error case - Negative value
+            assert factorial(-5) == 0
+        """
+        b = 1
+        while a != 1:
+            b *= a
+            a -= 1
+        return b
+
+    def taylor(self, x, n):
+        """
+        Evaluate the Taylor series expansion for a trigonometric function.
+        
+        Parameters:
+            x (float): Input value in degrees
+            n (int): Number of terms to consider in the Taylor series expansion
+            
+        Returns:
+            float: Result of the Taylor series expansion
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert taylor(90, 10) == 0
+            
+            # Test case 2: Edge case - High precision
+            assert taylor(30, 100) == 0.5
+            
+            # Test case 3: Error case - Negative terms
+            assert taylor(180, -5) == 'ERROR'
+        """
+        a = 1
+        x = x / 180 * pi
+        count = 1
+        for k in range(1, n):
+            if count % 2 != 0:
+                a -= (x ** (2 * k)) / self.factorial(2 * k)
+            else:
+                a += (x ** (2 * k)) / self.factorial(2 * k)
+            count += 1
+        return a
+
+    def sin(self, x):
+        """
+        Calculate the sine of an angle using Taylor series approximation.
+        
+        Parameters:
+            x (float): Numeric angle in degrees
+            
+        Returns:
+            float: Sine value of the provided angle
+        
+        Test cases:
+            # Test case 1: Normal usage
+            assert sin(30) == 0.5
+            
+            # Test case 2: Edge case - Negative angle
+            assert sin(-45) == -0.7071067812
+            
+            # Test case 3: Error case - Zero angle
+            assert sin(0) == 0
+        """
+        x = x / 180 * pi
+        g = 0
+        t = x
+        n = 1
+
+        while fabs(t) >= 1e-15:
+            g += t
+            n += 1
+            t = -t * x * x / (2 * n - 1) / (2 * n - 2)
+        return round(g, 10)
+
+    def tan(self, x):
+        """
+        Calculate the tangent of an angle using Taylor series approximation.
+        
+        Parameters:
+            x (float): Numeric angle in degrees
+            
+        Returns:
+            float: Tangent value of the provided angle
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert tan(45) == 1.0
+            
+            # Test case 2: Edge case - Negative angle
+            assert tan(-30) == -0.5773502692
+            
+            # Test case 3: Error case - Cosine zero division
+            assert tan(90) == False
+        """
+        if self.cos(x) != 0:
+            result = self.sin(x) / self.cos(x)
+            return round(result, 10)
+        else:
+            return False
+"""

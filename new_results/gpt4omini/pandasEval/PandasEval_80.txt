@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+import numpy as np
+def ceil_of_series(s):
+    # Apply the ceiling function to each element in the series
+    return np.ceil(s)
+```

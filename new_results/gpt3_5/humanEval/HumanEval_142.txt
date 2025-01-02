@@ -1,0 +1,36 @@
+Input:
+def sum_squares(lst):
+    <This function computes the sum of squares with specific conditions for elements in a list>
+    
+    <Test cases for the function>
+    result =[]
+    for i in range(len(lst)):
+        if i %3 == 0:
+            result.append(lst[i]**2)
+        elif i % 4 == 0 and i%3 != 0:
+            result.append(lst[i]**3)
+        else:
+            result.append(lst[i])
+    return sum(result)
+    
+❌ Wrong Output:
+# This function computes the sum of squares with specific conditions for elements in a list  
+def sum_squares(lst):
+    >>> sum_squares([1,2,3,4,5])
+    return sum(result)
+
+✅ Correct Output:
+def sum_squares(lst):
+    # Computes sum of squares and applies specific conditions for elements in the list
+    >>> sum_squares([1,2,3,4,5]) # returns 49
+    >>> sum_squares([2,3,4,5]) # returns 31
+    >>> sum_squares([3,6,9]) # returns 126
+    result =[]
+    for i in range(len(lst)):
+        if i %3 == 0:
+            result.append(lst[i]**2)
+        elif i % 4 == 0 and i%3 != 0:
+            result.append(lst[i]**3)
+        else:
+            result.append(lst[i])
+    return sum(result)

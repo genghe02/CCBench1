@@ -1,0 +1,141 @@
+ """
+This class provides utility functions for vector similarity calculations.
+"""
+
+import numpy as np
+from gensim import matutils
+
+
+class VectorUtil:
+    @staticmethod
+    def similarity(vector_1, vector_2):
+        """
+        Compute the cosine similarity between two vectors.
+
+        Parameters:
+            vector_1 (numpy.ndarray): The first vector
+            vector_2 (numpy.ndarray): The second vector
+            
+        Returns:
+            float: The cosine similarity between the two vectors
+
+        Test cases:
+            # Test case 1: Perfectly similar vectors
+            vector_1 = np.array([1, 0])
+            vector_2 = np.array([0, 1])
+            assert VectorUtil.similarity(vector_1, vector_2) == 1.0
+
+            # Test case 2: Orthogonal vectors
+            vector_1 = np.array([1, 0])
+            vector_2 = np.array([0, -1])
+            assert VectorUtil.similarity(vector_1, vector_2) == 0.0
+
+            # Test case 3: Vectors with a positive dot product
+            vector_1 = np.array([1, 1])
+            vector_2 = np.array([1, 1])
+            assert VectorUtil.similarity(vector_1, vector_2) > 0.0
+        """
+        return dot(matutils.unitvec(vector_1), matutils.unitvec(vector_2))
+
+    @staticmethod
+    def cosine_similarities(vector_1, vectors_all):
+        """
+        Compute the cosine similarities between a single vector and a list of vectors.
+
+        Parameters:
+            vector_1 (numpy.ndarray): The reference vector
+            vectors_all (List[numpy.ndarray]): A list of vectors
+
+        Returns:
+            List[float]: List of cosine similarities
+
+        Test cases:
+            # Test case 1: Vector similarity with one vector
+            vector_1 = np.array([1, 0])
+            vector_2 = np.array([0, 1])
+            vectors = [vector_2]
+            assert np.all(np.abs(VectorUtil.cosine_similarities(vector_1, vectors) - [VectorUtil.similarity(vector_1, vector_2)]) < 0.001)
+
+            # Test case 2: Vector similarity with a list of vectors
+            vector_1 = np.array([1, 0])
+            vector_2 = np.array([0, 1])
+            vector_3 = np.array([0.5, 0.5])
+            vectors = [vector_2, vector_3]
+            assert np.all(np.abs(VectorUtil.cosine_similarities(vector_1, vectors) - [VectorUtil.similarity(vector_1, vector_2), VectorUtil.similarity(vector_1, vector_3)]) < 0.001)
+
+            # Test case 3: Zero-length list
+            vectors = []
+            with pytest.raises(TypeError):
+                VectorUtil.cosine_similarities(vector_1, vectors)
+        """
+
+        norm = np.linalg.norm(vector_1)
+        all_norms = np.linalg.norm(vectors_all, axis=1)
+        dot_products = dot(vectors_all, vector_1)
+        similarities = dot_products / (norm * all_norms)
+        return similarities
+
+    @staticmethod
+    def n_similarity(vector_list_1, vector_list_2):
+        """
+        Compute the cosine similarity between the mean vectors of two lists.
+
+        Parameters:
+            vector_list_1 (List[numpy.ndarray]): List of vectors
+            vector_list_2 (List[numpy.ndarray]): List of vectors
+
+        Returns:
+            float: The cosine similarity between the two lists
+
+        Test cases:
+            # Test case 1: Identical lists
+            vector_1_list = [np.array([1, 0])]
+            vector_2_list = [np.array([1, 0])]
+            assert VectorUtil.n_similarity(vector_1_list, vector_2_list) == 1.0
+
+            # Test case 2: Orthogonal lists
+            vector_1_list = [np.array([1, 0]), np.array([0, 1])]
+            vector_2_list = [np.array([0, 1]), np.array([1, 0])]
+            assert VectorUtil.n_similarity(vector_1_list, vector_2_list) == 0.0
+
+            # Test case 3: Similar lists
+            vector_1_list = [np.array([0.5, 0.5]), np.array([0.6, 0.6])]
+            vector_2_list = [np.array([0.4, 0.6]), np.array([0.6, 0.4])]
+            assert VectorUtil.n_similarity(vector_1_list, vector_2_list) > 0.0
+        """
+        if not (len(vector_list_1) and len(vector_list_2)):
+            raise ZeroDivisionError('At least one of the passed lists is empty.')
+
+        return dot(matutils.unitvec(array(vector_list_1).mean(axis=0)),
+                   matutils.unitvec(array(vector_list_2).mean(axis=0)))
+
+    @staticmethod
+    def compute_idf_weight_dict(total_num, number_dict):
+        """
+        Compute the inverse document frequency weights.
+
+        Parameters:
+            total_num (int): The total number of documents
+            number_dict (Dict[str, int]): A dictionary mapping words to their document counts
+
+        Returns:
+            Dict[str, float]: A dictionary mapping words to their inverse document frequency weights
+
+        Test cases:
+            # Test case 1: Empty dictionary
+            total_num = 10
+            number_dict = {}
+            idf_weights = VectorUtil.compute_idf_weight_dict(total_num, number_dict)
+            assert len(idf_weights) == 0
+
+            # Test case 2: Single word document
+            total_num = 10
+            number_dict = {'word1': 5}
+            idf_weights = VectorUtil.compute_idf_weight_dict(total_num, number_dict)
+            assert idf_weights['word1'] > 0.0
+
+            # Test case 3: Multiple words document
+            total_num = 10
+            number_dict = {'word1': 5, 'word2': 3}
+            idf_weights = VectorUtil.compute_idf_weight_dict(total_num, number_dict)
+            assert idf_weights['word1'] > idf_weights['word2']</s>

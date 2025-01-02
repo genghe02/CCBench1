@@ -1,0 +1,39 @@
+ def get_odd_collatz(n):
+    # This function calculates the Collatz sequence for odd numbers using the Collatz Conjecture.
+    <description for whole function>
+    <some test cases for the function>
+    
+    if n % 2 == 0:
+        # If the input number is even, an empty list is returned as the Collatz sequence for even numbers is not defined by the Collatz Conjecture.
+        odd_collatz = []
+    else:
+        # If the input number is odd, the list starts with the input number itself.
+        odd_collatz = [n]
+
+    # Calculate the Collatz sequence for the given odd number.
+    while n > 1:
+        if n % 2 == 0:
+            # If the number is even, divide it by 2.
+            n = n / 2
+        else:
+            # If the number is odd, apply the Collatz Conjecture: n = 3n + 1.
+            n = n * 3 + 1
+
+        # Append the calculated number to the list if it's odd.
+        if n % 2 == 1:
+            odd_collatz.append(int(n))
+
+    # Return the sorted Collatz sequence as a list.
+    return sorted(odd_collatz)
+
+    # Test cases:
+    >>> get_odd_collatz(1)
+    [1]
+    >>> get_odd_collatz(3)
+    [3, 10, 5, 16, 8, 4, 2, 1]
+    >>> get_odd_collatz(5)
+    [5]
+    >>> get_odd_collatz(13)
+    [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+    >>> get_odd_collatz(15)
+    []

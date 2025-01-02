@@ -1,0 +1,104 @@
+ """
+This class represents an EmailClient that manages sending and receiving emails, keeping track of the EmailClient's address and email capacity.
+"""
+
+from datetime import datetime
+
+class EmailClient:
+    def __init__(self, addr, capacity):
+        """
+        Initialize an EmailClient instance with the given email address and capacity.
+
+        Parameters:
+            addr (str): The email address of the EmailClient
+            capacity (int): The maximum number of emails the EmailClient can store
+        """
+        self.addr = addr
+        self.capacity = capacity
+        self.inbox = []
+    
+    def send_to(self, recv, content, size):
+        """
+        Send an email to the given recipient with the given content and size.
+
+        Parameters:
+            recv (EmailClient): The recipient EmailClient instance
+            content (str): The content of the email
+            size (int): The size of the email in bytes
+
+        Returns:
+            bool: True if the email was successfully sent, False if the recipient EmailClient is full
+        """
+
+        if not recv.is_full_with_one_more_email(size):
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            email = {
+                "sender": self.addr,
+                "receiver": recv.addr,
+                "content": content,
+                "size": size,
+                "time": timestamp,
+                "state": "unread"
+            }
+            recv.inbox.append(email)
+            return True
+
+        else:
+            self.clear_inbox(size)
+            return False
+    
+    def fetch(self):
+        """
+        Fetch and mark the newest unread email as read.
+
+        Returns:
+            dict: The newest unread email if available, otherwise None
+        """
+
+        if len(self.inbox) == 0:
+            return None
+        for i in range(len(self.inbox)):
+            if self.inbox[i]['state'] == "unread":
+                self.inbox[i]['state'] = "read"
+                return self.inbox[i]
+        return None
+
+    def is_full_with_one_more_email(self, size):
+        """
+        Check if the EmailClient is full after adding one more email of the given size.
+
+        Parameters:
+            size (int): The size of the new email in bytes
+
+        Returns:
+            bool: True if the EmailClient is full after adding one more email of the given size, False otherwise
+        """
+
+        occupied_size = self.get_occupied_size()
+        return True if occupied_size + size > self.capacity else False
+    
+    def get_occupied_size(self):
+        """
+        Get the current size occupied by emails in the EmailClient's inbox.
+
+        Returns:
+            int: The size occupied by emails in bytes
+        """
+
+        occupied_size = 0
+        for email in self.inbox:
+            occupied_size += email["size"]
+        return occupied_size
+
+    def clear_inbox(self, size):
+        """
+        Delete emails from the EmailClient's inbox until the size is below the given limit.
+
+        Parameters:
+            size (int): The desired size limit for the EmailClient's inbox
+        """
+
+        if len(self.inbox) == 0:
+            return
+        while len(self.inbox) > 0 and self.get_occupied_size() > size:
+            del self.inbox[0]</s>

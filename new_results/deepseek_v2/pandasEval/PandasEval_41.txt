@@ -1,0 +1,5 @@
+import pandas as pd
+
+def is_contain_particular_value(series, value):
+    # Check if the specified value exists in the unique values of the series
+    return value in series.unique()

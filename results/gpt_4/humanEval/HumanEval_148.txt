@@ -1,0 +1,32 @@
+```python
+def bf(planet1, planet2):
+    # This function is designed to return a tuple of planet names that are located between two given planets in the sequence of the solar system.
+    # If the two given planets are not in the list of planet names or are the same, the function will return an empty tuple.
+    # The function assumes that the order of the planets in the tuple "planet_names" is the same as their order in the solar system.
+    # The function uses the index() method of the tuple data type to find the index of the given planets in "planet_names" and then returns the names of the planets between them.
+    # It's important to note that the function doesn't include the given planets in the returned tuple.
+    #
+    # Test cases:
+    # >>> bf("Earth", "Jupiter")
+    # ('Mars',)
+    # >>> bf("Mars", "Earth")
+    # ()
+    # >>> bf("Mercury", "Neptune")
+    # ('Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus')
+    # >>> bf("Neptune", "Mercury")
+    # ()
+    # >>> bf("Earth", "Earth")
+    # ()
+    # >>> bf("Pluto", "Earth")
+    # ()
+
+    planet_names = ("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
+    if planet1 not in planet_names or planet2 not in planet_names or planet1 == planet2:
+        return ()
+    planet1_index = planet_names.index(planet1)
+    planet2_index = planet_names.index(planet2)
+    if planet1_index < planet2_index:
+        return (planet_names[planet1_index + 1: planet2_index])
+    else:
+        return (planet_names[planet2_index + 1 : planet1_index])
+```

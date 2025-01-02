@@ -1,0 +1,8 @@
+```python
+def count_distinct_characters(string: str) -> int:
+    # Return the number of distinct characters in a string
+    >>> count_distinct_characters("Hello") # returns 4
+    >>> count_distinct_characters("world") # returns 5
+    >>> count_distinct_characters("") # returns 0
+    return len(set(string.lower()))
+```

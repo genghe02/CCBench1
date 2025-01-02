@@ -1,0 +1,180 @@
+"""
+This class represents a basic Warehouse management system with inventory tracking and order management functionality.
+"""
+
+class Warehouse:
+    def __init__(self):
+        """
+        Initialize the Warehouse with empty inventory and orders.
+        """
+        self.inventory = {}  # Product ID: Product
+        self.orders = {}  # Order ID: Order
+
+    def add_product(self, product_id, name, quantity):
+        """
+        Add a new product to the inventory or update existing product quantity.
+
+        Parameters:
+            product_id (int): The unique identifier of the product
+            name (str): The name of the product
+            quantity (int): The quantity of the product to add to the inventory
+        
+        Test cases:
+            # Test case 1: Add a new product
+            add_product(1, 'Laptop', 10)
+            assert inventory[1] == {'name': 'Laptop', 'quantity': 10}
+
+            # Test case 2: Update existing product quantity
+            add_product(1, 'Laptop', 5)
+            assert inventory[1] == {'name': 'Laptop', 'quantity': 15}
+
+            # Test case 3: Add a product with special characters in name
+            add_product(2, 'Mouse&Keyboard', 20)
+            assert inventory[2] == {'name': 'Mouse&Keyboard', 'quantity': 20}
+        """
+        if product_id not in self.inventory:
+            self.inventory[product_id] = {'name': name, 'quantity': quantity}
+        else:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def update_product_quantity(self, product_id, quantity):
+        """
+        Update the quantity of an existing product in the inventory.
+
+        Parameters:
+            product_id (int): The unique identifier of the product
+            quantity (int): The quantity to add (positive) or remove (negative)
+        
+        Test cases:
+            # Test case 1: Increase product quantity
+            update_product_quantity(1, 5)
+            assert inventory[1]['quantity'] == 20
+
+            # Test case 2: Decrease product quantity
+            update_product_quantity(1, -3)
+            assert inventory[1]['quantity'] == 17
+
+            # Test case 3: Update quantity of non-existing product
+            update_product_quantity(5, 10)
+            assert not inventory.get(5)
+        """
+        if product_id in self.inventory:
+            self.inventory[product_id]['quantity'] += quantity
+
+    def get_product_quantity(self, product_id):
+        """
+        Get the quantity of a specific product from the inventory.
+
+        Parameters:
+            product_id (int): The unique identifier of the product
+        
+        Returns:
+            int or False: The quantity of the product if found, False otherwise
+        
+        Test cases:
+            # Test case 1: Get quantity of existing product
+            assert get_product_quantity(1) == 17
+
+            # Test case 2: Get quantity of non-existing product
+            assert get_product_quantity(5) == False
+
+            # Test case 3: Get quantity of product with quantity 0
+            add_product(3, 'Keyboard', 0)
+            assert get_product_quantity(3) == 0
+        """
+        if product_id in self.inventory:
+            return self.inventory[product_id]['quantity']
+        else:
+            return False
+
+    def create_order(self, order_id, product_id, quantity):
+        """
+        Create a new order by reducing the product quantity from the inventory.
+
+        Parameters:
+            order_id (int): The unique identifier of the order
+            product_id (int): The unique identifier of the product in the order
+            quantity (int): The quantity of the product in the order
+        
+        Returns:
+            bool: True if order created successfully, False if product quantity insufficient
+        
+        Test cases:
+            # Test case 1: Create order with sufficient product quantity
+            add_product(4, 'Monitor', 15)
+            assert create_order(1, 4, 10) == True
+
+            # Test case 2: Create order with insufficient product quantity
+            add_product(5, 'Phone', 5)
+            assert create_order(2, 5, 10) == False
+
+            # Test case 3: Create order with zero quantity
+            add_product(6, 'Tablet', 5)
+            assert create_order(3, 6, 0) == True
+        """
+        if self.get_product_quantity(product_id) >= quantity:
+            self.update_product_quantity(product_id, -quantity)
+            self.orders[order_id] = {'product_id': product_id, 'quantity': quantity, 'status': 'Shipped'}
+            return True
+        else:
+            return False
+
+    def change_order_status(self, order_id, status):
+        """
+        Change the status of an existing order.
+
+        Parameters:
+            order_id (int): The unique identifier of the order
+            status (str): The new status of the order
+        
+        Returns:
+            bool: True if order status changed successfully, False if order not found
+        
+        Test cases:
+            # Test case 1: Change status of existing order
+            create_order(4, 1, 5)
+            assert change_order_status(4, 'Delivered') == True
+            assert orders[4]['status'] == 'Delivered'
+
+            # Test case 2: Change status of non-existing order
+            assert change_order_status(10, 'Delayed') == False
+
+            # Test case 3: Change status of order to empty string
+            create_order(5, 2, 2)
+            assert change_order_status(5, '') == True
+        """
+        if order_id in self.orders:
+            self.orders[order_id]['status'] = status
+            return True
+        else:
+            return False
+
+    def track_order(self, order_id):
+        """
+        Get the current status of an existing order.
+
+        Parameters:
+            order_id (int): The unique identifier of the order
+        
+        Returns:
+            str or False: The current status of the order if found, False otherwise
+        
+        Test cases:
+            # Test case 1: Track existing order status
+            create_order(6, 3, 3)
+            change_order_status(6, 'In Transit')
+            assert track_order(6) == 'In Transit'
+
+            # Test case 2: Track non-existing order status
+            assert track_order(100) == False
+
+            # Test case 3: Track order status with empty status
+            create_order(7, 4, 4)
+            change_order_status(7, '')
+            assert track_order(7) == ''
+        """
+        if order_id in self.orders:
+            return self.orders[order_id]['status']
+        else:
+            return False
+"""

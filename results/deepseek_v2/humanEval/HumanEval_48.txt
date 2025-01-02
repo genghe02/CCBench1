@@ -1,0 +1,20 @@
+```python
+def is_palindrome(text: str):
+    # Check if the given string is a palindrome by comparing characters from the beginning and the end moving towards the center.
+    # param text: str, the input string to be checked for palindrome property
+    # return: bool, True if the string is a palindrome, False otherwise
+    
+    # >>> is_palindrome("racecar")
+    # True
+    # >>> is_palindrome("hello")
+    # False
+    # >>> is_palindrome("a")
+    # True
+    # >>> is_palindrome("")
+    # True
+    
+    for i in range(len(text)):
+        if text[i] != text[len(text) - 1 - i]:
+            return False
+    return True
+```

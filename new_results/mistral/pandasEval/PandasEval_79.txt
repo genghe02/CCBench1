@@ -1,0 +1,9 @@
+ # Select rows containing at least one NaN value
+return df[df.isna().any(axis=1)]
+
+import pandas as pd
+import numpy as np
+
+def display_rows_with_gt_1_nan(df):
+# Select rows containing at least one NaN value
+return df[df.isna().any(axis=1)]</s>

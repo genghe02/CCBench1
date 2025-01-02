@@ -1,0 +1,2 @@
+ # Convert specified columns to numpy float32 type
+my\_df[cols] = my\_df[cols].astype(np.float32)</s>

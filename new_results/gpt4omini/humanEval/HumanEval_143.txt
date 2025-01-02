@@ -1,0 +1,19 @@
+```python
+def words_in_sentence(sentence):
+    # Return words in a sentence that are either prime or single letters
+    >>> words_in_sentence("I have 2 apples") # returns "I have apples"
+    >>> words_in_sentence("The quick brown fox") # returns "The quick brown fox"
+    >>> words_in_sentence("A") # returns "A"
+    >>> words_in_sentence("B is a letter") # returns "B is a letter"
+    new_lst = []
+    for word in sentence.split():
+        flg = 0
+        if len(word) == 1:
+            flg = 1
+        for i in range(2, len(word)):
+            if len(word) % i == 0:
+                flg = 1
+        if flg == 0 or len(word) == 2:
+            new_lst.append(word)
+    return " ".join(new_lst)
+```

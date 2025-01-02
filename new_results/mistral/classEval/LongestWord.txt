@@ -1,0 +1,70 @@
+ """
+This class is used to find the longest word in a sentence where each word is previously added to the class instance.
+"""
+
+import re
+import string
+
+
+class LongestWord:
+
+    def __init__(self):
+        """
+        Initialization method documentation.
+        """
+        self.word_list = []
+
+    def add_word(self, word):
+        """
+        Add a new word to the list of words stored in the class instance.
+
+        Parameters:
+            word (str): The word to be added to the class instance
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Add a new word
+            obj = LongestWord()
+            obj.add_word("example")
+            # Test case 2: Add multiple words
+            obj = LongestWord()
+            obj.add_word("example1")
+            obj.add_word("example2")
+            # Test case 3: Add empty string
+            obj = LongestWord()
+            obj.add_word("")
+        """
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        """
+        Find the longest word in a given sentence, considering only the words stored in the class instance.
+
+        Parameters:
+            sentence (str): The sentence to search for the longest word
+        
+        Returns:
+            str: The longest word found in the sentence
+
+        Test cases:
+            # Test case 1: Find the longest word from a simple sentence
+            obj = LongestWord()
+            obj.add_word("example")
+            assert obj.find_longest_word("example is the longest word") == "example"
+            # Test case 2: Find the longest word from a complex sentence
+            obj = LongestWord()
+            obj.add_word("example1")
+            obj.add_word("example2")
+            obj.add_word("example3")
+            assert obj.find_longest_word("example1 is the longest word in this sentence example2") == "example1"
+            # Test case 3: Handle empty sentence
+            obj = LongestWord()
+            assert obj.find_longest_word("") == ""
+            # Test case 4: Find the longest word with multiple occurrences
+            obj = LongestWord()
+            obj.add_word("example1")
+            obj.add_word("example2")
+            obj.add_word("example1")
+            assert obj.find_longest_word("example1 is the longest word and appears twice") == "example1"</s>

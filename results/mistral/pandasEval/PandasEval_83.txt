@@ -1,0 +1,11 @@
+ # Convert the specified column in the DataFrame to integers using astype(int) method.
+
+import pandas as pd
+
+def convert_bool_to_int(df, col_name):
+    <Requirements for the code>
+
+    # Convert the specified column in the DataFrame to integers using astype(int) method.
+    df[col_name] = df[col_name].astype(int)
+
+    return df

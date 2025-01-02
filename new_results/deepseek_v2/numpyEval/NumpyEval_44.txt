@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.array([[2,3,2],[5,6,1]])
+b = np.array([3,5])
+# Multiply each row of matrix a by corresponding element in vector b
+c = a * b[:, np.newaxis]

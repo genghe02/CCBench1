@@ -1,0 +1,2 @@
+ # Filter the DataFrame based on column values being in the targets list
+result = df.loc[df['col'].isin(targets)]</s>

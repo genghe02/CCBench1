@@ -1,0 +1,9 @@
+ # The function 'parse_music' takes a string representing music notes and returns a list of corresponding integers
+
+def parse_music(music_string: str) -> List[int]:
+    # Split the music string by space and map each note to its corresponding integer using the note_map
+    note_map = {'o': 4, 'o|': 2, '.|': 1}
+    >>> parse_music('o o o | . . | o o o') # returns [4, 4, 4, 1, 1, 1, 4, 4, 4]
+    >>> parse_music('o| . | o') # returns [2, 1, 4]
+    >>> parse_music('') # returns []
+    return [note_map[x] for x in music_string.split(' ') if x]</s>

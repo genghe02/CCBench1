@@ -1,0 +1,18 @@
+ # Function should describe what it does in one line
+ # and define any required inputs or assumptions
+ #----------------------------------------------
+ # Given an integer n, the function should return a list of integers from 0 to n-1,
+ # each incremented by 2
+
+ >>> make_a_pile(5)
+ # Test cases: Multiple lines starting with '>>>'
+ >>> print(make_a_pile(3))       # expected output: [3, 5, 7]
+ >>> print(make_a_pile(0))       # expected output: []
+ >>> print(make_a_pile(10))      # expected output: [12, 14, 16, 18, 20, 22, 24, 26, 28]
+
+ def make_a_pile(n):
+     # Function description and test cases
+     #--------------------------------------
+
+     # Function implementation
+     return [n + 2*i for i in range(n)]</s>

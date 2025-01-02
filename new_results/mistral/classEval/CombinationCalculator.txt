@@ -1,0 +1,154 @@
+ """
+This class, named CombinationCalculator, calculates combinations of strings from a given list.
+"""
+
+import math
+from typing import List
+
+class CombinationCalculator:
+
+    def __init__(self, datas: List[str]):
+        """
+        Initialize an instance of CombinationCalculator with the given data list.
+        """
+        self.datas = datas
+
+    @staticmethod
+    def count(n: int, m: int) -> int:
+        """
+        Calculate the number of combinations of n items taken m at a time.
+
+        Parameters:
+            n (int): The total number of items
+            m (int): The number of items to be taken in a combination
+
+        Returns:
+            int: The number of combinations
+        
+        Test cases:
+            # Test case 1: nC0
+            assert count(10, 0) == 1
+            
+            # Test case 2: nC1
+            assert count(10, 1) == 10
+            
+            # Test case 3: nC10
+            assert count(10, 10) == 1
+        """
+        if m == 0 or n == m:
+            return 1
+        return math.factorial(n) // (math.factorial(n - m) * math.factorial(m))
+
+    @staticmethod
+    def count_all(n: int) -> int:
+        """
+        Calculate the total number of combinations of n items.
+
+        Parameters:
+            n (int): The total number of items
+
+        Returns:
+            int: The total number of combinations
+        
+        Test cases:
+            # Test case 1: nC0
+            assert count_all(0) == 1
+            
+            # Test case 2: nC1
+            assert count_all(1) == 1
+            
+            # Test case 3: nC63
+            assert count_all(63) == 9223372036854775807
+        """
+        if n < 0 or n > 63:
+            return False
+        return (1 << n) - 1 if n != 63 else float("inf")
+
+    def select(self, m: int) -> List[List[str]]:
+        """
+        Generate all combinations of m strings from the given data list.
+
+        Parameters:
+            m (int): The number of strings to be taken in a combination
+
+        Returns:
+            List[List[str]]: A list of all possible combinations
+        
+        Test cases:
+            # Test case 1: Empty combination
+            assert select(0) == [[]]
+            
+            # Test case 2: One item combination
+            assert select(1) == [['a'], ['b'], ['c'], ...]
+            
+            # Test case 3: Multiple item combinations
+            assert select(2) == [['a', 'a'], ['a', 'b'], ['a', 'c'], ['b', 'b'], ['b', 'c'], ...]
+        """
+        result = []
+        self._select(0, [None] * m, 0, result)
+        return result
+
+    def select_all(self) -> List[List[str]]:
+        """
+        Generate all combinations of all possible sizes from the given data list.
+
+        Returns:
+            List[List[str]]: A list of all possible combinations
+        
+        Test cases:
+            # Test case 1: Empty list
+            assert select_all() == [[]]
+            
+            # Test case 2: Single item list
+            assert select_all() == [['a'], ['b'], ['c'], ...]
+            
+            # Test case 3: Longer list
+            # Assuming the data list contains 'a', 'b', 'c'...
+            assert select_all() == [..., ['a', 'b'], ['a', 'c'], ['b', 'a'], ['b', 'c'], ['c', 'a'], ['c', 'b'], ...]
+        """
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    def _select(self, dataIndex: int, resultList: List[str], resultIndex: int, result: List[List[str]]):
+        """
+        Recursively generate combinations by adding elements from the data list to the current combination.
+
+        Parameters:
+            dataIndex (int): The index of the data item to be considered
+            resultList (List[str]): The current combination
+            resultIndex (int): The index of the current position in the final results list
+            result (List[List[str]]): The final results list
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Base case - No more data items to consider
+            def _test_base_case():
+                result = []
+                self._select(len(self.datas), [None] * len(self.datas), 0, result)
+                assert result == [[]]
+
+            # Test case 2: Combine 'a' with empty list
+            def _test_combine_a():
+                result = []
+                self._select(1, [None] * 1, 0, result)
+                assert result == [['a']]
+
+            # Test case 3: Combine 'a' and 'b'
+            def _test_combine_ab():
+                result = []
+                self._select(2, [None] * 2, 0, result)
+                assert result == [['a'], ['b'], ['a', 'b']]
+        """
+        resultLen = len(resultList)
+        resultCount = resultIndex + 1
+        if resultCount > resultLen:
+            result.append(resultList.copy())
+            return
+
+        for i in range(dataIndex, len(self.datas) + resultCount - resultLen):
+            resultList[resultIndex] = self.datas[i]
+            self._select(i + 1, resultList, resultIndex + 1, result)</s>

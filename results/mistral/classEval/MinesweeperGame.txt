@@ -1,0 +1,68 @@
+ class MinesweeperGame:
+    # This class simulates a Minesweeper game with a given size (n x n) and number of mines (k).
+
+    def __init__(self, n, k) -> None:
+        # Initialize the game with the given size and number of mines.
+        self.n = n
+        self.k = k
+        self.minesweeper_map, self.player_map = self.generate_mine_sweeper_map(), self.generate_playerMap()
+        self.score = 0
+
+    def generate_mine_sweeper_map(self):
+        # Generate a random minefield with the given size and number of mines.
+        arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        for _ in range(self.k):
+            x, y = self._random_position()
+            arr[y][x] = 'X'
+            self._update_adjacent_mines(arr, x, y)
+        return arr
+
+    def _random_position(self):
+        # Generate a random position for a mine.
+        x, y = 0, 0
+        while x >= 0 and x < self.n and y >= 0 and y < self.n:
+            x, y = self._get_random_position(x, y)
+        return x, y
+
+    def _get_random_position(self, x, y):
+        # Get a random position that is not already occupied by a mine.
+        while arr[y][x] == 'X':
+            x, y = self._get_random_position_in_bounds(x, y)
+        return x, y
+
+    def _get_random_position_in_bounds(self, x, y):
+        # Get a random position within the bounds of the minefield.
+        while x < 0 or x >= self.n or y < 0 or y >= self.n:
+            x, y = random.randint(0, self.n-1), random.randint(0, self.n-1)
+        return x, y
+
+    def _update_adjacent_mines(self, arr, x, y):
+        # Update the adjacent cells with the number of mines in their 8 neighboring cells.
+        for dx, dy in [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]:
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < self.n and 0 <= ny < self.n:
+                if arr[ny][nx]!= 'X':
+                    arr[ny][nx] += 1
+
+    def generate_playerMap(self):
+        # Initialize the player map with empty cells.
+        arr = [['-' for row in range(self.n)] for column in range(self.n)]
+        return arr
+
+    def check_won(self, map):
+        # Check if all cells in the player map have been revealed and no mines are present.
+        for i in range(self.n):
+            for j in range(self.n):
+                if map[i][j] == '-':
+                    return False
+        return all(self.minesweeper_map[i][j]!= 'X' for i in range(self.n) for j in range(self.n))
+
+    def sweep(self, x, y):
+        # Reveal the cell at the given position and update the score if no mine is present.
+        if self.minesweeper_map[x][y] == 'X':
+            return False
+        self.player_map[x][y] = self.minesweeper_map[x][y]
+        self.score += 1
+        if self.check_won(self.player_map):
+            return True
+        return self.player_map

@@ -1,0 +1,4 @@
+ # Assign the given value to an entire column of the dataframe
+def set_value_to_entire_col(df, value):
+    df = df.assign(B=value)
+    return df</s>

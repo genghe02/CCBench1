@@ -1,0 +1,10 @@
+ def rounded_avg(n, m):
+    # Find the average of n numbers starting from n up to m, rounding up to the nearest integer
+    >>> rounded_avg(3, 5) # returns "0b11"
+    >>> rounded_avg(5, 8) # returns "0b101"
+    if m < n:
+        return -1
+    summation = 0
+    for i in range(n, m+1):
+        summation += i
+    return bin(round(summation/(m - n + 1)))</s>

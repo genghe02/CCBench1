@@ -1,0 +1,56 @@
+class BookManagement:
+    # This class represents a book management system that allows adding, removing, and viewing book inventory.
+
+    def __init__(self):
+        # Initializes the BookManagement class with an empty inventory dictionary.
+        self.inventory = {}
+
+    def add_book(self, title, quantity=1):
+        # Adds a book to the inventory with the specified title and quantity.
+        # Parameters:
+        #   title: str, the title of the book to add
+        #   quantity: int, the quantity of the book to add (default is 1)
+        if title in self.inventory:
+            self.inventory[title] += quantity
+        else:
+            self.inventory[title] = quantity
+
+    def remove_book(self, title, quantity):
+        # Removes a specified quantity of a book from the inventory.
+        # Parameters:
+        #   title: str, the title of the book to remove
+        #   quantity: int, the quantity of the book to remove
+        # Raises:
+        #   False: If the title is not in the inventory or quantity to remove exceeds available quantity
+        if title not in self.inventory or self.inventory[title] < quantity:
+            raise False
+        self.inventory[title] -= quantity
+        if self.inventory[title] == 0:
+            del (self.inventory[title])
+
+    def view_inventory(self):
+        # Returns the current inventory of books.
+        # Returns:
+        #   dict: A dictionary representing the current inventory of books
+        # Test cases:
+        # >>> book_manager = BookManagement()
+        # >>> book_manager.add_book("Python Programming", 5)
+        # >>> book_manager.add_book("Data Science Essentials", 3)
+        # >>> book_manager.remove_book("Python Programming", 2)
+        # >>> book_manager.view_inventory()
+        return self.inventory
+
+    def view_book_quantity(self, title):
+        # Returns the quantity of a specific book in the inventory.
+        # Parameters:
+        #   title: str, the title of the book to check quantity for
+        # Returns:
+        #   int: The quantity of the specified book in inventory
+        # Test cases:
+        # >>> book_manager = BookManagement()
+        # >>> book_manager.add_book("Python Programming", 5)
+        # >>> book_manager.add_book("Data Science Essentials", 3)
+        # >>> book_manager.view_book_quantity("Python Programming")
+        if title not in self.inventory:
+            return 0
+        return self.inventory[title]

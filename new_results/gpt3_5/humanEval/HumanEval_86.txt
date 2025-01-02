@@ -1,0 +1,6 @@
+# This function unscrambles shuffled words in a sentence
+>>> anti_shuffle('hello') # returns 'hello'
+>>> anti_shuffle('world') # returns 'world'
+>>> anti_shuffle('python is great') # returns 'nohtyp si aegrt'
+def anti_shuffle(s):
+    return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])

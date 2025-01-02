@@ -1,0 +1,85 @@
+```python
+"""
+This class provides functionality for processing natural language data by constructing a stop word list, removing stop words from a list of strings, and processing the strings to return a cleaned list of words.
+"""
+
+class NLPDataProcessor:
+
+    def construct_stop_word_list(self):
+        """
+        Constructs and returns a list of stop words.
+
+        Returns:
+            list: A list of stop words (e.g., ['a', 'an', 'the'])
+
+        Test cases:
+            # Test case 1: Check if the stop word list is correctly constructed
+            processor = NLPDataProcessor()
+            assert processor.construct_stop_word_list() == ['a', 'an', 'the']
+        """
+        stop_word_list = ['a', 'an', 'the']
+        return stop_word_list
+
+    def remove_stop_words(self, string_list, stop_word_list):
+        """
+        Removes stop words from each string in the provided list.
+
+        Parameters:
+            string_list (list): A list of strings to process
+            stop_word_list (list): A list of stop words to remove from the strings
+
+        Returns:
+            list: A list of lists, where each inner list contains the words of the corresponding string with stop words removed
+
+        Test cases:
+            # Test case 1: Normal usage
+            processor = NLPDataProcessor()
+            input_strings = ["a quick brown fox", "the lazy dog"]
+            stop_words = ['a', 'an', 'the']
+            assert processor.remove_stop_words(input_strings, stop_words) == [['quick', 'brown', 'fox'], ['lazy', 'dog']]
+
+            # Test case 2: Edge case with empty string
+            input_strings = ["", "the lazy dog"]
+            assert processor.remove_stop_words(input_strings, stop_words) == [[], ['lazy', 'dog']]
+
+            # Test case 3: Error case with non-string input
+            input_strings = [123, "the lazy dog"]
+            assert processor.remove_stop_words(input_strings, stop_words) == [[], ['lazy', 'dog']]
+        """
+        answer = []
+        for string in string_list:
+            string_split = string.split()
+            for word in string_split:
+                if word in stop_word_list:
+                    string_split.remove(word)
+            answer.append(string_split)
+        return answer
+
+    def process(self, string_list):
+        """
+        Processes a list of strings by removing stop words.
+
+        Parameters:
+            string_list (list): A list of strings to process
+
+        Returns:
+            list: A list of lists, where each inner list contains the words of the corresponding string with stop words removed
+
+        Test cases:
+            # Test case 1: Normal usage
+            processor = NLPDataProcessor()
+            input_strings = ["a quick brown fox", "the lazy dog"]
+            assert processor.process(input_strings) == [['quick', 'brown', 'fox'], ['lazy', 'dog']]
+
+            # Test case 2: Edge case with empty string
+            input_strings = ["", "the lazy dog"]
+            assert processor.process(input_strings) == [[], ['lazy', 'dog']]
+
+            # Test case 3: Error case with non-string input
+            input_strings = [123, "the lazy dog"]
+            assert processor.process(input_strings) == [[], ['lazy', 'dog']]
+        """
+        stop_word_list = self.construct_stop_word_list()
+        words_list = self.remove_stop_words(string_list, stop_word_list)
+        return words_list
+```

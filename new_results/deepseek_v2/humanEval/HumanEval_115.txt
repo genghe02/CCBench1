@@ -1,0 +1,9 @@
+```python
+def max_fill(grid, capacity):
+    import math
+    # Calculate the minimum number of trips needed to empty all water from the grid using buckets of given capacity
+    >>> max_fill([[1, 2], [3, 4]], 2) # returns 4
+    >>> max_fill([[0, 0], [0, 0]], 5) # returns 0
+    >>> max_fill([[5, 5, 5], [5, 5, 5]], 3) # returns 10
+    return sum([math.ceil(sum(arr)/capacity) for arr in grid])
+```

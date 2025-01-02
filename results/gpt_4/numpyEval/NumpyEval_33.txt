@@ -1,0 +1,1 @@
+# Reshape the 3D array 'arr' with shape (50,100,25) to a 2D array with shape (5000,25) using np.reshape() function.

@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.arange(0,10)
+# Convert array elements to a space-separated string
+a_string = " ".join(str(i) for i in a)
+```

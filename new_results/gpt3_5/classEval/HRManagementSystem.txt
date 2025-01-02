@@ -1,0 +1,163 @@
+"""
+The class HRManagementSystem handles employee management operations like addition, removal, update, retrieval, and listing.
+
+The class manages a system of employees within an organization along with their details.
+
+"""
+
+class HRManagementSystem:
+    def __init__(self):
+        """
+        Initializes the employee management system.
+        """
+        self.employees = {}
+
+    def add_employee(self, employee_id, name, position, department, salary):
+        """
+        Adds an employee to the system if the employee ID is unique.
+
+        Parameters:
+            employee_id (int): Unique identifier for the employee
+            name (str): Name of the employee
+            position (str): Job position of the employee
+            department (str): Department to which the employee belongs
+            salary (int): Salary of the employee
+        
+        Returns:
+            bool: True if the employee is added successfully, False otherwise
+
+        Test cases:
+            # Test case 1: Adding a new employee
+            assert add_employee(1, 'Alice', 'Manager', 'HR', 60000) == True
+            
+            # Test case 2: Adding employee with existing ID
+            assert add_employee(1, 'Bob', 'Intern', 'Finance', 35000) == False
+            
+            # Test case 3: Adding employee with negative salary
+            assert add_employee(2, 'Charlie', 'Developer', 'IT', -50000) == False
+
+        """
+        if employee_id in self.employees:
+            return False
+        else:
+            self.employees[employee_id] = {
+                'name': name,
+                'position': position,
+                'department': department,
+                'salary': salary
+            }
+            return True
+
+    def remove_employee(self, employee_id):
+        """
+        Removes an employee from the system based on the employee ID.
+
+        Parameters:
+            employee_id (int): The ID of the employee to be removed
+
+        Returns:
+            bool: True if the employee is successfully removed, False otherwise
+
+        Test cases:
+            # Test case 1: Removing an existing employee
+            assert remove_employee(1) == True
+            
+            # Test case 2: Removing non-existent employee
+            assert remove_employee(4) == False
+            
+            # Test case 3: Removing employee with invalid ID
+            assert remove_employee('XYZ') == False
+
+        """
+        if employee_id in self.employees:
+            del self.employees[employee_id]
+            return True
+        else:
+            return False
+
+    def update_employee(self, employee_id: int, employee_info: dict):
+        """
+        Update an employee's information.
+
+        Parameters:
+            employee_id (int): The ID of the employee to be updated
+            employee_info (dict): Dictionary containing updated information for the employee
+        
+        Returns:
+            bool: True if the employee information is updated successfully, False otherwise
+
+        Test cases:
+            # Test case 1: Updating an existing employee's information
+            assert update_employee(1, {'position': 'Lead Developer', 'salary': 75000}) == True
+            
+            # Test case 2: Updating information of a non-existent employee
+            assert update_employee(4, {'salary': 40000}) == False
+            
+            # Test case 3: Updating employee with invalid parameters
+            assert update_employee(1, {'title': 'CEO'}) == False
+
+        """
+        employee = self.get_employee(employee_id)
+        if employee == False:
+            return False
+        else:
+            for key, value in employee_info.items():
+                if key not in employee:
+                    return False
+            for key, value in employee_info.items():
+                employee[key] = value
+            return True
+
+    def get_employee(self, employee_id):
+        """
+        Retrieve information about a specific employee.
+
+        Parameters:
+            employee_id (int): The ID of the employee
+        
+        Returns:
+            dict: Details of the employee if found, False otherwise
+
+        Test cases:
+            # Test case 1: Retrieving an existing employee
+            assert get_employee(1) == {'name': 'Alice', 'position': 'Manager', 'department': 'HR', 'salary': 60000}
+            
+            # Test case 2: Retrieving a non-existent employee
+            assert get_employee(4) == False
+            
+            # Test case 3: Retrieving employee with invalid ID
+            assert get_employee('XYZ') == False
+
+        """
+        if employee_id in self.employees:
+            return self.employees[employee_id]
+        else:
+            return False
+
+    def list_employees(self):
+        """
+        Retrieve a detailed list of all employees within the system.
+
+        Returns:
+            dict: Detailed information about all employees if they exist, empty dictionary otherwise
+
+        Test cases:
+            # Test case 1: Listing all employees
+            assert list_employees() == {1: {'employee_ID': 1, 'name': 'Alice', 'position': 'Manager', 'department': 'HR', 'salary': 60000}}
+            
+            # Test case 2: Listing employees when no employees exist
+            assert list_employees() == {}
+            
+            # Test case 3: Listing employees with multiple entries
+            assert list_employees() == {1: {'employee_ID': 1, 'name': 'Alice', 'position': 'Manager', 'department': 'HR', 'salary': 60000}, 2: {'employee_ID': 2, 'name': 'Bob', 'position': 'Intern', 'department': 'Finance', 'salary': 35000}}
+        
+        """
+        employee_data = {}
+        if self.employees:
+            for employee_id, employee_info in self.employees.items():
+                employee_details = {}
+                employee_details["employee_ID"] = employee_id
+                for key, value in employee_info.items():
+                    employee_details[key] = value
+                employee_data[employee_id] = employee_details
+        return employee_data

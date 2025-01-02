@@ -1,0 +1,15 @@
+ # Ensure the input list is not empty
+ # Return the largest element in a list
+ >>> max_element([]) # raises an error
+ >>> max_element([1, 2, 3, 4, 5]) # returns 5
+ def max_element(l: list):
+     # Ensure the input list is not empty
+     if not l:
+         raise ValueError("List cannot be empty")
+
+     # Return the largest element in a list
+     m = l[0]
+     for e in l:
+         if e > m:
+             m = e
+     return m</s>

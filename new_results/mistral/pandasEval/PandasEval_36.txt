@@ -1,0 +1,2 @@
+ # Generate string representation of dataframe without index
+df_string = df.to_string(index=False)</s>

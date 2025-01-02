@@ -1,0 +1,2 @@
+ # Add newaxis dimension to each sample in a 3x3x1 array
+b = a[:, :, newaxis]</s>

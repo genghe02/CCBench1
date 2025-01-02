@@ -1,0 +1,6 @@
+def unique(l: list):
+    # This function takes a list as an input and returns a sorted list of unique elements.
+    # Example: 
+    # >>> unique([3, 2, 2, 1, 5, 3, 5])
+    # [1, 2, 3, 5]
+    return sorted(list(set(l)))

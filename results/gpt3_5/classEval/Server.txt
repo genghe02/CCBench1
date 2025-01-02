@@ -1,0 +1,91 @@
+class Server:
+
+    def __init__(self):
+        # Initialize the Server class with empty white_list, send_struct, and receive_struct attributes.
+
+        self.white_list = []
+        self.send_struct = {}
+        self.receive_struct = {}
+
+    def add_white_list(self, addr):
+        # Add the given address to the white_list if it is not already present.
+
+        # param addr: str, Address to be added to the white list
+        # return: list, Updated white list with the new address if added, False if address is already in the list
+
+        # Test cases:
+        # 1. add_white_list("127.0.0.1") - Should return ["127.0.0.1"]
+        # 2. add_white_list("192.168.1.1") - Should return ["127.0.0.1", "192.168.1.1"]
+
+        if addr in self.white_list:
+            return False
+        else:
+            self.white_list.append(addr)
+            return self.white_list
+
+    def del_white_list(self, addr):
+        # Remove the given address from the white_list if it exists.
+
+        # param addr: str, Address to be removed from the white list
+        # return: list, Updated white list after removing the address if present, False if address is not in the list
+
+        # Test cases:
+        # 1. del_white_list("127.0.0.1") - Should return []
+        # 2. del_white_list("192.168.1.1") - Should return ["127.0.0.1"]
+
+        if addr not in self.white_list:
+            return False
+        else:
+            self.white_list.remove(addr)
+            return self.white_list
+
+    def recv(self, info):
+        # Receive information and validate if it meets the required structure and if the address is in the white_list.
+
+        # param info: dict, Information containing "addr" and "content"
+        # return: str, Content if address is in the white list and info structure is correct, -1 otherwise
+
+        # Test cases:
+        # 1. recv({"addr": "127.0.0.1", "content": "Hello"}) - Should return "Hello"
+        # 2. recv({"address": "192.168.1.1", "content": "Hi"}) - Should return -1
+
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return -1
+        addr = info["addr"]
+        content = info["content"]
+        if addr not in self.white_list:
+            return False
+        else:
+            self.receive_struct = {"addr": addr, "content": content}
+            return self.receive_struct["content"]
+
+    def send(self, info):
+        # Send information and store the address and content in the send_struct attribute.
+
+        # param info: dict, Information to be sent containing "addr" and "content"
+        # return: str, Message indicating if the info structure is correct
+
+        # Test cases:
+        # 1. send({"addr": "127.0.0.1", "content": "Hello"}) - Should not return anything
+
+        if not isinstance(info, dict) or "addr" not in info or "content" not in info:
+            return "info structure is not correct"
+        self.send_struct = {"addr": info["addr"], "content": info["content"]}
+
+    def show(self, type):
+        # Show the stored information based on the type provided.
+
+        # param type: str, Type of information to show ("send" or "receive")
+        # return: dict or bool, Send or receive information based on type, False if type is invalid
+
+        # Test cases:
+        # 1. show("send") - Should return the send_struct content
+        # 2. show("receive") - Should return the receive_struct content
+        # 3. show("invalid_type") - Should return False
+
+        if type == "send":
+            return self.send_struct
+        elif type == "receive":
+            return self.receive_struct
+        else:
+            return False

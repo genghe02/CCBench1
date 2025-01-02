@@ -1,0 +1,1 @@
+# Add a new column 'Fruit Total' to the DataFrame df by using the apply function to sum each row's values (across all fruits), effectively calculating the total number of fruits in each row. The lambda function is used to sum the values.

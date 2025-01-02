@@ -1,0 +1,20 @@
+from typing import List
+
+
+def mean_absolute_deviation(numbers: List[float]) -> float:
+    # Calculate the mean absolute deviation of a list of numbers.
+    # Test cases:
+    # Case 1: Empty list
+    # Input: []
+    # Expected output: 0.0
+    # Case 2: List with one element
+    # Input: [5.0]
+    # Expected output: 0.0
+    # Case 3: List with positive numbers
+    # Input: [1.0, 2.0, 3.0, 4.0, 5.0]
+    # Expected output: 1.2
+    # Case 4: List with negative numbers
+    # Input: [-1.0, -2.0, -3.0, -4.0, -5.0]
+    # Expected output: 1.2
+    mean = sum(numbers) / len(numbers)
+    return sum(abs(x - mean) for x in numbers) / len(numbers)

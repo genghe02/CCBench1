@@ -1,0 +1,78 @@
+```python
+"""
+This class is designed to manage a list of words and find the longest word from a given sentence that is present in the list.
+"""
+
+import re
+import string
+
+
+class LongestWord:
+
+    def __init__(self):
+        """
+        Initializes the LongestWord class with an empty list to store words.
+        """
+        self.word_list = []
+
+    def add_word(self, word):
+        """
+        Adds a word to the list of words.
+
+        Parameters:
+            word (str): The word to be added to the list.
+        """
+        self.word_list.append(word)
+
+    def find_longest_word(self, sentence):
+        """
+        Finds the longest word in the given sentence that is present in the word list.
+
+        Parameters:
+            sentence (str): The sentence from which to find the longest word.
+
+        Returns:
+            str: The longest word found in the sentence that is present in the word list. 
+                 Returns an empty string if no such word is found.
+
+        Test cases:
+            # Test case 1: Normal usage
+            lw = LongestWord()
+            lw.add_word("apple")
+            lw.add_word("banana")
+            assert lw.find_longest_word("I like apple and banana") == "banana"
+
+            # Test case 2: Edge case with punctuation
+            lw = LongestWord()
+            lw.add_word("hello")
+            lw.add_word("world")
+            assert lw.find_longest_word("Hello, world!") == "hello"
+
+            # Test case 3: Error case with no matching words
+            lw = LongestWord()
+            lw.add_word("cat")
+            lw.add_word("dog")
+            assert lw.find_longest_word("I have a fish") == ""
+        """
+        longest_word = ""
+        sentence = sentence.lower()
+        sentence = re.sub('[%s]' % re.escape(string.punctuation), '', sentence)
+        sentence = re.split(' ', sentence)
+        for word in sentence:
+            if word in self.word_list and len(word) > len(longest_word):
+                longest_word = word
+        return longest_word
+```
+
+### Explanation:
+1. **Class Documentation**: The class `LongestWord` is described as managing a list of words and finding the longest word from a given sentence that is present in the list.
+2. **Method Documentation**:
+   - `__init__`: Initializes the class with an empty list to store words.
+   - `add_word`: Adds a word to the list of words.
+   - `find_longest_word`: Finds the longest word in the given sentence that is present in the word list. It handles punctuation and case insensitivity.
+3. **Test Cases**:
+   - **Normal usage**: Demonstrates finding the longest word in a sentence.
+   - **Edge case with punctuation**: Shows handling of punctuation in the sentence.
+   - **Error case with no matching words**: Demonstrates the behavior when no words in the sentence match the word list.
+
+This documentation adheres to Python standards and provides clear, concise, and useful information for each method, including practical test cases.

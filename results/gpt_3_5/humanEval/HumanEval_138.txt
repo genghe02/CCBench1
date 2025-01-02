@@ -1,0 +1,8 @@
+def is_equal_to_sum_even(n):
+    # Check if the input number is even and greater than or equal to 8.
+    # Test cases:
+    # 1. n = 4 -> False (not even)
+    # 2. n = 10 -> True (even and greater than or equal to 8)
+    # 3. n = 7 -> False (not greater than or equal to 8)
+    
+    return n % 2 == 0 and n >= 8

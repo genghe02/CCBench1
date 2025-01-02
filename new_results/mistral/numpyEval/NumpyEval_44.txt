@@ -1,0 +1,2 @@
+ # Multiply each row of matrix 'a' with each element of matrix 'b' (promote 'b' to shape (2, 1) to match 'a' shape)
+c = a * b[:, np.newaxis]</s>

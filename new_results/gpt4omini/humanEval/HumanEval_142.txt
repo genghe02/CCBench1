@@ -1,0 +1,17 @@
+```python
+def sum_squares(lst):
+    # Return the sum of squares of elements in lst at indices that are multiples of 3 and cubes at indices that are multiples of 4
+    >>> sum_squares([1, 2, 3, 4, 5, 6]) # returns 1^2 + 4^3 + 6^2 = 1 + 64 + 36 = 101
+    >>> sum_squares([10, 20, 30, 40, 50]) # returns 10^2 + 40^3 + 50^2 = 100 + 64000 + 2500 = 66600
+    >>> sum_squares([0, 1, 2, 3]) # returns 0^2 + 3^3 = 0 + 27 = 27
+    >>> sum_squares([1]) # returns 1
+    result =[]
+    for i in range(len(lst)):
+        if i %3 == 0:
+            result.append(lst[i]**2)
+        elif i % 4 == 0 and i%3 != 0:
+            result.append(lst[i]**3)
+        else:
+            result.append(lst[i])
+    return sum(result)
+```

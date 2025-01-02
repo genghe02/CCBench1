@@ -1,0 +1,2 @@
+# Convert array elements to string and concatenate them with a space in between
+a_string = " ".join(str(i) for i in a)

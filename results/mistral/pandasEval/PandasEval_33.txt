@@ -1,0 +1,17 @@
+ # Return the last 'n' rows of a given DataFrame using pandas' tail() method.
+
+import pandas as pd
+
+def get_last_n_rows(df, n):
+    """
+    Returns the last 'n' rows of a given DataFrame.
+
+    Parameters:
+    df (pandas DataFrame): The DataFrame to get the last 'n' rows from.
+    n (int): The number of rows to return.
+
+    Returns:
+    pandas DataFrame: The last 'n' rows of the given DataFrame.
+    """
+    # Return the last 'n' rows of the given DataFrame.
+    return df.tail(n)

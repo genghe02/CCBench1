@@ -1,0 +1,56 @@
+```python
+import math
+
+
+class AreaCalculator:
+    # A class for calculating various areas related to geometric shapes.
+
+    def __init__(self, radius):
+        # Initialize the AreaCalculator with a given radius.
+        # param radius: float, the radius of the circle or sphere.
+        self.radius = radius
+
+    def calculate_circle_area(self):
+        # Calculate the area of a circle given its radius.
+        # return: float, the area of the circle.
+        # >>> calc = AreaCalculator(5)
+        # >>> calc.calculate_circle_area()
+        # 78.53981633974483
+        return math.pi * self.radius ** 2
+
+    def calculate_sphere_area(self):
+        # Calculate the surface area of a sphere given its radius.
+        # return: float, the surface area of the sphere.
+        # >>> calc = AreaCalculator(5)
+        # >>> calc.calculate_sphere_area()
+        # 314.1592653589793
+        return 4 * math.pi * self.radius ** 2
+
+    def calculate_cylinder_area(self, height):
+        # Calculate the surface area of a cylinder given its radius and height.
+        # param height: float, the height of the cylinder.
+        # return: float, the surface area of the cylinder.
+        # >>> calc = AreaCalculator(5)
+        # >>> calc.calculate_cylinder_area(10)
+        # 471.23889803846896
+        return 2 * math.pi * self.radius * (self.radius + height)
+
+    def calculate_sector_area(self, angle):
+        # Calculate the area of a sector of a circle given its radius and angle.
+        # param angle: float, the angle of the sector in radians.
+        # return: float, the area of the sector.
+        # >>> calc = AreaCalculator(5)
+        # >>> calc.calculate_sector_area(math.pi / 2)
+        # 19.634954084936208
+        return self.radius ** 2 * angle / 2
+
+    def calculate_annulus_area(self, inner_radius, outer_radius):
+        # Calculate the area of an annulus (a ring-shaped object) given its inner and outer radii.
+        # param inner_radius: float, the inner radius of the annulus.
+        # param outer_radius: float, the outer radius of the annulus.
+        # return: float, the area of the annulus.
+        # >>> calc = AreaCalculator(5)
+        # >>> calc.calculate_annulus_area(3, 7)
+        # 125.66370614359172
+        return math.pi * (outer_radius ** 2 - inner_radius ** 2)
+```

@@ -1,0 +1,113 @@
+ """
+This class, `NLPDataProcessor2`, processes natural language processing data by removing non-English letters, converting strings to lowercase, splitting strings into words, calculating word frequencies, and returning the top 5 most frequent words.
+"""
+
+import re
+from collections import Counter
+
+class NLPDataProcessor2:
+
+    def process_data(self, string_list):
+        """
+        Preprocesses data for text analysis. This function takes a list of strings,
+        removes non-English letters, converts the strings to lowercase,
+        and splits each string into a list of words.
+
+        Parameters:
+            string_list (List[str]): The input list of strings
+
+        Returns:
+            List[List[str]]: A list where each inner list is a list of words from
+                the corresponding input string
+        """
+
+        words_list = []
+        for string in string_list:
+            processed_string = self._clean_string(string)
+            words = processed_string.split()
+            words_list.append(words)
+        return words_list
+
+    def _clean_string(self, string):
+        """
+        Removes non-English letters and converts the string to lowercase.
+
+        Parameters:
+            string (str): The input string
+
+        Returns:
+            str: The cleaned string
+        """
+        return re.sub(r'[^a-zA-Z\s]', '', string.lower())
+
+    def calculate_word_frequency(self, words_list):
+        """
+        Calculates the frequency distribution of words in a list of lists of words.
+
+        Parameters:
+            words_list (List[List[str]]): A list where each inner list is a list of words
+
+        Returns:
+            dict: A dictionary where keys are word strings and values are the number
+                of occurrences of each word
+        """
+
+        word_frequency = Counter(self._flatten(words_list))
+        return dict(word_frequency)
+
+    def _flatten(self, nested_list):
+        """
+        Flattens a nested list into a single list.
+
+        Parameters:
+            nested_list (List[List[str]]): A nested list
+
+        Returns:
+            List[str]: A flat list containing all strings from the nested list
+        """
+        return [item for sublist in nested_list for item in sublist]
+
+    def process(self, string_list):
+        """
+        Processes a list of strings by preprocessing the data, calculating word
+        frequencies, and returning the top 5 most frequent words.
+
+        Parameters:
+            string_list (List[str]): The input list of strings
+
+        Returns:
+            dict: A dictionary with the top 5 most frequent words and their counts
+        """
+
+        words_list = self.process_data(string_list)
+        word_frequency_dict = self.calculate_word_frequency(words_list)
+        top_5_word_frequency = self._get_top_n_dict_items(word_frequency_dict, 5)
+        return top_5_word_frequency
+
+    def _get_top_n_dict_items(self, dictionary, n):
+        """
+        Gets the top n items from a dictionary based on their values.
+
+        Parameters:
+            dictionary (Dict[str, int]): The input dictionary
+            n (int): The number of items to get
+
+        Returns:
+            dict: A new dictionary containing the top n items from the input dictionary
+        """
+        return dict(list(dictionary.items())[:n])
+
+
+# Sample test cases
+input_string_list = ['Hello world', 'This is a test', 'Sample text']
+processor = NLPDataProcessor2()
+output_processed_data = processor.process(input_string_list)
+print(output_processed_data) # Test case 1: Normal/successful usage
+
+input_string_list = ['12345', '67890', 'AbCdEf']
+output_processed_data = processor.process(input_string_list)
+print(output_processed_data) # Test case 2: Edge case handling (non-English characters)
+
+input_string_list = ['', 'None', None]
+output_processed_data = processor.process(input_string_list)
+print(output_processed_data) # Test case 3: Error case handling (empty strings and None)</s>

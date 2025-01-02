@@ -1,0 +1,1 @@
+# Repeat elements in array 'a' that satisfy condition 'cond' by 'n' times and store in array 'm'

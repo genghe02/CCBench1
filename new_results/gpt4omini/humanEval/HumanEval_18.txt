@@ -1,0 +1,15 @@
+```python
+def how_many_times(string: str, substring: str) -> int:
+    # Count the occurrences of a substring in a string
+    >>> how_many_times("hello world", "o") # returns 2
+    >>> how_many_times("hello world", "l") # returns 3
+    >>> how_many_times("hello hello", "hello") # returns 2
+    >>> how_many_times("a", "b") # returns 0
+    times = 0
+
+    for i in range(len(string) - len(substring) + 1):
+        if string[i:i+len(substring)] == substring:
+            times += 1
+
+    return times
+```

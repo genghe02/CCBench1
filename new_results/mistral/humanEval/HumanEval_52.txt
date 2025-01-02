@@ -1,0 +1,9 @@
+ def below_threshold(l: list, t: int):
+    # Check if all elements in the list are below the given threshold
+    >>> below_threshold([1, 2, 3], 2) # returns True
+    >>> below_threshold([1, 2, 3], 3) # returns False
+    >>> below_threshold([], 5) # returns True
+    for e in l:
+        if e >= t:
+            return False
+    return True</s>

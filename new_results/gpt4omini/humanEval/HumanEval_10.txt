@@ -1,0 +1,27 @@
+```python
+def truncate_number(number: float) -> float:
+   # Return the decimal part of a float number by using modulo 1.0
+   >>> truncate_number(3.5) # returns 0.5
+   >>> truncate_number(-3.5) # returns 0.5
+   >>> truncate_number(0.0) # returns 0.0
+   return number % 1.0
+
+def is_palindrome(string: str) -> bool:
+    # Check if the string is the same forwards and backwards
+    return string == string[::-1]
+
+def make_palindrome(string: str) -> str:
+    # Make the string a palindrome by appending the necessary suffix
+    >>> make_palindrome("abc") # returns "abccba"
+    >>> make_palindrome("race") # returns "racecar"
+    >>> make_palindrome("") # returns ""
+    if not string:
+        return ''
+
+    beginning_of_suffix = 0
+
+    while not is_palindrome(string[beginning_of_suffix:]):
+        beginning_of_suffix += 1
+
+    return string + string[:beginning_of_suffix][::-1]
+```

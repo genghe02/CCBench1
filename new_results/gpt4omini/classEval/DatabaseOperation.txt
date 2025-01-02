@@ -1,0 +1,149 @@
+```python
+"""
+This class provides methods for processing a SQLite database, including creating tables, inserting data, searching for records, and deleting entries.
+"""
+
+import sqlite3
+import pandas as pd
+
+class DatabaseProcessor:
+
+    def __init__(self, database_name):
+        """
+        Initializes the DatabaseProcessor with a specified database name.
+
+        Parameters:
+            database_name (str): The name of the database file to connect to.
+        """
+        self.database_name = database_name
+
+    def create_table(self, table_name, key1, key2):
+        """
+        Creates a new table in the database if it doesn't already exist.
+
+        Parameters:
+            table_name (str): The name of the table to create.
+            key1 (str): The name of the first column in the table.
+            key2 (str): The name of the second column in the table.
+
+        Test cases:
+            # Test case 1: Create a valid table
+            create_table('users', 'name', 'age')
+            # Expected: Table 'users' is created with columns 'name' and 'age'
+
+            # Test case 2: Create a table that already exists
+            create_table('users', 'name', 'age')
+            # Expected: No error raised, table already exists
+
+            # Test case 3: Attempt to create a table with an invalid name
+            create_table('users!@#', 'name', 'age')
+            # Expected: Exception raised or return an error (depends on SQLite's behavior)
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        create_table_query = f"CREATE TABLE IF NOT EXISTS {table_name} (id INTEGER PRIMARY KEY, {key1} TEXT, {key2} INTEGER)"
+        cursor.execute(create_table_query)
+
+        conn.commit()
+        conn.close()
+
+    def insert_into_database(self, table_name, data):
+        """
+        Inserts multiple records into the specified table in the database.
+
+        Parameters:
+            table_name (str): The name of the table to insert data into.
+            data (list): A list of dictionaries, where each dictionary represents a record.
+
+        Test cases:
+            # Test case 1: Insert multiple valid records
+            insert_into_database('users', [{'name': 'Alice', 'age': 30}, {'name': 'Bob', 'age': 25}])
+            # Expected: Records are inserted into 'users'
+
+            # Test case 2: Insert with missing fields
+            insert_into_database('users', [{'name': 'Charlie'}])
+            # Expected: Exception raised due to missing 'age'
+
+            # Test case 3: Insert into a non-existent table
+            insert_into_database('non_existent_table', [{'name': 'Dave', 'age': 40}])
+            # Expected: Exception raised since the table doesn't exist
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        for item in data:
+            insert_query = f"INSERT INTO {table_name} (name, age) VALUES (?, ?)"
+            cursor.execute(insert_query, (item['name'], item['age']))
+
+        conn.commit()
+        conn.close()
+
+    def search_database(self, table_name, name):
+        """
+        Searches for records in the database matching the given name.
+
+        Parameters:
+            table_name (str): The name of the table to search in.
+            name (str): The name of the record to search for.
+
+        Returns:
+            list or None: A list of records matching the name, or None if no records found.
+
+        Test cases:
+            # Test case 1: Search for an existing record
+            assert search_database('users', 'Alice') == [(1, 'Alice', 30)]
+            # Expected: List of records containing Alice's information
+
+            # Test case 2: Search for a non-existing record
+            assert search_database('users', 'Zoe') == None
+            # Expected: None (no record found)
+
+            # Test case 3: Search in a non-existent table
+            assert search_database('non_existent_table', 'Alice') == None
+            # Expected: Exception raised since the table doesn't exist
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        select_query = f"SELECT * FROM {table_name} WHERE name = ?"
+        cursor.execute(select_query, (name,))
+        result = cursor.fetchall()
+
+        if result:
+            return result
+        else:
+            return None
+
+    def delete_from_database(self, table_name, name):
+        """
+        Deletes records from the database matching the given name.
+
+        Parameters:
+            table_name (str): The name of the table to delete records from.
+            name (str): The name of the record to delete.
+
+        Test cases:
+            # Test case 1: Delete an existing record
+            delete_from_database('users', 'Alice')
+            # Expected: Record for Alice is deleted
+
+            # Test case 2: Delete a non-existing record
+            delete_from_database('users', 'Zoe')
+            # Expected: No error raised, nothing deleted
+
+            # Test case 3: Attempt to delete from a non-existent table
+            delete_from_database('non_existent_table', 'Alice')
+            # Expected: Exception raised since the table doesn't exist
+        """
+        conn = sqlite3.connect(self.database_name)
+        cursor = conn.cursor()
+
+        delete_query = f"DELETE FROM {table_name} WHERE name = ?"
+        cursor.execute(delete_query, (name,))
+
+        conn.commit()
+        conn.close()
+``` 
+
+This documentation provides a clear understanding of the class and its methods, including detailed parameter descriptions, return values, and example test cases for usage, edge cases, and error handling.

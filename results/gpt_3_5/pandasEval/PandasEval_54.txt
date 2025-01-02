@@ -1,0 +1,1 @@
+# Extract the last year from the given DataFrame column by splitting the strings based on '-' and converting the first element to numeric type, then adding 1 to obtain the final result.

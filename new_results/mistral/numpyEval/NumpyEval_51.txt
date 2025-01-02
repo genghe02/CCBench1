@@ -1,0 +1,2 @@
+ # Find the indices of the k smallest elements in array A
+idx = np.argpartition(A, k)[:k]</s>

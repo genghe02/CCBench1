@@ -1,0 +1,34 @@
+ def will_it_fly(q, w):
+ # Check if the sum of all elements in list q is less than or equal to the given weight w.
+ # If not, return False as the list cannot fly.
+ if sum(q) > w:
+ return False
+
+ # Check if all elements in the list q are equal to each other.
+ # If so, return True as the list can fly.
+ i, j = 0, len(q)-1
+ while i < j:
+ if q[i]!= q[j]:
+ return False
+ i += 1
+ j -= 1
+
+ return True
+
+ # Test cases:
+ # Test case 1: List with all equal elements and weight greater than the sum.
+ # q = [1, 1, 1], w = 5
+ # Test case 2: List with all equal elements and weight less than or equal to the sum.
+ # q = [1, 1, 1], w = 3
+ # Test case 3: List with different elements and weight greater than the sum.
+ # q = [1, 2, 3], w = 5
+ # Test case 4: List with different elements and weight less than the sum.
+ # q = [1, 2, 3], w = 2
+ # Test case 5: Empty list and any weight.
+ # q = [], w = 10
+ # Test case 6: List with one element and any weight.
+ # q = [1], w = 100
+ # Test case 7: List with multiple elements and weight equal to the sum.
+ # q = [1, 1, 1, 1], w = 4
+ # Test case 8: List with multiple elements and weight less than the sum.
+ # q = [1, 1, 1, 1], w = 3

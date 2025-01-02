@@ -1,0 +1,83 @@
+```python
+# This class is used to solve the 8 puzzle problem. It contains methods to track the blank space, move tiles, get possible moves and solve the puzzle.
+class EightPuzzle:
+    def __init__(self, initial_state):
+        # This method initializes the EightPuzzle class. It takes an initial state of the puzzle as an input and also sets a goal state.
+        # param initial_state: list, a 2D list representing the initial state of the 8 puzzle
+        self.initial_state = initial_state
+        self.goal_state = [[1, 2, 3], [4, 5, 6], [7, 8, 0]]
+
+    def find_blank(self, state):
+        # This method finds the blank (0) in the current state of the puzzle.
+        # param state: list, a 2D list representing the current state of the puzzle
+        # return: tuple, the coordinates of the blank space
+        # >>> puzzle = EightPuzzle([[1, 2, 3], [4, 0, 6], [7, 8, 5]])
+        # >>> puzzle.find_blank(puzzle.initial_state)
+        for i in range(3):
+            for j in range(3):
+                if state[i][j] == 0:
+                    return i, j
+
+    def move(self, state, direction):
+        # This method moves the blank space in the given direction if possible and returns a new state.
+        # param state: list, a 2D list representing the current state of the puzzle
+        # param direction: str, the direction to move the blank space. It can be 'up', 'down', 'left', 'right'.
+        # return: list, a 2D list representing the new state after the move
+        # >>> puzzle = EightPuzzle([[1, 2, 3], [4, 0, 6], [7, 8, 5]])
+        # >>> puzzle.move(puzzle.initial_state, 'up')
+        i, j = self.find_blank(state)
+        new_state = [row[:] for row in state]
+
+        if direction == 'up':
+            new_state[i][j], new_state[i - 1][j] = new_state[i - 1][j], new_state[i][j]
+        elif direction == 'down':
+            new_state[i][j], new_state[i + 1][j] = new_state[i + 1][j], new_state[i][j]
+        elif direction == 'left':
+            new_state[i][j], new_state[i][j - 1] = new_state[i][j - 1], new_state[i][j]
+        elif direction == 'right':
+            new_state[i][j], new_state[i][j + 1] = new_state[i][j + 1], new_state[i][j]
+
+        return new_state
+
+    def get_possible_moves(self, state):
+        # This method gets all the possible moves for the blank space in the given state.
+        # param state: list, a 2D list representing the current state of the puzzle
+        # return: list, a list of possible moves. It can contain 'up', 'down', 'left', 'right'.
+        # >>> puzzle = EightPuzzle([[1, 2, 3], [4, 0, 6], [7, 8, 5]])
+        # >>> puzzle.get_possible_moves(puzzle.initial_state)
+        moves = []
+        i, j = self.find_blank(state)
+
+        if i > 0:
+            moves.append('up')
+        if i < 2:
+            moves.append('down')
+        if j > 0:
+            moves.append('left')
+        if j < 2:
+            moves.append('right')
+
+        return moves
+
+    def solve(self):
+        # This method solves the puzzle from the initial state to the goal state using breadth-first search.
+        # return: list, a list of moves from the initial state to the goal state. If no solution is found, return None.
+        # >>> puzzle = EightPuzzle([[1, 2, 3], [4, 0, 6], [7, 8, 5]])
+        # >>> puzzle.solve()
+        open_list = [(self.initial_state, [])]
+        closed_list = []
+
+        while open_list:
+            current_state, path = open_list.pop(0)
+            closed_list.append(current_state)
+
+            if current_state == self.goal_state:
+                return path
+
+            for move in self.get_possible_moves(current_state):
+                new_state = self.move(current_state, move)
+                if new_state not in closed_list:
+                    open_list.append((new_state, path + [move]))
+
+        return None
+```

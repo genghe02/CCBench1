@@ -1,0 +1,19 @@
+ # This function encrypts a string by shifting each character in the alphabet by 2 positions
+ # If the character is not in the alphabet, it remains unchanged
+>>> encrypt('apple') # returns 'c rqj'
+>>> encrypt('banana') # returns 'd wtk'
+>>> encrypt('123') # returns '123'
+def encrypt(s):
+    # Shift each character in the string by 2 positions in the alphabet if it is a letter
+    # Keep the character unchanged if it is not a letter
+    >>> encrypt('apple') # returns 'c rqj'
+    >>> encrypt('banana') # returns 'd wtk'
+    >>> encrypt('123') # returns '123'
+    d = 'abcdefghijklmnopqrstuvwxyz'
+    out = ''
+    for c in s:
+        if c in d:
+            out += d[(d.index(c)+2*2) % 26]
+        else:
+            out += c
+    return out</s>

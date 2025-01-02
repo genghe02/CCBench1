@@ -1,0 +1,13 @@
+```python
+def maximum(arr, k):
+    # Return the k largest elements in a list
+    >>> maximum([1, 2, 3, 4, 5], 2) # returns [4, 5]
+    >>> maximum([10, 9, 8, 7, 6], 3) # returns [8, 9, 10]
+    >>> maximum([1], 1) # returns [1]
+    >>> maximum([], 0) # returns []
+    if k == 0:
+        return []
+    arr.sort()
+    ans = arr[-k:]
+    return ans
+```

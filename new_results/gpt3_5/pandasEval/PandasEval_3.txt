@@ -1,0 +1,2 @@
+# Add zeros to the beginning of a string in a dataframe column to ensure a total length of 15 characters
+    df[col_name] = df[col_name].apply(lambda x: '{0:0>15}'.format(x))

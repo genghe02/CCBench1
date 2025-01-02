@@ -1,0 +1,125 @@
+"""
+This class represents a game of Gomoku (also known as Five in a Row), a strategy board game where players take turns placing symbols on a grid, aiming to get five of their symbols in a row.
+"""
+
+class GomokuGame:
+    def __init__(self, board_size):
+        """
+        Initializes a new game of Gomoku with an empty board and sets the current player to 'X'.
+        
+        Parameters:
+            board_size (int): The size of the game board. The board is a square grid, so this is both the number of rows and columns.
+        """
+        self.board_size = board_size
+        self.board = [[' ' for _ in range(board_size)] for _ in range(board_size)]
+        self.current_player = 'X'
+
+    def make_move(self, row, col):
+        """
+        Makes a move by placing the current player's symbol at the specified cell. If the cell is already filled, the move is invalid and the method returns False.
+
+        Parameters:
+            row (int): The row index of the cell.
+            col (int): The column index of the cell.
+        
+        Returns:
+            bool: True if the move is valid and has been made, False otherwise.
+
+        Test cases:
+            # Test case 1: Making a valid move
+            game = GomokuGame(5)
+            assert game.make_move(0, 0) == True
+
+            # Test case 2: Making a move on an already filled cell
+            game = GomokuGame(5)
+            game.make_move(0, 0)
+            assert game.make_move(0, 0) == False
+
+            # Test case 3: Making a move outside the board
+            game = GomokuGame(5)
+            assert game.make_move(5, 5) == False
+        """
+        if self.board[row][col] == ' ':
+            self.board[row][col] = self.current_player
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
+            return True
+        return False
+
+    def check_winner(self):
+        """
+        Checks if there's a winner in the current board state. A player is a winner if they have five of their symbols in a row in any direction.
+
+        Returns:
+            str or None: The symbol of the winning player if there's a winner, None otherwise.
+
+        Test cases:
+            # Test case 1: No winner yet
+            game = GomokuGame(5)
+            assert game.check_winner() == None
+
+            # Test case 2: Player 'X' is the winner
+            game = GomokuGame(5)
+            for i in range(5):
+                game.make_move(i, 0)
+            assert game.check_winner() == 'X'
+
+            # Test case 3: Player 'O' is the winner
+            game = GomokuGame(5)
+            for i in range(5):
+                game.make_move(0, i)
+                game.make_move(1, i)
+            assert game.check_winner() == 'O'
+        """
+        directions = [(0, 1), (1, 0), (1, 1), (1, -1)]
+        for row in range(self.board_size):
+            for col in range(self.board_size):
+                if self.board[row][col] != ' ':
+                    for direction in directions:
+                        if self._check_five_in_a_row(row, col, direction):
+                            return self.board[row][col]
+        return None
+
+    def _check_five_in_a_row(self, row, col, direction):
+        """
+        Private helper method to check if there are five symbols in a row starting from the given cell.
+
+        Parameters:
+            row (int): The row index of the starting cell.
+            col (int): The column index of the starting cell.
+            direction (tuple): The direction to check in. This is a tuple of two integers representing the changes in the row and column indices respectively. For example, (1, 0) represents the down direction.
+        
+        Returns:
+            bool: True if there are five symbols in a row, False otherwise.
+
+        Test cases:
+            # Test case 1: Five 'X's in a row
+            game = GomokuGame(5)
+            for i in range(5):
+                game.make_move(i, 0)
+            assert game._check_five_in_a_row(0, 0, (1, 0)) == True
+
+            # Test case 2: Not enough symbols in a row
+            game = GomokuGame(5)
+            for i in range(4):
+                game.make_move(i, 0)
+            assert game._check_five_in_a_row(0, 0, (1, 0)) == False
+
+            # Test case 3: Five symbols in a row but not all are the same
+            game = GomokuGame(5)
+            for i in range(4):
+                game.make_move(i, 0)
+            game.make_move(4, 0)
+            assert game._check_five_in_a_row(0, 0, (1, 0)) == False
+        """
+        dx, dy = direction
+        count = 1
+        symbol = self.board[row][col]
+        for i in range(1, 5):
+            new_row = row + dx * i
+            new_col = col + dy * i
+            if not (0 <= new_row < self.board_size and 0 <= new_col < self.board_size):
+                return False
+            if self.board[new_row][new_col] != symbol:
+                return False
+            count += 1
+        return count == 5

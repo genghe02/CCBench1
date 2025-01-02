@@ -1,0 +1,229 @@
+```python
+"""
+The class CalendarUtil serves as a utility tool to manage a list of events. It provides methods to add or remove an event, 
+get all events on a particular date, check if a time slot is available, get all available slots on a particular date, 
+and get a certain number of upcoming events.
+"""
+
+from datetime import datetime, timedelta
+
+class CalendarUtil:
+    def __init__(self):
+        """
+        Initializes a new instance of the CalendarUtil class.
+        
+        This method initializes an empty list to store the events.
+        """
+        self.events = []
+
+    def add_event(self, event):
+        """
+        Adds an event to the list of events.
+        
+        Parameters:
+            event (dict): A dictionary containing details of the event. It should include 'date', 'start_time', and 'end_time' keys.
+            
+        Test cases:
+            # Test case 1: Adding a valid event
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 12, 0)}
+            cal.add_event(event)
+            assert len(cal.events) == 1
+            
+            # Test case 2: Adding an event with missing keys
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0)}
+            cal.add_event(event)
+            # This should raise a KeyError
+            
+            # Test case 3: Adding an event with invalid date/time
+            cal = CalendarUtil()
+            event = {'date': '2023-01-01', 'start_time': '10:00', 'end_time': '12:00'}
+            cal.add_event(event)
+            # This should raise a TypeError
+        """
+        self.events.append(event)
+
+    def remove_event(self, event):
+        """
+        Removes an event from the list of events if it exists.
+        
+        Parameters:
+            event (dict): A dictionary containing details of the event to be removed.
+            
+        Test cases:
+            # Test case 1: Removing an existing event
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 12, 0)}
+            cal.add_event(event)
+            cal.remove_event(event)
+            assert len(cal.events) == 0
+            
+            # Test case 2: Trying to remove an event that doesn't exist
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 12, 0)}
+            cal.remove_event(event)
+            # This should not raise an error, but also not remove any event
+            
+            # Test case 3: Trying to remove an event with missing/incorrect keys
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0)}
+            cal.remove_event(event)
+            # This should not raise an error, but also not remove any event
+        """
+        if event in self.events:
+            self.events.remove(event)
+
+    def get_events(self, date):
+        """
+        Returns a list of all events on a particular date.
+        
+        Parameters:
+            date (datetime): The date for which to get the events.
+            
+        Returns:
+            list: A list of dictionaries, each representing an event on the given date.
+            
+        Test cases:
+            # Test case 1: Getting events on a date with events
+            cal = CalendarUtil()
+            event1 = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 12, 0)}
+            event2 = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 14, 0), 'end_time': datetime(2023, 1, 1, 16, 0)}
+            cal.add_event(event1)
+            cal.add_event(event2)
+            events = cal.get_events(datetime(2023, 1, 1))
+            assert len(events) == 2
+            
+            # Test case 2: Getting events on a date with no events
+            cal = CalendarUtil()
+            events = cal.get_events(datetime(2023, 1, 1))
+            assert len(events) == 0
+            
+            # Test case 3: Trying to get events with an invalid date
+            cal = CalendarUtil()
+            events = cal.get_events('2023-01-01')
+            # This should raise a TypeError
+        """
+        events_on_date = []
+        for event in self.events:
+            if event['date'].date() == date.date():
+                events_on_date.append(event)
+        return events_on_date
+
+    def is_available(self, start_time, end_time):
+        """
+        Checks if the time slot between start_time and end_time is available (i.e., no events are scheduled in this time slot).
+        
+        Parameters:
+            start_time (datetime): The start of the time slot.
+            end_time (datetime): The end of the time slot.
+            
+        Returns:
+            bool: True if the time slot is available, False otherwise.
+            
+        Test cases:
+            # Test case 1: Checking an available time slot
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 12, 0)}
+            cal.add_event(event)
+            assert cal.is_available(datetime(2023, 1, 1, 12, 0), datetime(2023, 1, 1, 14, 0)) == True
+            
+            # Test case 2: Checking a time slot that is not available
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 12, 0)}
+            cal.add_event(event)
+            assert cal.is_available(datetime(2023, 1, 1, 11, 0), datetime(2023, 1, 1, 13, 0)) == False
+            
+            # Test case 3: Checking a time slot with invalid start_time/end_time
+            cal = CalendarUtil()
+            assert cal.is_available('10:00', '12:00') == False
+            # This should raise a TypeError
+        """
+        for event in self.events:
+            if start_time < event['end_time'] and end_time > event['start_time']:
+                return False
+        return True
+
+    def get_available_slots(self, date):
+        """
+        Gets a list of all available 1-hour time slots on a particular date.
+        
+        Parameters:
+            date (datetime): The date for which to get the available slots.
+            
+        Returns:
+            list: A list of tuples, each representing an available time slot. Each tuple contains two datetimes: start_time and end_time.
+            
+        Test cases:
+            # Test case 1: Getting available slots on a date with some events
+            cal = CalendarUtil()
+            event1 = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 11, 0)}
+            event2 = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 12, 0), 'end_time': datetime(2023, 1, 1, 13, 0)}
+            cal.add_event(event1)
+            cal.add_event(event2)
+            slots = cal.get_available_slots(datetime(2023, 1, 1))
+            assert len(slots) == 22  # 24 hours in a day, minus 2 hours occupied by events
+            
+            # Test case 2: Getting available slots on a date with no events
+            cal = CalendarUtil()
+            slots = cal.get_available_slots(datetime(2023, 1, 1))
+            assert len(slots) == 24  # 24 hours in a day, all available
+            
+            # Test case 3: Trying to get slots with an invalid date
+            cal = CalendarUtil()
+            slots = cal.get_available_slots('2023-01-01')
+            # This should raise a TypeError
+        """
+        available_slots = []
+        start_time = datetime(date.year, date.month, date.day, 0, 0)
+        end_time = datetime(date.year, date.month, date.day, 23, 59)
+
+        while start_time < end_time:
+            slot_end_time = start_time + timedelta(minutes=60)
+            if self.is_available(start_time, slot_end_time):
+                available_slots.append((start_time, slot_end_time))
+            start_time += timedelta(minutes=60)
+
+        return available_slots
+
+    def get_upcoming_events(self, num_events):
+        """
+        Gets a list of the next num_events upcoming events.
+        
+        Parameters:
+            num_events (int): The number of upcoming events to get.
+            
+        Returns:
+            list: A list of dictionaries, each representing an upcoming event.
+            
+        Test cases:
+            # Test case 1: Getting upcoming events when there are enough upcoming events
+            cal = CalendarUtil()
+            event1 = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 11, 0)}
+            event2 = {'date': datetime(2023, 1, 2), 'start_time': datetime(2023, 1, 2, 10, 0), 'end_time': datetime(2023, 1, 2, 11, 0)}
+            cal.add_event(event1)
+            cal.add_event(event2)
+            events = cal.get_upcoming_events(2)
+            assert len(events) == 2
+            
+            # Test case 2: Getting upcoming events when there are not enough upcoming events
+            cal = CalendarUtil()
+            event = {'date': datetime(2023, 1, 1), 'start_time': datetime(2023, 1, 1, 10, 0), 'end_time': datetime(2023, 1, 1, 11, 0)}
+            cal.add_event(event)
+            events = cal.get_upcoming_events(2)
+            assert len(events) == 1
+            
+            # Test case 3: Trying to get upcoming events with an invalid num_events
+            cal = CalendarUtil()
+            events = cal.get_upcoming_events('two')
+            # This should raise a TypeError
+        """
+        now = datetime.now()
+        upcoming_events = []
+        for event in self.events:
+            if event['start_time'] >= now:
+                upcoming_events.append(event)
+            if len(upcoming_events) == num_events:
+                break
+        return upcoming_events
+```

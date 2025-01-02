@@ -1,0 +1,2 @@
+ # Flatten the transpose of a 3x3 numpy array
+d = np.array([a, b, c]).T.flatten()</s>

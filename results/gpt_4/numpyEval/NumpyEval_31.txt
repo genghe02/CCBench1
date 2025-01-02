@@ -1,0 +1,1 @@
+# Index numpy array 'a' with tuple 'b' to return the specific elements from 'a'. The tuple 'b' represents the indices for the elements to be selected from 'a'.

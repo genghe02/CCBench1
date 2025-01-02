@@ -1,0 +1,174 @@
+"""
+This class implements an RPG character with attributes such as name, health points (HP), attack power, defense, level, and experience points.
+
+"""
+
+class RPGCharacter:
+    def __init__(self, name, hp, attack_power, defense, level=1):
+        """
+        Initialize an RPG character with given attributes.
+
+        Parameters:
+            name (str): The name of the character
+            hp (int): The health points of the character
+            attack_power (int): The attack power of the character
+            defense (int): The defense of the character
+            level (int): The level of the character (default is 1)
+        """
+
+        self.name = name
+        self.hp = hp
+        self.attack_power = attack_power
+        self.defense = defense
+        self.level = level
+        self.exp = 0
+
+    def attack(self, other_character):
+        """
+        Attack another character.
+
+        Parameters:
+            other_character (RPGCharacter): The character to attack
+        
+        Test cases:
+            # Test case 1: Normal attack
+            player1 = RPGCharacter("Player 1", 100, 20, 10)
+            player2 = RPGCharacter("Player 2", 100, 15, 5)
+            player1.attack(player2)
+            assert player2.hp == 85
+
+            # Test case 2: Minimum damage
+            player3 = RPGCharacter("Player 3", 100, 5, 5)
+            player4 = RPGCharacter("Player 4", 100, 5, 5)
+            player3.attack(player4)
+            assert player4.hp == 95
+
+            # Test case 3: Edge case, zero damage due to high defense
+            player5 = RPGCharacter("Player 5", 100, 20, 25)
+            player6 = RPGCharacter("Player 6", 100, 15, 10)
+            player5.attack(player6)
+            assert player6.hp == 100
+        """
+
+        damage = max(self.attack_power - other_character.defense, 1)
+        other_character.hp -= damage
+
+    def heal(self):
+        """
+        Heal the character by 10 HP.
+
+        Returns:
+            int: The current HP of the character after healing
+        
+        Test cases:
+            # Test case 1: Normal healing
+            player = RPGCharacter("Healer", 80, 10, 5)
+            player.heal()
+            assert player.hp == 90
+
+            # Test case 2: Maximum HP after healing
+            player2 = RPGCharacter("Healer 2", 95, 10, 5)
+            player2.heal()
+            assert player2.hp == 100
+
+            # Test case 3: Edge case, HP above maximum
+            player3 = RPGCharacter("Healer 3", 99, 10, 5)
+            player3.heal()
+            assert player3.hp == 100
+        """
+
+        self.hp += 10
+        if self.hp > 100:
+            self.hp = 100
+        return self.hp
+
+    def gain_exp(self, amount):
+        """
+        Gain experience points and level up if needed.
+
+        Parameters:
+            amount (int): The amount of experience points gained
+        
+        Test cases:
+            # Test case 1: Normal experience gain
+            player = RPGCharacter("Exp Player", 100, 20, 10)
+            player.gain_exp(50)
+            assert player.exp == 50
+            assert player.level == 1
+
+            # Test case 2: Level up with leftover exp
+            player2 = RPGCharacter("Exp Player 2", 100, 20, 10)
+            player2.gain_exp(120)
+            assert player2.exp == 20
+            assert player2.level == 2
+
+            # Test case 3: Edge case, multiple level ups
+            player3 = RPGCharacter("Exp Player 3", 100, 20, 10)
+            player3.gain_exp(500)
+            assert player3.exp == 0
+            assert player3.level == 5
+        """
+
+        while amount != 0:
+            if self.exp + amount >= self.level * 100:
+                amount -= (self.level * 100 - self.exp)
+                self.level_up()
+            else:
+                self.exp += amount
+                amount = 0
+
+    def level_up(self):
+        """
+        Level up the character and increase stats.
+
+        Returns:
+            tuple: Tuple containing the new level, HP, attack power, and defense
+        
+        Test cases:
+            # Test case 1: Normal level up
+            player = RPGCharacter("Level Up Player", 100, 20, 10)
+            level_stats = player.level_up()
+            assert level_stats == (2, 120, 25, 15)
+
+            # Test case 2: Maximum level reached
+            player2 = RPGCharacter("Level Up Player 2", 100, 20, 10, 99)
+            level_stats2 = player2.level_up()
+            assert level_stats2 == (100, 120, 25, 15)
+
+            # Test case 3: Edge case, multiple level ups
+            player3 = RPGCharacter("Level Up Player 3", 100, 20, 10, 97)
+            level_stats3 = player3.level_up()
+            assert level_stats3 == (100, 120, 25, 15)
+        """
+
+        if self.level < 100:
+            self.level += 1
+            self.exp = 0
+            self.hp += 20
+            self.attack_power += 5
+            self.defense += 5
+        return self.level, self.hp, self.attack_power, self.defense
+
+    def is_alive(self):
+        """
+        Check if the character is alive based on current HP.
+
+        Returns:
+            bool: True if character is alive, False otherwise
+        
+        Test cases:
+            # Test case 1: Character alive
+            living_player = RPGCharacter("Living Player", 50, 20, 10)
+            assert living_player.is_alive() == True
+
+            # Test case 2: Character at 0 HP
+            player_dead = RPGCharacter("Dead Player", 0, 20, 5)
+            assert player_dead.is_alive() == False
+
+            # Test case 3: Edge case, negative HP
+            player_critical = RPGCharacter("Critical Player", -10, 20, 5)
+            assert player_critical.is_alive() == False
+        """
+
+        return self.hp > 0
+```

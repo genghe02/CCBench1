@@ -1,0 +1,151 @@
+ """
+This class represents a student registration system where students can be registered and classes can be registered for them.
+"""
+
+import typing
+
+
+class ClassRegistrationSystem:
+
+    def __init__(self):
+        """
+        Initializes an empty ClassRegistrationSystem object.
+        """
+        self.students: typing.List[typing.Dict[str, str]] = []
+        self.students_registration_classes: typing.Dict[str, typing.List[str]] = {}
+
+    def register_student(self, student: typing.Dict[str, str]) -> int:
+        """
+        Registers a student in the system.
+
+        Parameters:
+            student (Dict[str, str]): A dictionary containing student data.
+
+        Returns:
+            0 if the student is already registered, 1 otherwise.
+
+        Test cases:
+            # Test case 1: Registering an existing student
+            student = {'name': 'John', 'major': 'Computer Science'}
+            assert register_student(student) == 0
+            
+            # Test case 2: Registering a new student
+            student = {'name': 'Jane', 'major': 'Mathematics'}
+            assert register_student(student) == 1
+            
+            # Test case 3: Trying to register an already registered student
+            student = {'name': 'John', 'major': 'Computer Science'}
+            assert register_student(student) == 0
+        """
+        if student in self.students:
+            return 0
+        else:
+            self.students.append(student)
+            return 1
+
+    def register_class(self, student_name: str, class_name: str) -> typing.List[str]:
+        """
+        Registers a class for a student.
+
+        Parameters:
+            student_name (str): The name of the student.
+            class_name (str): The name of the class.
+
+        Returns:
+            A list of classes registered for the given student.
+
+        Test cases:
+            # Test case 1: Registering a class for a student with no classes
+            assert register_class('John', 'Algebra') == ['Algebra']
+            
+            # Test case 2: Registering an already registered class
+            register_class('John', 'Algebra')
+            assert register_class('John', 'Algebra') == ['Algebra']
+            
+            # Test case 3: Registering multiple classes for a student
+            register_class('John', 'Algebra')
+            register_class('John', 'Calculus')
+            assert register_class('John', 'Geometry') == ['Algebra', 'Calculus', 'Geometry']
+        """
+        if student_name not in self.students_registration_classes:
+            self.students_registration_classes[student_name] = [class_name]
+        else:
+            self.students_registration_classes[student_name].append(class_name)
+        return self.students_registration_classes[student_name]
+
+    def get_students_by_major(self, major: str) -> typing.List[str]:
+        """
+        Returns a list of students having the given major.
+
+        Parameters:
+            major (str): The major of students to be searched.
+
+        Returns:
+            A list of student names with the given major.
+
+        Test cases:
+            # Test case 1: Getting students with a major in an empty system
+            assert get_students_by_major('Computer Science') == []
+            
+            # Test case 2: Getting students with a major having at least one student
+            register_student({'name': 'John', 'major': 'Computer Science'})
+            register_student({'name': 'Jane', 'major': 'Computer Science'})
+            assert get_students_by_major('Computer Science') == ['John', 'Jane']
+            
+            # Test case 3: Getting students with a major having no students
+            register_student({'name': 'John', 'major': 'Mathematics'})
+            assert get_students_by_major('Computer Science') == []
+        """
+        student_list = [student['name'] for student in self.students if student['major'] == major]
+        return student_list
+
+    def get_all_major(self) -> typing.List[str]:
+        """
+        Returns a list of all available majors.
+
+        Returns:
+            A list of all available majors.
+
+        Test cases:
+            # Test case 1: Getting majors in an empty system
+            assert get_all_major() == []
+            
+            # Test case 2: Getting majors in a system with some students
+            register_student({'name': 'John', 'major': 'Computer Science'})
+            register_student({'name': 'Jane', 'major': 'Mathematics'})
+            assert get_all_major() == ['Computer Science', 'Mathematics']
+        """
+        major_list = [student['major'] for student in self.students]
+        return major_list
+
+    def get_most_popular_class_in_major(self, major: str) -> str:
+        """
+        Returns the most popular class (with the highest number of students) for the given major.
+
+        Parameters:
+            major (str): The major of the students.
+
+        Returns:
+            The name of the most popular class.
+
+        Test cases:
+            # Test case 1: Getting the most popular class in an empty system
+            assert get_most_popular_class_in_major('Computer Science') is None
+            
+            # Test case 2: Getting the most popular class in a system with one class for each major
+            register_student({'name': 'John', 'major': 'Computer Science'})
+            register_student({'name': 'Jane', 'major': 'Computer Science'})
+            register_student({'name': 'Mark', 'major': 'Mathematics'})
+            register_student({'name': 'Mary', 'major': 'Mathematics'})
+            assert get_most_popular_class_in_major('Computer Science') == 'Algebra'
+            assert get_most_popular_class_in_major('Mathematics') == 'Algebra'
+            
+            # Test case 3: Getting the most popular class in a system with multiple classes for one major
+            register_student({'name': 'John', 'major': 'Computer Science'})
+            register_student({'name': 'Jane', 'major': 'Computer Science'})
+            register_student({'name': 'Mark', 'major': 'Computer Science'})
+            register_student({'name': 'Mary', 'major': 'Computer Science'})
+            register_student({'name': 'Anna', 'major': 'Computer Science'})
+            register_student({'name': 'Ben', 'major': 'Computer Science'})
+            assert get_most_popular_class_in_major('Computer Science') == 'Algebra'
+            assert get_most_popular_class_in_major('Mathematics') is None</s>

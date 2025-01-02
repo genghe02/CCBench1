@@ -1,0 +1,97 @@
+ This class represents an Access Gateway Filter that handles request filtering, authentication, and logging.
+
+The class initializes an instance of AccessGatewayFilter with no arguments and maintains an empty state.
+
+It has two methods:
+1. filter(): It filters requests based on certain conditions and allows access if they meet them.
+2. is_start_with(): It checks if the request URI starts with any of the allowed prefixes.
+
+```python
+"""
+This class represents an Access Gateway Filter that handles request filtering, authentication, and logging.
+
+The class initializes an instance of AccessGatewayFilter with no arguments and maintains an empty state.
+
+It has two methods:
+1. filter(): It filters requests based on certain conditions and allows access if they meet them.
+2. is_start_with(): It checks if the request URI starts with any of the allowed prefixes.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method documentation.
+        """
+        pass
+
+    def filter(self, request):
+        """
+        This method filters requests based on certain conditions and allows access if they meet them.
+
+        Parameters:
+            request (dict): The incoming HTTP request.
+        
+        Returns:
+            bool: True if the request is allowed, False otherwise.
+
+        Test cases:
+            # Test case 1: Allowing a request with the correct prefix
+            request = {'path': '/api/users'}
+            assert filter(request) == True
+            
+            # Test case 2: Denying a request with an incorrect prefix
+            request = {'path': '/wrong_prefix/users'}
+            assert filter(request) == False
+            
+            # Test case 3: Denying a request without a prefix
+            request = {'path': '/users'}
+            assert filter(request) == False
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Check if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check.
+        
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+            
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+            
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+```</s>

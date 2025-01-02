@@ -1,0 +1,16 @@
+```python
+def truncate_number(number: float) -> float:
+   # Return the decimal part of a float number by using modulo 1.0
+   >>> truncate_number(3.5) # returns 0.5
+   >>> truncate_number(-3.5) # returns 0.5
+   >>> truncate_number(0.0) # returns 0.0
+   return number % 1.0
+
+def encode_shift(s: str):
+    # Encode a string using a simple letter shift
+    return "".join([chr(((ord(ch) + 5 - ord("a")) % 26) + ord("a")) for ch in s])
+
+def decode_shift(s: str):
+    # Decode a string using a simple letter shift
+    return "".join([chr(((ord(ch) - 5 - ord("a")) % 26) + ord("a")) for ch in s])
+```

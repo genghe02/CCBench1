@@ -1,0 +1,5 @@
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'A': [1, 4, 7, np.nan], 'B': [np.nan, 2, 5, np.nan], 'C': [np.nan, np.nan, 3, 6]})
+# Sort each row by null values and drop rows with all null values
+new_df = df.apply(lambda x: sorted(x, key=pd.isnull)).dropna(how = 'all')

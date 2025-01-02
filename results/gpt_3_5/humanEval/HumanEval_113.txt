@@ -1,0 +1,21 @@
+def odd_count(lst):
+    # Count the number of odd elements in each string of the input list and return a list of strings containing this information.
+
+    # Test cases:
+    # Test case where all elements are odd numbers
+    # Input: ["1357", "97531"]
+    # Expected output: ["the number of odd elements 4 in the string 4 of the input.", "the number of odd elements 5 in the string 5 of the input."]
+    
+    # Test case where all elements are even numbers
+    # Input: ["2468", "246810"]
+    # Expected output: ["the number of odd elements 0 in the string 0 of the input.", "the number of odd elements 0 in the string 0 of the input."]
+    
+    # Test case where mix of odd and even numbers
+    # Input: ["12345", "246810"]
+    # Expected output: ["the number of odd elements 5 in the string 5 of the input.", "the number of odd elements 0 in the string 0 of the input."]
+    
+    res = []
+    for arr in lst:
+        n = sum(int(d)%2==1 for d in arr)
+        res.append("the number of odd elements " + str(n) + " in the string " + str(n) + " of the input.")
+    return res

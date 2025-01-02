@@ -1,0 +1,109 @@
+"""
+This class implements a Movie Booking System that allows users to add movies, book tickets, and view available movies within a specified time range.
+"""
+
+from datetime import datetime
+import numpy as np
+
+class MovieBookingSystem:
+    def __init__(self):
+        """
+        Initialize the MovieBookingSystem class.
+        """
+        self.movies = []
+
+    def add_movie(self, name, price, start_time, end_time, n):
+        """
+        Add a new movie to the booking system.
+
+        Parameters:
+            name (str): The name of the movie
+            price (float): The ticket price for the movie
+            start_time (str): The start time of the movie in the format HH:MM
+            end_time (str): The end time of the movie in the format HH:MM
+            n (int): The number of seats in the movie theater
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Normal movie addition
+            add_movie("Titanic", 10.00, "18:00", "21:00", 5)
+            
+            # Test case 2: Edge case with zero seats
+            add_movie("Inception", 12.00, "20:00", "23:00", 0)
+            
+            # Test case 3: Error case with invalid time format
+            add_movie("Avengers", 15.00, "24:00", "27:00", 3)
+
+        movie = {
+            'name': name,
+            'price': price,
+            'start_time': datetime.strptime(start_time, '%H:%M'),
+            'end_time': datetime.strptime(end_time, '%H:%M'),
+            'seats': np.zeros((n, n))
+        }
+        self.movies.append(movie)
+
+    def book_ticket(self, name, seats_to_book):
+        """
+        Book tickets for a specific movie.
+
+        Parameters:
+            name (str): The name of the movie
+            seats_to_book (list): A list of tuples representing seats to be booked
+        
+        Returns:
+            str: A success or failure message for booking
+        
+        Test cases:
+            # Test case 1: Successful booking
+            book_ticket("Titanic", [(1, 2), (3, 4)])
+            
+            # Test case 2: Booking failure due to seat already booked
+            book_ticket("Inception", [(0, 0), (0, 1)])
+            
+            # Test case 3: Error case for movie not found
+            book_ticket("Spiderman", [(2, 2)])
+
+        for movie in self.movies:
+            if movie['name'] == name:
+                for seat in seats_to_book:
+                    if movie['seats'][seat[0]][seat[1]] == 0:
+                        movie['seats'][seat[0]][seat[1]] = 1
+                    else:
+                        return "Booking failed."
+                return "Booking success."
+        return "Movie not found."
+
+    def available_movies(self, start_time, end_time):
+        """
+        Retrieve a list of available movies within a specified time range.
+
+        Parameters:
+            start_time (str): The start time for checking movie availability in the format HH:MM
+            end_time (str): The end time for checking movie availability in the format HH:MM
+        
+        Returns:
+            list: A list of movie names available within the specified time range
+        
+        Test cases:
+            # Test case 1: Retrieve available movies within a time range
+            available_movies("17:00", "22:00")
+        
+            # Test case 2: No movies available within the specified time range
+            available_movies("12:00", "15:00")
+        
+            # Test case 3: Edge case with empty time range
+            available_movies("00:00", "00:00")
+
+        start_time = datetime.strptime(start_time, '%H:%M')
+        end_time = datetime.strptime(end_time, '%H:%M')
+
+        available_movies = []
+        for movie in self.movies:
+            if start_time <= movie['start_time'] and movie['end_time'] <= end_time:
+                available_movies.append(movie['name'])
+
+        return available_movies
+```

@@ -1,0 +1,1 @@
+# Convert a given matrix into a 1D array by removing any singleton dimensions in the matrix using np.squeeze and converting it to a NumPy array using np.asarray.

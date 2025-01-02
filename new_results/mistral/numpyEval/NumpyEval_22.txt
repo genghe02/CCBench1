@@ -1,0 +1,2 @@
+ # Calculate mean of every group of 3 elements in array
+return np.mean(arr.reshape(-1, 3), axis=1)</s>

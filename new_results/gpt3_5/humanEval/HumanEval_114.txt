@@ -1,0 +1,23 @@
+# This function finds the minimum sum of a subarray
+# Returns the minimum sum of a subarray
+
+>>> minSubArraySum([-2, 1, -3, 4, -1, 2, 1, -5, 4]) # returns -5
+>>> minSubArraySum([1, 2, 3, 4]) # returns 0
+>>> minSubArraySum([-1, -2, -3, -4]) # returns -10
+
+def minSubArraySum(nums):
+    # Find the minimum sum of contiguous subarray using Kadane's algorithm
+    >>> minSubArraySum([-2, 1, -3, 4, -1, 2, 1, -5, 4]) # returns -5
+    >>> minSubArraySum([1, 2, 3, 4]) # returns 0
+    >>> minSubArraySum([-1, -2, -3, -4]) # returns -10
+    max_sum = 0
+    s = 0
+    for num in nums:
+        s += -num
+        if (s < 0):
+            s = 0
+        max_sum = max(s, max_sum)
+    if max_sum == 0:
+        max_sum = max(-i for i in nums)
+    min_sum = -max_sum
+    return min_sum

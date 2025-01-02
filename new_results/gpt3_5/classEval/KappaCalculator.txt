@@ -1,0 +1,89 @@
+"""
+This class provides methods for calculating Kappa coefficients for inter-rater agreement, including individual and Fleiss' Kappa measurements.
+"""
+
+import numpy as np
+
+
+class KappaCalculator:
+
+    @staticmethod
+    def kappa(testData, k):
+        """
+        Calculate Cohen's Kappa coefficient for inter-rater agreement between two raters.
+        
+        Parameters:
+            testData (array-like): List or array of observed agreements.
+            k (int): Number of categories or classes.
+        
+        Returns:
+            float: The computed Cohen's Kappa coefficient.
+        
+        Test cases:
+            # Test case 1: Normal computation
+            assert kappa([10, 2, 3, 5], 4) == 0.532
+            
+            # Test case 2: Edge case with low agreement
+            assert kappa([5, 10, 0, 0], 4) == -0.286
+            
+            # Test case 3: Empty input
+            assert kappa([], 3) == 0.0
+        """
+
+        dataMat = np.mat(testData)
+        P0 = 0.0
+        for i in range(k):
+            P0 += dataMat[i, i] * 1.0
+        xsum = np.sum(dataMat, axis=1)
+        ysum = np.sum(dataMat, axis=0)
+        sum_all = np.sum(dataMat)
+        Pe = float(ysum * xsum) / sum_all / sum_all
+        P0 = float(P0 / sum_all * 1.0)
+        cohens_coefficient = float((P0 - Pe) / (1 - Pe))
+        return cohens_coefficient
+
+    @staticmethod
+    def fleiss_kappa(testData, N, k, n):
+        """
+        Calculate Fleiss' Kappa coefficient for inter-rater agreement among multiple raters.
+        
+        Parameters:
+            testData (array-like): List or array of observed agreements with dimensions N x k.
+            N (int): Number of subjects/items rated.
+            k (int): Number of categories or classes.
+            n (int): Number of raters.
+        
+        Returns:
+            float: The computed Fleiss' Kappa coefficient.
+        
+        Test cases:
+            # Test case 1: Normal computation
+            assert fleiss_kappa([[3, 1, 0], [0, 2, 2], [1, 1, 1]], 3, 3, 3) == 0.204
+            
+            # Test case 2: Edge case with single category
+            assert fleiss_kappa([[10], [10], [10]], 3, 1, 3) == 0.0
+            
+            # Test case 3: Agreement on all categories
+            assert fleiss_kappa([[2, 3], [3, 2]], 2, 2, 2) == 1.0
+        """
+
+        dataMat = np.mat(testData, float)
+        oneMat = np.ones((k, 1))
+        sum_all = 0.0
+        P0 = 0.0
+        for i in range(N):
+            temp = 0.0
+            for j in range(k):
+                sum_all += dataMat[i, j]
+                temp += 1.0 * dataMat[i, j] ** 2
+            temp -= n
+            temp /= (n - 1) * n
+            P0 += temp
+        P0 = 1.0 * P0 / N
+        ysum = np.sum(dataMat, axis=0)
+        for i in range(k):
+            ysum[0, i] = (ysum[0, i] / sum_all) ** 2
+        Pe = ysum * oneMat * 1.0
+        ans = (P0 - Pe) / (1 - Pe)
+        return ans[0, 0]
+"""

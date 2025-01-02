@@ -1,0 +1,193 @@
+ """
+This class, named `AccessGatewayFilter`, acts as a filter for access control in an application. It handles request filtering, authentication, and logging.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initialization method.
+        Creates an empty dictionary to store user information.
+        """
+        self._user_data = {}
+
+    def filter(self, request):
+        """
+        Filters and processes incoming HTTP requests based on predefined rules.
+
+        Parameters:
+            request (dict): An HTTP request object containing request data, e.g., 'path' and 'method'.
+
+        Returns:
+            bool: A Boolean value signifying whether the request should be granted or not.
+
+        Test cases:
+            # Test case 1: Allow valid requests
+            input = {'path': '/api/users', 'method': 'GET'}
+            output = True
+            
+            # Test case 2: Deny requests without proper authentication
+            input = {'path': '/admin/users', 'method': 'GET'}
+            output = False
+            
+            # Test case 3: Log requests
+            input = {'path': '/login', 'method': 'GET'}
+            self.log_request(input)
+            output = True
+        """
+        request_uri = request['path']
+        request_method = request['method']
+
+        if self.is_allowed_uri_prefix(request_uri):
+            if self.authenticate_user(request):
+                self.log_request(request)
+                return True
+            return False
+
+    def is_allowed_uri_prefix(self, request_uri):
+        """
+        Determines if the request URI prefix is allowed.
+
+        Parameters:
+            request_uri (str): The requested URI path.
+
+        Returns:
+            bool: A Boolean value signifying whether the request URI prefix is allowed or not.
+
+        Test cases:
+            # Test case 1: Allowed URI prefix
+            assert is_allowed_uri_prefix('/api/users') == True
+            
+            # Test case 2: Denied URI prefix
+            assert is_allowed_uri_prefix('/admin/users') == False
+            
+            # Test case 3: Logged URI prefix
+            assert is_allowed_uri_prefix('/login') == True
+        """
+        allowed_prefixes = ['/api', '/login']
+        return request_uri.startswith(tuple(allowed_prefixes))
+
+    def authenticate_user(self, request):
+        """
+        Authenticates the user based on the provided JWT token.
+
+        Parameters:
+            request (dict): An HTTP request object containing request data and the JWT token.
+
+        Returns:
+            bool: A Boolean value signifying whether the authentication was successful or not.
+
+        Test cases:
+            # Test case 1: Authenticate valid user
+            input = {'path': '/api/users', 'method': 'GET', 'headers': {'Authorization': 'Bearer eyJhbGciOi...'}}
+            user = {'level': 3}
+            self._user_data[1] = user
+            output = True
+            
+            # Test case 2: Deny unauthenticated request
+            input = {'path': '/admin/users', 'method': 'GET', 'headers': {'Authorization': ''}}
+            output = False
+            
+            # Test case 3: Authenticate user with insufficient privileges
+            input = {'path': '/admin/users', 'method': 'GET', 'headers': {'Authorization': 'Bearer eyJhbGciOi...'}}
+            user = {'level': 1}
+            self._user_data[1] = user
+            output = False
+        """
+        jwt_token = request.get('headers').get('Authorization', '')
+        user = self.parse_jwt_token(jwt_token)
+
+        if user:
+            if user['level'] >= 3:
+                self._user_data[user['id']] = user
+                return True
+            else:
+                return False
+        return False
+
+    def parse_jwt_token(self, jwt_token):
+        """
+        Parses and extracts user information from a JWT token.
+
+        Parameters:
+            jwt_token (str): A JSON Web Token (JWT) string.
+
+        Returns:
+            dict or None: A dictionary containing the user information, or None if parsing fails.
+
+        Test cases:
+            # Test case 1: Parse valid JWT token
+            token = 'eyJhbGciOi...eyJpc3MiOiJ...'
+            expected_output = {'id': 1, 'level': 3}
+            assert parse_jwt_token(token) == expected_output
+            
+            # Test case 2: Parse invalid JWT token
+            token = 'eyJhbGciOi...'
+            assert parse_jwt_token(token) is None
+            
+            # Test case 3: Parse JWT token with missing 'level' claim
+            token = 'eyJhbGciOi...eyJpc3MiOiJ...'
+            assert parse_jwt_token(token).get('level') is None
+        """
+        try:
+            claims = json.decode(base64.b64decode(jwt_token.split('.')[1]))
+            return claims
+        except (ValueError, TypeError):
+            return None
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Sets the current user information and logs the request.
+
+        Parameters:
+            user (dict): A dictionary containing user information.
+
+        Test cases:
+            # Test case 1: Set and log user info
+            user = {'id': 1, 'level': 3}
+            self.set_current_user_info_and_log(user)
+            
+            # Test case 2: Log request without setting user info
+            user = {'level': 3}
+            self.log_request({'path': '/api/users', 'method': 'GET'})
+            
+            # Test case 3: Log request with no user info
+            self.log_request({'path': '/api/users', 'method': 'GET'})
+        """
+        self._current_user = user
+        self.log_request(
+            {'path': request['path'], 'method': request['method'], 'user': user}
+        )
+
+    def log_request(self, request):
+        """
+        Logs the incoming request.
+
+        Parameters:
+            request (dict): A dictionary containing the request information.
+
+        Test cases:
+            # Test case 1: Log a request
+            request = {'path': '/api/users', 'method': 'GET'}
+            self.log_request(request)
+            
+            # Test case 2: Log a request with user info
+            request = {'path': '/api/users', 'method': 'GET', 'user': {'id': 1, 'level': 3}}
+            self.log_request(request)
+            
+            # Test case 3: Log a request without user info
+            request = {'path': '/api/users', 'method': 'GET'}
+            self.log_request(request)
+        """
+        current_timestamp = datetime.datetime.utcnow()
+        logging.info(
+            f'[{current_timestamp}] '
+            f'Request received: '
+            f'Path: {request["path"]}; '
+            f'Method: {request["method"]}; '
+            f'User: {request.get("user")}'
+        )</s>

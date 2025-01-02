@@ -1,0 +1,4 @@
+import pandas as pd
+
+# Remove digits from the 'Name' column in the DataFrame
+df['Name'] = df['Name'].str.replace('\d+', '')

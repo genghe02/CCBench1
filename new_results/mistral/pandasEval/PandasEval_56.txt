@@ -1,0 +1,2 @@
+ # Get the largest value in the 'a' column of the DataFrame and assign it to 'first_value'
+first_value = df.a.nlargest(1).iloc[-1]</s>

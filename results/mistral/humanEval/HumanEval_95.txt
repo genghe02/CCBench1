@@ -1,0 +1,50 @@
+ def check_dict_case(dict):
+    # Check if the given dictionary is valid based on certain rules
+    # If the dictionary is empty, return False
+    if len(dict.keys()) == 0:
+        return False
+    
+    # Initialize state variable to keep track of the current state
+    state = "start"
+    
+    # Iterate through each key in the dictionary
+    for key in dict.keys():
+        
+        # Check if the key is a string and set the state accordingly
+        if isinstance(key, str):
+            if key.isupper():
+                state = "upper"
+            elif key.islower():
+                state = "lower"
+            else:
+                continue
+            
+        # If the state has been set, check if the current key matches the state
+        # If not, set the state to "mixed" and break the loop
+        elif (state == "upper" and not key.isupper()) or (state == "lower" and not key.islower()):
+            state = "mixed"
+            break
+        
+        # If the loop completes without breaking, the state is either "upper" or "lower"
+        # and the dictionary is valid
+        else:
+            break
+    
+    # Return True if the state is either "upper" or "lower", False otherwise
+    return state == "upper" or state == "lower"
+
+ # Test cases
+ >>> check_dict_case({'key1': 'value1', 'key2': 'value2'})
+ # This dictionary is valid as all keys are strings and either upper or lower case
+ >>> check_dict_case({1: 'value1', 'key2': 'value2'})
+ # This dictionary is invalid as it contains a non-string key
+ >>> check_dict_case({'key1': 1, 'key2': 'value2'})
+ # This dictionary is invalid as it contains a key with a non-string value
+ >>> check_dict_case({'KEY1': 'value1', 'key2': 'value2'})
+ # This dictionary is valid as all keys are either upper or lower case
+ >>> check_dict_case({'key1': 1, 'KEY2': 'value2'})
+ # This dictionary is valid as it contains keys with both upper and lower case letters
+ >>> check_dict_case({1: 1, 2: 2})
+ # This dictionary is valid as it only contains integer keys
+ >>> check_dict_case({})
+ # This dictionary is invalid as it is empty

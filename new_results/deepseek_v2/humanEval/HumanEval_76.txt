@@ -1,0 +1,14 @@
+```python
+def is_simple_power(x, n):
+    # Check if x is a power of n by multiplying n repeatedly until reaching or exceeding x
+    >>> is_simple_power(8, 2) # returns True
+    >>> is_simple_power(27, 3) # returns True
+    >>> is_simple_power(10, 2) # returns False
+    >>> is_simple_power(1, 1) # returns True
+    if (n == 1): 
+        return (x == 1) 
+    power = 1
+    while (power < x): 
+        power = power * n 
+    return (power == x) 
+```

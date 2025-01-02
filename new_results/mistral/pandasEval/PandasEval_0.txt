@@ -1,0 +1,2 @@
+ # Drop rows with NaN values in the specified column
+return df.dropna(subset=[col_name])</s>

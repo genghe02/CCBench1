@@ -1,0 +1,123 @@
+```python
+"""
+This class implements the Twenty Four Point Game, where players use four numbers and arithmetic operations to achieve a target value of 24.
+"""
+
+import random
+
+class TwentyFourPointGame:
+    def __init__(self) -> None:
+        """
+        Initializes the TwentyFourPointGame with an empty list for holding the card numbers.
+        """
+        self.nums = []
+
+    def _generate_cards(self):
+        """
+        Generates four random cards, each with a value between 1 and 9.
+
+        This is a private method that populates the 'nums' attribute with the generated cards.
+
+        Test cases:
+            # Test case 1: Generate cards
+            game = TwentyFourPointGame()
+            game._generate_cards()
+            assert len(game.nums) == 4
+            assert all(1 <= n <= 9 for n in game.nums)
+
+        """
+        for i in range(4):
+            self.nums.append(random.randint(1, 9))
+        assert len(self.nums) == 4
+
+    def get_my_cards(self):
+        """
+        Returns the generated cards for the game.
+
+        Returns:
+            list: A list containing the four random numbers generated for the game.
+
+        Test cases:
+            # Test case 1: Get cards
+            game = TwentyFourPointGame()
+            cards = game.get_my_cards()
+            assert len(cards) == 4
+            assert all(1 <= n <= 9 for n in cards)
+            # Test case 2: New game starts with new cards.
+            new_cards = game.get_my_cards()
+            assert new_cards != cards  # Assuming random numbers
+            # Test case 3: Inner state verification.
+            assert game.nums == new_cards  # Should match the instance 'nums'
+        """
+        self.nums = []
+        self._generate_cards()
+        return self.nums
+
+    def answer(self, expression):
+        """
+        Evaluates the player's expression to determine if it correctly uses all generated cards to achieve the target of 24.
+
+        Parameters:
+            expression (str): A string representing the arithmetic expression made up of the numbers and operators.
+
+        Returns:
+            bool: True if the expression is valid and evaluates to 24, False otherwise.
+
+        Test cases:
+            # Test case 1: Valid expression
+            game = TwentyFourPointGame()
+            game.get_my_cards()  # Assume cards = [2, 3, 4, 5]
+            assert game.answer('2 * 3 + 4 + 5') == True
+            # Test case 2: Invalid expression (not using all cards)
+            assert game.answer('2 + 2') == False
+            # Test case 3: Edge case with non-expressive input
+            assert game.answer('pass') == game.get_my_cards()
+        """
+        if expression == 'pass':
+            return self.get_my_cards()
+        statistic = {}
+        for c in expression:
+            if c.isdigit() and int(c) in self.nums:
+                statistic[c] = statistic.get(c, 0) + 1
+
+        nums_used = statistic.copy()
+
+        for num in self.nums:
+            if nums_used.get(str(num), -100) != -100 and nums_used[str(num)] > 0:
+                nums_used[str(num)] -= 1
+            else:
+                return False
+
+        if all(count == 0 for count in nums_used.values()):
+            return self.evaluate_expression(expression)
+        else:
+            return False
+
+    def evaluate_expression(self, expression):
+        """
+        Evaluates the arithmetic expression to check if it equals 24.
+
+        Parameters:
+            expression (str): The arithmetic expression to evaluate.
+
+        Returns:
+            bool: True if the evaluated expression equals 24, False otherwise.
+
+        Test cases:
+            # Test case 1: Evaluate correct expression
+            assert evaluate_expression('12 + 12') == True
+            # Test case 2: Evaluate incorrect expression
+            assert evaluate_expression('10 + 10 + 5') == False
+            # Test case 3: Handle errors during evaluation
+            assert evaluate_expression('invalid') == False
+        """
+        try:
+            if eval(expression) == 24:
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
+``` 
+
+This completes the documentation of the `TwentyFourPointGame` class, including clear explanations of the class's purpose, detailed descriptions of each method, parameter specifications, return values, and associated test cases for thoroughness and clarity.

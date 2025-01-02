@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+import numpy as np
+
+def find_non_numeric_rows(df: pd.DataFrame) -> pd.DataFrame:
+    """ 
+    Identify and return rows in a DataFrame that contain non-numeric values.
+    The function checks each cell in the DataFrame to determine if the value is numeric.
+    Rows with at least one non-numeric value are included in the output.
+    
+    >>> df = pd.DataFrame({'A': [1, 2, 'three'], 'B': [4.0, 5.1, 6]})
+    >>> find_non_numeric_rows(df)
+            A    B
+    2  three    6
+    >>> df2 = pd.DataFrame({'X': [10, 20, 30], 'Y': [1.1, 2.2, 3.3]})
+    >>> find_non_numeric_rows(df2)
+    Empty DataFrame
+    Columns: [X, Y]
+    Index: []
+    """
+    return df[~df.applymap(np.isreal).all(1)]
+```

@@ -1,0 +1,11 @@
+```python
+def modp(n: int, p: int):
+    # Calculate 2^n modulo p efficiently using a loop
+    >>> modp(3, 5) # returns 3
+    >>> modp(4, 7) # returns 2
+    >>> modp(0, 11) # returns 1
+    ret = 1
+    for i in range(n):
+        ret = (2 * ret) % p
+    return ret
+```

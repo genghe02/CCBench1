@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.array([1,2,3,4,5,6])
+b = np.array([2,3,5])
+# Compute the set difference of two arrays, returning the unique values in either array
+diff_arr = np.setxor1d(a, b)

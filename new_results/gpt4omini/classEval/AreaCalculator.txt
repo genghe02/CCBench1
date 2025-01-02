@@ -1,0 +1,164 @@
+```python
+"""
+This class provides methods to calculate areas of various geometric shapes based on a given radius.
+"""
+
+import math
+
+class AreaCalculator:
+
+    def __init__(self, radius):
+        """
+        Initializes the AreaCalculator with a specific radius.
+
+        Parameters:
+            radius (float): The radius used for area calculations. It must be a non-negative value.
+        """
+        if radius < 0:
+            raise ValueError("Radius must be non-negative.")
+        self.radius = radius
+
+    def calculate_circle_area(self):
+        """
+        Calculates the area of a circle using the formula A = π * r².
+
+        Returns:
+            float: The area of the circle.
+
+        Test cases:
+            # Test case 1: Circle area with radius 1
+            input = 1
+            expected_output = math.pi
+            assert calculate_circle_area() == expected_output
+            
+            # Test case 2: Circle area with radius 0
+            input = 0
+            expected_output = 0
+            assert calculate_circle_area() == expected_output
+            
+            # Test case 3: Circle area with radius 2.5
+            input = 2.5
+            expected_output = math.pi * (2.5 ** 2)
+            assert calculate_circle_area() == expected_output
+        """
+        return math.pi * self.radius ** 2
+
+    def calculate_sphere_area(self):
+        """
+        Calculates the surface area of a sphere using the formula A = 4 * π * r².
+
+        Returns:
+            float: The surface area of the sphere.
+
+        Test cases:
+            # Test case 1: Sphere area with radius 1
+            input = 1
+            expected_output = 4 * math.pi
+            assert calculate_sphere_area() == expected_output
+            
+            # Test case 2: Sphere area with radius 0
+            input = 0
+            expected_output = 0
+            assert calculate_sphere_area() == expected_output
+            
+            # Test case 3: Sphere area with radius 3
+            input = 3
+            expected_output = 36 * math.pi
+            assert calculate_sphere_area() == expected_output
+        """
+        return 4 * math.pi * self.radius ** 2
+
+    def calculate_cylinder_area(self, height):
+        """
+        Calculates the surface area of a cylinder using the formula A = 2 * π * r * (r + h).
+
+        Parameters:
+            height (float): The height of the cylinder. Must be a non-negative value.
+
+        Returns:
+            float: The surface area of the cylinder.
+
+        Test cases:
+            # Test case 1: Cylinder area with radius 1 and height 2
+            input = (1, 2)
+            expected_output = 2 * math.pi * 1 * (1 + 2)
+            assert calculate_cylinder_area(2) == expected_output
+            
+            # Test case 2: Cylinder area with radius 0 and height 5
+            input = (0, 5)
+            expected_output = 0
+            assert calculate_cylinder_area(5) == expected_output
+            
+            # Test case 3: Cylinder area with radius 2 and height 3
+            input = (2, 3)
+            expected_output = 40 * math.pi
+            assert calculate_cylinder_area(3) == expected_output
+        """
+        if height < 0:
+            raise ValueError("Height must be non-negative.")
+        return 2 * math.pi * self.radius * (self.radius + height)
+
+    def calculate_sector_area(self, angle):
+        """
+        Calculates the area of a sector of a circle using the formula A = (r² * θ) / 2.
+
+        Parameters:
+            angle (float): The angle in radians of the sector. Must be a non-negative value.
+
+        Returns:
+            float: The area of the sector.
+
+        Test cases:
+            # Test case 1: Sector area with radius 1 and angle π/2
+            input = (1, math.pi / 2)
+            expected_output = (1 ** 2 * (math.pi / 2)) / 2
+            assert calculate_sector_area(math.pi / 2) == expected_output
+            
+            # Test case 2: Sector area with radius 2 and angle 0
+            input = (2, 0)
+            expected_output = 0
+            assert calculate_sector_area(0) == expected_output
+            
+            # Test case 3: Sector area with radius 3 and angle π
+            input = (3, math.pi)
+            expected_output = (3 ** 2 * math.pi) / 2
+            assert calculate_sector_area(math.pi) == expected_output
+        """
+        if angle < 0:
+            raise ValueError("Angle must be non-negative.")
+        return self.radius ** 2 * angle / 2
+
+    def calculate_annulus_area(self, inner_radius, outer_radius):
+        """
+        Calculates the area of an annulus using the formula A = π * (R² - r²).
+
+        Parameters:
+            inner_radius (float): The inner radius of the annulus. Must be non-negative and less than outer_radius.
+            outer_radius (float): The outer radius of the annulus. Must be greater than inner_radius.
+
+        Returns:
+            float: The area of the annulus.
+
+        Test cases:
+            # Test case 1: Annulus area with inner radius 1 and outer radius 2
+            input = (1, 2)
+            expected_output = math.pi * (2 ** 2 - 1 ** 2)
+            assert calculate_annulus_area(1, 2) == expected_output
+            
+            # Test case 2: Annulus area with inner radius 0 and outer radius 2
+            input = (0, 2)
+            expected_output = 4 * math.pi
+            assert calculate_annulus_area(0, 2) == expected_output
+            
+            # Test case 3: Invalid annulus area case with equal radii
+            input = (2, 2)
+            expected_output = "ValueError"
+            try:
+                calculate_annulus_area(2, 2)
+            except ValueError:
+                pass # expected case
+        """
+        if inner_radius < 0 or outer_radius <= inner_radius:
+            raise ValueError("Invalid radii: inner_radius must be non-negative and less than outer_radius.")
+        return math.pi * (outer_radius ** 2 - inner_radius ** 2)
+```

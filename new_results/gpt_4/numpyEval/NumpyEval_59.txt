@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.arange(8)[:,None].repeat(8,axis=1)
+# Reshape 'a' into a 4-dimensional array and then reorder its dimensions using the transpose function
+b = a.reshape(2,4,2,4)
+c = b.transpose(0,2,1,3)

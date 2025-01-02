@@ -1,0 +1,2 @@
+# Perform broadcasting operation to add a 2x1 array to a 3x1 array
+c = a[:, None] + b*2

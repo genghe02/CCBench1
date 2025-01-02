@@ -1,0 +1,18 @@
+ # This function checks if a number is a FizzBuzz number (multiples of 11 or 13) and returns the number of 7's in the sum of their digits
+# Requirements: Check if the number is a FizzBuzz number, append it to a list, convert list to string, find digits, and check if each digit is 7
+# Test cases: Multiple input numbers to check if the function correctly identifies FizzBuzz numbers and counts the number of 7's in their digit sum
+def fizz_buzz(n: int):
+    <Requirements for the code>
+    >>> fizz_buzz(14) # returns 3 (since 14 is FizzBuzz and the digit sum is 4 + 5 + 0 = 9, with 3 '7's)
+    <some test cases for the function>
+    >>> fizz_buzz(17) # returns 0
+    >>> fizz_buzz(23) # returns 2
+    ns = []
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            ns.append(i)
+    s = ''.join(list(map(str, ns)))
+    ans = 0
+    for c in s:
+        ans += (c == '7')
+    return ans</s>

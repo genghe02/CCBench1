@@ -1,0 +1,8 @@
+ # Compare two lists, return the absolute differences of corresponding elements
+
+def compare(game, guess):
+    # Both game and guess must be lists
+    >>> compare([1, 2, 3], [1, 2, 3]) # returns [0, 0, 0]
+    >>> compare([1, 2, 3], [1, 2, 4]) # returns [0, 1, 1]
+    >>> compare([1, 2, 3], [3, 2, 1]) # returns [2, 1, 2]
+    return [abs(x-y) for x,y in zip(game, guess)]</s>

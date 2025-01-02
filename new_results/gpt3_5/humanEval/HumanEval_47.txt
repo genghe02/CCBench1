@@ -1,0 +1,20 @@
+Input:
+def median(l: list):
+    <This function calculates the median of a list of numbers>
+    <>>> median([4, 7, 1, 8, 5])>
+    l = sorted(l)
+    if len(l) % 2 == 1:
+        return l[len(l) // 2]
+    else:
+        return (l[len(l) // 2 - 1] + l[len(l) // 2]) / 2.0
+
+Output:
+def median(l: list):
+    # This function calculates the median of a list of numbers
+    # >>> median([4, 7, 1, 8, 5])
+    # >>> median([3, 2, 1, 4, 5, 6])
+    l = sorted(l)
+    if len(l) % 2 == 1:
+        return l[len(l) // 2]
+    else:
+        return (l[len(l) // 2 - 1] + l[len(l) // 2]) / 2.0

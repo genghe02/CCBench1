@@ -1,0 +1,102 @@
+ """
+This class is designed to perform statistical calculations on given data sets.
+"""
+
+class DataStatistics:
+
+    def mean(self, data):
+        """
+        Method to calculate the arithmetic mean of a given data set.
+
+        Parameters:
+            data (list or tuple): A list or tuple of numerical values
+
+        Returns:
+            float: The average value of all given data
+
+        Test cases:
+            # Test case 1: Simple mean calculation
+            stats = DataStatistics()
+            input = [1, 2, 3, 4, 5]
+            expected_output = 3.0
+            assert stats.mean(input) == expected_output
+
+            # Test case 2: Empty list
+            input = []
+            expected_output = 0.0
+            assert stats.mean(input) == expected_output
+
+            # Test case 3: List with single element
+            input = [10]
+            expected_output = 10.0
+            assert stats.mean(input) == expected_output
+        """
+        return round(sum(data) / len(data), 2)
+
+    def median(self, data):
+        """
+        Method to calculate the median value of a given data set.
+
+        Parameters:
+            data (list or tuple): A list or tuple of numerical values
+
+        Returns:
+            float: The middle value of the given data set
+
+        Test cases:
+            # Test case 1: Even number of elements
+            stats = DataStatistics()
+            input = [1, 3, 5, 7, 9]
+            expected_output = 5.0
+            assert stats.median(input) == expected_output
+
+            # Test case 2: Odd number of elements
+            input = [1, 3, 5, 7]
+            expected_output = 5.0
+            assert stats.median(input) == expected_output
+
+            # Test case 3: Empty list
+            input = []
+            expected_output = 0.0
+            assert stats.median(input) == expected_output
+        """
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 0:
+            middle = n // 2
+            return round((sorted_data[middle - 1] + sorted_data[middle]) / 2, 2)
+        else:
+            middle = n // 2
+            return sorted_data[middle]
+
+    def mode(self, data):
+        """
+        Method to find the mode of a given data set.
+
+        Parameters:
+            data (list or tuple): A list or tuple of values
+
+        Returns:
+            list or tuple: A list or tuple of values having the highest count in the given data set
+
+        Test cases:
+            # Test case 1: Simple mode calculation
+            stats = DataStatistics()
+            input = [1, 2, 3, 1, 2, 1, 3, 2, 1]
+            expected_output = [1, 2]
+            assert stats.mode(input) == expected_output
+
+            # Test case 2: Empty list
+            input = []
+            expected_output = []
+            assert stats.mode(input) == expected_output
+
+            # Test case 3: Single element list
+            input = [10]
+            expected_output = [10]
+            assert stats.mode(input) == expected_output
+        """
+        counter = Counter(data)
+        mode_count = max(counter.values())
+        mode = [x for x, count in counter.items() if count == mode_count]
+        return mode</s>

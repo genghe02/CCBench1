@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+
+def create_empty_df(col_names):
+    # Create an empty DataFrame with specified column names
+    return pd.DataFrame(columns=col_names)
+```

@@ -1,0 +1,17 @@
+```python
+def triples_sum_to_zero(l: list):
+    """Check if there are any three numbers in the list that sum up to zero."""
+    # Test cases for the triples_sum_to_zero function:
+    # >>> triples_sum_to_zero([-1, 0, 1]) => True, because -1 + 0 + 1 = 0
+    # >>> triples_sum_to_zero([1, 2, -2, -1]) => True, because 1 + (-2) + (-1) = 0
+    # >>> triples_sum_to_zero([1, 2, 3]) => False, no triplet sums to zero
+    # >>> triples_sum_to_zero([]) => False, no elements in the list
+    # >>> triples_sum_to_zero([0, 0, 0]) => True, 0 + 0 + 0 = 0
+    # >>> triples_sum_to_zero([-1, 1, 2, -2]) => True, because -1 + 1 + (-2) = 0
+    for i in range(len(l)):
+        for j in range(i + 1, len(l)):
+            for k in range(j + 1, len(l)):
+                if l[i] + l[j] + l[k] == 0:
+                    return True
+    return False
+```

@@ -1,0 +1,9 @@
+def get_row(lst, x):
+    # This function returns the coordinates of 'x' in 'lst' in ascending order.
+    
+    >>> get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 5) # returns [(1, 1)]
+    >>> get_row([[1, 1, 1], [2, 2, 2], [3, 3, 3]], 1) # returns [(0, 0), (0, 1), (0, 2)]
+    >>> get_row([[9, 8, 7], [6, 5, 4], [3, 2, 1]], 7) # returns [(0, 2)]
+    
+    coords = [(i, j) for i in range(len(lst)) for j in range(len(lst[i])) if lst[i][j] == x]
+    return sorted(sorted(coords, key=lambda x: x[1], reverse=True), key=lambda x: x[0])

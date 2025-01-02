@@ -1,0 +1,158 @@
+ """
+This class, named AccessGatewayFilter, is designed to handle request filtering, authentication, and logging in an access gateway system.
+"""
+
+import logging
+import datetime
+
+
+class AccessGatewayFilter:
+
+    def __init__(self):
+        """
+        Initializes the AccessGatewayFilter instance without any parameters.
+        """
+        self.current_user = None
+
+    def filter(self, request):
+        """
+        Filters a given HTTP request based on predefined conditions such as URI prefixes and JWT user authentication.
+
+        Parameters:
+            request (dict): An HTTP request dictionary containing the request method and URI.
+
+        Returns:
+            bool: True if the request is filtered through, False otherwise.
+
+        Test cases:
+            # Test case 1: Allowed URI prefix
+            input = {'path': '/api/users', 'method': 'GET'}
+            expected_output = True
+
+            # Test case 2: Disallowed URI prefix
+            input = {'path': '/api/non-existent', 'method': 'POST'}
+            expected_output = False
+
+            # Test case 3: JWT authenticated user
+            input = {'path': '/api/users', 'method': 'GET', 'headers': {'Authorization': 'Bearer 123abc'}}
+            expected_output = True
+        """
+
+        request_uri = request['path']
+        method = request['method']
+
+        if self.is_start_with(request_uri):
+            return True
+
+        try:
+            token = self.get_jwt_user(request)
+            user = token['user']
+            if user['level'] > 2:
+                self.set_current_user_info_and_log(user)
+                return True
+        except:
+            return False
+
+    def is_start_with(self, request_uri):
+        """
+        Checks if the request URI starts with any of the allowed prefixes.
+
+        Parameters:
+            request_uri (str): The URI path to check
+
+        Returns:
+            bool: True if URI starts with an allowed prefix, False otherwise.
+
+        Test cases:
+            # Test case 1: API endpoint
+            assert is_start_with('/api/users') == True
+
+            # Test case 2: Login endpoint
+            assert is_start_with('/login') == True
+
+            # Test case 3: Protected endpoint
+            assert is_start_with('/admin/users') == False
+        """
+
+        start_with = ["/api", '/login']
+        for s in start_with:
+            if request_uri.startswith(s):
+                return True
+        return False
+
+    def get_jwt_user(self, request):
+        """
+        Retrieves user information from a JWT token in the request headers.
+
+        Parameters:
+            request (dict): An HTTP request dictionary containing the request headers.
+
+        Returns:
+            dict: A dictionary containing the user information if a valid JWT token is provided, None otherwise.
+
+        Test cases:
+            # Test case 1: Valid JWT token
+            input = {'headers': {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'}}
+            expected_output = {'user': {'level': 5}}
+
+            # Test case 2: No JWT token
+            input = {'headers': {}}
+            expected_output = None
+
+            # Test case 3: Invalid JWT token
+            input = {'headers': {'Authorization': 'Bearer 123'}}
+            expected_output = None
+        """
+
+        headers = request.get('headers', {})
+        if 'Authorization' in headers:
+            token = headers['Authorization'].split(' ')[1]
+            try:
+                user = self.jwt_decode(token)
+                return {'user': user}
+            except Exception as e:
+                logging.error('Error decoding JWT token: %s', str(e))
+        return None
+
+    def jwt_decode(self, token):
+        """
+        Decodes a JWT token and extracts the user information.
+
+        Parameters:
+            token (str): A valid JSON Web Token string.
+
+        Returns:
+            dict: A dictionary containing the user information.
+
+        Raises:
+            Exception: If the JWT token is invalid.
+        """
+        # Implement JWT decoding logic here
+        raise NotImplementedError
+
+    def set_current_user_info_and_log(self, user):
+        """
+        Sets the current user information and logs the event.
+
+        Parameters:
+            user (dict): A dictionary containing the user information.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Normal usage
+            user = {'level': 5, 'name': 'John Doe'}
+            self.set_current_user_info_and_log(user)
+            
+            # Test case 2: User without a level
+            user = {'name': 'Jane Doe'}
+            self.set_current_user_info_and_log(user)
+
+            # Test case 3: Empty user dictionary
+            user = {}
+            self.set_current_user_info_and_log(user)
+        """
+
+        self.current_user = user
+        logging.info(f"Current user info: {user}")</s>

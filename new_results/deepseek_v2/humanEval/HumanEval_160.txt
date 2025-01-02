@@ -1,0 +1,11 @@
+```python
+def do_algebra(operator, operand):
+    # Perform basic algebra operations by constructing and evaluating an expression from the given operators and operands
+    >>> do_algebra(['+', '-'], [2, 3, 4]) # returns 1
+    >>> do_algebra(['*', '/'], [6, 2, 3]) # returns 4.0
+    >>> do_algebra(['+', '*'], [1, 2, 3]) # returns 7
+    expression = str(operand[0])
+    for oprt, oprn in zip(operator, operand[1:]):
+        expression+= oprt + str(oprn)
+    return eval(expression)
+```

@@ -1,0 +1,15 @@
+# This function finds the largest number x in the list such that x occurs at least x times
+>>> search([1, 3, 1, 5, 3, 1]) # returns 3
+>>> search([2, 2, 1, 3]) # returns 2
+>>> search([1, 2, 3, 4, 5]) # returns -1
+def search(lst):
+    frq = [0] * (max(lst) + 1)
+    for i in lst:
+        frq[i] += 1;
+
+    ans = -1
+    for i in range(1, len(frq)):
+        if frq[i] >= i:
+            ans = i
+    
+    return ans

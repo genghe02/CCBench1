@@ -1,0 +1,18 @@
+ # Find the number of columns in the given DataFrame using the length of its columns attribute.
+# This can be achieved efficiently using the pandas DataFrame object and its 'columns' attribute.
+
+import pandas as pd
+
+def get_number_columns(df):
+    """
+    This function returns the number of columns in the given DataFrame.
+
+    Parameters:
+    df (pandas DataFrame): The DataFrame whose number of columns is to be determined.
+
+    Returns:
+    int: The number of columns in the given DataFrame.
+    """
+
+    # Find the number of columns in the given DataFrame using the length of its columns attribute.
+    return len(df.columns)

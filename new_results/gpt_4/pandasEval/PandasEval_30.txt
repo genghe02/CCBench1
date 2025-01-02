@@ -1,0 +1,12 @@
+import pandas as pd
+
+# Create a dataframe with 'Name' and 'Email' columns, initialize 'Email' column as empty string
+df = pd.DataFrame({'Name':['Juda','Pri']})
+emails = {'a@a.com','b@b.com'}
+df['Email'] = ''
+
+# Change 'Email' column type to object to allow list or array assignment
+df.Email = df.Email.astype(object)
+
+# Assign email list to the first row of 'Email' column
+df.loc[0].Email = emails

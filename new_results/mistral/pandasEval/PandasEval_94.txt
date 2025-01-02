@@ -1,0 +1,6 @@
+ ✅ Correct Output:
+import pandas as pd
+
+def select_multiple_columns(df, columns):
+ # Return a new dataframe containing only the specified columns
+ return df[columns]</s>

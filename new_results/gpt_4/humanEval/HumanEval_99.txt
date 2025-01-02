@@ -1,0 +1,27 @@
+def closest_integer(value):
+    # This function rounds a float to the nearest integer. If the number is exactly halfway between two integers, it rounds towards the closest even number.
+
+    >>> closest_integer('3.5') # returns 4
+    >>> closest_integer('-3.5') # returns -4
+    >>> closest_integer('0.0') # returns 0
+    >>> closest_integer('3.75') # returns 4
+    >>> closest_integer('-2.3') # returns -2
+    from math import floor, ceil
+
+    if value.count('.') == 1:
+        # remove trailing zeros
+        while (value[-1] == '0'):
+            value = value[:-1]
+
+    num = float(value)
+    if value[-2:] == '.5':
+        if num > 0:
+            res = ceil(num)
+        else:
+            res = floor(num)
+    elif len(value) > 0:
+        res = int(round(num))
+    else:
+        res = 0
+
+    return res

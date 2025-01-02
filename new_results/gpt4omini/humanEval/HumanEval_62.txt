@@ -1,0 +1,8 @@
+```python
+def derivative(xs: list):
+    # Calculate the derivative of a list of numbers
+    >>> derivative([1, 2, 3, 4]) # returns [1, 2, 3]
+    >>> derivative([0, 0, 0]) # returns [0, 0]
+    >>> derivative([-1, -2, -3]) # returns [-1, -2, -3]
+    return [(i * x) for i, x in enumerate(xs)][1:]
+```

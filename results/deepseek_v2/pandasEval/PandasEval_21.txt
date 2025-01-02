@@ -1,0 +1,7 @@
+```python
+import pandas as pd
+import numpy as np
+df = pd.DataFrame({'a': [4, 1, 7, 3], 'b': [5, 2, 9, 6], 'c': [6, 3, 2, 8]})
+# Filter the DataFrame to keep only the values greater than the mean of each column, then apply a lambda function to drop NaN values and convert the result to a Series.
+df = df[df>df.mean()].apply(lambda x: pd.Series(x.dropna().values))
+```

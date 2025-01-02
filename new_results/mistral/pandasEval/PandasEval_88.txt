@@ -1,0 +1,2 @@
+ # Select the last N rows from the DataFrame
+result = df.tail(N)</s>

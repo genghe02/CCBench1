@@ -1,0 +1,22 @@
+# This function counts the number of positive digit sums in an array
+>>> count_nums([123, -456, 789]) # returns 2
+>>> count_nums([0, 11, -22, 33, -44]) # returns 3
+>>> count_nums([-999, 888, -777]) # returns 1
+
+def count_nums(arr):
+    # Count the number of positive digit sums in the array
+    >>> count_nums([123, -456, 789]) # returns 2
+    >>> count_nums([0, 11, -22, 33, -44]) # returns 3
+    >>> count_nums([-999, 888, -777]) # returns 1
+    def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))
+
+#TEST用
+print(count_nums([123, -456, 789])) #2
+print(count_nums([0,11,-22,33,-44])) #3
+print(count_nums([-999, 888, -777])) #1

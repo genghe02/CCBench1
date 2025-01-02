@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+a = np.arange(9)
+a = a.reshape((3, 3))
+b = np.zeros((5, 5))
+# Requirements for the code: Reshape a 1D array into a 3x3 matrix and embed it into a larger 5x5 matrix, centered at the position (1, 1) to (3, 3).
+b[1:4, 1:4] = a
+```

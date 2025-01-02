@@ -1,0 +1,96 @@
+```python
+"""
+This class provides methods to calculate basic statistical measures such as mean, median, and mode from a given dataset.
+"""
+
+from collections import Counter
+
+
+class DataStatistics:
+    def mean(self, data):
+        """
+        Calculate the arithmetic mean of the given dataset.
+        
+        Parameters:
+            data (list of int/float): A list of numerical values to calculate the mean from.
+            
+        Returns:
+            float: The mean value of the dataset, rounded to 2 decimal places.
+            
+        Test cases:
+            # Test case 1: Normal usage
+            assert mean([1, 2, 3, 4, 5]) == 3.0
+            
+            # Test case 2: Edge case with single value
+            assert mean([10]) == 10.0
+            
+            # Test case 3: Error case with empty list
+            assert mean([]) raises ZeroDivisionError
+        """
+        return round(sum(data) / len(data), 2)
+
+    def median(self, data):
+        """
+        Calculate the median of the given dataset.
+        
+        Parameters:
+            data (list of int/float): A list of numerical values to calculate the median from.
+            
+        Returns:
+            float: The median value of the dataset, rounded to 2 decimal places.
+            
+        Test cases:
+            # Test case 1: Normal usage with odd number of elements
+            assert median([1, 3, 5]) == 3.0
+            
+            # Test case 2: Normal usage with even number of elements
+            assert median([1, 2, 3, 4]) == 2.5
+            
+            # Test case 3: Edge case with single value
+            assert median([10]) == 10.0
+        """
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 0:
+            middle = n // 2
+            return round((sorted_data[middle - 1] + sorted_data[middle]) / 2, 2)
+        else:
+            middle = n // 2
+            return sorted_data[middle]
+
+    def mode(self, data):
+        """
+        Calculate the mode(s) of the given dataset.
+        
+        Parameters:
+            data (list of int/float): A list of numerical values to calculate the mode from.
+            
+        Returns:
+            list: A list of mode(s) from the dataset. If multiple modes exist, all are returned.
+            
+        Test cases:
+            # Test case 1: Normal usage with single mode
+            assert mode([1, 2, 2, 3]) == [2]
+            
+            # Test case 2: Normal usage with multiple modes
+            assert mode([1, 1, 2, 2, 3]) == [1, 2]
+            
+            # Test case 3: Edge case with all unique values
+            assert mode([1, 2, 3, 4]) == [1, 2, 3, 4]
+        """
+        counter = Counter(data)
+        mode_count = max(counter.values())
+        mode = [x for x, count in counter.items() if count == mode_count]
+        return mode
+```
+
+### Explanation:
+1. **Class Documentation**: The class `DataStatistics` is documented with a brief description of its purpose.
+2. **Method Documentation**:
+   - Each method (`mean`, `median`, `mode`) is documented with a clear description of its functionality.
+   - Parameters are described with their types and purposes.
+   - Return values are described with their types and meanings.
+   - Test cases are provided for normal usage, edge cases, and error cases.
+3. **Formatting**: The documentation follows the standard Python docstring format with clear sectioning (`Parameters`, `Returns`, `Test cases`).
+4. **Clarity and Accuracy**: Descriptions are concise and accurate, ensuring the reader understands the purpose and usage of each method.
+5. **Test Cases**: Test cases cover a variety of scenarios, including normal usage, edge cases, and error handling, ensuring the methods are robust and well-tested.

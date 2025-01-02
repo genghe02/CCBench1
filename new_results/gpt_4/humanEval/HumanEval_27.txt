@@ -1,0 +1,6 @@
+def flip_case(string: str) -> str:
+    # This function flips the case of all characters in a string
+    >>> flip_case("Hello World") # returns "hELLO wORLD"
+    >>> flip_case("PYTHON") # returns "python"
+    >>> flip_case("javaScript") # returns "JAVAsCRIPT"
+    return string.swapcase()

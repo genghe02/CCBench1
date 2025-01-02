@@ -1,0 +1,14 @@
+```python
+def any_int(x, y, z):
+    # Check if any two of the three integers sum to the third
+    >>> any_int(2, 3, 5) # returns True
+    >>> any_int(4, 4, 8) # returns True
+    >>> any_int(1, 2, 4) # returns False
+    >>> any_int(2.5, 3, 5.5) # returns False
+    
+    if isinstance(x,int) and isinstance(y,int) and isinstance(z,int):
+        if (x+y==z) or (x+z==y) or (y+z==x):
+            return True
+        return False
+    return False
+```

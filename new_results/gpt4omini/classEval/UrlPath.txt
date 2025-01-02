@@ -1,0 +1,110 @@
+```python
+"""
+This class handles URL path management, including segment addition and parsing, while keeping track of a trailing slash.
+"""
+
+import urllib.parse
+
+class UrlPath:
+    def __init__(self):
+        """
+        Initializes a new instance of UrlPath with an empty segments list and a flag for end tag.
+
+        Attributes:
+            segments (list): A list to hold segments of the URL path.
+            with_end_tag (bool): A flag indicating whether the URL path ends with a trailing slash.
+        """
+        self.segments = []
+        self.with_end_tag = False
+
+    def add(self, segment):
+        """
+        Adds a segment to the URL path after fixing its format.
+
+        Parameters:
+            segment (str): The segment to be added to the path. It may include leading or trailing slashes.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Adding a valid segment
+            url_path = UrlPath()
+            url_path.add('user')
+            assert url_path.segments == ['user']
+
+            # Test case 2: Adding a segment with leading and trailing slashes
+            url_path.add('/profile/')
+            assert url_path.segments == ['user', 'profile']
+
+            # Test case 3: Adding an empty segment does not change the segments
+            url_path.add('')
+            assert url_path.segments == ['user', 'profile']
+        """
+        self.segments.append(self.fix_path(segment))
+
+    def parse(self, path, charset):
+        """
+        Parses a given path into segments and stores them in the segments list while tracking if there is a trailing slash.
+
+        Parameters:
+            path (str): The URL path to be parsed.
+            charset (str): Character encoding to use for decoding URL segments.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Parsing a simple path
+            url_path = UrlPath()
+            url_path.parse('/api/users', 'utf-8')
+            assert url_path.segments == ['api', 'users']
+
+            # Test case 2: Parsing a path with a trailing slash
+            url_path.parse('/home/', 'utf-8')
+            assert url_path.segments == ['home']
+            assert url_path.with_end_tag is True
+
+            # Test case 3: Parsing an empty path
+            url_path = UrlPath()
+            url_path.parse('', 'utf-8')
+            assert url_path.segments == []
+        """
+        if path:
+            if path.endswith('/'):
+                self.with_end_tag = True
+
+            path = self.fix_path(path)
+            if path:
+                split = path.split('/')
+                for seg in split:
+                    decoded_seg = urllib.parse.unquote(seg, encoding=charset)
+                    self.segments.append(decoded_seg)
+
+    @staticmethod
+    def fix_path(path):
+        """
+        Strips leading and trailing slashes from the given path.
+
+        Parameters:
+            path (str): The path to be fixed.
+
+        Returns:
+            str: The cleaned path without leading or trailing slashes.
+
+        Test cases:
+            # Test case 1: Valid path
+            assert fix_path('/api/v1/') == 'api/v1'
+
+            # Test case 2: Path with no slashes
+            assert fix_path('home') == 'home'
+
+            # Test case 3: Empty path
+            assert fix_path('') == ''
+        """
+        if not path:
+            return ''
+
+        segment_str = path.strip('/')
+        return segment_str
+```

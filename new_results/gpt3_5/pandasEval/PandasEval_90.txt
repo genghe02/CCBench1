@@ -1,0 +1,2 @@
+# Drop rows with zero in column2 and odd index, along with the row above them, from the dataframe
+result = df.drop(idx)

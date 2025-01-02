@@ -1,0 +1,7 @@
+import numpy as np
+
+a = np.array([0 +  0.5j, 0.25 + 1.2352444e-24j, 0.25+ 0j, 2.46519033e-32 + 0j])
+tol = 1e-16
+# Set real and imaginary parts to zero if their absolute values are below the tolerance
+a.real[np.abs(a.real) < tol] = 0
+a.imag[np.abs(a.imag) < tol] = 0

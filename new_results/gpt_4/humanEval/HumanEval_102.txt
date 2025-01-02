@@ -1,0 +1,14 @@
+def choose_num(x, y):
+    # This function returns -1 if x > y, returns y if y is an even number, returns -1 if x == y, else, it returns y - 1
+
+    >>> choose_num(10, 20) # returns 20
+    >>> choose_num(20, 10) # returns -1
+    >>> choose_num(5, 5) # returns -1
+    >>> choose_num(3, 7) # returns 6
+    if x > y:
+        return -1
+    if y % 2 == 0:
+        return y
+    if x == y:
+        return -1
+    return y - 1

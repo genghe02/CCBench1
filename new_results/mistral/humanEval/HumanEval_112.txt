@@ -1,0 +1,6 @@
+ # This function deletes all occurrences of char in string s and checks if the resulting string is a palindrome
+ >>> reverse_delete("racecar", "a") # returns ("aceceracae", True)
+ >>> reverse_delete("hello", "l") # returns ("heo", False)
+ >>> reverse_delete("level", "l") # returns ("eve", True)
+ s = ''.join([char for char in s if char not in c])
+ return (s, s[::-1] == s)</s>

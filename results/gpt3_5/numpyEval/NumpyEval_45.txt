@@ -1,0 +1,1 @@
+# Combine array 'a' and array 'b' by stacking them side by side using numpy's column_stack function.

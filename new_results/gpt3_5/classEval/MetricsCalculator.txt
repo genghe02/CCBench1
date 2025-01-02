@@ -1,0 +1,164 @@
+"""
+This class implements a metrics calculator for classification tasks using confusion matrix values.
+
+The class MetricsCalculator contains methods to calculate precision, recall, F1 score, and accuracy based on true positives, false positives, false negatives, and true negatives.
+
+MetricsCalculator:
+    Methods:
+        - __init__: Initializes the metrics calculator with initial values of confustion matrix fields.
+        - update: Updates the confusion matrix fields based on predicted and true labels.
+        - precision: Calculates precision metric based on the updated confusion matrix.
+        - recall: Calculates recall metric based on the updated confusion matrix.
+        - f1_score: Calculates F1 score based on the precision and recall values.
+        - accuracy: Calculates accuracy based on the updated confusion matrix.
+
+"""
+
+class MetricsCalculator:
+    def __init__(self):
+        """
+        Initialize the MetricsCalculator object with the initial values of confusion matrix fields.
+        """        
+        self.true_positives = 0
+        self.false_positives = 0
+        self.false_negatives = 0
+        self.true_negatives = 0
+
+    def update(self, predicted_labels, true_labels):
+        """
+        Update the confusion matrix fields based on predicted and true labels.
+
+        Parameters:
+            predicted_labels (list): List of predicted labels (0 or 1)
+            true_labels (list): List of true labels (0 or 1)
+        
+        Test cases:
+            # Test case 1: Increment true_positive on correct positive prediction
+            update([1, 0, 1], [1, 0, 1])
+            assert true_positives == 2
+
+            # Test case 2: Increment false_positive on incorrect positive prediction
+            update([0, 1, 1], [1, 0, 0])
+            assert false_positives == 1
+
+            # Test case 3: Increment false_negative on incorrect negative prediction
+            update([0, 0, 1], [1, 0, 0])
+            assert false_negatives == 1
+        """
+        for predicted, true in zip(predicted_labels, true_labels):
+            if predicted == 1 and true == 1:
+                self.true_positives += 1
+            elif predicted == 1 and true == 0:
+                self.false_positives += 1
+            elif predicted == 0 and true == 1:
+                self.false_negatives += 1
+            elif predicted == 0 and true == 0:
+                self.true_negatives += 1
+
+    def precision(self, predicted_labels, true_labels):
+        """
+        Calculate the precision metric based on the updated confusion matrix.
+
+        Parameters:
+            predicted_labels (list): List of predicted labels (0 or 1)
+            true_labels (list): List of true labels (0 or 1)
+        
+        Returns:
+            float: Precision value between 0.0 and 1.0
+
+        Test cases:
+            # Test case 1: Perfect precision
+            assert precision([1, 1, 1], [1, 1, 1]) == 1.0
+
+            # Test case 2: Low precision
+            assert precision([0, 1, 0], [1, 0, 1]) == 0.0
+
+            # Test case 3: Intermediate precision
+            assert precision([1, 0, 1], [1, 0, 0]) == 0.67
+        """
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_positives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_positives)
+
+    def recall(self, predicted_labels, true_labels):
+        """
+        Calculate the recall metric based on the updated confusion matrix.
+
+        Parameters:
+            predicted_labels (list): List of predicted labels (0 or 1)
+            true_labels (list): List of true labels (0 or 1)
+        
+        Returns:
+            float: Recall value between 0.0 and 1.0
+
+        Test cases:
+            # Test case 1: Perfect recall
+            assert recall([1, 1, 1], [1, 1, 1]) == 1.0
+
+            # Test case 2: Low recall
+            assert recall([0, 1, 0], [1, 0, 1]) == 0.0
+
+            # Test case 3: Intermediate recall
+            assert recall([1, 0, 1], [1, 0, 0]) == 1.0
+        """
+        self.update(predicted_labels, true_labels)
+        if self.true_positives + self.false_negatives == 0:
+            return 0.0
+        return self.true_positives / (self.true_positives + self.false_negatives)
+
+    def f1_score(self, predicted_labels, true_labels):
+        """
+        Calculate the F1 score based on the precision and recall values.
+
+        Parameters:
+            predicted_labels (list): List of predicted labels (0 or 1)
+            true_labels (list): List of true labels (0 or 1)
+        
+        Returns:
+            float: F1 score value between 0.0 and 1.0
+
+        Test cases:
+            # Test case 1: Perfect F1 score
+            assert f1_score([1, 1, 1], [1, 1, 1]) == 1.0
+
+            # Test case 2: Low F1 score
+            assert f1_score([0, 1, 0], [1, 0, 1]) == 0.0
+
+            # Test case 3: Intermediate F1 score
+            assert f1_score([1, 0, 1], [1, 0, 0]) == 0.80
+        """
+        self.update(predicted_labels, true_labels)
+        precision = self.precision(predicted_labels, true_labels)
+        recall = self.recall(predicted_labels, true_labels)
+        if precision + recall == 0.0:
+            return 0.0
+        return (2 * precision * recall) / (precision + recall)
+
+    def accuracy(self, predicted_labels, true_labels):
+        """
+        Calculate the accuracy based on the updated confusion matrix.
+
+        Parameters:
+            predicted_labels (list): List of predicted labels (0 or 1)
+            true_labels (list): List of true labels (0 or 1)
+        
+        Returns:
+            float: Accuracy value between 0.0 and 1.0
+
+        Test cases:
+            # Test case 1: Perfect accuracy
+            assert accuracy([1, 1, 1], [1, 1, 1]) == 1.0
+
+            # Test case 2: Low accuracy
+            assert accuracy([0, 1, 0], [1, 0, 1]) == 0.33
+
+            # Test case 3: Intermediate accuracy
+            assert accuracy([1, 0, 1], [1, 0, 0]) == 0.67
+        """
+        self.update(predicted_labels, true_labels)
+        total = self.true_positives + self.true_negatives + self.false_positives + self.false_negatives
+        if total == 0:
+            return 0.0
+        return (self.true_positives + self.true_negatives) / total
+"""

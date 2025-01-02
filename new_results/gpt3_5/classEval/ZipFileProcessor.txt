@@ -1,0 +1,123 @@
+"""
+This class implements a Zip File Processor for reading, extracting, and creating zip files.
+"""
+
+import zipfile
+
+
+class ZipFileProcessor:
+    def __init__(self, file_name):
+        """
+        Initialize the ZipFileProcessor with the specified file name.
+
+        Parameters:
+            file_name (str): The name of the zip file to process
+        """
+        self.file_name = file_name
+
+    def read_zip_file(self):
+        """
+        Read and access the contents of the zip file.
+
+        Returns:
+            zipfile.ZipFile or None: Zipfile object if successful, None on failure
+        
+        Test cases:
+            # Test case 1: Read existing zip file
+            assert read_zip_file("example.zip") is not None
+            
+            # Test case 2: Read non-existent or invalid file
+            assert read_zip_file("invalid.zip") is None
+            
+            # Test case 3: Read corrupted zip file
+            assert read_zip_file("corrupted.zip") is None
+        """
+        try:
+            zip_file = zipfile.ZipFile(self.file_name, 'r')
+            return zip_file
+        except:
+            return None
+
+    def extract_all(self, output_path):
+        """
+        Extract all files from the zip archive to the specified output path.
+
+        Parameters:
+            output_path (str): The path to extract the files to
+            
+        Returns:
+            bool: True if extraction is successful, False otherwise
+
+        Test cases:
+            # Test case 1: Extract all files successfully
+            assert extract_all("/output") is True
+            
+            # Test case 2: Extract to non-existent path
+            assert extract_all("/non_existent_dir") is False
+            
+            # Test case 3: Extraction failure due to permissions
+            assert extract_all("/protected_folder") is False
+        """
+        try:
+            with zipfile.ZipFile(self.file_name, 'r') as zip_file:
+                zip_file.extractall(output_path)
+            return True
+        except:
+            return False
+
+    def extract_file(self, file_name, output_path):
+        """
+        Extract a specific file from the zip archive to the specified output path.
+
+        Parameters:
+            file_name (str): The name of the file to extract
+            output_path (str): The path to extract the file to
+            
+        Returns:
+            bool: True if extraction is successful, False otherwise
+
+        Test cases:
+            # Test case 1: Extract existing file successfully
+            assert extract_file("document.txt", "/output") is True
+            
+            # Test case 2: Extract non-existent file
+            assert extract_file("missing_file.txt", "/output") is False
+            
+            # Test case 3: Extract file with invalid output path
+            assert extract_file("data.csv", "/non_existent_dir") is False
+        """
+        try:
+            with zipfile.ZipFile(self.file_name, 'r') as zip_file:
+                zip_file.extract(file_name, output_path)
+            return True
+        except:
+            return False
+
+    def create_zip_file(self, files, output_file_name):
+        """
+        Create a new zip file containing the specified list of files.
+
+        Parameters:
+            files (list): List of file paths to include in the zip
+            output_file_name (str): Name of the output zip file to create
+
+        Returns:
+            bool: True if zip file creation is successful, False otherwise
+
+        Test cases:
+            # Test case 1: Create zip file successfully
+            assert create_zip_file(["file1.txt", "file2.txt"], "output.zip") is True
+            
+            # Test case 2: Empty file list creates empty zip file
+            assert create_zip_file([], "empty.zip") is True
+            
+            # Test case 3: Invalid output file name
+            assert create_zip_file(["data.csv", "image.png"], "") is False
+        """
+        try:
+            with zipfile.ZipFile(output_file_name, 'w') as zip_file:
+                for file in files:
+                    zip_file.write(file)
+            return True
+        except:
+            return False

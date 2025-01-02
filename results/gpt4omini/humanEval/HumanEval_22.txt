@@ -1,0 +1,19 @@
+```python
+from typing import List, Any
+
+def filter_integers(values: List[Any]) -> List[int]:
+    # This function filters out non-integer values from the given list.
+    # It returns a list containing only integer values.
+    # param values: List[Any], the input list which can contain elements of any type
+    # return: List[int], a list of integers filtered from the input list
+    # Test cases:
+    # >>> filter_integers([1, 'a', 2.5, 3])
+    # [1, 3]
+    # >>> filter_integers(['string', None, 4])
+    # [4]
+    # >>> filter_integers([True, 2, 3.0])
+    # [2]
+    # >>> filter_integers([])
+    # []
+    return [x for x in values if isinstance(x, int)]
+```

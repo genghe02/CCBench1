@@ -1,0 +1,20 @@
+def fib4(n: int):
+    # This function generates the nth number in the sequence where each number is the sum of the previous four numbers, starting with [0, 0, 2, 0].
+    # Test cases:
+    # >>> fib4(1) # should return 0
+    # >>> fib4(2) # should return 0
+    # >>> fib4(3) # should return 2
+    # >>> fib4(4) # should return 2 (0+0+2+0)
+    # >>> fib4(5) # should return 4 (0+2+0+2)
+    results = [0, 0, 2, 0]
+    if n < 4:
+        return results[n]
+
+    for _ in range(4, n + 1):
+        # append the sum of the last four numbers to the results list
+        results.append(results[-1] + results[-2] + results[-3] + results[-4])
+        # remove the first number in the list as it's no longer needed
+        results.pop(0)
+
+    # return the last number in the list which is the nth number in the sequence
+    return results[-1]

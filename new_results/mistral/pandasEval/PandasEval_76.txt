@@ -1,0 +1,2 @@
+ # Merge two series by appending the second series to the first and ignoring the index of the resulting series
+merged_series = target_series.append(source_series, ignore_index=True)</s>

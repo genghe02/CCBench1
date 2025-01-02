@@ -1,0 +1,6 @@
+def make_a_pile(n):
+    # This function generates a list of numbers, starting from n and increasing by 2 for each subsequent number, up to n times.
+    >>> make_a_pile(3) # returns [3, 5, 7]
+    >>> make_a_pile(0) # returns []
+    >>> make_a_pile(5) # returns [5, 7, 9, 11, 13]
+    return [n + 2*i for i in range(n)]

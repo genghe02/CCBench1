@@ -1,0 +1,11 @@
+```python
+def cycpattern_check(a, b):
+    # Check if string 'b' is a cyclic pattern in string 'a'.
+    l = len(b)
+    pat = b + b  # Create a double version of 'b' to facilitate cyclic comparison
+    for i in range(len(a) - l + 1):  # Iterate over all possible starting positions in 'a'
+        for j in range(l + 1):  # Check for matches of length 'l' in the cyclic pattern
+            if a[i:i+l] == pat[j:j+l]:  # Compare substring in 'a' with substring in 'pat'
+                return True  # Return True if a match is found
+    return False  # Return False if no match is found after all iterations
+```

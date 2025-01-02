@@ -1,0 +1,128 @@
+```python
+"""
+This class manages a book inventory, allowing for adding, removing, and viewing books and their quantities.
+"""
+
+class BookManagement:
+    def __init__(self):
+        """
+        Initializes the BookManagement class with an empty inventory.
+        """
+        self.inventory = {}
+
+    def add_book(self, title, quantity=1):
+        """
+        Adds a book to the inventory or increases its quantity if it already exists.
+
+        Parameters:
+            title (str): The title of the book to add.
+            quantity (int, optional): The number of copies to add. Defaults to 1.
+
+        Returns:
+            None
+
+        Test cases:
+            # Test case 1: Add a new book
+            bm = BookManagement()
+            bm.add_book("Python Programming")
+            assert bm.view_inventory() == {"Python Programming": 1}
+
+            # Test case 2: Add multiple copies of a new book
+            bm.add_book("Python Programming", 5)
+            assert bm.view_inventory() == {"Python Programming": 6}
+
+            # Test case 3: Add a book with zero quantity (edge case)
+            bm.add_book("Java Programming", 0)
+            assert bm.view_inventory() == {"Python Programming": 6, "Java Programming": 0}
+        """
+        if title in self.inventory:
+            self.inventory[title] += quantity
+        else:
+            self.inventory[title] = quantity
+
+    def remove_book(self, title, quantity):
+        """
+        Removes a specified quantity of a book from the inventory. If the quantity reaches zero, the book is removed entirely.
+
+        Parameters:
+            title (str): The title of the book to remove.
+            quantity (int): The number of copies to remove.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If the book is not in the inventory or the quantity to remove exceeds the available quantity.
+
+        Test cases:
+            # Test case 1: Remove a book with sufficient quantity
+            bm = BookManagement()
+            bm.add_book("Python Programming", 5)
+            bm.remove_book("Python Programming", 2)
+            assert bm.view_inventory() == {"Python Programming": 3}
+
+            # Test case 2: Remove all copies of a book
+            bm.remove_book("Python Programming", 3)
+            assert bm.view_inventory() == {}
+
+            # Test case 3: Remove a book not in the inventory (error case)
+            try:
+                bm.remove_book("Java Programming", 1)
+            except ValueError as e:
+                assert str(e) == "Book not in inventory or insufficient quantity"
+        """
+        if title not in self.inventory or self.inventory[title] < quantity:
+            raise ValueError("Book not in inventory or insufficient quantity")
+        self.inventory[title] -= quantity
+        if self.inventory[title] == :
+            del self.inventory[title]
+
+    def view_inventory(self):
+        """
+        Returns the current state of the inventory.
+
+        Returns:
+            dict: A dictionary where keys are book titles and values are their quantities.
+
+        Test cases:
+            # Test case 1: View empty inventory
+            bm = BookManagement()
+            assert bm.view_inventory() == {}
+
+            # Test case 2: View inventory with one book
+            bm.add_book("Python Programming")
+            assert bm.view_inventory() == {"Python Programming": 1}
+
+            # Test case 3: View inventory with multiple books
+            bm.add_book("Java Programming", 3)
+            assert bm.view_inventory() == {"Python Programming": 1, "Java Programming": 3}
+        """
+        return self.inventory
+
+    def view_book_quantity(self, title):
+        """
+        Returns the quantity of a specific book in the inventory.
+
+        Parameters:
+            title (str): The title of the book to check.
+
+        Returns:
+            int: The quantity of the book in the inventory. Returns 0 if the book is not found.
+
+        Test cases:
+            # Test case 1: Check quantity of a book in inventory
+            bm = BookManagement()
+            bm.add_book("Python Programming", 5)
+            assert bm.view_book_quantity("Python Programming") == 5
+
+            # Test case 2: Check quantity of a book not in inventory
+            assert bm.view_book_quantity("Java Programming") == 0
+
+            # Test case 3: Check quantity after removing some copies
+            bm.remove_book("Python Programming", 3)
+            assert bm.view_book_quantity("Python Programming") == 2
+        """
+        if title not in self.inventory:
+            return 0
+        return self.inventory[title]
+```

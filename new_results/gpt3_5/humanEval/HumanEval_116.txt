@@ -1,0 +1,6 @@
+# This function sorts the array based on the count of 1's in the binary representation of each element
+>>> sort_array([3, 10, 5, 16]) # returns [3, 5, 10, 16]
+>>> sort_array([1, 2, 3, 4, 5]) # returns [1, 2, 4, 3, 5]
+>>> sort_array([8, 4, 2, 1]) # returns [1, 2, 4, 8]
+def sort_array(arr):
+    return sorted(sorted(arr), key=lambda x: bin(x)[2:].count('1'))

@@ -1,0 +1,210 @@
+```python
+"""
+This class provides a set of static methods for performing basic statistical calculations on a dataset.
+"""
+
+import math
+
+class Statistics3:
+    @staticmethod
+    def median(data):
+        """
+        Calculate the median of a dataset.
+        
+        Parameters:
+            data (list): A list of numeric values
+            
+        Returns:
+            float: The median of the dataset
+        
+        Test cases:
+            # Test case 1: Odd number of data points
+            assert median([1, 2, 3]) == 2
+            
+            # Test case 2: Even number of data points
+            assert median([1, 2, 3, 4]) == 2.5
+            
+            # Test case 3: Empty dataset
+            assert median([]) == None
+        """
+        sorted_data = sorted(data)
+        n = len(sorted_data)
+        if n % 2 == 1:
+            return sorted_data[n // 2]
+        else:
+            return (sorted_data[n // 2 - 1] + sorted_data[n // 2]) / 2
+
+    @staticmethod
+    def mode(data):
+        """
+        Calculate the mode(s) of a dataset.
+        
+        Parameters:
+            data (list): A list of numeric values
+            
+        Returns:
+            list: A list of the mode(s) of the dataset
+        
+        Test cases:
+            # Test case 1: Single mode
+            assert mode([1, 2, 2, 3]) == [2]
+            
+            # Test case 2: Multiple modes
+            assert mode([1, 2, 2, 3, 3]) == [2, 3]
+            
+            # Test case 3: No mode
+            assert mode([1, 2, 3, 4]) == []
+        """
+        counts = {}
+        for value in data:
+            counts[value] = counts.get(value, 0) + 1
+        max_count = max(counts.values())
+        mode_values = [value for value, count in counts.items() if count == max_count]
+        return mode_values
+
+    @staticmethod
+    def correlation(x, y):
+        """
+        Calculate the correlation between two datasets.
+        
+        Parameters:
+            x (list): A list of numeric values
+            y (list): A list of numeric values
+            
+        Returns:
+            float: The correlation between x and y, or None if the correlation cannot be calculated
+        
+        Test cases:
+            # Test case 1: Positive correlation
+            assert correlation([1, 2, 3], [2, 4, 6]) == 1.0
+            
+            # Test case 2: No correlation
+            assert correlation([1, 2, 3], [2, 3, 2]) == 0.0
+            
+            # Test case 3: Negative correlation
+            assert correlation([1, 2, 3], [3, 2, 1]) == -1.0
+        """
+        n = len(x)
+        mean_x = sum(x) / n
+        mean_y = sum(y) / n
+        numerator = sum((xi - mean_x) * (yi - mean_y) for xi, yi in zip(x, y))
+        denominator = math.sqrt(sum((xi - mean_x) ** 2 for xi in x) * sum((yi - mean_y) ** 2 for yi in y))
+        if denominator == 0:
+            return None
+        return numerator / denominator
+
+    @staticmethod
+    def mean(data):
+        """
+        Calculate the mean of a dataset.
+        
+        Parameters:
+            data (list): A list of numeric values
+            
+        Returns:
+            float: The mean of the dataset, or None if the dataset is empty
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert mean([1, 2, 3]) == 2.0
+            
+            # Test case 2: Empty dataset
+            assert mean([]) == None
+        """
+        if len(data) == 0:
+            return None
+        return sum(data) / len(data)
+
+    @staticmethod
+    def correlation_matrix(data):
+        """
+        Calculate the correlation matrix for a dataset.
+        
+        Parameters:
+            data (list): A list of lists of numeric values
+            
+        Returns:
+            list: A correlation matrix for the dataset
+        
+        Test cases:
+            # Test case 1: Normal case
+            input = [[1, 2, 3], [2, 4, 6], [3, 6, 9]]
+            expected_output = [[1.0, 1.0, 1.0], [1.0, 1.0, 1.0], [1.0, 1.0, 1.0]]
+            assert correlation_matrix(input) == expected_output
+            
+            # Test case 2: Single column
+            input = [[1], [2], [3]]
+            expected_output = [[1.0]]
+            assert correlation_matrix(input) == expected_output
+            
+            # Test case 3: No correlation
+            input = [[1, 2, 3], [3, 2, 1]]
+            expected_output = [[1.0, -1.0], [-1.0, 1.0]]
+            assert correlation_matrix(input) == expected_output
+        """
+        matrix = []
+        for i in range(len(data[0])):
+            row = []
+            for j in range(len(data[0])):
+                column1 = [row[i] for row in data]
+                column2 = [row[j] for row in data]
+                correlation = Statistics3.correlation(column1, column2)
+                row.append(correlation)
+            matrix.append(row)
+        return matrix
+
+    @staticmethod
+    def standard_deviation(data):
+        """
+        Calculate the standard deviation of a dataset.
+        
+        Parameters:
+            data (list): A list of numeric values
+            
+        Returns:
+            float: The standard deviation of the dataset, or None if the dataset contains less than 2 data points
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert standard_deviation([1, 2, 3]) == 1.0
+            
+            # Test case 2: Single data point
+            assert standard_deviation([1]) == None
+            
+            # Test case 3: No deviation
+            assert standard_deviation([1, 1, 1]) == 0.0
+        """
+        n = len(data)
+        if n < 2:
+            return None
+        mean_value = Statistics3.mean(data)
+        variance = sum((x - mean_value) ** 2 for x in data) / (n - 1)
+        return math.sqrt(variance)
+
+    @staticmethod
+    def z_score(data):
+        """
+        Calculate the z-scores of a dataset.
+        
+        Parameters:
+            data (list): A list of numeric values
+            
+        Returns:
+            list: A list of z-scores, or None if the standard deviation is 0 or cannot be calculated
+        
+        Test cases:
+            # Test case 1: Normal case
+            assert z_score([1, 2, 3]) == [-1.0, 0.0, 1.0]
+            
+            # Test case 2: Single data point
+            assert z_score([1]) == None
+            
+            # Test case 3: No deviation
+            assert z_score([1, 1, 1]) == None
+        """
+        mean = Statistics3.mean(data)
+        std_deviation = Statistics3.standard_deviation(data)
+        if std_deviation is None or std_deviation == 0:
+            return None
+        return [(x - mean) / std_deviation for x in data]
+```

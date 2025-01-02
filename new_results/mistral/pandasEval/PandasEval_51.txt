@@ -1,0 +1,2 @@
+ # Calculate the sum of values in each row and add a new column 'Fruit Total'
+df['Fruit Total'] = df.apply(lambda x: sum(x.values), axis=1)</s>

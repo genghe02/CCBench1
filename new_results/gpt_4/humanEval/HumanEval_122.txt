@@ -1,0 +1,7 @@
+def add_elements(arr, k):
+    # Sum the first k elements in arr that have two or fewer digits
+
+    >>> add_elements([10, 20, 300, 40, 50], 3) # returns 30
+    >>> add_elements([100, 200, 300, 40, 50], 3) # returns 40
+    >>> add_elements([1, 2, 3, 4, 5], 5) # returns 15
+    return sum(elem for elem in arr[:k] if len(str(elem)) <= 2)

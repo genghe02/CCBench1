@@ -1,0 +1,2 @@
+ # Concatenate arrays 'a' and 'b' along a new axis to create a 2D array 'c'.
+# This operation is performed using numpy's np.column_stack() function.

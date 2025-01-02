@@ -1,0 +1,4 @@
+import numpy as np
+def matrix2array(M):
+    # Convert the given matrix M to an array and return the array
+    return np.squeeze(np.asarray(M))

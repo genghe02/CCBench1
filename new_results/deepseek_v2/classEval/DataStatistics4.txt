@@ -1,0 +1,156 @@
+```python
+"""
+This class provides a collection of static methods for calculating various statistical measures, including correlation coefficient, skewness, kurtosis, and probability density function (PDF) values.
+"""
+
+import math
+
+class DataStatistics4:
+
+    @staticmethod
+    def correlation_coefficient(data1, data2):
+        """
+        Calculates the Pearson correlation coefficient between two datasets.
+
+        Parameters:
+            data1 (list of float): The first dataset.
+            data2 (list of float): The second dataset.
+
+        Returns:
+            float: The Pearson correlation coefficient between the two datasets. Returns 0 if the denominator is zero.
+
+        Test cases:
+            # Test case 1: Perfect positive correlation
+            data1 = [1, 2, 3, 4, 5]
+            data2 = [1, 2, 3, 4, 5]
+            assert DataStatistics4.correlation_coefficient(data1, data2) == 1.0
+
+            # Test case 2: Perfect negative correlation
+            data1 = [1, 2, 3, 4, 5]
+            data2 = [5, 4, 3, 2, 1]
+            assert DataStatistics4.correlation_coefficient(data1, data2) == -1.0
+
+            # Test case 3: No correlation
+            data1 = [1, 2, 3, 4, 5]
+            data2 = [5, 1, 4, 2, 3]
+            assert abs(DataStatistics4.correlation_coefficient(data1, data2)) < 0.1
+        """
+        n = len(data1)
+        mean1 = sum(data1) / n
+        mean2 = sum(data2) / n
+
+        numerator = sum((data1[i] - mean1) * (data2[i] - mean2) for i in range(n))
+        denominator = math.sqrt(sum((data1[i] - mean1) ** 2 for i in range(n))) * math.sqrt(sum((data2[i] - mean2) ** 2 for i in range(n)))
+
+        return numerator / denominator if denominator != 0 else 0
+    
+    @staticmethod
+    def skewness(data):
+        """
+        Calculates the skewness of a dataset, which measures the asymmetry of the data distribution.
+
+        Parameters:
+            data (list of float): The dataset.
+
+        Returns:
+            float: The skewness of the dataset. Returns 0 if the standard deviation is zero.
+
+        Test cases:
+            # Test case 1: Symmetrical distribution
+            data = [1, 2, 3, 4, 5]
+            assert DataStatistics4.skewness(data) == 0.0
+
+            # Test case 2: Right-skewed distribution
+            data = [1, 2, 3, 4, 10]
+            assert DataStatistics4.skewness(data) > 0
+
+            # Test case 3: Left-skewed distribution
+            data = [1, 2, 3, 4, 0]
+            assert DataStatistics4.skewness(data) < 0
+        """
+        n = len(data)
+        mean = sum(data) / n
+        variance = sum((x - mean) ** 2 for x in data) / n
+        std_deviation = math.sqrt(variance)
+
+        skewness = sum((x - mean) ** 3 for x in data) * n / ((n - 1) * (n - 2) * std_deviation ** 3) if std_deviation != 0 else 0
+
+        return skewness
+    
+    @staticmethod
+    def kurtosis(data):
+        """
+        Calculates the kurtosis of a dataset, which measures the "tailedness" of the data distribution.
+
+        Parameters:
+            data (list of float): The dataset.
+
+        Returns:
+            float: The kurtosis of the dataset. Returns NaN if the standard deviation is zero.
+
+        Test cases:
+            # Test case 1: Normal distribution
+            data = [1, 2, 3, 4, 5]
+            assert abs(DataStatistics4.kurtosis(data)) < 0.1
+
+            # Test case 2: High kurtosis (leptokurtic)
+            data = [1, 1, 1, 1, 10]
+            assert DataStatistics4.kurtosis(data) > 0
+
+            # Test case 3: Low kurtosis (platykurtic)
+            data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            assert DataStatistics4.kurtosis(data) < 0
+        """
+
+        n = len(data)
+        mean = sum(data) / n
+        std_dev = math.sqrt(sum((x - mean) ** 2 for x in data) / n)
+
+        if std_dev == 0:
+            return math.nan
+
+        centered_data = [(x - mean) for x in data]
+        fourth_moment = sum(x ** 4 for x in centered_data) / n
+
+        kurtosis_value = (fourth_moment / std_dev ** 4) - 3
+
+        return kurtosis_value
+    
+    @staticmethod
+    def pdf(data, mu, sigma):
+        """
+        Calculates the probability density function (PDF) values for a dataset given a mean (mu) and standard deviation (sigma).
+
+        Parameters:
+            data (list of float): The dataset.
+            mu (float): The mean of the distribution.
+            sigma (float): The standard deviation of the distribution.
+
+        Returns:
+            list of float: The PDF values for each element in the dataset.
+
+        Test cases:
+            # Test case 1: PDF values for a normal distribution
+            data = [1, 2, 3, 4, 5]
+            mu = 3
+            sigma = 1
+            pdf_values = DataStatistics4.pdf(data, mu, sigma)
+            assert len(pdf_values) == len(data)
+
+            # Test case 2: PDF values for a single point
+            data = [0]
+            mu = 0
+            sigma = 1
+            pdf_values = DataStatistics4.pdf(data, mu, sigma)
+            assert abs(pdf_values[0] - 0.3989422804014327) < 1e-6
+
+            # Test case 3: PDF values with zero standard deviation
+            data = [1, 2, 3]
+            mu = 2
+            sigma = 0
+            pdf_values = DataStatistics4.pdf(data, mu, sigma)
+            assert all(math.isinf(x) for x in pdf_values)
+        """
+        pdf_values = [1 / (sigma * math.sqrt(2 * math.pi)) * math.exp(-0.5 * ((x - mu) / sigma) ** 2) for x in data]
+        return pdf_values
+```

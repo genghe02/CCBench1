@@ -1,0 +1,5 @@
+def incr_list(l: list):
+    # Increment each element in the input list by 1 and return a new list containing the incremented values.
+    # Test case 1: When the input list is [1, 2, 3], the output should be [2, 3, 4].
+    # Test case 2: When the input list is [0, -1, 5, 10], the output should be [1, 0, 6, 11].
+    return [(e + 1) for e in l]

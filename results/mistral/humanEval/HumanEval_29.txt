@@ -1,0 +1,31 @@
+ from typing import List
+
+
+def filter_by_prefix(strings: List[str], prefix: str) -> List[str]:
+    # This function takes a list of strings and a prefix string as input
+    # and returns a new list that contains only the strings from the input list
+    # that start with the given prefix.
+
+    # Find all strings in the input list that start with the given prefix.
+    return [x for x in strings if x.startswith(prefix)]
+    
+    # Test cases:
+    # Test case 1: Filter strings that start with a given prefix from an empty list.
+    >>> filter_by_prefix([], 'abc')
+    []
+    
+    # Test case 2: Filter strings that start with a given prefix from a list with strings that do not start with the prefix.
+    >>> filter_by_prefix(['apple', 'banana', 'cherry', 'date'], 'app')
+    ['apple']
+    
+    # Test case 3: Filter strings that start with a given prefix from a list with strings that start with the prefix followed by other characters.
+    >>> filter_by_prefix(['apple1', 'applet', 'application'], 'app')
+    ['apple', 'applet']
+    
+    # Test case 4: Filter strings that start with a given prefix from a list with strings that only contain the prefix.
+    >>> filter_by_prefix(['app', 'apple', 'apples'], 'app')
+    ['app', 'apple']
+    
+    # Test case 5: Filter strings that start with a given prefix from a list with strings that do not contain the prefix.
+    >>> filter_by_prefix(['orange', 'pear', 'grape'], 'app')
+    []

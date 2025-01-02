@@ -1,0 +1,11 @@
+```python
+def eat(number, need, remaining):
+    # This function calculates how much food an animal can eat
+    >>> eat(5, 3, 10) # returns [8, 7]
+    >>> eat(5, 7, 10) # returns [10, 0]
+    >>> eat(5, 0, 10) # returns [5, 10]
+    if(need <= remaining):
+        return [ number + need , remaining-need ]
+    else:
+        return [ number + remaining , 0]
+```

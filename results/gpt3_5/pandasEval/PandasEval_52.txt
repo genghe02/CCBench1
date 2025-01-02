@@ -1,0 +1,1 @@
+# Combine two pandas DataFrames by appending df2 to df1 while ignoring the index of df2.

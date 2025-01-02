@@ -1,0 +1,23 @@
+ # Check if the given string is readable the same way backwards as forwards
+def is_palindrome(string: str) -> bool:
+   # String should be readable the same way forwards and backwards
+   >>> is_palindrome('racecar') # returns True
+   >>> is_palindrome('hello') # returns False
+   return string == string[::-1]
+
+# Add characters to the string to make it a palindrome if it isn't already
+def make_palindrome(string: str) -> str:
+   # Make a string a palindrome by adding characters as necessary
+   # Empty strings are already palindromes
+   >>> make_palindrome('') # returns ''
+   >>> make_palindrome('hello') # returns 'hellohello'
+   >>> make_palindrome('racecar') # returns 'racecar' already is a palindrome
+   if not string:
+       return ''
+
+   beginning_of_suffix = 0
+
+   while not is_palindrome(string[beginning_of_suffix:]):
+       beginning_of_suffix += 1
+
+   return string + string[:beginning_of_suffix][::-1]</s>

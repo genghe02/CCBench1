@@ -1,0 +1,2 @@
+# Filter array 'a' rows where the first column is 0 and the second column is 1
+b = a[np.where((a[:,0] == 0) * (a[:,1] == 1))]

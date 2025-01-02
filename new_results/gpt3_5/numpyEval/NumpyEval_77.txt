@@ -1,0 +1,2 @@
+# Update array values to shift all elements one position to the right
+z[1:] = z[:-1]

@@ -1,0 +1,85 @@
+"""
+This class represents an IP Address object that allows validation and manipulation of IPv4 addresses.
+"""
+
+class IPAddress:
+    def __init__(self, ip_address):
+        """
+        Initialize the IP Address object.
+
+        Parameters:
+            ip_address (str): The input IPv4 address in string format
+        """
+        self.ip_address = ip_address
+
+    def is_valid(self):
+        """
+        Check if the IP address is valid.
+
+        Returns:
+            bool: True if the IP address is valid, False otherwise
+
+        Test cases:
+            # Test case 1: Valid IPv4 address
+            assert IPAddress('192.168.1.1').is_valid() == True
+
+            # Test case 2: Invalid IPv4 address (wrong format)
+            assert IPAddress('192.168.1').is_valid() == False
+
+            # Test case 3: Invalid IPv4 address (out of range)
+            assert IPAddress('192.256.1.1').is_valid() == False
+        """
+        octets = self.ip_address.split('.')
+        if len(octets) != 4:
+            return False
+        for octet in octets:
+            if not octet.isdigit() or int(octet) < 0 or int(octet) > 255:
+                return False
+        return True
+
+    def get_octets(self):
+        """
+        Get the individual octets of the IP address.
+
+        Returns:
+            list: A list of IPv4 address octets (as strings), empty list if invalid
+
+        Test cases:
+            # Test case 1: Valid IP address
+            assert IPAddress('192.168.1.1').get_octets() == ['192', '168', '1', '1']
+
+            # Test case 2: Invalid IP address
+            assert IPAddress('192.168.1').get_octets() == []
+
+            # Test case 3: Valid IP address with leading zeros
+            assert IPAddress('010.0.0.1').get_octets() == ['010', '0', '0', '1']
+        """
+        if self.is_valid():
+            return self.ip_address.split('.')
+        else:
+            return []
+
+    def get_binary(self):
+        """
+        Convert the IP address into binary format.
+
+        Returns:
+            str: Binary representation of the IP address, empty string if invalid
+
+        Test cases:
+            # Test case 1: Valid IP address
+            assert IPAddress('192.168.1.1').get_binary() == '11000000.10101000.00000001.00000001'
+
+            # Test case 2: Invalid IP address
+            assert IPAddress('256.0.1.1').get_binary() == ''
+
+            # Test case 3: Valid IP address with leading zeros
+            assert IPAddress('010.0.0.1').get_binary() == '00001010.00000000.00000000.00000001'
+        """
+        if self.is_valid():
+            binary_octets = []
+            for octet in self.get_octets():
+                binary_octets.append(format(int(octet), '08b'))
+            return '.'.join(binary_octets)
+        else:
+            return ''

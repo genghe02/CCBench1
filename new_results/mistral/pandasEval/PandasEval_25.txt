@@ -1,0 +1,2 @@
+ # Sort dataframe by 'date' column in ascending order and keep only the last row for each 'id'
+last_df = df.sort_values('date', ascending=True).groupby('id').last()</s>

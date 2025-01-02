@@ -1,0 +1,142 @@
+ ```python
+"""
+This class processes images by loading, saving, resizing, rotating, and adjusting brightness.
+"""
+
+from PIL import Image, ImageEnhance, ImageChops
+
+class ImageProcessor:
+    def __init__(self):
+        """
+        Initialize ImageProcessor instance with no image loaded.
+        """
+
+    def load_image(self, image_path):
+        """
+        Load an image from a given file path.
+
+        Parameters:
+            image_path (str): Path to the image file
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Load a valid image
+            image_path = 'test_images/input.jpg'
+            image_processor = ImageProcessor()
+            image_processor.load_image(image_path)
+
+            # Test case 2: Load a non-existent image
+            image_processor = ImageProcessor()
+            image_processor.load_image('non_existent_image.jpg')
+        """
+        self.image = Image.open(image_path)
+
+    def save_image(self, save_path):
+        """
+        Save the current image to a specified file path.
+
+        Parameters:
+            save_path (str): Desired file path for the saved image
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Save image to a valid path
+            save_path = 'test_images/output.jpg'
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.save_image(save_path)
+
+            # Test case 2: Save image to an existing file
+            save_path = 'test_images/input.jpg'
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.save_image(save_path)
+        
+    def resize_image(self, width, height):
+        """
+        Resize the current image to the specified width and height.
+
+        Parameters:
+            width (int): Desired width of the image
+            height (int): Desired height of the image
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Resize image to valid dimensions
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.resize_image(256, 256)
+
+            # Test case 2: Resize image to very large dimensions
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.resize_image(10000, 10000)
+
+            # Test case 3: Resize image to very small dimensions
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.resize_image(10, 10)
+        
+    def rotate_image(self, degrees):
+        """
+        Rotate the current image by the specified degrees.
+
+        Parameters:
+            degrees (float): Number of degrees to rotate the image
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Rotate image by 90 degrees
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.rotate_image(-90)
+
+            # Test case 2: Rotate image by 180 degrees
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.rotate_image(-180)
+
+            # Test case 3: Rotate image by 45 degrees
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.rotate_image(45)
+        
+    def adjust_brightness(self, factor):
+        """
+        Adjust the brightness of the current image by the specified factor.
+
+        Parameters:
+            factor (float): Brightness adjustment factor
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Adjust brightness to a brighter level
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.adjust_brightness(0.2)
+
+            # Test case 2: Adjust brightness to a darker level
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.adjust_brightness(-0.2)
+
+            # Test case 3: Adjust brightness to a minimal level
+            image_processor = ImageProcessor()
+            image_processor.load_image('test_images/input.jpg')
+            image_processor.adjust_brightness(-1)
+        
+        """
+        if self.image:
+            enhancer = ImageEnhance.Brightness(self.image)
+            self.image = enhancer.enhance(factor)
+```</s>

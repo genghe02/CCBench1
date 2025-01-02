@@ -1,0 +1,12 @@
+```python
+def check_if_last_char_is_a_letter(txt):
+    # Check if the last character of a string is a letter
+    >>> check_if_last_char_is_a_letter("Hello") # returns True
+    >>> check_if_last_char_is_a_letter("Hello!") # returns False
+    >>> check_if_last_char_is_a_letter("123") # returns False
+    >>> check_if_last_char_is_a_letter("Python3") # returns False
+    >>> check_if_last_char_is_a_letter("A") # returns True
+    
+    check = txt.split(' ')[-1]
+    return True if len(check) == 1 and (97 <= ord(check.lower()) <= 122) else False
+```

@@ -1,0 +1,73 @@
+```python
+"""
+This class handles partitioning a list into approximately equal-sized segments based on a specified limit.
+"""
+
+class AvgPartition:
+    def __init__(self, lst, limit):
+        """
+        Initialize an AvgPartition instance.
+        
+        Parameters:
+            lst (list): The list to be partitioned.
+            limit (int): The maximum number of partitions to create.
+        """
+        self.lst = lst
+        self.limit = limit
+
+    def setNum(self):
+        """
+        Calculate the size of each partition and any remainder from the division.
+
+        Returns:
+            tuple: A tuple containing:
+                - size (int): The base size of each partition.
+                - remainder (int): The number of extra elements that do not fit into equal partitions.
+        
+        Test cases:
+            # Test case 1: Normal partitioning
+            input = [1, 2, 3, 4, 5], limit = 2
+            expected_output = (2, 1)
+
+            # Test case 2: Limit equal to size
+            input = [1, 2], limit = 2
+            expected_output = (1, 0)
+
+            # Test case 3: Limit greater than size
+            input = [1], limit = 5
+            expected_output = (0, 1)
+        """
+        size = len(self.lst) // self.limit
+        remainder = len(self.lst) % self.limit
+        return size, remainder
+
+    def get(self, index):
+        """
+        Retrieve a specific partition based on its index.
+
+        Parameters:
+            index (int): The index of the partition to retrieve.
+        
+        Returns:
+            list: The partition of the list corresponding to the specified index.
+        
+        Test cases:
+            # Test case 1: Normal retrieval
+            input = 0 (for [1, 2, 3, 4, 5] with limit = 2)
+            expected_output = [1, 2]
+
+            # Test case 2: Retrieving the last partition
+            input = 1 (for [1, 2, 3, 4, 5] with limit = 2)
+            expected_output = [3, 4, 5]
+
+            # Test case 3: Out of bounds index
+            input = 2 (for [1, 2] with limit = 2)
+            expected_output = []
+        """
+        size, remainder = self.setNum()
+        start = index * size + min(index, remainder)
+        end = start + size
+        if index + 1 <= remainder:
+            end += 1
+        return self.lst[start:end]
+```

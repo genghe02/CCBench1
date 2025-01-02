@@ -1,0 +1,82 @@
+Task: Extract the comments from the code and organize them into a JSON file. These comments mostly start with '#'.
+
+Rules:
+1. JSON file format:
+[
+    "comment1",
+    "comment2",
+    ...
+]
+2. Do not output any unnecessary content
+3. You should identify the comments at each location and add a value to the JSON file for each comment
+4. If there is only one comment in the code, output a single element JSON file with the only element being the comment, do not directly output a string.
+5. Sometimes comments may be in the form of multiple lines, but you need to identify whether these comments are the same one. Don't simply classify a line of comments as a single comment.
+6. Do NOT include '```json' or '```' in the content
+
+Example1:
+Input:
+```python
+import pandas as pd
+
+def add_zeros_to_string(df, col_name):
+    # Pad the string in the specified column with leading zeros to ensure the total length is 15 characters.
+    df[col_name] = df[col_name].apply(lambda x: '{0:0>15}'.format(x))
+    return df
+```
+
+❌ Wrong Output (Output in string format):
+# Pad the string in the specified column with leading zeros to ensure the total length is 15 characters.
+
+✅ Correct Output:
+["# Pad the string in the specified column with leading zeros to ensure the total length is 15 characters."]
+
+Example2:
+Input:
+```python
+import pandas as pd
+import numpy as np
+
+def find_non_numeric_rows(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Identify and return rows in a DataFrame that contain non-numeric values.
+    The function checks each cell in the DataFrame to determine if the value is numeric.
+    Rows with at least one non-numeric value are included in the output.
+
+    >>> df = pd.DataFrame({'A': [1, 2, 'three'], 'B': [4.0, 5.1, 6]})
+    >>> find_non_numeric_rows(df)
+            A    B
+    2  three    6
+    >>> df2 = pd.DataFrame({'X': [10, 20, 30], 'Y': [1.1, 2.2, 3.3]})
+    >>> find_non_numeric_rows(df2)
+    Empty DataFrame
+    Columns: [X, Y]
+    Index: []
+    """
+    return df[~df.applymap(np.isreal).all(1)]
+```
+
+❌ Wrong Output (Error identifying one annotation as multiple):
+["Identify and return rows in a DataFrame that contain non-numeric values.",
+"The function checks each cell in the DataFrame to determine if the value is numeric.",
+"Rows with at least one non-numeric value are included in the output."
+]
+
+✅ Correct Output:
+["Identify and return rows in a DataFrame that contain non-numeric values.\nThe function checks each cell in the DataFrame to determine if the value is numeric.\nRows with at least one non-numeric value are included in the output."]
+
+Example3:
+Input:
+# Remove rows with NaN values in a specific column from a dataframe
+
+❌ Wrong Output (Failed to understand that the input itself is a comment):
+[]
+
+✅ Correct Output:
+["# Remove rows with NaN values in a specific column from a dataframe"]
+
+
+This is the end of examples.
+
+Here is the task you should finish:
+
+Input:

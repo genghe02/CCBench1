@@ -1,0 +1,2 @@
+ # Concatenate arr1 and arr2 using numpy's concatenate function
+return np.concatenate((arr1, arr2))</s>

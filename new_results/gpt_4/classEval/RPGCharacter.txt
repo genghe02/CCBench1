@@ -1,0 +1,142 @@
+"""
+This class represents a character in a Role-Playing Game (RPG), with attributes and methods for managing the character's
+state and interactions with other characters.
+"""
+
+class RPGCharacter:
+    def __init__(self, name, hp, attack_power, defense, level=1):
+        """
+        Initializes a new RPGCharacter with the given parameters.
+
+        Parameters:
+            name (str): The name of the character.
+            hp (int): The character's initial health points.
+            attack_power (int): The character's attack power.
+            defense (int): The character's defense rating.
+            level (int, optional): The character's starting level. Default is 1.
+        """
+        self.name = name
+        self.hp = hp
+        self.attack_power = attack_power
+        self.defense = defense
+        self.level = level
+        self.exp = 0
+
+    def attack(self, other_character):
+        """
+        Makes the character attack another character, reducing the other character's HP based on this character's attack
+        power and the other character's defense.
+
+        Parameters:
+            other_character (RPGCharacter): The character to attack.
+
+        Test cases:
+            # Test case 1: Normal attack
+            char1.attack(char2)
+            assert char2.hp == expected_hp
+            
+            # Test case 2: Attack character with high defense
+            char1.attack(char3)
+            assert char3.hp == expected_hp
+
+            # Test case 3: Attack character with low HP
+            char1.attack(char4)
+            assert char4.hp == expected_hp
+        """
+        damage = max(self.attack_power - other_character.defense, 1)
+        other_character.hp -= damage
+
+    def heal(self):
+        """
+        Heals the character by increasing its HP.
+
+        Returns:
+            int: The character's current HP after healing.
+
+        Test cases:
+            # Test case 1: Heal character with low HP
+            assert char1.heal() == expected_hp
+            
+            # Test case 2: Heal character with high HP
+            assert char2.heal() == expected_hp
+
+            # Test case 3: Heal character with full HP
+            assert char3.heal() == expected_hp
+        """
+        self.hp += 10
+        if self.hp > 100:
+            self.hp = 100
+        return self.hp
+
+    def gain_exp(self, amount):
+        """
+        Increases the character's experience by the given amount. When the character's experience reaches 100 times its
+        level, it levels up.
+
+        Parameters:
+            amount (int): The amount of experience to gain.
+
+        Test cases:
+            # Test case 1: Gain EXP to level up
+            char1.gain_exp(100)
+            assert char1.level == expected_level
+            
+            # Test case 2: Gain EXP without leveling up
+            char2.gain_exp(50)
+            assert char2.exp == expected_exp
+
+            # Test case 3: Gain EXP with overflow to next level
+            char3.gain_exp(150)
+            assert char3.level == expected_level and char3.exp == expected_exp
+        """
+        while amount != 0:
+            if self.exp + amount >= self.level * 100:
+                amount -= (self.level * 100 - self.exp)
+                self.level_up()
+            else:
+                self.exp += amount
+                amount = 0
+
+    def level_up(self):
+        """
+        Increases the character's level, resets its experience to 0, and increases its HP, attack power, and defense.
+
+        Returns:
+            tuple: The character's current level, HP, attack power, and defense after leveling up.
+
+        Test cases:
+            # Test case 1: Level up from low level
+            assert char1.level_up() == (expected_level, expected_hp, expected_attack_power, expected_defense)
+            
+            # Test case 2: Level up from high level
+            assert char2.level_up() == (expected_level, expected_hp, expected_attack_power, expected_defense)
+
+            # Test case 3: Attempt to level up from max level
+            assert char3.level_up() == (expected_level, expected_hp, expected_attack_power, expected_defense)
+        """
+        if self.level < 100:
+            self.level += 1
+            self.exp = 0
+            self.hp += 20
+            self.attack_power += 5
+            self.defense += 5
+        return self.level, self.hp, self.attack_power, self.defense
+
+    def is_alive(self):
+        """
+        Checks if the character is still alive (i.e., its HP is greater than 0).
+
+        Returns:
+            bool: True if the character is alive, False otherwise.
+
+        Test cases:
+            # Test case 1: Check alive character
+            assert char1.is_alive() == True
+            
+            # Test case 2: Check character with low HP
+            assert char2.is_alive() == True
+
+            # Test case 3: Check dead character
+            assert char3.is_alive() == False
+        """
+        return self.hp > 0

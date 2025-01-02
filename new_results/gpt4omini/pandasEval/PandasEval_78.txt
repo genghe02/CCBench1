@@ -1,0 +1,6 @@
+import pandas as pd  
+import numpy as np  
+  
+df = pd.DataFrame({'mycol':np.arange(5), 'dummy':np.arange(5)})  
+# Retrieve value from 'mycol' column with a default of NaN if index doesn't exist  
+value = df.mycol.get(1, np.nan)  

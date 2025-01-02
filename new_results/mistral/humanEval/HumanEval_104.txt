@@ -1,0 +1,11 @@
+ def unique_digits(x):
+   # Function to find numbers with odd digits in a list
+   # Returns a list of numbers with only odd digits
+   >>> unique_digits([1, 2, 3, 4, 5]) # returns [1, 3, 5]
+   >>> unique_digits([5, 6, 7, 8, 9]) # returns [5, 7, 9]
+   # Keep the rest of the code as is
+   odd_digit_elements = []
+   for i in x:
+       if all (int(c) % 2 == 1 for c in str(i)):
+           odd_digit_elements.append(i)
+   return sorted(odd_digit_elements)</s>

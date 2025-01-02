@@ -1,0 +1,6 @@
+ # Sort the 2D numpy array 'a' in lexicographic order based on its first and second columns using numpy's lexsort function and store the sorted indices in 'ind'. Then, reorder the array 'a' using these indices.
+
+# Sort the array 'a' in lexicographic order based on its first and second columns:
+# ind = np.lexsort((a[:, 0], a[:, 1]))
+# Reorder the array 'a' using the sorted indices:
+a = a[ind]

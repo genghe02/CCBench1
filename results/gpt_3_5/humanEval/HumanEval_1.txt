@@ -1,0 +1,29 @@
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    # Split the input string into groups enclosed by parentheses and return them as a list of strings.
+    # The function iterates through the input string character by character and identifies groups by tracking opening and closing parentheses.
+    
+    # Test cases:
+    # Test with empty input string
+    # Test with a single group enclosed by parentheses
+    # Test with multiple groups enclosed by parentheses at different depths
+    # Test with no parentheses in the input string
+    
+    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result

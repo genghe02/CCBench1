@@ -1,0 +1,15 @@
+def specialFilter(nums):
+    # This function counts the numbers in a list that are greater than 10 and have odd digits at both ends.
+    >>> specialFilter([15, 32, 97, 11, 13]) # returns 3
+    >>> specialFilter([21, 33, 45, 57, 69]) # returns 0
+    >>> specialFilter([11, 13, 15, 17, 19]) # returns 5
+    
+    count = 0
+    for num in nums:
+        if num > 10:
+            odd_digits = (1, 3, 5, 7, 9)
+            number_as_string = str(num)
+            if int(number_as_string[0]) in odd_digits and int(number_as_string[-1]) in odd_digits:
+                count += 1
+        
+    return count

@@ -1,0 +1,4 @@
+ # Convert specified column to integers
+def convert_bool_to_int(df, col_name):
+    df[col_name] = df[col_name].astype(int)
+    return df</s>

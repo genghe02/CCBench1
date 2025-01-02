@@ -1,0 +1,5 @@
+ # This function truncates a float number by keeping only the decimal part
+ >>> truncate_number(3.5) # returns 0.5
+ >>> truncate_number(-3.5) # returns 0.5
+ >>> truncate_number(0.0) # returns 0.0
+ return number % 1.0</s>

@@ -1,0 +1,7 @@
+# This function returns the value of a number that starts with 1 and has 'n' digits
+>>> starts_one_ends(1) # returns 1
+>>> starts_one_ends(2) # returns 18
+>>> starts_one_ends(3) # returns 180
+def starts_one_ends(n):
+    if n == 1: return 1
+    return 18 * (10 ** (n - 2))

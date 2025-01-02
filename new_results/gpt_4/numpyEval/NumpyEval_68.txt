@@ -1,0 +1,8 @@
+import numpy as np
+
+# Array `data` defines the columns of the nonzero elements in the output array.
+data = np.array([1, 0, 3])
+# We need to also define the rows and then use fancy indexing in the following way:
+result = np.zeros((data.size, data.max()+1))
+# Set the element at each row `i` and column `data[i]` to be 1
+result[np.arange(data.size), data] = 1

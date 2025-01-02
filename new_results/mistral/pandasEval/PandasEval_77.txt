@@ -1,0 +1,3 @@
+ # Dataframe slice to return rows where col_a > col_b
+def find_col_a_gt_col_b_rows(df, col_a, col_b):
+    return df[df[col_a] > df[col_b]]</s>

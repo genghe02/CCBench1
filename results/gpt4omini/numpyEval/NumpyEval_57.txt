@@ -1,0 +1,9 @@
+```python
+import numpy as np
+
+n = 2
+a = np.asarray([1, 2, 3, 4, 5])
+cond = (a % 2) == 0  # condition is True on even numbers
+# Repeat each even number in the array 'a', 'n' times, effectively expanding the array to include duplicates of the even numbers.
+m = np.repeat(a[cond], n)
+```

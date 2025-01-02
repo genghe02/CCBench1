@@ -1,0 +1,127 @@
+ """
+This class represents a Minesweeper game with a given size (n) and number of mines (k).
+"""
+
+import random
+
+class MinesweeperGame:
+    def __init__(self, n, k) -> None:
+        """
+        Initialize the MinesweeperGame with given dimensions and number of mines.
+
+        Parameters:
+            n (int): The width and height of the Minesweeper game
+            k (int): The number of mines to be placed in the game
+
+        Returns:
+            None
+        """
+        self.n = n
+        self.k = k
+        self.minesweeper_map = self.generate_mine_sweeper_map()
+        self.player_map = self.generate_playerMap()
+        self.score = 0
+
+    def generate_mine_sweeper_map(self):
+        """
+        Generate a new random MineSweeper map with given dimensions and number of mines.
+
+        Returns:
+            list: A 2D list representing the MineSweeper map
+        """
+        arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        for _ in range(self.k):
+            x, y = self.place_mine(arr)
+            self.update_adjacent_cells(arr, x, y)
+        return arr
+
+        # Test cases:
+        # Test case 1: Generate a new map
+        # test_map = generate_mine_sweeper_map()
+        # assert len(test_map) == self.n
+        # assert len(test_map[0]) == self.n
+        # assert all(isinstance(cell, list) for cell in test_map)
+
+        # Test case 2: Place a mine and update adjacent cells
+        # test_arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        # place, _ = self.place_mine(test_arr)
+        # test_arr[place[0]][place[1]] = 'X'
+        # self.update_adjacent_cells(test_arr, place[0], place[1])
+        # assert test_arr[place[0]][place[1]] == 'X'
+
+    def place_mine(self, arr):
+        """
+        Place a random mine at an empty cell in the given MineSweeper map.
+
+        Parameters:
+            arr (list): The MineSweeper map as a 2D list
+
+        Returns:
+            tuple: A tuple containing the row and column index of the placed mine
+        """
+        x, y = self.find_empty_cell(arr)
+        arr[y][x] = 'X'
+        return x, y
+
+        # Test case 1: Find empty cell and place mine
+        # test_arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        # empty_cell = self.find_empty_cell(test_arr)
+        # test_arr[empty_cell[0]][empty_cell[1]] = 'X'
+        # assert test_arr[empty_cell[0]][empty_cell[1]] == 'X'
+
+    def find_empty_cell(self, arr):
+        """
+        Find and return an empty cell in the given MineSweeper map.
+
+        Parameters:
+            arr (list): The MineSweeper map as a 2D list
+
+        Returns:
+            tuple: A tuple containing the row and column index of the empty cell
+        """
+        x = random.randint(0, self.n-1)
+        y = random.randint(0, self.n-1)
+        while arr[y][x] != '-':
+            x = random.randint(0, self.n-1)
+            y = random.randint(0, self.n-1)
+        return x, y
+
+        # Test case 1: Find empty cell
+        # test_arr = [[- for row in range(self.n)] for column in range(self.n)]
+        # empty_cell = self.find_empty_cell(test_arr)
+        # assert empty_cell[0] is not None
+        # assert empty_cell[1] is not None
+
+    def update_adjacent_cells(self, arr, x, y):
+        """
+        Increase the value of adjacent cells with a mine nearby (excluding the mine itself).
+
+        Parameters:
+            arr (list): The MineSweeper map as a 2D list
+            x (int): The row index of the mine
+            y (int): The column index of the mine
+        """
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if i == 0 and j == 0:
+                    continue
+                if x+i >= 0 and x+i < self.n and y+j >= 0 and y+j < self.n:
+                    arr[x+i][y+j] += 1
+
+        # Test case 1: Update adjacent cells
+        # test_arr = [[0 for row in range(self.n)] for column in range(self.n)]
+        # self.update_adjacent_cells(test_arr, 0, 0)
+        # assert test_arr[0][0] == 1
+        # assert test_arr[0][1] == 1
+        # assert test_arr[1][0] == 1
+        # assert test_arr[1][1] == 1
+
+    def generate_playerMap(self):
+        """
+        Generate a new empty player map with the same dimensions as the MineSweeper map.
+
+        Returns:
+            list: A 2D list representing the player map
+        """
+        arr = [[
+```</s>

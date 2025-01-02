@@ -1,0 +1,8 @@
+```python
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame([[1, 2.2, 'three']], columns=['A', 'B', 'C'])
+# Select columns of float64 type from the dataframe
+new_df = df.select_dtypes(include=['float64'])
+```

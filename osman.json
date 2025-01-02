@@ -1,0 +1,42 @@
+[
+  {
+    "model": "deepseek_v2",
+    "dataset": "pandasEval",
+    "osman": 63.25722772277226
+  },
+  {
+    "model": "deepseek_v2",
+    "dataset": "numpyEval",
+    "osman": 63.8018811881188
+  },
+  {
+    "model": "gpt_3_5",
+    "dataset": "pandasEval",
+    "osman": 58.7848514851485
+  },
+  {
+    "model": "gpt_3_5",
+    "dataset": "numpyEval",
+    "osman": 64.67475247524749
+  },
+  {
+    "model": "mistral",
+    "dataset": "pandasEval",
+    "osman": 47.64693069306927
+  },
+  {
+    "model": "mistral",
+    "dataset": "numpyEval",
+    "osman": 53.850990099009906
+  },
+  {
+    "model": "gpt_4",
+    "dataset": "pandasEval",
+    "osman": 59.76425742574257
+  },
+  {
+    "model": "gpt_4",
+    "dataset": "numpyEval",
+    "osman": 65.30574257425747
+  }
+]

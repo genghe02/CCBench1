@@ -1,0 +1,13 @@
+ def is_bored(S):
+    # This function checks if a given string S contains at least one pair of consecutive 'I'words, indicating that the speaker might be bored.
+
+    <Requirements for the code>
+
+    <some test cases for the function>
+    import re
+
+    # Split the string into a list of sentences using a regular expression that matches the end of a sentence.
+    sentences = re.split(r'[.?!]\s*', S)
+
+    # Check each sentence to see if it starts with 'I'and if so, increment a counter.
+    return sum(sentence[0:2] == 'I'for sentence in sentences)

@@ -1,0 +1,173 @@
+"""
+This class represents a simple book management system that interacts with an SQLite database.
+
+The class provides methods to create database tables for books, add, remove, borrow, return, and search for books.
+"""
+
+import sqlite3
+
+class BookManagementDB:
+    def __init__(self, db_name):
+        """
+        Initializes the BookManagementDB class with a connection to the specified database.
+        
+        Parameters:
+            db_name (str): The name of the SQLite database to connect to
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+        self.create_table()
+
+    def create_table(self):
+        """
+        Creates a 'books' table in the connected database if it doesn't exist already.
+        
+        Test cases:
+            # Test case 1: Create table
+            create_table()
+            assert table_exists('books') == True
+
+            # Test case 2: Table already exists
+            create_table()
+            assert table_does_not_change()
+
+            # Test case 3: Check table structure
+            create_table()
+            assert table_structure_is_valid()
+        """
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS books (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                author TEXT,
+                available INTEGER
+            )
+        ''')
+        self.connection.commit()
+
+    def add_book(self, title, author):
+        """
+        Adds a new book entry to the 'books' table in the database.
+        
+        Parameters:
+            title (str): The title of the book to be added
+            author (str): The author of the book to be added
+        
+        Test cases:
+            # Test case 1: Add new book
+            add_book("Python Programming", "Guido van Rossum")
+            assert book_added_successfully()
+
+            # Test case 2: Add book with empty title
+            add_book("", "Unknown Author")
+            assert book_not_added()
+
+            # Test case 3: Add book with non-string author
+            add_book("Java Programming", 123)
+            assert book_not_added()
+        """
+        self.cursor.execute('''
+            INSERT INTO books (title, author, available)
+            VALUES (?, ?, 1)
+        ''', (title, author))
+        self.connection.commit()
+
+    def remove_book(self, book_id):
+        """
+        Removes a book entry from the 'books' table based on the provided book ID.
+        
+        Parameters:
+            book_id (int): The ID of the book to be removed
+        
+        Test cases:
+            # Test case 1: Remove existing book
+            remove_book(1)
+            assert book_removed_successfully()
+
+            # Test case 2: Remove non-existing book
+            remove_book(100)
+            assert book_not_removed()
+
+            # Test case 3: Remove book with invalid ID
+            remove_book("invalid")
+            assert book_not_removed()
+        """
+        self.cursor.execute('''
+            DELETE FROM books WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def borrow_book(self, book_id):
+        """
+        Updates the availability status of a book to 'borrowed' based on the provided book ID.
+        
+        Parameters:
+            book_id (int): The ID of the book to be borrowed
+        
+        Test cases:
+            # Test case 1: Borrow available book
+            borrow_book(1)
+            assert book_borrowed_successfully()
+
+            # Test case 2: Borrow already borrowed book
+            borrow_book(2)
+            assert book_not_borrowed()
+
+            # Test case 3: Borrow non-existing book
+            borrow_book(100)
+            assert book_not_borrowed()
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 0 WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def return_book(self, book_id):
+        """
+        Updates the availability status of a book to 'available' based on the provided book ID.
+        
+        Parameters:
+            book_id (int): The ID of the book to be returned
+        
+        Test cases:
+            # Test case 1: Return borrowed book
+            return_book(1)
+            assert book_returned_successfully()
+
+            # Test case 2: Return already available book
+            return_book(2)
+            assert book_not_returned()
+
+            # Test case 3: Return non-existing book
+            return_book(100)
+            assert book_not_returned()
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 1 WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def search_books(self):
+        """
+        Fetches all the books stored in the 'books' table.
+        
+        Returns:
+            list of tuples: List containing information of all books (id, title, author, available)
+        
+        Test cases:
+            # Test case 1: Search for all books
+            assert search_books() == [(1, "Python Programming", "Guido van Rossum", 1), ...]
+
+            # Test case 2: Empty books table
+            clear_books_table()
+            assert search_books() == []
+
+            # Test case 3: Search for books with a specific author
+            assert search_books(author="JK Rowling") == [(5, "Harry Potter", "JK Rowling", 1), ...]
+        """
+        self.cursor.execute('''
+            SELECT * FROM books
+        ''')
+        books = self.cursor.fetchall()
+        return books
+```

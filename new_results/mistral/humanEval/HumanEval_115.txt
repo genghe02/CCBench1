@@ -1,0 +1,8 @@
+ def max_fill(grid, capacity):
+    import math
+    # Ensure the grid and capacity are valid inputs
+    >>> grid = [[1, 2], [3, 4]]
+    >>> capacity = 2
+    >>> max_fill(grid, capacity) # returns 3 (1+2+2)
+    
+    return sum([math.ceil(sum(arr)/capacity) for arr in grid])</s>

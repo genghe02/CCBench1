@@ -1,0 +1,14 @@
+def do_algebra(operator, operand):
+    # This function takes two lists as arguments - 'operator' and 'operand'. 
+    # The 'operator' list contains the mathematical operators in string format and the 'operand' list contains the numbers.
+    # It then combines these two lists to form a mathematical expression in string format and finally evaluates this expression.
+
+    # Test Cases:
+    # >>> do_algebra(['+', '-'], [1, 2, 3]) -> Should return 0
+    # >>> do_algebra(['*', '/'], [2, 3, 4]) -> Should return 1.5
+    # >>> do_algebra(['*', '+', '-'], [1, 2, 3, 4]) -> Should return 3
+
+    expression = str(operand[0])
+    for oprt, oprn in zip(operator, operand[1:]):
+        expression+= oprt + str(oprn)
+    return eval(expression) # Evaluates the string expression and returns the result.

@@ -1,0 +1,6 @@
+```python
+import numpy as np
+def get_minimum_value(arr):
+    # Obtain the minimum value from the given array
+    return np.min(arr)
+```

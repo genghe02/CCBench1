@@ -1,0 +1,106 @@
+"""
+This class provides lemmatization functionality for natural language processing tasks.
+"""
+
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk import pos_tag, word_tokenize
+import string
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('punkt')
+nltk.download('wordnet')
+
+
+class Lemmatization:
+    def __init__(self):
+        """
+        Initializes the Lemmatization class with a WordNetLemmatizer instance.
+        """
+        self.lemmatizer = WordNetLemmatizer()
+
+    def lemmatize_sentence(self, sentence):
+        """
+        Lemmatizes the input sentence by processing each word based on its part of speech.
+        
+        Parameters:
+            sentence (str): The input sentence to lemmatize
+            
+        Returns:
+            list: A list of lemmatized words from the input sentence
+        
+        Test cases:
+            # Test case 1: Normal sentence
+            assert lemmatize_sentence("Cats are running") == ['cat', 'be', 'run']
+            
+            # Test case 2: Empty sentence
+            assert lemmatize_sentence("") == []
+            
+            # Test case 3: Sentence with special characters
+            assert lemmatize_sentence("Hello, how are you?") == ['hello', 'how', 'be', 'you']
+        """
+        lemmatized_words = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for word, tag in tagged_words:
+            if tag.startswith('V'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='v')
+            elif tag.startswith('J'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='a')
+            elif tag.startswith('R'):
+                lemmatized_word = self.lemmatizer.lemmatize(word, pos='r')
+            else:
+                lemmatized_word = self.lemmatizer.lemmatize(word)
+            lemmatized_words.append(lemmatized_word)
+        return lemmatized_words
+
+    def get_pos_tag(self, sentence):
+        """
+        Retrieve part of speech tags for words in the input sentence.
+        
+        Parameters:
+            sentence (str): The input sentence to analyze part of speech
+            
+        Returns:
+            list: A list of part of speech tags for words in the input sentence
+        
+        Test cases:
+            # Test case 1: Normal sentence
+            assert get_pos_tag("Cats are running") == ['NNS', 'VBP', 'VBG']
+            
+            # Test case 2: Empty sentence
+            assert get_pos_tag("") == []
+            
+            # Test case 3: Sentence with special characters
+            assert get_pos_tag("Hello, how are you?") == ['NN', 'WRB', 'VBP', 'PRP']
+        """
+        pos_tags = []
+        sentence = self.remove_punctuation(sentence)
+        words = word_tokenize(sentence)
+        tagged_words = pos_tag(words)
+        for tagged_word in tagged_words:
+            pos_tags.append(tagged_word[1])
+        return pos_tags
+
+    def remove_punctuation(self, sentence):
+        """
+        Eliminates punctuation characters from the input sentence.
+        
+        Parameters:
+            sentence (str): The input sentence to remove punctuation from
+            
+        Returns:
+            str: Sentence without any punctuation characters
+        
+        Test cases:
+            # Test case 1: Sentence with punctuation
+            assert remove_punctuation("Hello, world!") == "Hello world"
+            
+            # Test case 2: Empty sentence
+            assert remove_punctuation("") == ""
+            
+            # Test case 3: Sentence with special characters
+            assert remove_punctuation("Don't forget your 2,000-word essay!") == "Dont forget your 2000word essay"
+        """
+        return sentence.translate(str.maketrans('', '', string.punctuation))

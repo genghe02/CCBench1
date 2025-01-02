@@ -1,0 +1,115 @@
+"""
+This class implements an SQL query builder that generates SQL SELECT, INSERT, DELETE, and UPDATE queries based on the input parameters.
+"""
+
+class SQLQueryBuilder:
+
+    @staticmethod
+    def select(table, columns='*', where=None):
+        """
+        Generate an SQL SELECT query.
+
+        Parameters:
+            table (str): The name of the table to select from
+            columns (str or list): The columns to select, '*' for all columns by default
+            where (dict): A dictionary representing the WHERE clause conditions
+
+        Returns:
+            str: SQL SELECT query string
+        
+        Test cases:
+            # Test case 1: Select all columns
+            assert select('users') == "SELECT * FROM users"
+            
+            # Test case 2: Select specific columns with WHERE clause
+            assert select('orders', ['id', 'product'], {'status': 'shipped'}) == "SELECT id, product FROM orders WHERE status='shipped'"
+            
+            # Test case 3: Edge case with empty WHERE clause
+            assert select('products', ['name', 'price']) == "SELECT name, price FROM products"
+    """
+
+        if columns != '*':
+            columns = ', '.join(columns)
+        query = f"SELECT {columns} FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def insert(table, data):
+        """
+        Generate an SQL INSERT query.
+
+        Parameters:
+            table (str): The name of the table to insert into
+            data (dict): A dictionary representing the column-value pairs to insert
+
+        Returns:
+            str: SQL INSERT query string
+        
+        Test cases:
+            # Test case 1: Insert data into table
+            assert insert('customers', {'name': 'Alice', 'email': 'alice@example.com'}) == "INSERT INTO customers (name, email) VALUES ('Alice', 'alice@example.com')"
+            
+            # Test case 2: Insert with multiple columns
+            assert insert('orders', {'id': 123, 'amount': 50}) == "INSERT INTO orders (id, amount) VALUES (123, 50)"
+            
+            # Test case 3: Insert with empty data
+            assert insert('users', {}) == "INSERT INTO users () VALUES ()"
+    """
+
+        keys = ', '.join(data.keys())
+        values = ', '.join(f"'{v}'" for v in data.values())
+        return f"INSERT INTO {table} ({keys}) VALUES ({values})"
+
+    @staticmethod
+    def delete(table, where=None):
+        """
+        Generate an SQL DELETE query.
+
+        Parameters:
+            table (str): The name of the table to delete from
+            where (dict): A dictionary representing the WHERE clause conditions
+
+        Returns:
+            str: SQL DELETE query string
+        
+        Test cases:
+            # Test case 1: Delete all rows
+            assert delete('orders') == "DELETE FROM orders"
+            
+            # Test case 2: Delete with WHERE clause
+            assert delete('users', {'status': 'inactive'}) == "DELETE FROM users WHERE status='inactive'"
+            
+            # Test case 3: Edge case with empty WHERE
+            assert delete('products') == "DELETE FROM products"
+    """
+
+        query = f"DELETE FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def update(table, data, where=None):
+        """
+        Generate an SQL UPDATE query.
+
+        Parameters:
+            table (str): The name of the table to update
+            data (dict): A dictionary representing the column-value pairs to update
+            where (dict): A dictionary representing the WHERE clause conditions
+
+        Returns:
+            str: SQL UPDATE query string 
+        
+        Test cases:
+            # Test case 1: Update data with WHERE clause
+            assert update('users', {'status': 'active'}, {'id': 123}) == "UPDATE users SET status='active' WHERE id='123'"
+            
+            # Test case 2: Update multiple columns
+            assert update('products', {'price': 100, 'stock': 50}) == "UPDATE products SET price='100', stock='50'"
+            
+            # Test case 3: Edge case with empty data and WHERE
+            assert update('customers', {}, {'level': 'gold'}) == "UPDATE customers SET  WHERE level='gold'"
+    """

@@ -1,0 +1,7 @@
+ # Calculate the Mean Absolute Deviation (MAD) of a list of numbers by finding the absolute difference between each number and the mean, and then taking the average of those differences
+# MAD is a measure of the dispersion of a set of numbers
+>>> mean_absolute_deviation([1, 2, 3, 4]) # returns 1.5
+>>> mean_absolute_deviation([-1, -2, -3, -4]) # returns 1.5
+>>> mean_absolute_deviation([0, 0, 0, 0]) # returns 0.0
+mean = sum(numbers) / len(numbers)
+return sum(abs(x - mean) for x in numbers) / len(numbers)</s>

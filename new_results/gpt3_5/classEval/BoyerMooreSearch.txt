@@ -1,0 +1,94 @@
+"""
+This class implements a Boyer-Moore algorithm for string searching.
+
+The BoyerMooreSearch class uses the Boyer-Moore algorithm to search for patterns in text data efficiently.
+
+"""
+class BoyerMooreSearch:
+    def __init__(self, text, pattern):
+        """
+        Initializes the BoyerMooreSearch object with text and pattern.
+
+        Parameters:
+            text (str): The input text to search within.
+            pattern (str): The pattern to search for within the text.
+        """
+        self.text, self.pattern = text, pattern
+        self.textLen, self.patLen = len(text), len(pattern)
+
+    def match_in_pattern(self, char):
+        """
+        Finds the rightmost occurrence of the character in the pattern.
+
+        Parameters:
+            char (str): The character to find in the pattern.
+
+        Returns:
+            int: The index of the rightmost occurrence of the character in the pattern or -1 if not found.
+
+        Test cases:
+            # Test case 1: Matching character is present
+            assert match_in_pattern('a') == 2
+            
+            # Test case 2: Matching character is not present
+            assert match_in_pattern('z') == -1
+            
+            # Test case 3: Pattern is empty
+            assert match_in_pattern('a') == -1
+        """
+        for i in range(self.patLen - 1, -1, -1):
+            if char == self.pattern[i]:
+                return i
+        return -1
+
+    def mismatch_in_text(self, currentPos):
+        """
+        Identifies the mismatch between the current position in text and pattern.
+
+        Parameters:
+            currentPos (int): The starting index position in the text.
+
+        Returns:
+            int: The position of the first mismatch found in the text based on the pattern.
+
+        Test cases:
+            # Test case 1: Matching pattern
+            assert mismatch_in_text(0) == -1
+            
+            # Test case 2: Mismatch at the beginning
+            assert mismatch_in_text(5) == 5
+            
+            # Test case 3: Mismatch at the end
+            assert mismatch_in_text(10) == 10
+        """
+        for i in range(self.patLen - 1, -1, -1):
+            if self.pattern[i] != self.text[currentPos + i]:
+                return currentPos + i
+        return -1
+
+    def bad_character_heuristic(self):
+        """
+        Identifies potential positions in the text where patterns may be found.
+        
+        Returns:
+            list: A list of positions where the pattern may be present.
+
+        Test cases:
+            # Test case 1: Pattern is found in text
+            assert bad_character_heuristic() == [3, 6, 9]
+            
+            # Test case 2: Pattern is not found in text
+            assert bad_character_heuristic() == []
+            
+            # Test case 3: Text is empty
+            assert bad_character_heuristic() == []
+        """
+        positions = []
+        for i in range(self.textLen - self.patLen + 1):
+            mismatch_index = self.mismatch_in_text(i)
+            if mismatch_index == -1:
+                positions.append(i)
+            else:
+                match_index = self.match_in_pattern(self.text[mismatch_index])
+                i = (mismatch_index - match_index)
+        return positions

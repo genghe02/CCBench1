@@ -1,0 +1,11 @@
+ def any_int(x, y, z):
+    # The function checks if two or more integers follow the equality condition: x + y = z or x + z = y or y + z = x
+    
+    >>> any_int(1, 2, 3) # False
+    >>> any_int(1, 2, 2) # True
+    >>> any_int(-1, 1, 0) # True
+    if isinstance(x,int) and isinstance(y,int) and isinstance(z,int):
+        if (x+y==z) or (x+z==y) or (y+z==x):
+            return True
+        return False
+    return False</s>

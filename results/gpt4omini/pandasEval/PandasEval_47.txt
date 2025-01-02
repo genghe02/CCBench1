@@ -1,0 +1,22 @@
+```python
+import pandas as pd
+
+def make_dataframe_column_headers_lowercase(data: pd.DataFrame) -> pd.DataFrame:
+    """ Convert all column headers of the provided DataFrame to lowercase.
+    This function modifies the DataFrame in-place and then returns the modified DataFrame.
+    
+    >>> df = pd.DataFrame({'A': [1, 2], 'B': [3, 4]})
+    >>> make_dataframe_column_headers_lowercase(df).columns.tolist()
+    ['a', 'b']
+    
+    >>> df = pd.DataFrame({'ColumnOne': [1], 'COLUMNtwo': [2]})
+    >>> make_dataframe_column_headers_lowercase(df).columns.tolist()
+    ['columnone', 'coulumntwo']
+    
+    >>> df_empty = pd.DataFrame(columns=['HeaderOne', 'HEADERtwo'])
+    >>> make_dataframe_column_headers_lowercase(df_empty).columns.tolist()
+    ['headerone', 'headertwo']
+    """
+    data.columns = map(str.lower, data.columns)
+    return data
+```

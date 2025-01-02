@@ -1,0 +1,2 @@
+ # Count the number of true elements in the given array and return the result
+return arr.sum()</s>

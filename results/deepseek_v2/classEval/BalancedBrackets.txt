@@ -1,0 +1,53 @@
+```python
+# This class is designed to check if a given expression has balanced brackets.
+class BalancedBrackets:
+    def __init__(self, expr):
+        # Initialize the class with the given expression and prepare the necessary data structures.
+        # self.stack is a list used to store the left brackets as they are encountered.
+        # self.left_brackets is a list of all left brackets.
+        # self.right_brackets is a list of all right brackets.
+        # self.expr is the expression to be checked for balanced brackets.
+        self.stack = []
+        self.left_brackets = ["(", "{", "["]
+        self.right_brackets = [")", "}", "]"]
+        self.expr = expr
+
+    def clear_expr(self):
+        # This function removes all characters from the expression that are not brackets.
+        # param self: BalancedBrackets, the instance of the class.
+        # return: None, modifies the instance's expr attribute in place.
+        # >>> bb = BalancedBrackets("a(b{c[d]e}f)g")
+        # >>> bb.clear_expr()
+        # >>> bb.expr
+        # '({[]})'
+        self.expr = ''.join(c for c in self.expr if (c in self.left_brackets or c in self.right_brackets))
+
+    def check_balanced_brackets(self):
+        # This function checks if the expression has balanced brackets.
+        # param self: BalancedBrackets, the instance of the class.
+        # return: bool, True if the brackets are balanced, False otherwise.
+        # >>> bb = BalancedBrackets("a(b{c[d]e}f)g")
+        # >>> bb.check_balanced_brackets()
+        # True
+        # >>> bb = BalancedBrackets("a(b{c[d}e]f)g")
+        # >>> bb.check_balanced_brackets()
+        # False
+        self.clear_expr()
+        for Brkt in self.expr:
+            if Brkt in self.left_brackets:
+                self.stack.append(Brkt)
+            else:
+                Current_Brkt = self.stack.pop()
+                if Current_Brkt == "(":
+                    if Brkt != ")":
+                        return False
+                if Current_Brkt == "{":
+                    if Brkt != "}":
+                        return False
+                if Current_Brkt == "[":
+                    if Brkt != "]":
+                        return False
+        if self.stack:
+            return False
+        return True
+```

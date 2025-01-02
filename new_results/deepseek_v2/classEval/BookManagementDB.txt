@@ -1,0 +1,187 @@
+```python
+"""
+This class manages a simple book management system using SQLite database.
+It provides functionalities to add, remove, borrow, return, and search books.
+"""
+
+import sqlite3
+
+class BookManagementDB:
+    def __init__(self, db_name):
+        """
+        Initializes the database connection and creates the books table if it doesn't exist.
+        
+        Parameters:
+            db_name (str): The name of the SQLite database file to connect to.
+        """
+        self.connection = sqlite3.connect(db_name)
+        self.cursor = self.connection.cursor()
+        self.create_table()
+
+    def create_table(self):
+        """
+        Creates the 'books' table if it doesn't already exist.
+        The table has columns: id (primary key), title, author, and available.
+        
+        Test cases:
+            # Test case 1: Table creation
+            db = BookManagementDB(':memory:')
+            db.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='books'")
+            assert db.cursor.fetchone() is not None
+            
+            # Test case 2: Table already exists
+            db = BookManagementDB(':memory:')
+            db.create_table()  # Should not raise an error
+            
+            # Test case 3: Verify table structure
+            db.cursor.execute("PRAGMA table_info(books)")
+            columns = db.cursor.fetchall()
+            assert len(columns) == 4
+        """
+        self.cursor.execute('''
+            CREATE TABLE IF NOT EXISTS books (
+                id INTEGER PRIMARY KEY,
+                title TEXT,
+                author TEXT,
+                available INTEGER
+            )
+        ''')
+        self.connection.commit()
+
+    def add_book(self, title, author):
+        """
+        Adds a new book to the database with the given title and author.
+        The book is marked as available by default.
+        
+        Parameters:
+            title (str): The title of the book to add.
+            author (str): The author of the book to add.
+        
+        Test cases:
+            # Test case 1: Add a new book
+            db = BookManagementDB(':memory:')
+            db.add_book('1984', 'George Orwell')
+            db.cursor.execute("SELECT * FROM books WHERE title='1984'")
+            assert db.cursor.fetchone() is not None
+            
+            # Test case 2: Add a book with empty title
+            db.add_book('', 'Unknown')
+            db.cursor.execute("SELECT * FROM books WHERE title=''")
+            assert db.cursor.fetchone() is not None
+            
+            # Test case 3: Add a book with empty author
+            db.add_book('Untitled', '')
+            db.cursor.execute("SELECT * FROM books WHERE author=''")
+            assert db.cursor.fetchone() is not None
+        """
+        self.cursor.execute('''
+            INSERT INTO books (title, author, available)
+            VALUES (?, ?, 1)
+        ''', (title, author))
+        self.connection.commit()
+
+    def remove_book(self, book_id):
+        """
+        Removes a book from the database based on its ID.
+        
+        Parameters:
+            book_id (int): The ID of the book to remove.
+        
+        Test cases:
+            # Test case 1: Remove an existing book
+            db = BookManagementDB(':memory:')
+            db.add_book('1984', 'George Orwell')
+            db.remove_book(1)
+            db.cursor.execute("SELECT * FROM books WHERE id=1")
+            assert db.cursor.fetchone() is None
+            
+            # Test case 2: Remove a non-existent book
+            db.remove_book(999)  # Should not raise an error
+            
+            # Test case 3: Remove a book with invalid ID
+            db.remove_book('invalid')  # Should not raise an error
+        """
+        self.cursor.execute('''
+            DELETE FROM books WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def borrow_book(self, book_id):
+        """
+        Marks a book as borrowed by setting its available status to 0.
+        
+        Parameters:
+            book_id (int): The ID of the book to borrow.
+        
+        Test cases:
+            # Test case 1: Borrow an available book
+            db = BookManagementDB(':memory:')
+            db.add_book('1984', 'George Orwell')
+            db.borrow_book(1)
+            db.cursor.execute("SELECT available FROM books WHERE id=1")
+            assert db.cursor.fetchone()[0] == 0
+            
+            # Test case 2: Borrow a non-existent book
+            db.borrow_book(999)  # Should not raise an error
+            
+            # Test case 3: Borrow an already borrowed book
+            db.borrow_book(1)  # Should not raise an error
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 0 WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def return_book(self, book_id):
+        """
+        Marks a book as returned by setting its available status to 1.
+        
+        Parameters:
+            book_id (int): The ID of the book to return.
+        
+        Test cases:
+            # Test case 1: Return a borrowed book
+            db = BookManagementDB(':memory:')
+            db.add_book('1984', 'George Orwell')
+            db.borrow_book(1)
+            db.return_book(1)
+            db.cursor.execute("SELECT available FROM books WHERE id=1")
+            assert db.cursor.fetchone()[0] == 1
+            
+            # Test case 2: Return a non-existent book
+            db.return_book(999)  # Should not raise an error
+            
+            # Test case 3: Return an already available book
+            db.return_book(1)  # Should not raise an error
+        """
+        self.cursor.execute('''
+            UPDATE books SET available = 1 WHERE id = ?
+        ''', (book_id,))
+        self.connection.commit()
+
+    def search_books(self):
+        """
+        Retrieves all books from the database.
+        
+        Returns:
+            list: A list of tuples representing all books in the database.
+        
+        Test cases:
+            # Test case 1: Search in an empty database
+            db = BookManagementDB(':memory:')
+            assert db.search_books() == []
+            
+            # Test case 2: Search with one book
+            db.add_book('1984', 'George Orwell')
+            assert len(db.search_books()) == 1
+            
+            # Test case 3: Search with multiple books
+            db.add_book('Animal Farm', 'George Orwell')
+            assert len(db.search_books()) == 2
+        """
+        self.cursor.execute('''
+            SELECT * FROM books
+        ''')
+        books = self.cursor.fetchall()
+        return books
+```

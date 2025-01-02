@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.arange(1, 10)
+a = a.reshape(len(a), 1)
+# Extract elements from index 4 to the end of the array
+b = a[4:]

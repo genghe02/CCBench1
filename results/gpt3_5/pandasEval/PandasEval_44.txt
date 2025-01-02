@@ -1,0 +1,8 @@
+# Remove a specified column from a pandas DataFrame.
+# 
+# Args:
+#     df (pd.DataFrame): The pandas DataFrame from which the column will be removed.
+#     column_name (str): The name of the column to be deleted.
+# 
+# Returns:
+#     pd.DataFrame: The DataFrame with the specified column removed.

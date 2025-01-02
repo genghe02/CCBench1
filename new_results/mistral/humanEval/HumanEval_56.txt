@@ -1,0 +1,22 @@
+ # Check if the string contains balanced '<' and '>' brackets
+# Return True if balanced, False otherwise
+
+def correct_bracketing(brackets: str):
+    <Requirements for the code>
+
+    <some test cases for the function>
+    depth = 0
+    for b in brackets:
+        if b == "<":
+            depth += 1
+        else:
+            depth -= 1
+        if depth < 0:
+            return False
+    return depth == 0
+
+# Example usage:
+# print(correct_bracketing("<a><b><c>")) # True
+# print(correct_bracketing("<a><b><c>)>")) # False
+# print(correct_bracketing("<a><b>")) # True
+# print(correct_bracketing("<a><b> >")) # False</s>

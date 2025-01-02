@@ -1,0 +1,20 @@
+Input:
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+   <Requirements for the code>
+   <some test cases for the function>
+   return [x for x in strings if substring in x]
+
+❌ Wrong Output:
+# This function filters a list of strings by substring
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+   >>> filter_by_substring(["apple", "banana", "cherry"], "an")
+   return [x for x in strings if substring in x]
+
+✅ Correct Output:
+
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+   # Filter a list of strings to keep only those that contain the given substring
+   >>> filter_by_substring(["apple", "banana", "cherry"], "an") # returns ['banana', 'cherry']
+   >>> filter_by_substring(["apple", "banana", "cherry"], "o") # returns []
+   >>> filter_by_substring(["apple", "banana", "cherry"], "a") # returns ['apple', 'banana']
+   return [x for x in strings if substring in x]

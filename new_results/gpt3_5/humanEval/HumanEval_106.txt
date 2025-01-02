@@ -1,0 +1,2 @@
+# This function calculates factorial for even numbers and sum for odd numbers
+>>> f(5) # returns [0, 1, 6, 49, 480]

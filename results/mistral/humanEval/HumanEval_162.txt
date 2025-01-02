@@ -1,0 +1,9 @@
+ def string_to_md5(text):
+    """
+    Generate an MD5 hash of a given text string.
+
+    :param text: str, the text to be hashed
+    :return: str, the MD5 hash of the text as a hexadecimal string
+    """
+    import hashlib
+    return hashlib.md5(text.encode('ascii')).hexdigest() if text else None

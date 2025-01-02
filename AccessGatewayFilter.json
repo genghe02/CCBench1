@@ -1,0 +1,23 @@
+[
+  "This class is responsible for filtering incoming requests based on certain rules and conditions.",
+  "Filter the incoming request based on certain rules and conditions.",
+  "param request: dict, the incoming request details",
+  "return: bool, True if the request is allowed, False otherwise",
+  ">>> filter = AccessGatewayFilter()\n>>> filter.filter({'path': '/login', 'method': 'POST'})\nTrue",
+  ">>> filter.filter({'path': '/api/data', 'method': 'GET'})\nTrue",
+  ">>> filter.filter({'path': '/admin', 'method': 'GET', 'headers': {'Authorization': {'user': {'level': 1}}}})\nFalse",
+  "Check if the request URI starts with any of the predefined prefixes.",
+  "param request_uri: str, the URI of the incoming request",
+  "return: bool, True if the URI starts with any of the predefined prefixes, False otherwise",
+  ">>> filter = AccessGatewayFilter()\n>>> filter.is_start_with('/api/data')\nTrue",
+  ">>> filter.is_start_with('/login')\nTrue",
+  ">>> filter.is_start_with('/admin')\nFalse",
+  "Extract and validate the JWT user from the request headers.",
+  "param request: dict, the incoming request details",
+  "return: dict, the user details if valid, None otherwise",
+  ">>> filter = AccessGatewayFilter()\n>>> filter.get_jwt_user({'headers': {'Authorization': {'jwt': 'user12023-10-01', 'user': {'name': 'user1'}}}})\n{'jwt': 'user12023-10-01', 'user': {'name': 'user1'}}\n>>> filter.get_jwt_user({'headers': {'Authorization': {'jwt': 'user12023-01-01', 'user': {'name': 'user1'}}}})\nNone",
+  "Set the current user information and log the details.",
+  "param user: dict, the user details",
+  "return: None",
+  ">>> filter = AccessGatewayFilter()\n>>> filter.set_current_user_info_and_log({'name': 'user1', 'address': '127.0.0.1', 'level': 3})"
+]

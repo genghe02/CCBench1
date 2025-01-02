@@ -1,0 +1,2 @@
+ # Select DataFrame columns of float64 data type
+new_df = df.select_dtypes(include=['float64'])</s>

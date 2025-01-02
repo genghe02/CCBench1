@@ -1,0 +1,1 @@
+# Invoke the standard deviation function on a 2D array with axis=0 to return a 1D array containing the standard deviation of each column.

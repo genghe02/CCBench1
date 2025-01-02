@@ -1,0 +1,17 @@
+def prime_length(string):
+    # This function checks if the length of a given string is a prime number. It first calculates the length of the string.
+    # If the length is 0 or 1, it returns False. It then checks each number from 2 up to the length of the string (exclusive). 
+    # If any of these numbers can divide the length perfectly (remainder is 0), it also returns False, meaning the length is not a prime number.
+    # If none of the numbers can divide the length perfectly, it returns True, meaning the length is a prime number.
+    # Test cases:
+    # >>> prime_length("hello")  # Returns True as length is 5 which is a prime number
+    # >>> prime_length("world")  # Returns False as length is 5 which is not a prime number
+    # >>> prime_length("")  # Returns False as length is 0 which is not a prime number
+    # >>> prime_length("a")  # Returns False as length is 1 which is not a prime number
+    l = len(string)
+    if l == 0 or l == 1:
+        return False
+    for i in range(2, l):
+        if l % i == 0:
+            return False
+    return True

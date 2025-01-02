@@ -1,0 +1,195 @@
+```python
+"""
+This class manages an assessment system for students, allowing for the addition of students, their course scores, and GPA calculations.
+"""
+
+class AssessmentSystem:
+    def __init__(self):
+        """
+        Initializes the AssessmentSystem with an empty dictionary to hold student data.
+        """
+        self.students = {}
+
+    def add_student(self, name, grade, major):
+        """
+        Adds a new student to the system with the provided name, grade, and major.
+
+        Parameters:
+            name (str): The name of the student.
+            grade (int): The grade level of the student.
+            major (str): The major field of study for the student.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Adding a student successfully
+            add_student('Alice', 12, 'Science')
+            assert 'Alice' in self.students
+            
+            # Test case 2: Overwriting existing student
+            add_student('Alice', 12, 'Math')
+            assert self.students['Alice']['major'] == 'Math'
+            
+            # Test case 3: Adding student with invalid grade
+            try:
+                add_student('Bob', 'Eleventh', 'History')
+            except TypeError:
+                assert True  # expected a TypeError
+        """
+        self.students[name] = {'name': name, 'grade': grade, 'major': major, 'courses': {}}
+
+    def add_course_score(self, name, course, score):
+        """
+        Adds a score for a specific course for the given student.
+
+        Parameters:
+            name (str): The name of the student.
+            course (str): The name of the course.
+            score (float): The score achieved in the course.
+        
+        Returns:
+            None
+        
+        Test cases:
+            # Test case 1: Valid student and valid course
+            add_student('Charlie', 11, 'Arts')
+            add_course_score('Charlie', 'Painting', 85)
+            assert 'Painting' in self.students['Charlie']['courses']
+            
+            # Test case 2: Adding score for non-existent student
+            try:
+                add_course_score('NonExistent', 'Swimming', 90)
+            except KeyError:
+                assert True  # expected a KeyError
+            
+            # Test case 3: Adding invalid score type
+            try:
+                add_course_score('Charlie', 'Dance', 'A')
+            except TypeError:
+                assert True  # expected a TypeError
+        """
+        if name in self.students:
+            self.students[name]['courses'][course] = score
+
+    def get_gpa(self, name):
+        """
+        Calculates the GPA of the specified student.
+
+        Parameters:
+            name (str): The name of the student.
+        
+        Returns:
+            float: The GPA of the student if they have courses, otherwise None.
+        
+        Test cases:
+            # Test case 1: Student with courses
+            add_student('Dan', 10, 'Math')
+            add_course_score('Dan', 'Math', 80)
+            add_course_score('Dan', 'Science', 90)
+            assert get_gpa('Dan') == 85.0
+            
+            # Test case 2: Student with no courses
+            add_student('Eve', 9, 'English')
+            assert get_gpa('Eve') is None
+            
+            # Test case 3: Non-existent student
+            assert get_gpa('NonExistent') is None
+        """
+        if name in self.students and self.students[name]['courses']:
+            return sum(self.students[name]['courses'].values()) / len(self.students[name]['courses'])
+        else:
+            return None
+
+    def get_all_students_with_fail_course(self):
+        """
+        Retrieves a list of students who have failed at least one course.
+
+        Returns:
+            list: A list of names of students who have failed a course.
+        
+        Test cases:
+            # Test case 1: Student with a failing score
+            add_student('Frank', 11, 'History')
+            add_course_score('Frank', 'Math', 55)
+            assert 'Frank' in get_all_students_with_fail_course()
+            
+            # Test case 2: Student with no failing scores
+            add_student('Grace', 10, 'Art')
+            add_course_score('Grace', 'Art', 70)
+            assert 'Grace' not in get_all_students_with_fail_course()
+            
+            # Test case 3: No students
+            assert get_all_students_with_fail_course() == []
+        """
+        students = []
+        for name, student in self.students.items():
+            for course, score in student['courses'].items():
+                if score < 60:
+                    students.append(name)
+                    break
+        return students
+
+    def get_course_average(self, course):
+        """
+        Calculates the average score for the specified course across all students.
+
+        Parameters:
+            course (str): The name of the course for which the average is calculated.
+        
+        Returns:
+            float: The average score for the course if there are scores, otherwise None.
+        
+        Test cases:
+            # Test case 1: Course with scores
+            add_student('Henry', 12, 'Biology')
+            add_course_score('Henry', 'Biology', 85)
+            add_course_score('Grace', 'Biology', 75)
+            assert get_course_average('Biology') == 80.0
+            
+            # Test case 2: Course with no scores
+            assert get_course_average('Chemistry') is None
+            
+            # Test case 3: Non-existent course
+            assert get_course_average('NonExistent') is None
+        """
+        total = 0
+        count = 0
+        for student in self.students.values():
+            if course in student['courses']:
+                score = student['courses'][course]
+                if score is not None:
+                    total += score
+                    count += 1
+        return total / count if count > 0 else None
+
+    def get_top_student(self):
+        """
+        Identifies the student with the highest GPA.
+
+        Returns:
+            str: The name of the top student, or None if no students exist.
+        
+        Test cases:
+            # Test case 1: Single student added
+            add_student('Ivy', 10, 'Physics')
+            add_course_score('Ivy', 'Physics', 90)
+            assert get_top_student() == 'Ivy'
+            
+            # Test case 2: Multiple students
+            add_student('Jack', 11, 'Chemistry')
+            add_course_score('Jack', 'Chemistry', 95)
+            assert get_top_student() == 'Jack'
+            
+            # Test case 3: No students present
+            assert get_top_student() is None
+        """
+        top_student = None
+        top_gpa = 0
+        for name, student in self.students.items():
+            gpa = self.get_gpa(name)
+            if gpa is not None and gpa > top_gpa:
+                top_gpa = gpa
+                top_student = name
+        return top_student
+```

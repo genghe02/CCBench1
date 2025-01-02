@@ -1,0 +1,2 @@
+# Get unique rows from the array 'a' and store them in 'out' variable
+out = np.unique(a, axis=0)

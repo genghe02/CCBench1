@@ -1,0 +1,17 @@
+```python
+def truncate_number(number: float) -> float:
+   # Return the decimal part of a float number by using modulo 1.0
+   >>> truncate_number(3.5) # returns 0.5
+   >>> truncate_number(-3.5) # returns 0.5
+   >>> truncate_number(0.0) # returns 0.0
+   return number % 1.0
+
+def greatest_common_divisor(a: int, b: int) -> int:
+    # Calculate the greatest common divisor of two integers
+    >>> greatest_common_divisor(8, 12) # returns 4
+    >>> greatest_common_divisor(7, 3)  # returns 1
+    >>> greatest_common_divisor(0, 5)  # returns 5
+    while b:
+        a, b = b, a % b
+    return a
+```

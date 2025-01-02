@@ -1,0 +1,2 @@
+ # Count the number of values in a 3D numpy array that fall between 2 and 8
+count_value = ((2 < a) & (a < 8)).sum()</s>

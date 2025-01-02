@@ -1,0 +1,15 @@
+from typing import List
+
+def all_prefixes(string: str) -> List[str]:
+    # This function generates all prefixes of the given string.
+    # For example, for the string "abc", it will return ["a", "ab", "abc"].
+    # >>> all_prefixes("abc") => ["a", "ab", "abc"]
+    # >>> all_prefixes("a") => ["a"]
+    # >>> all_prefixes("") => []
+    result = []
+
+    for i in range(len(string)):
+        # This loop iterates over each character in the string, and appends the substring
+        # from the beginning to the current character (inclusive) to the result list.
+        result.append(string[:i+1])
+    return result

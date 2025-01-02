@@ -1,0 +1,82 @@
+import itertools
+
+
+class ArrangementCalculator:
+    # This class provides various methods for calculating arrangements and combinations of a given list of data.
+    def __init__(self, datas):
+        # Initialize the ArrangementCalculator class with the provided data.
+        # :param datas: list, the data elements to be arranged and combined.
+        self.datas = datas
+
+    @staticmethod
+    def count(n, m=None):
+        # Calculate the number of arrangements of n elements taken m at a time.
+        # :param n: int, total number of elements.
+        # :param m: int, number of elements to select for arrangement.
+        # :return: int, number of arrangements of n elements taken m at a time.
+        # Test cases:
+        # >>> ArrangementCalculator.count(5, 3)
+        # 60
+        # >>> ArrangementCalculator.count(5, 5)
+        # 120
+        if m is None or n == m:
+            return ArrangementCalculator.factorial(n)
+        else:
+            return ArrangementCalculator.factorial(n) // ArrangementCalculator.factorial(n - m)
+
+    @staticmethod
+    def count_all(n):
+        # Calculate the total number of arrangements for n elements considering all combinations.
+        # :param n: int, total number of elements.
+        # :return: int, total number of arrangements for n elements considering all combinations.
+        # Test cases:
+        # >>> ArrangementCalculator.count_all(3)
+        # 12
+        # >>> ArrangementCalculator.count_all(4)
+        # 50
+        total = 0
+        for i in range(1, n + 1):
+            total += ArrangementCalculator.count(n, i)
+        return total
+
+    def select(self, m=None):
+        # Generate all possible arrangements of m elements from the provided data.
+        # :param m: int, number of elements to select for arrangement.
+        # :return: list, list of all possible arrangements of m elements from the data.
+        # Test cases:
+        # >>> calc = ArrangementCalculator([1, 2, 3])
+        # >>> calc.select(2)
+        # [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
+        if m is None:
+            m = len(self.datas)
+        result = []
+        for permutation in itertools.permutations(self.datas, m):
+            result.append(list(permutation))
+        return result
+
+    def select_all(self):
+        # Generate all possible arrangements of different lengths from the provided data.
+        # :return: list, list of all possible arrangements of different lengths from the data.
+        # Test cases:
+        # >>> calc = ArrangementCalculator([1, 2])
+        # >>> calc.select_all()
+        # [[1], [2], [1, 2], [2, 1]]
+        result = []
+        for i in range(1, len(self.datas) + 1):
+            result.extend(self.select(i))
+        return result
+
+    @staticmethod
+    def factorial(n):
+        # Calculate the factorial of a given number.
+        # :param n: int, number for which factorial is to be calculated.
+        # :return: int, factorial of the given number.
+        # Test cases:
+        # >>> ArrangementCalculator.factorial(5)
+        # 120
+        # >>> ArrangementCalculator.factorial(0)
+        # 1
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result

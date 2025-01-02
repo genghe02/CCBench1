@@ -1,0 +1,7 @@
+import numpy as np
+
+a = np.arange(9)
+a = a.reshape((3, 3))
+b = np.zeros((5, 5))
+# Fill the center 3x3 area of a 5x5 zero matrix with values from a 3x3 matrix
+b[1:4, 1:4] = a

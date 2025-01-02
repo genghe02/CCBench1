@@ -1,0 +1,5 @@
+import pandas as pd
+
+data = pd.DataFrame({'A':range(3), 'B':range(3,0,-1), 'C':list('abc')})
+# Rename columns to lowercase letters
+data.columns = ['a', 'b', 'c']

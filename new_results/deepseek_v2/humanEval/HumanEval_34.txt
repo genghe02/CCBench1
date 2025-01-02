@@ -1,0 +1,8 @@
+```python
+def unique(l: list):
+    # Return a sorted list of unique elements from the input list
+    >>> unique([3, 1, 2, 2, 3]) # returns [1, 2, 3]
+    >>> unique([5, 5, 5, 5]) # returns [5]
+    >>> unique([]) # returns []
+    return sorted(list(set(l)))
+```

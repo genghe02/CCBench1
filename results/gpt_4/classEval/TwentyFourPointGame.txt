@@ -1,0 +1,65 @@
+```python
+import random
+
+# This class is designed to simulate a '24 point game' where 4 random cards are dealt and the player 
+# needs to use arithmetic operations to make the number 24 from the 4 numbers.
+class TwentyFourPointGame:
+    def __init__(self) -> None:
+        self.nums = []
+
+    # This function generates 4 random numbers (cards) in the range of 1 to 9.
+    def _generate_cards(self):
+        for i in range(4):
+            self.nums.append(random.randint(1, 9))
+        assert len(self.nums) == 4
+
+    # This function clears any previously generated cards and generates a new set of cards.
+    # Returns the list of generated cards.
+    # Test case: game = TwentyFourPointGame()
+    #            print(game.get_my_cards()) # prints 4 random numbers
+    def get_my_cards(self):
+        self.nums = []
+        self._generate_cards()
+        return self.nums
+
+    # This function checks if the input expression uses all and only the dealt cards and if the expression evaluates to 24.
+    # Parameters: expression: str, mathematical expression created using the dealt cards.
+    # Returns True if the expression uses all and only the dealt cards and evaluates to 24, False otherwise.
+    # Test case: game = TwentyFourPointGame()
+    #            cards = game.get_my_cards()
+    #            print(game.answer('pass')) # prints the cards
+    def answer(self, expression):
+        if expression == 'pass':
+            return self.get_my_cards()
+        statistic = {}
+        for c in expression:
+            if c.isdigit() and int(c) in self.nums:
+                statistic[c] = statistic.get(c, 0) + 1
+
+        nums_used = statistic.copy()
+
+        for num in self.nums:
+            if nums_used.get(str(num), -100) != -100 and nums_used[str(num)] > 0:
+                nums_used[str(num)] -= 1
+            else:
+                return False
+
+        if all(count == 0 for count in nums_used.values()) == True:
+            return self.evaluate_expression(expression)
+        else:
+            return False
+
+    # This function evaluates the input expression.
+    # Parameters: expression: str, mathematical expression created using the dealt cards.
+    # Returns True if the expression evaluates to 24, False otherwise.
+    # Test case: game = TwentyFourPointGame()
+    #            print(game.evaluate_expression('2*2*2*3')) # prints True
+    def evaluate_expression(self, expression):
+        try:
+            if eval(expression) == 24:
+                return True
+            else:
+                return False
+        except Exception as e:
+            return False
+```

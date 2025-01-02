@@ -1,0 +1,2 @@
+# Check for elements in the array divisible by 2 and return their indices
+out = np.where(x % 2 == 0)

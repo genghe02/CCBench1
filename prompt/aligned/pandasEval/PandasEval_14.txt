@@ -1,0 +1,4 @@
+# Calculate the difference between rows within each group using pandas, where row ordering is important.
+# Use pandas.groupby() to group the data and apply a custom function to compute the difference between rows.
+# Use the .iat method for selecting values by position.
+# Return the resulting DataFrame.

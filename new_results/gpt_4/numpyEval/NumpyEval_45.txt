@@ -1,0 +1,6 @@
+import numpy as np
+
+a = np.array([[1,3,4],[1,2,3],[1,2,1]])
+b = np.array([1,2,3])
+# Stack 1-D array 'b' as columns into 2-D array 'a' and assign it to 'c'
+c = np.column_stack((a, b))

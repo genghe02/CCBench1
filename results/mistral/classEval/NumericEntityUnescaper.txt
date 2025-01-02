@@ -1,0 +1,83 @@
+ class NumericEntityUnescaper:
+    # A class for unescaping numeric entities in a given string.
+    def __init__(self):
+        # Initializes an empty instance of the NumericEntityUnescaper class.
+        pass
+
+    def replace(self, string):
+        # A method for unescaping numeric entities in a given string.
+        # param string: str, the input string containing numeric entities to be unescaped
+        # return: str, the output string with all numeric entities unescaped
+
+        out = []
+        pos = 0
+        length = len(string)
+
+        while pos < length - 2:
+            if string[pos] == '&' and string[pos + 1] == '#':
+                start = pos + 2
+                is_hex = False
+                first_char = string[start]
+
+                if first_char == 'x' or first_char == 'X':
+                    start += 1
+                    is_hex = True
+
+                if self.is_valid_entity_start(string, start):
+                    try:
+                        entity_value = self.parse_entity(string, start, is_hex)
+                    except:
+                        return ''.join(out)
+
+                    out.append(chr(entity_value))
+                    pos = self.get_next_entity_start(string, pos)
+                    continue
+
+            out.append(string[pos])
+            pos += 1
+
+        return ''.join(out)
+
+    @staticmethod
+    def is_valid_entity_start(string, start):
+        # A static method for checking if the given character is a valid start of a numeric entity.
+        # param string: str, the input string
+        # param start: int, the index of the first character of the potential numeric entity
+        # return: bool, True if the character is a valid start of a numeric entity, False otherwise
+
+        # Check if the character following the '&' symbol is '#'.
+        if string[start - 1]!= '#':
+            return False
+
+        # Check if the character after the '#' symbol is a valid hexadecimal character or a digit.
+        if not (string[start + 1].isdigit() or ('a' <= string[start + 1].lower() <= 'f' or string[start + 1].isupper() and 'A' <= string[start + 1].upper() <= 'F')):
+            return False
+
+        return True
+
+    @staticmethod
+    def parse_entity(string, start, is_hex):
+        # A static method for parsing the value of a numeric entity.
+        # param string: str, the input string
+        # param start: int, the index of the first character of the numeric entity
+        # param is_hex: bool, a flag indicating if the numeric entity is in hexadecimal format
+        # return: int, the value of the numeric entity
+
+        end = start
+
+        while end < len(string) and (is_hex and string[end].ishexdigit() or not is_hex and string[end].isdigit()):
+            end += 1
+
+        if end < len(string) and (is_hex and string[end] == ';') or (not is_hex and string[end].isdigit()):
+            return int(string[start:end])
+
+        raise ValueError("Invalid numeric entity")
+
+    @staticmethod
+    def get_next_entity_start(string, pos):
+        # A static method for getting the index of the next character after the current position in the string.
+        # param string: str, the input string
+        # param pos: int, the current position in the string
+        # return: int, the index of the next character after the current position
+
+        return pos + len(str(ord(string[pos]))) + 1 if string[pos] == '&' and string[pos + 1] == '#' else pos + 1

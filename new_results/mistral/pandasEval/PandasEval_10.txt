@@ -1,0 +1,2 @@
+ # Create a new dataframe by grouping original dataframe based on 'Mt' column and selecting the row with maximum 'num' value for each group
+new_df = df.groupby('Mt').apply(lambda x: x.loc[x.num == x.num.max()])</s>

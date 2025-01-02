@@ -1,0 +1,2 @@
+ # Calculate Euclidean distance between two arrays
+dist = np.linalg.norm(a-b)</s>

@@ -1,0 +1,12 @@
+```python
+def count_upper(s):
+    # Count the number of uppercase vowels in even indices of the string
+    >>> count_upper("HELLO") # returns 1
+    >>> count_upper("AEIOU") # returns 3
+    >>> count_upper("PYTHON") # returns 0
+    count = 0
+    for i in range(0,len(s),2):
+        if s[i] in "AEIOU":
+            count += 1
+    return count
+```

@@ -1,0 +1,2 @@
+ # Create a NumPy array of ones with shape (3, 4) and data type bool
+data = np.ones((3, 4), dtype=bool)</s>

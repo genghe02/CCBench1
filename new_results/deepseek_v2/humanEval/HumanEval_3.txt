@@ -1,0 +1,17 @@
+```python
+from typing import List
+
+def below_zero(operations: List[int]) -> bool:
+    # Check if the balance goes below zero at any point during the operations
+    >>> below_zero([10, -20, 30]) # returns True
+    >>> below_zero([10, 20, 30]) # returns False
+    >>> below_zero([-10, -20, -30]) # returns True
+    balance = 0
+
+    for op in operations:
+        balance += op
+        if balance < 0:
+            return True
+
+    return False
+```

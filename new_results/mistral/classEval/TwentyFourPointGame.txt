@@ -1,0 +1,130 @@
+ ```python
+"""
+A TwentyFourPointGame class where the player tries to get a hand of cards such that the given expression made from those numbers evaluates to 24.
+"""
+
+import random
+
+
+class TwentyFourPointGame:
+    def __init__(self):
+        """
+        Initialize an instance of TwentyFourPointGame class.
+        """
+        self.nums = []
+
+    def _generate_cards(self):
+        """
+        Generate a new hand of 4 random numbers for the player.
+        """
+        for i in range(4):
+            self.nums.append(random.randint(1, 9))
+        assert len(self.nums) == 4
+
+    def get_my_cards(self):
+        """
+        Get the current hand of 4 cards.
+
+        Returns:
+            list: A list of 4 integers representing the player's current hand.
+        """
+        self.nums = []
+        self._generate_cards()
+        return self.nums
+
+    def answer(self, expression):
+        """
+        Check if a given expression made from the player's hand evaluates to 24.
+
+        Parameters:
+            expression (str): A string representing an expression made from the player's hand numbers.
+                            Use '+' for addition, '-' for subtraction, '*' for multiplication, '/' for division, and '^' for exponentiation.
+
+        Returns:
+            bool: True if the given expression evaluates to 24 using the player's hand numbers, False otherwise.
+
+        Test cases:
+            # Test case 1: Hand with numbers evaluating to 24 using '+'
+            input = '2 3 4 7'
+            assert answer(input) == True
+
+            # Test case 2: Hand with numbers not evaluating to 24
+            input = '1 2 3 8'
+            assert answer(input) == False
+
+            # Test case 3: Invalid input
+            input = 'abcd'
+            assert answer(input) == False
+        """
+
+        if expression == 'pass':
+            return self.get_my_cards()
+
+        statistic = {}
+        for c in expression:
+            if c.isdigit() and int(c) in self.nums:
+                statistic[c] = statistic.get(c, 0) + 1
+
+        nums_used = statistic.copy()
+
+        for num in self.nums:
+            if nums_used.get(str(num), -100) != -100 and nums_used[str(num)] > 0:
+                nums_used[str(num)] -= 1
+            else:
+                return False
+
+        if all(count == 0 for count in nums_used.values()) == True:
+            return self.evaluate_expression(expression)
+        else:
+            return False
+
+    def evaluate_expression(self, expression):
+        """
+        Evaluate the given expression using the player's hand numbers.
+
+        Parameters:
+            expression (str): A string representing the expression to evaluate using the player's hand numbers.
+
+        Returns:
+            bool: True if the given expression evaluates to 24 using the player's hand numbers, False otherwise.
+
+        Test cases:
+            # Test case 1: Hand evaluating to 24 using '+'
+            input = '2 3 4 7'
+            assert evaluate_expression(input) == True
+
+            # Test case 2: Hand not evaluating to 24
+            input = '1 2 3 8'
+            assert evaluate_expression(input) == False
+
+            # Test case 3: Invalid input
+            input = 'abcd'
+            assert evaluate_expression(input) == False
+        """
+        allowed_ops = {
+            '+': lambda a, b: a + b,
+            '-': lambda a, b: a - b,
+            '*': lambda a, b: a * b,
+            '/': lambda a, b: a / b,
+            '^': lambda a, b: a ** b
+        }
+
+        def evaluate(expr, nums):
+            if len(expr) == 0:
+                return True
+
+            op_pos = expr.index(next(filter(lambda x: x in allowed_ops, expr)))
+
+            left_expr, right_expr = expr[:op_pos], expr[op_pos+1:]
+
+            left = evaluate(left_expr, nums)
+            right = evaluate(right_expr, nums)
+
+            if not left or not right:
+                return False
+
+            result = allowed_ops[expr[op_pos]](evaluate(left_expr, nums)[0], evaluate(right_expr, nums)[0])
+            return result == 24 or result in nums
+
+        return evaluate(expression, self.nums)
+```</s>

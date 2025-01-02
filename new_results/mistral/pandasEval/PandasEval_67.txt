@@ -1,0 +1,4 @@
+ # Add a new row at the bottom and then sort the DataFrame in place by index
+df.loc[-1] = row
+df.index = df.index + 1
+df.sort_index(inplace=True)</s>

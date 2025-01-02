@@ -1,0 +1,7 @@
+```python
+import numpy as np
+
+a = np.array([1,2,3,4,5])
+# Check if the array is sorted in non-decreasing order
+is_sorted = np.all(a[:-1] <= a[1:])
+```

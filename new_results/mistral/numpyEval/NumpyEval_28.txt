@@ -1,0 +1,6 @@
+ ✅ Correct Output:
+import numpy as np
+
+def matrix2array(M):
+ # Convert a multi-dimensional NumPy array to a 1-dimensional NumPy array
+ return np.squeeze(np.asarray(M))</s>

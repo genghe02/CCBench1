@@ -1,0 +1,1 @@
+ # Convert DataFrame to string representation without indexes.

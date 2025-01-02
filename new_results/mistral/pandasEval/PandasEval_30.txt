@@ -1,0 +1,4 @@
+ # Assign 'Email' column to be of object data type
+df.Email = df.Email.astype(object)
+# Set the Email value for the first row using the provided list
+df.loc[0].Email = emails</s>

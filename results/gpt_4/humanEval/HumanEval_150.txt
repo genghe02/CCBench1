@@ -1,0 +1,20 @@
+def x_or_y(n, x, y):
+    # This function checks if a number (n) is prime or not. If it's prime, the function will return a value (x), otherwise it will return another value (y).
+    # It starts by checking if the number is 1 (which is not considered a prime number), if it's true, it will return y.
+    # For numbers greater than 1, it checks if the number has any divisors other than 1 and itself by iterating over a range of numbers from 2 up to (n - 1).
+    # If it finds any divisor, it will return y and stop the loop, otherwise it will return x.
+
+    # Test cases:
+    # >>> x_or_y(1, 10, 20) returns: 20
+    # >>> x_or_y(2, 10, 20) returns: 10
+    # >>> x_or_y(4, 10, 20) returns: 20
+    # >>> x_or_y(7, 10, 20) returns: 10
+
+    if n == 1:
+        return y
+    for i in range(2, n):
+        if n % i == 0:
+            return y
+            break
+    else:
+        return x

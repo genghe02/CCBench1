@@ -1,0 +1,78 @@
+```python
+# This class represents a simple vending machine with basic functionalities like adding items, inserting coins, purchasing items, restocking items, and displaying available items.
+class VendingMachine:
+    def __init__(self):
+        # Initialize the vending machine with an empty inventory and a balance of 0.
+        self.inventory = {}
+        self.balance = 0
+
+    def add_item(self, item_name, price, quantity):
+        # Add a new item to the vending machine's inventory or restock an existing item.
+        # param item_name: str, the name of the item to be added or restocked.
+        # param price: float, the price of the item.
+        # param quantity: int, the quantity of the item to be added.
+        # return: None, the function modifies the inventory directly.
+        # >>> vending_machine = VendingMachine()
+        # >>> vending_machine.add_item('Soda', 1.5, 10)
+        # >>> vending_machine.add_item('Chips', 1.0, 5)
+        if not self.restock_item(item_name, quantity):
+            self.inventory[item_name] = {'price': price, 'quantity': quantity}
+
+    def insert_coin(self, amount):
+        # Insert coins into the vending machine to increase the balance.
+        # param amount: float, the amount of money inserted.
+        # return: float, the updated balance after the insertion.
+        # >>> vending_machine = VendingMachine()
+        # >>> vending_machine.insert_coin(1.0)
+        # >>> vending_machine.insert_coin(0.5)
+        self.balance += amount
+        return self.balance
+
+    def purchase_item(self, item_name):
+        # Attempt to purchase an item from the vending machine if it is available and the balance is sufficient.
+        # param item_name: str, the name of the item to be purchased.
+        # return: float or bool, the updated balance if the purchase is successful, False otherwise.
+        # >>> vending_machine = VendingMachine()
+        # >>> vending_machine.add_item('Soda', 1.5, 10)
+        # >>> vending_machine.insert_coin(2.0)
+        # >>> vending_machine.purchase_item('Soda')
+        if item_name in self.inventory:
+            item = self.inventory[item_name]
+            if item['quantity'] > 0 and self.balance >= item['price']:
+                self.balance -= item['price']
+                item['quantity'] -= 1
+                return self.balance
+            else:
+                return False
+        else:
+            return False
+
+    def restock_item(self, item_name, quantity):
+        # Restock an existing item in the vending machine's inventory.
+        # param item_name: str, the name of the item to be restocked.
+        # param quantity: int, the quantity of the item to be added.
+        # return: bool, True if the item was restocked, False if the item does not exist in the inventory.
+        # >>> vending_machine = VendingMachine()
+        # >>> vending_machine.add_item('Soda', 1.5, 10)
+        # >>> vending_machine.restock_item('Soda', 5)
+        if item_name in self.inventory:
+            self.inventory[item_name]['quantity'] += quantity
+            return True
+        else:
+            return False
+
+    def display_items(self):
+        # Display the current items available in the vending machine along with their prices and quantities.
+        # return: str or bool, a formatted string of items if the inventory is not empty, False otherwise.
+        # >>> vending_machine = VendingMachine()
+        # >>> vending_machine.add_item('Soda', 1.5, 10)
+        # >>> vending_machine.add_item('Chips', 1.0, 5)
+        # >>> vending_machine.display_items()
+        if not self.inventory:
+            return False
+        else:
+            items = []
+            for item_name, item_info in self.inventory.items():
+                items.append(f"{item_name} - ${item_info['price']} [{item_info['quantity']}]")
+            return "\n".join(items)
+```

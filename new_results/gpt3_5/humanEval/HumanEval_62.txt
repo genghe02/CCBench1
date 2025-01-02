@@ -1,0 +1,8 @@
+# Calculate the derivative of a polynomial function
+>>> derivative([1, 2, 3]) # returns [2, 6]
+>>> derivative([3, 4, 5]) # returns [4, 10]
+>>> derivative([0, 0, 1, 0, 0]) # returns [0, 2, 0, 0]
+
+def derivative(xs: list):
+    # Multiply each element by its index and return the list starting from index 1
+    return [(i * x) for i, x in enumerate(xs)][1:]

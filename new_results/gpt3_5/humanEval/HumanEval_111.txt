@@ -1,0 +1,25 @@
+# Count the frequency of each word in the input string
+>>> histogram("the quick brown fox jumps over the lazy dog")
+>>> histogram("apple orange banana apple orange")
+>>> histogram("hello world hello")
+
+def histogram(test):
+    # Count the frequency of each word in the input string
+    
+    >>> histogram("the quick brown fox jumps over the lazy dog") # returns {'the': 2, 'quick': 1, 'brown': 1, 'fox': 1, 'jumps': 1, 'over': 1, 'lazy': 1, 'dog': 1}
+    >>> histogram("apple orange banana apple orange") # returns {'apple': 2, 'orange': 2, 'banana': 1}
+    >>> histogram("hello world hello") # returns {'hello': 2, 'world': 1}
+    
+    dict1={}
+    list1=test.split(" ")
+    t=0
+
+    for i in list1:
+        if(list1.count(i)>t) and i!='':
+            t=list1.count(i)
+    if t>0:
+        for i in list1:
+            if(list1.count(i)==t):
+                
+                dict1[i]=t
+    return dict1

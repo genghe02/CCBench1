@@ -1,0 +1,3 @@
+# Remove duplicates based on column names and return the dataframe without duplicate columns
+def remove_duplicates_by_col_names(df):
+    return df.loc[:,~df.columns.duplicated()]

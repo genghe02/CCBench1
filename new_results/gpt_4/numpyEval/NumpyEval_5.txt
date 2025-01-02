@@ -1,0 +1,5 @@
+import numpy as np
+
+def matrix_to_array(matrix):
+    # Convert the input matrix into a 1-D array
+    return np.squeeze(np.asarray(matrix))

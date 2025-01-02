@@ -1,0 +1,1 @@
+# Find each index where the value changes in an efficient way using numpy by comparing each element with its neighbor and utilizing np.where(condition).

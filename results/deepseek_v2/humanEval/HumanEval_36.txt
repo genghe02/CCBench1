@@ -1,0 +1,27 @@
+```python
+def fizz_buzz(n: int):
+    # This function calculates the number of times the digit '7' appears in the concatenated string of numbers divisible by 11 or 13 up to n.
+    # It iterates through numbers from 0 to n-1, checks divisibility by 11 or 13, and concatenates the results into a string.
+    # Then, it counts the occurrences of the digit '7' in that string.
+    
+    # >>> fizz_buzz(11)
+    # 0
+    # >>> fizz_buzz(22)
+    # 1
+    # >>> fizz_buzz(143)
+    # 2
+    # >>> fizz_buzz(144)
+    # 3
+    # >>> fizz_buzz(156)
+    # 4
+    
+    ns = []
+    for i in range(n):
+        if i % 11 == 0 or i % 13 == 0:
+            ns.append(i)
+    s = ''.join(list(map(str, ns)))
+    ans = 0
+    for c in s:
+        ans += (c == '7')
+    return ans
+```

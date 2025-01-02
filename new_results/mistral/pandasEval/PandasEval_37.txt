@@ -1,0 +1,2 @@
+ # Replace values in specified column with clipped values
+df.loc[df['col_0']=='a','col_1'] = df.loc[df['col_0']=='a','col_1'].clip(-2,2)</s>

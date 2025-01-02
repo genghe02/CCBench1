@@ -1,0 +1,104 @@
+"""
+This class provides static methods for building SQL queries for select, insert, delete, and update operations.
+"""
+class SQLQueryBuilder:
+
+    @staticmethod
+    def select(table, columns='*', where=None):
+        """
+        Constructs a SELECT SQL query.
+
+        Parameters:
+            table (str): The name of the table to select from.
+            columns (list or str, optional): The columns to select. Defaults to '*'.
+            where (dict, optional): The conditions for the WHERE clause. Defaults to None.
+
+        Returns:
+            str: The constructed SELECT SQL query.
+
+        Test cases:
+            # Test case 1: Select all columns from a table
+            assert SQLQueryBuilder.select('users') == 'SELECT * FROM users'
+
+            # Test case 2: Select specific columns from a table
+            assert SQLQueryBuilder.select('users', ['id', 'name']) == 'SELECT id, name FROM users'
+
+            # Test case 3: Select with WHERE clause
+            assert SQLQueryBuilder.select('users', where={'id': 1}) == "SELECT * FROM users WHERE id='1'"
+        """
+        if columns != '*':
+            columns = ', '.join(columns)
+        query = f"SELECT {columns} FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def insert(table, data):
+        """
+        Constructs an INSERT SQL query.
+
+        Parameters:
+            table (str): The name of the table to insert into.
+            data (dict): The data to insert, where keys are column names and values are the corresponding values.
+
+        Returns:
+            str: The constructed INSERT SQL query.
+
+        Test cases:
+            # Test case 1: Insert data into a table
+            assert SQLQueryBuilder.insert('users', {'name': 'John', 'age': 30}) == "INSERT INTO users (name, age) VALUES ('John', '30')"
+        """
+        keys = ', '.join(data.keys())
+        values = ', '.join(f"'{v}'" for v in data.values())
+        return f"INSERT INTO {table} ({keys}) VALUES ({values})"
+
+    @staticmethod
+    def delete(table, where=None):
+        """
+        Constructs a DELETE SQL query.
+
+        Parameters:
+            table (str): The name of the table to delete from.
+            where (dict, optional): The conditions for the WHERE clause. Defaults to None.
+
+        Returns:
+            str: The constructed DELETE SQL query.
+
+        Test cases:
+            # Test case 1: Delete all rows from a table
+            assert SQLQueryBuilder.delete('users') == 'DELETE FROM users'
+
+            # Test case 2: Delete with WHERE clause
+            assert SQLQueryBuilder.delete('users', where={'id': 1}) == "DELETE FROM users WHERE id='1'"
+        """
+        query = f"DELETE FROM {table}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query
+
+    @staticmethod
+    def update(table, data, where=None):
+        """
+        Constructs an UPDATE SQL query.
+
+        Parameters:
+            table (str): The name of the table to update.
+            data (dict): The data to update, where keys are column names and values are the new values.
+            where (dict, optional): The conditions for the WHERE clause. Defaults to None.
+
+        Returns:
+            str: The constructed UPDATE SQL query.
+
+        Test cases:
+            # Test case 1: Update data in a table
+            assert SQLQueryBuilder.update('users', {'name': 'John', 'age': 30}) == "UPDATE users SET name='John', age='30'"
+
+            # Test case 2: Update with WHERE clause
+            assert SQLQueryBuilder.update('users', {'name': 'John'}, where={'id': 1}) == "UPDATE users SET name='John' WHERE id='1'"
+        """
+        update_str = ', '.join(f"{k}='{v}'" for k, v in data.items())
+        query = f"UPDATE {table} SET {update_str}"
+        if where:
+            query += " WHERE " + ' AND '.join(f"{k}='{v}'" for k, v in where.items())
+        return query

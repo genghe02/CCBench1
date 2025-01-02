@@ -1,0 +1,2 @@
+ # Convert each element in the array to float
+return arr.astype(np.float)</s>

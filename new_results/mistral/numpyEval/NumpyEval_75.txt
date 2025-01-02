@@ -1,0 +1,2 @@
+ # Find indices of even numbers in numpy array x
+out = np.where(x % 2 == 0)</s>
