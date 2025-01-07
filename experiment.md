@@ -446,6 +446,10 @@ gpt4o-mini
 
 ```
 mistral 7b
+         error  count  error_rate
+0       others    361    0.341533
+1  test_points    679    0.642384
+2     time_out     17    0.016083
 ```
 
 ```
