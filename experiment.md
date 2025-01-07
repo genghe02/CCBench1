@@ -450,6 +450,10 @@ mistral 7b
 
 ```
 deepseek 7b
+         error  count  error_rate
+0       others     59    0.204152
+1  test_points    219    0.757785
+2     time_out     11    0.038062
 ```
 
 二、retry后成功率分布：
@@ -489,6 +493,12 @@ mistral 7b
 
 ```
 deepseek 7b
+Total tasks: 289
+Success tasks: 49
+Fail tasks: 240
+Success rate: 16.96%
+Average retry (all tasks): 8.69
+Average retry (only success tasks): 2.24
 ```
 
 三、单个模型在每个Task上的表现

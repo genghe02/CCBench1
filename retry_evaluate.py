@@ -339,7 +339,9 @@ if __name__ == '__main__':
     # Set model
     # model_name = 'gpt4o-mini'
     # model_name = 'deepseek_v2'
-    model_name = 'gpt3_5'
+    # model_name = 'gpt3_5'
+    # model_name = 'deepseek_7b'
+    model_name = 'mistral'
     assert model_name in ['deepseek_v2', 'gpt3_5', 'gpt4o-mini', 'mistral',  "deepseek_7b"]
 
     # Set retry_log_path
@@ -359,19 +361,19 @@ if __name__ == '__main__':
     初始错误分析
     """
 
-    # original_error_type(retry_log_path, model_name)
+    original_error_type(retry_log_path, model_name)
 
     """
     retry后成功率分析
     """
 
-    # retry_success_analisys(retry_log_path, model_name)
+    retry_success_analisys(retry_log_path, model_name)
 
     """
     单个模型在每个task_id上的表现
     """
 
-    # retry_single_task_id_analysis(retry_log_path, model_name)
+    retry_single_task_id_analysis(retry_log_path, model_name)
 
     """
     不同模型对于样本的表现
