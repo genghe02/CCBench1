@@ -568,6 +568,16 @@ Mean of avg_retry_if_success: 2.15
 ```
 ### next trajectory prediction
 
-微调？
+RAG
+
+```
+deepseek_7b:
+'pass@1': 0.823780487804878 -> 0.8536585365853658
+```
+
+```
+4omini:
+'pass@1': 0.8689024390243902 -> 0.8902439024390244
+```
 
 
