@@ -69,14 +69,14 @@ def evaluate_functional_correctness(
             n_samples += 1
 
         # genghe
-
-        p_id = list(completion_id.keys())[0]
-        new_problems = {}
-        print(type(problems))
-        for key, value in problems.items():
-            if key == p_id:
-                new_problems[p_id] = value
-        problems = new_problems
+        #
+        # p_id = list(completion_id.keys())[0]
+        # new_problems = {}
+        # print(type(problems))
+        # for key, value in problems.items():
+        #     if key == p_id:
+        #         new_problems[p_id] = value
+        # problems = new_problems
         # print(problems)
 
         assert len(completion_id) == len(problems), "Some problems are not attempted."

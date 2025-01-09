@@ -57,7 +57,7 @@ def extract_python_code(text):
     return code_blocks
 
 if __name__ == '__main__':
-    file_path = "deepseek_v2_humaneval_code.json"
+    file_path = "gpt_4omini_humaneval_code_trajectory.json"
     f = open_json(file_path)
     samples = []
     # I = """<s> [INST] Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n        Note: You only need to provide Python code, don't generate unnecessary content.\n\n\n        ### Instruction:\n        Create a Python script for this problem:\n        \n\ndef same_chars(s0: str, s1: str):\n    \"\"\"\n    Check if two words have the same characters.\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc')\n    True\n    >>> same_chars('abcd', 'dddddddabc')\n    True\n    >>> same_chars('dddddddabc', 'abcd')\n    True\n    >>> same_chars('eabcd', 'dddddddabc')\n    False\n    >>> same_chars('abcd', 'dddddddabce')\n    False\n    >>> same_chars('eabcdzzzz', 'dddzzzzzzzddddabc')\n    False\n    \"\"\"\n\n\n        ### Response: [/INST] """
@@ -78,5 +78,5 @@ if __name__ == '__main__':
         #     "completion": text
         # })
     print(samples)
-    write_jsonl("sample_deepseek_v2.jsonl", samples)
+    write_jsonl("sample_trajectory.jsonl", samples)
     pass

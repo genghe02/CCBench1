@@ -340,8 +340,8 @@ if __name__ == '__main__':
     # model_name = 'gpt4o-mini'
     # model_name = 'deepseek_v2'
     # model_name = 'gpt3_5'
-    # model_name = 'deepseek_7b'
-    model_name = 'mistral'
+    model_name = 'deepseek_7b'
+    # model_name = 'mistral'
     assert model_name in ['deepseek_v2', 'gpt3_5', 'gpt4o-mini', 'mistral',  "deepseek_7b"]
 
     # Set retry_log_path

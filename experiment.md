@@ -493,6 +493,12 @@ Average retry (only success tasks): 1.76
 
 ```
 mistral 7b
+Total tasks: 1057
+Success tasks: 420
+Fail tasks: 637
+Success rate: 39.74%
+Average retry (all tasks): 7.52
+Average retry (only success tasks): 3.76
 ```
 
 ```
@@ -543,10 +549,22 @@ Mean of avg_retry_if_success: 2.15
 
 ```
 mistral 7b
+Total tasks: 136
+Tasks that had at least one success: 105
+Tasks with zero success: 31
+Success rate: 77.21%
+Mean of min_retry_if_success: 2.41
+Mean of avg_retry_if_success: 3.80
 ```
 
 ```
 deepseek 7b
+Total tasks: 38
+Tasks that had at least one success: 13
+Tasks with zero success: 25
+Success rate: 34.21%
+Mean of min_retry_if_success: 1.46
+Mean of avg_retry_if_success: 2.15
 ```
 ### next trajectory prediction
 
