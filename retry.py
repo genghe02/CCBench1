@@ -436,4 +436,3 @@ if __name__ == '__main__':
                 retry_single_log['error_type'].append(error_type)
         retry_log.append(retry_single_log)
         save_json(f"{model_name}_retry_log.json", retry_log)
-

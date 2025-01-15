@@ -145,6 +145,20 @@ def large_model_api(model_name, prompt, model, tokenizer):
             ]
         )
         return completion.choices[0].message.content
+    elif model_name == 'gpt4o':
+        modelname = 'gpt-4o'
+        api_key = "sk-fyw5AXxFDRzRHzJ344240f868d964f04Ba90BfBe75A08a73"
+        api_base = "https://api.fast-tunnel.one/v1"
+        client = OpenAI(api_key=api_key, base_url=api_base)
+
+        # save the whole response body
+        completion = client.chat.completions.create(
+            model=f"{modelname}",
+            messages=[
+                {"role": "user", "content": f"{prompt}"}
+            ]
+        )
+        return completion.choices[0].message.content
         # return None
     elif model_name == 'gpt_4':
         modelname = 'gpt-4-turbo'
@@ -200,7 +214,7 @@ if __name__ == '__main__':
     # dataset_name, model_name = args.dataset, args.model
 
     # Test Settings
-    dataset_name, model_name = "humaneval", "deepseek_v2"
+    dataset_name, model_name = "humaneval", "gpt4o"
 
     dataset_name = dataset_name.lower()
     assert dataset_name in ("humaneval", "classeval", "pandaseval", "numpyeval")
